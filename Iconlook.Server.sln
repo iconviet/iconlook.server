@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iconlook.Service.Web", "Iconlook.Service.Web\Iconlook.Service.Web.csproj", "{8166A676-EE24-466A-BFC9-431283ADF760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Web", "Iconlook.Service.Web\Iconlook.Service.Web.csproj", "{8166A676-EE24-466A-BFC9-431283ADF760}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Object", "Iconlook.Object\Iconlook.Object.csproj", "{F6D12EB8-037A-4D59-9A51-0A10A0420887}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service", "Iconlook.Service\Iconlook.Service.csproj", "{583A0A37-ABF4-42E0-856E-EB55CF794E56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Server", "Iconlook.Server\Iconlook.Server.csproj", "{31EA0786-9602-47A9-BB32-D109E40D6F27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Entity", "Iconlook.Entity\Iconlook.Entity.csproj", "{E0951FA9-037C-44B3-A40B-27F254E58441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D12EB8-037A-4D59-9A51-0A10A0420887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D12EB8-037A-4D59-9A51-0A10A0420887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D12EB8-037A-4D59-9A51-0A10A0420887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D12EB8-037A-4D59-9A51-0A10A0420887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0951FA9-037C-44B3-A40B-27F254E58441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0951FA9-037C-44B3-A40B-27F254E58441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0951FA9-037C-44B3-A40B-27F254E58441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0951FA9-037C-44B3-A40B-27F254E58441}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
