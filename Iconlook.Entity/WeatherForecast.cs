@@ -1,6 +1,6 @@
 using System;
 
-namespace Iconlook.Service.Web.Data
+namespace Iconlook.Entity
 {
     public class WeatherForecast
     {
