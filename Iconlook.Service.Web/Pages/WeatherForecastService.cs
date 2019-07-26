@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Iconlook.Entity;
 
-namespace Iconlook.Service.Web.Data
+namespace Iconlook.Service.Web.Pages
 {
     public class WeatherForecastService
     {
