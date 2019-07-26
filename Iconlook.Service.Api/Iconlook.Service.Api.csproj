@@ -9,4 +9,9 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Dockerfile">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

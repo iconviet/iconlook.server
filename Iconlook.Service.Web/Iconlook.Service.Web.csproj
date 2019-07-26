@@ -10,12 +10,14 @@
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.35-beta" />
+    <Content Include="Dockerfile">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Service\Iconlook.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
+    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.35-beta" />
   </ItemGroup>
 </Project>
