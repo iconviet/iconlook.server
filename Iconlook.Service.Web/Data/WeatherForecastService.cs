@@ -9,7 +9,16 @@ namespace Iconlook.Service.Web.Data
     {
         private static readonly string[] Summaries =
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing",
+            "Bracing",
+            "Chilly",
+            "Cool",
+            "Mild",
+            "Warm",
+            "Balmy",
+            "Hot",
+            "Sweltering",
+            "Scorching"
         };
 
         public Task<WeatherForecast[]> GetForecastAsync(DateTime date)
