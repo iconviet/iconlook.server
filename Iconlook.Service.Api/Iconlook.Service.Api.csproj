@@ -13,6 +13,14 @@
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="appconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ServiceStack.Api.Swagger" Version="5.5.0" />
+    <PackageReference Include="Twilio" Version="5.31.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Service\Iconlook.Service.csproj" />

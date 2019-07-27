@@ -7,7 +7,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Iconlook\Iconlook.csproj" />
-  </ItemGroup>
+<ItemGroup>
+  <PackageReference Include="Iconlook.Object" Version="0.1.0-master-*" />
+  <PackageReference Include="ServiceStack.Text" Version="5.5.0" />
+</ItemGroup>
 </Project>

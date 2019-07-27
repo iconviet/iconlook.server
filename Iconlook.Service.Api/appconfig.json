@@ -1,0 +1,10 @@
+﻿{
+  "connectionStrings": {
+    "seq": "seq:5341",
+    "mssql": "mssql:1433",
+    "redis": "redis:6379",
+    "ravendb": "ravendb:8080",
+    "elastic": "elastic:9200",
+    "rabbitmq": "rabbitmq:5672"
+  }
+}

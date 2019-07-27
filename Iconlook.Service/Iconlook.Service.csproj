@@ -8,10 +8,6 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Iconlook.Object" Version="0.1.0-master-*" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
     <ProjectReference Include="..\Iconlook.Server\Iconlook.Server.csproj" />
   </ItemGroup>
 </Project>

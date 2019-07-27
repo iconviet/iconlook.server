@@ -13,8 +13,13 @@
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="appconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Iconlook.Service.Api\Iconlook.Service.Api.csproj" />
     <ProjectReference Include="..\Iconlook.Service\Iconlook.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
