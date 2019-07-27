@@ -41,7 +41,7 @@ namespace Iconlook.Service.Web
                 application.UseServiceStack(host);
                 SyncfusionLicenseProvider.RegisterLicense("MTI1Mjk1QDMxMzcyZTMyMmUzMEhsKzRudFN1U00rd2");
             };
-            await StartAsync(new WebHost(), "http://*:80/");
+            await StartAsync(new WebHost(), "http://*");
         }
     }
 }

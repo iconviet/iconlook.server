@@ -6,7 +6,7 @@ namespace Iconlook.Service.Api
     {
         public static async Task Main()
         {
-            await StartAsync<ApiHost>("http://*:81/");
+            await StartAsync<ApiHost>("http://*:81");
         }
     }
 }
