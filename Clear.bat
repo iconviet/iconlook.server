@@ -1,0 +1,1 @@
+del /s /q "C:\Users\Tom Nuen\AppData\Local\NuGet\v3-cache"

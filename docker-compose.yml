@@ -1,0 +1,45 @@
+version: "3.4"
+
+services:
+  # REDIS
+  redis:
+    image: iconviet/redis
+    ports:
+      - "6379:6379"
+    network_mode: bridge
+    environment:
+      - ENVIRONMENT=localhost
+
+  # RAVENDB
+  ravendb:
+    image: iconviet/ravendb
+    ports:
+      - "8080:8080"
+      - "38888:38888"
+    network_mode: bridge
+    environment:
+      - ENVIRONMENT=localhost
+
+# RABBITMQ
+  rabbitmq:
+    image: iconviet/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    network_mode: bridge
+    environment:
+      - ENVIRONMENT=localhost
+
+# ELASTIC
+  elastic:
+    image: iconviet/elastic
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "9300:9300"
+    network_mode: bridge
+    environment:
+      - ENVIRONMENT=localhost
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "cluster.name=krypto_localhost"
