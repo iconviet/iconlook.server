@@ -5,12 +5,9 @@ namespace Iconlook.Service.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(x => x.UseStartup<Startup>())
-                .Build()
-                .Run();
+            Host.CreateDefaultBuilder().ConfigureWebHostDefaults(x => x.UseStartup<Startup>()).Build().Run();
         }
     }
 }
