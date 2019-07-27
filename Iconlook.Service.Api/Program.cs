@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Iconlook.Service.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadLine();
+            Host.CreateDefaultBuilder().ConfigureWebHostDefaults(x => x.UseUrls("http://*:81/")).Build().Run();
         }
     }
 }

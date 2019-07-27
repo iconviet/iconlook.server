@@ -7,7 +7,7 @@ namespace Iconlook.Service.Web
     {
         public static void Main()
         {
-            Host.CreateDefaultBuilder().ConfigureWebHostDefaults(x => x.UseStartup<Startup>()).Build().Run();
+            Host.CreateDefaultBuilder().ConfigureWebHostDefaults(x => x.UseUrls("http://*:80/").UseStartup<Startup>()).Build().Run();
         }
     }
 }
