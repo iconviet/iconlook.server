@@ -15,12 +15,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Iconlook.Service\Iconlook.Service.csproj" />
   </ItemGroup>
 </Project>
