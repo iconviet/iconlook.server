@@ -7,7 +7,7 @@ namespace Iconlook.Service.Api
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.R
+            Console.ReadLine();
         }
     }
 }
