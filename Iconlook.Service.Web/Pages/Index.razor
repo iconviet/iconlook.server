@@ -23,14 +23,6 @@
         <p>It is possible to add custom style on the selected image inside the RichTextEditor through quick toolbar.</p>
     </ChildContent>
 </EjsRichTextEditor>
-<EjsGrid DataSource="@Orders">
-    <GridColumns>
-        <GridColumn Field=@nameof(Order.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
-        <GridColumn Field=@nameof(Order.CustomerID) HeaderText="Customer Name" Width="150"></GridColumn>
-        <GridColumn Field=@nameof(Order.OrderDate) HeaderText=" Order Date" Format="yMd" Type="date" TextAlign="TextAlign.Right" Width="130"></GridColumn>
-        <GridColumn Field=@nameof(Order.Freight) HeaderText="Freight" Format="C2" TextAlign="TextAlign.Right" Width="120"></GridColumn>
-    </GridColumns>
-</EjsGrid>
 @code {
     public List<MenuItem> MenuItems = new List<MenuItem>{
         new MenuItem{ Text = "File", Items = new List<MenuItem>{
@@ -57,26 +49,4 @@
         new MenuItem{ Text = "Go" },
         new MenuItem{ Text = "Help" }
     };
-}
-@code{
-    public List<Order> Orders { get; set; }
-
-    protected override void OnInit()
-    {
-        Orders = Enumerable.Range(1, 75).Select(x => new Order()
-        {
-            OrderID = 1000 + x,
-            CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
-            Freight = 2.1 * x,
-            OrderDate = DateTime.Now.AddDays(-x),
-        }).ToList();
-    }
-
-    public class Order
-    {
-        public int? OrderID { get; set; }
-        public string CustomerID { get; set; }
-        public DateTime? OrderDate { get; set; }
-        public double? Freight { get; set; }
-    }
 }
