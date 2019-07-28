@@ -1,6 +1,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Agiper.Server;
 using Hangfire;
 using Iconlook.Service.Web.Pages;
 using Microsoft.AspNetCore.Builder;
@@ -11,14 +12,14 @@ using Syncfusion.Licensing;
 
 namespace Iconlook.Service.Web
 {
-    public class Program : Agiper.Server.Program
+    public class Program : ProgramBase
     {
         public static async Task Main()
         {
             ConfigureServices = host => services =>
             {
                 services.AddRazorPages();
-                services.AddHangfire(x => {});
+                services.AddHangfire(x => { });
                 services.AddResponseCaching();
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
@@ -42,7 +43,7 @@ namespace Iconlook.Service.Web
                 SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
                                                           "dLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
             };
-            await StartAsync(new WebHost(), "http://*");
+            await StartAsync(new WebHost(), 80);
         }
     }
 }

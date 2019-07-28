@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
+using Agiper.Server;
 
 namespace Iconlook.Service.Api
 {
-    public class Program : Agiper.Server.Program
+    public class Program : ProgramBase
     {
         public static async Task Main()
         {
-            await StartAsync<ApiHost>("http://*:81");
+            await StartAsync<ApiHost>(81);
         }
     }
 }
