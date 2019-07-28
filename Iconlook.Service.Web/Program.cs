@@ -31,6 +31,7 @@ namespace Iconlook.Service.Web
             Configure = host => application =>
             {
                 application.UseResponseCaching();
+                application.UseForwardedHeaders();
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseRouting();
