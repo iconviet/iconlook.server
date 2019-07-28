@@ -24,6 +24,12 @@ namespace Iconlook.Service.Web
                 services.AddResponseCaching();
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
+                services.Configure<ForwardedHeadersOptions>(x =>
+                {
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
+                });
                 services.AddSingleton<WeatherForecastService>();
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
@@ -36,10 +42,10 @@ namespace Iconlook.Service.Web
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseRouting();
-                application.UseEndpoints(endpoints =>
+                application.UseEndpoints(x =>
                 {
-                    endpoints.MapBlazorHub();
-                    endpoints.MapFallbackToPage("/_host");
+                    x.MapBlazorHub();
+                    x.MapFallbackToPage("/_host");
                 });
                 application.UseServiceStack(host);
                 SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
