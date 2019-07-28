@@ -39,7 +39,8 @@ namespace Iconlook.Service.Web
                     endpoints.MapFallbackToPage("/_host");
                 });
                 application.UseServiceStack(host);
-                SyncfusionLicenseProvider.RegisterLicense("MTI1Mjk1QDMxMzcyZTMyMmUzMEhsKzRudFN1U00rd2");
+                SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
+                                                          "dLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
             };
             await StartAsync(new WebHost(), "http://*");
         }
