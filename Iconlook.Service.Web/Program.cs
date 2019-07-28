@@ -6,6 +6,7 @@ using Hangfire;
 using Iconlook.Service.Web.Pages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using Syncfusion.Licensing;
@@ -31,6 +32,7 @@ namespace Iconlook.Service.Web
             Configure = host => application =>
             {
                 application.UseResponseCaching();
+                application.UseForwardedHeaders();
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseRouting();
