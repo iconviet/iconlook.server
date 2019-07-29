@@ -15,10 +15,6 @@ app {
     flex-direction: column;
 }
 
-#header {
-    background-color: white;
-}
-
 .top-menu {
     background-color: white;
 }
@@ -51,6 +47,13 @@ app {
     padding: 0 56px 0 28px;
 }
 
+
+.e-switch-wrapper .e-switch-on,
+.e-css.e-switch-wrapper .e-switch-on {
+    color: white;
+    background-color: #1aaaba;
+}
+
 .e-menu-wrapper ul .e-menu-item.e-focused {
     color: #1aaaba;
     background-color: transparent;
@@ -66,10 +69,9 @@ app {
     background-color: transparent;
 }
 
-.e-switch-wrapper .e-switch-on,
-.e-css.e-switch-wrapper .e-switch-on {
-    color: white;
-    background-color: #1aaaba;
+#header {
+    background-color: white;
+    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
 }
 
 .e-switch-wrapper .e-switch-handle.e-switch-active,
