@@ -1,49 +1,64 @@
 ﻿@inherits LayoutComponentBase
+@using Syncfusion.EJ2.Blazor.Buttons
 @using Syncfusion.EJ2.Blazor.Navigations
-<div class="main">
-    <div class="row top-row">
-        <div class="col-2">
+<div class="wrapper">
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col top-menu-wrapper">
+                    <EjsMenu Items="@MenuItems" CssClass="top-menu"></EjsMenu>
+                    <EjsSwitch Checked="true"></EjsSwitch>
+                </div>
+            </div>
         </div>
-        <div class="col-8 top-menu-container">
-            <EjsMenu Items="@MenuItems" CssClass="top-menu"></EjsMenu>
+    </header>
+    <main id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col main-body-wrapper">
+                    @Body
+                </div>
+            </div>
         </div>
-        <div class="col-2">
+    </main>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="height: 200px;">
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-8">
-            @Body
-        </div>
-        <div class="col-2">
-        </div>
-    </div>
+    </footer>
 </div>
 @code {
     public List<MenuItem> MenuItems = new List<MenuItem>{
-        new MenuItem{ Text = "File", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Open" },
-            new MenuItem{ Text= "Save" },
-            new MenuItem{ Separator= true },
-            new MenuItem{ Text= "Exit" }}
+        new MenuItem{ Text = "Home" },
+        new MenuItem{ Text = "P-Rep", Items = new List<MenuItem>{
+            new MenuItem{ Text = "View P-Rep List" },
+            new MenuItem{ Text = "View P-Rep Transactions" },
+            new MenuItem{ Text = "View Exclusively Top Token" }}
         },
-        new MenuItem{ Text = "Edit", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Cut" },
-            new MenuItem{ Text= "Copy" },
-            new MenuItem{ Text= "Paste" }}
+        new MenuItem{ Text = "Staking", Items = new List<MenuItem>{
+            new MenuItem{ Text= "View Txns" },
+            new MenuItem{ Text= "View Pending Txns" },
+            new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "View", Items = new List<MenuItem>{
-            new MenuItem{ Text = "Toolbars" },
-            new MenuItem{ Text = "Zoom" },
-            new MenuItem{ Text = "Full Screen" }}
+        new MenuItem{ Text = "Blockchain", Items = new List<MenuItem>{
+            new MenuItem{ Text= "View Txns" },
+            new MenuItem{ Text= "View Pending Txns" },
+            new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "Tools", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Spelling & Grammar" },
-            new MenuItem{ Text= "Customize" },
-            new MenuItem{ Text= "Options" }}
+        new MenuItem{ Text = "Calculator", Items = new List<MenuItem>{
+            new MenuItem{ Text= "Delegation Reward" },
+            new MenuItem{ Text= "Representative Reward" },
+            new MenuItem{ Text= "Production and Verification Reward" }
+        }
         },
-        new MenuItem{ Text = "Go" },
-        new MenuItem{ Text = "Help" }
+        new MenuItem{ Text = "More", Items = new List<MenuItem>{
+            new MenuItem{ Text= "P-Rep Directory" },
+            new MenuItem{ Text= "Charts And Stats" },
+            new MenuItem{ Text= "Logout" },
+        }
+        },
     };
 }
