@@ -1,4 +1,5 @@
 ﻿using System;
+using Agiper.Server;
 using Funq;
 using Iconlook.Service.Api;
 using ServiceStack;
@@ -9,7 +10,10 @@ namespace Iconlook.Service.Web
     {
         public WebHost() : base("Web", typeof(WebHost).Assembly)
         {
+            TestMode = true;
             EndpointCanMakeCallbackRequests = true;
+            NServiceBusTransport = NServiceBusTransport.Learning;
+            NServiceBusPersistence = NServiceBusPersistence.Memory;
         }
 
         public override void Configure(Container container)

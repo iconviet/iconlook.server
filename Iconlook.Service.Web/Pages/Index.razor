@@ -3,7 +3,7 @@
 @using Syncfusion.EJ2.Blazor.SplitButtons
 @using Syncfusion.EJ2.Blazor.RichTextEditor
 @using Syncfusion.EJ2.Blazor.Grids
-<EjsMenu Items="@MenuItems"></EjsMenu>
+
 <h1>Hello, world!</h1>
 <EjsSwitch Checked="true"></EjsSwitch>
 <EjsCalendar></EjsCalendar>
@@ -23,30 +23,3 @@
         <p>It is possible to add custom style on the selected image inside the RichTextEditor through quick toolbar.</p>
     </ChildContent>
 </EjsRichTextEditor>
-@code {
-    public List<MenuItem> MenuItems = new List<MenuItem>{
-        new MenuItem{ Text = "File", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Open" },
-            new MenuItem{ Text= "Save" },
-            new MenuItem{ Separator= true },
-            new MenuItem{ Text= "Exit" }}
-        },
-        new MenuItem{ Text = "Edit", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Cut" },
-            new MenuItem{ Text= "Copy" },
-            new MenuItem{ Text= "Paste" }}
-        },
-        new MenuItem{ Text = "View", Items = new List<MenuItem>{
-            new MenuItem{ Text = "Toolbars" },
-            new MenuItem{ Text = "Zoom" },
-            new MenuItem{ Text = "Full Screen" }}
-        },
-        new MenuItem{ Text = "Tools", Items = new List<MenuItem>{
-            new MenuItem{ Text= "Spelling & Grammar" },
-            new MenuItem{ Text= "Customize" },
-            new MenuItem{ Text= "Options" }}
-        },
-        new MenuItem{ Text = "Go" },
-        new MenuItem{ Text = "Help" }
-    };
-}
