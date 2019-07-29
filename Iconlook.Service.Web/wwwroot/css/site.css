@@ -1,9 +1,26 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+
+.standing-message {
+    display: flex;
+    height: 3.5rem;
+    color: #6c757e;
+    font-size: 13px;
+    align-items: center;
+}
+
 app {
     display: flex;
     position: relative;
     flex-direction: column;
+}
+
+#header {
+    background-color: white;
+}
+
+.top-menu {
+    background-color: white;
 }
 
 .wrapper {
@@ -11,23 +28,15 @@ app {
     background-color: #f8f9fa;
 }
 
-#header {
-    background-color: white;
-}
-
 .top-menu-wrapper {
-    height: 4rem;
     display: flex;
+    height: 3.5rem;
     align-items: center;
     justify-content: flex-end;
 }
 
-.top-menu {
-    background-color: transparent;
-}
-
 .main-body-wrapper {
-    padding: 2rem 1rem;
+    padding: 0 1rem 2rem 2rem;
 }
 
 .e-menu-wrapper ul .e-menu-item {
@@ -59,8 +68,8 @@ app {
 
 .e-switch-wrapper .e-switch-on,
 .e-css.e-switch-wrapper .e-switch-on {
+    color: white;
     background-color: #1aaaba;
-    color: #fff;
 }
 
 .e-switch-wrapper .e-switch-handle.e-switch-active,
@@ -68,11 +77,10 @@ app {
     background-color: #1aaaba;
 }
 
-
-#footer {
+.gradient-background {
     background-repeat: repeat-x;
     background-attachment: fixed;
-    background-image: linear-gradient(150deg,#1aaaba,#12747e);
+    background-image: linear-gradient(150deg,#1aaaba,#0b464c);
 }
 
 html, body {
