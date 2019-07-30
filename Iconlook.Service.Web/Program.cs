@@ -39,8 +39,13 @@ namespace Iconlook.Service.Web
             };
             Configure = host => application =>
             {
-                application.UseResponseCaching();
                 application.UseForwardedHeaders();
+                application.Use((context, middleware) =>
+                {
+                    context.Request.Scheme = "https";
+                    return middleware();
+                });
+                application.UseResponseCaching();
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseRouting();
