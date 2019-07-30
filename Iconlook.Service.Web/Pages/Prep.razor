@@ -1,4 +1,5 @@
 ﻿@page "/prep"
+@layout BodyLayout
 @using Iconlook.Entity
 @using Iconlook.Service.Api
 @inject PRepService PRepService
@@ -18,10 +19,10 @@ else
             </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@Object.Name</td>
-            <td>@Object.Location</td>
-        </tr>
+            <tr>
+                <td>@Object.Name</td>
+                <td>@Object.Location</td>
+            </tr>
         </tbody>
     </table>
 }
