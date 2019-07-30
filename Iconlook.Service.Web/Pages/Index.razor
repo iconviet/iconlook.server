@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Iconlook.Entity;
 @using Syncfusion.EJ2.Blazor.Navigations
 @using Syncfusion.EJ2.Blazor.SplitButtons
 @using Syncfusion.EJ2.Blazor.RichTextEditor
@@ -24,14 +25,61 @@
 <div class="row mb-5">
     <div class="col">
         <div class="card with-shadow" style="min-height: 500px;">
-            <div class="card-header">Latest Blocks</div>
-            <div class="card-body"></div> 
+            <div class="card-header">Latest P-Reps</div>
+            <div class="card-body px-3 py-0">
+                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                    <GridColumns>
+                        <GridColumn Width="30" TextAlign="TextAlign.Center">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <div class="avatar">
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="images/100.png" />
+                                        </div>
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
+                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
+                    </GridColumns>
+                </EjsGrid>
+            </div>
         </div>
     </div>
     <div class="col">
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">Transactions</div>
-            <div class="card-body"></div> 
+            <div class="card-body px-3 py-0">
+                <EjsGrid DataSource="@Transactions"></EjsGrid>
+            </div>
         </div>
     </div>
 </div>
+@code{
+    public PRep PRep = new PRep();
+    public List<PRep> PReps { get; set; }
+    public List<Transaction> Transactions { get; set; }
+
+        protected override Task OnInitAsync()
+        {
+            PReps = Enumerable.Range(1, 12).Select(x => new PRep
+            {
+                Name = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)],
+                Location = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)]
+            }).ToList();
+
+            Transactions = Enumerable.Range(1, 12).Select(x => new Transaction
+            {
+                To = new [] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],
+                From = new [] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],
+                Hash = new [] { "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543" }[new Random().Next(5)],
+                Amount = new decimal[] { 100, 200, 300, 400, 500 }[new Random().Next(5)],
+                Fee = new decimal[] { 1, 2, 3, 4, 5 }[new Random().Next(5)]
+            }).ToList();
+
+            return base.OnInitAsync();
+        }
+
+}

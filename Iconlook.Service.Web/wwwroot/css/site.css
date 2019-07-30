@@ -10,8 +10,25 @@ app {
     flex-direction: column;
 }
 
+.card .e-grid {
+    border: none;
+}
+
 .card {
     color: #363b3f;
+    border-color: #e7eaf3;
+}
+
+.avatar {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.card .e-grid .e-rowcell {
+    padding: 8px 0;
     border-color: #e7eaf3;
 }
 
@@ -22,13 +39,28 @@ app {
     background-color: white;
 }
 
+.with-rounded-circle {
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
 .with-rounded-corners {
     -ms-border-radius: 3px;
     border-radius: 3px;
 }
 
+.card .e-grid .e-gridheader {
+    display: none;
+}
+
 .body {
     background-color: #f8f9fa;
+}
+
+.avatar img {
+    width: 100%;
+    -webkit-object-fit: cover;
+    object-fit: cover;
 }
 
 .ejs-menu {
