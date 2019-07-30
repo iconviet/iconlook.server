@@ -1,9 +1,10 @@
 ﻿@page "/prep"
 @layout PRepLayout
 @inject PRepService PRepService
+@inject TransactionService TransactionService
 <h1>P-REP</h1>
 <p>This component demonstrates fetching p-rep from service</p>
-@if (Object == null)
+@if (Model == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,17 +19,59 @@ else
         </thead>
         <tbody>
             <tr>
-                <td>@Object.Name</td>
-                <td>@Object.Location</td>
+                <td>@Model.Name</td>
+                <td>@Model.Location</td>
             </tr>
         </tbody>
     </table>
 }
-@code {
-    PRep Object { get; set; }
+<div class="row mb-5">
+    <div class="col">
+        <div class="card with-shadow" style="min-height: 500px;">
+            <div class="card-header">Latest P-Reps</div>
+            <div class="card-body px-4 pt-1 pb-2">
+                <EjsGrid ModelType="@Model" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                    <GridColumns>
+                        <GridColumn Width="30" TextAlign="TextAlign.Center">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <div class="avatar">
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="images/100.png" />
+                                        </div>
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
+                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
+                    </GridColumns>
+                </EjsGrid>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card with-shadow" style="min-height: 500px;">
+            <div class="card-header">Transactions</div>
+            <div class="card-body mono-font px-4 pt-1 pb-2">
+                <EjsGrid DataSource="@Transactions" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+
+                </EjsGrid>
+            </div>
+        </div>
+    </div>
+</div>
+@code{
+    public PRep Model = new PRep();
+    public List<PRep> PReps { get; set; }
+    public List<Transaction> Transactions { get; set; }
 
     protected override async Task OnInitAsync()
     {
-        Object = await PRepService.GetPRepAsync("");
+        Model = await PRepService.GetPRepAsync("");
+        PReps = await PRepService.GetLatestPRepsAsync();
+        Transactions = await TransactionService.GetLatestTransactionsAsync();
     }
+
 }

@@ -69,6 +69,10 @@ app {
     background-color: initial;
 }
 
+.e-menu-wrapper li .e-menu-url {
+    color: #6c757e !important;
+}
+
 .e-menu-wrapper ul .e-menu-item {
     color: #6c757e;
     font-size: 13px;
@@ -92,20 +96,19 @@ app {
     background-color: #1aaaba;
 }
 
-
 .e-menu-wrapper ul .e-menu-item.e-focused {
     color: #1aaaba;
-    background-color: transparent;
+    background-color: initial;
 }
 
 .e-menu-wrapper ul .e-menu-item.e-selected {
     color: #1aaaba;
-    background-color: transparent;
+    background-color: initial;
 }
 
 .e-menu-wrapper .e-ul .e-menu-item.e-focused {
     color: #1aaaba;
-    background-color: transparent;
+    background-color: initial;
 }
 
 header {
