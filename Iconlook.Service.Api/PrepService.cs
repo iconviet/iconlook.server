@@ -7,11 +7,16 @@ using Iconlook.Entity;
 
 namespace Iconlook.Service.Api
 {
-    public class PrepService : ServiceBase
+    public class PRepService : ServiceBase
     {
-        public async Task<List<Prep>> GetLatestPrepsAsync()
+        public async Task<PRep> GetPRepAsync(string address)
         {
-            return Enumerable.Range(1, 12).Select(x => new Prep
+            return new PRep { Name = "ICONVIET", Location = "Vietnam" };
+        }
+
+        public async Task<List<PRep>> GetLatestPRepsAsync()
+        {
+            return Enumerable.Range(1, 12).Select(x => new PRep
             {
                 Name = new[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)],
                 Location = new[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)]

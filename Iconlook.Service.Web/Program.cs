@@ -25,15 +25,14 @@ namespace Iconlook.Service.Web
                 services.AddResponseCaching();
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
+                services.AddSingleton<PRepService>();
+                services.AddSingleton<TransactionService>();
                 services.Configure<ForwardedHeadersOptions>(x =>
                 {
                     x.KnownProxies.Clear();
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 });
-                services.AddSingleton<PrepService>();
-                services.AddSingleton<TransactionService>();
-                services.AddSingleton<WeatherForecastService>();
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
                     .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);

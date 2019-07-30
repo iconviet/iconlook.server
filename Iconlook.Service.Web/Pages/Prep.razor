@@ -1,0 +1,35 @@
+﻿@page "/prep"
+@using Iconlook.Entity
+@using Iconlook.Service.Api
+@inject PRepService PRepService
+<h1>P-REP</h1>
+<p>This component demonstrates fetching p-rep from service</p>
+@if (Object == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Object.Name</td>
+            <td>@Object.Location</td>
+        </tr>
+        </tbody>
+    </table>
+}
+@code {
+    PRep Object { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        Object = await PRepService.GetPRepAsync("");
+    }
+}

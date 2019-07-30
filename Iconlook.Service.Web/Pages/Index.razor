@@ -5,9 +5,8 @@
 @using Syncfusion.EJ2.Blazor.RichTextEditor
 @using Syncfusion.EJ2.Blazor.Grids
 @using  Syncfusion.EJ2.Blazor.DropDowns
-@using Iconlook.Entity
 @using Iconlook.Service.Api
-@inject PrepService PrepService
+@inject PRepService PRepService
 @inject TransactionService TransactionService
 <div class="py-3 top-message">
     <strong>ICONVIET</strong> - Vote For Us And You Will See - <a href="https://iconviet.io">Visit Our Web Site Now!.</a>
@@ -31,12 +30,12 @@
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">Latest P-Reps</div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@Prep" DataSource="@Preps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
                         <GridColumn Width="30" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PRep prep)
                                     {
                                         <div class="avatar">
                                             <img alt="@prep.Name" class="with-rounded-circle" src="images/100.png" />
@@ -45,8 +44,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(Prep.Name)></GridColumn>
-                        <GridColumn HeaderText="Location" Field=@nameof(Prep.Location)></GridColumn>
+                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
+                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>
@@ -62,13 +61,13 @@
     </div>
 </div>
 @code{
-    public Prep Prep = new Prep();
-    public List<Prep> Preps { get; set; }
+    public PRep PRep = new PRep();
+    public List<PRep> PReps { get; set; }
     public List<Transaction> Transactions { get; set; }
 
     protected override async Task OnInitAsync()
     {
-        Preps = await PrepService.GetLatestPrepsAsync();
+        PReps = await PRepService.GetLatestPRepsAsync();
         Transactions = await TransactionService.GetLatestTransactionsAsync();
     }
 
