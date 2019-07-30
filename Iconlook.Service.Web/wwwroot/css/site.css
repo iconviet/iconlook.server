@@ -2,7 +2,15 @@
 
 .top-message {
     color: #6c757e;
-    font-size: 13px;
+}
+
+.card {
+    color: #363b3f;
+}
+
+.card .card-header {
+    font-weight: bold;
+    background-color: white;
 }
 
 app {
@@ -11,7 +19,7 @@ app {
     flex-direction: column;
 }
 
-.rounded-corners {
+.with-rounded-corners {
     -ms-border-radius: 3px;
     border-radius: 3px;
 }
@@ -22,10 +30,6 @@ app {
 
 .ejs-menu {
     background-color: initial;
-}
-
-.main.container {
-    padding: 0 1rem 2rem 2rem;
 }
 
 .e-menu-wrapper ul .e-menu-item {
@@ -70,7 +74,12 @@ header {
     background-color: #1aaaba;
 }
 
-.gradient-filled {
+
+.with-shadow {
+    box-shadow: 0 0.5rem 1.2rem rgba(189,197,209,.2);
+}
+
+.with-gradient {
     -ms-background-repeat: repeat-x;
     background-repeat: repeat-x;
     -ms-background-attachment: fixed;
@@ -79,5 +88,6 @@ header {
 }
 
 html, body {
+    font-size: 13px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
