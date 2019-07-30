@@ -6,6 +6,7 @@ using Hangfire;
 using Iconlook.Service.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using Syncfusion.Licensing;
@@ -35,6 +36,12 @@ namespace Iconlook.Service.Web
                 services.AddServerSideBlazor();
                 services.AddSingleton<PRepService>();
                 services.AddSingleton<TransactionService>();
+                services.Configure<ForwardedHeadersOptions>(x =>
+                {
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
+                });
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
                     .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
