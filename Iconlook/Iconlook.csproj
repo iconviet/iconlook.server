@@ -8,7 +8,7 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
 <ItemGroup>
-  <PackageReference Include="Iconlook.Object" Version="0.1.0-master-2081923" />
+  <PackageReference Include="Iconlook.Object" Version="0.1.0-master-2110710" />
   <PackageReference Include="ServiceStack.Text" Version="5.5.0" />
 </ItemGroup>
 </Project>
