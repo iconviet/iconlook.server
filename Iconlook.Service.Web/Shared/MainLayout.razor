@@ -4,17 +4,15 @@
 <div class="body">
     <header>
         <div class="container">
-            <div class="row py-1">
-                <div class="col pl-0 d-flex align-items-center">
-                    <div>
-                        <img alt="ICONVIET" src="images/iconviet-logo.png" style="max-width: 105px;" />
-                    </div>
-                    <div class="flex-grow-1 text-right">
-                        <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
-                    </div>
-                    <div>
-                        <EjsSwitch Checked="true"></EjsSwitch>
-                    </div>
+            <div class="row py-1 align-items-center">
+                <div class="col-auto">
+                    <img alt="ICONVIET" src="images/iconviet-logo.png" style="max-width: 105px;" />
+                </div>
+                <div class="col text-right">
+                    <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
+                </div>
+                <div class="col-auto pt-1">
+                    <EjsSwitch Checked="true"></EjsSwitch>
                 </div>
             </div>
         </div>

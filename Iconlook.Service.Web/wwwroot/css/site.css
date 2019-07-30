@@ -4,19 +4,22 @@
     color: #6c757e;
 }
 
-.card {
-    color: #363b3f;
-}
-
-.card .card-header {
-    font-weight: bold;
-    background-color: white;
-}
-
 app {
     display: flex;
     position: relative;
     flex-direction: column;
+}
+
+.card {
+    color: #363b3f;
+    border-color: #e7eaf3;
+}
+
+.card .card-header {
+    font-weight: bold;
+    border-color: #e7eaf3;
+    padding: 0.9rem 1.1rem;
+    background-color: white;
 }
 
 .with-rounded-corners {
