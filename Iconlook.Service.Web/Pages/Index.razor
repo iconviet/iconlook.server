@@ -5,6 +5,10 @@
 @using Syncfusion.EJ2.Blazor.RichTextEditor
 @using Syncfusion.EJ2.Blazor.Grids
 @using  Syncfusion.EJ2.Blazor.DropDowns
+@using Iconlook.Entity
+@using Iconlook.Service.Api
+@inject PrepService PrepService
+@inject TransactionService TransactionService
 <div class="py-3 top-message">
     <strong>ICONVIET</strong> - Vote For Us And You Will See - <a href="https://iconviet.io">Visit Our Web Site Now!.</a>
 </div>
@@ -62,24 +66,10 @@
     public List<Prep> Preps { get; set; }
     public List<Transaction> Transactions { get; set; }
 
-        protected override Task OnInitAsync()
-        {
-            Preps = Enumerable.Range(1, 12).Select(x => new Prep
-            {
-                Name = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)],
-                Location = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)]
-            }).ToList();
-
-            Transactions = Enumerable.Range(1, 12).Select(x => new Transaction
-            {
-                To = new [] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],
-                From = new [] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],
-                Hash = new [] { "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543", "0x07c3....bc543" }[new Random().Next(5)],
-                Amount = new decimal[] { 100, 200, 300, 400, 500 }[new Random().Next(5)],
-                Fee = new decimal[] { 1, 2, 3, 4, 5 }[new Random().Next(5)]
-            }).ToList();
-
-            return base.OnInitAsync();
-        }
+    protected override async Task OnInitAsync()
+    {
+        Preps = await PrepService.GetLatestPrepsAsync();
+        Transactions = await TransactionService.GetLatestTransactionsAsync();
+    }
 
 }

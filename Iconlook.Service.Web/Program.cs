@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Agiper.Server;
 using Hangfire;
+using Iconlook.Service.Api;
 using Iconlook.Service.Web.Pages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -30,6 +31,8 @@ namespace Iconlook.Service.Web
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 });
+                services.AddSingleton<PrepService>();
+                services.AddSingleton<TransactionService>();
                 services.AddSingleton<WeatherForecastService>();
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
