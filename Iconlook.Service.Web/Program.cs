@@ -36,12 +36,10 @@ namespace Iconlook.Service.Web
                 services.AddServerSideBlazor();
                 services.AddSingleton<PRepService>();
                 services.AddSingleton<TransactionService>();
-                // services.Configure<ForwardedHeadersOptions>(options =>
-                // {
-                //     options.KnownProxies.Clear();
-                //     options.KnownNetworks.Clear();
-                //     options.ForwardedHeaders = ForwardedHeaders.All;
-                // });
+                services.Configure<ForwardedHeadersOptions>(options =>
+                {
+                    options.ForwardedHeaders = ForwardedHeaders.All;
+                });
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
                     .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
