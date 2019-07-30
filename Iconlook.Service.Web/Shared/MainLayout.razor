@@ -31,23 +31,23 @@
 </div>
 @code {
     public List<MenuItem> MenuItems = new List<MenuItem>{
-        new MenuItem{ Text = "Home", Url="/" },
-        new MenuItem{ Text = "P-Rep", Url="/prep", Items = new List<MenuItem>{
+        new MenuItem{ Text = "HOME", Url="/" },
+        new MenuItem{ Text = "P-REP", Url="/prep", Items = new List<MenuItem>{
             new MenuItem{ Text = "View P-Rep List" },
             new MenuItem{ Text = "View P-Rep Transactions" },
             new MenuItem{ Text = "View Exclusively Top Token" }}
         },
-        new MenuItem{ Text = "Staking", Items = new List<MenuItem>{
+        new MenuItem{ Text = "STAKING", Items = new List<MenuItem>{
             new MenuItem{ Text= "View Txns" },
             new MenuItem{ Text= "View Pending Txns" },
             new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "Blockchain", Items = new List<MenuItem>{
+        new MenuItem{ Text = "BLOCKCHAIN", Items = new List<MenuItem>{
             new MenuItem{ Text= "View Txns" },
             new MenuItem{ Text= "View Pending Txns" },
             new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "Calculator", Items = new List<MenuItem>{
+        new MenuItem{ Text = "CALCULATOR", Items = new List<MenuItem>{
             new MenuItem{ Text= "Delegation Reward" },
             new MenuItem{ Text= "Representative Reward" },
             new MenuItem{ Text= "Production and Verification Reward" }

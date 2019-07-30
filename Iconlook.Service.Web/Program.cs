@@ -19,6 +19,7 @@ namespace Iconlook.Service.Web
         {
             Configure = host => application =>
             {
+                application.UseForwardedHeaders();
                 application.UseRouting();
                 application.UseStaticFiles();
                 application.UseEndpoints(x =>
@@ -26,7 +27,6 @@ namespace Iconlook.Service.Web
                     x.MapBlazorHub();
                     x.MapFallbackToPage("/_Page");
                 });
-                application.UseForwardedHeaders();
                 application.UseServiceStack(host);
             };
             ConfigureServices = host => services =>
