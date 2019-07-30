@@ -1,27 +1,34 @@
 ﻿@inherits LayoutComponentBase
 @using Syncfusion.EJ2.Blazor.Buttons
 @using Syncfusion.EJ2.Blazor.Navigations
-<div class="wrapper">
-    <header id="header">
+<div class="body">
+    <header>
         <div class="container">
-            <div class="row">
-                <div class="col top-menu-wrapper">
-                    <EjsMenu Items="@MenuItems" CssClass="top-menu"></EjsMenu>
-                    <EjsSwitch Checked="true"></EjsSwitch>
+            <div class="row py-1">
+                <div class="col pl-0 d-flex align-items-center">
+                    <div>
+                        <img alt="ICONVIET" src="images/iconviet-logo.png" style="max-width: 105px;" />
+                    </div>
+                    <div class="flex-grow-1 text-right">
+                        <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
+                    </div>
+                    <div>
+                        <EjsSwitch Checked="true"></EjsSwitch>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-    <main id="content">
+    <main>
         <div class="container">
             <div class="row">
-                <div class="col main-body-wrapper">
+                <div class="col">
                     @Body
                 </div>
             </div>
         </div>
     </main>
-    <footer id="footer" class="gradient-background">
+    <footer class="gradient-filled">
         <div class="container">
             <div class="row">
                 <div class="col" style="height: 200px;">

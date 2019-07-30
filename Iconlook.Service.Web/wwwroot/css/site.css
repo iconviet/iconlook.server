@@ -1,11 +1,8 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-.standing-message {
-    display: flex;
-    height: 3.5rem;
+.top-message {
     color: #6c757e;
     font-size: 13px;
-    align-items: center;
 }
 
 app {
@@ -14,22 +11,20 @@ app {
     flex-direction: column;
 }
 
-.top-menu {
-    background-color: white;
+.rounded-corners {
+    -ms-border-radius: 3px;
+    border-radius: 3px;
 }
 
-.wrapper {
+.body {
     background-color: #f8f9fa;
 }
 
-.top-menu-wrapper {
-    display: flex;
-    height: 3.5rem;
-    align-items: center;
-    justify-content: flex-end;
+.ejs-menu {
+    background-color: initial;
 }
 
-.main-body-wrapper {
+.main.container {
     padding: 0 1rem 2rem 2rem;
 }
 
@@ -38,13 +33,11 @@ app {
     font-weight: 500;
     padding: 3px 30px 0 30px;
 }
-
 .e-menu-wrapper .e-ul .e-menu-item {
     font-size: 13px;
     font-weight: 400;
     padding: 0 56px 0 28px;
 }
-
 
 .e-switch-wrapper .e-switch-on,
 .e-css.e-switch-wrapper .e-switch-on {
@@ -67,7 +60,7 @@ app {
     background-color: transparent;
 }
 
-#header {
+header {
     background-color: white;
     box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
 }
@@ -77,8 +70,10 @@ app {
     background-color: #1aaaba;
 }
 
-.gradient-background {
+.gradient-filled {
+    -ms-background-repeat: repeat-x;
     background-repeat: repeat-x;
+    -ms-background-attachment: fixed;
     background-attachment: fixed;
     background-image: linear-gradient(150deg,#1aaaba,#0b464c);
 }

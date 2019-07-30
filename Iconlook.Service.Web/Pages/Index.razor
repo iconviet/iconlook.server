@@ -3,11 +3,17 @@
 @using Syncfusion.EJ2.Blazor.SplitButtons
 @using Syncfusion.EJ2.Blazor.RichTextEditor
 @using Syncfusion.EJ2.Blazor.Grids
-<div class="standing-message">
+@using  Syncfusion.EJ2.Blazor.DropDowns
+<div class="py-3 top-message">
     <strong>ICONVIET</strong> - Vote For Us And You Will See - <a href="https://iconviet.io">Visit Our Web Site Now!.</a>
 </div>
-<div class="gradient-background" style="height: 3.5rem; border-radius: 3px;">
-
+<div class="p-3 d-flex gradient-filled rounded-corners">
+    <div class="flex-grow-1">
+        <EjsAutoComplete></EjsAutoComplete>
+    </div>
+    <div>
+        <EjsButton CssClass="e-flat" IconCss="e-icons e-pause-icon">Search</EjsButton>
+    </div>
 </div>
 <div>
     <EjsChipList EnableDelete="true">
@@ -42,7 +48,7 @@
         </EjsRichTextEditor>
     </div>
 </div>
-<div class="row">
+<div class="row no-gutters">
     <div class="col">
         <EjsRichTextEditor>
             <ChildContent>
