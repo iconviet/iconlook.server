@@ -27,12 +27,12 @@
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">Latest P-Reps</div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ModelType="@Prep" DataSource="@Preps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
                         <GridColumn Width="30" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
-                                    if (context is PRep prep)
+                                    if (context is Prep prep)
                                     {
                                         <div class="avatar">
                                             <img alt="@prep.Name" class="with-rounded-circle" src="images/100.png" />
@@ -41,8 +41,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
-                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
+                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(Prep.Name)></GridColumn>
+                        <GridColumn HeaderText="Location" Field=@nameof(Prep.Location)></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>
@@ -58,13 +58,13 @@
     </div>
 </div>
 @code{
-    public PRep PRep = new PRep();
-    public List<PRep> PReps { get; set; }
+    public Prep Prep = new Prep();
+    public List<Prep> Preps { get; set; }
     public List<Transaction> Transactions { get; set; }
 
         protected override Task OnInitAsync()
         {
-            PReps = Enumerable.Range(1, 12).Select(x => new PRep
+            Preps = Enumerable.Range(1, 12).Select(x => new Prep
             {
                 Name = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)],
                 Location = new [] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" }[new Random().Next(5)]
