@@ -22,9 +22,7 @@ namespace Iconlook.Service.Web
             {
                 services.AddRazorPages();
                 services.AddHangfire(x => {});
-                services.AddResponseCaching();
                 services.AddServerSideBlazor();
-                services.AddResponseCompression();
                 services.AddSingleton<PRepService>();
                 services.AddSingleton<TransactionService>();
                 services.Configure<ForwardedHeadersOptions>(x =>
@@ -39,14 +37,6 @@ namespace Iconlook.Service.Web
             };
             Configure = host => application =>
             {
-                application.UseForwardedHeaders();
-                application.Use((context, middleware) =>
-                {
-                    context.Request.Scheme = "https";
-                    return middleware();
-                });
-                application.UseResponseCaching();
-                application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseRouting();
                 application.UseEndpoints(x =>
