@@ -25,6 +25,7 @@ namespace Iconlook.Service.Web
                     x.MapBlazorHub();
                     x.MapFallbackToPage("/_Page");
                 });
+                application.UseForwardedHeaders();
                 application.UseServiceStack(host);
             };
             ConfigureServices = host => services =>
