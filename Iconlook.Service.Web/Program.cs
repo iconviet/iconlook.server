@@ -37,14 +37,20 @@ namespace Iconlook.Service.Web
             };
             Configure = host => application =>
             {
-                application.UseStaticFiles();
                 application.UseRouting();
+                application.UseStaticFiles();
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
                     x.MapFallbackToPage("/_Page");
                 });
                 application.UseServiceStack(host);
+                application.UseForwardedHeaders();
+                application.Use((context, next) =>
+                {
+                    context.Request.Scheme = "https";
+                    return next();
+                });
                 SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
                                                           "dLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
             };
