@@ -1,4 +1,6 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono:300,400,500,600");
 
 .top-message {
     color: #6c757e;
@@ -69,11 +71,16 @@ app {
 
 .e-menu-wrapper ul .e-menu-item {
     color: #6c757e;
-    font-weight: 500;
+    font-weight: 600;
     padding: 3px 30px 0 30px;
 }
+
+
+.mono-font {
+    font-family: 'Share Tech Mono';
+}
+
 .e-menu-wrapper .e-ul .e-menu-item {
-    font-size: 13px;
     font-weight: 400;
     padding: 0 56px 0 28px;
 }
@@ -83,6 +90,7 @@ app {
     color: white;
     background-color: #1aaaba;
 }
+
 
 .e-menu-wrapper ul .e-menu-item.e-focused {
     color: #1aaaba;
@@ -122,7 +130,7 @@ header {
     background-image: linear-gradient(150deg,#1aaaba,#0b464c);
 }
 
-html, body {
+html, body, .e-control {
     font-size: 13px;
-    font-family: 'SF Text', Helvetica, Arial, sans-serif;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif !important;
 }

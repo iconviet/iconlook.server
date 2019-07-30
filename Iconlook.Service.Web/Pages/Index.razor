@@ -55,8 +55,10 @@
     <div class="col">
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">Transactions</div>
-            <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid DataSource="@Transactions"></EjsGrid>
+            <div class="card-body mono-font px-4 pt-1 pb-2">
+                <EjsGrid DataSource="@Transactions" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+
+                </EjsGrid>
             </div>
         </div>
     </div>
