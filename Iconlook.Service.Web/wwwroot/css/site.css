@@ -71,6 +71,7 @@ app {
 
 .e-menu-wrapper ul .e-menu-item {
     color: #6c757e;
+    font-size: 13px;
     font-weight: 600;
     padding: 3px 30px 0 30px;
 }
