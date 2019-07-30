@@ -38,7 +38,9 @@ namespace Iconlook.Service.Web
                 services.AddSingleton<TransactionService>();
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
-                    options.ForwardedHeaders = ForwardedHeaders.All;
+                    options.KnownProxies.Clear();
+                    options.KnownNetworks.Clear();
+                    options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
                 });
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
