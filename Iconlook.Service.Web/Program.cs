@@ -47,7 +47,7 @@ namespace Iconlook.Service.Web
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
-                    x.MapFallbackToPage("/_host");
+                    x.MapFallbackToPage("/_Page");
                 });
                 application.UseServiceStack(host);
                 SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
