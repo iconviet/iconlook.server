@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel;
 <div class="body">
     <header>
         <div class="container">
@@ -17,6 +18,22 @@
     </header>
     <main>
         <div class="container">
+            <div class="row py-3 align-items-center">
+                <div class="col top-message">
+                    We have no any intention to influence and manipulate the incoming PRep election. Even within our analysis, we are still trying to be neutral as much as possible
+                </div>
+                <div class="col-auto">
+                    <EjsDropDownButton Items="@Items" CssClass="filter">MAINNET</EjsDropDownButton>
+                    @code {
+
+                        public List<ItemModel> Items = new List<ItemModel>
+                        {
+                            new ItemModel{ Text = "JINYONG TESTNET" },
+                            new ItemModel{ Text = "YONOUSONG TESTNET" }
+                        };
+                    }
+                </div>
+            </div>
             @Body
         </div>
     </main>
@@ -31,23 +48,28 @@
 </div>
 @code {
     public List<MenuItem> MenuItems = new List<MenuItem>{
-        new MenuItem{ Text = "HOME", Url="/" },
-        new MenuItem{ Text = "P-REP", Url="/prep", Items = new List<MenuItem>{
+        new MenuItem{ Text = "STATUS", Url="/", IconCss="far fa-signal-alt" },
+        new MenuItem{ Text = "P-REPS", Url="/prep", IconCss="far fa-users-class", Items = new List<MenuItem>{
             new MenuItem{ Text = "View P-Rep List" },
             new MenuItem{ Text = "View P-Rep Transactions" },
             new MenuItem{ Text = "View Exclusively Top Token" }}
         },
-        new MenuItem{ Text = "STAKING", Items = new List<MenuItem>{
+        new MenuItem{ Text = "STAKING", IconCss="far fa-badge-percent", Items = new List<MenuItem>{
             new MenuItem{ Text= "View Txns" },
             new MenuItem{ Text= "View Pending Txns" },
             new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "BLOCKCHAIN", Items = new List<MenuItem>{
+        new MenuItem{ Text = "ECOSYSTEM", IconCss="far fa-cube", Items = new List<MenuItem>{
             new MenuItem{ Text= "View Txns" },
             new MenuItem{ Text= "View Pending Txns" },
             new MenuItem{ Text= "View Internal Transaction" }}
         },
-        new MenuItem{ Text = "CALCULATOR", Items = new List<MenuItem>{
+        new MenuItem{ Text = "CALCULATOR", IconCss="far fa-calculator-alt", Items = new List<MenuItem>{
+            new MenuItem{ Text= "View Txns" },
+            new MenuItem{ Text= "View Pending Txns" },
+            new MenuItem{ Text= "View Internal Transaction" }}
+        },
+        new MenuItem{ Text = "RESOURCES", IconCss="far fa-books", Items = new List<MenuItem>{
             new MenuItem{ Text= "Delegation Reward" },
             new MenuItem{ Text= "Representative Reward" },
             new MenuItem{ Text= "Production and Verification Reward" }

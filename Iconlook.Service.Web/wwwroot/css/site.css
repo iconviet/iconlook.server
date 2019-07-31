@@ -1,15 +1,18 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
 @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono:300,400,500,600");
+
+.card .e-grid {
+    border: none;
+}
+
+a {
+    color: #1aaaba;
+}
 
 app {
     display: flex;
     position: relative;
     flex-direction: column;
-}
-
-.card .e-grid {
-    border: none;
 }
 
 .card {
@@ -39,6 +42,10 @@ app {
 .with-rounded-corners {
     -ms-border-radius: 3px;
     border-radius: 3px;
+}
+
+.card .card-body {
+    background-color: white;
 }
 
 .card .card-header {
@@ -74,9 +81,8 @@ app {
     color: #6c757e;
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 3px 30px 0 30px;
+    padding: 3px 15px 0 15px;
 }
-
 
 .mono-font {
     font-family: 'Share Tech Mono';
@@ -106,6 +112,22 @@ app {
 .e-menu-wrapper .e-ul .e-menu-item.e-focused {
     color: #1aaaba;
     background-color: initial;
+}
+
+
+.e-menu-wrapper ul .e-menu-item .e-menu-icon {
+    width: 16px;
+    color: #1aaaba;
+    font-size: 1rem;
+    margin-top: -1px;
+}
+
+.e-menu-wrapper .e-menu-item.e-selected .e-menu-icon {
+    color: #1aaaba;
+}
+
+.e-menu-wrapper .e-ul .e-menu-item.e-focused .e-menu-icon {
+    color: #1aaaba;
 }
 
 header {

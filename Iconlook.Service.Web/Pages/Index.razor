@@ -2,18 +2,34 @@
 @layout MainLayout
 @inject PRepService PRepService
 @inject TransactionService TransactionService
-<div class="py-3 top-message">
-    <strong>ICONVIET</strong> - Vote For Us And You Will See - <a href="https://iconviet.io">Visit Our Web Site Now!.</a>
-</div>
-<div class="p-3 d-flex with-shadow with-gradient with-rounded-corners">
-    <div class="flex-grow-1">
-        <EjsAutoComplete></EjsAutoComplete>
+<div class="row mb-3">
+    <div class="col">
+        <div class="card px-4 pt-3 pb-4 with-shadow with-gradient with-rounded-corners">
+            <h4 style="color: white;"><strong>ICON Ecosystem Explorer</strong></h4>
+            <div class="d-flex" style="background-color: white;">
+                <div>
+                    <EjsDropDownButton Items="@Items" CssClass="filter">ALL FILTERS</EjsDropDownButton>
+                    @code {
+
+                        public List<ItemModel> Items = new List<ItemModel>
+                        {
+                            new ItemModel{ Text = "P-REP" },
+                            new ItemModel{ Text = "ADDRESS" },
+                            new ItemModel{ Text = "TRANSACTIONS" }
+                        };
+                    }
+                </div>
+                <div class="flex-grow-1">
+                    <EjsAutoComplete Placeholder="Search by P-Rep / Address / Transaction"></EjsAutoComplete>
+                </div>
+                <div>
+                    <EjsButton CssClass="e-flat" IconCss="far fa-search">Search</EjsButton>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <EjsButton CssClass="e-flat" IconCss="e-icons e-pause-icon">Search</EjsButton>
-    </div>
 </div>
-<div class="row my-4">
+<div class="row mb-3">
     <div class="col">
         <div class="card with-shadow" style="min-height: 100px;">
         </div>
@@ -22,7 +38,16 @@
 <div class="row mb-5">
     <div class="col">
         <div class="card with-shadow" style="min-height: 500px;">
-            <div class="card-header">Latest P-Reps</div>
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <i class="far fa-user-clock"></i>&nbsp;&nbsp;P-REPS WATCHER
+                    </div>
+                    <div class="col text-right">
+                        <a href="/prep">MORE</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body px-4 pt-1 pb-2">
                 <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
@@ -47,7 +72,16 @@
     </div>
     <div class="col">
         <div class="card with-shadow" style="min-height: 500px;">
-            <div class="card-header">Transactions</div>
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <i class="far fa-cube"></i>&nbsp;&nbsp;BLOCK WATCHER
+                    </div>
+                    <div class="col text-right">
+                        <a href="/prep">MORE</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body mono-font px-4 pt-1 pb-2">
                 <EjsGrid DataSource="@Transactions" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
 
