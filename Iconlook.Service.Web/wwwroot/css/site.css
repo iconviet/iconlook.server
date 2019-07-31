@@ -14,7 +14,7 @@ app {
 
 .card {
     color: #363b3f;
-    border-color: #e7eaf3;
+    border-color: #e7eaee;
 }
 
 .avatar {
@@ -28,14 +28,7 @@ app {
 .card .e-grid .e-rowcell {
     padding: 10px 0;
     font-size: inherit;
-    border-color: #e7eaf3;
-}
-
-.card .card-header {
-    font-weight: bold;
-    border-color: #e7eaf3;
-    padding: 0.9rem 1.1rem;
-    background-color: white;
+    border-color: #e7eaee;
 }
 
 .with-rounded-circle {
@@ -46,6 +39,13 @@ app {
 .with-rounded-corners {
     -ms-border-radius: 3px;
     border-radius: 3px;
+}
+
+.card .card-header {
+    font-weight: bold;
+    border-color: #e7eaee;
+    padding: 0.9rem 1.1rem;
+    background-color: #fafafa;
 }
 
 .card .e-grid .e-gridheader {
@@ -88,10 +88,9 @@ app {
     padding: 0 56px 0 28px;
 }
 
-.e-switch-wrapper .e-switch-on,
-.e-css.e-switch-wrapper .e-switch-on {
+.e-switch-wrapper .e-switch-on {
     color: white;
-    background-color: #1aaaba;
+    background-color: #1aaaba !important;
 }
 
 .e-menu-wrapper ul .e-menu-item.e-focused {
@@ -114,9 +113,8 @@ header {
     box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
 }
 
-.e-switch-wrapper .e-switch-handle.e-switch-active,
-.e-css.e-switch-wrapper .e-switch-handle.e-switch-active {
-    background-color: #1aaaba;
+.e-switch-wrapper .e-switch-handle.e-switch-active {
+    background-color: #1aaaba !important;
 }
 
 
