@@ -30,6 +30,8 @@ namespace Iconlook.Service.Web
                     return next();
                 });
                 application.UseResponseCompression();
+                application.UseStaticFiles();
+                application.UseCookiePolicy();
                 application.UseRouting();
                 application.UseEndpoints(x =>
                 {
