@@ -19,6 +19,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.12" />
     <PackageReference Include="ServiceStack.Api.Swagger" Version="5.5.0" />
     <PackageReference Include="Twilio" Version="5.31.2" />
   </ItemGroup>

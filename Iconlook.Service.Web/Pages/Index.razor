@@ -49,22 +49,24 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
+                        <GridColumn Width="24" HeaderText="Rank" Field="@nameof(PRep.Rank)"></GridColumn>
                         <GridColumn Width="30" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
                                     {
                                         <div class="avatar">
-                                            <img alt="@prep.Name" class="with-rounded-circle" src="images/100.png" />
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl" />
                                         </div>
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="120" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
+                        <GridColumn Width="155" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
                         <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
+                        <GridColumn Width="24" HeaderText="ID" Field=@nameof(PRep.Id) TextAlign="TextAlign.Right"></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>
