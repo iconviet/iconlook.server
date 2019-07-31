@@ -3,6 +3,7 @@ using Agiper.Server;
 using Funq;
 using Iconlook.Service.Api;
 using ServiceStack;
+using Environment = Agiper.Environment;
 
 namespace Iconlook.Service.Web
 {
@@ -12,8 +13,11 @@ namespace Iconlook.Service.Web
         {
             TestMode = true;
             EndpointCanMakeCallbackRequests = true;
-            NServiceBusTransport = NServiceBusTransport.Learning;
-            NServiceBusPersistence = NServiceBusPersistence.Memory;
+            if (Environment == Environment.Localhost)
+            {
+                NServiceBusTransport = NServiceBusTransport.Learning;
+                NServiceBusPersistence = NServiceBusPersistence.Memory;
+            }
         }
 
         public override void Configure(Container container)

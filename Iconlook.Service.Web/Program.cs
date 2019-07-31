@@ -1,6 +1,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Agiper;
 using Agiper.Server;
 using Hangfire;
 using Iconlook.Service.Api;
@@ -20,8 +21,16 @@ namespace Iconlook.Service.Web
             Configure = host => application =>
             {
                 application.UseForwardedHeaders();
+                application.Use((context, next) =>
+                {
+                    if (host.Environment != Environment.Localhost)
+                    {
+                        context.Request.Scheme = "https";
+                    }
+                    return next();
+                });
+                application.UseResponseCompression();
                 application.UseRouting();
-                application.UseStaticFiles();
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
@@ -34,6 +43,7 @@ namespace Iconlook.Service.Web
                 services.AddRazorPages();
                 services.AddHangfire(x => { });
                 services.AddServerSideBlazor();
+                services.AddResponseCompression();
                 services.AddSingleton<PRepService>();
                 services.AddSingleton<TransactionService>();
                 services.Configure<ForwardedHeadersOptions>(options =>
