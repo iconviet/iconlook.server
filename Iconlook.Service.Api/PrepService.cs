@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Agiper;
 using Agiper.Server;
 using HtmlAgilityPack;
 using Iconlook.Entity;
@@ -16,21 +16,29 @@ namespace Iconlook.Service.Api
             return new PRep { Name = "ICONVIET", Location = "Vietnam" };
         }
 
-        public async Task<List<PRep>> GetLatestPRepsAsync()
+        public async Task<List<PRep>> GetLatestPRepsAsync(int take = 22)
         {
-            var rank = new Stack<int>(Enumerable.Range(1, 60));
-            var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
-            var data = (from t in html.DocumentNode.SelectNodes("//tbody")
-                        from r in t.SelectNodes("tr")
-                        select new PRep
-                        {
-                            Rank = rank.Pop(),
-                            Created = r.SelectNodes("td")[1].InnerText.Trim(),
-                            Name = r.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
-                            Id = r.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                            LogoUrl = $"https://icon.community{r.SelectSingleNode("td/div/img").GetAttributeValue("src", null)}",
-                            Location = r.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                        }).OrderBy(x => x.Rank).Shuffle().Take(12).ToList();
+            var data = new List<PRep>();
+            try
+            {
+                var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
+                var query = from t in html.DocumentNode.SelectNodes("//tbody")
+                            from r in t.SelectNodes("tr")
+                            select r;
+                var rank = new Stack<int>(Enumerable.Range(1, query.Count()));
+                data = query.Select(x => new PRep
+                {
+                    Rank = rank.Pop(),
+                    Created = x.SelectNodes("td")[1].InnerText.Trim(),
+                    Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
+                    Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
+                    LogoUrl = $"https://icon.community{x.SelectSingleNode("td/div/img").GetAttributeValue("src", null)}",
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
+                }).OrderBy(x => x.Rank).Reverse().Take(take).ToList();
+            }
+            catch (Exception)
+            {
+            }
             return data;
         }
     }

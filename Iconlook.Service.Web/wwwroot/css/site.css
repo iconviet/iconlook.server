@@ -31,7 +31,6 @@ html, body, .e-control {
 }
 
 .card {
-    color: #363b3f;
     overflow: hidden;
     border-color: #e7eaee;
 }
@@ -41,10 +40,15 @@ html, body, .e-control {
 }
 
 .card .card-header {
+    color: #363b3f;
     font-weight: bold;
     border-color: #e7eaee;
     padding: 0.9rem 1.1rem;
     background-color: #fafafa;
+}
+
+.card .card-header .far {
+    color: #6c757e;
 }
 
 .card .e-grid .e-gridheader {
@@ -112,7 +116,7 @@ SYNCFUSION CUSTOMIZATION
     color: #6c757e;
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 3px 15px 0 15px;
+    padding: 3px 20px 0 20px;
 }
 
 .e-menu-wrapper .e-ul .e-menu-item {

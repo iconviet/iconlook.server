@@ -15,7 +15,7 @@
                         {
                             new ItemModel{ Text = "P-REP" },
                             new ItemModel{ Text = "ADDRESS" },
-                            new ItemModel{ Text = "TRANSACTIONS" }
+                            new ItemModel{ Text = "TRANSACTION" }
                         };
                     }
                 </div>
@@ -41,10 +41,10 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <i class="far fa-user-clock"></i>&nbsp;&nbsp;P-REPS WATCHER
+                        <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/prep">MORE</a>
+                        <a href="/prep-directory">MORE</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <i class="far fa-cube"></i>&nbsp;&nbsp;BLOCK WATCHER
+                        <i class="fal pr-2 fa-cube"></i>BLOCK WATCHER
                     </div>
                     <div class="col text-right">
                         <a href="/prep">MORE</a>
@@ -99,7 +99,7 @@
 
     protected override async Task OnInitAsync()
     {
-        PReps = await PRepService.GetLatestPRepsAsync();
+        PReps = await PRepService.GetLatestPRepsAsync(12);
         Transactions = await TransactionService.GetLatestTransactionsAsync();
     }
 

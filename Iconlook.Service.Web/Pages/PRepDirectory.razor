@@ -1,0 +1,57 @@
+﻿@page "/prep-directory"
+@layout MainLayout
+@inject PRepService PRepService
+<div class="row mb-3">
+    <div class="col">
+        <div class="card with-shadow" style="min-height: 50px;">
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col">
+        <div class="card with-shadow" style="min-height: 500px;">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <i class="fal pr-2 fa-user-clock"></i>P-REP DIRECTORY
+                    </div>
+                    <div class="col text-right">
+                        <a href="/preps-watcher">MORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-4 pt-1 pb-2">
+                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                    <GridColumns>
+                        <GridColumn Width="24" HeaderText="Rank" Field="@nameof(PRep.Rank)"></GridColumn>
+                        <GridColumn Width="30" TextAlign="TextAlign.Center">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <div class="avatar">
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl" />
+                                        </div>
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="155" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
+                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
+                        <GridColumn Width="24" HeaderText="ID" Field=@nameof(PRep.Id) TextAlign="TextAlign.Right"></GridColumn>
+                    </GridColumns>
+                </EjsGrid>
+            </div>
+        </div>
+    </div>
+</div>
+@code{
+    public PRep PRep = new PRep();
+    public List<PRep> PReps { get; set; }
+    
+    protected override async Task OnInitAsync()
+    {
+        PReps = await PRepService.GetLatestPRepsAsync(44);
+    }
+
+}
