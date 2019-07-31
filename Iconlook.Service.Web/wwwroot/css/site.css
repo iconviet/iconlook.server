@@ -1,10 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
 @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono:300,400,500,600");
 
-.card .e-grid {
-    border: none;
-}
-
 a {
     color: #1aaaba;
 }
@@ -15,36 +11,32 @@ app {
     flex-direction: column;
 }
 
+header {
+    background-color: white;
+    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
+}
+
+html, body, .e-control {
+    color: #6c757e;
+    font-size: 14px;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif !important;
+}
+
+.body {
+    background-color: #f8f9fa;
+}
+
+.card .e-grid {
+    border: none;
+}
+
 .card {
     color: #363b3f;
     border-color: #e7eaee;
 }
 
-.avatar {
-    width: 20px;
-    height: 20px;
-    overflow: hidden;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-}
-
-.card .e-grid .e-rowcell {
-    padding: 10px 0;
-    font-size: inherit;
-    border-color: #e7eaee;
-}
-
-.with-rounded-circle {
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-}
-
-.with-rounded-corners {
-    -ms-border-radius: 3px;
-    border-radius: 3px;
-}
-
 .card .card-body {
+    overflow: hidden;
     background-color: white;
 }
 
@@ -59,16 +51,55 @@ app {
     display: none;
 }
 
-.body {
-    background-color: #f8f9fa;
+.card .card-body .e-grid .e-rowcell {
+    padding: 10px 0;
+    font-size: inherit;
+    border-color: #e7eaee;
 }
 
-.avatar img {
+.card .e-grid .e-rowcell .avatar {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.card .e-grid .e-rowcell .avatar img {
     width: 100%;
     -webkit-object-fit: cover;
     object-fit: cover;
 }
 
+.mono-font {
+    font-family: 'Share Tech Mono';
+}
+
+.with-rounded-circle {
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.with-rounded-corners {
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.with-shadow {
+    box-shadow: 0 0.5rem 1.2rem rgba(189,197,209,.2);
+}
+
+.with-gradient {
+    -ms-background-repeat: repeat-x;
+    background-repeat: repeat-x;
+    -ms-background-attachment: fixed;
+    background-attachment: fixed;
+    background-image: linear-gradient(150deg,#1aaaba,#0b464c);
+}
+
+/*
+SYNCFUSION CUSTOMIZATION    
+*/
 .ejs-menu {
     background-color: initial;
 }
@@ -82,10 +113,6 @@ app {
     font-weight: 600;
     font-size: 0.95rem;
     padding: 3px 15px 0 15px;
-}
-
-.mono-font {
-    font-family: 'Share Tech Mono';
 }
 
 .e-menu-wrapper .e-ul .e-menu-item {
@@ -129,31 +156,6 @@ app {
 .e-menu-wrapper .e-ul .e-menu-item.e-focused .e-menu-icon {
     color: #1aaaba;
 }
-
-header {
-    background-color: white;
-    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
-}
-
 .e-switch-wrapper .e-switch-handle.e-switch-active {
     background-color: #1aaaba !important;
-}
-
-
-.with-shadow {
-    box-shadow: 0 0.5rem 1.2rem rgba(189,197,209,.2);
-}
-
-.with-gradient {
-    -ms-background-repeat: repeat-x;
-    background-repeat: repeat-x;
-    -ms-background-attachment: fixed;
-    background-attachment: fixed;
-    background-image: linear-gradient(150deg,#1aaaba,#0b464c);
-}
-
-html, body, .e-control {
-    color: #6c757e;
-    font-size: 14px;
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif !important;
 }
