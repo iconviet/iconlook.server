@@ -32,11 +32,11 @@ html, body, .e-control {
 
 .card {
     color: #363b3f;
+    overflow: hidden;
     border-color: #e7eaee;
 }
 
 .card .card-body {
-    overflow: hidden;
     background-color: white;
 }
 
