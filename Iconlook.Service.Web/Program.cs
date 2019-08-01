@@ -21,14 +21,14 @@ namespace Iconlook.Service.Web
             Configure = host => application =>
             {
                 application.UseForwardedHeaders();
-                application.Use((context, next) =>
-                {
-                    if (host.Environment != Environment.Localhost)
-                    {
-                        context.Request.Scheme = "https";
-                    }
-                    return next();
-                });
+                // application.Use((context, next) =>
+                // {
+                //     if (host.Environment != Environment.Localhost)
+                //     {
+                //         context.Request.Scheme = "https";
+                //     }
+                //     return next();
+                // });
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseCookiePolicy();
