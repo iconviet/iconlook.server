@@ -16,29 +16,28 @@
                         <i class="fal pr-2 fa-user-clock"></i>P-REP DIRECTORY
                     </div>
                     <div class="col text-right">
-                        <a href="/preps-watcher">MORE</a>
+                        <a href="/preps-directory">MORE</a>
                     </div>
                 </div>
             </div>
-            <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@PRep" DataSource="@PReps" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+            <div class="card-body pt-0 pb-2">
+                <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSorting="true" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="24" HeaderText="Rank" Field="@nameof(PRep.Rank)"></GridColumn>
-                        <GridColumn Width="30" TextAlign="TextAlign.Center">
+                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="Rank" Field="@nameof(PRep.Rank)"></GridColumn>
+                        <GridColumn Width="44" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
                                     {
-                                        <div class="avatar">
-                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl"/>
-                                        </div>
+                                        <img width="20" height="20" class="avatar" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="155" HeaderText="Name" Field=@nameof(PRep.Name)></GridColumn>
-                        <GridColumn HeaderText="Location" Field=@nameof(PRep.Location)></GridColumn>
-                        <GridColumn Width="24" HeaderText="ID" Field=@nameof(PRep.Id) TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="170" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
+                        <GridColumn Width="150" HeaderText="Location" Field="@nameof(PRep.Location)"></GridColumn>
+                        <GridColumn HeaderText="Address" Field="@nameof(PRep.Address)"></GridColumn>
+                        <GridColumn Width="64" HeaderText="ID" Field="@nameof(PRep.Id)" TextAlign="TextAlign.Center"></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>

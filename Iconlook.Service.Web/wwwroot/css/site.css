@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
 @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono:300,400,500,600");
 
+/*
+    GLOBAL
+*/
+
 a {
     color: #1aaaba;
 }
@@ -11,23 +15,40 @@ app {
     flex-direction: column;
 }
 
-header {
-    background-color: white;
-    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
+.body {
+    background-color: #f8f9fa;
 }
 
 html, body, .e-control {
     color: #6c757e;
     font-size: 14px;
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif !important;
+    font-family: 'Source Sans Pro';
 }
 
-.body {
-    background-color: #f8f9fa;
+header {
+    background-color: white;
+    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
 }
+
+img.avatar {
+    overflow: hidden;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+
+
+
+/*
+    CARD
+*/
 
 .card .e-grid {
     border: none;
+}
+
+.card .card-header .far {
+    color: #6c757e;
 }
 
 .card {
@@ -47,34 +68,15 @@ html, body, .e-control {
     background-color: #fafafa;
 }
 
-.card .card-header .far {
-    color: #6c757e;
-}
-
 .card .e-grid .e-gridheader {
-    display: none;
+    border-top: none;
 }
 
-.card .card-body .e-grid .e-rowcell {
-    padding: 10px 0;
-    font-size: inherit;
-    border-color: #e7eaee;
-}
 
-.card .e-grid .e-rowcell .avatar {
-    width: 20px;
-    height: 20px;
-    overflow: hidden;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-}
 
-.card .e-grid .e-rowcell .avatar img {
-    width: 100%;
-    -webkit-object-fit: cover;
-    object-fit: cover;
-}
-
+/*
+    EFFECTS
+*/
 .mono-font {
     font-family: 'Share Tech Mono';
 }
@@ -101,9 +103,28 @@ html, body, .e-control {
     background-image: linear-gradient(150deg,#1aaaba,#0b464c);
 }
 
+
+
 /*
-SYNCFUSION CUSTOMIZATION    
+    EJS-GRID
 */
+.e-grid .e-rowcell {
+    font-size: inherit;
+    border-color: #e7eaee;
+}
+
+/*
+    EJS-SWITCH
+*/
+.e-switch-wrapper .e-switch-handle.e-switch-active {
+    background-color: #1aaaba !important;
+}
+
+
+/*
+    EJS-MENU
+*/
+
 .ejs-menu {
     background-color: initial;
 }
@@ -159,7 +180,4 @@ SYNCFUSION CUSTOMIZATION
 
 .e-menu-wrapper .e-ul .e-menu-item.e-focused .e-menu-icon {
     color: #1aaaba;
-}
-.e-switch-wrapper .e-switch-handle.e-switch-active {
-    background-color: #1aaaba !important;
 }
