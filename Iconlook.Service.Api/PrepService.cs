@@ -12,7 +12,7 @@ namespace Iconlook.Service.Api
 {
     public class PRepService : ServiceBase
     {
-        public async Task<List<PRepResponse>> GetPRepsAsync(PRepListRequest request)
+        public async Task<List<PRepResponse>> Any(PRepListRequest request)
         {
             var data = new List<PRepResponse>();
             try
@@ -30,7 +30,7 @@ namespace Iconlook.Service.Api
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     LogoUrl = $"https://icon.community{x.SelectSingleNode("td/div/img").GetAttributeValue("src", null)}",
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                }).OrderBy(x => x.Rank).Reverse().Take(request.Take).ToList();
+                }).OrderBy(x => x.Rank).Reverse().Take(request.Take == 0 ? 22 : 0).ToList();
             }
             catch (Exception)
             {
