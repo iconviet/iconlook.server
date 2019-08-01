@@ -30,7 +30,7 @@
                                     if (context is PRep prep)
                                     {
                                         <div class="avatar">
-                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl" />
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl"/>
                                         </div>
                                     }
                                 }
@@ -45,10 +45,11 @@
         </div>
     </div>
 </div>
+
 @code{
     public PRep PRep = new PRep();
     public List<PRep> PReps { get; set; }
-    
+
     protected override async Task OnInitAsync()
     {
         PReps = await PRepService.GetLatestPRepsAsync(44);

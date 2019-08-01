@@ -5,19 +5,24 @@
 <div class="row mb-3">
     <div class="col">
         <div class="card px-4 pt-3 pb-4 with-shadow with-gradient with-rounded-corners">
-            <h4 style="color: white;"><strong>ICON Ecosystem Explorer</strong></h4>
+            <h4 style="color: white;">
+                <strong>ICON Ecosystem Explorer</strong>
+            </h4>
             <div class="d-flex" style="background-color: white;">
                 <div>
                     <EjsDropDownButton Items="@Items" CssClass="filter">ALL FILTERS</EjsDropDownButton>
+
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
                         {
-                            new ItemModel{ Text = "P-REP" },
-                            new ItemModel{ Text = "ADDRESS" },
-                            new ItemModel{ Text = "TRANSACTION" }
+                            new ItemModel { Text = "P-REP" },
+                            new ItemModel { Text = "ADDRESS" },
+                            new ItemModel { Text = "TRANSACTION" }
                         };
+
                     }
+
                 </div>
                 <div class="flex-grow-1">
                     <EjsAutoComplete Placeholder="Search by P-Rep / Address / Transaction"></EjsAutoComplete>
@@ -58,7 +63,7 @@
                                     if (context is PRep prep)
                                     {
                                         <div class="avatar">
-                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl" />
+                                            <img alt="@prep.Name" class="with-rounded-circle" src="@prep.LogoUrl"/>
                                         </div>
                                     }
                                 }
@@ -92,6 +97,7 @@
         </div>
     </div>
 </div>
+
 @code{
     public PRep PRep = new PRep();
     public List<PRep> PReps { get; set; }
