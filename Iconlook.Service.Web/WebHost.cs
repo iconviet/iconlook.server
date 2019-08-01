@@ -9,20 +9,12 @@ namespace Iconlook.Service.Web
     {
         public WebHost() : base("Web", typeof(WebHost).Assembly)
         {
-            TestMode = true;
-            EndpointCanMakeCallbackRequests = true;
         }
 
         public override void Configure(Container container)
         {
             base.Configure(container);
             RegisterServicesInAssembly(typeof(ApiHost).Assembly);
-        }
-
-        protected override void ConfigureFeature()
-        {
-            base.ConfigureFeature();
-            GetPlugin<ServerEventsFeature>().LimitToAuthenticatedUsers = false;
         }
 
         public override RouteAttribute[] GetRouteAttributes(Type type)

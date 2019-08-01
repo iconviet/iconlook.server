@@ -29,15 +29,15 @@ namespace Iconlook.Service.Web
                     }
                     return next();
                 });
-                application.UseResponseCompression();
-                application.UseStaticFiles();
-                application.UseCookiePolicy();
-                application.UseRouting();
-                application.UseEndpoints(x =>
-                {
-                    x.MapBlazorHub();
-                    x.MapFallbackToPage("/_Page");
-                });
+                // application.UseResponseCompression();
+                // application.UseStaticFiles();
+                // application.UseCookiePolicy();
+                // application.UseRouting();
+                // application.UseEndpoints(x =>
+                // {
+                //     x.MapBlazorHub();
+                //     // x.MapFallbackToPage("/_Page");
+                // });
                 application.UseServiceStack(host);
             };
             ConfigureServices = host => services =>

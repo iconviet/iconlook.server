@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Service.Api\Iconlook.Service.Api.csproj" />
-    <ProjectReference Include="..\Iconlook.Service\Iconlook.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.35-beta" />

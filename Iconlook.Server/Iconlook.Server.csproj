@@ -12,7 +12,6 @@
     <PackageReference Include="NServiceBus.Persistence.Sql" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
     <ProjectReference Include="..\Iconlook.Message\Iconlook.Message.csproj" />
   </ItemGroup>
 </Project>

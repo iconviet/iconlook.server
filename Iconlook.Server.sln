@@ -5,21 +5,19 @@ VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Web", "Iconlook.Service.Web\Iconlook.Service.Web.csproj", "{8166A676-EE24-466A-BFC9-431283ADF760}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service", "Iconlook.Service\Iconlook.Service.csproj", "{583A0A37-ABF4-42E0-856E-EB55CF794E56}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Server", "Iconlook.Server\Iconlook.Server.csproj", "{31EA0786-9602-47A9-BB32-D109E40D6F27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Entity", "Iconlook.Entity\Iconlook.Entity.csproj", "{E0951FA9-037C-44B3-A40B-27F254E58441}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Api", "Iconlook.Service.Api\Iconlook.Service.Api.csproj", "{54701964-9D8F-441E-AB67-E199CB1D8545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iconlook", "Iconlook\Iconlook.csproj", "{2431B4DD-DCA8-40D8-ABFB-0D2EA295B70E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook", "Iconlook\Iconlook.csproj", "{2431B4DD-DCA8-40D8-ABFB-0D2EA295B70E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Server", "1.Server", "{754E3BDB-5BC1-4306-949A-AD265A16EB54}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Services", "2.Services", "{D9B4D14D-CB67-45D7-9442-8F9C5D2EDFA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iconlook.Message", "Iconlook.Message\Iconlook.Message.csproj", "{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Message", "Iconlook.Message\Iconlook.Message.csproj", "{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8166A676-EE24-466A-BFC9-431283ADF760}.Release|Any CPU.Build.0 = Release|Any CPU
-		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{583A0A37-ABF4-42E0-856E-EB55CF794E56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31EA0786-9602-47A9-BB32-D109E40D6F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,7 +55,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8166A676-EE24-466A-BFC9-431283ADF760} = {D9B4D14D-CB67-45D7-9442-8F9C5D2EDFA9}
-		{583A0A37-ABF4-42E0-856E-EB55CF794E56} = {754E3BDB-5BC1-4306-949A-AD265A16EB54}
 		{31EA0786-9602-47A9-BB32-D109E40D6F27} = {754E3BDB-5BC1-4306-949A-AD265A16EB54}
 		{E0951FA9-037C-44B3-A40B-27F254E58441} = {754E3BDB-5BC1-4306-949A-AD265A16EB54}
 		{54701964-9D8F-441E-AB67-E199CB1D8545} = {D9B4D14D-CB67-45D7-9442-8F9C5D2EDFA9}

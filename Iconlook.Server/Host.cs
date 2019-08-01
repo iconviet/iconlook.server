@@ -13,6 +13,7 @@ namespace Iconlook.Server
 
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
+            TestMode = true;
             if (Environment == Environment.Localhost)
             {
                 LogEventLevel = LogEventLevel.Verbose;
