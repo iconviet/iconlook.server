@@ -35,7 +35,21 @@ img.avatar {
     -ms-border-radius: 50%;
     border-radius: 50%;
 }
+.ascent {
+    color: #1aaaba !important;
+}
 
+.primary {
+    color: #6c757e !important;
+}
+
+.secondary {
+    color: #77838f !important;
+}
+
+.mono-font {
+    font-family: 'Share Tech Mono';
+}
 
 
 
@@ -77,10 +91,6 @@ img.avatar {
 /*
     EFFECTS
 */
-.mono-font {
-    font-family: 'Share Tech Mono';
-}
-
 .with-rounded-circle {
     -ms-border-radius: 50%;
     border-radius: 50%;
