@@ -6,9 +6,24 @@
     .e-grid .e-row {
         height: 39px;
     }
+
+    .subtext {
+        font-size: 11px;
+    }
+
+    .numeric {
+        font-size: 15px;
+    }
+
     .e-grid .e-gridheader {
         display: none;
     }
+
+    .numeric-condensed {
+        font-size: 15px;
+        letter-spacing: -1px;
+    }
+
     .e-grid .e-rowcell {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -27,14 +42,13 @@
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
-                        {
+                                        {
                             new ItemModel { Text = "P-REP" },
                             new ItemModel { Text = "ADDRESS" },
                             new ItemModel { Text = "TRANSACTION" }
                         };
 
                     }
-
                 </div>
                 <div class="flex-grow-1">
                     <EjsAutoComplete Placeholder="Search by P-Rep / Address / Transaction"></EjsAutoComplete>
@@ -48,50 +62,64 @@
 </div>
 <div class="row mb-3">
     <div class="col">
-        <div class="card with-shadow">
+        <div class="card with-shadow border-bottom-0">
             <div class="container">
-                <div class="row justify-content-lg-between">
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
+                <div class="row">
+                    <div class="col d-inline-flex border-right border-bottom">
+                        <div class="p-3 mr-auto">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-coins secondary"></i>MARKET CAP</div>
+                            <div class="primary mono-font numeric-condensed">$132,134,325</div>
+                        </div>
+                        <div class="p-3 text-right">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-usd-circle secondary"></i>SPOT PRICE</div>
+                            <div class="primary mono-font numeric">$0.25</div>
+                        </div>
                     </div>
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
+                    <div class="col d-inline-flex border-right border-bottom">
+                        <div class="p-3 mr-auto">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-users-class secondary"></i>P-REP COUNT</div>
+                            <div class="primary mono-font numeric">22<span class="secondary">(48)</span></div>
+                        </div>
+                        <div class="p-3 text-right">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-person-sign secondary"></i>VOTER COUNT</div>
+                            <div class="primary mono-font numeric">32,250</div>
+                        </div>
                     </div>
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
+                    <div class="col d-inline-flex border-right border-bottom">
+                        <div class="p-3 mr-auto">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-cube secondary"></i>BLOCK HEIGHT</div>
+                            <div class="primary mono-font numeric-condensed">8,749,250</div>
+                        </div>
+                        <div class="p-3 text-right">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-exchange-alt secondary"></i>TRANSACTIONS</div>
+                            <div class="primary mono-font numeric-condensed">38,749,250</div>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-lg-between">
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
-                    </div>
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
-                    </div>
-                    <div class="col p-3">
-                        <div>TOTAL SUPPLY</div>
-                        <div>400,000,000</div>
+                    <div class="col d-inline-flex border-bottom">
+                        <div class="p-3 mr-auto">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-box-open secondary"></i>ALL SUPPLY</div>
+                            <div class="primary mono-font numeric-condensed">800,000,000</div>
+                        </div>
+                        <div class="p-3 text-right">
+                            <div class="secondary subtext"><i class="fal pr-2 fa-parachute-box secondary"></i>CIRCULATING</div>
+                            <div class="primary mono-font numeric-condensed">490,000,000</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row mb-5">
-    <div class="col">
+<div class="row">
+    <div class="col-md mb-3">
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
-                    <div class="col text-right">
-                        <a href="/prep-directory">MORE</a>
+                    <div class="col-auto text-right">
+                        <a href="/">MORE</a>
                     </div>
                 </div>
             </div>
@@ -104,7 +132,7 @@
                                 @{
                                     if (context is PRep prep)
                                     {
-                                        <img width="20" height="20" class="avatar" alt="@prep.Name" src="@prep.LogoUrl"/>
+                                        <img width="20" height="20" class="avatar" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
                                 }
                             </Template>
@@ -117,15 +145,15 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col-md mb-3">
         <div class="card with-shadow" style="min-height: 500px;">
             <div class="card-header">
                 <div class="row align-items-center">
-                    <div class="col">
+                    <div class="col-auto">
                         <i class="fal pr-2 fa-cube"></i>BLOCK WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/block-watcher">MORE</a>
+                        <a href="/">MORE</a>
                     </div>
                 </div>
             </div>
@@ -136,7 +164,6 @@
         </div>
     </div>
 </div>
-
 @code{
     public PRep PRep = new PRep();
     public List<PRep> PReps { get; set; }
