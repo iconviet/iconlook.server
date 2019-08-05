@@ -16,14 +16,31 @@
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/preps-watcher">MORE</a>
+                        <a href="/preps-watcher">MATRIX</a>
                     </div>
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSorting="true" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Rank)"></GridColumn>
+                        <GridColumn Width="34">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        if (prep.Direction)
+                                        {
+                                            <i class="fas fa-caret-up" style="color: limegreen;"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-caret-down" style="color: orangered;"></i>
+                                        }
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
                         <GridColumn Width="44" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
@@ -34,10 +51,10 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="170" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
-                        <GridColumn Width="150" HeaderText="Location" Field="@nameof(PRep.Location)"></GridColumn>
-                        <GridColumn HeaderText="Address" Field="@nameof(PRep.Address)"></GridColumn>
-                        <GridColumn Width="64" HeaderText="ID" Field="@nameof(PRep.Id)" TextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn Width="200" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
+                        <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="45" HeaderText="% S" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Center" HeaderTextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn HeaderText="Location" Field="@nameof(PRep.Location)" TextAlign="TextAlign.Right"></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>
