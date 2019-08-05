@@ -10,6 +10,12 @@
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="wwwroot\images\p-reps\**" />
+    <Content Remove="wwwroot\images\p-reps\**" />
+    <EmbeddedResource Remove="wwwroot\images\p-reps\**" />
+    <None Remove="wwwroot\images\p-reps\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

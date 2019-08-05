@@ -16,14 +16,14 @@
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/preps-directory">MORE</a>
+                        <a href="/preps-watcher">MORE</a>
                     </div>
                 </div>
             </div>
-            <div class="card-body pt-0 pb-2">
+            <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSorting="true" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="Rank" Field="@nameof(PRep.Rank)"></GridColumn>
+                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Rank)"></GridColumn>
                         <GridColumn Width="44" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
@@ -51,7 +51,7 @@
 
     protected override async Task OnInitAsync()
     {
-        PReps = await Service.GetLatestPRepsAsync(44);
+        PReps = await Service.GetLatestPRepsAsync(40);
     }
 
 }

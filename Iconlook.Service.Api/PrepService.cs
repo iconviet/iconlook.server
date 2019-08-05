@@ -28,8 +28,8 @@ namespace Iconlook.Service.Api
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    LogoUrl = $"https://icon.community{x.SelectSingleNode("td/div/img").GetAttributeValue("src", null)}",
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
+                    LogoUrl = $"images/preps/{x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)}.png"
                 }).OrderBy(x => x.Rank).Reverse().Take(request.Take == 0 ? 22 : 0).ToList();
             }
             catch (Exception)
@@ -54,8 +54,8 @@ namespace Iconlook.Service.Api
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    LogoUrl = $"https://icon.community{x.SelectSingleNode("td/div/img").GetAttributeValue("src", null)}",
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
+                    LogoUrl = $"images/preps/{x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)}.png"
                 }).OrderBy(x => x.Rank).Reverse().Take(take).ToList();
             }
             catch (Exception)
