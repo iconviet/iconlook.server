@@ -20,14 +20,6 @@ namespace Iconlook.Service.Web
             Configure = host => application =>
             {
                 application.UseForwardedHeaders();
-                // application.Use((context, next) =>
-                // {
-                //     if (host.Environment != Environment.Localhost)
-                //     {
-                //         context.Request.Scheme = "https";
-                //     }
-                //     return next();
-                // });
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseCookiePolicy();
@@ -35,7 +27,7 @@ namespace Iconlook.Service.Web
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
-                    x.MapFallbackToPage("/_Page");
+                    x.MapFallbackToPage("/_Host");
                 });
                 application.UseServiceStack(host);
             };

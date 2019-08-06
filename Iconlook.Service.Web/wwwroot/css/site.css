@@ -51,8 +51,6 @@ img.avatar {
     font-family: 'Share Tech Mono';
 }
 
-
-
 /*
     CARD
 */
@@ -84,6 +82,19 @@ img.avatar {
 
 .card .e-grid .e-gridheader {
     border-top: none;
+}
+
+.card .subtext {
+    font-size: 11px;
+}
+
+.card .numeric {
+    font-size: 15px;
+}
+
+.card .numeric-condensed {
+    font-size: 15px;
+    letter-spacing: -1px;
 }
 
 

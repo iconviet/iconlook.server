@@ -14,18 +14,7 @@ namespace Iconlook.Server
 
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
-            TestMode = true;
             LogEventLevel = LogEventLevel.Information;
-            if (Environment == Environment.Localhost)
-            {
-                NServiceBusTransport = NServiceBusTransport.Learning;
-                NServiceBusPersistence = NServiceBusPersistence.Memory;
-            }
-            else
-            {
-                NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-                NServiceBusPersistence = NServiceBusPersistence.SqlServer;
-            }
         }
     }
 }
