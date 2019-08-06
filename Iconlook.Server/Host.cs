@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Threading.Tasks;
-using Agiper;
 using Agiper.Server;
 using Serilog.Events;
 
@@ -15,6 +13,8 @@ namespace Iconlook.Server
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
             LogEventLevel = LogEventLevel.Information;
+            NServiceBusTransport = NServiceBusTransport.RabbitMQ;
+            NServiceBusPersistence = NServiceBusPersistence.SqlServer;
         }
     }
 }
