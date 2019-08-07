@@ -85,7 +85,7 @@
                             </Template>
                         </GridColumn>
                         <GridColumn Width="34" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
-                        <GridColumn Width="42" TextAlign="TextAlign.Center">
+                        <GridColumn Width="42">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -98,6 +98,8 @@
                         <GridColumn Width="200" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
                         <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
                         <GridColumn Width="105" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn Width="90" HeaderText="Voters" Field="@nameof(PRep.Voters)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="110" HeaderText="Last Seen" Field="@nameof(PRep.LastSeen)" TextAlign="TextAlign.Right"></GridColumn>         
                         <GridColumn HeaderText="Location" Field="@nameof(PRep.Location)" TextAlign="TextAlign.Right"></GridColumn>
                     </GridColumns>
                 </EjsGrid>
@@ -112,7 +114,7 @@
 
     protected override async Task OnInitAsync()
     {
-        PReps = await Service.GetLatestPRepsAsync(40);
+        PReps = await Service.GetLatestPRepsAsync(22);
     }
 
 }

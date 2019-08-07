@@ -137,7 +137,7 @@
             <div class="card-body px-4 pt-1 pb-2">
                 <EjsGrid ModelType="@PRep" ID="prep-watcher" DataSource="@PReps" EnableHover="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="10">
+                        <GridColumn Width="14">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -154,8 +154,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="28" HeaderText="Position" Field="@nameof(PRep.Position)" TextAlign="TextAlign.Center"></GridColumn>
-                        <GridColumn Width="32" TextAlign="TextAlign.Center">
+                        <GridColumn Width="32" HeaderText="Position" Field="@nameof(PRep.Position)" TextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn Width="36" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -166,8 +166,9 @@
                             </Template>
                         </GridColumn>
                         <GridColumn Width="170" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
-                        <GridColumn HeaderText="Location" Field="@nameof(PRep.Location)"></GridColumn>
-                        <GridColumn Width="44" HeaderText="ID" Field="@nameof(PRep.Id)" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn HeaderText="% Uptime" Field="@nameof(PRep.UptimePercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>

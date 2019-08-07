@@ -51,9 +51,11 @@ namespace Iconlook.Service.Api
                 data = query.Select(x => new PRep
                 {
                     Position = position.Pop(),
+                    Voters = new Random().Next(100, 1000),
                     Votes = new Random().Next(1000000, 10000000),
                     Direction = new Random().NextDouble() >= 0.5,
                     UptimePercentage = new Random().NextDouble(),
+                    LastSeen = $"{new Random().Next(1, 60)}s ago",
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
