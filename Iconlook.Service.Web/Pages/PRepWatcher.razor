@@ -68,7 +68,7 @@
             <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSorting="true" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="34">
+                        <GridColumn Width="30">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -85,8 +85,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="44" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
-                        <GridColumn Width="44" TextAlign="TextAlign.Center">
+                        <GridColumn Width="34" HeaderTextAlign="TextAlign.Left" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
+                        <GridColumn Width="42" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
