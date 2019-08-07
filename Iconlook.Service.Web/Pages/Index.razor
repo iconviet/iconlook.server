@@ -168,7 +168,23 @@
                         <GridColumn Width="170" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
                         <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
                         <GridColumn Width="100" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Center"></GridColumn>
-                        <GridColumn HeaderText="% Uptime" Field="@nameof(PRep.UptimePercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn HeaderText="% Uptime" TextAlign="TextAlign.Right">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        if (prep.UptimePercentage > 0.5)
+                                        {
+                                            <span style="color: forestgreen;">@prep.UptimePercentage.ToString("P")</span>
+                                        }
+                                        if (prep.UptimePercentage <= 0.5)
+                                        {
+                                            <span style="color: red;">@prep.UptimePercentage.ToString("P")</span>
+                                        }
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
                     </GridColumns>
                 </EjsGrid>
             </div>
