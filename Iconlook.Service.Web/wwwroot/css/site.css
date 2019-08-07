@@ -39,6 +39,10 @@ img.avatar {
     color: #1aaaba !important;
 }
 
+.special {
+    color: #FF1493 !important;
+}
+
 .primary {
     color: #363b3f !important;
 }
@@ -47,9 +51,56 @@ img.avatar {
     color: #77838f !important;
 }
 
-.mono-font {
+
+
+/*
+    TEXT & NUMBER
+*/
+.txt-0 {
+    font-size: 11px;
+}
+
+.txt-1 {
+    font-size: 12px;
+}
+
+.txt-2 {
+    font-size: 13px;
+}
+
+.num-0 {
+    font-size: 14px;
+}
+
+.num-1 {
+    font-size: 15px;
+}
+
+.num-2 {
+    font-size: 16px;
+}
+
+.num-0-condensed {
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+.num-1-condensed {
+    font-size: 15px;
+    letter-spacing: -1px;
+}
+
+.num-2-condensed {
+    font-size: 16px;
+    letter-spacing: -1px;
+}
+
+.mono {
     font-family: 'Share Tech Mono';
 }
+
+
+
 
 /*
     CARD
@@ -82,19 +133,6 @@ img.avatar {
 
 .card .e-grid .e-gridheader {
     border-top: none;
-}
-
-.card .subtext {
-    font-size: 11px;
-}
-
-.card .numeric {
-    font-size: 15px;
-}
-
-.card .numeric-condensed {
-    font-size: 15px;
-    letter-spacing: -1px;
 }
 
 
