@@ -3,6 +3,14 @@
 @inject PRepService PRepService
 @inject TransactionService TransactionService
 <style>
+    .search-input {
+        border: 0;
+    }
+
+    .search-button {
+        background-color: red;
+    }
+
     .e-grid .e-row {
         height: 39px;
     }
@@ -64,10 +72,10 @@
                     }
                 </div>
                 <div class="flex-grow-1">
-                    <EjsTextBox CssClass="search-textbox" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
+                    <EjsTextBox CssClass="search-input" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
                 </div>
                 <div>
-                    <EjsButton CssClass="e-flat" IconCss="far fa-search">Search</EjsButton>
+                    <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">Search</EjsButton>
                 </div>
             </div>
         </div>
@@ -135,7 +143,7 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@PRep" ID="prep-watcher" DataSource="@PReps" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ModelType="@PRep" ID="prep-watcher" DataSource="@PReps" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
                         <GridColumn Width="14">
                             <Template>
@@ -175,11 +183,11 @@
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
-                                            <span style="color: forestgreen;">@prep.UptimePercentage.ToString("P")</span>
+                                            <span style="color: limegreen;">@prep.UptimePercentage.ToString("P")</span>
                                         }
                                         if (prep.UptimePercentage <= 0.5)
                                         {
-                                            <span style="color: red;">@prep.UptimePercentage.ToString("P")</span>
+                                            <span style="color: orangered;">@prep.UptimePercentage.ToString("P")</span>
                                         }
                                     }
                                 }
