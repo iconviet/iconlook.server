@@ -3,7 +3,7 @@
     public class PRep
     {
         public int Votes { get; set; }
-        public int Score { get; set; }
+        public int CScore { get; set; }
         public string Id { get; set; }
         public int Voters { get; set; }
         public string Name { get; set; }

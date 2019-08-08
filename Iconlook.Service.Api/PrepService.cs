@@ -51,7 +51,7 @@ namespace Iconlook.Service.Api
                 data = query.Select(x => new PRep
                 {
                     Position = position.Pop(),
-                    Score = new Random().Next(0, 128),
+                    CScore = new Random().Next(0, 128),
                     Voters = new Random().Next(100, 1000),
                     Votes = new Random().Next(1000000, 10000000),
                     Direction = new Random().NextDouble() >= 0.5,
