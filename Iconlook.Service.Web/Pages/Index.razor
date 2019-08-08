@@ -26,7 +26,7 @@
 </style>
 <div class="row mb-3">
     <div class="col">
-        <div class="card with-shadow border-bottom-0">
+        <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
                     <div class="col p-3 text-center border-right border-bottom">
@@ -39,11 +39,11 @@
                     </div>
                     <div class="col p-3 text-center border-right border-bottom">
                         <div><strong class="txt-1 ascent">WHO SHOULD I VOTE FOR?</strong></div>
-                        <div class="primary">vote for those with reasonable <span class="mono special">score</span></div>
+                        <div class="primary">vote for those with reasonable <span class="mono special border-bottom">score</span></div>
                     </div>
                     <div class="col p-3 text-center border-bottom">
                         <div><strong class="txt-1 ascent">WHY SHOULD I CARE WHO?</strong></div>
-                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special">value</span></div>
+                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special border-bottom">value</span></div>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
 </div>
 <div class="row mb-3">
     <div class="col">
-        <div class="card px-4 pt-3 pb-4 with-shadow with-gradient with-rounded-corners">
+        <div class="card px-4 pt-3 pb-4 rounded gradient shadow-sm border-0">
             <div class="row pb-1">
                 <div class="col text-center" style="color: white;">
                     <h4>
@@ -86,7 +86,7 @@
 </div>
 <div class="row mb-3">
     <div class="col">
-        <div class="card with-shadow border-bottom-0">
+        <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
                     <div class="col d-inline-flex border-right border-bottom">
@@ -134,7 +134,7 @@
 </div>
 <div class="row">
     <div class="col-md mb-3 mr-sm-n2">
-        <div class="card with-shadow" style="min-height: 500px;">
+        <div class="card shadow-sm" style="min-height: 500px;">
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
@@ -159,7 +159,7 @@
                                         }
                                         else
                                         {
-                                            <i class="fas fa-caret-down" style="color: orangered;"></i>
+                                            <i class="fas fa-caret-down" style="color: red;"></i>
                                         }
                                     }
                                 }
@@ -171,26 +171,36 @@
                                 @{
                                     if (context is PRep prep)
                                     {
-                                        <img width="20" height="20" class="avatar" alt="@prep.Name" src="@prep.LogoUrl" />
+                                        <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="170" HeaderText="Name" Field="@nameof(PRep.Name)"></GridColumn>
-                        <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Center"></GridColumn>
-                        <GridColumn HeaderText="% Uptime" TextAlign="TextAlign.Right">
+                        <GridColumn HeaderText="Name">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <strong>@prep.Name</strong>
+                                    }
+
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="90" HeaderText="Votes" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PRep prep)
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
-                                            <span style="color: limegreen;">@prep.UptimePercentage.ToString("P")</span>
+                                            <span style="color: mediumseagreen;">@prep.UptimePercentage.ToString("P")</span>
                                         }
                                         if (prep.UptimePercentage <= 0.5)
                                         {
-                                            <span style="color: orangered;">@prep.UptimePercentage.ToString("P")</span>
+                                            <span style="color: darkred;">@prep.UptimePercentage.ToString("P")</span>
                                         }
                                     }
                                 }
@@ -202,7 +212,7 @@
         </div>
     </div>
     <div class="col-md mb-3 ml-sm-n2">
-        <div class="card with-shadow" style="min-height: 500px;">
+        <div class="card shadow-sm" style="min-height: 500px;">
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-auto">
