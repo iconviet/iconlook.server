@@ -3,16 +3,16 @@
 @inject PRepService Service
 <style>
     .e-grid .e-rowcell:last-child {
-        padding-left: 10px !important;
+        padding-left: 5px !important;
         padding-right: 20px !important;
     }
     .e-grid .e-rowcell, .e-grid .e-headercell {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
     .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
         padding-left: 20px !important;
-        padding-right: 10px !important;
+        padding-right: 5px !important;
     }
 </style>
 <div class="row mb-3">
@@ -38,25 +38,13 @@
                             <div class="num-1 mono primary">132,250,456</div>
                         </div>
                     </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <div class="p-3 mr-auto">
-                            <div class="txt-0 secondary"><i class="fal pr-2 fa-cube secondary"></i>BLOCK HEIGHT</div>
-                            <div class="mono primary num-1-condensed">8,749,250</div>
-                        </div>
-                        <div class="p-3 text-right">
-                            <div class="txt-0 secondary"><i class="fal pr-2 fa-exchange-alt secondary"></i>TRANSACTIONS</div>
-                            <div class="mono primary num-1-condensed">38,749,250</div>
-                        </div>
+                    <div class="col p-3 text-center border-right border-bottom">
+                        <div><strong class="txt-1 ascent">WHO SHOULD I VOTE?</strong></div>
+                        <div class="primary">vote for those with reasonable <span class="mono special border-bottom">score</span></div>
                     </div>
-                    <div class="col d-inline-flex border-bottom">
-                        <div class="p-3 mr-auto">
-                            <div class="txt-0 secondary"><i class="fal pr-2 fa-box-open secondary"></i>ALL SUPPLY</div>
-                            <div class="primary mono num-1-condensed">800,000,000</div>
-                        </div>
-                        <div class="p-3 text-right">
-                            <div class="txt-0 secondary"><i class="fal pr-2 fa-parachute-box secondary"></i>CIRCULATING</div>
-                            <div class="mono primary num-1-condensed">490,000,000</div>
-                        </div>
+                    <div class="col p-3 text-center border-bottom">
+                        <div><strong class="txt-1 ascent">WHY SHOULD I CARE?</strong></div>
+                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special border-bottom">price</span></div>
                     </div>
                 </div>
             </div>
@@ -72,14 +60,14 @@
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/preps-watcher">MATRIX</a>
+                        <a href="/preps-watcher">WHAT IS SCORE?</a>
                     </div>
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
-                        <GridColumn Width="40" TextAlign="TextAlign.Center" HeaderText="⇵">
+                        <GridColumn Width="30" TextAlign="TextAlign.Center" HeaderText="⇵">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -96,8 +84,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="44" TextAlign="TextAlign.Center" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
-                        <GridColumn Width="44" TextAlign="TextAlign.Center">
+                        <GridColumn Width="45" TextAlign="TextAlign.Center" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
+                        <GridColumn Width="35" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -118,24 +106,54 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="100" HeaderText="ICX Staked" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" HeaderText="% Supply" Field="@nameof(PRep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" HeaderText="Voters" Field="@nameof(PRep.Voters)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="150" HeaderText="Location" Field="@nameof(PRep.Location)" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" HeaderText="% Uptime" TextAlign="TextAlign.Right">
+                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PRep prep)
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
-                                            <span style="color: mediumseagreen;">@prep.UptimePercentage.ToString("P2")</span>
+                                            <span style="color: mediumseagreen;">@prep.UptimePercentage.ToString("P0")</span>
                                         }
                                         if (prep.UptimePercentage <= 0.5)
                                         {
-                                            <span style="color: darkred;">@prep.UptimePercentage.ToString("P2")</span>
+                                            <span style="color: darkred;">@prep.UptimePercentage.ToString("P0")</span>
                                         }
                                     }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="110" HeaderText="ICX Staked" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" HeaderText="% Supply" TextAlign="TextAlign.Right">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <span class="secondary">@prep.SupplyPercentage.ToString("P2")</span>
+                                    }
+
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="100" HeaderText="Voters" TextAlign="TextAlign.Right">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <span class="secondary">@prep.Voters.ToString("N0")</span>
+                                    }
+
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="150" HeaderText="Location" TextAlign="TextAlign.Right">
+                            <Template>
+                                @{
+                                    if (context is PRep prep)
+                                    {
+                                        <span class="secondary">@prep.Location</span>
+                                    }
+
                                 }
                             </Template>
                         </GridColumn>
@@ -149,12 +167,12 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="100" HeaderText=" C_Score" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Center">
+                        <GridColumn Width="100" HeaderText="&nbsp;&nbsp;Score" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
                                     {
-                                        <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color:#e3165b;"><strong style="color:white;">@prep.CScore.ToString("N0")</strong></div>
+                                        <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color:#e3165b;"><strong style="color:white;">@prep.Score.ToString("N0")</strong></div>
                                     }
 
                                 }
