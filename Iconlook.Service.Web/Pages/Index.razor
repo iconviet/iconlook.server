@@ -30,20 +30,20 @@
             <div class="container">
                 <div class="row text-nowrap">
                     <div class="col p-3 text-center border-right border-bottom">
-                        <div><strong class="txt-1 special"><i class="fal pr-2 fa-clock"></i>PRE-VOTING</strong>&nbsp;&nbsp;<span class="txt-0 secondary">AUGUST 26</span></div>
+                        <div><strong class="txt-1 ascent">PRE-VOTING</strong>&nbsp;&nbsp;<span class="txt-0 secondary">AUGUST 26</span></div>
                         <div class="primary"><strong>15</strong> days <strong>4</strong> hours <strong>2</strong> minutes</div>
                     </div>
                     <div class="col p-3 text-center border-right border-bottom">
-                        <div><strong class="txt-1 special"><i class="fal pr-2 fa-clock"></i>ELECTION</strong>&nbsp;&nbsp;<span class="txt-0 secondary">SEPTEMBER 24</span></div>
+                        <div><strong class="txt-1 ascent">ON-CHAIN ELECTION</strong>&nbsp;&nbsp;<span class="txt-0 secondary">SEP 24</span></div>
                         <div class="primary"><strong>43</strong> days <strong>4</strong> hours <strong>2</strong> minutes</div>
                     </div>
                     <div class="col p-3 text-center border-right border-bottom">
-                        <div><strong class="txt-1 special"><i class="fal pr-2 fa-clock"></i>PRE-VOTING</strong>&nbsp;&nbsp;<span class="txt-0 secondary">AUGUST 26</span></div>
-                        <div class="primary"><strong>15</strong> days <strong>4</strong> hours <strong>2</strong> minutes</div>
+                        <div><strong class="txt-1 ascent">WHO SHOULD I VOTE FOR?</strong></div>
+                        <div class="primary">vote for those with reasonable <span class="mono special">score</span></div>
                     </div>
                     <div class="col p-3 text-center border-bottom">
-                        <div><strong class="txt-1 special"><i class="fal pr-2 fa-clock"></i>PRE-VOTING</strong>&nbsp;&nbsp;<span class="txt-0 secondary">AUGUST 26</span></div>
-                        <div class="primary"><strong>15</strong> days <strong>4</strong> hours <strong>2</strong> minutes</div>
+                        <div><strong class="txt-1 ascent">WHY SHOULD I CARE WHO?</strong></div>
+                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special">value</span></div>
                     </div>
                 </div>
             </div>
@@ -53,17 +53,20 @@
 <div class="row mb-3">
     <div class="col">
         <div class="card px-4 pt-3 pb-4 with-shadow with-gradient with-rounded-corners">
-            <h4 style="color: white;">
-                <strong>ICON Ecosystem Explorer</strong>
-            </h4>
-            <div class="d-flex" style="background-color: white;">
-                <div>
+            <div class="row pb-1">
+                <div class="col text-center" style="color: white;">
+                    <h4>
+                        <strong>ICONLOOK</strong>
+                    </h4>
+                </div>
+            </div>
+            <div class="row no-gutters" style="background-color: white;">
+                <div class="col col-auto">
                     <EjsDropDownButton Items="@Items" CssClass="filter">ALL FILTERS</EjsDropDownButton>
-
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
-                                                        {
+                        {
                             new ItemModel { Text = "P-REP" },
                             new ItemModel { Text = "ADDRESS" },
                             new ItemModel { Text = "TRANSACTION" }
@@ -71,10 +74,10 @@
 
                     }
                 </div>
-                <div class="flex-grow-1">
+                <div class="col">
                     <EjsTextBox CssClass="search-input" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
                 </div>
-                <div>
+                <div class="col col-auto">
                     <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">Search</EjsButton>
                 </div>
             </div>
@@ -210,7 +213,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body mono-font px-4 pt-1 pb-2">
+            <div class="card-body px-4 pt-1 pb-2">
                 <EjsGrid ID="block-watcher" DataSource="@Transactions" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                 </EjsGrid>
             </div>
