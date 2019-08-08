@@ -42,4 +42,4 @@ services:
       - ENVIRONMENT=localhost
       - "bootstrap.memory_lock=true"
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-      - "cluster.name=krypto_localhost"
+      - "cluster.name=iconlook_localhost"

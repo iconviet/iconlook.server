@@ -19,7 +19,7 @@
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="p-3 mr-auto">
                             <div class="txt-0 secondary"><i class="fal pr-2 fa-users-class secondary"></i>VOTERS</div>
-                            <div class="num-1 mono primary">32,250</div>
+                            <div class="num-1 mono primary">32,250,300</div>
                         </div>
                         <div class="p-3 text-right">
                             <div class="txt-0 secondary"><i class="fal pr-2 fa-person-sign secondary"></i>ICX STAKED</div>
@@ -132,7 +132,7 @@
 
     protected override async Task OnInitAsync()
     {
-        PReps = await Service.GetLatestPRepsAsync(22);
+        PReps = await Service.GetLatestPRepsAsync();
     }
 
 }
