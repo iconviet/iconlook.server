@@ -50,14 +50,14 @@ namespace Iconlook.Service.Web
                 services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
                     .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
-                var connection = host.HostConfiguration.GetConnectionString("redis");
-                if (connection.HasValue())
+                var redis = host.HostConfiguration.GetConnectionString("redis");
+                if (redis.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
                     {
-                        connection = connection.Replace("redis", "localhost");
+                        redis = redis.Replace("redis", "localhost");
                     }
-                    services.AddSignalR().AddStackExchangeRedis(connection);
+                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(redis);
                 }
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
