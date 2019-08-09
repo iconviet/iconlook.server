@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
@@ -45,6 +46,11 @@ namespace Iconlook.Service.Web
                 services.Configure<KestrelServerOptions>(options =>
                 {
                     options.AllowSynchronousIO = true;
+                });
+                services.Configure<HubOptions>(options =>
+                {
+                    options.EnableDetailedErrors = true;
+                    options.MaximumReceiveMessageSize = 1024 * 1024;
                 });
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
