@@ -8,6 +8,7 @@ using Iconlook.Service.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
@@ -25,14 +26,13 @@ namespace Iconlook.Service.Web
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseCookiePolicy();
+                application.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
                 application.UseRouting();
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
                     x.MapFallbackToPage("/_Page");
-                    x.Map("/api/{*path}", c => Task.Delay(0));
                 });
-                application.UseServiceStack(host);
             };
             ConfigureServices = host => services =>
             {
@@ -42,6 +42,10 @@ namespace Iconlook.Service.Web
                 services.AddResponseCompression();
                 services.AddSingleton<PrepService>();
                 services.AddSingleton<TransactionService>();
+                services.Configure<KestrelServerOptions>(options =>
+                {
+                    options.AllowSynchronousIO = true;
+                });
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
                     options.KnownProxies.Clear();

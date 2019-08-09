@@ -11,10 +11,10 @@
         padding-right: 0 !important;
     }
     .search-input {
-        background-color: red !important;
+        background-color: white !important;
     }
     .search-button {
-        background-color: red !important;
+        background-color: white !important;
     }
 </style>
 <div class="row mb-3">
@@ -139,12 +139,13 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-3">
-                <EjsGrid ModelType="@Prep" ID="prep-watcher" DataSource="@Preps" RowHeight="40" Height="474" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PrepResponse" Height="474" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.ODataV4Adaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="14">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         if (prep.Direction)
                                         {
@@ -158,11 +159,11 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="32" HeaderText="Position" Field="@nameof(Prep.Position)" TextAlign="TextAlign.Center"></GridColumn>
+                        <GridColumn Width="32" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Center"></GridColumn>
                         <GridColumn Width="36" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
@@ -172,7 +173,7 @@
                         <GridColumn HeaderText="Name">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         <strong>@prep.Name</strong>
                                     }
@@ -180,12 +181,12 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" HeaderText="Votes" Field="@nameof(Prep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="90" HeaderText="% Supply" Field="@nameof(Prep.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="90" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" Format="P2" TextAlign="TextAlign.Right"></GridColumn>
                         <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
@@ -224,13 +225,10 @@
     </div>
 </div>
 @code{
-    public Prep Prep = new Prep();
-    public List<Prep> Preps { get; set; }
     public List<Transaction> Transactions { get; set; }
 
     protected override async Task OnInitAsync()
     {
-        Preps = await PrepService.GetLatestPrepsAsync(12);
         Transactions = await TransactionService.GetLatestTransactionsAsync();
     }
 

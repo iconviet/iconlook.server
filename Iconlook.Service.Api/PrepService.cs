@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
 using HtmlAgilityPack;
-using Iconlook.Entity;
 using Iconlook.Message;
 using ServiceStack;
 
@@ -22,7 +21,7 @@ namespace Iconlook.Service.Api
                             from r in t.SelectNodes("tr")
                             select r;
                 var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                data = query.Select(x => new PrepResponse
+                data = new List<PrepResponse>(query.Select(x => new PrepResponse
                 {
                     Position = position.Pop(),
                     CScore = new Random().Next(0, 128),
@@ -36,39 +35,7 @@ namespace Iconlook.Service.Api
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
                     LogoUrl = $"images/preps/{x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)}.png"
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(22).ToList();
-            }
-            catch (Exception)
-            {
-            }
-            return data;
-        }
-
-        public async Task<List<Prep>> GetLatestPrepsAsync(int take = 22)
-        {
-            var data = new List<Prep>();
-            try
-            {
-                var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
-                var query = from t in html.DocumentNode.SelectNodes("//tbody")
-                            from r in t.SelectNodes("tr")
-                            select r;
-                var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                data = query.Select(x => new Prep
-                {
-                    Position = position.Pop(),
-                    CScore = new Random().Next(0, 128),
-                    Voters = new Random().Next(100, 1000),
-                    Votes = new Random().Next(1000000, 10000000),
-                    Direction = new Random().NextDouble() >= 0.5,
-                    UptimePercentage = new Random().NextDouble(),
-                    LastSeen = $"{new Random().Next(1, 60)}s ago",
-                    Created = x.SelectNodes("td")[1].InnerText.Trim(),
-                    Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
-                    Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
-                    LogoUrl = $"images/preps/{x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)}.png"
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(take).ToList();
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(22).ToList());
             }
             catch (Exception)
             {

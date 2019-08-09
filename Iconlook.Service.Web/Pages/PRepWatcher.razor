@@ -67,13 +67,12 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid TValue="PrepResponse" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps" CrossDomain="true">
-                    </EjsDataManager>
+                    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.ODataV4Adaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         if (prep.Direction)
                                         {
@@ -87,22 +86,22 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="45" Field="@nameof(Prep.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
+                        <GridColumn Width="45" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
                         <GridColumn Width="35" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Field="@nameof(Prep.Name)" HeaderText="Name"></GridColumn>
-                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right" Field="@nameof(Prep.UptimePercentage)">
+                        <GridColumn Field="@nameof(PrepResponse.Name)" HeaderText="Name"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
@@ -116,15 +115,15 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="110" Field="@nameof(Prep.Votes)" HeaderText="ICX Staked" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(Prep.SupplyPercentage)" HeaderText="% Supply" Format="P2" TextAlign="TextAlign.Right" AllowSorting="true"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(Prep.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(Prep.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="150" Field="@nameof(Prep.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(Prep.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
+                        <GridColumn Width="110" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" Format="P2" TextAlign="TextAlign.Right" AllowSorting="true"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PrepResponse.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
-                                    if (context is Prep prep)
+                                    if (context is PrepResponse prep)
                                     {
                                         <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color:#e3165b;"><strong style="color:white;">@prep.CScore.ToString("N0")</strong></div>
                                     }
