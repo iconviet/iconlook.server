@@ -1,7 +1,5 @@
 ﻿@page "/"
 @layout MainLayout
-@inject PrepService PrepService
-@inject TransactionService TransactionService
 <style>
     .e-grid {
         min-height: 480px;
@@ -143,9 +141,9 @@
             </div>
             <div class="card-body px-4 pt-1 pb-2">
                 @code  {
-                    public PrepResponse ModelType = new PrepResponse();
+                    public PrepResponse PrepResponse = new PrepResponse();
                 }
-                <EjsGrid TValue="PrepResponse" ModelType="ModelType" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PrepResponse" ModelType="PrepResponse" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=12" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="14">
@@ -224,18 +222,13 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ID="block-watcher" DataSource="@Transactions" RowHeight="40" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                @code  {
+                    public BlockResponse BlockResponse = new BlockResponse();
+                }
+                <EjsGrid TValue="BlockResponse" ModelType="BlockResponse" RowHeight="40" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                    <EjsDataManager Url="/api/v1.0/blocks?take=12" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                 </EjsGrid>
             </div>
         </div>
     </div>
 </div>
-@code{
-    public List<Transaction> Transactions { get; set; }
-
-    protected override async Task OnInitAsync()
-    {
-        Transactions = await TransactionService.GetLatestTransactionsAsync();
-    }
-
-}

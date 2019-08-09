@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
 using Hangfire;
-using Iconlook.Service.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -41,8 +40,6 @@ namespace Iconlook.Service.Web
                 services.AddHangfire(x => { });
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
-                services.AddSingleton<PrepService>();
-                services.AddSingleton<TransactionService>();
                 services.Configure<KestrelServerOptions>(options =>
                 {
                     options.AllowSynchronousIO = true;

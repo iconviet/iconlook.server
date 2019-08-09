@@ -1,6 +1,5 @@
 ﻿@page "/prep-watcher"
 @layout MainLayout
-@inject PrepService Service
 <style>
     .e-grid { min-height: 680px; }
 
@@ -76,10 +75,10 @@
             <div class="card-body px-0 pt-0 pb-2">
 
                 @code {
-                    public PrepResponse ModelType = new PrepResponse();
+                    public PrepResponse PrepResponse = new PrepResponse();
                 }
 
-                <EjsGrid TValue="PrepResponse" ModelType="ModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PrepResponse" ModelType="PrepResponse" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=70" CrossDomain="true" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
