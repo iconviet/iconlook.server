@@ -35,7 +35,7 @@ namespace Iconlook.Service.Api
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
                     LogoUrl = $"images/preps/{x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)}.png"
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(22).ToList());
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().ToList());
             }
             catch (Exception)
             {

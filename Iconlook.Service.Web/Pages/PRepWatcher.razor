@@ -2,6 +2,9 @@
 @layout MainLayout
 @inject PrepService Service
 <style>
+    .e-grid {
+        min-height: 600px;
+    }
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
@@ -66,7 +69,7 @@
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <EjsGrid TValue="PrepResponse" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PrepResponse" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.ODataV4Adaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">

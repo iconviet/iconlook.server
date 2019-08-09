@@ -3,6 +3,9 @@
 @inject PrepService PrepService
 @inject TransactionService TransactionService
 <style>
+    .e-grid {
+        min-height: 480px;
+    }
     .e-grid .e-gridheader {
         display: none;
     }
@@ -138,8 +141,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body px-4 pt-1 pb-3">
-                <EjsGrid TValue="PrepResponse" Height="474" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+            <div class="card-body px-4 pt-1 pb-2">
+                <EjsGrid TValue="PrepResponse" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.ODataV4Adaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="14">
@@ -218,7 +221,7 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ID="block-watcher" DataSource="@Transactions" RowHeight="40" Height="480" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ID="block-watcher" DataSource="@Transactions" RowHeight="40" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                 </EjsGrid>
             </div>
         </div>
