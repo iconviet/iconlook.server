@@ -2,18 +2,19 @@
 @layout MainLayout
 @inject PrepService Service
 <style>
-    .e-grid {
-        min-height: 680px;
-    }
+    .e-grid { min-height: 680px; }
+
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
         padding-right: 20px !important;
     }
+
     .e-grid .e-rowcell, .e-grid .e-headercell {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }
+
     .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
         padding-left: 20px !important;
         padding-right: 5px !important;
@@ -43,11 +44,15 @@
                         </div>
                     </div>
                     <div class="col p-3 text-center border-right border-bottom">
-                        <div><strong class="txt-1 ascent">WHO CAN I VOTE?</strong></div>
+                        <div>
+                            <strong class="txt-1 ascent">WHO CAN I VOTE?</strong>
+                        </div>
                         <div class="primary">vote for any P-Rep with reasonable <span class="mono special border-bottom">c_score</span></div>
                     </div>
                     <div class="col p-3 text-center border-bottom">
-                        <div><strong class="txt-1 ascent">WHY SHOULD I CARE?</strong></div>
+                        <div>
+                            <strong class="txt-1 ascent">WHY SHOULD I CARE?</strong>
+                        </div>
                         <div class="primary">because your <strong>votes</strong> affect future <span class="mono special border-bottom">price</span></div>
                     </div>
                 </div>
@@ -69,9 +74,11 @@
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+
                 @code {
                     public PrepResponse ModelType = new PrepResponse();
                 }
+
                 <EjsGrid TValue="PrepResponse" ModelType="ModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=70" CrossDomain="true" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
@@ -131,9 +138,10 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color:#e3165b;"><strong style="color:white;">@prep.CScore.ToString("N0")</strong></div>
+                                        <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color: #e3165b;">
+                                            <strong style="color: white;">@prep.CScore.ToString("N0")</strong>
+                                        </div>
                                     }
-
                                 }
                             </Template>
                         </GridColumn>

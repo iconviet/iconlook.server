@@ -34,7 +34,7 @@ namespace Iconlook.Service.Api
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
                 }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(request.Take).ToList());
             }
             catch (Exception)

@@ -1,55 +1,56 @@
 ﻿@using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
 @inherits LayoutComponentBase
-    <div class="body">
-        <header>
-            <div class="container">
-                <div class="row no-gutters align-items-center" style="min-height: 52px;">
-                    <div class="col-auto">
-                        <a href="/">
-                            <img alt="ICONVIET" src="images/iconviet-logo.png" style="max-width: 110px;" />
-                        </a>
-                    </div>
-                    <div class="col text-right">
-                        <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
-                    </div>
-                    <div class="col-auto">
-                        <EjsSwitch Checked="true"></EjsSwitch>
-                    </div>
+<div class="body">
+    <header>
+        <div class="container">
+            <div class="row no-gutters align-items-center" style="min-height: 52px;">
+                <div class="col-auto">
+                    <a href="/">
+                        <img alt="ICONVIET" src="images/iconviet-logo.png" style="max-width: 110px;"/>
+                    </a>
+                </div>
+                <div class="col text-right">
+                    <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
+                </div>
+                <div class="col-auto">
+                    <EjsSwitch Checked="true"></EjsSwitch>
                 </div>
             </div>
-        </header>
-        <main>
-            <div class="container">
-                <div class="row py-3 align-items-center" style="min-height: 52px;">
-                    <div class="col">
-                        We! have no any intention to influence and manipulate the incoming Prep election. Even within our analysis, we are still trying to be neutral as much as possible
-                    </div>
-                    <div class="col-auto">
-                        <EjsDropDownButton Items="@Items" CssClass="filter">MAINNET</EjsDropDownButton>
-
-                        @code {
-
-                            public List<ItemModel> Items = new List<ItemModel>
-                            {
-                                new ItemModel { Text = "JINYONG TESTNET" },
-                                new ItemModel { Text = "YONOUSONG TESTNET" }
-                            };
-
-                        }
-                    </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row py-3 align-items-center" style="min-height: 52px;">
+                <div class="col">
+                    We! have no any intention to influence and manipulate the incoming Prep election. Even within our analysis, we are still trying to be neutral as much as possible
                 </div>
-                @Body
-            </div>
-        </main>
-        <footer class="gradient">
-            <div class="container">
-                <div class="row">
-                    <div class="col" style="height: 200px;">
-                    </div>
+                <div class="col-auto">
+                    <EjsDropDownButton Items="@Items" CssClass="filter">MAINNET</EjsDropDownButton>
+
+                    @code {
+
+                        public List<ItemModel> Items = new List<ItemModel>
+                        {
+                            new ItemModel { Text = "JINYONG TESTNET" },
+                            new ItemModel { Text = "YONOUSONG TESTNET" }
+                        };
+
+                    }
+
                 </div>
             </div>
-        </footer>
-    </div>
+            @Body
+        </div>
+    </main>
+    <footer class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="height: 200px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
 @code {
 
