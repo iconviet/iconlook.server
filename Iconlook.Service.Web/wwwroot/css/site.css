@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
-@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono:300,400,500,600");
+@import url('https://fonts.googleapis.com/css?family=Share+Tech|Share+Tech+Mono|Share:400,700|Source+Sans+Pro:300,400,600,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500,600,700|IBM+Plex+Sans+Condensed:300,400,500,600,700|IBM+Plex+Sans:300,400,500,600,700&display=swap');
 
 /*
     GLOBAL
@@ -19,10 +19,29 @@ app {
     background-color: #f8f9fa;
 }
 
+
 html, body, .e-control {
     color: #6c757e;
-    font-size: 14px;
-    font-family: 'Source Sans Pro';
+    font-size: 13px;
+    font-family: 'IBM Plex Sans';
+}
+
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+.mono {
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    font-family: 'IBM Plex Mono';
+}
+
+.mono-lg {
+    font-family: 'Share Tech Mono';
+}
+
+.condensed {
+    font-family: 'IBM Plex Sans Condensed';
 }
 
 header {
@@ -95,11 +114,6 @@ header {
     font-size: 16px;
     letter-spacing: -1px;
 }
-
-.mono {
-    font-family: 'Share Tech Mono';
-}
-
 
 
 
@@ -177,12 +191,10 @@ header {
 .e-menu-wrapper ul .e-menu-item {
     color: #6c757e;
     font-weight: 600;
-    font-size: 0.95rem;
     padding: 3px 20px 0 20px;
 }
 
 .e-menu-wrapper .e-ul .e-menu-item {
-    font-size: 1rem;
     font-weight: 400;
     padding: 0 56px 0 28px;
 }
