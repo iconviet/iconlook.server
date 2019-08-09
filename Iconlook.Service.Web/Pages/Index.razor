@@ -142,7 +142,10 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid TValue="PrepResponse" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                @code  {
+                    public PrepResponse ModelType = new PrepResponse();
+                }
+                <EjsGrid TValue="PrepResponse" ModelType="ModelType" RowHeight="40" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=12" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="14">
@@ -168,7 +171,7 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="/images/preps/(@prep.Id).png" />
+                                        <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@($"/images/preps/{prep.Id}.png")" />
                                     }
                                 }
                             </Template>
