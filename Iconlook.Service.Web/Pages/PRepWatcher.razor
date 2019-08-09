@@ -81,7 +81,7 @@
                 <EjsGrid TValue="PrepResponse" ModelType="PrepResponse" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=70" CrossDomain="true" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
-                        <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
+                        <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -98,8 +98,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="45" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
-                        <GridColumn Width="35" TextAlign="TextAlign.Right">
+                        <GridColumn Width="44" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
+                        <GridColumn Width="34" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -109,7 +109,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="170" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
+                        <GridColumn Width="150" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Message;
@@ -8,8 +9,9 @@ namespace Iconlook.Service.Api
 {
     public class BlockService : ServiceBase
     {
-        public object Any(BlockListRequest request)
+        public async Task<object> Any(BlockListRequest request)
         {
+            await Task.Delay(1000);
             return new ListResponse<BlockResponse>(Enumerable.Range(1, 12).Select(x => new BlockResponse
             {
                 To = new[] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],
