@@ -73,7 +73,7 @@
                     public PrepResponse ModelType = new PrepResponse();
                 }
                 <EjsGrid TValue="PrepResponse" ModelType="ModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps?take=70" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                    <EjsDataManager Url="/api/v1.0/preps?take=70" CrossDomain="true" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
@@ -98,7 +98,7 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@($"/images/preps/{prep.Id}.png")" />
+                                        <img width="20" height="20" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
                                     }
                                 }
                             </Template>

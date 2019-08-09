@@ -171,7 +171,7 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@($"/images/preps/{prep.Id}.png")" />
+                                        <img width="20" height="20" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
                                     }
                                 }
                             </Template>
