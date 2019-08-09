@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Iconlook.Message
 {
-    [Route("/preps", "GET")]
+    [Route("/api/v1.0/preps", "GET")]
     public class PrepListRequest : ListRequestBase<PrepListRequest, PrepResponse>, IGet
     {
     }

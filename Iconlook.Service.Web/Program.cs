@@ -29,7 +29,8 @@ namespace Iconlook.Service.Web
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
-                    x.MapFallbackToPage("/_Host");
+                    x.MapFallbackToPage("/_Page");
+                    x.Map("/api/{*path}", c => Task.Delay(0));
                 });
                 application.UseServiceStack(host);
             };

@@ -1,7 +1,5 @@
-﻿using System;
-using Funq;
+﻿using Funq;
 using Iconlook.Service.Api;
-using ServiceStack;
 
 namespace Iconlook.Service.Web
 {
@@ -15,16 +13,6 @@ namespace Iconlook.Service.Web
         {
             base.Configure(container);
             RegisterServicesInAssembly(typeof(ApiHost).Assembly);
-        }
-
-        public override RouteAttribute[] GetRouteAttributes(Type type)
-        {
-            var routes = base.GetRouteAttributes(type);
-            if (type.Namespace == "Iconlook.Message" && type.Name.EndsWith("Request"))
-            {
-                routes.Each(x => x.Path = "/api" + x.Path);
-            }
-            return routes;
         }
     }
 }

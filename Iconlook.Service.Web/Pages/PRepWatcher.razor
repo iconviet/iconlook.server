@@ -66,8 +66,9 @@
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <EjsGrid TValue="Prep" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                <EjsGrid TValue="PrepResponse" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                    <EjsDataManager Url="/api/v1.0/preps" CrossDomain="true">
+                    </EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
