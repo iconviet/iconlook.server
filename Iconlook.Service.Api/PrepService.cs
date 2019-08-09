@@ -35,12 +35,11 @@ namespace Iconlook.Service.Api
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase(),
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().ToList());
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(request.Take).ToList());
             }
             catch (Exception)
             {
             }
-            await Task.Delay(1000);
             return data;
         }
     }

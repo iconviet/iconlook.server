@@ -70,7 +70,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <EjsGrid TValue="PrepResponse" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                    <EjsDataManager Url="/api/v1.0/preps?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>

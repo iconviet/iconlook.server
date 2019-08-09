@@ -16,6 +16,7 @@ namespace Iconlook.Service.Web
         {
             base.Configure(container);
             Config.EnableFeatures = Feature.Json;
+            SetConfig(new HostConfig { UseCamelCase = false });
             RegisterServicesInAssembly(typeof(ApiHost).Assembly);
         }
 
