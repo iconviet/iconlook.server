@@ -3,6 +3,8 @@
 <style>
     .e-grid { min-height: 680px; }
 
+    .e-grid .e-row { height: 42px; }
+
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
@@ -200,9 +202,18 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px; background-color: #e3165b;">
-                                            <span class="mono font-weight-semibold" style="color: white; letter-spacing: 1px;">@prep.Score.ToString("N0")</span>
-                                        </div>
+                                        if (prep.Score > 0)
+                                        {
+                                            <div class="d-inline-block rounded-pill text-center" style="background-color: #1aaaba; width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                                                <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-inline-block rounded-pill text-center" style="background-color: #e7eaee; width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                                                <span class="txt-1 secondary condensed font-weight-semibold" style="letter-spacing: 1px;">NA</span>
+                                            </div>
+                                        }
                                     }
                                 }
                             </Template>

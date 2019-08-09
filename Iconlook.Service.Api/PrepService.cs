@@ -25,7 +25,7 @@ namespace Iconlook.Service.Api
                 data = new ListResponse<PrepResponse>(query.Select(x => new PrepResponse
                 {
                     Position = position.Pop(),
-                    Score = new Random().Next(0, 128),
+                    Score = new Random().Next(-100, 100),
                     Voters = new Random().Next(100, 1000),
                     Votes = new Random().Next(1000000, 10000000),
                     Direction = new Random().NextDouble() >= 0.5,
