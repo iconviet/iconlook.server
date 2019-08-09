@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Agiper.Object;
 using Agiper.Server;
 using HtmlAgilityPack;
 using Iconlook.Message;
@@ -11,9 +12,9 @@ namespace Iconlook.Service.Api
 {
     public class PrepService : ServiceBase
     {
-        public async Task<List<PrepResponse>> Any(PrepListRequest request)
+        public async Task<object> Any(PrepListRequest request)
         {
-            var data = new List<PrepResponse>();
+            var data = new ListResponse<PrepResponse>();
             try
             {
                 var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
@@ -21,7 +22,7 @@ namespace Iconlook.Service.Api
                             from r in t.SelectNodes("tr")
                             select r;
                 var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                data = new List<PrepResponse>(query.Select(x => new PrepResponse
+                data = new ListResponse<PrepResponse>(query.Select(x => new PrepResponse
                 {
                     Position = position.Pop(),
                     CScore = new Random().Next(0, 128),
