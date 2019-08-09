@@ -1,6 +1,6 @@
 ﻿@page "/prep-watcher"
 @layout MainLayout
-@inject PRepService Service
+@inject PrepService Service
 <style>
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
@@ -40,8 +40,8 @@
                         </div>
                     </div>
                     <div class="col p-3 text-center border-right border-bottom">
-                        <div><strong class="txt-1 ascent">WHO SHOULD I VOTE?</strong></div>
-                        <div class="primary">vote for P-Reps with reasonable <span class="mono special border-bottom">c_score</span></div>
+                        <div><strong class="txt-1 ascent">WHO CAN I VOTE?</strong></div>
+                        <div class="primary">vote for any P-Rep with reasonable <span class="mono special border-bottom">c_score</span></div>
                     </div>
                     <div class="col p-3 text-center border-bottom">
                         <div><strong class="txt-1 ascent">WHY SHOULD I CARE?</strong></div>
@@ -66,13 +66,13 @@
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <EjsGrid TValue="PRep" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="Prep" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
-                                    if (context is PRep prep)
+                                    if (context is Prep prep)
                                     {
                                         if (prep.Direction)
                                         {
@@ -86,22 +86,22 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="45" Field="@nameof(PRep.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
+                        <GridColumn Width="45" Field="@nameof(Prep.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
                         <GridColumn Width="35" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
-                                    if (context is PRep prep)
+                                    if (context is Prep prep)
                                     {
                                         <img width="20" height="20" class="rounded-circle" alt="@prep.Name" src="@prep.LogoUrl" />
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Field="@nameof(PRep.Name)" HeaderText="Name"></GridColumn>
-                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right" Field="@nameof(PRep.UptimePercentage)">
+                        <GridColumn Field="@nameof(Prep.Name)" HeaderText="Name"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right" Field="@nameof(Prep.UptimePercentage)">
                             <Template>
                                 @{
-                                    if (context is PRep prep)
+                                    if (context is Prep prep)
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
@@ -115,15 +115,15 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="110" Field="@nameof(PRep.Votes)" HeaderText="ICX Staked" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(PRep.SupplyPercentage)" HeaderText="% Supply" Format="P2" TextAlign="TextAlign.Right" AllowSorting="true"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(PRep.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(PRep.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="150" Field="@nameof(PRep.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(PRep.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
+                        <GridColumn Width="110" Field="@nameof(Prep.Votes)" HeaderText="ICX Staked" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(Prep.SupplyPercentage)" HeaderText="% Supply" Format="P2" TextAlign="TextAlign.Right" AllowSorting="true"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(Prep.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(Prep.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="150" Field="@nameof(Prep.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(Prep.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
-                                    if (context is PRep prep)
+                                    if (context is Prep prep)
                                     {
                                         <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color:#e3165b;"><strong style="color:white;">@prep.CScore.ToString("N0")</strong></div>
                                     }

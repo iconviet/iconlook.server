@@ -10,11 +10,11 @@ using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
-    public class PRepService : ServiceBase
+    public class PrepService : ServiceBase
     {
-        public async Task<List<PRepResponse>> Any(PRepListRequest request)
+        public async Task<List<PrepResponse>> Any(PrepListRequest request)
         {
-            var data = new List<PRepResponse>();
+            var data = new List<PrepResponse>();
             try
             {
                 var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
@@ -22,7 +22,7 @@ namespace Iconlook.Service.Api
                             from r in t.SelectNodes("tr")
                             select r;
                 var rank = new Stack<int>(Enumerable.Range(1, query.Count()));
-                data = query.Select(x => new PRepResponse
+                data = query.Select(x => new PrepResponse
                 {
                     Position = rank.Pop(),
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
@@ -38,9 +38,9 @@ namespace Iconlook.Service.Api
             return data;
         }
 
-        public async Task<List<PRep>> GetLatestPRepsAsync(int take = 22)
+        public async Task<List<Prep>> GetLatestPrepsAsync(int take = 22)
         {
-            var data = new List<PRep>();
+            var data = new List<Prep>();
             try
             {
                 var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
@@ -48,7 +48,7 @@ namespace Iconlook.Service.Api
                             from r in t.SelectNodes("tr")
                             select r;
                 var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                data = query.Select(x => new PRep
+                data = query.Select(x => new Prep
                 {
                     Position = position.Pop(),
                     CScore = new Random().Next(0, 128),

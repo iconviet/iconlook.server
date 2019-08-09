@@ -2,7 +2,7 @@
 
 namespace Iconlook.Message
 {
-    public class PRepResponse : ResponseBase<PRepResponse>
+    public class PrepResponse : ResponseBase<PrepResponse>
     {
         public string Id { get; set; }
         public string Name { get; set; }

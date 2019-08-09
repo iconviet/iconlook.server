@@ -39,7 +39,7 @@ namespace Iconlook.Service.Web
                 services.AddHangfire(x => { });
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
-                services.AddSingleton<PRepService>();
+                services.AddSingleton<PrepService>();
                 services.AddSingleton<TransactionService>();
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
