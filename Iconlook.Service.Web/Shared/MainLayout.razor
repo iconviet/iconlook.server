@@ -22,17 +22,16 @@
         <div class="container">
             <div class="row py-3 align-items-center" style="min-height: 52px;">
                 <div class="col">
-                    We! have no any intention to influence and manipulate the incoming Prep election. Even within our analysis, we are still trying to be neutral as much as possible
+                    We have no any intention to influence and manipulate the incoming P-Rep election!
                 </div>
                 <div class="col-auto">
-                    <EjsDropDownButton Items="@Items" CssClass="filter">MAINNET</EjsDropDownButton>
-
+                    <EjsDropDownButton Items="@Items" CssClass="filter">VOTING GUIDELINES</EjsDropDownButton>
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
                         {
-                            new ItemModel { Text = "JINYONG TESTNET" },
-                            new ItemModel { Text = "YONOUSONG TESTNET" }
+                            new ItemModel { Text = "WHO CAN I VOTE" },
+                            new ItemModel { Text = "WHY SHOULD I CARE" }
                         };
 
                     }
@@ -56,6 +55,16 @@
 
     public List<MenuItem> MenuItems = new List<MenuItem>
     {
+        new MenuItem
+        {
+            Text = "ICONVIET", Items = new List<MenuItem>
+            {
+                new MenuItem { Text = "Who Are We" },
+                new MenuItem { Text = "Why Vote For Us" },
+                new MenuItem { Text = "What We Will Do" },
+                new MenuItem { Text = "Our Contributions" }
+            }
+        },
         new MenuItem
         {
             Text = "VOTERS", IconCss = "fal fa-person-sign", Items = new List<MenuItem>

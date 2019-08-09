@@ -46,13 +46,13 @@
                         <div>
                             <strong class="txt-1 ascent">WHO CAN I VOTE?</strong>
                         </div>
-                        <div class="primary">vote for any P-Rep with reasonable <span class="mono special border-bottom">c_score</span></div>
+                        <div class="primary">vote for any P-Rep with reasonable <span class="mono special font-weight-bold">score</span></div>
                     </div>
                     <div class="col p-3 text-center border-bottom">
                         <div>
                             <strong class="txt-1 ascent">WHY SHOULD I CARE?</strong>
                         </div>
-                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special border-bottom">price</span></div>
+                        <div class="primary">because your <strong>votes</strong> affect future <span class="mono special font-weight-bold">price</span></div>
                     </div>
                 </div>
             </div>
@@ -67,8 +67,8 @@
                     <div class="col">
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
-                    <div class="col text-right">
-                        <a href="/preps-watcher">CONTRIBUTION</a>
+                    <div class="col text-right text-nowrap">
+                        <a href="/voting-guidelines">VOTING GUIDELINES</a>
                     </div>
                 </div>
             </div>
@@ -78,8 +78,8 @@
                     public PrepResponse PrepResponse = new PrepResponse();
                 }
 
-                <EjsGrid TValue="PrepResponse" ModelType="PrepResponse" RowHeight="43" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps?take=70" CrossDomain="true" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                <EjsGrid TValue="PrepResponse" ModelType="PrepResponse" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                    <EjsDataManager Url="/api/v1.0/preps?take=70" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
@@ -141,13 +141,13 @@
                         <GridColumn Width="100" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
                         <GridColumn Width="100" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
                         <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" Field="@nameof(PrepResponse.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
+                        <GridColumn Width="100" Field="@nameof(PrepResponse.Score)" HeaderText="Score&nbsp;&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="true">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
                                     {
                                         <div class="special d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 4px; background-color: #e3165b;">
-                                            <strong style="color: white;">@prep.CScore.ToString("N0")</strong>
+                                            <strong style="color: white;">@prep.Score.ToString("N0")</strong>
                                         </div>
                                     }
                                 }
