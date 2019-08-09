@@ -148,6 +148,13 @@ header {
 }
 
 /*
+    EJS-SPINNER
+*/
+.e-spinner-pane .e-spin-material {
+    stroke: #1aaaba !important;
+}
+
+/*
     EJS-SWITCH
 */
 .e-switch-wrapper .e-switch-handle.e-switch-active {

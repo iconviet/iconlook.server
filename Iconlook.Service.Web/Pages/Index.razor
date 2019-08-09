@@ -4,15 +4,11 @@
 @inject TransactionService TransactionService
 <style>
     .search-input {
-        border: 0;
+        background-color: red !important;
     }
 
     .search-button {
-        background-color: red;
-    }
-
-    .e-grid .e-row {
-        height: 39px;
+        background-color: red !important;
     }
 
     .e-grid .e-gridheader {
@@ -146,7 +142,7 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ModelType="@PRep" ID="prep-watcher" DataSource="@PReps" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ModelType="@PRep" ID="prep-watcher" DataSource="@PReps" RowHeight="39" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <GridColumns>
                         <GridColumn Width="14">
                             <Template>
@@ -224,7 +220,7 @@
                 </div>
             </div>
             <div class="card-body px-4 pt-1 pb-2">
-                <EjsGrid ID="block-watcher" DataSource="@Transactions" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
+                <EjsGrid ID="block-watcher" DataSource="@Transactions" RowHeight="39" AllowSelection="false" EnableHover="false" GridLines="GridLine.Horizontal">
                 </EjsGrid>
             </div>
         </div>

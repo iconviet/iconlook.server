@@ -2,7 +2,8 @@
 @layout MainLayout
 @inject PRepService Service
 <style>
-    .e-grid .e-rowcell:last-child {
+    .e-grid .e-rowcell:last-child,
+    .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
         padding-right: 20px !important;
     }
@@ -53,21 +54,22 @@
 </div>
 <div class="row mb-5">
     <div class="col">
-        <div class="card shadow-sm" style="min-height: 500px;">
+        <div class="card shadow-sm">
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
                         <i class="fal pr-2 fa-user-clock"></i>P-REP WATCHER
                     </div>
                     <div class="col text-right">
-                        <a href="/preps-watcher">WHAT IS C_SCORE?</a>
+                        <a href="/preps-watcher">CONTRIBUTION MATRIX</a>
                     </div>
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <EjsGrid ModelType="@PRep" DataSource="@PReps" EnableHover="false" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PRep" Height="600" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                    <EjsDataManager Url="/api/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
-                        <GridColumn Width="30" TextAlign="TextAlign.Center" HeaderText="⇵">
+                        <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -84,7 +86,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="45" TextAlign="TextAlign.Center" HeaderText="#" Field="@nameof(PRep.Position)"></GridColumn>
+                        <GridColumn Width="45" Field="@nameof(PRep.Position)" TextAlign="TextAlign.Center" HeaderText="#"></GridColumn>
                         <GridColumn Width="35" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
@@ -95,18 +97,8 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn HeaderText="Name">
-                            <Template>
-                                @{
-                                    if (context is PRep prep)
-                                    {
-                                        <strong>@prep.Name</strong>
-                                    }
-
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right">
+                        <GridColumn Field="@nameof(PRep.Name)" HeaderText="Name"></GridColumn>
+                        <GridColumn Width="90" HeaderText="% Uptime" TextAlign="TextAlign.Right" Field="@nameof(PRep.UptimePercentage)">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -123,51 +115,12 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="110" HeaderText="ICX Staked" Field="@nameof(PRep.Votes)" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
-                        <GridColumn Width="100" HeaderText="% Supply" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PRep prep)
-                                    {
-                                        <span class="secondary">@prep.SupplyPercentage.ToString("P2")</span>
-                                    }
-
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="100" HeaderText="Voters" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PRep prep)
-                                    {
-                                        <span class="secondary">@prep.Voters.ToString("N0")</span>
-                                    }
-
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="150" HeaderText="Location" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PRep prep)
-                                    {
-                                        <span class="secondary">@prep.Location</span>
-                                    }
-
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="100" HeaderText="Last Seen" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PRep prep)
-                                    {
-                                        <span class="secondary">@prep.LastSeen</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="100" HeaderText="&nbsp;&nbsp;&nbsp;c_score" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Center">
+                        <GridColumn Width="110" Field="@nameof(PRep.Votes)" HeaderText="ICX Staked" Format="N0" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PRep.SupplyPercentage)" HeaderText="% Supply" Format="P2" TextAlign="TextAlign.Right" AllowSorting="true"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PRep.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PRep.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="150" Field="@nameof(PRep.Location)" HeaderText="Location" TextAlign="TextAlign.Right"></GridColumn>
+                        <GridColumn Width="100" Field="@nameof(PRep.CScore)" HeaderText="c_score" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PRep prep)
@@ -184,14 +137,3 @@
         </div>
     </div>
 </div>
-
-@code{
-    public PRep PRep = new PRep();
-    public List<PRep> PReps { get; set; }
-
-    protected override async Task OnInitAsync()
-    {
-        PReps = await Service.GetLatestPRepsAsync();
-    }
-
-}
