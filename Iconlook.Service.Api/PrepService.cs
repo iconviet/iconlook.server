@@ -31,7 +31,9 @@ namespace Iconlook.Service.Api
                     Direction = new Random().NextDouble() >= 0.5,
                     UptimePercentage = new Random().NextDouble(),
                     LastSeen = $"{new Random().Next(1, 60)}s ago",
+                    RejectedBlocks = new Random().Next(100, 1000),
                     Created = x.SelectNodes("td")[1].InnerText.Trim(),
+                    ProducedBlocks = new Random().Next(100000, 1000000),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()

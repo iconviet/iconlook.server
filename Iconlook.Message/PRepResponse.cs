@@ -14,8 +14,8 @@ namespace Iconlook.Message
         public string Created { get; set; }
         public string LastSeen { get; set; }
         public string Location { get; set; }
-        public int MissedBlocks { get; set; }
         public int ProducedBlocks { get; set; }
+        public int RejectedBlocks { get; set; }
         public double UptimePercentage { get; set; }
         public double SupplyPercentage { get; set; }
     }
