@@ -56,7 +56,6 @@ namespace Iconlook.Service.Web
             };
             Configure = host => application =>
             {
-                application.UseForwardedHeaders();
                 if (host.Environment != Environment.Localhost)
                 {
                     application.Use((context, next) =>
@@ -65,6 +64,7 @@ namespace Iconlook.Service.Web
                         return next();
                     });
                 }
+                application.UseForwardedHeaders();
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseCookiePolicy();
