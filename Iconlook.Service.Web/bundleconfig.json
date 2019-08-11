@@ -1,9 +1,30 @@
 ﻿[
   {
+    "minify": { "enabled": false },
     "inputFiles": [
-      "wwwroot/css/site.css",
+      "wwwroot/js/ej2-base.js",
+      "wwwroot/js/ej2-lists.js",
+      "wwwroot/js/ej2-popups.js",
+      "wwwroot/js/ej2-navigations.js",
+      "wwwroot/js/ej2-inputs.js",
+      "wwwroot/js/ej2-buttons.js",
+      "wwwroot/js/ej2-dropdowns.js",
+      "wwwroot/js/ej2-splitbuttons.js",
+      "wwwroot/js/ej2-data.js",
+      "wwwroot/js/ej2-grids.js",
+      "wwwroot/js/ejs.interop.js"
+    ],
+    "outputFileName": "wwwroot/js/bundle.min.js"
+  },
+  {
+    "minify": { "enabled": false },
+    "inputFiles": [
       "wwwroot/css/bootstrap.css",
-      "wwwroot/css/prep-sprite.css"
+      "wwwroot/css/ej2-*.css",
+      "wwwroot/css/fa-*.css",
+      "wwwroot/css/fontawesome.css",
+      "wwwroot/css/prep-sprite.css",
+      "wwwroot/css/site.css"
     ],
     "outputFileName": "wwwroot/css/bundle.min.css"
   }
