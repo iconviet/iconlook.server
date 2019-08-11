@@ -1,0 +1,10 @@
+﻿[
+  {
+    "inputFiles": [
+      "wwwroot/css/site.css",
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/prep-sprite.css"
+    ],
+    "outputFileName": "wwwroot/css/bundle.min.css"
+  }
+]

@@ -9,15 +9,16 @@
     <meta charset="utf-8" />
     <title>ICONLOOK | ICON Ecosystem Explorer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <environment names="Localhost">
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-    </environment>
-    <environment names="Development, Testing, Staging, Production">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    </environment>
     <!-- ********** Stylesheet ********** -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <environment names="Localhost">
         <link href="https://cdn.syncfusion.com/ej2/@syncfusion/material.css" rel="stylesheet" />
+        <link href="css/site.css" rel="stylesheet" />
+        <link href="css/fa-light.css" rel="stylesheet" />
+        <link href="css/fa-solid.css" rel="stylesheet" />
+        <link href="css/fa-regular.css" rel="stylesheet" />
+        <link href="css/fontawesome.css" rel="stylesheet" />
+        <link href="css/prep-sprite.css" rel="stylesheet" />
     </environment>
     <environment names="Development, Testing, Staging, Production">
         <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-base/styles/material.css" rel="stylesheet" />
@@ -29,13 +30,8 @@
         <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-dropdowns/styles/material.css" rel="stylesheet" />
         <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-navigations/styles/material.css" rel="stylesheet" />
         <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-splitbuttons/styles/material.css" rel="stylesheet" />
+        <link href="css/bundle.min.css" rel="stylesheet" />
     </environment>
-    <link href="css/site.css" rel="stylesheet" />
-    <link href="css/prep-sprite.css" rel="stylesheet" />
-    <link href="css/fa-light.min.css" rel="stylesheet" />
-    <link href="css/fa-solid.min.css" rel="stylesheet" />
-    <link href="css/fa-regular.min.css" rel="stylesheet" />
-    <link href="css/fontawesome.min.css" rel="stylesheet" />
 </head>
 <body>
     <app>@(await Html.RenderComponentAsync<App>())</app>
