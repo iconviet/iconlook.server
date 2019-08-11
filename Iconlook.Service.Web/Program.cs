@@ -56,15 +56,15 @@ namespace Iconlook.Service.Web
             };
             Configure = host => application =>
             {
-                if (host.Environment != Environment.Localhost)
-                {
-                    application.Use((context, next) =>
-                    {
-                        context.Request.Scheme = "https";
-                        return next();
-                    });
-                }
                 application.UseForwardedHeaders();
+                // if (host.Environment != Environment.Localhost)
+                // {
+                //     application.Use((context, next) =>
+                //     {
+                //         context.Request.Scheme = "https";
+                //         return next();
+                //     });
+                // }
                 application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.UseCookiePolicy();
