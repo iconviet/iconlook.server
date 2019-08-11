@@ -21,8 +21,11 @@
         <link href="~/css/site.css" rel="stylesheet"/>
     </environment>
     <environment names="Development, Testing, Staging, Production">
-        <link href="css/bundle.min.css" rel="stylesheet"/>
+        <link href="~/css/bundle.min.css" rel="stylesheet"/>
     </environment>
+</head>
+<body>
+    <app>@(await Html.RenderComponentAsync<App>())</app>
     <!-- ********** JavaScripts ********** -->
     <environment names="Localhost">
         <script src="~/js/ej2.js"></script>
@@ -31,9 +34,6 @@
     <environment names="Development, Testing, Staging, Production">
         <script src="~/js/bundle.min.js"></script>
     </environment>
-</head>
-<body>
-<app>@(await Html.RenderComponentAsync<App>())</app>
-<script src="_framework/blazor.server.js"></script>
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
