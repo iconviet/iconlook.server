@@ -79,7 +79,7 @@
                     public PrepResponse PrepModelType = new PrepResponse();
                 }
                 <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps?take=70" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                    <EjsDataManager Url="/api/v1.0/preps?take=65" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
                             <Template>
@@ -205,7 +205,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="130" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
+                        <GridColumn Width="125" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)

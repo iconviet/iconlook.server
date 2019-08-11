@@ -156,10 +156,15 @@ header {
 /*
     EJS-GRID
 */
+.e-grid .e-emptyrow {
+    display: none;
+}
+
 .e-grid .e-rowcell {
     font-size: inherit;
     border-color: #e7eaee;
 }
+
 
 /*
     EJS-SPINNER
