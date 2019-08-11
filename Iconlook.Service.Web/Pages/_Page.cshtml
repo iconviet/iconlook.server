@@ -1,5 +1,6 @@
 ﻿@page "/"
 @namespace Iconlook.Service.Web.Pages
+@{ const string syncfusion = "17.2.40"; }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="en">
@@ -17,18 +18,18 @@
 
     <!-- ********** Stylesheet ********** -->
     <environment names="Localhost">
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/material.css" rel="stylesheet" />
     </environment>
     <environment names="Development, Testing, Staging, Production">
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-base/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-lists/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-grids/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-popups/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-inputs/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-buttons/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-dropdowns/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-navigations/styles/material.css" rel="stylesheet" />
-        <link href="https://cdn.syncfusion.com/ej2/17.2.40/ej2-splitbuttons/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-base/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-lists/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-grids/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-popups/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-inputs/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-buttons/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-dropdowns/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-navigations/styles/material.css" rel="stylesheet" />
+        <link href="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-splitbuttons/styles/material.css" rel="stylesheet" />
     </environment>
     <link href="css/site.css" rel="stylesheet" />
     <link href="css/prep-sprite.css" rel="stylesheet" />
@@ -40,24 +41,24 @@
 
     <!-- ********** JavaScripts ********** -->
     <environment names="Localhost">
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/dist/ej2.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/dist/ej2.min.js"></script>
     </environment>
     <environment names="Development, Testing, Staging, Production">
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-base/dist/global/ej2-base.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-lists/dist/global/ej2-lists.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-popups/dist/global/ej2-popups.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-navigations/dist/global/ej2-navigations.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-inputs/dist/global/ej2-inputs.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-buttons/dist/global/ej2-buttons.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-dropdowns/dist/global/ej2-dropdowns.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-splitbuttons/dist/global/ej2-splitbuttons.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-data/dist/global/ej2-data.min.js"></script>
-        <script src="https://cdn.syncfusion.com/ej2/17.2.40/ej2-grids/dist/global/ej2-grids.min.js"></script>
+        <script src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-base/dist/global/ej2-base.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-data/dist/global/ej2-data.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-lists/dist/global/ej2-lists.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-popups/dist/global/ej2-popups.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-inputs/dist/global/ej2-inputs.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-buttons/dist/global/ej2-buttons.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-dropdowns/dist/global/ej2-dropdowns.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-navigations/dist/global/ej2-navigations.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-splitbuttons/dist/global/ej2-splitbuttons.min.js"></script>
+        <script async src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-grids/dist/global/ej2-grids.min.js"></script>
     </environment>
-    <script src="https://cdn.syncfusion.com/ej2/17.2.40/dist/ejs.interop.min.js"></script>
+    <script src="https://cdn.syncfusion.com/ej2/@syncfusion/dist/ejs.interop.min.js"></script>
 </head>
 <body>
-<app>@(await Html.RenderComponentAsync<App>())</app>
-<script src="_framework/blazor.server.js"></script>
+    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
