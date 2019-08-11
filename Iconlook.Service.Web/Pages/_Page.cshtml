@@ -36,9 +36,6 @@
     <link href="css/fa-solid.min.css" rel="stylesheet" />
     <link href="css/fa-regular.min.css" rel="stylesheet" />
     <link href="css/fontawesome.min.css" rel="stylesheet" />
-</head>
-<body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
     <!-- ********** JavaScripts ********** -->
     <environment names="Localhost">
         <script src="https://cdn.syncfusion.com/ej2/@syncfusion/dist/ej2.min.js"></script>
@@ -56,6 +53,9 @@
         <script src="https://cdn.syncfusion.com/ej2/@syncfusion/ej2-grids/dist/global/ej2-grids.min.js"></script>
     </environment>
     <script src="https://cdn.syncfusion.com/ej2/@syncfusion/dist/ejs.interop.min.js"></script>
-    <script src="_framework/blazor.server.js"></script>
+</head>
+<body>
+    <app>@(await Html.RenderComponentAsync<App>())</app>
+<script src="_framework/blazor.server.js"></script>
 </body>
 </html>
