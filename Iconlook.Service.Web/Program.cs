@@ -20,20 +20,6 @@ namespace Iconlook.Service.Web
     {
         public static async Task Main()
         {
-            Configure = host => application =>
-            {
-                application.UseForwardedHeaders();
-                application.UseResponseCompression();
-                application.UseStaticFiles();
-                application.UseCookiePolicy();
-                application.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
-                application.UseRouting();
-                application.UseEndpoints(x =>
-                {
-                    x.MapBlazorHub();
-                    x.MapFallbackToPage("/_Page");
-                });
-            };
             ConfigureServices = host => services =>
             {
                 services.AddRazorPages();
@@ -70,6 +56,28 @@ namespace Iconlook.Service.Web
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMj" +
                                                       "dLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
+            Configure = host => application =>
+            {
+                if (host.Environment != Environment.Localhost)
+                {
+                    application.Use((context, next) =>
+                    {
+                        context.Request.Scheme = "https";
+                        return next();
+                    });
+                }
+                application.UseForwardedHeaders();
+                application.UseResponseCompression();
+                application.UseStaticFiles();
+                application.UseCookiePolicy();
+                application.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
+                application.UseRouting();
+                application.UseEndpoints(x =>
+                {
+                    x.MapBlazorHub();
+                    x.MapFallbackToPage("/_Page");
+                });
+            };
             await StartAsync(new WebHost(), 80);
         }
     }
