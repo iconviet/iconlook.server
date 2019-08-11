@@ -12,7 +12,7 @@ namespace Iconlook.Service.Api
 {
     public class PrepService : ServiceBase
     {
-        [CacheResponse(Duration = 60, MaxAge = 30)]
+        [CacheResponse(Duration = 600, MaxAge = 300)]
         public async Task<object> Any(PrepListRequest request)
         {
             var cache = (CacheInfo) Request.GetItem(Keywords.CacheInfo);
