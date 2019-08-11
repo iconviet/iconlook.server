@@ -74,12 +74,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-
+            <div class="card-body px-0 pt-0 pb-2" style="min-height: 680px;">
                 @code {
                     public PrepResponse PrepModelType = new PrepResponse();
                 }
-
                 <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=70" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
