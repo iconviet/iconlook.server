@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using Syncfusion.Licensing;
+using WebMarkupMin.AspNetCore3;
 
 namespace Iconlook.Service.Web
 {
@@ -34,6 +35,13 @@ namespace Iconlook.Service.Web
                 {
                     options.EnableDetailedErrors = true;
                     options.MaximumReceiveMessageSize = 1024 * 1024;
+                });
+                services.AddWebMarkupMin(options =>
+                {
+                    options.AllowMinificationInDevelopmentEnvironment = true;
+                }).AddHtmlMinification(options =>
+                {
+                    options.MinificationSettings.RemoveHtmlComments = false;
                 });
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
@@ -70,6 +78,7 @@ namespace Iconlook.Service.Web
                 application.UseCookiePolicy();
                 application.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
                 application.UseRouting();
+                application.UseWebMarkupMin();
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
