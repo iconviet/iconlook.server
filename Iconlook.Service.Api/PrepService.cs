@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Agiper.Object;
 using Agiper.Server;
 using HtmlAgilityPack;
@@ -11,40 +12,44 @@ namespace Iconlook.Service.Api
 {
     public class PrepService : ServiceBase
     {
-        public object Any(PrepListRequest request)
+        [CacheResponse(Duration = 60, MaxAge = 30)]
+        public async Task<object> Any(PrepListRequest request)
         {
-            return Request.ToOptimizedResultUsingCache<object>(Cache, nameof(PrepListRequest), TimeSpan.FromMinutes(5), () =>
+            var cache = (CacheInfo) Request.GetItem(Keywords.CacheInfo);
+            cache.KeyBase = $"{Request.PathInfo}?take={Request.QueryString.Get("take")}";
+            if (await Request.HandleValidCache(cache))
             {
-                var response = new ListResponse<PrepResponse>();
-                try
+                return null;
+            }
+            var response = new ListResponse<PrepResponse>();
+            try
+            {
+                var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
+                var query = from t in html.DocumentNode.SelectNodes("//tbody")
+                            from r in t.SelectNodes("tr")
+                            select r;
+                var position = new Stack<int>(Enumerable.Range(1, query.Count()));
+                response = new ListResponse<PrepResponse>(query.Select(x => new PrepResponse
                 {
-                    var html = new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates").Result;
-                    var query = from t in html.DocumentNode.SelectNodes("//tbody")
-                                from r in t.SelectNodes("tr")
-                                select r;
-                    var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                    response = new ListResponse<PrepResponse>(query.Select(x => new PrepResponse
-                    {
-                        Position = position.Pop(),
-                        Score = new Random().Next(-100, 100),
-                        Voters = new Random().Next(100, 1000),
-                        Votes = new Random().Next(1000000, 10000000),
-                        Direction = new Random().NextDouble() >= 0.5,
-                        UptimePercentage = new Random().NextDouble(),
-                        LastSeen = $"{new Random().Next(1, 60)}s ago",
-                        RejectedBlocks = new Random().Next(100, 1000),
-                        Created = x.SelectNodes("td")[1].InnerText.Trim(),
-                        ProducedBlocks = new Random().Next(100000, 1000000),
-                        Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
-                        Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                        Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                    }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(request.Take).ToList());
-                }
-                catch (Exception)
-                {
-                }
-                return response;
-            });
+                    Position = position.Pop(),
+                    Score = new Random().Next(-100, 100),
+                    Voters = new Random().Next(100, 1000),
+                    Votes = new Random().Next(1000000, 10000000),
+                    Direction = new Random().NextDouble() >= 0.5,
+                    UptimePercentage = new Random().NextDouble(),
+                    LastSeen = $"{new Random().Next(1, 60)}s ago",
+                    RejectedBlocks = new Random().Next(100, 1000),
+                    Created = x.SelectNodes("td")[1].InnerText.Trim(),
+                    ProducedBlocks = new Random().Next(100000, 1000000),
+                    Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
+                    Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Reverse().Take(request.Take).ToList());
+            }
+            catch (Exception)
+            {
+            }
+            return response;
         }
     }
 }
