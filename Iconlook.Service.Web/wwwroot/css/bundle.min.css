@@ -39213,6 +39213,7 @@ a.special, a:hover.special, a:visited.special {
 
 .card .card-header {
     color: #444444;
+    min-height: 42px;
     font-weight: bold;
     border-color: #e7eaee;
     padding: 0.9rem 1.1rem;
@@ -39228,8 +39229,7 @@ a.special, a:hover.special, a:visited.special {
 }
 
 .card .card-header .e-tab-header .e-toolbar-item {
-    height: 43px;
-    min-height: 43px;
+    min-height: 42px;
 }
 
 
