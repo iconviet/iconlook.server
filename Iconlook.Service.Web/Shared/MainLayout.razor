@@ -1,4 +1,4 @@
-﻿@using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
+﻿@inject IUriHelper Uri
 @inherits LayoutComponentBase
 <div class="body">
     <header>
@@ -6,14 +6,14 @@
             <div class="row no-gutters align-items-center" style="min-height: 52px;">
                 <div class="col-auto" style="margin-left: -16px;">
                     <a href="/">
-                        <img alt="ICONLOOK" src="images/iconlook.png" style="max-width: 110px;"/>
+                        <img alt="ICONLOOK" src="images/iconlook.png" style="max-width: 110px;" />
                     </a>
                 </div>
                 <div class="col text-right">
                     <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
                 </div>
-                <div class="col-auto">
-                    <EjsSwitch Checked="true"></EjsSwitch>
+                <div class="col-auto fs-3 pl-3">
+                    <i class="fas fa-signal primary"></i>
                 </div>
             </div>
         </div>
@@ -25,18 +25,7 @@
                     We have no any intention to influence and manipulate the incoming P-Rep election!
                 </div>
                 <div class="col-auto">
-                    <EjsDropDownButton Items="@Items" CssClass="filter">VOTING GUIDELINES</EjsDropDownButton>
-                    @code {
-
-                        public List<ItemModel> Items = new List<ItemModel>
-                        {
-                            new ItemModel { Text = "HELLO BITCHES!" },
-                            new ItemModel { Text = "WHO CAN I VOTE" },
-                            new ItemModel { Text = "WHY SHOULD I CARE" }
-                        };
-
-                    }
-
+                    <EjsSwitch></EjsSwitch>
                 </div>
             </div>
             @Body
@@ -55,11 +44,11 @@
 @code {
 
     public List<MenuItem> MenuItems = new List<MenuItem>
-    {
+{
         new MenuItem
         {
             Text = "ICONVIET", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "Who Are We" },
                 new MenuItem { Text = "Why Vote For Us" },
                 new MenuItem { Text = "What We Will Do" },
@@ -69,7 +58,7 @@
         new MenuItem
         {
             Text = "VOTERS", IconCss = "fal fa-person-sign", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "Who Can I Vote" },
                 new MenuItem { Text = "Why Should I Care" },
                 new MenuItem { Text = "How To Stake With Ledger *" },
@@ -80,7 +69,7 @@
         new MenuItem
         {
             Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "P-Rep Watcher", Url = "/prep-watcher" },
                 new MenuItem { Text = "P-Reps Transactions" },
                 new MenuItem { Text = "Validation Penalties *" },
@@ -91,7 +80,7 @@
         new MenuItem
         {
             Text = "D-APPS", Url = "/dapps", IconCss = "fal fa-rocket", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "View Top 10 D-Apps *" },
                 new MenuItem { Text = "View D-Apps Transactions *" },
                 new MenuItem { Text = "View Exclusively Top Token *" }
@@ -100,7 +89,7 @@
         new MenuItem
         {
             Text = "BLOCKCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "View Txns *" },
                 new MenuItem { Text = "View Pending Txns *" },
                 new MenuItem { Text = "View Internal Transaction *" }
@@ -109,7 +98,7 @@
         new MenuItem
         {
             Text = "CALCULATOR", IconCss = "fal fa-calculator-alt", Items = new List<MenuItem>
-            {
+    {
                 new MenuItem { Text = "Staking Reward *" },
                 new MenuItem { Text = "Representative Reward *" }
             }

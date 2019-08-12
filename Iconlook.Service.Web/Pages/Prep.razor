@@ -1,2 +1,9 @@
-﻿@page "/prep"
+﻿@page "/prep/{id:int}"
 @layout MainLayout
+
+@code{
+
+    [Parameter]
+    public int Id { get; set; }
+
+}
