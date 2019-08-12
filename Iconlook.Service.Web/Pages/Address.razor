@@ -1,2 +1,10 @@
-﻿@page "/address"
+﻿@page "/address/{hash}"
 @layout MainLayout
+@code{
+
+    [Parameter]
+    public string Hash { get; set; }
+}
+<h1>
+    @Hash
+</h1>

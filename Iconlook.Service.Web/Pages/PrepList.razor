@@ -90,7 +90,7 @@
                 @code {
                     public PrepResponse PrepModelType = new PrepResponse();
                 }
-                <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+                <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
                     <EjsDataManager Url="/api/v1.0/preps?take=65" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
                     <GridColumns>
                         <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
@@ -130,17 +130,17 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="180" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
+                        <GridColumn Width="170" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <a class="secondary font-weight-semibold" href="/address?hash=hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                                        <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="Produced" TextAlign="TextAlign.Right">
+                        <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="<i class='fal pr-2 fa-cube positive-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -150,29 +150,12 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="80" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="Rejected" TextAlign="TextAlign.Center">
+                        <GridColumn Width="80" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="<i class='fal pr-2 fa-cube negative-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
                                     {
                                         <span class="mono">@prep.RejectedBlocks.ToString("N0")</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="75" HeaderText="% Up" TextAlign="TextAlign.Center" Field="@nameof(PrepResponse.UptimePercentage)">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        if (prep.UptimePercentage > 0.5)
-                                        {
-                                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P0")</span>
-                                        }
-                                        if (prep.UptimePercentage <= 0.5)
-                                        {
-                                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P0")</span>
-                                        }
                                     }
                                 }
                             </Template>
@@ -187,7 +170,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="110" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
+                        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -198,17 +181,34 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right" AllowSorting="true">
+                        <GridColumn Width="70" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right" AllowSorting="true">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <span class="mono">@prep.SupplyPercentage.ToString("P2")</span>
+                                        <span class="mono tx-light">(@prep.SupplyPercentage.ToString("P2"))</span>
                                     }
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right">
+                        <GridColumn Width="90" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
+                            <Template>
+                                @{
+                                    if (context is PrepResponse prep)
+                                    {
+                                        if (prep.UptimePercentage > 0)
+                                        {
+                                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P")</span>
+                                        }
+                                        if (prep.UptimePercentage < 0)
+                                        {
+                                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
+                                        }
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="90" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Active" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -218,12 +218,12 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="120" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
+                        <GridColumn Width="130" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <span>@prep.Location</span>
+                                        <span class="tx-condensed">@prep.Location</span>
                                     }
                                 }
                             </Template>

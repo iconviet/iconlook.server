@@ -179,7 +179,9 @@ a.special, a:hover.special, a:visited.special {
     color: #888888 !important;
 }
 
-
+.tx-condensed {
+    font-family: 'IBM Plex Sans Condensed';
+}
 
 /*
     CARD
@@ -232,6 +234,10 @@ a.special, a:hover.special, a:visited.special {
     display: none;
 }
 
+.e-grid .e-altrow {
+    background-color: #fbfbfb;
+}
+
 .e-grid .e-rowcell {
     font-size: inherit;
     border-color: #e7eaee;
@@ -263,7 +269,7 @@ a.special, a:hover.special, a:visited.special {
     EJS-TAB
 */
 .e-tab .e-tab-header .e-tab-text {
-    color: #111111;
+    color: #666666;
     font-weight: bold !important;
     font-family: 'IBM Plex Sans' !important;
 }
