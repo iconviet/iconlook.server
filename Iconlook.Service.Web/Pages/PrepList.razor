@@ -52,8 +52,8 @@
                         </div>
                     </div>
                     <div class="col px-1 p-3 text-center border-right border-bottom">
-                        <div><a class="primary font-weight-bold" href="/voters/who-can-i-vote">WHO CAN I VOTE?</a></div>
-                        <div class="tx-dark">vote for any P-Rep with reasonable <span class="fs-1 mono font-weight-bold">score</span></div>
+                        <div><a class="primary font-weight-bold" href="/voters/who-can-i-vote">WHO SHOULD I VOTE?</a></div>
+                        <div class="tx-dark">for P-Reps who have contribution <span class="fs-1 mono font-weight-bold">score</span></div>
                     </div>
                     <div class="col px-1 p-3 text-center border-bottom">
                         <div><a class="primary font-weight-bold" href="/voters/why-should-i-care">WHY SHOULD I CARE?</a></div>
@@ -170,7 +170,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
+                        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -191,7 +191,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
+                        <GridColumn Width="80" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -208,7 +208,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Active" TextAlign="TextAlign.Right">
+                        <GridColumn Width="105" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -228,7 +228,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="90" Field="@nameof(PrepResponse.Score)" HeaderText="Score&nbsp;&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="true">
+                        <GridColumn Width="85" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
