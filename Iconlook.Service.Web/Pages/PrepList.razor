@@ -1,25 +1,30 @@
 ﻿@page "/preps"
 @layout MainLayout
+@using Syncfusion.EJ2.Blazor.Navigations
 <style type="text/css">
-    .e-grid { min-height: 680px; }
-
-    .e-grid .e-row { height: 42px; }
-
-    .e-grid .e-rowcell:last-child,
-    .e-grid .e-headercell:last-child {
-        padding-left: 5px !important;
-        padding-right: 20px !important;
+    .e-grid {
+        min-height: 680px;
     }
 
-    .e-grid .e-rowcell, .e-grid .e-headercell {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
+        .e-grid .e-row {
+            height: 42px;
+        }
 
-    .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
-        padding-left: 20px !important;
-        padding-right: 5px !important;
-    }
+        .e-grid .e-rowcell:last-child,
+        .e-grid .e-headercell:last-child {
+            padding-left: 5px !important;
+            padding-right: 20px !important;
+        }
+
+        .e-grid .e-rowcell, .e-grid .e-headercell {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+
+            .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
+                padding-left: 20px !important;
+                padding-right: 5px !important;
+            }
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -62,16 +67,22 @@
 <div class="row mb-5">
     <div class="col">
         <div class="card shadow-sm">
-            <div class="card-header">
+            <div class="card-header pl-0 pr-4 py-0">
                 <div class="row align-items-center">
-                    <div class="col-auto text-nowrap">
-                        <a class="secondary" href="/prep-dashboard"><i class="fal pr-2 fa-chalkboard-teacher"></i> DASHBOARD</a>
+                    <div class="col">
+                        <EjsTab>
+                            <TabItems>
+                                <TabItem Header="@Dashboard"></TabItem>
+                                <TabItem Header="@Information"></TabItem>
+                            </TabItems>
+                        </EjsTab>
+                        @code{
+                            public TabHeader Dashboard = new TabHeader { Text = "DASHBOARD" };
+                            public TabHeader Information = new TabHeader { Text = "INFORMATION" };
+                        }
                     </div>
-                    <div class="col-auto text-nowrap">
-                        <a class="secondary" href="/prep-information"><i class="fal pr-2 fa-info-circle"></i> INFORMATION</a>
-                    </div>
-                    <div class="col pr-4 text-right text-nowrap">
-                        <a class="secondary" href="/score-explained"><i class="fal pr-2 fa-question-circle"></i> EXPLAINATION</a>
+                    <div class="col text-right text-nowrap">
+                        <a class="secondary" href="/"><i class="fas pr-2 secondary fa-question-circle"></i></a>
                     </div>
                 </div>
             </div>
@@ -181,7 +192,8 @@
                                 @{
                                     if (context is PrepResponse prep)
                                     {
-                                        <span class="mono">@prep.Votes.ToString("N0")</span><span class="pl-1 tx-light">ICX</span>
+                                        <span class="mono">@prep.Votes.ToString("N0")</span>
+                                        <span class="pl-1 tx-light">ICX</span>
                                     }
                                 }
                             </Template>

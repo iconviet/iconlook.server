@@ -39092,16 +39092,21 @@ header {
 /*  
     LINK
 */
-a.special, a:hover.special, a:visited.special {
-    color: #e3165b;
+a.secondary, a:visited.secondary {
+    color: #000000;
+}
+
+a:hover.secondary {
+    color: #1aaaba !important;
+    text-decoration: none !important;
 }
 
 a.primary, a:hover.primary, a:visited.primary {
-    color: #1aaaba;
+    color: #1aaaba !important;
 }
 
-a.secondary, a:hover.secondary, a:visited.secondary {
-    color: #000000;
+a.special, a:hover.special, a:visited.special {
+    color: #e3165b !important;
 }
 
 
@@ -39212,10 +39217,18 @@ a.secondary, a:hover.secondary, a:visited.secondary {
     background-color: #fafafa;
 }
 
-.card .e-grid .e-gridheader {
+.card .card-header .e-tab-header {
+    margin-bottom: -1px;
+}
+
+.card .card-body .e-grid .e-gridheader {
     border-top: none;
 }
 
+.card .card-header .e-tab-header .e-toolbar-item {
+    height: 43px;
+    min-height: 43px;
+}
 
 
 
@@ -39233,6 +39246,8 @@ a.secondary, a:hover.secondary, a:visited.secondary {
 }
 
 
+
+
 /*
     EJS-SPINNER
 */
@@ -39240,12 +39255,34 @@ a.secondary, a:hover.secondary, a:visited.secondary {
     stroke: #1aaaba !important;
 }
 
+
+
 /*
     EJS-SWITCH
 */
 .e-switch-wrapper .e-switch-handle.e-switch-active {
     background-color: #1aaaba !important;
 }
+
+
+
+/*
+    EJS-TAB
+*/
+.e-tab .e-tab-header .e-tab-text {
+    color: #111111;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans' !important;
+}
+
+.e-tab .e-tab-header .e-indicator {
+    background-color: #1aaaba;
+}
+
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text {
+    color: #1aaaba;
+}
+
 
 
 /*
