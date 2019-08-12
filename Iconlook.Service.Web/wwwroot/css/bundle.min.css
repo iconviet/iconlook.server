@@ -39059,6 +39059,22 @@ header {
     color: #1aaaba !important;
 }
 
+.positive-dark {
+    color: mediumseagreen !important;
+}
+
+.negative-dark {
+    color: darkred !important;
+}
+
+.positive-light {
+    color: limegreen !important;
+}
+
+.negative-light {
+    color: red !important;
+}
+
 .secondary {
     color: #000000 !important;
 }
@@ -39164,7 +39180,6 @@ a.secondary, a:hover.secondary, a:visited.secondary {
 .tx-light {
     color: #888888 !important;
 }
-
 
 
 

@@ -29,7 +29,7 @@
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="pb-1 fs-n2 tx-light"><i class="fal pr-2 fa-coins tx-light"></i> 24H PRICE</div>
-                            <div><span class="fs-1 tx-dark mono-lg font-weight-bold">$0.25</span>&nbsp;&nbsp;<span class="fs-1 mono-lg" style="opacity: 0.75; color: mediumseagreen;">+5.06%</span></div>
+                            <div><span class="fs-1 tx-dark mono-lg font-weight-bold">$0.25</span>&nbsp;&nbsp;<span class="fs-1 mono-lg positive-dark" style="opacity: 0.75;">+5.06%</span></div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="pb-1 fs-n2 tx-light">MARKET CAP</div>
@@ -86,11 +86,11 @@
                                     {
                                         if (prep.Direction)
                                         {
-                                            <i class="fas fa-caret-up" style="color: limegreen;"></i>
+                                            <i class="fas fa-caret-up positive-light"></i>
                                         }
                                         else
                                         {
-                                            <i class="fas fa-caret-down" style="color: red;"></i>
+                                            <i class="fas fa-caret-down negative-light"></i>
                                         }
                                     }
                                 }
@@ -153,11 +153,11 @@
                                     {
                                         if (prep.UptimePercentage > 0.5)
                                         {
-                                            <span class="mono" style="color: mediumseagreen;">@prep.UptimePercentage.ToString("P0")</span>
+                                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P0")</span>
                                         }
                                         if (prep.UptimePercentage <= 0.5)
                                         {
-                                            <span class="mono" style="color: darkred;">@prep.UptimePercentage.ToString("P0")</span>
+                                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P0")</span>
                                         }
                                     }
                                 }
