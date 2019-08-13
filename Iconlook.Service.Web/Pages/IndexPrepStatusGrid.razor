@@ -18,7 +18,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="20" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
+        <GridColumn Width="24" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -49,7 +49,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -83,6 +83,16 @@
                         {
                             <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
                         }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="45" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <i class="far pb-1 fs-n2 fa-wifi positive-light"></i>
                     }
                 }
             </Template>

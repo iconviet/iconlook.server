@@ -82,19 +82,19 @@
         <style>
             #preplist { min-height: 740px; }
         </style>
-        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm">
+        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm" EnablePersistence="true">
             <TabItems>
-                <TabItem Header="@Ranking">
+                <TabItem Header="@Overview">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListRankingGrid></PrepListRankingGrid>
+                            <PrepListOverviewGrid></PrepListOverviewGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Research">
+                <TabItem Header="@Background">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListResearchGrid></PrepListResearchGrid>
+                            <PrepListBackgroundGrid></PrepListBackgroundGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
@@ -110,7 +110,7 @@
     </div>
 </div>
 @code{
-    public TabHeader Ranking = new TabHeader { Text = "RANKING" };
-    public TabHeader Research = new TabHeader { Text = "RESEARCH" };
+    public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
+    public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
     public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
 }
