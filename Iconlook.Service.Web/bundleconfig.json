@@ -17,7 +17,7 @@
     "outputFileName": "wwwroot/js/bundle.min.js"
   },
   {
-    "minify": { "enabled": false },
+    "minify": { "enabled": true },
     "inputFiles": [
       "wwwroot/css/bootstrap.css",
       "wwwroot/css/gf-*.css",
