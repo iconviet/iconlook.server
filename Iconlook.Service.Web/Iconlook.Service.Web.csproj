@@ -10,9 +10,13 @@
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="wwwroot\fonts\**" />
     <Compile Remove="wwwroot\images\p-reps\**" />
+    <Content Remove="wwwroot\fonts\**" />
     <Content Remove="wwwroot\images\p-reps\**" />
+    <EmbeddedResource Remove="wwwroot\fonts\**" />
     <EmbeddedResource Remove="wwwroot\images\p-reps\**" />
+    <None Remove="wwwroot\fonts\**" />
     <None Remove="wwwroot\images\p-reps\**" />
   </ItemGroup>
   <ItemGroup>
@@ -34,9 +38,5 @@
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.40-beta" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.40" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.6.0-preview1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\fonts\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 </Project>
