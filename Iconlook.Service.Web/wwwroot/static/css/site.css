@@ -90,8 +90,11 @@ header {
 /*  
     LINK
 */
+a .secondary {
+    color: #888888 !important;
+}
 a.secondary, a:visited.secondary {
-    color: #000000;
+    color: #000000 !important;
 }
 
 a:hover.secondary {
@@ -105,6 +108,24 @@ a.primary, a:hover.primary, a:visited.primary {
 
 a.special, a:hover.special, a:visited.special {
     color: #e3165b !important;
+}
+
+
+
+/*  
+    BUTTON
+*/
+
+button.special, button .special {
+    color: #e3165b !important;
+}
+
+button.primary, button .primary {
+    color: #1aaaba !important;
+}
+
+button.secondary, button .secondary {
+    color: #888888 !important;
 }
 
 

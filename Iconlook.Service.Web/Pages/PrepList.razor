@@ -1,31 +1,6 @@
 ﻿@page "/preps"
 @layout MainLayout
 @using Syncfusion.EJ2.Blazor.Navigations
-<style type="text/css">
-    .e-grid {
-        min-height: 680px;
-    }
-
-    .e-grid .e-row {
-        height: 42px;
-    }
-
-    .e-grid .e-rowcell:last-child,
-    .e-grid .e-headercell:last-child {
-        padding-left: 5px !important;
-        padding-right: 20px !important;
-    }
-
-    .e-grid .e-rowcell, .e-grid .e-headercell {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-
-    .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
-        padding-left: 20px !important;
-        padding-right: 5px !important;
-    }
-</style>
 <div class="row mb-3">
     <div class="col">
         <div class="card shadow-sm border-bottom-0">
@@ -68,192 +43,39 @@
     <div class="col">
         <div class="card shadow-sm">
             <div class="card-header p-0">
-                <div class="row pr-5 no-gutters align-items-center">
+                <div class="row pr-3 no-gutters align-items-center">
                     <div class="col pl-0">
-                        <EjsTab>
+                        <EjsTab @ref="PrepsTab">
                             <TabItems>
                                 <TabItem Header="@Ranking"></TabItem>
                                 <TabItem Header="@Research"></TabItem>
                                 <TabItem Header="@Contribution"></TabItem>
                             </TabItems>
                         </EjsTab>
-                        @code{
-                            public TabHeader Ranking = new TabHeader { Text = "RANKING" };
-                            public TabHeader Research = new TabHeader { Text = "RESEARCH" };
-                            public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-                        }
                     </div>
                     <div class="col-auto text-right text-nowrap">
-                        <a class="secondary" href="/"><i class="fas secondary fa-question-circle"></i></a>
+                        <EjsTooltip OpensOn="Hover" Content="@("Fuck this shit!")" Position="Position.LeftCenter">
+                            <EjsButton CssClass="e-link" onclick="OnQuestionClick"><i class="fas secondary fa-question-circle"></i></EjsButton>
+                        </EjsTooltip>
                     </div>
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2" style="min-height: 680px;">
-                @code {
-                    public PrepResponse PrepModelType = new PrepResponse();
-                }
-                <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-                    <EjsDataManager Url="/api/v1.0/preps?take=65" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-                    <GridColumns>
-                        <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        if (prep.Direction)
-                                        {
-                                            <i class="fas fa-caret-up positive-light"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="fas fa-caret-down negative-light"></i>
-                                        }
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="44" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Center" HeaderText="#">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono">@prep.Position</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="34" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <img width="20" height="20" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="170" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="85" Field="@nameof(PrepResponse.LastSeen)" HeaderText="<i class='far fa-plug positive-dark'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                            <span class="positive-dark">● online</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="<i class='far pr-2 fa-cube positive-dark'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="80" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="<i class='far pr-1 fa-cube negative-dark'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono">@prep.RejectedBlocks.ToString("N0")</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="75" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Center" Format="N0">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono">@prep.Voters.ToString("N0")</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                                        <span class="pl-1 tx-light">ICX</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="75" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right" AllowSorting="true">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="mono tx-light">(@prep.SupplyPercentage.ToString("P2"))</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="85" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        if (prep.UptimePercentage > 0)
-                                        {
-                                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P")</span>
-                                        }
-                                        if (prep.UptimePercentage < 0)
-                                        {
-                                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
-                                        }
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="140" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span class="tx-condensed">@prep.Location</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="85" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        if (prep.Score > 0)
-                                        {
-                                            <div class="bg-primary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
-                                                <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
-                                                <span class="fs-n1 ls-2 tx-light">--</span>
-                                            </div>
-                                        }
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                    </GridColumns>
-                </EjsGrid>
+                <PrepListRankingGrid></PrepListRankingGrid>
             </div>
         </div>
     </div>
 </div>
+}
+@code{
+    public EjsTab PrepsTab;
+    public EjsButton TestButton;
+    public TabHeader Ranking = new TabHeader { Text = "RANKING" };
+    public TabHeader Research = new TabHeader { Text = "RESEARCH" };
+    public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+
+    private void OnQuestionClick()
+    {
+        Console.WriteLine("Fuck this shit!");
+    }
+}
