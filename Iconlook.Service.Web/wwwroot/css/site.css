@@ -62,7 +62,7 @@ header {
 }
 
 .negative-dark {
-    color: darkred !important;
+    color: rgb(180, 0, 0) !important;
 }
 
 .positive-light {
@@ -274,7 +274,7 @@ a.special, a:hover.special, a:visited.special {
     EJS-TAB
 */
 .e-tab .e-tab-header .e-tab-text {
-    color: #666666;
+    color: #888888;
     font-weight: bold !important;
     font-family: 'IBM Plex Sans' !important;
 }
@@ -284,7 +284,7 @@ a.special, a:hover.special, a:visited.special {
 }
 
 .e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text {
-    color: #1aaaba;
+    color: #111111;
 }
 
 
