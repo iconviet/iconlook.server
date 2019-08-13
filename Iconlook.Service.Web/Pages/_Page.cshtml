@@ -1,13 +1,15 @@
 ﻿@page "/"
+@using Agiper
 @namespace Iconlook.Service.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{var version = typeof(WebHost).Assembly.InformationVersion(); }
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="~/"/>
-    <meta charset="utf-8"/>
+    <base href="~/" />
+    <meta charset="utf-8" />
     <title>ICONLOOK | ICON Ecosystem Explorer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <environment names="Localhost">
         <link href="~/css/bootstrap.css" rel="stylesheet" />
         <link href="~/css/gf-ibmplexsans.css" rel="stylesheet" />
@@ -23,7 +25,7 @@
         <link href="~/css/site.css" rel="stylesheet" />
     </environment>
     <environment names="Development, Testing, Staging, Production">
-        <link href="~/css/bundle.min.css" rel="stylesheet"/>
+        <link href="~/css/bundle.min.css?v=@version" rel="stylesheet" />
     </environment>
 </head>
 <body>
@@ -33,8 +35,8 @@
         <script src="~/js/ejs.interop.js"></script>
     </environment>
     <environment names="Development, Testing, Staging, Production">
-        <script async src="~/js/bundle.min.js"></script>
+        <script async src="~/js/bundle.min.js?v=@version"></script>
     </environment>
-    <script async src="_framework/blazor.server.js"></script>
+    <script async src="_framework/blazor.server.js?v=@version"></script>
 </body>
 </html>
