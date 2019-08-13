@@ -140,7 +140,17 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="80" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="<i class='fal pr-2 fa-cube positive-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
+                        <GridColumn Width="85" Field="@nameof(PrepResponse.LastSeen)" HeaderText="<i class='far fs-1 fa-plug'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
+                            <Template>
+                                @{
+                                    if (context is PrepResponse prep)
+                                    {
+                                        <span class="positive-dark">online</span>
+                                    }
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="<i class='fal fs-1 pr-2 fa-cube positive-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -150,7 +160,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="75" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="<i class='fal pr-2 fa-cube negative-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
+                        <GridColumn Width="80" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="<i class='fal fs-1 pr-1 fa-cube negative-light'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -160,7 +170,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="70" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Center" Format="N0">
+                        <GridColumn Width="75" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Center" Format="N0">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -181,7 +191,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="70" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right" AllowSorting="true">
+                        <GridColumn Width="75" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right" AllowSorting="true">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -191,7 +201,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="80" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
+                        <GridColumn Width="85" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
@@ -208,17 +218,7 @@
                                 }
                             </Template>
                         </GridColumn>
-                        <GridColumn Width="105" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Last Seen" TextAlign="TextAlign.Right">
-                            <Template>
-                                @{
-                                    if (context is PrepResponse prep)
-                                    {
-                                        <span>@prep.LastSeen</span>
-                                    }
-                                }
-                            </Template>
-                        </GridColumn>
-                        <GridColumn Width="145" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
+                        <GridColumn Width="140" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
                             <Template>
                                 @{
                                     if (context is PrepResponse prep)
