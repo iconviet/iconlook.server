@@ -43,40 +43,7 @@
         </div>
     </div>
 </div>
-<div class="row mb-3">
-    <div class="col">
-        <div class="card px-4 pt-3 pb-4 rounded gradient shadow-sm border-0">
-            <div class="row pb-1">
-                <div class="col text-center" style="color: white;">
-                    <h5 class="font-weight-bold">
-                        ICONLOOK
-                    </h5>
-                </div>
-            </div>
-            <div class="row no-gutters" style="background-color: white;">
-                <div class="col col-auto">
-                    <EjsDropDownButton Items="@Items" CssClass="filter">ALL FILTERS</EjsDropDownButton>
-                    @code {
 
-                        public List<ItemModel> Items = new List<ItemModel>
-                        {
-                            new ItemModel { Text = "P-REP" },
-                            new ItemModel { Text = "ADDRESS" },
-                            new ItemModel { Text = "TRANSACTION" }
-                        };
-
-                    }
-                </div>
-                <div class="col">
-                    <EjsTextBox CssClass="search-input" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
-                </div>
-                <div class="col col-auto">
-                    <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">Search</EjsButton>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row mb-3">
     <div class="col">
         <div class="card shadow-sm border-bottom-0">
