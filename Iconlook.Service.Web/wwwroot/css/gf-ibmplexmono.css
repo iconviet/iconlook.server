@@ -3,6 +3,7 @@
  */
 /* ibm-plex-mono-regular - latin */
 @font-face {
+    font-display: swap;
     font-family: 'IBM Plex Mono';
     font-style: normal;
     font-weight: 400;

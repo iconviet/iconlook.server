@@ -3,6 +3,7 @@
  */
 /* ibm-plex-sans-condensed-regular - latin */
 @font-face {
+    font-display: swap;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
     font-weight: 400;

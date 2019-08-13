@@ -3,6 +3,7 @@
  */
 /* ibm-plex-sans-regular - latin */
 @font-face {
+    font-display: swap;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
@@ -15,6 +16,7 @@
 }
 /* ibm-plex-sans-600 - latin */
 @font-face {
+    font-display: swap;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
@@ -27,6 +29,7 @@
 }
 /* ibm-plex-sans-700 - latin */
 @font-face {
+    font-display: swap;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 700;

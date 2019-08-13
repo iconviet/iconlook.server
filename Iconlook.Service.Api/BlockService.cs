@@ -9,7 +9,7 @@ namespace Iconlook.Service.Api
 {
     public class BlockService : ServiceBase
     {
-        [CacheResponse(Duration = 2, MaxAge = 1)]
+        [CacheResponse(Duration = 60, MaxAge = 30)]
         public object Any(BlockListRequest request)
         {
             return new ListResponse<BlockResponse>(Enumerable.Range(1, 12).Select(x => new BlockResponse
