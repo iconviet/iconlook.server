@@ -223,7 +223,7 @@ button.secondary, button .secondary {
 
 .card {
     overflow: hidden;
-    border-color: #e7eaee;
+    border: solid 1px#e7eaee;
 }
 
 .card .card-body {
@@ -232,24 +232,32 @@ button.secondary, button .secondary {
 
 .card .card-header {
     color: #444444;
-    min-height: 42px;
     font-weight: bold;
-    border-color: #e7eaee;
-    padding: 0.9rem 1.1rem;
+    padding: 9px 12px;
     background-color: #fafafa;
+    border-bottom: solid 1px #e7eaee;
 }
 
-.card .card-header .e-tab-header {
-    margin-bottom: -1px;
+.card .e-tab-header {
+    color: #444444;
+    min-height: 40px;
+    font-weight: bold;
+    background-color: #fafafa;
+    border-bottom: solid 1px #e7eaee;
+}
+
+.card .e-tab-header .e-toolbar-item {
+    min-height: 40px;
 }
 
 .card .card-body .e-grid .e-gridheader {
     border-top: none;
 }
 
-.card .card-header .e-tab-header .e-toolbar-item {
-    min-height: 42px;
+.card .e-tab-header .e-toolbar-item:not(.e-separator) {
+    min-height: 40px;
 }
+
 
 
 

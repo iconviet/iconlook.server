@@ -1,6 +1,31 @@
 ﻿@page "/preps"
-@layout MainLayout
 @using Syncfusion.EJ2.Blazor.Navigations
+@layout MainLayout
+<style type="text/css">
+    .e-grid {
+    min-height: 700px;
+    }
+
+    .e-grid .e-row {
+        height: 42px;
+    }
+
+    .e-grid .e-rowcell:last-child,
+    .e-grid .e-headercell:last-child {
+        padding-left: 5px !important;
+        padding-right: 20px !important;
+    }
+
+    .e-grid .e-rowcell, .e-grid .e-headercell {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
+        padding-left: 20px !important;
+        padding-right: 5px !important;
+    }
+</style>
 <div class="row mb-3">
     <div class="col">
         <div class="card shadow-sm border-bottom-0">
@@ -27,11 +52,15 @@
                         </div>
                     </div>
                     <div class="col px-1 p-3 text-center border-right border-bottom">
-                        <div><a class="primary font-weight-bold" href="/voters/who-can-i-vote">WHO SHOULD I VOTE?</a></div>
+                        <div>
+                            <a class="primary font-weight-bold" href="/">WHO SHOULD I VOTE?</a>
+                        </div>
                         <div class="tx-dark">for P-Reps who have contribution <span class="mono font-weight-bold">score</span></div>
                     </div>
                     <div class="col px-1 p-3 text-center border-bottom">
-                        <div><a class="primary font-weight-bold" href="/voters/why-should-i-care">WHY SHOULD I CARE?</a></div>
+                        <div>
+                            <a class="primary font-weight-bold" href="/">WHY SHOULD I CARE?</a>
+                        </div>
                         <div class="tx-dark">because your votes affect future <span class="mono font-weight-bold">price</span></div>
                     </div>
                 </div>
@@ -41,41 +70,47 @@
 </div>
 <div class="row mb-5">
     <div class="col">
-        <div class="card shadow-sm">
-            <div class="card-header p-0">
-                <div class="row pr-3 no-gutters align-items-center">
-                    <div class="col pl-0">
-                        <EjsTab @ref="PrepsTab">
-                            <TabItems>
-                                <TabItem Header="@Ranking"></TabItem>
-                                <TabItem Header="@Research"></TabItem>
-                                <TabItem Header="@Contribution"></TabItem>
-                            </TabItems>
-                        </EjsTab>
-                    </div>
-                    <div class="col-auto text-right text-nowrap">
-                        <EjsTooltip OpensOn="Hover" Content="@("Fuck this shit!")" Position="Position.LeftCenter">
-                            <EjsButton CssClass="e-link" onclick="OnQuestionClick"><i class="fas secondary fa-question-circle"></i></EjsButton>
-                        </EjsTooltip>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2" style="min-height: 680px;">
-                <PrepListRankingGrid></PrepListRankingGrid>
-            </div>
-        </div>
+        @code {
+
+            public TabAnimationSettings Animation = new TabAnimationSettings
+            {
+                Next = new TabAnimationNext { Duration = 0 },
+                Previous = new TabAnimationPrevious { Duration = 0 }
+            };
+
+        }
+        <style>
+            #preplist { min-height: 740px; }
+        </style>
+        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm">
+            <TabItems>
+                <TabItem Header="@Ranking">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
+                            <PrepListRankingGrid></PrepListRankingGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@Research">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
+                            <PrepListResearchGrid></PrepListResearchGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@Contribution">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
+                            <PrepListContributionGrid></PrepListContributionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+            </TabItems>
+        </EjsTab>
     </div>
 </div>
-}
 @code{
-    public EjsTab PrepsTab;
-    public EjsButton TestButton;
     public TabHeader Ranking = new TabHeader { Text = "RANKING" };
     public TabHeader Research = new TabHeader { Text = "RESEARCH" };
     public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-
-    private void OnQuestionClick()
-    {
-        Console.WriteLine("Fuck this shit!");
-    }
 }
