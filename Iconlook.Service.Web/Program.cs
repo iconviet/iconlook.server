@@ -26,7 +26,6 @@ namespace Iconlook.Service.Web
                 services.AddRazorPages();
                 services.AddHangfire(x => { });
                 services.AddServerSideBlazor();
-                // services.AddResponseCompression();
                 services.Configure<KestrelServerOptions>(options =>
                 {
                     options.AllowSynchronousIO = true;
@@ -73,9 +72,7 @@ namespace Iconlook.Service.Web
                     });
                 }
                 application.UseForwardedHeaders();
-                // application.UseResponseCompression();
                 application.UseStaticFiles();
-                application.UseCookiePolicy();
                 application.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
                 application.UseRouting();
                 application.UseWebMarkupMin();
