@@ -23,9 +23,7 @@
       "wwwroot/css/gf-*.css",
       "wwwroot/css/fa-*.css",
       "wwwroot/css/ej2-*.css",
-      "wwwroot/css/fontawesome.css",
-      "wwwroot/css/prep-sprite.css",
-      "wwwroot/css/site.css"
+      "wwwroot/css/site*.css"
     ],
     "outputFileName": "wwwroot/css/bundle.min.css"
   }
