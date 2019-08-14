@@ -49,17 +49,20 @@ namespace Iconlook.Service.Web
                     options.KnownNetworks.Clear();
                     options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
                 });
-                services.AddDataProtection()
-                    .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
-                    .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
-                var redis = host.HostConfiguration.GetConnectionString("redis");
-                if (redis.HasValue())
+                if (!OperatingSystem.IsWindows)
+                {
+                    services.AddDataProtection()
+                        .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
+                        .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
+                }
+                var connection_string = host.HostConfiguration.GetConnectionString("redis");
+                if (connection_string.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
                     {
-                        redis = redis.Replace("redis", "localhost");
+                        connection_string = connection_string.Replace("redis", "localhost");
                     }
-                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(redis);
+                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection_string);
                 }
             };
             Configure = host => application =>
