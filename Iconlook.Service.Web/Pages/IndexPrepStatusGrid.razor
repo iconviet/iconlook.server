@@ -18,7 +18,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="24" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
+        <GridColumn Width="32" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -28,27 +28,20 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="36" TextAlign="TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <img width="20" height="20" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                    }
-                }
-            </Template>
-        </GridColumn>
         <GridColumn HeaderText="Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a class="secondary font-weight-semibold" href="prep/@prep.Id">@prep.Name</a>
+                        <div class="d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="102" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -59,7 +52,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" TextAlign="TextAlign.Right">
+        <GridColumn Width="62" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -69,7 +62,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="62" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -86,7 +79,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="45" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Right">
+        <GridColumn Width="42" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)

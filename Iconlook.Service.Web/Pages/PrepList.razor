@@ -77,6 +77,7 @@
             #preplist { min-height: 740px; }
         </style>
         <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm" EnablePersistence="true">
+            <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Overview">
                     <ContentTemplate>
@@ -92,18 +93,33 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Contribution">
+                <TabItem Header="@ContributionStar">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListContributionGrid></PrepListContributionGrid>
+                            <PrepListContributionStarGrid></PrepListContributionStarGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@ContributionChip">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
+                            <PrepListContributionChipGrid></PrepListContributionChipGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
             </TabItems>
             @code{
+                public void Cancel(SelectingEventArgs args) 
+                {
+                    if(args.IsSwiped)
+                    {
+                        args.Cancel = true;
+                    }
+                }
                 public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
                 public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
-                public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+                public TabHeader ContributionStar = new TabHeader { Text = "CONTRIBUTION" };
+                public TabHeader ContributionChip = new TabHeader { Text = "SCORE MATRIX" };
             }
         </EjsTab>
     </div>

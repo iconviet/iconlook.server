@@ -1,0 +1,104 @@
+﻿<style>
+    .fal.fa-star {
+        opacity: 0.75;
+        color: #eebf4a;
+        margin-right: 4px;
+    }
+    .fas.fa-star, .fas.fa-star-half-alt {
+        color: #eebf4a;
+        margin-right: 4px;
+    }
+    .e-chip-list.e-chip, .e-chip-list .e-chip {
+        font-weight: 500;
+        margin: 0 2px !important;
+        font-size: 12px !important;
+        font-family: 'IBM Plex Mono' !important;
+    }
+</style>
+<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+    <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                    <div class="mt-1 d-flex align-items-center">
+                        <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                        <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                    </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="160" HeaderText="Finance" TextAlign="TextAlign.Center">
+            <Template>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="160" HeaderText="Business" TextAlign="TextAlign.Center">
+            <Template>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="160" HeaderText="Awareness" TextAlign="TextAlign.Center">
+            <Template>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="160" HeaderText="Development" TextAlign="TextAlign.Center">
+            <Template>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="160" HeaderText="Transparency" TextAlign="TextAlign.Center">
+            <Template>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="90" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        if (prep.Score > 0)
+                        {
+                    <div class="bg-primary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                        <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
+                    </div>
+                        }
+                        else
+                        {
+                    <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 2px; padding-bottom: 2px;">
+                        <span class="fs-n1 ls-2 tx-light">--</span>
+                    </div>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>
+@code{
+    public PrepResponse PrepModelType = new PrepResponse();
+}

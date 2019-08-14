@@ -1,22 +1,15 @@
 ﻿<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
     <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="45" TextAlign="TextAlign.Right">
+        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <img width="20" height="20" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="170" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        <div class="mt-1 d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
                     }
                 }
             </Template>
