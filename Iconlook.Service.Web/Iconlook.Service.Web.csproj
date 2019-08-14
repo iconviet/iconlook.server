@@ -10,16 +10,6 @@
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="wwwroot\fonts\**" />
-    <Compile Remove="wwwroot\images\p-reps\**" />
-    <Content Remove="wwwroot\fonts\**" />
-    <Content Remove="wwwroot\images\p-reps\**" />
-    <EmbeddedResource Remove="wwwroot\fonts\**" />
-    <EmbeddedResource Remove="wwwroot\images\p-reps\**" />
-    <None Remove="wwwroot\fonts\**" />
-    <None Remove="wwwroot\images\p-reps\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -33,10 +23,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.0.0-preview8.19405.7" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.0.0-preview7.19365.7" />
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.40-beta" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.41" />
+    <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.40" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.6.0-preview1" />
   </ItemGroup>
 </Project>
