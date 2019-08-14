@@ -10,16 +10,6 @@
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="wwwroot\fonts\**" />
-    <Compile Remove="wwwroot\images\p-reps\**" />
-    <Content Remove="wwwroot\fonts\**" />
-    <Content Remove="wwwroot\images\p-reps\**" />
-    <EmbeddedResource Remove="wwwroot\fonts\**" />
-    <EmbeddedResource Remove="wwwroot\images\p-reps\**" />
-    <None Remove="wwwroot\fonts\**" />
-    <None Remove="wwwroot\images\p-reps\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
