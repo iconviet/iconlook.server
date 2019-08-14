@@ -1,26 +1,18 @@
 ﻿@page "/"
-@using  ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
+@using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
 <style type="text/css">
-    .e-grid {
-        min-height: 521px;
+    .e-grid { min-height: 521px; }
+
+    .e-grid .e-rowcell {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
-        .e-grid .e-rowcell {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-        }
+    .e-grid .e-gridheader { display: none; }
 
-        .e-grid .e-gridheader {
-            display: none;
-        }
+    .search-input { background-color: white !important; }
 
-    .search-input {
-        background-color: white !important;
-    }
-
-    .search-button {
-        background-color: white !important;
-    }
+    .search-button { background-color: white !important; }
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -88,7 +80,7 @@
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
-                                                        {
+                        {
                             new ItemModel { Text = "P-REP" },
                             new ItemModel { Text = "ADDRESS" },
                             new ItemModel { Text = "TRANSACTION" }
@@ -120,11 +112,15 @@
                         <div class="tx-dark"><span class="font-weight-semibold">43</span> days <span class="tx-dark font-weight-semibold">4</span> hours <span class="tx-dark font-weight-semibold">2</span> minutes</div>
                     </div>
                     <div class="col px-1 p-3 text-center border-right border-bottom">
-                        <div><a class="primary font-weight-bold" href="/">WHO SHOULD I VOTE?</a></div>
+                        <div>
+                            <a class="primary font-weight-bold" href="/">WHO SHOULD I VOTE?</a>
+                        </div>
                         <div class="tx-dark">for P-Reps who have contribution <span class="mono font-weight-bold">score</span></div>
                     </div>
                     <div class="col px-1 p-3 text-center border-bottom">
-                        <div><a class="primary font-weight-bold" href="/">WHY SHOULD I CARE?</a></div>
+                        <div>
+                            <a class="primary font-weight-bold" href="/">WHY SHOULD I CARE?</a>
+                        </div>
                         <div class="tx-dark">because your votes affect future <span class="mono font-weight-bold">price</span></div>
                     </div>
                 </div>

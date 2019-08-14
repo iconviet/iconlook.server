@@ -5,12 +5,13 @@
             <div class="row no-gutters align-items-center" style="min-height: 52px;">
                 <div class="col-auto" style="margin-left: -16px;">
                     <a href="/">
-                        <img alt="ICONLOOK" src="static/images/iconlook.png" style="max-width: 110px;" />
+                        <img alt="ICONLOOK" src="static/images/iconlook.png" style="max-width: 110px;"/>
                     </a>
                 </div>
                 <div class="col text-right">
                     <EjsMenu Items="@Items" CssClass="ejs-menu">
                         @code {
+
                             public List<MenuItem> Items = new List<MenuItem>
                             {
                                 new MenuItem
@@ -43,7 +44,7 @@
                                         new MenuItem { Text = "Contribution" },
                                         new MenuItem { Text = "Transactions *" },
                                         new MenuItem { Text = "Alll Penalties *" }
-                            }
+                                    }
                                 },
                                 new MenuItem
                                 {
@@ -57,7 +58,7 @@
                                 new MenuItem
                                 {
                                     Text = "BLOCKCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
-                                                {
+                                    {
                                         new MenuItem { Text = "View Txns *" },
                                         new MenuItem { Text = "View Pending Txns *" },
                                         new MenuItem { Text = "View Internal Transaction *" }
@@ -73,6 +74,7 @@
                                 },
                                 new MenuItem { Text = "LOGIN" }
                             };
+
                         }
                     </EjsMenu>
                 </div>
