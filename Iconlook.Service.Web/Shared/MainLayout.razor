@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@inject IUriHelper Uri
+@inherits LayoutComponentBase
 <div class="body">
     <header>
         <div class="container">
@@ -9,7 +10,7 @@
                     </a>
                 </div>
                 <div class="col text-right">
-                    <EjsMenu Items="@Items" CssClass="ejs-menu"></EjsMenu>
+                    <EjsMenu Items="@MenuItems" CssClass="ejs-menu"></EjsMenu>
                 </div>
                 <div class="col-auto fs-2 pl-3 pb-1">
                     <i class="fas fa-signal positive-dark"></i>
@@ -39,9 +40,11 @@
         </div>
     </footer>
 </div>
+
 @code {
-    public List<MenuItem> Items = new List<MenuItem>
-    {
+
+    public List<MenuItem> MenuItems = new List<MenuItem>
+{
         new MenuItem
         {
             Text = "ICONVIET", Items = new List<MenuItem>
@@ -102,4 +105,5 @@
         },
         new MenuItem { Text = "LOGIN" }
     };
+
 }
