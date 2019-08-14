@@ -37,6 +37,7 @@
     <environment names="Development, Testing, Staging, Production">
         <script async src="~/static/js/bundle.min.js?v=@version"></script>
     </environment>
-    <script async src="_framework/blazor.server.js?v=@version"></script>
+    <script src="_framework/blazor.server.js?v=@version" autostart="false"></script>
+    <script>Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); }});</script>
 </body>
 </html>

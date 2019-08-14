@@ -45,7 +45,7 @@ namespace Iconlook.Service.Api
                     UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Shuffle().Take(request.Take).ToList());
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Take(request.Take).Reverse().ToList());
             }
             catch (Exception)
             {

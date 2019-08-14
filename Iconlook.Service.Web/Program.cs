@@ -84,7 +84,7 @@ namespace Iconlook.Service.Web
                 application.UseEndpoints(x =>
                 {
                     x.MapBlazorHub();
-                    x.MapFallbackToPage("/_Page");
+                    x.MapFallbackToPage("/_Host");
                 });
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMjdLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");

@@ -1,6 +1,4 @@
 ﻿@page "/preps"
-@using Syncfusion.EJ2.Blazor.Navigations
-@layout MainLayout
 <style type="text/css">
     .e-grid {
     min-height: 700px;
@@ -38,13 +36,13 @@
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="pb-1 fs-n2 tx-light">MARKET CAP</div>
-                            <div class="fs-2 tx-dark mono-lg">$132,134,325</div>
+                            <div class="fs-1 tx-dark mono-lg">$132,134,325</div>
                         </div>
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="pb-1 fs-n2 tx-light">TOTAL ICX STAKED</div>
-                            <div><span class="fs-2 tx-dark mono-lg">132,250,456</span>&nbsp;<span class="mono-lg tx-light">(36.52%)</span></div>
+                            <div><span class="fs-1 tx-dark mono-lg">132,250,456</span>&nbsp;<span class="mono-lg tx-light">(36.52%)</span></div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="pb-1 fs-n2 tx-light">24H CHANGE</div>
@@ -106,11 +104,11 @@
                     </ContentTemplate>
                 </TabItem>
             </TabItems>
+            @code{
+                public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
+                public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
+                public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+            }
         </EjsTab>
     </div>
 </div>
-@code{
-    public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
-    public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
-    public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-}
