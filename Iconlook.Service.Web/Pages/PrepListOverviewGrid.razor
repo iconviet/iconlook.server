@@ -1,4 +1,15 @@
-﻿<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
+﻿<style>
+    .fal.fa-star {
+        opacity: 0.75;
+        color: #eebf4a;
+        margin-right: 4px;
+    }
+    .fas.fa-star, .fas.fa-star-half-alt {
+        color: #eebf4a;
+        margin-right: 4px;
+    }
+</style>
+<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
     <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
@@ -119,17 +130,16 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Right">
+        <GridColumn Width="170" HeaderText="Contribution&nbsp;" TextAlign="TextAlign.Center">
             <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="tx-condensed">@prep.Location</span>
-                    }
-                }
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="85" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="70" Field="@nameof(PrepResponse.Score)" HeaderText="Score&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
             <Template>
                 @{
                     if (context is PrepResponse prep)

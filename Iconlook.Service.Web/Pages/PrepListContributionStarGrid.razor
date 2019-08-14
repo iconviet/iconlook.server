@@ -31,7 +31,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Finance" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Finance" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -40,7 +40,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Business" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Business" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -49,7 +49,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Awareness" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Operation" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -58,7 +58,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Development" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Marketing" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -67,7 +67,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Transparency" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Development" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -76,25 +76,13 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="90" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="148" HeaderText="Transactional" TextAlign="TextAlign.Center">
             <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        if (prep.Score > 0)
-                        {
-                    <div class="bg-primary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
-                        <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
-                    </div>
-                        }
-                        else
-                        {
-                    <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 2px; padding-bottom: 2px;">
-                        <span class="fs-n1 ls-2 tx-light">--</span>
-                    </div>
-                        }
-                    }
-                }
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
     </GridColumns>
