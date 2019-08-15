@@ -1,0 +1,42 @@
+﻿#components-reconnect-modal {
+    height: 24px;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+}
+.components-reconnect-hide {
+    display: none !important;
+}
+        
+.components-reconnect-failed {
+    color: darkred;
+    background-color: rgb(255, 197, 190);
+    display: block !important;
+}
+        
+.components-reconnect-show {
+    color: rgb(126, 92, 8);
+    display: block !important;
+    background-color: #ffd800;
+}
+
+.components-reconnect-hide .reconnecting,
+.components-reconnect-hide .connection-lost {
+    display: none;    
+}
+
+.components-reconnect-show .reconnecting {
+    display: block;
+}
+
+.components-reconnect-failed .reconnecting {
+    display: none;
+}
+
+.components-reconnect-show .connection-lost {
+    display: none;
+}
+
+.components-reconnect-failed .connection-lost {
+    display: block;
+}
