@@ -269,7 +269,7 @@ button.secondary, button .secondary {
 }
 
 .e-dialog.e-edit-dialog .e-dlg-header {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -278,7 +278,7 @@ button.secondary, button .secondary {
 }
 
 .e-dialog.e-edit-dialog .e-footer-content .e-btn {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 
