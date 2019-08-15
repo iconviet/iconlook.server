@@ -18,20 +18,20 @@
 <EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
     <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="Name">
+        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                    <div class="mt-1 d-flex align-items-center">
-                        <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                        <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
-                    </div>
+                        <div class="mt-1 d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Finance" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Node Resiliency" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -40,7 +40,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Business" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="App Development" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -49,7 +49,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Operation" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Content Creation" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -58,7 +58,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Marketing" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Community Active" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -67,7 +67,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Development" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="Ecosystem Focus" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -76,7 +76,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="148" HeaderText="Transactional" TextAlign="TextAlign.Center">
+        <GridColumn Width="148" HeaderText="TX Fee Generated" TextAlign="TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>

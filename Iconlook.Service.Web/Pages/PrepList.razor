@@ -68,15 +68,15 @@
 
             public TabAnimationSettings Animation = new TabAnimationSettings
             {
-                Next = new TabAnimationNext { Duration = 250 },
-                Previous = new TabAnimationPrevious { Duration = 250 }
+                Next = new TabAnimationNext { Duration = 500 },
+                Previous = new TabAnimationPrevious { Duration = 500 }
             };
 
         }
         <style>
             #preplist { min-height: 740px; }
         </style>
-        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm" EnablePersistence="true">
+        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Overview">
@@ -93,17 +93,17 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@ContributionStar">
+                <TabItem Header="@Competency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListContributionStarGrid></PrepListContributionStarGrid>
+                            <PrepListCompetencyGrid></PrepListCompetencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@ContributionChip">
+                <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListContributionChipGrid></PrepListContributionChipGrid>
+                            <PrepListContributionGrid></PrepListContributionGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
@@ -118,8 +118,8 @@
                 }
                 public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
                 public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
-                public TabHeader ContributionStar = new TabHeader { Text = "CONTRIBUTION" };
-                public TabHeader ContributionChip = new TabHeader { Text = "SCORE MATRIX" };
+                public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
+                public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
             }
         </EjsTab>
     </div>
