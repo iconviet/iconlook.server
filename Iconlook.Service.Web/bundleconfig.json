@@ -4,14 +4,14 @@
     "inputFiles": [
       "wwwroot/static/js/ej2-base.js",
       "wwwroot/static/js/ej2-lists.js",
-      "wwwroot/static/js/ej2-popups.js",
-      "wwwroot/static/js/ej2-navigations.js",
       "wwwroot/static/js/ej2-inputs.js",
       "wwwroot/static/js/ej2-buttons.js",
       "wwwroot/static/js/ej2-dropdowns.js",
       "wwwroot/static/js/ej2-splitbuttons.js",
+      "wwwroot/static/js/ej2-popups.js",
       "wwwroot/static/js/ej2-data.js",
       "wwwroot/static/js/ej2-grids.js",
+      "wwwroot/static/js/ej2-navigations.js",
       "wwwroot/static/js/ejs.interop.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
