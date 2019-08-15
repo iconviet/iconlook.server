@@ -1,7 +1,14 @@
-﻿<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-    <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+﻿@code {
+    [Parameter]
+    public string EditKey { get; set; }
+
+    public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
+}
+<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" EnableAltRow="true" EnableHover="false" AllowSelection="@CanEdit" GridLines="GridLine.Horizontal">
+    <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="@($"/api/v1.0/preps?take=100&edit={EditKey}")" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name">
+        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -13,6 +20,7 @@
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
             <Template>

@@ -1,7 +1,14 @@
-﻿<style>
+﻿@code {
+    [Parameter]
+    public string EditKey { get; set; }
+
+    public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
+}
+<style>
     .e-grid .e-rowcell {
         padding: 0 !important;
     }
+
     .e-chip-list.e-chip, .e-chip-list .e-chip {
         opacity: 0.9;
         padding: 0 11px;
@@ -11,10 +18,11 @@
         font-family: 'IBM Plex Mono' !important;
     }
 </style>
-<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" AllowSorting="false" EnableHover="false" EnableAltRow="true" AllowSelection="false" GridLines="GridLine.Horizontal">
-    <EjsDataManager Url="/api/v1.0/preps?take=100" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" EnableAltRow="true" EnableHover="false" AllowSelection="@CanEdit" GridLines="GridLine.Horizontal">
+    <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="@($"/api/v1.0/preps?take=100&edit={EditKey}")" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name">
+        <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -26,6 +34,7 @@
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
             <Template>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Agiper;
 using Agiper.Object;
 using Agiper.Server;
 using HtmlAgilityPack;
@@ -16,7 +17,7 @@ namespace Iconlook.Service.Api
         public async Task<object> Any(PrepListRequest request)
         {
             var cache = (CacheInfo) Request.GetItem(Keywords.CacheInfo);
-            cache.KeyBase = $"{Request.PathInfo}?take={Request.QueryString.Get("take")}";
+            cache.KeyBase = $"{Request.PathInfo}?take={Request.QueryString.Get("take")}&edit={Request.QueryString.Get("edit")}";
             if (await Request.HandleValidCache(cache))
             {
                 return null;
@@ -29,7 +30,7 @@ namespace Iconlook.Service.Api
                             from r in t.SelectNodes("tr")
                             select r;
                 var position = new Stack<int>(Enumerable.Range(1, query.Count()));
-                response = new ListResponse<PrepResponse>(query.Select(x => new PrepResponse
+                var result = query.Select(x => new PrepResponse
                 {
                     Position = position.Pop(),
                     Score = new Random().Next(-100, 100),
@@ -44,7 +45,13 @@ namespace Iconlook.Service.Api
                     UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Take(request.Take).Reverse().ToList());
+                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Take(request.Take).Reverse();
+                var id = Request.QueryString.Get("edit");
+                if (id.HasValue() && id != "all")
+                {
+                    result = result.Where(x => x.Id == id);
+                }
+                response = new ListResponse<PrepResponse>(result.ToList());
             }
             catch (Exception)
             {

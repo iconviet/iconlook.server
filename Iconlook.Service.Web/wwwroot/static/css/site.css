@@ -260,6 +260,29 @@ button.secondary, button .secondary {
 
 
 
+/* 
+    EJS-DIALOG
+*/
+.e-dialog.e-edit-dialog {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.e-dialog.e-edit-dialog .e-dlg-header {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.e-dialog.e-edit-dialog .e-footer-content {
+    padding: 20px;
+}
+
+.e-dialog.e-edit-dialog .e-footer-content .e-btn {
+    font-weight: bold;
+}
+
+
+
 /*
     EJS-GRID
 */

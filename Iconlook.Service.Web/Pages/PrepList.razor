@@ -1,13 +1,22 @@
 ﻿@page "/preps"
+@page "/preps/edit/{key}"
+@code {
+    [Parameter]
+    public string Key { get; set; }
+}
 <style type="text/css">
-    .e-grid { min-height: 700px; }
-
-    .e-grid .e-row { height: 42px; }
+    .e-grid {
+        min-height: 700px;
+    }
 
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
         padding-right: 20px !important;
+    }
+
+    .e-grid .e-row .e-selectionbackground {
+        background-color: yellow;
     }
 
     .e-grid .e-rowcell, .e-grid .e-headercell {
@@ -19,6 +28,13 @@
         padding-left: 20px !important;
         padding-right: 5px !important;
     }
+
+    .e-grid .e-row {
+        height: 42px;
+        cursor: @(Key == null ? "initial;" : "pointer;");
+        background-color: @(Key == null ? "initial;" : "rgb(255, 255, 227);");
+    }
+
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -65,16 +81,16 @@
 <div class="row mb-5">
     <div class="col">
         @code {
-
             public TabAnimationSettings Animation = new TabAnimationSettings
             {
                 Next = new TabAnimationNext { Duration = 500 },
                 Previous = new TabAnimationPrevious { Duration = 500 }
             };
-
         }
         <style>
-            #preplist { min-height: 740px; }
+            #preplist {
+                min-height: 740px;
+            }
         </style>
         <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
@@ -82,36 +98,36 @@
                 <TabItem Header="@Overview">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListOverviewGrid></PrepListOverviewGrid>
+                            <PrepListOverviewGrid EditKey="@Key"></PrepListOverviewGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Background">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListBackgroundGrid></PrepListBackgroundGrid>
+                            <PrepListBackgroundGrid EditKey="@Key"></PrepListBackgroundGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Competency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListCompetencyGrid></PrepListCompetencyGrid>
+                            <PrepListCompetencyGrid EditKey="@Key"></PrepListCompetencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 700px;">
-                            <PrepListContributionGrid></PrepListContributionGrid>
+                            <PrepListContributionGrid EditKey="@Key"></PrepListContributionGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
             </TabItems>
             @code{
-                public void Cancel(SelectingEventArgs args) 
+                public void Cancel(SelectingEventArgs args)
                 {
-                    if(args.IsSwiped)
+                    if (args.IsSwiped)
                     {
                         args.Cancel = true;
                     }
