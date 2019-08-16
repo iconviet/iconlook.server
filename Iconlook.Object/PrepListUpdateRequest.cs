@@ -5,7 +5,7 @@ namespace Iconlook.Object
 {
     // TODO: switch route to /prep
     [Route("/v1.0/preps", "PUT")]
-    public class PrepUpdateRequest : RequestBase<PrepUpdateRequest>, IGet
+    public class PrepListUpdateRequest : RequestBase<PrepListUpdateRequest>, IPut
     {
         public int Score { get; set; }
         public string Id { get; set; }

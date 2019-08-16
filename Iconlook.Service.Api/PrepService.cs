@@ -13,11 +13,11 @@ namespace Iconlook.Service.Api
 {
     public class PrepService : ServiceBase
     {
-        public void Put(PrepUpdateRequest request)
+        public void Put(PrepListUpdateRequest request)
         {
         }
 
-        //[CacheResponse(Duration = 60, MaxAge = 30)]
+        [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
             if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
