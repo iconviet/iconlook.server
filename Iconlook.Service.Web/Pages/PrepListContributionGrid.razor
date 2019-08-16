@@ -5,9 +5,7 @@
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
 <style>
-    .e-grid .e-rowcell {
-        padding: 0 !important;
-    }
+    .e-grid .e-rowcell { padding: 0 !important; }
 
     .e-chip-list.e-chip, .e-chip-list .e-chip {
         height: 25px;
@@ -45,7 +43,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
             <Template>
