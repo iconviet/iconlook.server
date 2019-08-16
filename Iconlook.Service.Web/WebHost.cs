@@ -23,7 +23,7 @@ namespace Iconlook.Service.Web
         public override RouteAttribute[] GetRouteAttributes(Type type)
         {
             var routes = base.GetRouteAttributes(type);
-            if (type.Namespace == "Iconlook.Message" && type.Name.EndsWith("Request"))
+            if (type.Namespace == "Iconlook.Object" && type.Name.EndsWith("Request"))
             {
                 routes.Each(x => x.Path = "/api" + x.Path);
             }

@@ -1,7 +1,7 @@
 ﻿using Agiper.Object;
 using ServiceStack;
 
-namespace Iconlook.Message
+namespace Iconlook.Object
 {
     // TODO: switch route to /prep
     [Route("/v1.0/preps", "PUT")]

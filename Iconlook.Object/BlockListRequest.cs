@@ -1,7 +1,7 @@
 ﻿using Agiper.Object;
 using ServiceStack;
 
-namespace Iconlook.Message
+namespace Iconlook.Object
 {
     [Route("/v1.0/blocks", "GET")]
     public class BlockListRequest : ListRequestBase<BlockListRequest, BlockResponse>, IGet

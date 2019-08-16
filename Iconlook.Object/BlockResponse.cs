@@ -1,6 +1,6 @@
 ﻿using Agiper.Object;
 
-namespace Iconlook.Message
+namespace Iconlook.Object
 {
     public class BlockResponse : ResponseBase<BlockResponse>
     {

@@ -1,7 +1,7 @@
 ﻿using Agiper.Object;
 using ServiceStack;
 
-namespace Iconlook.Message
+namespace Iconlook.Object
 {
     [Route("/v1.0/preps", "GET")]
     public class PrepListRequest : ListRequestBase<PrepListRequest, PrepResponse>, IGet

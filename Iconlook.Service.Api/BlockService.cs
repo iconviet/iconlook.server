@@ -2,7 +2,7 @@
 using System.Linq;
 using Agiper.Object;
 using Agiper.Server;
-using Iconlook.Message;
+using Iconlook.Object;
 using ServiceStack;
 
 namespace Iconlook.Service.Api

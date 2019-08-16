@@ -6,7 +6,7 @@ using Agiper;
 using Agiper.Object;
 using Agiper.Server;
 using HtmlAgilityPack;
-using Iconlook.Message;
+using Iconlook.Object;
 using ServiceStack;
 
 namespace Iconlook.Service.Api
