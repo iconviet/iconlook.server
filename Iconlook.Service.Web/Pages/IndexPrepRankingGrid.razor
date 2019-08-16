@@ -1,5 +1,11 @@
-﻿<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" RowHeight="40" EnableHover="false" EnableAltRow="false" AllowSelection="false" GridLines="GridLine.Horizontal">
-    <EjsDataManager Url="/api/v1.0/preps?take=13" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+﻿<EjsGrid
+         RowHeight="40"
+         EnableHover="false"
+         TValue="PrepResponse"
+         ModelType="PrepModelType"
+         GridLines="GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="11">
             <Template>

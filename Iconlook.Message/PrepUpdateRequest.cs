@@ -3,6 +3,7 @@ using ServiceStack;
 
 namespace Iconlook.Message
 {
+    // TODO: switch route to /prep
     [Route("/v1.0/preps", "PUT")]
     public class PrepUpdateRequest : RequestBase<PrepUpdateRequest>, IGet
     {

@@ -15,17 +15,20 @@ namespace Iconlook.Service.Api
     {
         public void Put(PrepUpdateRequest request)
         {
-            var cu = Request;
         }
 
         [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
-            var cache = (CacheInfo) Request.GetItem(Keywords.CacheInfo);
-            cache.KeyBase = $"{Request.PathInfo}?take={Request.QueryString.Get("take")}&edit={Request.QueryString.Get("edit")}";
-            if (await Request.HandleValidCache(cache))
+            if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
             {
-                return null;
+                cache.KeyBase = $"{Request.PathInfo}" +
+                                $"?take={Request.QueryString.Get("take")}" +
+                                $"&edit={Request.QueryString.Get("edit")}";
+                if (await Request.HandleValidCache(cache))
+                {
+                    return null;
+                }
             }
             var response = new ListResponse<PrepResponse>();
             try
