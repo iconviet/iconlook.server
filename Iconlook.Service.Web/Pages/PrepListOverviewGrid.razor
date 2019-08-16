@@ -4,193 +4,104 @@
 
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
-<style>
-    .fal.fa-star {
-        opacity: 0.75;
-        color: #ffdc85;
-    }
-    .fa-star:not(:last-child),
-    .fa-star-half-alt:not(:last-child) {
-        margin-right: 4px;
-    }
-
-    .fas.fa-star, .fas.fa-star-half-alt {
-        color: #eebf4a;
-    }
-</style>
-<EjsGrid        
-        EnableHover="false"
-        EnableAltRow="true"
-        TValue="PrepResponse"
-        AllowSelection="@CanEdit"
-        ModelType="PrepModelType"
-        GridLines="GridLine.Horizontal"
-        Query="@("new ej.data.Query()" +
-                 ".addParams('take', '22')" + 
-                 $".addParams('edit', '{EditKey}')")">
-    <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-    <GridColumns>
-        <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        if (prep.Direction)
+    <EjsGrid AllowPaging="true"
+             EnableHover="false"
+             EnableAltRow="true"
+             TValue="PrepResponse"
+             AllowSelection="@CanEdit"
+             ModelType="PrepModelType"
+             GridLines="GridLine.Horizontal"
+             Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+        <GridPageSettings PageSize="22"></GridPageSettings>
+        <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+        <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+        <GridColumns>
+            <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
                         {
-                            <i class="fas fa-caret-up positive-light" style="opacity: 0.75"></i>
-                        }
-                        else
-                        {
-                            <i class="fas fa-caret-down negative-light" style="opacity: 0.75"></i>
-                        }
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="40" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left" HeaderText="&nbsp;#" DisableHtmlEncode="false">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono">@prep.Position</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="210" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <div class="mt-1 d-flex align-items-center">
-                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
-                        </div>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <i class="far pb-1 fs-n2 fa-wifi positive-light"></i>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" HeaderText="<i class='far pr-2 fa-cube positive-dark'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.RejectedBlocks)" HeaderText="<i class='far pr-1 fa-cube negative-dark'></i>" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono">@prep.RejectedBlocks.ToString("N0")</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Center" Format="N0">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono">@prep.Voters.ToString("N0")</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 tx-light">ICX</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono tx-light">(@prep.SupplyPercentage.ToString("P2"))</span>
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="85" HeaderText="% 24h Chg" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        if (prep.UptimePercentage > 0)
-                        {
-                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P")</span>
-                        }
-                        if (prep.UptimePercentage < 0)
-                        {
-                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
-                        }
-                    }
-                }
-            </Template>
-            <EditTemplate />
-        </GridColumn>
-        <GridColumn Width="170" HeaderText="Competency  " TextAlign="TextAlign.Center">
-            <Template>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="fal fa-star"></i>
-                <i class="fal fa-star"></i>
-            </Template>
-        </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Left">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        if (prep.Score > 0)
-                        {
-                            <div class="bg-primary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
-                                <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 2px; padding-bottom: 2px;">
-                                <span class="fs-n1 ls-2 tx-light">--</span>
+                            <div class="mt-1 d-flex align-items-center">
+                                <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                                <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                             </div>
                         }
                     }
-                }
-            </Template>
-        </GridColumn>
-    </GridColumns>
-</EjsGrid>
+                </Template>
+                <EditTemplate />
+            </GridColumn>
+            <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <span>@prep.Location</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Background" TextAlign="TextAlign.Left">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <span>Development</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Team Size" TextAlign="TextAlign.Center">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <span>3</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Testnet" TextAlign="TextAlign.Left">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <span>102 days</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="TextAlign.Left">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <a class="primary" href="https://www.iconviet.io">iconviet.io</a>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="TextAlign.Center">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <a href="https://twitter.com"><img width="22" height="22" src="/static/images/twitter.png" /></a>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="TextAlign.Center">
+                <Template>
+                    @{
+                        if (context is PrepResponse prep)
+                        {
+                            <a href="https://t.me/iconviet"><img width="22" height="22" src="/static/images/telegram.png" /></a>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+        </GridColumns>
+    </EjsGrid>
 @code{
     public PrepResponse PrepModelType = new PrepResponse();
 }

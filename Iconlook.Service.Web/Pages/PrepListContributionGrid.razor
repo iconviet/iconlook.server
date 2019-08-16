@@ -10,24 +10,25 @@
     }
 
     .e-chip-list.e-chip, .e-chip-list .e-chip {
+        height: 25px;
         opacity: 0.9;
         padding: 0 11px;
         font-weight: 500;
+        border-radius: 13px;
         margin: 0 2px !important;
         font-size: 12px !important;
         font-family: 'IBM Plex Mono' !important;
     }
 </style>
-<EjsGrid        
-    EnableHover="false"
-    EnableAltRow="true"
-    TValue="PrepResponse"
-    AllowSelection="@CanEdit"
-    ModelType="PrepModelType"
-    GridLines="GridLine.Horizontal"
-    Query="@("new ej.data.Query()" +
-             ".addParams('take', '22')" + 
-             $".addParams('edit', '{EditKey}')")">
+<EjsGrid AllowPaging="true"
+         EnableHover="false"
+         EnableAltRow="true"
+         TValue="PrepResponse"
+         AllowSelection="@CanEdit"
+         ModelType="PrepModelType"
+         GridLines="GridLine.Horizontal"
+         Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+    <GridPageSettings PageSize="22"></GridPageSettings>
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
 
@@ -101,13 +102,13 @@
                     {
                         if (prep.Score > 0)
                         {
-                            <div class="bg-primary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
-                                <span class="mono font-weight-semibold" style="color: white; letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
+                            <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                                <span class="fs-n1 mono font-weight-bold" style="letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
                             </div>
                         }
                         else
                         {
-                            <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 2px; padding-bottom: 2px;">
+                            <div class="d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
                                 <span class="fs-n1 ls-2 tx-light">--</span>
                             </div>
                         }

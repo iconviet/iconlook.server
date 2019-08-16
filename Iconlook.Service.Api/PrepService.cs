@@ -17,13 +17,14 @@ namespace Iconlook.Service.Api
         {
         }
 
-        [CacheResponse(Duration = 60, MaxAge = 30)]
+        //[CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
             if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
             {
                 cache.KeyBase = $"{Request.PathInfo}" +
-                                $"?take={Request.QueryString.Get("take")}" +
+                                $"&skip={Request.QueryString.Get("skip")}" +
+                                $"&take={Request.QueryString.Get("take")}" +
                                 $"&edit={Request.QueryString.Get("edit")}";
                 if (await Request.HandleValidCache(cache))
                 {
@@ -51,15 +52,16 @@ namespace Iconlook.Service.Api
                     ProducedBlocks = new Random().Next(100000, 1000000),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
+                    SupplyPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').LastOrDefault().ToLower().ToTitleCase()
-                }.ThenDo(o => o.SupplyPercentage = (double) o.Votes / 490000000)).Distinct().OrderBy(x => x.Position).Take(request.Take).Reverse();
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase()
+                }).Distinct().OrderBy(x => x.Position).Reverse();
                 var id = Request.QueryString.Get("edit");
                 if (id.HasValue() && id != "all")
                 {
                     result = result.Where(x => x.Id == id);
                 }
-                response = new ListResponse<PrepResponse>(result.ToList());
+                response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList());
             }
             catch (Exception)
             {

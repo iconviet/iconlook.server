@@ -217,10 +217,6 @@ button.secondary, button .secondary {
     border: none;
 }
 
-.card .card-header .far {
-    color: #888888;
-}
-
 .card {
     overflow: hidden;
     border: solid 1px#e7eaee;
@@ -230,8 +226,14 @@ button.secondary, button .secondary {
     background-color: white;
 }
 
+.card .card-header .far,
+.card .card-header .fal,
+.card .card-header .fas {
+    color: #1aaaba !important;
+}
+
 .card .card-header {
-    color: #444444;
+    color: #888888;
     font-weight: bold;
     padding: 9px 12px;
     background-color: #fafafa;
@@ -298,6 +300,11 @@ button.secondary, button .secondary {
     font-size: inherit;
     border-color: #e7eaee;
     color: #111111 !important;
+}
+
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background-color: #1aaaba !important;
 }
 
 

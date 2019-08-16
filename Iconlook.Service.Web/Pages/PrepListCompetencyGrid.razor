@@ -18,16 +18,15 @@
         color: #eebf4a;
     }
 </style>
-<EjsGrid        
-    EnableHover="false"
-    EnableAltRow="true"
-    TValue="PrepResponse"
-    AllowSelection="@CanEdit"
-    ModelType="PrepModelType"
-    GridLines="GridLine.Horizontal"
-    Query="@("new ej.data.Query()" +
-             ".addParams('take', '22')" + 
-             $".addParams('edit', '{EditKey}')")">
+<EjsGrid AllowPaging="true"
+         EnableHover="false"
+         EnableAltRow="true"
+         TValue="PrepResponse"
+         AllowSelection="@CanEdit"
+         ModelType="PrepModelType"
+         GridLines="GridLine.Horizontal"
+         Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+    <GridPageSettings PageSize="22"></GridPageSettings>
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
 
