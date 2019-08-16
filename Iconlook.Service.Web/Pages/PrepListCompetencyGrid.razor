@@ -1,6 +1,12 @@
 ﻿@code {
     [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
     public string EditKey { get; set; }
+    
+    [Parameter]
+    public object PageSizes { get; set; }
 
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
@@ -23,7 +29,7 @@
          ModelType="PrepModelType"
          GridLines="GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="22"></GridPageSettings>
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
 
@@ -40,7 +46,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="148" HeaderText="Node Resiliency" TextAlign="TextAlign.Center">
             <Template>

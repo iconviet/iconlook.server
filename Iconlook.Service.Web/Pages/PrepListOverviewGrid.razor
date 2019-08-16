@@ -1,6 +1,12 @@
 ﻿@code {
     [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
     public string EditKey { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
 
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
@@ -12,7 +18,7 @@
          ModelType="PrepModelType"
          GridLines="GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="22"></GridPageSettings>
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
@@ -28,7 +34,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
             <Template>
@@ -86,7 +92,7 @@
                     if (context is PrepResponse prep)
                     {
                         <a href="https://twitter.com">
-                            <img width="22" height="22" src="/static/images/twitter.png"/>
+                            <img width="22" height="22" src="/static/images/twitter.png" />
                         </a>
                     }
                 }
@@ -98,7 +104,7 @@
                     if (context is PrepResponse prep)
                     {
                         <a href="https://t.me/iconviet">
-                            <img width="22" height="22" src="/static/images/telegram.png"/>
+                            <img width="22" height="22" src="/static/images/telegram.png" />
                         </a>
                     }
                 }

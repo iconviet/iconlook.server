@@ -1,6 +1,10 @@
 ﻿@page "/preps"
 @page "/preps/edit/{key}"
 @code {
+    private const int SIZE = 22;
+
+    private readonly object _sizes = new[] { 22, 50, 100 };
+
     [Parameter]
     public string Key { get; set; }
 }
@@ -77,13 +81,27 @@
 <div class="row mb-5">
     <div class="col">
         @code {
-
             public TabAnimationSettings Animation = new TabAnimationSettings
             {
                 Next = new TabAnimationNext { Duration = 500 },
                 Previous = new TabAnimationPrevious { Duration = 500 }
             };
 
+            public TabHeader Status = new TabHeader { Text = "STATUS" };
+
+            public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
+
+            public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
+
+            public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+
+            public void Cancel(SelectingEventArgs args)
+            {
+                if (args.IsSwiped)
+                {
+                    args.Cancel = true;
+                }
+            }
         }
         <style>
             #preplist { min-height: 740px; }
@@ -94,47 +112,32 @@
                 <TabItem Header="@Status">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListStatusGrid EditKey="@Key"></PrepListStatusGrid>
+                            <PrepListStatusGrid EditKey="@Key" PageSize="@SIZE" PageSizes="@_sizes"></PrepListStatusGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Overview">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListOverviewGrid EditKey="@Key"></PrepListOverviewGrid>
+                            <PrepListOverviewGrid EditKey="@Key"  PageSize="@SIZE" PageSizes="@_sizes"></PrepListOverviewGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Competency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListCompetencyGrid EditKey="@Key"></PrepListCompetencyGrid>
+                            <PrepListCompetencyGrid EditKey="@Key"  PageSize="@SIZE" PageSizes="@_sizes"></PrepListCompetencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListContributionGrid EditKey="@Key"></PrepListContributionGrid>
+                            <PrepListContributionGrid EditKey="@Key" PageSize="@SIZE" PageSizes="@_sizes"></PrepListContributionGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
             </TabItems>
-            @code{
-
-                public void Cancel(SelectingEventArgs args)
-                {
-                    if (args.IsSwiped)
-                    {
-                        args.Cancel = true;
-                    }
-                }
-
-                public TabHeader Status = new TabHeader { Text = "STATUS" };
-                public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
-                public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
-                public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-            }
         </EjsTab>
     </div>
 </div>
