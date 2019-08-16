@@ -84,13 +84,12 @@ namespace Iconlook.Service.Web
                 application.UseStaticFiles();
                 application.Use((context, next) =>
                 {
-                    var request = context.Request;
                     if (context.Request.Path.StartsWithSegments("/api"))
                     {
-                        var query = QueryHelpers.ParseQuery(request.QueryString.Value);
+                        var query = QueryHelpers.ParseQuery(context.Request.QueryString.Value);
                         var builder = new QueryBuilder(query.SelectMany(x => x.Value, (x, y) =>
                             new KeyValuePair<string, string>(x.Key.Replace("$", string.Empty).Replace("top", "take"), y)));
-                        request.QueryString = builder.ToQueryString();
+                        context.Request.QueryString = builder.ToQueryString();
                     }
                     return next();
                 });

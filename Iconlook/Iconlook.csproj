@@ -8,7 +8,7 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
 <ItemGroup>
-  <PackageReference Include="Iconlook.Object" Version="0.1.0-master-2280419" />
+  <PackageReference Include="Agiper.Object" Version="1.0.2-master-2280915" />
   <PackageReference Include="ServiceStack.Text" Version="5.6.0" />
 </ItemGroup>
 </Project>

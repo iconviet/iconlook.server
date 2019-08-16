@@ -56,12 +56,16 @@ namespace Iconlook.Service.Api
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase()
                 }).Distinct().OrderBy(x => x.Position).Reverse();
-                var id = Request.QueryString.Get("edit");
-                if (id.HasValue() && id != "all")
+                if (Request.QueryString.Get("edit") is string id && id.HasValue() && id != "all")
                 {
                     result = result.Where(x => x.Id == id);
                 }
-                response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList());
+                response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList())
+                {
+                    Skip = request.Skip,
+                    Take = request.Take,
+                    Count = query.Count()
+                };
             }
             catch (Exception)
             {
