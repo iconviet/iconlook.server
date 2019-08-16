@@ -1,12 +1,14 @@
 ﻿@page "/preps"
+@page "/preps/{size:int}"
 @page "/preps/edit/{key}"
 @code {
-    private const int SIZE = 22;
-
-    private readonly object _sizes = new[] { 22, 50, 100 };
-
     [Parameter]
     public string Key { get; set; }
+    
+    [Parameter]
+    public int Size { get; set; } = 22;
+
+    public object Sizes { get; } = new[] { 22, 50, 100 };
 }
 <style type="text/css">
     .e-grid { min-height: 700px; }
@@ -81,11 +83,13 @@
 <div class="row mb-5">
     <div class="col">
         @code {
-            public TabAnimationSettings Animation = new TabAnimationSettings
+            public void Cancel(SelectingEventArgs args)
             {
-                Next = new TabAnimationNext { Duration = 500 },
-                Previous = new TabAnimationPrevious { Duration = 500 }
-            };
+                if (args.IsSwiped)
+                {
+                    args.Cancel = true;
+                }
+            }
 
             public TabHeader Status = new TabHeader { Text = "STATUS" };
 
@@ -94,46 +98,40 @@
             public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
 
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-
-            public void Cancel(SelectingEventArgs args)
-            {
-                if (args.IsSwiped)
-                {
-                    args.Cancel = true;
-                }
-            }
         }
         <style>
-            #preplist { min-height: 740px; }
+            #preplist {
+                min-height: 740px;
+            }
         </style>
-        <EjsTab ID="preplist" Animation="Animation" CssClass="card shadow-sm">
+        <EjsTab ID="preplist" CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Status">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListStatusGrid EditKey="@Key" PageSize="@SIZE" PageSizes="@_sizes"></PrepListStatusGrid>
+                            <PrepListStatusGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListStatusGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Overview">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListOverviewGrid EditKey="@Key"  PageSize="@SIZE" PageSizes="@_sizes"></PrepListOverviewGrid>
+                            <PrepListOverviewGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListOverviewGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Competency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListCompetencyGrid EditKey="@Key"  PageSize="@SIZE" PageSizes="@_sizes"></PrepListCompetencyGrid>
+                            <PrepListCompetencyGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListCompetencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListContributionGrid EditKey="@Key" PageSize="@SIZE" PageSizes="@_sizes"></PrepListContributionGrid>
+                            <PrepListContributionGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListContributionGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
