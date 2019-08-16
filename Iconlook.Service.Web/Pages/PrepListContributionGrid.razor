@@ -18,9 +18,19 @@
         font-family: 'IBM Plex Mono' !important;
     }
 </style>
-<EjsGrid TValue="PrepResponse" ModelType="PrepModelType" EnableAltRow="true" EnableHover="false" AllowSelection="@CanEdit" GridLines="GridLine.Horizontal">
+<EjsGrid        
+    EnableHover="false"
+    EnableAltRow="true"
+    TValue="PrepResponse"
+    AllowSelection="@CanEdit"
+    ModelType="PrepModelType"
+    GridLines="GridLine.Horizontal"
+    Query="@("new ej.data.Query()" +
+             ".addParams('take', '100')" + 
+             $".addParams('edit', '{EditKey}')")">
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="@($"/api/v1.0/preps?take=100&edit={EditKey}")" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+
     <GridColumns>
         <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <Template>
@@ -84,7 +94,7 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score&nbsp;&nbsp;" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score  " TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Left" DisableHtmlEncode="false">
             <Template>
                 @{
                     if (context is PrepResponse prep)
