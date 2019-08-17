@@ -110,7 +110,7 @@
                 <TabItem Header="@Summary">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListSummaryGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListSummaryGrid>
+                            <PrepListSummaryGrid EditKey="@Key" PageSize="@Size" PageSizes="@(Key == "all" ? Sizes : false)"></PrepListSummaryGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
