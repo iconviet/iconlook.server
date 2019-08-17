@@ -11,9 +11,7 @@
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
 <style>
-    .e-grid .e-rowcell {
-        padding: 0 !important;
-    }
+    .e-grid .e-rowcell { padding: 0 !important; }
 
     .e-chip-list.e-chip, .e-chip-list .e-chip {
         height: 25px;
@@ -53,7 +51,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
             <Template>
@@ -103,7 +101,10 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score  " TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Left" DisableHtmlEncode="false">
+        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="Score" TextAlign="TextAlign.Right">
+            <HeaderTemplate>
+                <div class="pr-2">Score&nbsp;</div>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)

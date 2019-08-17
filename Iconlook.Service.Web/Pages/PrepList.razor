@@ -4,7 +4,7 @@
 @code {
     [Parameter]
     public string Key { get; set; }
-    
+
     [Parameter]
     public int Size { get; set; } = 22;
 
@@ -83,6 +83,7 @@
 <div class="row mb-5">
     <div class="col">
         @code {
+
             public void Cancel(SelectingEventArgs args)
             {
                 if (args.IsSwiped)
@@ -100,9 +101,7 @@
             public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
         }
         <style>
-            #preplist {
-                min-height: 740px;
-            }
+            #preplist { min-height: 740px; }
         </style>
         <EjsTab ID="preplist" CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>

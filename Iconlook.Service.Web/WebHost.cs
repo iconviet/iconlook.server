@@ -34,8 +34,8 @@ namespace Iconlook.Service.Web
 
         protected override void OnStart()
         {
-            BackgroundJob.Enqueue<BlockProductionJob>(x => x.Run());
-            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), Cron.Minutely());
+            BackgroundJob.Enqueue<BlockProductionStatusJob>(x => x.Run());
+            RecurringJob.AddOrUpdate<BlockProductionStatusJob>(x => x.Run(), Cron.Minutely());
         }
     }
 }

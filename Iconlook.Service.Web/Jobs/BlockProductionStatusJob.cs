@@ -3,11 +3,11 @@ using Agiper.Server;
 
 namespace Iconlook.Service.Web.Jobs
 {
-    public class BlockProductionJob : JobBase
+    public class BlockProductionStatusJob : JobBase
     {
         public void Run()
         {
-            Console.WriteLine("Block Production Monitor Job Ran.");
+            Console.WriteLine("Block Production Status Job Ran.");
         }
     }
 }

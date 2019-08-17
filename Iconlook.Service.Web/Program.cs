@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Agiper;
-using Iconlook.Server;
+using Agiper.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -24,7 +24,7 @@ namespace Iconlook.Service.Web
     {
         public static async Task Main()
         {
-            ConfigureServices = (host, services) =>
+            ConfigureServices = host => services =>
             {
                 services.AddRazorPages();
                 services.AddResponseCaching();
@@ -68,7 +68,7 @@ namespace Iconlook.Service.Web
                     services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection_string);
                 }
             };
-            ConfigureApplication = (host, application) =>
+            ConfigureApplication = host => application =>
             {
                 if (host.Environment != Environment.Localhost)
                 {
@@ -101,9 +101,10 @@ namespace Iconlook.Service.Web
                     x.MapBlazorHub();
                     x.MapFallbackToPage("/_Host");
                 });
+                ConfigureApplicationDefault(host, application); // TODO: Remove this
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMjdLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
-            await StartAsync<WebHost>(80);
+            await StartAsync(new WebHost(), 80);
         }
     }
 }
