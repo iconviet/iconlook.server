@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Agiper.Server;
-using Serilog.Events;
 
 namespace Iconlook.Server
 {
@@ -12,8 +11,8 @@ namespace Iconlook.Server
 
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
-            LogEventLevel = LogEventLevel.Information;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
+            HangfireJobPersistence = HangfireJobPersistence.Redis;
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;
         }
     }

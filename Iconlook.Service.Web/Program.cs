@@ -4,8 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Agiper;
-using Agiper.Server;
-using Hangfire;
+using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -25,10 +24,10 @@ namespace Iconlook.Service.Web
     {
         public static async Task Main()
         {
-            ConfigureServices = host => services =>
+            ConfigureServices = (host, services) =>
             {
                 services.AddRazorPages();
-                services.AddHangfire(x => { });
+                services.AddResponseCaching();
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
                 services.Configure<KestrelServerOptions>(options =>
@@ -69,7 +68,7 @@ namespace Iconlook.Service.Web
                     services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection_string);
                 }
             };
-            Configure = host => application =>
+            ConfigureApplication = (host, application) =>
             {
                 if (host.Environment != Environment.Localhost)
                 {
@@ -81,6 +80,7 @@ namespace Iconlook.Service.Web
                 }
                 application.UseForwardedHeaders();
                 application.UseResponseCompression();
+                application.UseResponseCaching();
                 application.UseStaticFiles();
                 application.Use((context, next) =>
                 {
@@ -103,7 +103,7 @@ namespace Iconlook.Service.Web
                 });
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMjdLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
-            await StartAsync(new WebHost(), 80);
+            await StartAsync<WebHost>(80);
         }
     }
 }

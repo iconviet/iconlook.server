@@ -1,7 +1,9 @@
 ﻿using System;
 using Funq;
+using Hangfire;
 using Iconlook.Server;
 using Iconlook.Service.Api;
+using Iconlook.Service.Web.Jobs;
 using ServiceStack;
 
 namespace Iconlook.Service.Web
@@ -28,6 +30,12 @@ namespace Iconlook.Service.Web
                 routes.Each(x => x.Path = "/api" + x.Path);
             }
             return routes;
+        }
+
+        protected override void OnStart()
+        {
+            BackgroundJob.Enqueue<BlockProductionJob>(x => x.Run());
+            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), Cron.Minutely());
         }
     }
 }
