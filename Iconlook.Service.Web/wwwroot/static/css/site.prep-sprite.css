@@ -15,7 +15,7 @@
 .prep-96, .prep-97, .prep-98, .prep-99 {
     max-width: 100%;
     background-size: 100%;
-    background-image: url('../images/prep-sprite.png');
+    background-image: url('../images/prep-sprite.png?v=66');
 }
 
 .prep-100 {
