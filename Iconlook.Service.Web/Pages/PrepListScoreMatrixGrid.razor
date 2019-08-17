@@ -15,13 +15,28 @@
 
     .e-chip-list.e-chip, .e-chip-list .e-chip {
         height: 25px;
-        opacity: 0.9;
         padding: 0 11px;
         font-weight: 500;
         border-radius: 13px;
         font-size: 12px !important;
         margin: 0 2px 1px 2px !important;
         font-family: 'IBM Plex Mono' !important;
+    }
+
+    .finance {
+        background-color: rgba(193, 87, 0, 0.25) !important;
+    }
+
+    .business {
+        background-color: rgba(227, 22, 91, 0.25) !important;
+    }
+
+    .awareness {
+        background-color: rgba(77, 132, 29, 0.25) !important;
+    }
+
+    .development {
+        background-color: rgba(3, 120, 213, 0.25) !important;
     }
 </style>
 <EjsGrid AllowPaging="true"
@@ -57,10 +72,10 @@
             <Template>
                 <EjsChipList>
                     <ChipCollection>
-                        <ChipListChip Text="D1A" CssClass="e-info"></ChipListChip>
-                        <ChipListChip Text="D1B" CssClass="e-info"></ChipListChip>
-                        <ChipListChip Text="D2A" CssClass="e-info"></ChipListChip>
-                        <ChipListChip Text="D3A" CssClass="e-info"></ChipListChip>
+                        <ChipListChip Text="D1A" CssClass="development"></ChipListChip>
+                        <ChipListChip Text="D1B" CssClass="development"></ChipListChip>
+                        <ChipListChip Text="D2A" CssClass="development"></ChipListChip>
+                        <ChipListChip Text="D3A" CssClass="development"></ChipListChip>
                     </ChipCollection>
                 </EjsChipList>
             </Template>
@@ -69,10 +84,10 @@
             <Template>
                 <EjsChipList>
                     <ChipCollection>
-                        <ChipListChip Text="A1A" CssClass="e-success"></ChipListChip>
-                        <ChipListChip Text="A1B" CssClass="e-success"></ChipListChip>
-                        <ChipListChip Text="A2A" CssClass="e-success"></ChipListChip>
-                        <ChipListChip Text="A3A" CssClass="e-success"></ChipListChip>
+                        <ChipListChip Text="A1A" CssClass="awareness"></ChipListChip>
+                        <ChipListChip Text="A1B" CssClass="awareness"></ChipListChip>
+                        <ChipListChip Text="A2A" CssClass="awareness"></ChipListChip>
+                        <ChipListChip Text="A3A" CssClass="awareness"></ChipListChip>
                     </ChipCollection>
                 </EjsChipList>
             </Template>
@@ -81,10 +96,10 @@
             <Template>
                 <EjsChipList>
                     <ChipCollection>
-                        <ChipListChip Text="B1A" CssClass="e-primary"></ChipListChip>
-                        <ChipListChip Text="B1B" CssClass="e-primary"></ChipListChip>
-                        <ChipListChip Text="B2A" CssClass="e-primary"></ChipListChip>
-                        <ChipListChip Text="B3A" CssClass="e-primary"></ChipListChip>
+                        <ChipListChip Text="B1A" CssClass="business"></ChipListChip>
+                        <ChipListChip Text="B1B" CssClass="business"></ChipListChip>
+                        <ChipListChip Text="B2A" CssClass="business"></ChipListChip>
+                        <ChipListChip Text="B3A" CssClass="business"></ChipListChip>
                     </ChipCollection>
                 </EjsChipList>
             </Template>
@@ -93,10 +108,10 @@
             <Template>
                 <EjsChipList>
                     <ChipCollection>
-                        <ChipListChip Text="F1A" CssClass="e-warning"></ChipListChip>
-                        <ChipListChip Text="F1B" CssClass="e-warning"></ChipListChip>
-                        <ChipListChip Text="F2A" CssClass="e-warning"></ChipListChip>
-                        <ChipListChip Text="F3A" CssClass="e-warning"></ChipListChip>
+                        <ChipListChip Text="F1A" CssClass="finance"></ChipListChip>
+                        <ChipListChip Text="F1B" CssClass="finance"></ChipListChip>
+                        <ChipListChip Text="F2A" CssClass="finance"></ChipListChip>
+                        <ChipListChip Text="F3A" CssClass="finance"></ChipListChip>
                     </ChipCollection>
                 </EjsChipList>
             </Template>
