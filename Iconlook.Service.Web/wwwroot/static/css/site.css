@@ -47,34 +47,42 @@ header {
 
 .special {
     color: #e3165b !important;
+    border-color: #e3165b !important;
 }
 
 .primary {
     color: #1aaaba !important;
-}
-
-.positive-darkest {
-    color: seagreen !important;
-}
-
-.positive-dark {
-    color: mediumseagreen !important;
-}
-
-.negative-dark {
-    color: rgb(180, 0, 0) !important;
-}
-
-.positive-light {
-    color: limegreen !important;
-}
-
-.negative-light {
-    color: red !important;
+    border-color: #1aaaba !important;
 }
 
 .secondary {
     color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.positive-darkest {
+    color: seagreen !important;
+    border-color: seagreen !important;
+}
+
+.positive-dark {
+    color: mediumseagreen !important;
+    border-color: mediumseagreen !important;
+}
+
+.negative-dark {
+    color: rgb(180, 0, 0) !important;
+    border-color: rgb(180, 0, 0) !important;
+}
+
+.positive-light {
+    color: limegreen !important;
+    border-color: limegreen !important;
+}
+
+.negative-light {
+    color: red !important;
+    border-color: red !important;
 }
 
 .bg-primary {

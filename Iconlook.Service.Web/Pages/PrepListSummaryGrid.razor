@@ -107,7 +107,7 @@
         </GridColumn>
         <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
-                <i class='far pr-2 fa-cube positive-dark'></i>
+                <i style="padding: 4px; opacity: 0.5;" class="far fs-n1 fa-cube border rounded-circle positive-dark"></i>
             </HeaderTemplate>
             <Template>
                 @{
@@ -121,7 +121,7 @@
         </GridColumn>
         <GridColumn Width="70" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
-                <i class='far pr-1 fa-cube negative-dark'></i>
+                <i style="padding: 4px; opacity: 0.5;" class="far fs-n1 fa-cube border rounded-circle negative-dark"></i>
             </HeaderTemplate>
             <Template>
                 @{
@@ -146,7 +146,7 @@
         </GridColumn>
         <GridColumn Width="115" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
             <HeaderTemplate>
-                <div class="pr-2">ICX Staked</div>
+                <div class="pr-2">ICX Staked&nbsp;&nbsp;</div>
             </HeaderTemplate>
             <Template>
                 @{
