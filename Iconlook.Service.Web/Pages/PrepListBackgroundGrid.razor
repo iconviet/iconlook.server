@@ -23,6 +23,9 @@
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="215" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+            <HeaderTemplate>
+                <span><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep Name</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -37,6 +40,9 @@
             <EditTemplate />
         </GridColumn>
         <GridColumn Width="120" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
+            <HeaderTemplate>
+                <span>Location<i class='far pl-2 fa-map-marker-alt'></i></span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -76,12 +82,15 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Hosting On" TextAlign="TextAlign.Center">
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Hosting" TextAlign="TextAlign.Center">
+            <HeaderTemplate>
+                <span><i class='fal pr-2 fal fa-cloud'></i>Hosting</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span>Bare Metal</span>
+                        <span>AWS, GCC</span>
                     }
                 }
             </Template>
@@ -96,7 +105,10 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="88" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='far fs-1 pr-2 fa-globe'></i>Website" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="88" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+            <HeaderTemplate>
+                <span><i class='far pr-2 fa-globe'></i>Website</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -106,7 +118,10 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='fab fs-1 pr-2 fa-twitter'></i>Twitter" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+            <HeaderTemplate>
+                <span><i class='fab pr-2 fa-twitter'></i>Twitter</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -116,7 +131,10 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='fab fs-1 pr-2 fa-telegram'></i>Telegram" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+        <GridColumn Width="105" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
+            <HeaderTemplate>
+                <span><i class='fab pr-2 fa-telegram'></i>Telegram</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)

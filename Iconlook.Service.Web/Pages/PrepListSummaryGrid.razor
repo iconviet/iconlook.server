@@ -37,7 +37,7 @@
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="28" HeaderText="⇵" TextAlign="TextAlign.Center">
+        <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -55,10 +55,10 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="40" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left" HeaderText="&nbsp;#" DisableHtmlEncode="false">
+        <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
                 @{
-                    if (context is PrepResponse prep)
+                    if (context is PrepResponse prep)   
                     {
                         <span class="mono">@prep.Position</span>
                     }
@@ -67,6 +67,9 @@
             <EditTemplate />
         </GridColumn>
         <GridColumn Width="210" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+            <HeaderTemplate>
+                <span><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep Name</span>
+            </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)

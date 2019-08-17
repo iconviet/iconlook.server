@@ -16,6 +16,7 @@ namespace Iconlook.Service.Api
     {
         public void Put(PrepListUpdateRequest request)
         {
+            Log.Information("Update", request);
         }
 
         // [CacheResponse(Duration = 60, MaxAge = 30)]

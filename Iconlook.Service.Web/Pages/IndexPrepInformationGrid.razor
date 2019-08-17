@@ -7,7 +7,7 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="11">
+        <GridColumn Width="14">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -24,7 +24,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="32" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
+        <GridColumn Width="38" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="195" HeaderText="P-Rep Name">
+        <GridColumn Width="186" HeaderText="P-Rep Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
