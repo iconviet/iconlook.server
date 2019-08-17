@@ -7,6 +7,7 @@ using Agiper.Object;
 using Agiper.Server;
 using HtmlAgilityPack;
 using Iconlook.Object;
+using Serilog;
 using ServiceStack;
 
 namespace Iconlook.Service.Api
@@ -17,7 +18,7 @@ namespace Iconlook.Service.Api
         {
         }
 
-        [CacheResponse(Duration = 60, MaxAge = 30)]
+        // [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
             if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
@@ -58,17 +59,26 @@ namespace Iconlook.Service.Api
                 }).Distinct().OrderBy(x => x.Position).Reverse();
                 if (Request.QueryString.Get("edit") is string id && id.HasValue() && id != "all")
                 {
-                    result = result.Where(x => x.Id == id);
+                    response = new ListResponse<PrepResponse>(result.Where(x => x.Id == id).ToList())
+                    {
+                        Skip = 0,
+                        Take = 1,
+                        Count = 1
+                    };
                 }
-                response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList())
+                else
                 {
-                    Skip = request.Skip,
-                    Take = request.Take,
-                    Count = query.Count()
-                };
+                    response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList())
+                    {
+                        Skip = request.Skip,
+                        Take = request.Take,
+                        Count = query.Count()
+                    };
+                }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Log.Error(exception, exception.Message);
             }
             return response;
         }

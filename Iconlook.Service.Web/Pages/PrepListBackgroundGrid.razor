@@ -22,7 +22,7 @@
     <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+        <GridColumn Width="215" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -36,7 +36,7 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="150" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
+        <GridColumn Width="140" Field="@nameof(PrepResponse.Location)" HeaderText="Location" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -46,7 +46,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Background" TextAlign="TextAlign.Left">
+        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Expertise" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -56,56 +56,72 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Team Size" TextAlign="TextAlign.Center">
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Team Size" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span>3</span>
+                        <span>3 </span><span class=" tx-light">people</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Testnet" TextAlign="TextAlign.Left">
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Team Identity" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span>102 days</span>
+                        <span>Anonymous</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="TextAlign.Left">
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Infrastructure" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a class="primary" href="https://www.iconviet.io">iconviet.io</a>
+                        <span>Bare Metal</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="TextAlign.Center">
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Testnet Phase" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a href="https://twitter.com">
-                            <img width="22" height="22" src="/static/images/twitter.png" />
-                        </a>
+                        <span>Phase 1, 2</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="TextAlign.Center">
+        <GridColumn Width="88" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='far fs-1 pr-2 fa-globe'></i>Website" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a href="https://t.me/iconviet">
-                            <img width="22" height="22" src="/static/images/telegram.png" />
-                        </a>
+                        <a class="primary tx-condensed" href="https://www.iconviet.io">iconviet.io</a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="88" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='fab fs-1 pr-2 fa-twitter'></i>Twitter" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary tx-condensed" href="https://twitter.com/iconviet">iconviet</a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="97" Field="@nameof(PrepResponse.Location)" HeaderText="<i class='fab fs-1 pr-2 fa-telegram'></i>Telegram" TextAlign="TextAlign.Center" DisableHtmlEncode="false">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary tx-condensed" href="https://t.me/iconviet">iconviet</a>
                     }
                 }
             </Template>

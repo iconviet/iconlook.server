@@ -91,9 +91,9 @@
                 }
             }
 
-            public TabHeader Status = new TabHeader { Text = "STATUS" };
+            public TabHeader Summary = new TabHeader { Text = "SUMMARY" };
 
-            public TabHeader Overview = new TabHeader { Text = "OVERVIEW" };
+            public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
 
             public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
 
@@ -107,17 +107,17 @@
         <EjsTab ID="preplist" CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
-                <TabItem Header="@Status">
+                <TabItem Header="@Summary">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListStatusGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListStatusGrid>
+                            <PrepListSummaryGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListSummaryGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Overview">
+                <TabItem Header="@Background">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListOverviewGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListOverviewGrid>
+                            <PrepListBackgroundGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
