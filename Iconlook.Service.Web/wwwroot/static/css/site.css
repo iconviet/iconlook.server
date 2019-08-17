@@ -65,9 +65,19 @@ header {
     border-color: seagreen !important;
 }
 
+.bg-positive-darkest {
+    color: white !important;
+    background-color: seagreen !important;
+}
+
 .positive-dark {
     color: mediumseagreen !important;
     border-color: mediumseagreen !important;
+}
+
+.bg-positive-dark {
+    color: white !important;
+    background-color: mediumseagreen !important;
 }
 
 .negative-dark {
@@ -75,9 +85,19 @@ header {
     border-color: rgb(180, 0, 0) !important;
 }
 
+.bg-negative-dark {
+    color: white !important;
+    background-color: rgb(180, 0, 0) !important;
+}
+
 .positive-light {
     color: limegreen !important;
     border-color: limegreen !important;
+}
+
+.bg-positive-light {
+    color: white !important;
+    background-color: limegreen !important;
 }
 
 .negative-light {
@@ -86,6 +106,7 @@ header {
 }
 
 .bg-primary {
+    color: white !important;
     background-color: #1aaaba !important;
 }
 
