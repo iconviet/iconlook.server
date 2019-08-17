@@ -95,9 +95,9 @@
 
             public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
 
-            public TabHeader Competency = new TabHeader { Text = "COMPETENCY" };
-
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+
+            public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
         }
         <style>
             #preplist {
@@ -121,17 +121,17 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Competency">
-                    <ContentTemplate>
-                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListCompetencyGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListCompetencyGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
                 <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
                             <PrepListContributionGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListContributionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@ScoreMatrix">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <PrepListScoreMatrixGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListScoreMatrixGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>

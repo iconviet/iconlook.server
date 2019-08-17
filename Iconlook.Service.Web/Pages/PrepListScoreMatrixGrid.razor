@@ -1,0 +1,129 @@
+﻿@code {
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public string EditKey { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
+
+    public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
+}
+<style>
+    .e-grid .e-rowcell {
+        padding: 0 !important;
+    }
+
+    .e-chip-list.e-chip, .e-chip-list .e-chip {
+        height: 25px;
+        opacity: 0.9;
+        padding: 0 11px;
+        font-weight: 500;
+        border-radius: 13px;
+        font-size: 12px !important;
+        margin: 0 2px 1px 2px !important;
+        font-family: 'IBM Plex Mono' !important;
+    }
+</style>
+<EjsGrid AllowPaging="true"
+         EnableHover="false"
+         EnableAltRow="true"
+         TValue="PrepResponse"
+         AllowSelection="@CanEdit"
+         ModelType="PrepModelType"
+         GridLines="GridLine.Horizontal"
+         Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+
+    <GridColumns>
+        <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <div class="mt-1 d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.Id rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
+                    }
+                }
+            </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
+            <Template>
+                <EjsChipList>
+                    <ChipCollection>
+                        <ChipListChip Text="D1A" CssClass="e-info"></ChipListChip>
+                        <ChipListChip Text="D1B" CssClass="e-info"></ChipListChip>
+                        <ChipListChip Text="D2A" CssClass="e-info"></ChipListChip>
+                        <ChipListChip Text="D3A" CssClass="e-info"></ChipListChip>
+                    </ChipCollection>
+                </EjsChipList>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Awareness" TextAlign="TextAlign.Center">
+            <Template>
+                <EjsChipList>
+                    <ChipCollection>
+                        <ChipListChip Text="A1A" CssClass="e-success"></ChipListChip>
+                        <ChipListChip Text="A1B" CssClass="e-success"></ChipListChip>
+                        <ChipListChip Text="A2A" CssClass="e-success"></ChipListChip>
+                        <ChipListChip Text="A3A" CssClass="e-success"></ChipListChip>
+                    </ChipCollection>
+                </EjsChipList>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Business" TextAlign="TextAlign.Center">
+            <Template>
+                <EjsChipList>
+                    <ChipCollection>
+                        <ChipListChip Text="B1A" CssClass="e-primary"></ChipListChip>
+                        <ChipListChip Text="B1B" CssClass="e-primary"></ChipListChip>
+                        <ChipListChip Text="B2A" CssClass="e-primary"></ChipListChip>
+                        <ChipListChip Text="B3A" CssClass="e-primary"></ChipListChip>
+                    </ChipCollection>
+                </EjsChipList>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Finance" TextAlign="TextAlign.Center">
+            <Template>
+                <EjsChipList>
+                    <ChipCollection>
+                        <ChipListChip Text="F1A" CssClass="e-warning"></ChipListChip>
+                        <ChipListChip Text="F1B" CssClass="e-warning"></ChipListChip>
+                        <ChipListChip Text="F2A" CssClass="e-warning"></ChipListChip>
+                        <ChipListChip Text="F3A" CssClass="e-warning"></ChipListChip>
+                    </ChipCollection>
+                </EjsChipList>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="C.Score  " TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Left" DisableHtmlEncode="false">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        if (prep.Score > 0)
+                        {
+                            <div class="bg-secondary d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                                <span class="fs-n1 mono font-weight-bold" style="letter-spacing: 0.5px;">@prep.Score.ToString("N0")</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-inline-block rounded-pill text-center" style="width: 48px; padding-top: 3px; padding-bottom: 3px;">
+                                <span class="fs-n1 ls-2 tx-light">--</span>
+                            </div>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>
+@code{
+    public PrepResponse PrepModelType = new PrepResponse();
+}
