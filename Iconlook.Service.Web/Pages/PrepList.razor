@@ -11,6 +11,10 @@
     public object Sizes { get; } = new[] { 22, 50, 100 };
 }
 <style type="text/css">
+    .main.card {
+        min-height: 740px;
+    }
+
     .e-grid { min-height: 700px; }
 
     .e-grid .e-rowcell:last-child,
@@ -99,10 +103,7 @@
 
             public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
         }
-        <style>
-            #ejstab { min-height: 740px; }
-        </style>
-        <EjsTab ID="ejstab" CssClass="card shadow-sm">
+        <EjsTab CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Summary">
