@@ -141,26 +141,43 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body px-4 pt-1 mb-n3" style="min-height: 521px;">
+            <div class="card-body px-4 pt-1 pb-1" style="min-height: 521px;">
                 <IndexPrepInformationGrid></IndexPrepInformationGrid>
             </div>
         </div>
     </div>
     <div class="col-md ml-sm-n2">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <div class="row px-2 align-items-center">
-                    <div class="col-auto">
-                        <i class="fal pr-2 fa-cube"></i>BLOCK PRODUCTION
-                    </div>
-                    <div class="col text-right">
-                        <NavLink class="primary" href="transactions">MORE</NavLink>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body px-4 pt-1 mb-n3" style="min-height: 521px;">
-                <IndexBlockProductionGrid></IndexBlockProductionGrid>
-            </div>
-        </div>
+        @code{
+            public void Cancel(SelectingEventArgs args)
+            {
+                if (args.IsSwiped)
+                {
+                    args.Cancel = true;
+                }
+            }
+
+            public TabHeader Blocks = new TabHeader { Text = "BLOCKS" };
+
+            public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS" };
+        }
+        <EjsTab CssClass="card shadow-sm">
+            <TabEvents Selecting="Cancel"></TabEvents>
+            <TabItems>
+                <TabItem Header="@Blocks">
+                    <ContentTemplate>
+                        <div class="card-body px-4 pt-0 pb-1" style="min-height: 521px;">
+                            <IndexBlockGrid></IndexBlockGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@Transactions">
+                    <ContentTemplate>
+                        <div class="card-body px-4 pt-0 pb-1" style="min-height: 521px;">
+                            <IndexTransactionGrid></IndexTransactionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+            </TabItems>
+         </EjsTab>
     </div>
 </div>

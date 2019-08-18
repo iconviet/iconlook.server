@@ -1,0 +1,12 @@
+﻿<EjsGrid RowHeight="40" 
+         EnableHover="false"
+         EnableAltRow="false"
+         TValue="BlockResponse"
+         AllowSelection="false"
+         GridLines="GridLine.Horizontal"
+         ModelType="TransactionModelType">
+    <EjsDataManager Url="/api/v1.0/transactions?take=13" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+</EjsGrid>
+@code {
+    public TransactionResponse TransactionModelType = new TransactionResponse();
+}

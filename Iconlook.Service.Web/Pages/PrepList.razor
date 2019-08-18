@@ -36,7 +36,6 @@
         cursor: @(Key == null ? "initial;" : "pointer;");
         background-color: @(Key == null ? "initial;" : "rgb(255, 255, 227);");
     }
-
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -103,7 +102,7 @@
         <style>
             #preplist { min-height: 740px; }
         </style>
-        <EjsTab ID="preplist" CssClass="card shadow-sm">
+        <EjsTab CssClass="card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Summary">
