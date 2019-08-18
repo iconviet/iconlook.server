@@ -1,14 +1,17 @@
 ﻿@page "/"
 @using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
 <style type="text/css">
-    .e-grid { min-height: 520px; }
-
+    
     .e-grid .e-rowcell {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-
+    
     .e-grid .e-gridheader { display: none; }
+
+    .main.card { height: 562px !important; }
+
+    .main.card .card-body { min-height: 520px; }
 
     .search-input { background-color: white !important; }
 
@@ -130,7 +133,7 @@
 </div>
 <div class="row mb-3">
     <div class="col-md mr-sm-n2">
-        <div class="card shadow-sm">
+        <div class="main card shadow-sm">
             <div class="card-header">
                 <div class="row px-2 align-items-center">
                     <div class="col">
@@ -141,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body px-4 py-0" style="min-height: 520px;">
+            <div class="card-body px-4 py-0">
                 <IndexPrepInformationGrid></IndexPrepInformationGrid>
             </div>
         </div>
@@ -160,19 +163,19 @@
 
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS" };
         }
-        <EjsTab CssClass="card shadow-sm">
+        <EjsTab CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Blocks">
                     <ContentTemplate>
-                        <div class="card-body px-4 py-0" style="min-height: 520px;">
+                        <div class="card-body px-4 py-0">
                             <IndexBlockGrid></IndexBlockGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
                 <TabItem Header="@Transactions">
                     <ContentTemplate>
-                        <div class="card-body px-4 py-0" style="min-height: 520px;">
+                        <div class="card-body px-4 py-0">
                             <IndexTransactionGrid></IndexTransactionGrid>
                         </div>
                     </ContentTemplate>
