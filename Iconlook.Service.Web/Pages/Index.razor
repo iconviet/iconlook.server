@@ -154,20 +154,11 @@
     </div>
     <div class="col-md ml-sm-n2">
         @code{
-            public void Cancel(SelectingEventArgs args)
-            {
-                if (args.IsSwiped)
-                {
-                    args.Cancel = true;
-                }
-            }
-
             public TabHeader Blocks = new TabHeader { Text = "BLOCKS" };
 
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS" };
         }
         <EjsTab CssClass="main card shadow-sm">
-            <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Blocks">
                     <ContentTemplate>

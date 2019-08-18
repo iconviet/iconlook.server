@@ -13,7 +13,7 @@ namespace Iconlook.Service.Api
         [CacheResponse(Duration = 60, MaxAge = 30)]
         public object Any(TransactionListRequest request)
         {
-            Task.Delay(2000).Wait();
+            Task.Delay(1000).Wait();
             return new ListResponse<TransactionResponse>(Enumerable.Range(1, 20).Select(x => new TransactionResponse
             {
                 To = new[] { "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84", "hx522b...2e84" }[new Random().Next(5)],

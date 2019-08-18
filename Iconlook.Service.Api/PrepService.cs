@@ -19,10 +19,10 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
-        // [CacheResponse(Duration = 60, MaxAge = 30)]
+        [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
             {
                 cache.KeyBase = $"{Request.PathInfo}" +
