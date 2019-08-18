@@ -22,6 +22,7 @@ namespace Iconlook.Service.Api
         // [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
+            await Task.Delay(2000);
             if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
             {
                 cache.KeyBase = $"{Request.PathInfo}" +
