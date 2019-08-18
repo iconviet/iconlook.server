@@ -1,4 +1,5 @@
 ﻿<EjsGrid RowHeight="40" 
+         @ref="@Instance"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
@@ -8,5 +9,7 @@
     <EjsDataManager Url="/api/v1.0/blocks?take=13" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
 </EjsGrid>
 @code {
+    public EjsGrid<BlockResponse> Instance;
+
     public BlockResponse BlockModelType = new BlockResponse();
 }
