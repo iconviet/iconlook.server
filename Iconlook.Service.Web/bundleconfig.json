@@ -21,9 +21,9 @@
     "minify": { "enabled": true },
     "inputFiles": [
       "wwwroot/static/css/bootstrap.css",
+      "wwwroot/static/css/ej2-*.css",
       "wwwroot/static/css/gf-*.css",
       "wwwroot/static/css/fa-*.css",
-      "wwwroot/static/css/ej2-*.css",
       "wwwroot/static/css/site*.css"
     ],
     "outputFileName": "wwwroot/static/css/bundle.min.css"
