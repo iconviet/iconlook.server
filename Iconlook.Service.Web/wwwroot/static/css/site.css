@@ -258,11 +258,11 @@ button.secondary, button .secondary {
 .card .card-header .far,
 .card .card-header .fal,
 .card .card-header .fas {
-    color: #1aaaba !important;
+    color: #888888 !important;
 }
 
 .card .card-header {
-    color: #888888;
+    color: #444444;
     font-weight: bold;
     padding: 10px 12px;
     background-color: #fafafa;
@@ -359,18 +359,36 @@ button.secondary, button .secondary {
 /*
     EJS-TAB
 */
+
+.e-tab .e-tab-header .e-indicator {
+    background-color: #1aaaba;
+}
+
 .e-tab .e-tab-header .e-tab-text {
     color: #888888;
     font-weight: bold !important;
     font-family: 'IBM Plex Sans' !important;
 }
 
-.e-tab .e-tab-header .e-indicator {
-    background-color: #1aaaba;
+.e-tab .e-tab-header .e-active .e-tab-text {
+    color: #444444 !important;
 }
 
-.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text {
-    color: #111111;
+.e-tab .e-tab-header .e-tab-icon::before,
+.e-tab .e-tab-header .e-tab-icon.e-icon-left {
+    color: #888888;
+    width: auto !important;
+    height: auto !important;
+    font-size: 13px !important;
+    min-width: unset !important;
+}
+
+.e-tab .e-tab-header .e-icon-left + .e-tab-text {
+    margin: 0 0 0 7px !important;
+}
+
+.e-tab .e-tab-header .e-active .e-tab-icon.e-icon-left {
+    color: #1aaaba !important;
 }
 
 
@@ -378,7 +396,6 @@ button.secondary, button .secondary {
 /*
     EJS-MENU
 */
-
 .ejs-menu {
     background-color: initial;
 }
