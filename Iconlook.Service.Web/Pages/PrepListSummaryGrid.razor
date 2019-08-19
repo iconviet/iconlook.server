@@ -49,7 +49,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
@@ -60,7 +60,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="210" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <HeaderTemplate>
@@ -77,33 +77,20 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="55" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <div style="padding-bottom: 2px;">
-                            <i class="far fs-n2 fa-wifi positive-light"></i>
+                        <div style="padding-bottom: 1px;">
+                            <i class="fal fs-n1 fa-wifi positive-light"></i>
                         </div>
                     }
                 }
             </Template>
-            <EditTemplate/>
-        </GridColumn>
-        <GridColumn Width="55" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <div style="padding-top: 1px;">
-                            <span class="fs-n1 mono-lg positive-light">100%</span>
-                        </div>
-                    }
-                }
-            </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
@@ -117,7 +104,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="70" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
@@ -133,16 +120,16 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Center" Format="N0">
+        <GridColumn Width="55" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="mono">@prep.Voters.ToString("N0")</span>
+                        <span class="mono positive-light font-weight-light">100%</span>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="115" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
             <HeaderTemplate>
@@ -153,11 +140,11 @@
                     if (context is PrepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 tx-light">ICX</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="70" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="TextAlign.Right">
             <Template>
@@ -168,7 +155,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="75" HeaderText="% 24h" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
             <Template>
@@ -186,7 +173,18 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="65" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono">@prep.Voters.ToString("N0")</span>
+                    }
+                }
+            </Template>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="160" HeaderText="Contribution" TextAlign="TextAlign.Center">
             <Template>

@@ -99,9 +99,14 @@
 
             public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
 
+            public TabHeader Reliability = new TabHeader { Text = "RELIABILITY" };
+
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
+            
+            public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
 
             public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
+
         }
         <EjsTab CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
@@ -120,6 +125,13 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
+                <TabItem Header="@Reliability">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <PrepListBackgroundGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
                 <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
@@ -127,7 +139,14 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@ScoreMatrix">
+                <TabItem Header="@Transparency">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <PrepListBackgroundGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@ScoreMatrix" Disabled="true">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
                             <PrepListScoreMatrixGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListScoreMatrixGrid>
