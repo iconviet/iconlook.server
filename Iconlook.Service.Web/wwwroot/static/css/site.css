@@ -19,7 +19,11 @@ html, body, .e-control {
 }
 
 .font-weight-semibold {
-    font-weight: 600;
+    font-weight: 500 !important;
+}
+
+.font-weight-semibolder {
+    font-weight: 600 !important;
 }
 
 .mono {
@@ -128,6 +132,10 @@ a.secondary, a:visited.secondary {
 
 a:hover.secondary {
     color: #1aaaba !important;
+    text-decoration: none !important;
+}
+
+a:hover.no-underline {
     text-decoration: none !important;
 }
 

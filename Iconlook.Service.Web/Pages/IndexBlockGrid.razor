@@ -1,12 +1,92 @@
-﻿<EjsGrid RowHeight="40" 
+﻿<style>
+    .block-hash {
+        padding: 4px 7px;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+    }
+
+    .block-height {
+        padding: 5px;
+        border-radius: 4px;
+        background-color: #e1fafd;
+    }
+</style>
+<EjsGrid RowHeight="40"
          @ref="@Instance"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
          AllowSelection="false"
          ModelType="BlockModelType"
-         GridLines="GridLine.Horizontal">
-    <EjsDataManager Url="/api/v1.0/blocks?take=13" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+         GridLines="GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
+    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="80" Field="@nameof(BlockResponse.Height)">
+            <Template>
+                @{
+                    if (context is BlockResponse block)
+                    {
+                        <a class="primary no-underline" href="block/@block.Height">
+                            <span class="fs-n1 mono-lg block-height">@block.Height.ToString("N0")</span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="102" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is BlockResponse block)
+                    {
+                        <a class="secondary no-underline" href="/">
+                            <span class="fs-n1 mono-lg block-hash">@block.Hash.Substring(0, 12)</span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="70" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is BlockResponse block)
+                    {
+                        <a class="primary no-underline" href="/">
+                            <span class="pr-1 mono ls-n2">@block.Transactions.ToString("N0")</span><span class="fs-n1">txns</span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="90" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is BlockResponse block)
+                    {
+                        <span class="mono ls-n2 font-weight-semibold">@block.Amount.ToString("N0").</span><span class="pr-1 ls-n1 tx-light font-weight-light">0000</span>
+                        <span class="tx-light font-weight-light">ICX</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="143" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is BlockResponse block)
+                    {
+                        <a class="secondary tx-condensed" href="address/@block.ProducerAddress">@block.ProduderName</a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="20" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                  <i class='fal fs-n1 fa-cube positive-dark'></i>
+                }
+            </Template>
+        </GridColumn>        
+    </GridColumns>
 </EjsGrid>
 @code {
     public EjsGrid<BlockResponse> Instance;

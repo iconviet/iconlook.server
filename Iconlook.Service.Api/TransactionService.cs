@@ -13,9 +13,9 @@ namespace Iconlook.Service.Api
         [CacheResponse(Duration = 60, MaxAge = 30)]
         public object Any(TransactionListRequest request)
         {
-            return new ListResponse<TransactionResponse>(Enumerable.Range(1, 20).Select(x => new TransactionResponse
+            var response = new ListResponse<TransactionResponse>(Enumerable.Range(1, 20).Select(x => new TransactionResponse
             {
-                Timestamp = DateTimeOffset.UtcNow,
+                Timestamp = DateTime.UtcNow,
                 To = new[]
                 {
                     "hxd2d001c3938c7f6d31bc76b1cda922a64c51c8bf",
@@ -32,9 +32,9 @@ namespace Iconlook.Service.Api
                     "hxd2d001c3938c7f6d31bc76b1cda922a64c51c8bf",
                     "hx15bf6ed47613fc187093e141e55f48be79f8913a"
                 }[new Random().Next(5)],
-                Fee = new decimal[] { 1, 2, 3, 4, 5 }[new Random().Next(5)],
-                BlockHeight = Enumerable.Range(6000000, 6000100).Shuffle().Single(),
-                Amount = new decimal[] { 100, 200, 300, 400, 500 }[new Random().Next(5)],
+                Fee = new float[] { 1, 2, 3, 4, 5 }[new Random().Next(5)],
+                BlockHeight = Enumerable.Range(6000000, 100).Shuffle().First(),
+                Amount = new float[] { 100, 200, 300, 400, 500 }[new Random().Next(5)],
                 Hash = new[]
                 {
                     "0xdf1e9ad04468b63047704beb80820ed394de6102ac165bd9ed95eafffa5892ab",
@@ -44,6 +44,7 @@ namespace Iconlook.Service.Api
                     "0x81ca226c940605afe7e3165b4d95f8bf361ec4385e53e9cf2cfe391c61531917"
                 }[new Random().Next(5)]
             }).Take(request.Take).ToList());
+            return response;
         }
     }
 }
