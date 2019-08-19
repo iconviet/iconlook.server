@@ -123,17 +123,35 @@ header {
 /*  
     LINK
 */
+a.special, a:visited.special {
+    color: #e3165b !important;
+}
+
+a.primary, a:visited.primary {
+    color: #1aaaba !important;
+}
+
 a.tertiary, a:visited.tertiary {
     color: #888888 !important;
+}
+
+a.secondary, a:visited.secondary {
+    color: #000000 !important;
+}
+
+a:hover.special {
+    color: #e3165b !important;
+    text-decoration: none !important;
+}
+
+a:hover.primary {
+    color: #12cade !important;
+    text-decoration: none !important;
 }
 
 a:hover.tertiary {
     color: #1aaaba !important;
     text-decoration: none !important;
-}
-
-a.secondary, a:visited.secondary {
-    color: #000000 !important;
 }
 
 a:hover.secondary {
@@ -145,13 +163,6 @@ a:hover.no-underline {
     text-decoration: none !important;
 }
 
-a.primary, a:hover.primary, a:visited.primary {
-    color: #1aaaba !important;
-}
-
-a.special, a:hover.special, a:visited.special {
-    color: #e3165b !important;
-}
 
 
 
