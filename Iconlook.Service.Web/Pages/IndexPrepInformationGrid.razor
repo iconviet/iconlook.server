@@ -47,13 +47,25 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="102" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="35" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <div style="padding-bottom: 1px;">
+                            <i class="fal fs-n1 fa-wifi positive-light"></i>
+                        </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="105" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="pl-1 fs-n2 tx-light font-weight-light">votes</span>
                     }
                 }
             </Template>
@@ -81,18 +93,6 @@
                         {
                             <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
                         }
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="42" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <div style="padding-bottom: 4px;">
-                            <i class="far fs-n2 fa-wifi positive-light"></i>
-                        </div>
                     }
                 }
             </Template>

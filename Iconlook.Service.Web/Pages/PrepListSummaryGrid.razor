@@ -131,22 +131,22 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="115" Field="@nameof(PrepResponse.Votes)" HeaderText="ICX Staked" TextAlign="TextAlign.Right">
+        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Center">
             <HeaderTemplate>
-                <div class="pr-2">ICX Staked&nbsp;&nbsp;</div>
+                <div class="pl-2">Tally</div>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="pl-1 fs-n2 tx-light font-weight-light">votes</span>
                     }
                 }
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="70" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
