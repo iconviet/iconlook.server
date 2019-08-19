@@ -12,7 +12,7 @@
 
     .e-grid .e-gridheader { display: none; }
 
-    .main.card { height: 562px !important; }
+    .main.card { height: 567px !important; }
 
     .main.card .e-grid { min-height: 520px; }
 
@@ -135,8 +135,8 @@
     </div>
 </div>
 <div class="row mb-3">
-    <div class="col-md mr-sm-n2">
-        <div class="main card shadow-sm">
+    <div class="col-md mr-md-n3">
+        <div class="main card mb-3 shadow-sm">
             <div class="card-header">
                 <div class="row px-2 align-items-center">
                     <div class="col">
@@ -152,13 +152,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md ml-sm-n2">
+    <div class="col-md">
         @code {
             public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
 
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice"};
         }
-        <EjsTab CssClass="main card shadow-sm">
+        <EjsTab CssClass="main card mb-3 shadow-sm">
             <TabItems>
                 <TabItem Header="@Blocks">
                     <ContentTemplate>
