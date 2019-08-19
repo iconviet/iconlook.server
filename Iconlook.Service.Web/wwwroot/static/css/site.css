@@ -123,9 +123,15 @@ header {
 /*  
     LINK
 */
-a .secondary {
+a.tertiary, a:visited.tertiary {
     color: #888888 !important;
 }
+
+a:hover.tertiary {
+    color: #1aaaba !important;
+    text-decoration: none !important;
+}
+
 a.secondary, a:visited.secondary {
     color: #000000 !important;
 }

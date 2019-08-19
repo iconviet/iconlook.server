@@ -1,12 +1,12 @@
 ﻿<style>
     .block-hash {
-        padding: 4px 7px;
+        padding: 5px 7px;
         border-radius: 4px;
         background-color: #f5f5f5;
     }
 
     .block-height {
-        padding: 5px;
+        padding: 5px 7px;
         border-radius: 4px;
         background-color: #e1fafd;
     }
@@ -22,7 +22,7 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="80" Field="@nameof(BlockResponse.Height)">
+        <GridColumn Width="79" Field="@nameof(BlockResponse.Height)">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="102" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
+        <GridColumn Width="101" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -46,35 +46,35 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="70" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
                         <a class="primary no-underline" href="/">
-                            <span class="pr-1 mono ls-n2">@block.Transactions.ToString("N0")</span><span class="fs-n1">txns</span>
+                            <span class="pr-1 mono">@block.Transactions.ToString("N0")</span><span class="fs-n1">txns</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="90" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="128" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2 font-weight-semibold">@block.Amount.ToString("N0").</span><span class="pr-1 ls-n1 tx-light font-weight-light">0000</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0").</span><span class="pr-1 ls-n1 tx-light font-weight-light">0000</span>
                         <span class="tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="143" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
+        <GridColumn Width="120" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="secondary tx-condensed" href="address/@block.ProducerAddress">@block.ProduderName</a>
+                        <a class="fs-n1 tertiary tx-condensed font-weight-bold" href="address/@block.ProducerAddress">@block.ProduderName</a>
                     }
                 }
             </Template>
