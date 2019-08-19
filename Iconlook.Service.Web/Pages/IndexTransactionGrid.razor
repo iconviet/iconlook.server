@@ -1,11 +1,103 @@
-﻿<EjsGrid RowHeight="40" 
+﻿<style>
+    .transaction-hash {
+        padding: 5px 7px;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+    }
+
+    .transaction-address {
+        padding: 5px 7px;
+        border-radius: 4px;
+        background-color: #e1fafd;
+        
+    }
+</style>
+<EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
-         TValue="BlockResponse"
          AllowSelection="false"
+         TValue="TransactionResponse"
          GridLines="GridLine.Horizontal"
-         ModelType="TransactionModelType">
-    <EjsDataManager Url="/api/v1.0/transactions?take=13" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+         ModelType="TransactionModelType"
+         Query="new ej.data.Query().addParams('take', '13')">
+    <EjsDataManager Url="/api/v1.0/transactions" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="94" Field="@nameof(TransactionResponse.Hash)">
+            <Template>
+                @{
+                    if (context is TransactionResponse transaction)
+                    {
+                        <a class="secondary no-underline" href="transaction/@transaction.Hash">
+                            <span class="fs-n1 mono-lg transaction-hash">
+                                <span class="font-weight-bold" style="opacity: 0.85;">@transaction.Hash.Substring(0, 2)</span>@transaction.Hash.Substring(0, 10)
+                            </span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="31">
+            <Template>
+                @{
+                    <span class="fs-n1">from</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="88" Field="@nameof(TransactionResponse.From)">
+            <Template>
+                @{
+                    if (context is TransactionResponse transaction)
+                    {
+                        <a class="primary no-underline" href="transaction/@transaction.From">
+                            <span class="fs-n1 mono-lg transaction-address">
+                                <span class="font-weight-bold">@transaction.From.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            </span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="23" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                      <span class="fs-n1">to</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="88" Field="@nameof(TransactionResponse.To)">
+            <Template>
+                @{
+                    if (context is TransactionResponse transaction)
+                    {
+                        <a class="primary no-underline" href="transaction/@transaction.To">
+                            <span class="fs-n1 mono-lg transaction-address">
+                                <span class="font-weight-bold">@transaction.To.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            </span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="128" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is TransactionResponse transaction)
+                    {
+                        <span class="mono ls-n2">@transaction.Amount.ToString("N0").</span>
+                        <span class="pr-1 ls-n1 tx-light font-weight-light">0000</span>
+                        <span class="tx-light font-weight-light">ICX</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="24" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    <i style="padding-bottom: 1px;" class="far fa-check positive-dark"></i>
+                }
+            </Template>
+        </GridColumn>   
+    </GridColumns>
 </EjsGrid>
 @code {
     public TransactionResponse TransactionModelType = new TransactionResponse();

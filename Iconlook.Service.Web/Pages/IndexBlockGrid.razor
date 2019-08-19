@@ -40,7 +40,9 @@
                     if (context is BlockResponse block)
                     {
                         <a class="secondary no-underline" href="/">
-                            <span class="fs-n1 mono-lg block-hash">@block.Hash.Substring(0, 12)</span>
+                            <span class="fs-n1 mono-lg block-hash">
+                                <span class="font-weight-bold" style="opacity: 0.85;">@block.Hash.Substring(0, 2)</span>@block.Hash.Substring(0, 10)
+                            </span>
                         </a>
                     }
                 }
@@ -74,7 +76,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="fs-n1 tertiary tx-condensed font-weight-bold" href="address/@block.ProducerAddress">@block.ProduderName</a>
+                        <a class="secondary tx-condensed" href="address/@block.ProducerAddress">@block.ProduderName</a>
                     }
                 }
             </Template>
