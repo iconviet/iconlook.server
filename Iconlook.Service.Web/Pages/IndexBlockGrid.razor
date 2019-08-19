@@ -39,7 +39,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="secondary no-underline" href="/">
+                        <a class="secondary no-underline" href="block/@block.Hash">
                             <span class="fs-n1 mono-lg block-hash">
                                 <span class="font-weight-bold" style="opacity: 0.85;">@block.Hash.Substring(0, 2)</span>@block.Hash.Substring(0, 10)
                             </span>
@@ -71,7 +71,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
+        <GridColumn Width="127" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -80,14 +80,7 @@
                     }
                 }
             </Template>
-        </GridColumn>
-        <GridColumn Width="20" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                  <i style="padding-bottom: 1px;" class="far fa-check-circle positive-light"></i>
-                }
-            </Template>
-        </GridColumn>        
+        </GridColumn>      
     </GridColumns>
 </EjsGrid>
 @code {

@@ -48,7 +48,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <a class="primary no-underline" href="transaction/@transaction.From">
+                        <a class="primary no-underline" href="address/@transaction.From">
                             <span class="fs-n1 mono-lg transaction-address">
                                 <span class="font-weight-bold">@transaction.From.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
                             </span>
@@ -69,7 +69,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <a class="primary no-underline" href="transaction/@transaction.To">
+                        <a class="primary no-underline" href="address/@transaction.To">
                             <span class="fs-n1 mono-lg transaction-address">
                                 <span class="font-weight-bold">@transaction.To.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
                             </span>
@@ -78,7 +78,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="128" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="152" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
@@ -90,13 +90,6 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="24" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    <i style="padding-bottom: 1px;" class="far fa-check positive-dark"></i>
-                }
-            </Template>
-        </GridColumn>   
     </GridColumns>
 </EjsGrid>
 @code {
