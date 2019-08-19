@@ -34,7 +34,6 @@ namespace Iconlook.Service.Api
                 }[new Random().Next(5)],
                 Fee = new float[] { 1, 2, 3, 4, 5 }[new Random().Next(5)],
                 BlockHeight = Enumerable.Range(6000000, 100).Shuffle().First(),
-                Amount = new float[] { 100, 200, 300, 400, 500 }[new Random().Next(5)],
                 Hash = new[]
                 {
                     "0xdf1e9ad04468b63047704beb80820ed394de6102ac165bd9ed95eafffa5892ab",
@@ -42,7 +41,8 @@ namespace Iconlook.Service.Api
                     "0x12f0821c57bcdaa230706c3cf5b6fd4ff5e8b452b087edd39ab22ed9416caa72",
                     "0xdd6d8abb19f9e7a38198585ab7c5431867dfd1c436940771afd143560f256344",
                     "0x81ca226c940605afe7e3165b4d95f8bf361ec4385e53e9cf2cfe391c61531917"
-                }[new Random().Next(5)]
+                }[new Random().Next(5)],
+                Amount = new float[] { 100, 200, 300, 400, 500 }[new Random().Next(5)] * 100000
             }).Take(request.Take).ToList());
             return response;
         }
