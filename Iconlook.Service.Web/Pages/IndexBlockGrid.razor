@@ -6,7 +6,7 @@
     }
 
     .block-height {
-        padding: 5px 7px;
+        padding: 5px 8px;
         border-radius: 3px;
         background-color: #e1fafd;
     }
@@ -22,7 +22,7 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="79" Field="@nameof(BlockResponse.Height)">
+        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -40,8 +40,8 @@
                     if (context is BlockResponse block)
                     {
                         <a class="secondary no-underline" href="block/@block.Hash">
-                            <span class="fs-n1 mono-lg block-hash">
-                                <span class="font-weight-bold" style="opacity: 0.85;">@block.Hash.Substring(0, 2)</span>@block.Hash.Substring(0, 10)
+                            <span class="fs-n1 mono block-hash">
+                                <span class="font-weight-semibold">@block.Hash.Substring(0, 2)</span>@block.Hash.Substring(0, 10)
                             </span>
                         </a>
                     }
@@ -72,7 +72,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="125" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
+        <GridColumn Width="123" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)

@@ -8,7 +8,7 @@
     .transaction-address {
         padding: 5px 7px;
         border-radius: 3px;
-        background-color: #f5f5f5;
+        background-color: #e1fafd;
         
     }
 </style>
@@ -28,57 +28,57 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="secondary no-underline" href="transaction/@transaction.Hash">
-                            <span class="fs-n1 mono-lg transaction-hash">
-                                <span class="font-weight-bold" style="opacity: 0.85;">@transaction.Hash.Substring(0, 2)</span>@transaction.Hash.Substring(0, 10)
+                            <span class="fs-n1 mono transaction-hash">
+                                <span class="font-weight-semibold">@transaction.Hash.Substring(0, 2)</span>@transaction.Hash.Substring(0, 10)
                             </span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="35" TextAlign="TextAlign.Center">
+        <GridColumn Width="36" TextAlign="TextAlign.Center">
             <Template>
                 @{
-                    <span class="fs-n1">from</span>
+                    <span class="mt-1 fs-n1">from</span>
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="94" Field="@nameof(TransactionResponse.From)">
+        <GridColumn Width="96" Field="@nameof(TransactionResponse.From)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.From">
-                            <span class="fs-n1 mono-lg transaction-address">
-                                <span class="font-weight-bold">@transaction.From.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            <span class="fs-n1 mono transaction-address">
+                                <span class="font-weight-semibold">@transaction.From.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
                             </span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="25" TextAlign="TextAlign.Center">
+        <GridColumn Width="26" TextAlign="TextAlign.Center">
             <Template>
                 @{
-                      <span class="fs-n1">to</span>
+                      <span class="mt-1 fs-n1">to</span>
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="94" Field="@nameof(TransactionResponse.To)">
+        <GridColumn Width="96" Field="@nameof(TransactionResponse.To)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.To">
-                            <span class="fs-n1 mono-lg transaction-address">
-                                <span class="font-weight-bold">@transaction.To.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            <span class="fs-n1 mono transaction-address">
+                                <span class="font-weight-semibold">@transaction.To.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
                             </span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="163" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="155" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
