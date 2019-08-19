@@ -54,7 +54,7 @@
                     if (context is BlockResponse block)
                     {
                         <a class="primary no-underline" href="/">
-                            <span class="pr-1 mono">@block.Transactions.ToString("N0")</span><span class="fs-n1 tx-light">txns</span>
+                            <span class="pr-1 mono">@block.Transactions.ToString("N0")</span><span class="tx-light">txns</span>
                         </a>
                     }
                 }
@@ -65,8 +65,9 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0").</span><span class="pr-1 ls-n2 tx-light font-weight-light">0000</span>
-                        <span class="tx-light font-weight-light">ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0").</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">0000</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>

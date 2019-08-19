@@ -53,7 +53,7 @@
                     if (context is PrepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 tx-light">ICX</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
@@ -63,7 +63,7 @@
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="mono tx-light">(@prep.SupplyPercentage.ToString("P"))</span>
+                        <span class="mono tx-light font-weight-light">(@prep.SupplyPercentage.ToString("P"))</span>
                     }
                 }
             </Template>

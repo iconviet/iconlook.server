@@ -8,7 +8,7 @@
     .transaction-address {
         padding: 5px 7px;
         border-radius: 3px;
-        background-color: #e1fafd;
+        background-color: #f5f5f5;
         
     }
 </style>
@@ -84,8 +84,8 @@
                     if (context is TransactionResponse transaction)
                     {
                         <span class="mono ls-n2">@transaction.Amount.ToString("N0").</span>
-                        <span class="pr-1 ls-n2 tx-light font-weight-light">0000</span>
-                        <span class="tx-light font-weight-light">ICX</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">0000</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
