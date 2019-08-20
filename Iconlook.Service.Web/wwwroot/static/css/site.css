@@ -373,9 +373,19 @@ button.secondary, button .secondary {
 
 
 /*
+    EJS-INPUT
+*/
+.e-input-group::after,
+.e-input-group::before {
+    background: none !important;
+}
+
+
+
+/*
     EJS-SWITCH
 */
-.e-switch-wrapper .e-switch-handle.e-switch-active {
+    .e-switch-wrapper .e-switch-handle.e-switch-active {
     background-color: #1aaaba !important;
 }
 

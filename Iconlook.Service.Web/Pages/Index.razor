@@ -10,15 +10,69 @@
         padding-right: 0 !important;
     }
 
-    .e-grid .e-gridheader { display: none; }
+    .e-grid .e-gridheader {
+        display: none;
+    }
 
-    .main.card { height: 567px !important; }
+    .main.card {
+        height: 567px !important;
+    }
 
-    .main.card .e-grid { min-height: 520px; }
+        .main.card .e-grid {
+            min-height: 520px;
+        }
 
-    .search-input { background-color: white !important; }
+    button.search-button:hover,
+    button.search-filter:hover {
+        color: #1aaaba !important;
+    }
 
-    .search-button { background-color: white !important; }
+    .search-input .e-input-group::after,
+    .search-input .e-input-group::before {
+        background: none !important;
+    }
+
+
+    button.search-filter.e-active {
+        background-color: white !important;
+    }
+
+    button.search-filter {
+        color: #666666 !important;
+        font-weight: bold !important;
+        background-color: white !important;
+        padding: 9px 10px 7px 10px !important;
+    }
+
+    .search-filter.e-dropdown-popup {
+        color: #666666;
+    }
+
+    .search-filter.e-dropdown-popup .e-item {
+        padding: 0 25px;
+        font-size: 13px;
+    }
+
+    .search-filter.e-dropdown-popup .e-item:hover {
+        color: #1aaaba;
+        background: none;
+    }
+
+    button.search-button {
+        color: #666666 !important;
+        font-weight: bold !important;
+        background-color: white !important;
+        padding: 9px 12px 7px 8px !important;
+    }
+
+
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+        padding: 8px 5px 6px 5px !important;
+    }
+
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap {
+        border-color: transparent !important;
+    }
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -80,16 +134,16 @@
                     </h5>
                 </div>
             </div>
-            <div class="row no-gutters" style="background-color: white;">
+            <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto">
-                    <EjsDropDownButton Items="@Items" CssClass="filter">ALL FILTERS</EjsDropDownButton>
+                    <EjsDropDownButton Items="@Items" CssClass="search-filter">EVERYTHING</EjsDropDownButton>
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
-                        {
-                            new ItemModel { Text = "P-REP" },
-                            new ItemModel { Text = "ADDRESS" },
-                            new ItemModel { Text = "TRANSACTION" }
+                                        {
+                            new ItemModel { Text = "P-REP", IconCss = "fal fa-users-class" },
+                            new ItemModel { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
+                            new ItemModel { Text = "TRANSACTION", IconCss = "fal fa-dice" }
                         };
 
                     }
@@ -98,7 +152,7 @@
                     <EjsTextBox CssClass="search-input" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
                 </div>
                 <div class="col col-auto">
-                    <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">Search</EjsButton>
+                    <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">SEARCH</EjsButton>
                 </div>
             </div>
         </div>
@@ -156,7 +210,7 @@
         @code {
             public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
 
-            public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice"};
+            public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
         }
         <EjsTab CssClass="main card mb-3 shadow-sm">
             <TabItems>
@@ -175,6 +229,6 @@
                     </ContentTemplate>
                 </TabItem>
             </TabItems>
-         </EjsTab>
+        </EjsTab>
     </div>
 </div>
