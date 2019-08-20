@@ -10,4 +10,7 @@
     <ItemGroup>
   <PackageReference Include="ServiceStack" Version="5.6.0" />
 </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Iconlook.Object\Iconlook.Object.csproj" />
+    </ItemGroup>
 </Project>

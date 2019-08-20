@@ -29,20 +29,20 @@ namespace Iconlook.Service.Api
                             select r;
                 var result = query.Select(x => new PrepResponse
                 {
+                    Joined = DateTime.UtcNow,
+                    LastSeen = DateTime.UtcNow,
                     Position = new Random().Next(1, 66),
                     Score = new Random().Next(-100, 100),
                     Voters = new Random().Next(100, 1000),
                     Votes = new Random().Next(1000000, 10000000),
                     Direction = new Random().NextDouble() >= 0.5,
                     RejectedBlocks = new Random().Next(100, 1000),
-                    LastSeen = $"{new Random().Next(1, 10)} minutes",
-                    Created = x.SelectNodes("td")[1].InnerText.Trim(),
                     ProducedBlocks = new Random().Next(100000, 1000000),
                     Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                     UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
                     SupplyPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
-                    Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
-                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase()
+                    Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase(),
+                    Id = int.Parse(x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3))
                 }).Distinct().OrderBy(x => x.Position).Reverse();
                 if (request.Filter.HasValue())
                 {
@@ -55,7 +55,8 @@ namespace Iconlook.Service.Api
                 }
                 if (request.Edit.HasValue() && request.Edit != "all")
                 {
-                    return new ListResponse<PrepResponse>(result.Where(x => x.Id == request.Edit).ToList())
+                    return new ListResponse<PrepResponse>(
+                        result.Where(x => x.Id.ToString() == request.Edit).ToList())
                     {
                         Skip = 0,
                         Take = 1,
