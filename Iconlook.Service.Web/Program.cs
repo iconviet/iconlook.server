@@ -27,7 +27,6 @@ namespace Iconlook.Service.Web
             ConfigureServices = host => services =>
             {
                 services.AddRazorPages();
-                services.AddResponseCaching();
                 services.AddServerSideBlazor();
                 services.AddResponseCompression();
                 services.Configure<KestrelServerOptions>(options =>
@@ -80,7 +79,6 @@ namespace Iconlook.Service.Web
                 }
                 application.UseForwardedHeaders();
                 application.UseResponseCompression();
-                application.UseResponseCaching();
                 application.UseStaticFiles();
                 application.Use((context, next) =>
                 {

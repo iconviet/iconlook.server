@@ -18,21 +18,12 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
-        [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
-            if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
-            {
-                cache.KeyBase = $"{Request.PathInfo}" +
-                                $"&skip={Request.QueryString.Get("skip")}" +
-                                $"&take={Request.QueryString.Get("take")}" +
-                                $"&edit={Request.QueryString.Get("edit")}" +
-                                $"&filter={Request.QueryString.Get("filter")}";
-            }
             var response = new ListResponse<PrepResponse>();
             try
             {
-                var html = await new HtmlWeb().LoadFromWebAsync("https://icon.community/iconsensus/candidates");
+                var html = await new HtmlWeb().LoadFromWebAsync("http://icon.community/iconsensus/candidates");
                 var query = from t in html.DocumentNode.SelectNodes("//tbody")
                             from r in t.SelectNodes("tr")
                             select r;
