@@ -75,8 +75,8 @@ namespace Iconlook.Service.Api
                         SupplyPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
                         Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase(),
                         IdExternal = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)
-                    }).Distinct().OrderBy(x => x.Position).Reverse();
-                    await Db.Instance().InsertAllAsync(preps.ToList());
+                    });
+                    await Db.Instance().InsertAllAsync(preps.Reverse().ToList());
                 }
                 catch (Exception exception)
                 {
