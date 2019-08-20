@@ -28,7 +28,6 @@ namespace Iconlook.Service.Web
             {
                 services.AddRazorPages();
                 services.AddServerSideBlazor();
-                services.AddResponseCompression();
                 services.Configure<KestrelServerOptions>(options =>
                 {
                     options.AllowSynchronousIO = true;
@@ -78,7 +77,6 @@ namespace Iconlook.Service.Web
                     });
                 }
                 application.UseForwardedHeaders();
-                application.UseResponseCompression();
                 application.UseStaticFiles();
                 application.Use((context, next) =>
                 {

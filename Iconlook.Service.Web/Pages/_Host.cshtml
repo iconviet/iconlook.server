@@ -39,8 +39,8 @@
 </div>
 <app>@(await Html.RenderComponentAsync<App>())</app>
 <environment names="Localhost">
-    <script src="~/static/js/ej2.js"></script>
-    <script src="~/static/js/ejs.interop.js"></script>
+    <script src="~/static/js/ej2.min.js"></script>
+    <script src="~/static/js/ejs.interop.min.js"></script>
 </environment>
 <environment names="Development, Testing, Staging, Production">
     <script async src="~/static/js/bundle.min.js?v=@version"></script>

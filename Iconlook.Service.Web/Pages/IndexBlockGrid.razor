@@ -12,7 +12,6 @@
     }
 </style>
 <EjsGrid RowHeight="40"
-         @ref="@Instance"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
@@ -85,7 +84,5 @@
     </GridColumns>
 </EjsGrid>
 @code {
-    public EjsGrid<BlockResponse> Instance;
-
     public BlockResponse BlockModelType = new BlockResponse();
 }

@@ -3,22 +3,23 @@
     "minify": { "enabled": false },
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
-      "wwwroot/static/js/ej2-base.js",
-      "wwwroot/static/js/ej2-data.js",
-      "wwwroot/static/js/ej2-lists.js",
-      "wwwroot/static/js/ej2-inputs.js",
-      "wwwroot/static/js/ej2-buttons.js",
-      "wwwroot/static/js/ej2-popups.js",
-      "wwwroot/static/js/ej2-splitbuttons.js",
-      "wwwroot/static/js/ej2-dropdowns.js",
-      "wwwroot/static/js/ej2-navigations.js",
-      "wwwroot/static/js/ej2-grids.js",
-      "wwwroot/static/js/ejs.interop.js"
+      "wwwroot/static/js/ej2-base.min.js",
+      "wwwroot/static/js/ej2-data.min.js",
+      "wwwroot/static/js/ej2-lists.min.js",
+      "wwwroot/static/js/ej2-inputs.min.js",
+      "wwwroot/static/js/ej2-buttons.min.js",
+      "wwwroot/static/js/ej2-popups.min.js",
+      "wwwroot/static/js/ej2-splitbuttons.min.js",
+      "wwwroot/static/js/ej2-dropdowns.min.js",
+      "wwwroot/static/js/ej2-navigations.min.js",
+      "wwwroot/static/js/ej2-grids.min.js",
+      "wwwroot/static/js/ejs.interop.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
   },
   {
     "minify": { "enabled": true },
+    // *** do not change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/css/bootstrap.css",
       "wwwroot/static/css/ej2-*.css",
