@@ -11,7 +11,7 @@ namespace Iconlook.Entity
     {
         [PrimaryKey]
         public long Id { get; set; }
-        
+
         [StringLength(18)]
         public string IdExternal { get; set; }
 
@@ -35,10 +35,9 @@ namespace Iconlook.Entity
         public int Votes { get; set; }
 
         public int Voters { get; set; }
-        
+
         public int Score { get; set; }
 
-        
         public int Position { get; set; }
 
         public bool Direction { get; set; }

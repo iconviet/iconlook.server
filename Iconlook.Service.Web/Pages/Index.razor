@@ -2,26 +2,16 @@
 @using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
 <style type="text/css">
     
-    .main.card .e-grid {
-        min-height: 520px;
-    }
+    .main.card .e-grid { min-height: 520px; }
 
-    .e-grid .e-gridheader {
-        display: none;
-    }
+    .e-grid .e-gridheader { display: none; }
 
-    .e-tab {
-        background-color: white;
-    }
+    .e-tab { background-color: white; }
 
-    .main.card {
-        height: 567px !important;
-    }
+    .main.card { height: 567px !important; }
 
     button.search-button:hover,
-    button.search-filter:hover {
-        color: #1aaaba !important;
-    }
+    button.search-filter:hover { color: #1aaaba !important; }
 
     .e-grid .e-rowcell {
         padding-left: 0 !important;
@@ -29,14 +19,10 @@
     }
 
     .search-input .e-input-group::after,
-    .search-input .e-input-group::before {
-        background: none !important;
-    }
+    .search-input .e-input-group::before { background: none !important; }
 
 
-    button.search-filter.e-active {
-        background-color: white !important;
-    }
+    button.search-filter.e-active { background-color: white !important; }
 
     button.search-filter {
         color: #666666 !important;
@@ -45,9 +31,7 @@
         padding: 9px 10px 7px 10px !important;
     }
 
-    .search-filter.e-dropdown-popup {
-        color: #666666;
-    }
+    .search-filter.e-dropdown-popup { color: #666666; }
 
     .search-filter.e-dropdown-popup .e-item {
         padding: 0 25px;
@@ -67,13 +51,9 @@
     }
 
 
-    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
-        padding: 8px 5px 6px 5px !important;
-    }
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 8px 5px 6px 5px !important; }
 
-    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap {
-        border-color: transparent !important;
-    }
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap { border-color: transparent !important; }
 </style>
 <div class="row mb-3">
     <div class="col">
@@ -141,7 +121,7 @@
                     @code {
 
                         public List<ItemModel> Items = new List<ItemModel>
-                                        {
+                        {
                             new ItemModel { Text = "P-REP", IconCss = "fal fa-users-class" },
                             new ItemModel { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
                             new ItemModel { Text = "TRANSACTION", IconCss = "fal fa-dice" }
@@ -150,11 +130,11 @@
                     }
                 </div>
                 <div class="col">
-                    <EjsAutoComplete MinLength="3"                                     
+                    <EjsAutoComplete MinLength="3"
                                      TValue="string"
                                      Highlight="true"
                                      SuggestionCount="5"
-                                     CssClass="search-input"                                     
+                                     CssClass="search-input"
                                      ShowClearButton="false"
                                      Query="new ej.data.Query()"
                                      Placeholder="Search P-Rep / Address / Transaction">
@@ -219,6 +199,7 @@
     </div>
     <div class="col-md">
         @code {
+
             public void Cancel(SelectingEventArgs args)
             {
                 if (args.IsSwiped)

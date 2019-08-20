@@ -11,9 +11,7 @@
     public object Sizes { get; } = new[] { 22, 50, 100 };
 }
 <style type="text/css">
-    .main.card {
-        min-height: 740px;
-    }
+    .main.card { min-height: 740px; }
 
     .e-grid { min-height: 700px; }
 
@@ -102,11 +100,10 @@
             public TabHeader Reliability = new TabHeader { Text = "RELIABILITY" };
 
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-            
+
             public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
 
             public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
-
         }
         <EjsTab CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
