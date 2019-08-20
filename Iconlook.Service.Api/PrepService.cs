@@ -34,7 +34,8 @@ namespace Iconlook.Service.Api
             }
             if (request.Edit.HasValue() && request.Edit != "all")
             {
-                var query = await Db.SelectAsync(Db.From<Prep>().Where(x => x.IdExternal == request.Edit));
+                var query = await Db.SelectAsync(
+                    Db.From<Prep>().Where(x => x.IdExternal == request.Edit));
                 return new ListResponse<PrepResponse>(query.ConvertAll(x => x.ConvertTo<PrepResponse>()))
                 {
                     Skip = 0, Take = 1, Count = 1
