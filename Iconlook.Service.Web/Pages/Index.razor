@@ -149,7 +149,17 @@
                     }
                 </div>
                 <div class="col">
-                    <EjsTextBox CssClass="search-input" Placeholder="Search by P-Rep / Address / Transaction"></EjsTextBox>
+                    <EjsAutoComplete MinLength="3"                                     
+                                     TValue="string"
+                                     Highlight="true"
+                                     SuggestionCount="5"
+                                     CssClass="search-input"                                     
+                                     ShowClearButton="false"
+                                     Query="new ej.data.Query()"
+                                     Placeholder="Search P-Rep / Address / Transaction">
+                        <AutoCompleteFieldSettings Value="Name"></AutoCompleteFieldSettings>
+                        <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                    </EjsAutoComplete>
                 </div>
                 <div class="col col-auto">
                     <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">SEARCH</EjsButton>

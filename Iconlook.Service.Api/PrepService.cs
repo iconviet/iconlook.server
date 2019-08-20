@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Agiper;
@@ -19,20 +18,8 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
-        [CacheResponse(Duration = 60, MaxAge = 30)]
         public async Task<object> Get(PrepListRequest request)
         {
-            if (Request.GetItem(Keywords.CacheInfo) is CacheInfo cache)
-            {
-                cache.KeyBase = $"{Request.PathInfo}" +
-                                $"&skip={Request.QueryString.Get("skip")}" +
-                                $"&take={Request.QueryString.Get("take")}" +
-                                $"&edit={Request.QueryString.Get("edit")}";
-                if (await Request.HandleValidCache(cache))
-                {
-                    return null;
-                }
-            }
             var response = new ListResponse<PrepResponse>();
             try
             {
@@ -40,10 +27,9 @@ namespace Iconlook.Service.Api
                 var query = from t in html.DocumentNode.SelectNodes("//tbody")
                             from r in t.SelectNodes("tr")
                             select r;
-                var position = new Stack<int>(Enumerable.Range(1, query.Count()));
                 var result = query.Select(x => new PrepResponse
                 {
-                    Position = position.Pop(),
+                    Position = new Random().Next(1, 66),
                     Score = new Random().Next(-100, 100),
                     Voters = new Random().Next(100, 1000),
                     Votes = new Random().Next(1000000, 10000000),
@@ -58,24 +44,30 @@ namespace Iconlook.Service.Api
                     Id = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3),
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase()
                 }).Distinct().OrderBy(x => x.Position).Reverse();
-                if (Request.QueryString.Get("edit") is string id && id.HasValue() && id != "all")
+                if (request.Filter.HasValue())
                 {
-                    response = new ListResponse<PrepResponse>(result.Where(x => x.Id == id).ToList())
+                    var name = request.Filter
+                        .Replace("substringof('", string.Empty)
+                        .Replace("',tolower(Name))", string.Empty);
+                    return new ListResponse<PrepResponse>(result
+                        .Where(x => x.Name.ToLower().Contains(name.ToLower()))
+                        .Skip(request.Skip).Take(request.Take).ToList());
+                }
+                if (request.Edit.HasValue() && request.Edit != "all")
+                {
+                    return new ListResponse<PrepResponse>(result.Where(x => x.Id == request.Edit).ToList())
                     {
                         Skip = 0,
                         Take = 1,
                         Count = 1
                     };
                 }
-                else
+                return new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList())
                 {
-                    response = new ListResponse<PrepResponse>(result.Skip(request.Skip).Take(request.Take).ToList())
-                    {
-                        Skip = request.Skip,
-                        Take = request.Take,
-                        Count = query.Count()
-                    };
-                }
+                    Skip = request.Skip,
+                    Take = request.Take,
+                    Count = query.Count()
+                };
             }
             catch (Exception exception)
             {
