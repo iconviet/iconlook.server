@@ -42,7 +42,7 @@ namespace Iconlook.Service.Api
                     UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
                     SupplyPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
                     Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase(),
-                    Id = int.Parse(x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3))
+                    IdExternal = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)
                 }).Distinct().OrderBy(x => x.Position).Reverse();
                 if (request.Filter.HasValue())
                 {
@@ -56,7 +56,7 @@ namespace Iconlook.Service.Api
                 if (request.Edit.HasValue() && request.Edit != "all")
                 {
                     return new ListResponse<PrepResponse>(
-                        result.Where(x => x.Id.ToString() == request.Edit).ToList())
+                        result.Where(x => x.IdExternal.ToString() == request.Edit).ToList())
                     {
                         Skip = 0,
                         Take = 1,

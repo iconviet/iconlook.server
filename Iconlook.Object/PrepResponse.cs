@@ -5,7 +5,6 @@ namespace Iconlook.Object
 {
     public class PrepResponse : ResponseBase<PrepResponse>
     {
-        public int Id { get; set; }
         public int Votes { get; set; }
         public int Score { get; set; }
         public int Voters { get; set; }
@@ -14,6 +13,7 @@ namespace Iconlook.Object
         public bool Direction { get; set; }
         public string Location { get; set; }
         public DateTime Joined { get; set; }
+        public string IdExternal { get; set; }
         public DateTime LastSeen { get; set; }
         public int ProducedBlocks { get; set; }
         public int RejectedBlocks { get; set; }

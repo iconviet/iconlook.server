@@ -7,17 +7,23 @@ using ServiceStack.DataAnnotations;
 namespace Iconlook.Entity
 {
     [Alias(nameof(Prep))]
-    public class Prep : EntityBase<Prep>, IHasState<PrepState>, IHasTimestamp, IHasHash
+    public class Prep : EntityBase<Prep>, IHasId<long>, IHasTimestamp, IHasState<PrepState>
     {
         [PrimaryKey]
-        public int Id { get; set; }
+        public long Id { get; set; }
         
+        [StringLength(18)]
+        public string IdExternal { get; set; }
+
         [ForeignKey(typeof(PrepState_))]
         public PrepState State { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
+        [StringLength(42)]
+        public string Address { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -28,20 +34,18 @@ namespace Iconlook.Entity
 
         public int Votes { get; set; }
 
-        public int CScore { get; set; }
-
         public int Voters { get; set; }
+        
+        public int Score { get; set; }
 
-        [StringLength(64)]
-        public string Hash { get; set; }
-
+        
         public int Position { get; set; }
 
         public bool Direction { get; set; }
 
         public DateTimeOffset LastSeen { get; set; }
 
-        public int MissedBlocks { get; set; }
+        public int RejectedBlocks { get; set; }
 
         public int ProducedBlocks { get; set; }
 
@@ -56,7 +60,7 @@ namespace Iconlook.Entity
             base.AddRules(validator);
             validator.RuleFor(x => x.Id).NotEmpty();
             validator.RuleFor(x => x.State).IsInEnum().NotEqual(PrepState.Empty);
-            validator.RuleFor(x => x.Hash).Length(64).When(x => x.State != PrepState.Empty);
+            validator.RuleFor(x => x.Address).Length(4).When(x => x.State != PrepState.Empty);
         }
     }
 }
