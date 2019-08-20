@@ -1,30 +1,35 @@
 ﻿@page "/"
 @using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel
 <style type="text/css">
-    .e-tab {
-        background-color: white;
+    
+    .main.card .e-grid {
+        min-height: 520px;
     }
 
-    .e-grid .e-rowcell {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    .e-grid .e-content {
+        overflow: hidden;
     }
 
     .e-grid .e-gridheader {
         display: none;
     }
 
+    .e-tab {
+        background-color: white;
+    }
+
     .main.card {
         height: 567px !important;
     }
 
-        .main.card .e-grid {
-            min-height: 520px;
-        }
-
     button.search-button:hover,
     button.search-filter:hover {
         color: #1aaaba !important;
+    }
+
+    .e-grid .e-rowcell {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     .search-input .e-input-group::after,
@@ -135,7 +140,7 @@
                 </div>
             </div>
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
-                <div class="col col-auto">
+                <div class="col col-auto d-none d-sm-block">
                     <EjsDropDownButton Items="@Items" CssClass="search-filter">EVERYTHING</EjsDropDownButton>
                     @code {
 
@@ -218,11 +223,20 @@
     </div>
     <div class="col-md">
         @code {
+            public void Cancel(SelectingEventArgs args)
+            {
+                if (args.IsSwiped)
+                {
+                    args.Cancel = true;
+                }
+            }
+
             public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
 
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
         }
         <EjsTab CssClass="main card mb-3 shadow-sm">
+            <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Blocks">
                     <ContentTemplate>

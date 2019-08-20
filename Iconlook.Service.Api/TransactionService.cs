@@ -4,13 +4,11 @@ using Agiper;
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
-using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class TransactionService : ServiceBase
     {
-        [CacheResponse(Duration = 60, MaxAge = 30)]
         public object Any(TransactionListRequest request)
         {
             var response = new ListResponse<TransactionResponse>(Enumerable.Range(1, 20).Select(x => new TransactionResponse
