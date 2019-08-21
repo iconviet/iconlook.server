@@ -7,7 +7,7 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="14">
+        <GridColumn Width="15">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -24,7 +24,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="38" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
+        <GridColumn Width="30" HeaderText="Position" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="186" HeaderText="P-Rep Name">
+        <GridColumn Width="195" HeaderText="P-Rep Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -47,7 +47,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="35" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Center">
+        <GridColumn Width="25" Field="@nameof(PrepResponse.LastSeen)" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -59,7 +59,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="110" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -70,7 +70,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="62" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -80,7 +80,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="62" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
