@@ -99,13 +99,11 @@
 
             public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
 
-            public TabHeader Reliability = new TabHeader { Text = "RELIABILITY" };
+            public TabHeader Capability = new TabHeader { Text = "CAPABILITY" };
 
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
 
             public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
-
-            public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
         }
         <EjsTab CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
@@ -124,10 +122,10 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Reliability">
+                <TabItem Header="@Capability">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListBackgroundGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
+                            <PrepListCapabilityGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListCapabilityGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
@@ -141,14 +139,7 @@
                 <TabItem Header="@Transparency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListBackgroundGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="@ScoreMatrix">
-                    <ContentTemplate>
-                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListScoreMatrixGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListScoreMatrixGrid>
+                            <PrepListTransparencyGrid EditKey="@Key" PageSize="@Size" PageSizes="@Sizes"></PrepListTransparencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>

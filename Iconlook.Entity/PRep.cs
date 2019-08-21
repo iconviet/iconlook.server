@@ -38,7 +38,21 @@ namespace Iconlook.Entity
 
         public int Score { get; set; }
 
+        public string Goals { get; set; }
+
         public int Position { get; set; }
+
+        public string Entity { get; set; }
+
+        public string Identity { get; set; }
+
+        public string Hosting { get; set; }
+        
+        public string Regions { get; set; }
+
+        public bool Testnet { get; set; }
+
+        public int Size { get; set; }
 
         public bool Direction { get; set; }
 

@@ -62,6 +62,7 @@ namespace Iconlook.Service.Api
                         Joined = DateTime.UtcNow,
                         State = PrepState.Enabled,
                         LastSeen = DateTime.UtcNow,
+                        Size = new Random().Next(1, 10),
                         Position = new Random().Next(1, 66),
                         Score = new Random().Next(-100, 100),
                         Voters = new Random().Next(100, 1000),
@@ -71,9 +72,15 @@ namespace Iconlook.Service.Api
                         RejectedBlocks = new Random().Next(100, 1000),
                         ProducedBlocks = new Random().Next(100000, 1000000),
                         Address = "hxd2d001c3938c7f6d31bc76b1cda922a64c51c8bf",
+                        Testnet = new[] { true, false }[new Random().Next(0, 1)],
                         Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                         UptimePercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
+                        Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
                         SupplyPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
+                        Identity = new[] { "Verified", "Unknown", "Anonymous" }[new Random().Next(0, 3)],
+                        Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
+                        Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],
+                        Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
                         Location = x.SelectNodes("td")[3].InnerText.Trim().Split(',').Last().ToLower().ToTitleCase(),
                         IdExternal = x.SelectSingleNode("td/a").GetAttributeValue("href", "0").Split('/').ElementAt(3)
                     });

@@ -1,4 +1,17 @@
-﻿@code {
+﻿<style>
+    .transaction-hash {
+        padding: 5px 7px;
+        border-radius: 3px;
+        background-color: #f5f5f5;
+    }
+
+    .transaction-address {
+        padding: 5px 7px;
+        border-radius: 3px;
+        background-color: #e1fafd;
+    }
+</style>
+@code {
     [Parameter]
     public int PageSize { get; set; }
 
@@ -39,107 +52,86 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="135" Field="@nameof(PrepResponse.Location)" HeaderText="Location">
+        <GridColumn Width="105" Field="@nameof(PrepResponse.Address)" HeaderText="Wallet" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary no-underline" href="address/@prep.Address">
+                            <span class="fs-n1 mono transaction-address">
+                                <span class="font-weight-semibold">@prep.Address.Substring(0, 2)</span>@prep.Address.Substring(2, 10)
+                            </span>
+                        </a>
+                    }
+                }
+            </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="115" Field="@nameof(PrepResponse.Balance)" TextAlign="TextAlign.Right">
             <HeaderTemplate>
-                <span>Location<i class='far pl-2 fa-map-marker-alt'></i></span>
+                <span>Balance</span>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="pt-1 tx-condensed">@prep.Location</span>
+                        <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="105" Field="@nameof(PrepResponse.Location)" HeaderText="Joined">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="tx-condensed">@prep.Joined.ToString("dd MMM, yyyy")</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="92" Field="@nameof(PrepResponse.Location)" HeaderText="Entity">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span>@prep.Entity</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PrepResponse.Location)" HeaderText="Size">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="font-weight-bold">3</span><span class="pl-1 fs-n1 tx-light">people</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Identity">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span>@prep.Identity</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="126" Field="@nameof(PrepResponse.Location)" HeaderText="Experience" TextAlign="TextAlign.Left">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="tx-condensed">Dev, Biz, Marketing</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(PrepResponse.Balance)" TextAlign="TextAlign.Right">
             <HeaderTemplate>
-                <span><i class='far pr-2 fa-globe'></i>Website</span>
+                <span>Sold YTD</span>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://www.iconviet.io">iconviet.io</a>
+                        <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(PrepResponse.Balance)" TextAlign="TextAlign.Right">
             <HeaderTemplate>
-                <span><i class='fab pr-2 fa-twitter'></i>Twitter</span>
+                <span>Received YTD</span>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://twitter.com/iconviet">iconviet</a>
+                        <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
+                        <span class="pl-1 tx-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="TextAlign.Right" DisableHtmlEncode="false">
-            <HeaderTemplate>
-                <span><i class='fab pr-2 fa-telegram'></i>Telegram</span>
-            </HeaderTemplate>
+        <GridColumn Width="135" Field="@nameof(PrepResponse.Address)" HeaderText="Last TX Out" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://t.me/iconviet">iconviet</a>
+                        <a class="secondary no-underline" href="transaction/@prep.Address">
+                            <span class="fs-n1 mono transaction-hash">
+                                <span class="font-weight-semibold">@prep.Address.Substring(0, 2)</span>@prep.Address.Substring(0, 10)
+                            </span>
+                        </a>
                     }
                 }
             </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn HeaderText="Description" TextAlign="TextAlign.Right">
+            <Template>
+                <span class="tx-light">Lorem ipsum</span>
+            </Template>
+            <EditTemplate />
         </GridColumn>
     </GridColumns>
 </EjsGrid>
