@@ -22,7 +22,7 @@
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/css/bootstrap.css",
-      "wwwroot/static/css/ej2-*.css",
+      "wwwroot/static/css/ej2-*.min.css",
       "wwwroot/static/css/gf-*.css",
       "wwwroot/static/css/fa-*.css",
       "wwwroot/static/css/site*.css"
