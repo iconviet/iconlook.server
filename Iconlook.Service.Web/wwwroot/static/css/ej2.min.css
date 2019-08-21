@@ -2,7 +2,6 @@
 /**
  * ej2 styles
  */
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
 @font-face {
   font-family: "e-icons";
   font-style: normal;
@@ -48,6 +47,7 @@
 
 .e-rtl {
   direction: rtl;
+  text-align: right;
 }
 
 .e-overlay {
@@ -17552,8 +17552,7 @@ body.e-colorpicker-overflow {
   width: auto;
 }
 
-.e-dialog .e-dlg-header,
-.e-dialog .e-dlg-header * {
+.e-dialog .e-dlg-header {
   display: block;
   font-size: 18px;
   font-weight: normal;
@@ -35543,7 +35542,7 @@ ejs-sidebar {
 
 .e-multiselect .e-input-group-icon.e-ddl-icon {
   float: right;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 
 .e-multiselect.e-rtl .e-input-group-icon.e-ddl-icon {
@@ -35562,7 +35561,7 @@ ejs-sidebar {
 
 .e-multiselect.e-checkbox .e-multi-select-wrapper,
 .e-multiselect .e-multi-select-wrapper.e-down-icon {
-  padding: 2px 0 0;
+  padding: 0;
 }
 
 .e-ddl.e-popup.e-multi-select-list-wrapper .e-filter-parent .e-input-filter,
@@ -44857,7 +44856,6 @@ label[for*='_wholeWord_e-de-rtl'] {
 
 .e-grid .e-table {
   border-collapse: separate;
-  border-spacing: 0.25px;
   table-layout: fixed;
   width: 100%;
 }
@@ -49179,6 +49177,14 @@ ejs-filemanager {
   content: "";
 }
 
+.e-treegrid .e-toolbar-item .e-indent::before {
+  content: "";
+}
+
+.e-treegrid .e-toolbar-item .e-outdent::before {
+  content: "";
+}
+
 .e-bigger .e-treegrid .e-treegridexpand,
 .e-bigger .e-treegrid .e-treegridcollapse {
   height: 18px;
@@ -49277,6 +49283,114 @@ ejs-filemanager {
 .e-treegrid .e-table .e-detailrowcollapse,
 .e-treegrid .e-filterbarcell.e-mastercell {
   display: none;
+}
+
+.e-treegrid .e-icons.e-errorelem {
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.e-treegrid .e-errorelem::before {
+  color: #e3165b;
+  content: '\e22a';
+  transform: rotate(180deg);
+}
+
+.e-treegrid .e-gridcontent td.e-childborder {
+  border-color: #e3165b;
+  border-width: 1px 0 0;
+  box-shadow: 0 1px 0 0 #e3165b;
+  position: relative;
+  z-index: 1;
+}
+
+.e-treegrid .e-gridcontent td.e-rowcell.e-childborder.e-dragborder,
+.e-treegrid .e-gridcontent td.e-rowcell.e-dropbottom.e-dragborder td.e-rowdragdrop.e-dropbottom.e-dragborder {
+  box-shadow: 0 1px 0 0 #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-rowcell.e-dragborder,
+.e-treegrid .e-gridcontent tr.e-row:first-child .e-rowcell.e-dragborder,
+.e-treegrid .e-gridcontent .e-rowdragdrop.e-dragborder {
+  box-shadow: 0 0 0 0;
+}
+
+.e-treegrid .e-gridcontent td.e-childborder:first-child {
+  border-left: 1px solid #e3165b;
+  box-shadow: 0 1px 0 0 #e3165b;
+  position: relative;
+  z-index: 1;
+}
+
+.e-treegrid .e-gridcontent td.e-rowcell.e-childborder:last-child {
+  border-right: 1px solid #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-lastrowcell.e-childborder {
+  border-width: 1px 0;
+}
+
+.e-treegrid .e-gridcontent td.e-lastrowcell.e-childborder:last-child {
+  border-right: 1px solid #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-lastrowcell.e-childborder:first-child {
+  border-left: 1px solid #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-dropbottom:first-child,
+.e-treegrid .e-gridcontent td.e-rowcell.e-dropbottom,
+.e-treegrid .e-gridcontent td.e-dropbottom {
+  box-shadow: 0 1px 0 0 #e3165b;
+  position: relative;
+  z-index: 1;
+}
+
+.e-treegrid .e-gridcontent td.e-droptop:first-child,
+.e-treegrid .e-gridcontent td.e-rowcell.e-droptop {
+  border-top-color: #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-lastrowcell.e-dropbottom {
+  border-bottom-color: #e3165b;
+}
+
+.e-treegrid .e-gridcontent td.e-rowdragdrop.e-droptop.e-dragborder {
+  box-shadow: 0 0 0 0;
+}
+
+.e-treegrid .e-gridcontent .e-gridheader .e-firstrow-dragborder {
+  height: 1px;
+}
+
+.e-treegrid .e-gridcontent .e-lastrow-dragborder {
+  height: 0;
+}
+
+.e-treegrid .e-gridheader .e-firstrow-dragborder {
+  height: 0;
+}
+
+.e-treegrid .e-droptop .e-lastrow-dragborder {
+  height: 0;
+}
+
+.e-treegrid .e-treegrid-relative {
+  position: relative;
+}
+
+.e-treegrid .e-gridheader .e-firstrow-dragborder tr:first-child.e-dropbottom {
+  height: 0;
+}
+
+.e-treegrid .e-gridheader .e-firstrow-border,
+.e-treegrid .e-gridcontent .e-lastrow-border {
+  background-color: #e3165b;
+  bottom: 0;
+  height: 1px;
+  position: absolute;
+  z-index: 1;
 }
 
 /*! component's theme wise override definitions and variables */
@@ -59945,7 +60059,7 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 }
 
 .e-pivotview .e-toolbar-formatting::before {
-  content: '\e70b';
+  content: '\e725';
 }
 
 .e-pivotview-pdf-export::before {
@@ -59980,14 +60094,32 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
   content: '\e554';
 }
 
+.e-pivot-format-menu::before {
+  content: '\e728';
+}
+
+.e-pivot-number-format-menu::before {
+  content: '\e70b';
+}
+
+.e-pivot-conditional-format-menu::before {
+  content: '\e725';
+}
+
+.e-pivot-format-toolbar::before {
+  content: '\e70b';
+}
+
 /*! PivotView layout */
 .e-pivotview .e-value-field-settings,
-.e-pivotview .e-member-editor-dialog {
+.e-pivotview .e-member-editor-dialog,
+.e-pivotview .e-pivot-format-dialog {
   max-height: 450px !important;
 }
 
 .e-pivotview .e-value-field-settings,
-.e-pivotview .e-member-editor-dialog {
+.e-pivotview .e-member-editor-dialog,
+.e-pivotview .e-pivot-format-dialog {
   border-radius: 4px;
   max-width: 400px;
   width: auto;
@@ -59996,19 +60128,22 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-value-field-settings .e-dlg-header-content,
 .e-pivotview .e-value-field-settings .e-footer-content,
 .e-pivotview .e-member-editor-dialog .e-dlg-header-content,
-.e-pivotview .e-member-editor-dialog .e-footer-content {
+.e-pivotview .e-member-editor-dialog .e-footer-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-header-content,
+.e-pivotview .e-pivot-format-dialog .e-footer-content {
   border-radius: 4px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-header-content,
-.e-pivotview .e-member-editor-dialog .e-dlg-header-content {
+.e-pivotview .e-member-editor-dialog .e-dlg-header-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-header-content {
   border: 0;
   font-weight: normal;
 }
 
 .e-pivotview .e-value-field-settings .e-footer-content,
-.e-pivotview .e-member-editor-dialog .e-footer-content {
-  border-top: 1px solid #e0e0e0;
+.e-pivotview .e-member-editor-dialog .e-footer-content,
+.e-pivotview .e-pivot-format-dialog .e-footer-content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding-bottom: 8px;
@@ -60016,42 +60151,49 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 }
 
 .e-pivotview .e-value-field-settings .e-footer-content .e-clear-filter-button,
-.e-pivotview .e-member-editor-dialog .e-footer-content .e-clear-filter-button {
+.e-pivotview .e-member-editor-dialog .e-footer-content .e-clear-filter-button,
+.e-pivotview .e-pivot-format-dialog .e-footer-content .e-clear-filter-button {
   float: left;
 }
 
 .e-pivotview .e-value-field-settings .e-footer-content .e-clear-filter-button.e-disable,
-.e-pivotview .e-member-editor-dialog .e-footer-content .e-clear-filter-button.e-disable {
+.e-pivotview .e-member-editor-dialog .e-footer-content .e-clear-filter-button.e-disable,
+.e-pivotview .e-pivot-format-dialog .e-footer-content .e-clear-filter-button.e-disable {
   display: none;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content,
-.e-pivotview .e-member-editor-dialog .e-dlg-content {
+.e-pivotview .e-member-editor-dialog .e-dlg-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content {
   overflow: hidden;
   padding: 0;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-editor-label-wrapper,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-editor-label-wrapper {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-editor-label-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-editor-label-wrapper {
   background-color: #f5f5f5;
   padding: 12px 10px 16px 20px;
   width: 240px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-editor-label-wrapper .e-editor-label,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-editor-label-wrapper .e-editor-label {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-editor-label-wrapper .e-editor-label,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-editor-label-wrapper .e-editor-label {
   color: #000;
   font: 500 13px Roboto;
   opacity: 0.87;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content {
   padding: 0 20px 10px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper {
   display: -ms-flexbox;
   display: flex;
 }
@@ -60059,19 +60201,23 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content {
   font-size: 13px;
   font-weight: 500;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-title {
   -ms-flex: none;
       flex: none;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-field-name-text-wrapper .e-field-name-content {
   -ms-flex: auto;
       flex: auto;
   width: 100%;
@@ -60084,7 +60230,11 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper {
   padding-top: 20px;
 }
 
@@ -60111,7 +60261,19 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-type-option-text,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-base-field-option-text,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-base-item-option-text,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-type-option-text {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-type-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper .e-base-field-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper .e-base-item-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper .e-type-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper .e-base-field-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper .e-base-item-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper .e-type-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-base-field-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-base-item-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-type-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-base-field-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-base-item-option-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-type-option-text {
   font-size: 13px;
   font-weight: 500;
   width: 100%;
@@ -60124,24 +60286,31 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper .e-caption-input-text,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper .e-caption-input-text,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-caption-input-text,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-caption-input-text {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-caption-input-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-caption-input-wrapper .e-caption-input-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-type-option-wrapper .e-caption-input-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-field-option-wrapper .e-caption-input-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-field-div-content .e-field-option-wrapper .e-base-item-option-wrapper .e-caption-input-text {
   font-size: 13px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-editor-search-wrapper,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-editor-search-wrapper {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-editor-search-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-editor-search-wrapper {
   padding: 0 20px 10px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-member-prompt,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-prompt {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-prompt,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-member-prompt {
   padding: 15px 20px;
   text-align: center;
   width: 100%;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-member-editor-container,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container {
   height: 160px;
   max-width: 400px;
   overflow: auto;
@@ -60151,7 +60320,9 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul {
   margin-left: -35px;
   overflow: hidden;
 }
@@ -60159,56 +60330,68 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul li .e-list-text,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul li .e-list-text,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul li .e-list-text,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul li .e-list-text {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul li .e-list-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-select-all-wrapper ul li .e-list-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-member-editor-container ul li .e-list-text {
   font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif", "-apple-system", "BlinkMacSystemFont";
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-member-editor-wrapper .e-disable,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-disable {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-member-editor-wrapper .e-disable,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-member-editor-wrapper .e-disable {
   display: none;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper {
   border: none;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
   margin: 0 0 0 6px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon {
   height: 14px;
   min-width: 14px;
   width: 14px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon::before,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon::before {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon::before,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-text-wrap .e-tab-icon::before {
   font-size: 14px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
   margin: 0 6px 0 0;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter {
   padding-top: 20px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter .e-member-editor-container {
   height: 147px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter {
   height: 248px;
   overflow: auto;
   padding: 20px;
@@ -60218,7 +60401,9 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-text-div {
   font-size: 13px;
   font-weight: 500;
 }
@@ -60234,76 +60419,145 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-separator-div,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-separator-div {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-separator-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-separator-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-separator-div {
   padding-top: 20px;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-between-text-div,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-between-text-div,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-between-text-div,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-between-text-div {
   padding: 8px 0;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-disable,
 .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-disable,
 .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-disable,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-disable {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-disable,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-disable,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-disable {
   display: none;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-empty-field::-webkit-input-placeholder,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field::-webkit-input-placeholder {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field::-webkit-input-placeholder,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-empty-field::-webkit-input-placeholder {
   color: #f44336 !important;
   font-weight: 600 !important;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-empty-field:-moz-placeholder,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field:-moz-placeholder {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field:-moz-placeholder,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-empty-field:-moz-placeholder {
   color: #f44336 !important;
   font-weight: 600 !important;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-empty-field::-moz-placeholder,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field::-moz-placeholder {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field::-moz-placeholder,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-empty-field::-moz-placeholder {
   color: #f44336 !important;
   font-weight: 600 !important;
 }
 
 .e-pivotview .e-value-field-settings .e-dlg-content .e-empty-field:-ms-input-placeholder,
-.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field:-ms-input-placeholder {
+.e-pivotview .e-member-editor-dialog .e-dlg-content .e-empty-field:-ms-input-placeholder,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-empty-field:-ms-input-placeholder {
   color: #f44336 !important;
   font-weight: 600 !important;
 }
 
 .e-pivotview .e-value-field-settings.e-excel-filter,
-.e-pivotview .e-member-editor-dialog.e-excel-filter {
+.e-pivotview .e-member-editor-dialog.e-excel-filter,
+.e-pivotview .e-pivot-format-dialog.e-excel-filter {
   min-width: 280px;
 }
 
 .e-pivotview .e-value-field-settings.e-excel-filter .e-editor-label-wrapper,
-.e-pivotview .e-member-editor-dialog.e-excel-filter .e-editor-label-wrapper {
+.e-pivotview .e-member-editor-dialog.e-excel-filter .e-editor-label-wrapper,
+.e-pivotview .e-pivot-format-dialog.e-excel-filter .e-editor-label-wrapper {
   padding: 16px 10px 9px 20px;
   width: 280px;
 }
 
 .e-pivotview .e-value-field-settings.e-rtl .e-member-editor-wrapper ul,
-.e-pivotview .e-member-editor-dialog.e-rtl .e-member-editor-wrapper ul {
+.e-pivotview .e-member-editor-dialog.e-rtl .e-member-editor-wrapper ul,
+.e-pivotview .e-pivot-format-dialog.e-rtl .e-member-editor-wrapper ul {
   margin-left: 0;
   margin-right: -35px;
 }
 
 .e-pivotview .e-value-field-settings.e-rtl .e-footer-content .e-clear-filter-button,
-.e-pivotview .e-member-editor-dialog.e-rtl .e-footer-content .e-clear-filter-button {
+.e-pivotview .e-member-editor-dialog.e-rtl .e-footer-content .e-clear-filter-button,
+.e-pivotview .e-pivot-format-dialog.e-rtl .e-footer-content .e-clear-filter-button {
   float: right;
 }
 
-.e-pivotview .e-value-field-settings {
+.e-pivotview .e-value-field-settings .e-footer-content,
+.e-pivotview .e-member-editor-dialog .e-footer-content {
+  border-top: 1px solid #e0e0e0;
+}
+
+.e-pivotview .e-value-field-settings,
+.e-pivotview .e-pivot-format-dialog {
   min-width: 300px;
 }
 
-.e-pivotview .e-value-field-settings .e-dlg-content {
+.e-pivotview .e-value-field-settings .e-dlg-content,
+.e-pivotview .e-pivot-format-dialog .e-dlg-content {
   overflow: auto;
+}
+
+.e-pivotview .e-pivot-format-dialog {
+  max-width: 350px;
+}
+
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer {
+  padding: 0 20px;
+}
+
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-value-lable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-lable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-custom-lable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-symbol-lable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-grouping-lable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-decimal-lable {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-value-drop,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-drop,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-custom-text,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-symbol-drop,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-grouping-drop,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-decimal-drop {
+  margin-bottom: 25px;
+}
+
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-custom-text.e-disable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-symbol-drop.e-disable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-custom-lable.e-disable,
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer .e-pivot-format-symbol-lable.e-disable {
+  display: none;
+}
+
+.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer table tr td:nth-child(1) {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.e-pivotview .e-pivot-format-dialog.e-rtl .e-pivot-format-dialog-outer table tr td:nth-child(1) {
+  padding-left: 30px;
+  padding-right: 0;
 }
 
 .e-pivotview .e-pivot-toolbar {
@@ -60429,46 +60683,62 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-header-content .e-clear-filter-button.e-small,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-header-content .e-clear-filter-button.e-small,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-header-content .e-clear-filter-button.e-small,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-header-content .e-clear-filter-button.e-small,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-header-content .e-clear-filter-button.e-small {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-header-content .e-clear-filter-button.e-small,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-header-content .e-clear-filter-button.e-small {
   font-size: 14px;
   top: 0;
 }
 
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
   margin: 0 0 0 6px;
 }
 
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-filter-tab-wrapper.e-rtl .e-tab-header .e-toolbar-item .e-icon-left + .e-tab-text {
   margin: 0 6px 0 0;
 }
 
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-excelfilter .e-member-editor-container,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-excelfilter .e-member-editor-container,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-excelfilter .e-member-editor-container {
   height: 100px;
 }
 
@@ -60476,18 +60746,26 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter {
   height: 220px;
 }
 
@@ -60495,18 +60773,26 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-filter-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-filter-text-div,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-text-div {
   font-size: 14px;
 }
 
@@ -60522,6 +60808,12 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-separator-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-separator-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-separator-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-separator-div,
@@ -60534,6 +60826,12 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-separator-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-separator-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-separator-div,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-separator-div,
@@ -60546,6 +60844,12 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-separator-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-separator-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-separator-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-separator-div,
@@ -60557,7 +60861,13 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-separator-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-separator-div {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-separator-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-1,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-filter-option-wrapper-2,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-separator-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-1,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-filter-option-wrapper-2,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-separator-div {
   padding-top: 24px;
 }
 
@@ -60565,30 +60875,49 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-between-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-between-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger .e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-between-text-div,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-label-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-member-editor-dialog .e-dlg-content .e-value-filter .e-between-text-div,
 .e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-label-filter .e-between-text-div,
-.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div {
+.e-bigger.e-pivotview .e-value-field-settings .e-dlg-content .e-value-filter .e-between-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-label-filter .e-between-text-div,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-dlg-content .e-value-filter .e-between-text-div {
   padding: 10px 0;
 }
 
 .e-bigger .e-pivotview .e-member-editor-dialog.e-excel-filter,
 .e-bigger .e-pivotview .e-value-field-settings.e-excel-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog.e-excel-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog.e-excel-filter,
 .e-bigger.e-pivotview .e-value-field-settings.e-excel-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog.e-excel-filter,
 .e-bigger .e-pivotview .e-member-editor-dialog.e-excel-filter,
 .e-bigger .e-pivotview .e-value-field-settings.e-excel-filter,
+.e-bigger .e-pivotview .e-pivot-format-dialog.e-excel-filter,
 .e-bigger.e-pivotview .e-member-editor-dialog.e-excel-filter,
-.e-bigger.e-pivotview .e-value-field-settings.e-excel-filter {
+.e-bigger.e-pivotview .e-value-field-settings.e-excel-filter,
+.e-bigger.e-pivotview .e-pivot-format-dialog.e-excel-filter {
   min-width: 280px;
+}
+
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer,
+.e-bigger .e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer,
+.e-bigger.e-pivotview .e-pivot-format-dialog .e-pivot-format-dialog-outer {
+  padding: 0 20px 10px;
 }
 
 .e-bigger .e-pivotview .e-value-field-settings .e-value-field-div-content,
