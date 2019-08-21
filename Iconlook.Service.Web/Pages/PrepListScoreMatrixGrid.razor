@@ -37,14 +37,14 @@
 <EjsGrid EnableHover="false"
          EnableAltRow="true"
          TValue="PrepResponse"
-         AllowPaging="CanPage"
-         AllowSelection="CanEdit"
-         ModelType="PrepModelType"
-         GridLines="GridLine.Horizontal"
+         AllowPaging="@CanPage"
+         AllowSelection="@CanEdit"
+         ModelType="@PrepModelType"
+         GridLines="@GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <HeaderTemplate>
@@ -63,7 +63,7 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
+        <GridColumn Width="200" HeaderText="Development" TextAlign="@TextAlign.Center">
             <Template>
                 <EjsChipList>
                     <ChipCollection>
@@ -75,7 +75,7 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Awareness" TextAlign="TextAlign.Center">
+        <GridColumn Width="200" HeaderText="Awareness" TextAlign="@TextAlign.Center">
             <Template>
                 <EjsChipList>
                     <ChipCollection>
@@ -87,7 +87,7 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Business" TextAlign="TextAlign.Center">
+        <GridColumn Width="200" HeaderText="Business" TextAlign="@TextAlign.Center">
             <Template>
                 <EjsChipList>
                     <ChipCollection>
@@ -99,7 +99,7 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Finance" TextAlign="TextAlign.Center">
+        <GridColumn Width="200" HeaderText="Finance" TextAlign="@TextAlign.Center">
             <Template>
                 <EjsChipList>
                     <ChipCollection>
@@ -111,7 +111,7 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="Score" TextAlign="TextAlign.Right">
+        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="Score" TextAlign="@TextAlign.Right">
             <HeaderTemplate>
                 <div class="pr-2">Score&nbsp;</div>
             </HeaderTemplate>

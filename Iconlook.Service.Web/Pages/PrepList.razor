@@ -105,40 +105,40 @@
                 Previous = new TabAnimationPrevious { Duration = 0 }
             };
         }
-        <EjsTab Animation="Animation" CssClass="main card shadow-sm">
+        <EjsTab Animation="@Animation" CssClass="main card shadow-sm">
             <TabItems>
-                <TabItem Header="Summary">
+                <TabItem Header="@Summary">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListSummaryGrid EditKey="Key" CanPage="Page" PageSize="Size" PageSizes="Sizes"></PrepListSummaryGrid>
+                            <PrepListSummaryGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListSummaryGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="Background">
+                <TabItem Header="@Background">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListBackgroundGrid EditKey="Key" CanPage="Page" PageSize="Size" PageSizes="Sizes"></PrepListBackgroundGrid>
+                            <PrepListBackgroundGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListBackgroundGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="Capability">
+                <TabItem Header="@Capability">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListCapabilityGrid EditKey="Key" CanPage="Page" PageSize="Size" PageSizes="Sizes"></PrepListCapabilityGrid>
+                            <PrepListCapabilityGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListCapabilityGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="Contribution">
+                <TabItem Header="@Contribution">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListContributionGrid EditKey="Key" CanPage="Page" PageSize="Size" PageSizes="Sizes"></PrepListContributionGrid>
+                            <PrepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListContributionGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="Transparency">
+                <TabItem Header="@Transparency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PrepListTransparencyGrid EditKey="Key" CanPage="Page" PageSize="Size" PageSizes="Sizes"></PrepListTransparencyGrid>
+                            <PrepListTransparencyGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListTransparencyGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>

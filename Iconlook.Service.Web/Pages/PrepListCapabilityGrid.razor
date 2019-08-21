@@ -16,14 +16,14 @@
 <EjsGrid EnableHover="false"
              EnableAltRow="true"
              TValue="PrepResponse"
-             AllowPaging="CanPage"
-             AllowSelection="CanEdit"
-             ModelType="PrepModelType"
-             GridLines="GridLine.Horizontal"
+             AllowPaging="@CanPage"
+             AllowSelection="@CanEdit"
+             ModelType="@PrepModelType"
+             GridLines="@GridLine.Horizontal"
              Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-        <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-        <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-        <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+        <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+        <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
+        <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
         <GridColumns>
             <GridColumn Width="213" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
                 <HeaderTemplate>
@@ -42,7 +42,7 @@
                 </Template>
                 <EditTemplate />
             </GridColumn>
-            <GridColumn Width="110" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
+            <GridColumn Width="110" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="@TextAlign.Center">
                 <Template>
                     @{
                         if (context is PrepResponse prep)
@@ -79,7 +79,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Field="@nameof(PrepResponse.Location)" HeaderText="Testnet Participation" TextAlign="TextAlign.Left">
+            <GridColumn Field="@nameof(PrepResponse.Location)" HeaderText="Testnet Participation">
                 <Template>
                     @{
                         if (context is PrepResponse prep)

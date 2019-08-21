@@ -27,16 +27,16 @@
 <EjsGrid EnableHover="false"
          EnableAltRow="true"
          TValue="PrepResponse"
-         AllowPaging="CanPage"
-         AllowSelection="CanEdit"
-         ModelType="PrepModelType"
-         GridLines="GridLine.Horizontal"
+         AllowPaging="@CanPage"
+         AllowSelection="@CanEdit"
+         ModelType="@PrepModelType"
+         GridLines="@GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
+        <GridColumn Width="30" HeaderText="⇵" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -54,7 +54,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" TextAlign="TextAlign.Left" HeaderText="&nbsp;#" DisableHtmlEncode="false">
+        <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -82,7 +82,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="51" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="TextAlign.Center">
+        <GridColumn Width="51" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -95,7 +95,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
+        <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube positive-dark"></i>
             </HeaderTemplate>
@@ -109,7 +109,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="TextAlign.Center">
+        <GridColumn Width="65" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube negative-dark"></i>
             </HeaderTemplate>
@@ -123,7 +123,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="51" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
+        <GridColumn Width="51" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -134,7 +134,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Center">
+        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right" HeaderTextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <div class="pl-2">Tally</div>
             </HeaderTemplate>
@@ -149,7 +149,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -160,7 +160,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="75" HeaderText="% 24h" TextAlign="TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
+        <GridColumn Width="75" HeaderText="% 24h" TextAlign="@TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -178,7 +178,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0">
+        <GridColumn Width="60" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="@TextAlign.Right" Format="N0">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -189,7 +189,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="140" HeaderText="Contribution" TextAlign="TextAlign.Center">
+        <GridColumn Width="140" HeaderText="Contribution" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -198,7 +198,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="110" Field="@nameof(PrepResponse.Balance)" TextAlign="TextAlign.Right">
+        <GridColumn Width="110" Field="@nameof(PrepResponse.Balance)" TextAlign="@TextAlign.Right">
             <HeaderTemplate>
                 <span>Balance</span>
             </HeaderTemplate>

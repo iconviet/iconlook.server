@@ -139,7 +139,7 @@
                                      Query="new ej.data.Query()"
                                      Placeholder="Search P-Rep / Address / Transaction">
                         <AutoCompleteFieldSettings Value="Name"></AutoCompleteFieldSettings>
-                        <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+                        <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
                     </EjsAutoComplete>
                 </div>
                 <div class="col col-auto">
@@ -209,16 +209,16 @@
 
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
         }
-        <EjsTab Animation="Animation" CssClass="main card mb-3 shadow-sm">
+        <EjsTab Animation="@Animation" CssClass="main card mb-3 shadow-sm">
             <TabItems>
-                <TabItem Header="Blocks">
+                <TabItem Header="@Blocks">
                     <ContentTemplate>
                         <div class="card-body px-4 pt-1 pb-0">
                             <IndexBlockGrid></IndexBlockGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="Transactions">
+                <TabItem Header="@Transactions">
                     <ContentTemplate>
                         <div class="card-body px-4 pt-1 pb-0">
                             <IndexTransactionGrid></IndexTransactionGrid>

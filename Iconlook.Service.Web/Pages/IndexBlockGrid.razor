@@ -16,10 +16,10 @@
          EnableAltRow="false"
          TValue="BlockResponse"
          AllowSelection="false"
-         ModelType="BlockModelType"
-         GridLines="GridLine.Horizontal"
+         ModelType="@BlockModelType"
+         GridLines="@GridLine.Horizontal"
          Query="new ej.data.Query().addParams('take', '13')">
-    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
             <Template>
@@ -33,7 +33,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="101" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
+        <GridColumn Width="101" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -47,7 +47,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Right">
+        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -59,7 +59,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="140" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -71,7 +71,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="123" Field="@nameof(BlockResponse.ProduderName)" TextAlign="TextAlign.Right">
+        <GridColumn Width="123" Field="@nameof(BlockResponse.ProduderName)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)

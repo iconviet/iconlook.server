@@ -27,14 +27,14 @@
 <EjsGrid EnableHover="false"
          EnableAltRow="true"
          TValue="PrepResponse"
-         AllowPaging="CanPage"
-         AllowSelection="CanEdit"
-         ModelType="PrepModelType"
-         GridLines="GridLine.Horizontal"
+         AllowPaging="@CanPage"
+         AllowSelection="@CanEdit"
+         ModelType="@PrepModelType"
+         GridLines="@GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
 
     <GridColumns>
         <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
@@ -54,7 +54,7 @@
             </Template>
             <EditTemplate />
         </GridColumn>
-        <GridColumn Width="126" HeaderText="Ecosystem Goals" TextAlign="TextAlign.Center">
+        <GridColumn Width="126" HeaderText="Ecosystem Goals" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -64,7 +64,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="Node Resiliency" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="Node Resiliency" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -73,7 +73,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="App Development" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="App Development" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -82,7 +82,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="Content Creation" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="Content Creation" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -91,7 +91,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="Community Active" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="Community Active" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -100,7 +100,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="Ecosystem Focus" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="Ecosystem Focus" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -109,7 +109,7 @@
                 <i class="fal fa-star"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="127" HeaderText="TXs Generation" TextAlign="TextAlign.Center">
+        <GridColumn Width="127" HeaderText="TXs Generation" TextAlign="@TextAlign.Center">
             <Template>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
