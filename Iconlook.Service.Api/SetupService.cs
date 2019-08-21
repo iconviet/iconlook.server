@@ -67,6 +67,7 @@ namespace Iconlook.Service.Api
                         Voters = new Random().Next(100, 1000),
                         Votes = new Random().Next(1000000, 10000000),
                         Direction = new Random().NextDouble() >= 0.5,
+                        Balance = new Random().Next(100000, 10000000),
                         RejectedBlocks = new Random().Next(100, 1000),
                         ProducedBlocks = new Random().Next(100000, 1000000),
                         Address = "hxd2d001c3938c7f6d31bc76b1cda922a64c51c8bf",

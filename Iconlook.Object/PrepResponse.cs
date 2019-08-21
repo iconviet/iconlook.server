@@ -11,6 +11,7 @@ namespace Iconlook.Object
         public string Name { get; set; }
         public int Position { get; set; }
         public bool Direction { get; set; }
+        public double Balance { get; set; }
         public string Location { get; set; }
         public DateTime Joined { get; set; }
         public string IdExternal { get; set; }

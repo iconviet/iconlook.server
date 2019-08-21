@@ -43,6 +43,7 @@ namespace Iconlook.Service.Api
             }
             {
                 var query = Db.From<Prep>();
+                if (request.Take == 0) request.Take = 22;
                 if (request.Take > 0) query.Take(request.Take);
                 var preps = await Db.SelectAsync(query.Skip(0).OrderBy(x => x.Position));
                 return new ListResponse<PrepResponse>(preps.ConvertAll(x => x.ConvertTo<PrepResponse>()))

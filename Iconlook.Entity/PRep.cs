@@ -42,6 +42,8 @@ namespace Iconlook.Entity
 
         public bool Direction { get; set; }
 
+        public double Balance { get; set; }
+
         public DateTimeOffset LastSeen { get; set; }
 
         public int RejectedBlocks { get; set; }

@@ -15,23 +15,25 @@
 
     .e-grid { min-height: 700px; }
 
+    .e-grid .e-rowcell,
+    .e-grid .e-headercell {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
     .e-grid .e-rowcell:last-child,
     .e-grid .e-headercell:last-child {
         padding-left: 5px !important;
         padding-right: 20px !important;
     }
 
-    .e-grid .e-row .e-selectionbackground { background-color: #ffe100; }
-
-    .e-grid .e-rowcell, .e-grid .e-headercell {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-
-    .e-grid .e-rowcell:first-child, .e-grid .e-headercell:first-child {
+    .e-grid .e-rowcell:first-child, 
+    .e-grid .e-headercell:first-child {
         padding-left: 20px !important;
         padding-right: 5px !important;
     }
+
+    .e-grid .e-row .e-selectionbackground { background-color: #ffe100; }
 
     .e-grid .e-row {
         height: 42px;
