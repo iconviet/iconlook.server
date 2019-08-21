@@ -199,15 +199,6 @@
     </div>
     <div class="col-md">
         @code {
-
-            public void Cancel(SelectingEventArgs args)
-            {
-                if (args.IsSwiped)
-                {
-                    args.Cancel = true;
-                }
-            }
-
             public TabAnimationSettings Animation { get; } = new TabAnimationSettings
             {
                 Next = new TabAnimationNext { Duration = 0 },
@@ -219,7 +210,6 @@
             public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
         }
         <EjsTab Animation="Animation" CssClass="main card mb-3 shadow-sm">
-            <TabEvents></TabEvents>
             <TabItems>
                 <TabItem Header="@Blocks">
                     <ContentTemplate>

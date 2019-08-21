@@ -3,6 +3,9 @@
     public int PageSize { get; set; }
 
     [Parameter]
+    public bool CanPage { get; set; }
+
+    [Parameter]
     public string EditKey { get; set; }
 
     [Parameter]
@@ -21,16 +24,16 @@
     .fa-star:not(:last-child),
     .fa-star-half-alt:not(:last-child) { margin-right: 4px; }
 </style>
-<EjsGrid AllowPaging="true"
-         EnableHover="false"
+<EjsGrid EnableHover="false"
          EnableAltRow="true"
          TValue="PrepResponse"
-         AllowSelection="@CanEdit"
+         AllowPaging="CanPage"
+         AllowSelection="CanEdit"
          ModelType="PrepModelType"
          GridLines="GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
-    <GridEditSettings AllowEditing="@CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
 
     <GridColumns>
@@ -49,7 +52,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="126" HeaderText="Ecosystem Goals" TextAlign="TextAlign.Center">
             <Template>
