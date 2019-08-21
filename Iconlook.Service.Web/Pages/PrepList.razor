@@ -1,6 +1,8 @@
 ﻿@page "/preps"
 @page "/preps/{size:int}"
 @page "/preps/edit/{key}"
+@using Syncfusion.EJ2.Blazor.Diagrams
+@using Syncfusion.EJ2.Blazor.Lists
 @code {
     [Parameter]
     public string Key { get; set; }
@@ -104,8 +106,14 @@
             public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
 
             public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
+
+            public TabAnimationSettings Animation { get; } = new TabAnimationSettings
+            {
+                Next = new TabAnimationNext { Duration = 0 },
+                Previous = new TabAnimationPrevious { Duration = 0 }
+            };
         }
-        <EjsTab CssClass="main card shadow-sm">
+        <EjsTab Animation="Animation" CssClass="main card shadow-sm">
             <TabEvents Selecting="Cancel"></TabEvents>
             <TabItems>
                 <TabItem Header="@Summary">
