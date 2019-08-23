@@ -47,7 +47,7 @@ namespace Iconlook.Entity
         public string Identity { get; set; }
 
         public string Hosting { get; set; }
-
+        
         public string Regions { get; set; }
 
         public bool Testnet { get; set; }
