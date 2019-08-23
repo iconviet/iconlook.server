@@ -14,139 +14,139 @@
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 }
 <EjsGrid EnableHover="false"
-             EnableAltRow="true"
-             TValue="PrepResponse"
-             AllowPaging="@CanPage"
-             AllowSelection="@CanEdit"
-             ModelType="@PrepModelType"
-             GridLines="@GridLine.Horizontal"
-             Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
-        <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
-        <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
-        <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
-        <GridColumns>
-            <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
-                <HeaderTemplate>
-                    <span class="tx-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep Name</span>
-                </HeaderTemplate>
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <div class="mt-1 d-flex align-items-center">
-                                <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.IdExternal rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                                <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
-                            </div>
-                        }
+         EnableAltRow="true"
+         TValue="PrepResponse"
+         AllowPaging="@CanPage"
+         AllowSelection="@CanEdit"
+         ModelType="@PrepModelType"
+         GridLines="@GridLine.Horizontal"
+         Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+    <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="220" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+            <HeaderTemplate>
+                <span class="tx-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep Name</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <div class="mt-1 d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.IdExternal rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
                     }
-                </Template>
-                <EditTemplate />
-            </GridColumn>
-            <GridColumn Width="135" Field="@nameof(PrepResponse.Location)" HeaderText="Location">
-                <HeaderTemplate>
-                    <span>Location<i class='far pl-2 fa-map-marker-alt'></i></span>
-                </HeaderTemplate>
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span class="pt-1 tx-condensed">@prep.Location</span>
-                        }
+                }
+            </Template>
+            <EditTemplate/>
+        </GridColumn>
+        <GridColumn Width="135" Field="@nameof(PrepResponse.Location)" HeaderText="Location">
+            <HeaderTemplate>
+                <span>Location<i class='far pl-2 fa-map-marker-alt'></i></span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="pt-1 tx-condensed">@prep.Location</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="105" Field="@nameof(PrepResponse.Location)" HeaderText="Joined">
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span class="tx-condensed">@prep.Joined.ToString("dd MMM, yyyy")</span>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="105" Field="@nameof(PrepResponse.Location)" HeaderText="Joined">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="tx-condensed">@prep.Joined.ToString("dd MMM, yyyy")</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="92" Field="@nameof(PrepResponse.Location)" HeaderText="Entity">
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span>@prep.Entity</span>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="92" Field="@nameof(PrepResponse.Location)" HeaderText="Entity">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span>@prep.Entity</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="75" Field="@nameof(PrepResponse.Location)" HeaderText="Size">
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span class="font-weight-bold">3</span>
-                            <span class="pl-1 fs-n1 tx-light">people</span>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="75" Field="@nameof(PrepResponse.Location)" HeaderText="Size">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="font-weight-bold">3</span>
+                        <span class="pl-1 fs-n1 tx-light">people</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Identity">
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span>@prep.Identity</span>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="95" Field="@nameof(PrepResponse.Location)" HeaderText="Identity">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span>@prep.Identity</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="126" Field="@nameof(PrepResponse.Location)" HeaderText="Experience">
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <span class="tx-condensed">Dev, Biz, Marketing</span>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="126" Field="@nameof(PrepResponse.Location)" HeaderText="Experience">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="tx-condensed">Dev, Biz, Marketing</span>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="@TextAlign.Right">
-                <HeaderTemplate>
-                    <span><i class='far pr-2 fa-globe'></i>Website</span>
-                </HeaderTemplate>
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <a class="primary tx-condensed" href="https://www.iconviet.io">iconviet.io</a>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Website" TextAlign="@TextAlign.Right">
+            <HeaderTemplate>
+                <span><i class='far pr-2 fa-globe'></i>Website</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary tx-condensed" href="https://www.iconviet.io">iconviet.io</a>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="@TextAlign.Right">
-                <HeaderTemplate>
-                    <span><i class='fab pr-2 fa-twitter'></i>Twitter</span>
-                </HeaderTemplate>
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <a class="primary tx-condensed" href="https://twitter.com/iconviet">iconviet</a>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="80" Field="@nameof(PrepResponse.Location)" HeaderText="Twitter" TextAlign="@TextAlign.Right">
+            <HeaderTemplate>
+                <span><i class='fab pr-2 fa-twitter'></i>Twitter</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary tx-condensed" href="https://twitter.com/iconviet">iconviet</a>
                     }
-                </Template>
-            </GridColumn>
-            <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="@TextAlign.Right">
-                <HeaderTemplate>
-                    <span><i class='fab pr-2 fa-telegram'></i>Telegram</span>
-                </HeaderTemplate>
-                <Template>
-                    @{
-                        if (context is PrepResponse prep)
-                        {
-                            <a class="primary tx-condensed" href="https://t.me/iconviet">iconviet</a>
-                        }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="100" Field="@nameof(PrepResponse.Location)" HeaderText="Telegram" TextAlign="@TextAlign.Right">
+            <HeaderTemplate>
+                <span><i class='fab pr-2 fa-telegram'></i>Telegram</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <a class="primary tx-condensed" href="https://t.me/iconviet">iconviet</a>
                     }
-                </Template>
-            </GridColumn>
-        </GridColumns>
-    </EjsGrid>
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>
 @code {
     public PrepResponse PrepModelType = new PrepResponse();
 }
