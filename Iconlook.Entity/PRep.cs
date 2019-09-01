@@ -60,13 +60,13 @@ namespace Iconlook.Entity
 
         public DateTimeOffset LastSeen { get; set; }
 
-        public int RejectedBlocks { get; set; }
+        public int MissedBlocks { get; set; }
 
         public int ProducedBlocks { get; set; }
 
-        public double UptimePercentage { get; set; }
+        public double ProductivityPercentage { get; set; }
 
-        public double SupplyPercentage { get; set; }
+        public double DelegatedPercentage { get; set; }
 
         public DateTimeOffset Timestamp { get; set; }
 

@@ -42,7 +42,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="110" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="@TextAlign.Center">
+        <GridColumn Width="110" Field="@nameof(PrepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -84,7 +84,7 @@
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span>@(prep.Testnet ? "Yes" : "No")</span>
+                        <span>@(prep.Testnet ? "Phase 1, 2, 3" : "-")</span>
                     }
                 }
             </Template>

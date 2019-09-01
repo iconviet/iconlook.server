@@ -70,12 +70,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% Supply" Field="@nameof(PrepResponse.SupplyPercentage)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="65" HeaderText="% Supply" Field="@nameof(PrepResponse.DelegatedPercentage)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="mono tx-light font-weight-light">(@prep.SupplyPercentage.ToString("P"))</span>
+                        <span class="mono tx-light font-weight-light">(@prep.DelegatedPercentage.ToString("P"))</span>
                     }
                 }
             </Template>
@@ -85,13 +85,13 @@
                 @{
                     if (context is PrepResponse prep)
                     {
-                        if (prep.UptimePercentage > 0)
+                        if (prep.ProductivityPercentage > 0)
                         {
-                            <span class="mono positive-dark">@prep.UptimePercentage.ToString("P")</span>
+                            <span class="mono positive-dark">@prep.ProductivityPercentage.ToString("P")</span>
                         }
-                        if (prep.UptimePercentage <= 0)
+                        if (prep.ProductivityPercentage <= 0)
                         {
-                            <span class="mono negative-dark">@prep.UptimePercentage.ToString("P")</span>
+                            <span class="mono negative-dark">@prep.ProductivityPercentage.ToString("P")</span>
                         }
                     }
                 }

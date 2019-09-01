@@ -20,13 +20,13 @@ namespace Iconlook.Object
         public string Regions { get; set; }
         public string Location { get; set; }
         public string Identity { get; set; }
+        public int MissedBlocks { get; set; }
         public string IdExternal { get; set; }
         public int ProducedBlocks { get; set; }
-        public int RejectedBlocks { get; set; }
         public DateTimeOffset Joined { get; set; }
-        public double UptimePercentage { get; set; }
-        public double SupplyPercentage { get; set; }
         public DateTimeOffset LastSeen { get; set; }
         public DateTimeOffset Timestamp { get; set; }
+        public double DelegatedPercentage { get; set; }
+        public double ProductivityPercentage { get; set; }
     }
 }
