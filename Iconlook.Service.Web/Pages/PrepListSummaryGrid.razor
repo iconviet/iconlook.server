@@ -52,7 +52,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
@@ -63,7 +63,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="213" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <HeaderTemplate>
@@ -80,22 +80,20 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="51" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <div style="padding-bottom: 1px;">
-                            <i class="fal fs-n1 fa-wifi positive-light"></i>
-                        </div>
+                        <i class="fas fs-n3 fa-circle positive-light"></i>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="90" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube positive-dark"></i>
             </HeaderTemplate>
@@ -107,9 +105,9 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="60" Field="@nameof(PrepResponse.RejectedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube negative-dark"></i>
             </HeaderTemplate>
@@ -121,9 +119,9 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="51" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Uptime" TextAlign="@TextAlign.Center">
+        <GridColumn Width="60" Field="@nameof(PrepResponse.UptimePercentage)" HeaderText="Health" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -132,35 +130,35 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right" HeaderTextAlign="@TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Rate" TextAlign="@TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono font-weight-semibold">@prep.SupplyPercentage.ToString("P2")</span>
+                    }
+                }
+            </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right" HeaderTextAlign="@TextAlign.Right">
             <HeaderTemplate>
-                <div class="pl-2">Tally</div>
+                <div class="pl-2">Weight</div>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
+                        <span class="mono ls-n2 font-weight-light">@prep.Votes.ToString("N0")</span>
                         <span class="pl-1 fs-n2 tx-light font-weight-light">votes</span>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PrepResponse.SupplyPercentage)" HeaderText="% Sply" TextAlign="@TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono tx-light font-weight-light">(@prep.SupplyPercentage.ToString("P2"))</span>
-                    }
-                }
-            </Template>
-            <EditTemplate/>
-        </GridColumn>
-        <GridColumn Width="75" HeaderText="% 24h" TextAlign="@TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
+        <GridColumn Width="70" HeaderText="% 24h" TextAlign="@TextAlign.Right" Field="@nameof(PrepResponse.UptimePercentage)">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -176,7 +174,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="60" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="@TextAlign.Right" Format="N0">
             <Template>
@@ -187,13 +185,13 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="140" HeaderText="Contribution" TextAlign="@TextAlign.Center">
             <Template>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
+                <i class="fal fa-star"></i>
                 <i class="fal fa-star"></i>
                 <i class="fal fa-star"></i>
             </Template>
@@ -211,7 +209,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
     </GridColumns>
 </EjsGrid>

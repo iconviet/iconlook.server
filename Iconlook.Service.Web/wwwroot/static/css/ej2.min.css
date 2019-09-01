@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /**
  * ej2 styles
  */
@@ -63,6 +63,10 @@
 
 .e-hidden {
   display: none;
+}
+
+.e-blazor-hidden {
+  visibility: hidden;
 }
 
 .e-disabled {
@@ -35954,6 +35958,10 @@ ejs-multiselect {
   pointer-events: none;
 }
 
+.e-listbox-wrapper .e-disable {
+  opacity: .7;
+}
+
 .e-listbox-wrapper .e-list-parent {
   margin: 0;
   padding: 0;
@@ -62416,6 +62424,14 @@ div > .e-pv-bookmark-icon.e-pv-icon.e-right {
 .e-query-builder .e-group-body .e-horizontal-mode .e-rule-operator,
 .e-query-builder .e-group-body .e-horizontal-mode .e-rule-value,
 .e-query-builder .e-group-body .e-horizontal-mode .e-rule-value-delete {
+  display: inline-block;
+}
+
+.e-query-builder .e-group-body .e-rule-value.e-hide {
+  display: none;
+}
+
+.e-query-builder .e-group-body .e-rule-value.e-show {
   display: inline-block;
 }
 
