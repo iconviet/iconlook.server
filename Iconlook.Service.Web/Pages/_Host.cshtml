@@ -37,7 +37,7 @@
         <span class="connection-lost">Server connection lost. Please refresh.</span>
     </div>
 </div>
-<app>@(await Html.RenderComponentAsync<App>())</app>
+<app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
 <environment names="Localhost">
     <script src="~/static/js/ej2.min.js"></script>
     <script src="~/static/js/ejs.interop.min.js"></script>
