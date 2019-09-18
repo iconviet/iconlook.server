@@ -25,7 +25,7 @@
     <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.0.0-rc1.19457.4" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.0.0-rc1.19457.4" />
-    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.50-beta" />
+    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.52-beta" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.51" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.6.3-rc1" />
   </ItemGroup>
