@@ -99,6 +99,8 @@
 
             public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
 
+            public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
+
             public TabAnimationSettings Animation { get; } = new TabAnimationSettings
             {
                 Next = new TabAnimationNext { Duration = 0 },
@@ -139,6 +141,13 @@
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
                             <PrepListTransparencyGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListTransparencyGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@ScoreMatrix">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <PrepListScoreMatrixGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PrepListScoreMatrixGrid>
                         </div>
                     </ContentTemplate>
                 </TabItem>
