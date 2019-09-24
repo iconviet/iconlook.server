@@ -9,11 +9,5 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Agiper.Server" Version="1.0.2-master-2671005" />
-    <PackageReference Include="NServiceBus.Persistence.Sql" Version="4.6.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
-    <ProjectReference Include="..\Iconlook.Message\Iconlook.Message.csproj" />
-    <ProjectReference Include="..\Iconlook.Object\Iconlook.Object.csproj" />
   </ItemGroup>
 </Project>
