@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using Hangfire;
 using Iconlook.Server;
+using Iconlook.Service.Job.Block;
 using Iconlook.Service.Job.Prep;
+using NServiceBus;
 
 namespace Iconlook.Service.Job
 {
@@ -17,8 +19,14 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            BackgroundJob.Enqueue<VoteHistoryPrepJob>(x => x.Run());
             RecurringJob.AddOrUpdate<VoteHistoryPrepJob>(x => x.Run(), Cron.Minutely());
+            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), Cron.Minutely());
+        }
+
+        protected override void ConfigureNServiceBusSqlServerTransportRouting<T>(RoutingSettings<T> routing)
+        {
+            base.ConfigureNServiceBusSqlServerTransportRouting(routing);
+            routing.RegisterPublisher(typeof(JobHost).Assembly, EndpointName);
         }
     }
 }

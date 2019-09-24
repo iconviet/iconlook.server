@@ -50,7 +50,12 @@ namespace Iconlook.Service.Web
                     options.KnownNetworks.Clear();
                     options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
                 });
-                if (!OperatingSystem.IsWindows)
+                if (OperatingSystem.IsWindows)
+                {
+                    services.AddDataProtection()
+                        .DisableAutomaticKeyGeneration();
+                }
+                else
                 {
                     services.AddDataProtection()
                         .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))

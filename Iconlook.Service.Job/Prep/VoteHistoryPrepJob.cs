@@ -7,7 +7,7 @@ namespace Iconlook.Service.Job.Prep
     {
         public void Run()
         {
-            Log.Information("Vote History Prep Job ran");
+            Log.Information("VoteHistoryPrepJob ran");
         }
     }
 }
