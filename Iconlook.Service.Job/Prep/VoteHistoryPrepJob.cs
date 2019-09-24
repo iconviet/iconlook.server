@@ -1,5 +1,5 @@
-﻿using System;
-using Agiper.Server;
+﻿using Agiper.Server;
+using Serilog;
 
 namespace Iconlook.Service.Job.Prep
 {
@@ -7,7 +7,7 @@ namespace Iconlook.Service.Job.Prep
     {
         public void Run()
         {
-            Console.WriteLine("Vote History Prep Job Ran.");
+            Log.Information("Vote History Prep Job ran");
         }
     }
 }
