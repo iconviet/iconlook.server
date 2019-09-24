@@ -19,8 +19,8 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            RecurringJob.AddOrUpdate<VoteHistoryPrepJob>(x => x.Run(), Cron.Minutely());
-            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), Cron.Minutely());
+            BackgroundJob.Enqueue<BlockProductionJob>(x => x.Run());
+            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), "*/30 * * * * *");
         }
 
         protected override void ConfigureNServiceBusSqlServerTransportRouting<T>(RoutingSettings<T> routing)

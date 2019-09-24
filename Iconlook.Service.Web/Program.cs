@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
+using StackExchange.Redis;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 
@@ -50,25 +51,26 @@ namespace Iconlook.Service.Web
                     options.KnownNetworks.Clear();
                     options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
                 });
-                if (OperatingSystem.IsWindows)
+                var redis = host.HostConfiguration.GetConnectionString("redis");
+                if (redis.HasValue())
                 {
-                    services.AddDataProtection()
-                        .DisableAutomaticKeyGeneration();
+                    if (host.Environment == Environment.Localhost)
+                    {
+                        redis = redis.Replace("redis", "localhost");
+                    }
+                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(redis);
                 }
-                else
+                if (!OperatingSystem.IsWindows)
                 {
                     services.AddDataProtection()
                         .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
                         .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
                 }
-                var connection_string = host.HostConfiguration.GetConnectionString("redis");
-                if (connection_string.HasValue())
+                else
                 {
-                    if (host.Environment == Environment.Localhost)
-                    {
-                        connection_string = connection_string.Replace("redis", "localhost");
-                    }
-                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection_string);
+                    services.AddDataProtection()
+                        .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name)
+                        .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redis), host.ProjectName);
                 }
             };
             ConfigureApplication = host => application =>

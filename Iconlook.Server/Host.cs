@@ -12,7 +12,7 @@ namespace Iconlook.Server
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Redis;
+            HangfireJobPersistence = HangfireJobPersistence.Memory; // TODO: change to Redis
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;
         }
     }

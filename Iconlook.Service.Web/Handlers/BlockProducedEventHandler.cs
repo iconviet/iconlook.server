@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Message;
+using Iconlook.Service.Web.Models;
 using NServiceBus;
 using Serilog;
 
@@ -10,6 +11,7 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockProducedEvent message, IMessageHandlerContext context)
         {
+            BlockModel.Height = BlockModel.Height + 1;
             Log.Information("BlockProducedEvent received");
             return Task.CompletedTask;
         }
