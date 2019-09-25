@@ -1,5 +1,4 @@
-﻿@using Serilog
-@Height.ToString("N0")
+﻿@Height.ToString("N0")
 @implements IDisposable
 @code {
     private IDisposable _subscription;
@@ -14,7 +13,6 @@
             Height = x.Last().Current.BlockHeight;
             InvokeAsync(() => StateHasChanged());
         });
-        Log.Warning("BlockHeight.razor initialized");
     }
     
     public void Dispose()
