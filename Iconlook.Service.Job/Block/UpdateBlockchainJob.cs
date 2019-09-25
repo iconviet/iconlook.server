@@ -6,12 +6,12 @@ using Serilog;
 
 namespace Iconlook.Service.Job.Block
 {
-    public class BlockProductionJob : JobBase
+    public class UpdateBlockchainJob : JobBase
     {
         public Task Run()
         {
-            Log.Information("BlockProductionJob ran");
-            return Endpoint.Publish(new BlockProducedEvent());
+            Log.Information("UpdateBlockchainJob ran");
+            return Endpoint.Publish(new BlockchainUpdatedEvent());
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reactive.Linq;
+using System.Reflection;
 using Hangfire;
 using Iconlook.Server;
 using Iconlook.Service.Job.Block;
-using Iconlook.Service.Job.Prep;
 using NServiceBus;
 
 namespace Iconlook.Service.Job
@@ -19,8 +20,11 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            BackgroundJob.Enqueue<BlockProductionJob>(x => x.Run());
-            RecurringJob.AddOrUpdate<BlockProductionJob>(x => x.Run(), "*/30 * * * * *");
+            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x =>
+            {
+                Resolve<UpdateBlockchainJob>().Run();
+            });
+            RecurringJob.AddOrUpdate<UpdateBlockchainJob>(x => x.Run(), "*/30 * * * * *");
         }
 
         protected override void ConfigureNServiceBusSqlServerTransportRouting<T>(RoutingSettings<T> routing)
