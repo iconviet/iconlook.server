@@ -1,15 +1,14 @@
-﻿@Height.ToString("N0")
+﻿@Count.ToString("N0")
 @code {
-    public long Height { get; set; }
+    public long Count { get; set; }
 
     protected override void OnInitialized()
     {
         var connection = Source.Blockchain.Connect();
         connection.Subscribe(x =>
         {
-            Height = x.Last().Current.BlockHeight;
+            Count = x.Last().Current.TotalTransactions;
             InvokeAsync(() => StateHasChanged());
         });
     }
-
 }

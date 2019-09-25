@@ -28,4 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Server\Iconlook.Server.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Block\" />
+  </ItemGroup>
 </Project>

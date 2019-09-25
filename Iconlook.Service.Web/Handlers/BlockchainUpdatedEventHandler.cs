@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Agiper.Server;
+using DynamicData;
 using Iconlook.Message;
-using Iconlook.Service.Web.Models;
+using Iconlook.Object;
+using Iconlook.Service.Web.Sources;
 using NServiceBus;
 using Serilog;
 
@@ -11,8 +13,11 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockchainUpdatedEvent message, IMessageHandlerContext context)
         {
-            BlockchainModel.BlockHeight += 1;
-            BlockchainModel.AllTransactions += 10;
+            Source.Blockchain.AddOrUpdate(new BlockchainResponse
+            {
+                BlockHeight = message.BlockHeight,
+                TotalTransactions = message.TotalTransactions
+            });
             Log.Information("BlockchainUpdatedEvent received");
             return Task.CompletedTask;
         }

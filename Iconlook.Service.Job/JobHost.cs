@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Reflection;
 using Hangfire;
 using Iconlook.Server;
-using Iconlook.Service.Job.Block;
+using Iconlook.Service.Job.Blockchain;
 using NServiceBus;
 
 namespace Iconlook.Service.Job
@@ -20,9 +20,9 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x =>
+            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x =>
             {
-                Resolve<UpdateBlockchainJob>().Run();
+                await Resolve<UpdateBlockchainJob>().Run();
             });
             RecurringJob.AddOrUpdate<UpdateBlockchainJob>(x => x.Run(), "*/30 * * * * *");
         }

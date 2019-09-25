@@ -2,11 +2,11 @@
 {
     public static class Source
     {
-        public static BlockSource Blocks { get; }
+        public static BlockchainSource Blockchain { get; }
 
         static Source()
         {
-            Blocks = new BlockSource(x => x.Height);
+            Blockchain = new BlockchainSource(x => x.BlockHeight);
         }
     }
 }
