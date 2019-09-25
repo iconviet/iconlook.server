@@ -11,7 +11,7 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockProducedEvent message, IMessageHandlerContext context)
         {
-            BlockModel.Height = BlockModel.Height + 1;
+            BlockModel.Height += 1;
             Log.Information("BlockProducedEvent received");
             return Task.CompletedTask;
         }
