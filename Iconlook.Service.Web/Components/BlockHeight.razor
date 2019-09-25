@@ -3,6 +3,11 @@
 @code {
     protected override void OnInitialized()
     {
+        var connection = Source.Blocks.Connect();
+        connection.Subscribe(x =>
+        {
+            
+        });
         Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x =>
         {
             InvokeAsync(() => StateHasChanged());
