@@ -1,15 +1,24 @@
-﻿@Height.ToString("N0")
+﻿@using Serilog
+@Height.ToString("N0")
+@implements IDisposable
 @code {
+    private IDisposable _subscription;
+    
     public long Height { get; set; }
 
     protected override void OnInitialized()
     {
         var connection = Source.Blockchain.Connect();
-        connection.Subscribe(x =>
+        _subscription = connection.Subscribe(x =>
         {
             Height = x.Last().Current.BlockHeight;
             InvokeAsync(() => StateHasChanged());
         });
+        Log.Warning("BlockHeight.razor initialized");
     }
-
+    
+    public void Dispose()
+    {
+        _subscription.Dispose();
+    }
 }
