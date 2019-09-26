@@ -5,7 +5,6 @@ using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Service.Web.Sources;
 using NServiceBus;
-using Serilog;
 
 namespace Iconlook.Service.Web.Handlers
 {
@@ -19,7 +18,6 @@ namespace Iconlook.Service.Web.Handlers
                 BlockHeight = message.BlockHeight,
                 TotalTransactions = message.TotalTransactions
             });
-            Log.Information("Timestamp: {Timestamp}", message.Timestamp);
             return Task.CompletedTask;
         }
     }

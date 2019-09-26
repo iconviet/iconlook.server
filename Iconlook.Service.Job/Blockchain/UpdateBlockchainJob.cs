@@ -22,7 +22,7 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 BlockHeight = (long) last_block.GetHeight(),
                 TokenSupply = (long) total_supply.ToLooplessIcx(),
-                TotalTransactions = (long) total_supply.ToLooplessIcx(),
+                TotalTransactions = last_block.GetTransactions().Count,
                 Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().ToZeroless(3))
             });
         }
