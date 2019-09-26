@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Message;
@@ -21,7 +22,8 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 BlockHeight = (long) last_block.GetHeight(),
                 TokenSupply = (long) total_supply.ToLooplessIcx(),
-                TotalTransactions = (long) total_supply.ToLooplessIcx()
+                TotalTransactions = (long) total_supply.ToLooplessIcx(),
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().ToZeroless(3))
             });
         }
     }
