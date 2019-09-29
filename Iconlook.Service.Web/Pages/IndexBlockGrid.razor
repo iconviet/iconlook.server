@@ -96,10 +96,7 @@
         var connection = Source.Blockchain.Connect();
         connection.Subscribe(x =>
         {
-            if (DataManager != null)
-            {
-                Console.WriteLine(DataManager == null);
-            }
+            
         });
     }
 }
