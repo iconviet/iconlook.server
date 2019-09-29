@@ -14,6 +14,7 @@ namespace Iconlook.Service.Web.Handlers
         {
             Source.Blockchain.AddOrUpdate(new BlockchainResponse
             {
+                Timestamp = message.Timestamp,
                 BlockHeight = message.BlockHeight,
                 TotalTransactions = message.TotalTransactions
             });

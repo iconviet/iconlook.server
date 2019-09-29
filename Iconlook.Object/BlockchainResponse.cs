@@ -1,4 +1,6 @@
-﻿namespace Iconlook.Object
+﻿using System;
+
+namespace Iconlook.Object
 {
     public class BlockchainResponse
     {
@@ -8,5 +10,6 @@
         public double TokenPrice { get; set; }
         public long TokenCirculation { get; set; }
         public long TotalTransactions { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
     }
 }

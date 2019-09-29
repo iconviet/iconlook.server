@@ -8,6 +8,9 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Agiper.Server" Version="1.0.2-master-2711618" />
+    <PackageReference Include="Agiper.Server" Version="1.0.2-master-2690146" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
   </ItemGroup>
 </Project>
