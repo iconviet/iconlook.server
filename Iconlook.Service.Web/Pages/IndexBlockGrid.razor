@@ -20,7 +20,7 @@
          ModelType="@BlockModelType"
          GridLines="@GridLine.Horizontal"
          Query="new ej.data.Query().addParams('take', '13')">
-    <EjsDataManager @ref="DataManager" Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
             <Template>
@@ -85,8 +85,6 @@
     </GridColumns>
 </EjsGrid>
 @code {
-    public EjsDataManager DataManager;
-
     public EjsGrid<BlockResponse> Grid;
 
     public BlockResponse BlockModelType = new BlockResponse();
@@ -96,7 +94,10 @@
         var connection = Source.Blockchain.Connect();
         connection.Subscribe(x =>
         {
-            
+            if (Grid != null)
+            {
+                Console.WriteLine(Grid + " " + Grid);
+            }
         });
     }
 }
