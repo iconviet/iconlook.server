@@ -23,19 +23,26 @@ namespace Iconlook.Service.Job.Blockchain
             var last_block = await icon_service.GetLastBlock();
             var total_supply = await icon_service.GetTotalSupply();
             var timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().ToZeroless(3));
-            await Endpoint.Publish(new BlockchainUpdatedEvent
-            {
-                Timestamp = timestamp,
-                BlockHeight = (long) last_block.GetHeight(),
-                TokenSupply = (long) total_supply.ToLooplessIcx(),
-                TotalTransactions = 71098147 + last_block.GetTransactions().Count
-            });
             await Channel.Publish(new BlockProducedSignal
             {
                 Block = new BlockResponse
                 {
                     Height = 100000
                 }
+            });
+            await Channel.Publish(new BlockchainUpdatedSignal
+            {
+                Blockchain = new BlockchainResponse
+                {
+                    BlockHeight = 100000
+                }
+            });
+            await Endpoint.Publish(new BlockchainUpdatedEvent
+            {
+                Timestamp = timestamp,
+                BlockHeight = (long) last_block.GetHeight(),
+                TokenSupply = (long) total_supply.ToLooplessIcx(),
+                TotalTransactions = 71098147 + last_block.GetTransactions().Count
             });
             await Endpoint.Publish(new BlockProducedEvent
             {
