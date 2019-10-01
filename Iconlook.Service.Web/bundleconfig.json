@@ -17,7 +17,7 @@
       "wwwroot/static/js/rxjs.min.js",
       "wwwroot/static/js/jquery.min.js",
       "wwwroot/static/js/ss-utils.min.js",
-      "wwwroot/static/js/site.min.js"
+      "wwwroot/static/js/ss-rxjs-integration.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
   },
