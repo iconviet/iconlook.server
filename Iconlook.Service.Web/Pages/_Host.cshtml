@@ -45,13 +45,12 @@
     <script src="~/static/js/rxjs.min.js"></script>
     <script src="~/static/js/jquery.min.js"></script>
     <script src="~/static/js/ss-utils.min.js"></script>
-    <script src="~/static/js/ss-rxjs-integration.min.js"></script>
+    <script src="~/static/js/startup.min.js"></script>
 </environment>
 <environment names="Development, Testing, Staging, Production">
     <script async src="~/static/js/bundle.min.js?v=@version"></script>
 </environment>
 <script src="_framework/blazor.server.js?v=@version" autostart="false"></script>
 <script>Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
-<script>Source = new window.EventSource('/sse/stream?channel=@Host.Current.ChannelName.ToLower()');</script>
 </body>
 </html>
