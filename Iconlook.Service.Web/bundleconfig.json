@@ -13,7 +13,10 @@
       "wwwroot/static/js/ej2-dropdowns.min.js",
       "wwwroot/static/js/ej2-navigations.min.js",
       "wwwroot/static/js/ej2-grids.min.js",
-      "wwwroot/static/js/ejs.interop.min.js"
+      "wwwroot/static/js/ejs.interop.min.js",
+      "wwwroot/static/js/jquery.min.js",
+      "wwwroot/static/js/ss-utils.min.js",
+      "wwwroot/static/js/ss-utils-client.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
   },

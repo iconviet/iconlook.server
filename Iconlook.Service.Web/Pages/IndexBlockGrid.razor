@@ -77,7 +77,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="secondary tx-condensed" href="address/@block.ProducerAddress">@block.ProduderName</a>
+                        @block.Timestamp.Ago()
                     }
                 }
             </Template>

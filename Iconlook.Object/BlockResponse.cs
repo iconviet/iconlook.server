@@ -1,5 +1,6 @@
 ﻿using System;
 using Agiper.Object;
+using FluentValidation;
 
 namespace Iconlook.Object
 {
@@ -14,5 +15,11 @@ namespace Iconlook.Object
         public string ProduderName { get; set; }
         public string ProducerAddress { get; set; }
         public DateTimeOffset Timestamp { get; set; }
+
+        protected override void AddRules(Validator<BlockResponse> validator)
+        {
+            base.AddRules(validator);
+            validator.RuleFor(x => x.Height).GreaterThan(0);
+        }
     }
 }

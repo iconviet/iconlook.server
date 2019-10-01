@@ -96,7 +96,8 @@ namespace Iconlook.Service.Web
                     }
                     return next();
                 });
-                application.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), a => a.UseServiceStack(host));
+                application.UseWhen(context => context.Request.Path.StartsWithSegments("/api") ||
+                                               context.Request.Path.StartsWithSegments("/sse"), builder => builder.UseServiceStack(host));
                 application.UseRouting();
                 application.UseWebMarkupMin();
                 application.UseEndpoints(x =>

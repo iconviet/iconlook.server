@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Entity;
 using Iconlook.Message;
+using Iconlook.Object;
+using Iconlook.Server;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Transport.Http;
 using NServiceBus;
@@ -27,6 +29,13 @@ namespace Iconlook.Service.Job.Blockchain
                 BlockHeight = (long) last_block.GetHeight(),
                 TokenSupply = (long) total_supply.ToLooplessIcx(),
                 TotalTransactions = 71098147 + last_block.GetTransactions().Count
+            });
+            await Channel.Publish(new BlockProducedSignal
+            {
+                Block = new BlockResponse
+                {
+                    Height = 100000
+                }
             });
             await Endpoint.Publish(new BlockProducedEvent
             {

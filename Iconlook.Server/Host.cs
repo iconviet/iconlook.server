@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using Agiper.Server;
+using NServiceBus;
+using ServiceStack;
 
 namespace Iconlook.Server
 {
@@ -12,8 +14,21 @@ namespace Iconlook.Server
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Memory; // TODO: change to Redis
+            HangfireJobPersistence = HangfireJobPersistence.Redis;
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;
+        }
+
+        protected override void ConfigureFeature()
+        {
+            base.ConfigureFeature();
+            GetPlugin<ServerEventsFeature>().LimitToAuthenticatedUsers = false;
+        }
+
+        protected override void ConfigureNServiceBus(EndpointConfiguration configuration)
+        {
+            base.ConfigureNServiceBus(configuration);
+            var validation = configuration.UseFluentValidation();
+            validation.AddValidatorsFromAssembly(Assembly.Load("Iconlook.Message"));
         }
     }
 }
