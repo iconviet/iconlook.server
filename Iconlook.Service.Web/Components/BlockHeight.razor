@@ -2,7 +2,7 @@
 @implements IDisposable
 @code {
     private IDisposable _subscription;
-    
+
     public long Height { get; set; }
 
     protected override void OnInitialized()
@@ -14,9 +14,10 @@
             InvokeAsync(() => StateHasChanged());
         });
     }
-    
+
     public void Dispose()
     {
         _subscription.Dispose();
     }
+
 }
