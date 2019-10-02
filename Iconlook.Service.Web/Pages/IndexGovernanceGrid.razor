@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="195" HeaderText="P-Rep Name">
+        <GridColumn Width="190" HeaderText="P-Rep Name">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -47,19 +47,18 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="25" Field="@nameof(PrepResponse.LastSeen)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="50" Field="@nameof(PrepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <div style="padding-bottom: 1px;">
-                            <i class="fal fs-n1 fa-wifi positive-light"></i>
-                        </div>
+                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
                     }
                 }
             </Template>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="110" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="105" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -70,7 +69,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% Supply" Field="@nameof(PrepResponse.DelegatedPercentage)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="60" HeaderText="% Supply" Field="@nameof(PrepResponse.DelegatedPercentage)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)
@@ -80,7 +79,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% 24h Chg" TextAlign="@TextAlign.Right">
+        <GridColumn Width="55" HeaderText="% 24h Chg" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is PrepResponse prep)

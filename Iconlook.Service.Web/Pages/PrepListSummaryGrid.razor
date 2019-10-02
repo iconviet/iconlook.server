@@ -52,7 +52,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="38" Field="@nameof(PrepResponse.Position)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
@@ -63,7 +63,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="213" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <HeaderTemplate>
@@ -80,18 +80,42 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="51" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Online" TextAlign="@TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(PrepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <i class="fas fs-n3 fa-circle positive-light"></i>
+                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="56" Field="@nameof(PrepResponse.LastSeen)" HeaderText="Status" TextAlign="@TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <div style="padding-top: 1px;">
+                            <span class="positive-light">online</span>
+                        </div>
+                    }
+                }
+            </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="65" Field="@nameof(PrepResponse.ProductivityPercentage)" HeaderText="Prod." TextAlign="@TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono positive-light font-weight-light">100%</span>
+                    }
+                }
+            </Template>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="85" Field="@nameof(PrepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
@@ -105,9 +129,9 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PrepResponse.MissedBlocks)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="50" Field="@nameof(PrepResponse.MissedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube negative-dark"></i>
             </HeaderTemplate>
@@ -119,44 +143,22 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
-        </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PrepResponse.ProductivityPercentage)" HeaderText="Health" TextAlign="@TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono positive-light font-weight-light">100%</span>
-                    }
-                }
-            </Template>
-            <EditTemplate/>
-        </GridColumn>
-        <GridColumn Width="70" Field="@nameof(PrepResponse.DelegatedPercentage)" HeaderText="% Rate" TextAlign="@TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PrepResponse prep)
-                    {
-                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
-                    }
-                }
-            </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="120" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right" HeaderTextAlign="@TextAlign.Right">
             <HeaderTemplate>
-                <div class="pl-2">Weight</div>
+                <div class="pl-2">Vote Count</div>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PrepResponse prep)
                     {
-                        <span class="mono ls-n2 font-weight-light">@prep.Votes.ToString("N0")</span>
+                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
                         <span class="pl-1 fs-n2 tx-light font-weight-light">votes</span>
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="70" HeaderText="% 24h" TextAlign="@TextAlign.Right" Field="@nameof(PrepResponse.ProductivityPercentage)">
             <Template>
@@ -174,7 +176,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="60" Field="@nameof(PrepResponse.Voters)" HeaderText="Voters" TextAlign="@TextAlign.Right" Format="N0">
             <Template>
@@ -185,7 +187,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
         <GridColumn Width="140" HeaderText="Contribution" TextAlign="@TextAlign.Center">
             <Template>
@@ -209,7 +211,7 @@
                     }
                 }
             </Template>
-            <EditTemplate/>
+            <EditTemplate />
         </GridColumn>
     </GridColumns>
 </EjsGrid>

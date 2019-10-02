@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="101" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="110" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -48,7 +48,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="70" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -60,7 +60,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="155" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -72,12 +72,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="123" Field="@nameof(BlockResponse.ProduderName)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="88" Field="@nameof(BlockResponse.ProduderName)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        @block.Timestamp.Ago()
+                        <span class="tx-light">@block.Timestamp.Ago()</span>
                     }
                 }
             </Template>
