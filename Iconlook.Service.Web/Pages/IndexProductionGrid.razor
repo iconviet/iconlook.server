@@ -1,0 +1,103 @@
+﻿<EjsGrid RowHeight="40"
+         EnableHover="false"
+         EnableAltRow="false"
+         TValue="PrepResponse"
+         ModelType="@PrepModelType"
+         GridLines="@GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="15">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        if (prep.Direction)
+                        {
+                            <i class="fas fa-caret-up positive-light" style="opacity: 0.75"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-caret-down negative-light" style="opacity: 0.75"></i>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="30" HeaderText="Position" Field="@nameof(PrepResponse.Position)">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono">@prep.Position</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="190" HeaderText="P-Rep Name">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <div class="d-flex align-items-center">
+                            <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.IdExternal rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                        </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="50" Field="@nameof(PrepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="@TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
+                    }
+                }
+            </Template>
+            <EditTemplate />
+        </GridColumn>
+        <GridColumn Width="105" HeaderText="Votes" Field="@nameof(PrepResponse.Votes)" TextAlign="@TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
+                        <span class="pl-1 fs-n2 tx-light font-weight-light">votes</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="60" HeaderText="% Supply" Field="@nameof(PrepResponse.DelegatedPercentage)" TextAlign="@TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        <span class="mono tx-light font-weight-light">(@prep.DelegatedPercentage.ToString("P"))</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="55" HeaderText="% 24h Chg" TextAlign="@TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PrepResponse prep)
+                    {
+                        if (prep.ProductivityPercentage > 0)
+                        {
+                            <span class="mono positive-dark">@prep.ProductivityPercentage.ToString("P")</span>
+                        }
+                        if (prep.ProductivityPercentage <= 0)
+                        {
+                            <span class="mono negative-dark">@prep.ProductivityPercentage.ToString("P")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>
+@code {
+    public PrepResponse PrepModelType = new PrepResponse();
+}

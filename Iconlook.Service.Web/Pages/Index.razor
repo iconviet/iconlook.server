@@ -190,6 +190,10 @@
             Next = new TabAnimationNext { Duration = 0 },
             Previous = new TabAnimationPrevious { Duration = 0 }
         };
+        public TabHeader Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-cube" };
+
+        public TabHeader Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-cube" };
+
         public TabHeader Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-cube" };
             
         public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
@@ -197,20 +201,26 @@
         public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
     }
     <div class="col-md mr-md-n3">
-        <div class="main card mb-3 shadow-sm">
-            <div class="card-header">
-                <div class="row px-2 align-items-center">
-                    <div class="col">
-                        <i class="fal pr-2 fa-user-clock"></i>GOVERNANCE
-                    </div>
-                    <div class="col-auto text-right">
-                        <NavLink class="primary" href="preps">MORE</NavLink>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body px-4 pt-1 pb-0">
-                <IndexGovernanceGrid></IndexGovernanceGrid>
-            </div>
+        <EjsTab Animation="@Animation" CssClass="main card mb-3 shadow-sm">
+            <TabItems>
+                <TabItem Header="@Production">
+                    <ContentTemplate>
+                        <div class="card-body px-4 pt-1 pb-0">
+                            <IndexProductionGrid></IndexProductionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@Governance">
+                    <ContentTemplate>
+                        <div class="card-body px-4 pt-1 pb-0">
+                            <IndexGovernanceGrid></IndexGovernanceGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+            </TabItems>
+        </EjsTab>
+        <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
+            <NavLink class="primary" href="preps">MORE</NavLink>
         </div>
     </div>
     <div class="col-md">
@@ -238,5 +248,8 @@
                 </TabItem>
             </TabItems>
         </EjsTab>
+        <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
+            <NavLink class="primary" href="preps">MORE</NavLink>
+        </div>
     </div>
 </div>
