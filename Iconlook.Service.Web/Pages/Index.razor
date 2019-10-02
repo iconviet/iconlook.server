@@ -184,6 +184,18 @@
     </div>
 </div>
 <div class="row mb-3">
+    @code {
+        public TabAnimationSettings Animation { get; } = new TabAnimationSettings
+        {
+            Next = new TabAnimationNext { Duration = 0 },
+            Previous = new TabAnimationPrevious { Duration = 0 }
+        };
+        public TabHeader Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-cube" };
+            
+        public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
+
+        public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
+    }
     <div class="col-md mr-md-n3">
         <div class="main card mb-3 shadow-sm">
             <div class="card-header">
@@ -202,17 +214,6 @@
         </div>
     </div>
     <div class="col-md">
-        @code {
-            public TabAnimationSettings Animation { get; } = new TabAnimationSettings
-            {
-                Next = new TabAnimationNext { Duration = 0 },
-                Previous = new TabAnimationPrevious { Duration = 0 }
-            };
-
-            public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
-
-            public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-dice" };
-        }
         <EjsTab Animation="@Animation" CssClass="main card mb-3 shadow-sm">
             <TabItems>
                 <TabItem Header="@Blocks">
@@ -226,6 +227,12 @@
                     <ContentTemplate>
                         <div class="card-body px-4 pt-1 pb-0">
                             <IndexTransactionGrid></IndexTransactionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@Votes">
+                    <ContentTemplate>
+                        <div class="card-body px-4 pt-1 pb-0">
                         </div>
                     </ContentTemplate>
                 </TabItem>
