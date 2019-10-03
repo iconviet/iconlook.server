@@ -10,7 +10,7 @@
 
     .main.card { height: 567px !important; }
 
-    button.search-button:hover,
+    button.submit-button:hover,
     button.search-filter:hover { color: #1aaaba !important; }
 
     .e-grid .e-rowcell {
@@ -43,7 +43,7 @@
         background: none;
     }
 
-    button.search-button {
+    button.submit-button {
         color: #666666 !important;
         font-weight: bold !important;
         background-color: white !important;
@@ -115,16 +115,16 @@
             <div class="row pb-1">
                 <div class="col text-center" style="color: white;">
                     <h5 class="font-weight-bold">
-                        ADVANCE&nbsp;&nbsp;ICON&nbsp;&nbsp;ECOSYSTEM
+                        EXPLORE&nbsp;&nbsp;ICON&nbsp;&nbsp;ECOSYSTEM
                     </h5>
                 </div>
             </div>
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto d-none d-sm-block">
-                    <EjsDropDownButton Items="@Items" CssClass="search-filter">EVERYTHING</EjsDropDownButton>
+                    <EjsDropDownButton Items="@SearchItems" CssClass="search-filter">EVERYTHING</EjsDropDownButton>
                     @code {
 
-                        public List<ItemModel> Items = new List<ItemModel>
+                        public List<ItemModel> SearchItems = new List<ItemModel>
                         {
                             new ItemModel { Text = "P-REP", IconCss = "fal fa-users-class" },
                             new ItemModel { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
@@ -147,7 +147,44 @@
                     </EjsAutoComplete>
                 </div>
                 <div class="col col-auto">
-                    <EjsButton CssClass="e-flat search-button" IconCss="far fa-search">SEARCH</EjsButton>
+                    <EjsButton CssClass="e-flat submit-button" IconCss="far fa-search">SEARCH</EjsButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card px-4 pt-3 pb-4 rounded gradient shadow-sm border-0">
+            <div class="row pb-1">
+                <div class="col text-center" style="color: white;">
+                    <h5 class="font-weight-bold">
+                        TRY WALLET TOOLKIT
+                    </h5>
+                </div>
+            </div>
+            <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
+                <div class="col col-auto d-none d-sm-block">
+                    <EjsDropDownButton Items="@ToolItems" CssClass="search-filter">ROUND</EjsDropDownButton>
+                    @code {
+
+                        public List<ItemModel> ToolItems = new List<ItemModel>
+                                        {
+                            new ItemModel { Text = "ROUND", IconCss = "fal fa-users-class" },
+                            new ItemModel { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
+                            new ItemModel { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
+                        };
+
+                    }
+                </div>
+                <div class="col">
+                    <EjsAutoComplete MinLength="3"
+                                     TValue="string"
+                                     CssClass="search-input"
+                                     ShowClearButton="false"
+                                     Placeholder="Wallet Address">
+                    </EjsAutoComplete>
+                </div>
+                <div class="col col-auto">
+                    <EjsButton CssClass="e-flat submit-button" IconCss="far fa-search">SUBMIT</EjsButton>
                 </div>
             </div>
         </div>
