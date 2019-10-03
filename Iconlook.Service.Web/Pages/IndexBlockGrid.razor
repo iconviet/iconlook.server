@@ -75,7 +75,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="tx-light">@(block.Timestamp.Ago().Replace("seconds", "sec").Replace("minutes", "min")) ago</span>
+                        <span class="tx-light">@(block.Timestamp.Ago().Replace("second", "sec").Replace("minute", "min")) ago</span>
                     }
                 }
             </Template>
