@@ -22,7 +22,7 @@ services:
     environment:
       - ENVIRONMENT=localhost
 
-# RABBITMQ
+  # RABBITMQ
   rabbitmq:
     ports:
       - "5672:5672"
@@ -33,7 +33,7 @@ services:
     environment:
       - ENVIRONMENT=localhost
 
-# ELASTIC
+  # ELASTIC
   elastic:
     ports:
       - "5601:5601"
