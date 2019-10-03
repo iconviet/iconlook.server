@@ -11,9 +11,9 @@ namespace Iconlook.Object
         public string Hash { get; set; }
         public decimal Fee { get; set; }
         public decimal Amount { get; set; }
+        public string Producer { get; set; }
+        public string PrevHash { get; set; }
         public int Transactions { get; set; }
-        public string ProduderName { get; set; }
-        public string ProducerAddress { get; set; }
         public DateTimeOffset Timestamp { get; set; }
 
         protected override void AddRules(Validator<BlockResponse> validator)

@@ -1,53 +1,54 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
-using Lykke.Icon.Sdk;
-using Lykke.Icon.Sdk.Transport.Http;
 using NServiceBus;
 
 namespace Iconlook.Service.Job.Blockchain
 {
     public class UpdateBlockchainJob : JobBase
     {
-        private static readonly HttpClient Http = new HttpClient();
-
         public async Task Run()
         {
-            var icon_service = new IconService(new HttpProvider(Http, "https://ctz.solidwallet.io/api/v3"));
-            var last_block = await icon_service.GetLastBlock();
-            var total_supply = await icon_service.GetTotalSupply();
-            var timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3));
+            var client = new IconClient();
+            var last_block = await client.GetLastBlock();
+            var total_supply = await client.GetTotalSupply();
+            var timestamp = (long) last_block.GetTimestamp().DividePow(10, 3);
+            var block = new BlockResponse
+            {
+                Producer = "ICONVIET",
+                Height = (long) last_block.GetHeight(),
+                Hash = last_block.GetBlockHash().ToString(),
+                Transactions = last_block.GetTransactions().Count,
+                PrevHash = last_block.GetPrevBlockHash().ToString(),
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestamp)
+            };
             await Channel.Publish(new BlockProducedSignal
             {
-                Block = new BlockResponse
-                {
-                    Height = 100000
-                }
+                Block = block
             });
             await Channel.Publish(new BlockchainUpdatedSignal
             {
                 Blockchain = new BlockchainResponse
                 {
-                    BlockHeight = 100000
+                    BlockHeight = block.Height
                 }
             });
             await Endpoint.Publish(new BlockchainUpdatedEvent
             {
-                Timestamp = timestamp,
-                BlockHeight = (long) last_block.GetHeight(),
+                BlockHeight = block.Height,
+                Timestamp = block.Timestamp,
                 TokenSupply = (long) total_supply.DividePow(10, 18),
                 TotalTransactions = 71098147 + last_block.GetTransactions().Count
             });
             await Endpoint.Publish(new BlockProducedEvent
             {
-                Timestamp = timestamp,
-                Height = (long) last_block.GetHeight(),
+                Height = block.Height,
+                Timestamp = block.Timestamp,
                 Transactions = last_block.GetTransactions().Select(x => new Transaction
                 {
                     To = x.GetTo().ToString(),
@@ -56,6 +57,7 @@ namespace Iconlook.Service.Job.Blockchain
                     Amount = x.GetValue() != null ? (decimal) x.GetValue() : 0
                 }).ToList()
             });
+            Redis.Instance().As<BlockResponse>().Store(block, TimeSpan.FromMinutes(1));
         }
     }
 }
