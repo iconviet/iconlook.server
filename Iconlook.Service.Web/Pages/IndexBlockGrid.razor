@@ -1,10 +1,10 @@
-﻿<style>
+﻿@implements IDisposable
+<style>
     .block-hash {
         padding: 5px 8px;
         border-radius: 4px;
         background-color: #f1f1f1;
     }
-
     .block-height {
         padding: 5px 8px;
         border-radius: 4px;
@@ -12,14 +12,14 @@
     }
 </style>
 <EjsGrid @ref="Grid"
-          RowHeight="40"
-          EnableHover="false"
-          EnableAltRow="false"
-          TValue="BlockResponse"
-          AllowSelection="false"
-          ModelType="@BlockModelType"
-          GridLines="@GridLine.Horizontal"
-          Query="new ej.data.Query().addParams('take', '13')">
+         RowHeight="40"
+         EnableHover="false"
+         EnableAltRow="false"
+         TValue="BlockResponse"
+         AllowSelection="false"
+         ModelType="@BlockModelType"
+         GridLines="@GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
@@ -65,7 +65,9 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
+                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -83,17 +85,23 @@
     </GridColumns>
 </EjsGrid>
 @code {
+    private IDisposable _subscription;
+
     public EjsGrid<BlockResponse> Grid;
 
     public BlockResponse BlockModelType = new BlockResponse();
 
     protected override void OnInitialized()
     {
-        var connection = Source.Blockchain.Connect();
-        connection.Subscribe(x =>
+        var connection = Source.Blocks.Connect();
+        _subscription = connection.Subscribe(x =>
         {
             Grid?.Refresh();
         });
     }
 
+    public void Dispose()
+    {
+        _subscription.Dispose();
+    }
 }

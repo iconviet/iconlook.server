@@ -1,5 +1,5 @@
-﻿@Height.ToString("N0")
-@implements IDisposable
+﻿@implements IDisposable
+@Height.ToString("N0")
 @code {
     private IDisposable _subscription;
 
@@ -19,5 +19,4 @@
     {
         _subscription.Dispose();
     }
-
 }

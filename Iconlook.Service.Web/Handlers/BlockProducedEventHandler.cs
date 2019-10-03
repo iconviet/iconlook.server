@@ -20,7 +20,11 @@ namespace Iconlook.Service.Web.Handlers
             });
             Source.Transactions.AddOrUpdate(message.Transactions.Select(x => new TransactionResponse
             {
+                To = x.To,
+                Fee = x.Fee,
+                From = x.From,
                 Hash = x.Hash,
+                Amount = x.Amount,
                 Timestamp = x.Timestamp
             }));
             return Task.CompletedTask;
