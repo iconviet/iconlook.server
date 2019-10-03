@@ -40,7 +40,7 @@ namespace Iconlook.Service.Api
                     "0xdd6d8abb19f9e7a38198585ab7c5431867dfd1c436940771afd143560f256344",
                     "0x81ca226c940605afe7e3165b4d95f8bf361ec4385e53e9cf2cfe391c61531917"
                 }[new Random().Next(5)],
-                Amount = new float[] { 100, 200, 300, 400, 500 }[new Random().Next(5)] * 100000
+                Amount = new float[] { 100, 200, 300, 400, 500 }[new Random().Next(5)]
             }).Take(request.Take).ToList());
             return response;
         }

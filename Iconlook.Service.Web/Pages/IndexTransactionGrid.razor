@@ -21,14 +21,14 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="94" Field="@nameof(TransactionResponse.Hash)">
+        <GridColumn Width="133" Field="@nameof(TransactionResponse.Hash)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
                         <a class="secondary no-underline" href="transaction/@transaction.Hash">
-                            <span class="fs-n1 mono transaction-hash">
-                                <span class="font-weight-semibold">@transaction.Hash.Substring(0, 2)</span>@transaction.Hash.Substring(0, 10)
+                            <span class="fs-n1 mono-lg transaction-hash">
+                                <span class="font-weight-semibold">@(transaction.Hash.Substring(0, 16))..</span>
                             </span>
                         </a>
                     }
@@ -48,8 +48,8 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.From">
-                            <span class="fs-n1 mono transaction-address">
-                                <span class="font-weight-semibold">@transaction.From.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            <span class="fs-n1 mono-lg transaction-address">
+                                <span class="font-weight-semibold">@transaction.From.Substring(0, 10)..</span>
                             </span>
                         </a>
                     }
@@ -69,22 +69,20 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.To">
-                            <span class="fs-n1 mono transaction-address">
-                                <span class="font-weight-semibold">@transaction.To.Substring(0, 2)</span>@transaction.From.Substring(2, 10)
+                            <span class="fs-n1 mono-lg transaction-address">
+                                <span class="font-weight-semibold">@transaction.To.Substring(0, 10)..</span>
                             </span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="155" Field="@nameof(TransactionResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(TransactionResponse.Amount)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToString("N0").</span>
-                        <span class="mono ls-n2 tx-light font-weight-light">0000</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>

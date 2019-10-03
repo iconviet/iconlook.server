@@ -1,13 +1,13 @@
 ﻿<style>
     .block-hash {
-        padding: 5px 7px;
-        border-radius: 3px;
-        background-color: #f5f5f5;
+        padding: 5px 8px;
+        border-radius: 4px;
+        background-color: #f1f1f1;
     }
 
     .block-height {
         padding: 5px 8px;
-        border-radius: 3px;
+        border-radius: 4px;
         background-color: #e1fafd;
     }
 </style>
@@ -34,40 +34,38 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="110" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="145" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
                         <a class="secondary no-underline" href="block/@block.Hash">
-                            <span class="fs-n1 mono block-hash">
-                                <span class="font-weight-semibold">@block.Hash.Substring(0, 2)</span>@block.Hash.Substring(0, 10)
+                            <span class="fs-n1 mono-lg block-hash">
+                                <span class="font-weight-semibold">@(block.Hash.Substring(0, 16))..</span>
                             </span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="70" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
                         <a class="primary no-underline" href="/">
-                            <span class="pr-1 mono">@block.Transactions.ToString("N0")</span><span class="tx-light">txns</span>
+                            <span class="pr-1 mono">@block.Transactions.ToString("000")</span><span class="tx-light">txns</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="155" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="130" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0").</span>
-                        <span class="mono ls-n2 tx-light font-weight-light">0000</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -77,7 +75,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="tx-light">@block.Timestamp.Ago()</span>
+                        <span class="tx-light">@(block.Timestamp.Ago().Replace("seconds", "sec").Replace("minutes", "min")) ago</span>
                     }
                 }
             </Template>
@@ -96,7 +94,7 @@
         {
             if (Grid != null)
             {
-                Console.WriteLine(Grid + " " + Grid);
+                
             }
         });
     }

@@ -16,16 +16,19 @@ namespace Iconlook.Service.Job.Blockchain
         {
             var client = new IconClient();
             var last_block = await client.GetLastBlock();
+            var transactions = last_block.GetTransactions();
             var total_supply = await client.GetTotalSupply();
             var timestamp = (long) last_block.GetTimestamp().DividePow(10, 3);
             var block = new BlockResponse
             {
                 Producer = "ICONVIET",
+                Transactions = transactions.Count,
                 Height = (long) last_block.GetHeight(),
                 Hash = last_block.GetBlockHash().ToString(),
-                Transactions = last_block.GetTransactions().Count,
                 PrevHash = last_block.GetPrevBlockHash().ToString(),
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestamp)
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestamp),
+                Fee = transactions.Sum(x => x.GetFee() == null ? 0 : (decimal) x.GetFee().Value.DividePow(10, 18)),
+                Amount = transactions.Sum(x => x.GetValue() == null ? 0 : (decimal) x.GetValue().Value.DividePow(10, 18))
             };
             await Channel.Publish(new BlockProducedSignal
             {
