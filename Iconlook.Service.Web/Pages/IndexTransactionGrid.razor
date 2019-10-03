@@ -21,28 +21,7 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="133" Field="@nameof(TransactionResponse.Hash)">
-            <Template>
-                @{
-                    if (context is TransactionResponse transaction)
-                    {
-                        <a class="secondary no-underline" href="transaction/@transaction.Hash">
-                            <span class="fs-n1 mono-lg transaction-hash">
-                                <span class="font-weight-semibold">@(transaction.Hash.Substring(0, 16))..</span>
-                            </span>
-                        </a>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="36" TextAlign="@TextAlign.Center">
-            <Template>
-                @{
-                    <span class="mt-1 fs-n1">from</span>
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="96" Field="@nameof(TransactionResponse.From)">
+        <GridColumn Width="95" Field="@nameof(TransactionResponse.From)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
@@ -56,14 +35,14 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="26" TextAlign="@TextAlign.Center">
+        <GridColumn Width="25" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     <span class="mt-1 fs-n1">to</span>
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="96" Field="@nameof(TransactionResponse.To)">
+        <GridColumn Width="95" Field="@nameof(TransactionResponse.To)" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
@@ -77,7 +56,21 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="115" Field="@nameof(TransactionResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="140" Field="@nameof(TransactionResponse.Hash)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is TransactionResponse transaction)
+                    {
+                        <a class="secondary no-underline" href="transaction/@transaction.Hash">
+                            <span class="fs-n1 mono-lg transaction-hash">
+                                <span class="font-weight-semibold">@(transaction.Hash.Substring(0, 16))..</span>
+                            </span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="150" Field="@nameof(TransactionResponse.Amount)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)

@@ -92,10 +92,7 @@
         var connection = Source.Blockchain.Connect();
         connection.Subscribe(x =>
         {
-            if (Grid != null)
-            {
-                
-            }
+            Grid?.Refresh();
         });
     }
 
