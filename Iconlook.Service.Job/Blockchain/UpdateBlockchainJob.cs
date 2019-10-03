@@ -22,7 +22,7 @@ namespace Iconlook.Service.Job.Blockchain
             var icon_service = new IconService(new HttpProvider(Http, "https://ctz.solidwallet.io/api/v3"));
             var last_block = await icon_service.GetLastBlock();
             var total_supply = await icon_service.GetTotalSupply();
-            var timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().ToZeroless(3));
+            var timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3));
             await Channel.Publish(new BlockProducedSignal
             {
                 Block = new BlockResponse
@@ -41,7 +41,7 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 Timestamp = timestamp,
                 BlockHeight = (long) last_block.GetHeight(),
-                TokenSupply = (long) total_supply.ToLooplessIcx(),
+                TokenSupply = (long) total_supply.DividePow(10, 18),
                 TotalTransactions = 71098147 + last_block.GetTransactions().Count
             });
             await Endpoint.Publish(new BlockProducedEvent
