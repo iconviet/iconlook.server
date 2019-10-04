@@ -13,14 +13,14 @@
     }
 </style>
 <EjsGrid @ref="Grid"
-         RowHeight="40"
-         EnableHover="false"
-         EnableAltRow="false"
-         AllowSelection="false"
-         TValue="TransactionResponse"
-         GridLines="@GridLine.Horizontal"
-         ModelType="@TransactionModelType"
-         Query="new ej.data.Query().addParams('take', '13')">
+          RowHeight="40"
+          EnableHover="false"
+          EnableAltRow="false"
+          AllowSelection="false"
+          TValue="TransactionResponse"
+          GridLines="@GridLine.Horizontal"
+          ModelType="@TransactionModelType"
+          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="95" Field="@nameof(TransactionResponse.From)">
@@ -96,14 +96,12 @@
     protected override void OnInitialized()
     {
         var connection = Source.Transactions.Connect();
-        _subscription = connection.Subscribe(x =>
-        {
-            Grid?.Refresh();
-        });
+        _subscription = connection.Subscribe(x => { Grid?.Refresh(); });
     }
 
     public void Dispose()
     {
         _subscription.Dispose();
     }
+
 }

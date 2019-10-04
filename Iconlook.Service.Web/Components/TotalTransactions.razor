@@ -14,9 +14,10 @@
             InvokeAsync(() => StateHasChanged());
         });
     }
-    
+
     public void Dispose()
     {
         _subscription.Dispose();
     }
+
 }
