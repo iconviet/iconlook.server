@@ -1,6 +1,18 @@
 version: "3.4"
 
 services:
+  # SEQ
+  seq:
+    ports:
+      - "8080:80"
+      - "5341:5341"
+    image: datalust/seq
+    container_name: seq
+    network_mode: bridge
+    environment:
+      - ACCEPT_EULA=Y
+      - ENVIRONMENT=localhost
+
   # REDIS
   redis:
     ports:
@@ -14,7 +26,6 @@ services:
   # RAVENDB
   ravendb:
     ports:
-      - "8080:8080"
       - "38888:38888"
     network_mode: bridge
     image: iconviet/ravendb
