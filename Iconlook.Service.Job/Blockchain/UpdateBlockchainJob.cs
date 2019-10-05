@@ -7,7 +7,8 @@ using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
-using Serilog;
+using ServiceStack;
+using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job.Blockchain
 {
@@ -15,70 +16,68 @@ namespace Iconlook.Service.Job.Blockchain
     {
         public async Task Run()
         {
-            try
+            var client = new IconClient();
+            var last_block = await client.GetLastBlock();
+            var total_supply = await client.GetTotalSupply();
+            var transactions = last_block.GetTransactions().Select(x => new Transaction
             {
-                var client = new IconClient();
-                var last_block = await client.GetLastBlock();
-                var total_supply = await client.GetTotalSupply();
-                var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
+                To = x.GetTo().ToString(),
+                From = x.GetFrom().ToString(),
+                Hash = x.GetTxHash().ToString(),
+                Block = (long) last_block.GetHeight(),
+                Fee = x.GetFee().HasValue ? (decimal) x.GetFee().Value.DividePow(10, 18) : 0,
+                Amount = x.GetValue().HasValue ? (decimal) x.GetValue().Value.DividePow(10, 18) : 0,
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) x.GetTimestamp().Value.DividePow(10, 3))
+            }).ToList();
+            var block = new Block
+            {
+                PeerId = last_block.GetPeerId(),
+                Transactions = transactions.Count,
+                Fee = transactions.Sum(x => x.Fee),
+                Height = (long) last_block.GetHeight(),
+                Amount = transactions.Sum(x => x.Amount),
+                Hash = last_block.GetBlockHash().ToString(),
+                PrevHash = last_block.GetPrevBlockHash().ToString(),
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
+            };
+            await Task.WhenAll(
+                Endpoint.Publish(new BlockProducedEvent
                 {
-                    To = x.GetTo().ToString(),
-                    From = x.GetFrom().ToString(),
-                    Hash = x.GetTxHash().ToString(),
-                    Fee = x.GetFee().HasValue ? (decimal) x.GetFee().Value.DividePow(10, 18) : 0,
-                    Amount = x.GetValue().HasValue ? (decimal) x.GetValue().Value.DividePow(10, 18) : 0,
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) x.GetTimestamp().Value.DividePow(10, 3))
-                }).ToList();
-                var block = new BlockResponse
-                {
-                    Producer = "ICONVIET",
-                    Transactions = transactions.Count,
-                    Fee = transactions.Sum(x => x.Fee),
-                    Height = (long) last_block.GetHeight(),
-                    Amount = transactions.Sum(x => x.Amount),
-                    Hash = last_block.GetBlockHash().ToString(),
-                    PrevHash = last_block.GetPrevBlockHash().ToString(),
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
-                };
-
-                await Channel.Publish(new BlockProducedSignal
-                {
-                    Block = block
-                });
-                await Channel.Publish(new BlockchainUpdatedSignal
+                    Block = block,
+                    Transactions = transactions
+                }),
+                Channel.Publish(new BlockchainUpdatedSignal
                 {
                     Blockchain = new BlockchainResponse
                     {
                         BlockHeight = block.Height
                     }
-                });
-                await Endpoint.Publish(new BlockProducedEvent
-                {
-                    Height = block.Height,
-                    Timestamp = block.Timestamp,
-                    Transactions = transactions.Select(x => new Transaction
+                }),
+                Channel.Publish(new BlockProducedSignal
                     {
-                        To = x.To,
-                        Fee = x.Fee,
-                        From = x.From,
-                        Hash = x.Hash,
-                        Amount = x.Amount
-                    }).ToList()
-                });
-                await Endpoint.Publish(new BlockchainUpdatedEvent
+                        Block = block.ConvertTo<BlockResponse>()
+                    }
+                ),
+                Endpoint.Publish(new BlockchainUpdatedEvent
                 {
                     BlockHeight = block.Height,
                     Timestamp = block.Timestamp,
                     TotalTransactions = 71098147 + transactions.Count,
                     TokenSupply = (long) total_supply.DividePow(10, 18)
-                });
-                Redis.Instance().As<BlockResponse>().Store(block, TimeSpan.FromMinutes(1));
-                transactions.ForEach(x => Redis.Instance().As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(1)));
-            }
-            catch (Exception exception)
-            {
-                Log.Error(exception, nameof(UpdateBlockchainJob));
-            }
+                }),
+                new Task(async () =>
+                {
+                    var db = Db.Instance();
+                    if (!db.Exists<Block>(x => x.Height == block.Height))
+                    {
+                        await db.InsertAsync(block);
+                        await db.InsertAllAsync(transactions);
+                        var block_redis = Redis.Instance().As<BlockResponse>();
+                        var transaction_redis = Redis.Instance().As<TransactionResponse>();
+                        transactions.ForEach(x => transaction_redis.Store(x.ConvertTo<TransactionResponse>(), TimeSpan.FromMinutes(1)));
+                        block_redis.Store(block.ConvertTo<BlockResponse>().ThenDo(x => x.PRepName = x.Hash.Substring(0, 10)), TimeSpan.FromMinutes(1));
+                    }
+                }));
         }
     }
 }

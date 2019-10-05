@@ -10,9 +10,10 @@ namespace Iconlook.Object
         public long Height { get; set; }
         public string Hash { get; set; }
         public decimal Fee { get; set; }
+        public string PeerId { get; set; }
         public decimal Amount { get; set; }
-        public string Producer { get; set; }
         public string PrevHash { get; set; }
+        public string PRepName { get; set; }
         public int Transactions { get; set; }
         public DateTimeOffset Timestamp { get; set; }
 

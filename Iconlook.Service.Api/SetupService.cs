@@ -38,6 +38,8 @@ namespace Iconlook.Service.Api
 
             public void DropTables()
             {
+                Db.Instance().DropTable<Transaction>();
+                Db.Instance().DropTable<Block>();
                 Db.Instance().DropTable<Prep>();
                 Db.Instance().DropTable<PrepState_>();
             }
@@ -46,6 +48,8 @@ namespace Iconlook.Service.Api
             {
                 Db.Instance().CreateTable<PrepState_>();
                 Db.Instance().CreateTable<Prep>();
+                Db.Instance().CreateTable<Block>();
+                Db.Instance().CreateTable<Transaction>();
             }
 
             public async Task PopulateTables()

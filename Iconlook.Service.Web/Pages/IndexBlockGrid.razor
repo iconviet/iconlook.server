@@ -67,14 +67,12 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span>
-                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
-                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="88" Field="@nameof(BlockResponse.Producer)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="88" Field="@nameof(BlockResponse.Timestamp)" TextAlign="@TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
