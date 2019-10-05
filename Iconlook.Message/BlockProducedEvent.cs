@@ -9,7 +9,12 @@ namespace Iconlook.Message
 {
     public class BlockProducedEvent : EventBase<BlockProducedEvent>
     {
+        public int Size { get; set; }
         public long Height { get; set; }
+        public string Hash { get; set; }
+        public decimal Fee { get; set; }
+        public decimal Amount { get; set; }
+        public string Producer { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public List<Transaction> Transactions { get; set; }
 
@@ -21,7 +26,7 @@ namespace Iconlook.Message
         protected override void AddRules(Validator<BlockProducedEvent> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Height).NotNull();
+            validator.RuleFor(x => x.Height).GreaterThan(0);
         }
     }
 

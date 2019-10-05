@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.WebUtilities;
@@ -27,7 +28,6 @@ namespace Iconlook.Service.Web
         {
             ConfigureServices = host => services =>
             {
-                services.AddRazorPages();
                 services.AddServerSideBlazor();
                 services.Configure<KestrelServerOptions>(options =>
                 {
@@ -50,6 +50,10 @@ namespace Iconlook.Service.Web
                     options.KnownProxies.Clear();
                     options.KnownNetworks.Clear();
                     options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
+                });
+                services.AddRazorPages(options =>
+                {
+                    options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
                 });
                 var redis = host.HostConfiguration.GetConnectionString("redis");
                 if (redis.HasValue())

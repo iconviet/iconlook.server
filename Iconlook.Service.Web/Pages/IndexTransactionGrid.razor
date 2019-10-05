@@ -22,6 +22,7 @@
           ModelType="@TransactionModelType"
           Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="95" Field="@nameof(TransactionResponse.From)">
             <Template>
@@ -94,7 +95,16 @@
     protected override void OnInitialized()
     {
         var connection = Source.Transactions.Connect();
-        _subscription = connection.Subscribe(x => { Grid?.Refresh(); });
+        _subscription = connection.Subscribe(changes =>
+        {
+            if (Grid != null)
+            {
+                foreach (var change in changes)
+                {
+                    Grid.AddRecord(change.Current);
+                }
+            }
+        });
     }
 
     public void Dispose()

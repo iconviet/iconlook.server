@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Agiper.Server;
 using DynamicData;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Service.Web.Sources;
 using NServiceBus;
+using ServiceStack;
 
 namespace Iconlook.Service.Web.Handlers
 {
@@ -13,20 +13,8 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockProducedEvent message, IMessageHandlerContext context)
         {
-            Source.Blocks.AddOrUpdate(new BlockResponse
-            {
-                Height = message.Height,
-                Timestamp = message.Timestamp
-            });
-            Source.Transactions.AddOrUpdate(message.Transactions.Select(x => new TransactionResponse
-            {
-                To = x.To,
-                Fee = x.Fee,
-                From = x.From,
-                Hash = x.Hash,
-                Amount = x.Amount,
-                Timestamp = x.Timestamp
-            }));
+            Source.Blocks.AddOrUpdate(message.ConvertTo<BlockResponse>());
+            Source.Transactions.AddOrUpdate(message.Transactions.ConvertAll(x => x.ConvertTo<TransactionResponse>()));
             return Task.CompletedTask;
         }
     }

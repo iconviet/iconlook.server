@@ -13,15 +13,16 @@
     }
 </style>
 <EjsGrid @ref="Grid"
-          RowHeight="40"
-          EnableHover="false"
-          EnableAltRow="false"
-          TValue="BlockResponse"
-          AllowSelection="false"
-          ModelType="@BlockModelType"
-          GridLines="@GridLine.Horizontal"
-          Query="new ej.data.Query().addParams('take', '13')">
+         RowHeight="40"
+         EnableHover="false"
+         EnableAltRow="false"
+         TValue="BlockResponse"
+         AllowSelection="false"
+         ModelType="@BlockModelType"
+         GridLines="@GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
             <Template>
@@ -66,7 +67,9 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
+                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -93,7 +96,16 @@
     protected override void OnInitialized()
     {
         var connection = Source.Blocks.Connect();
-        _subscription = connection.Subscribe(x => { Grid?.Refresh(); });
+        _subscription = connection.Subscribe(changes =>
+        {
+            if (Grid != null)
+            {
+                foreach (var change in changes)
+                {
+                    Grid.AddRecord(change.Current);
+                }
+            }
+        });
     }
 
     public void Dispose()

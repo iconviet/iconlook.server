@@ -1,5 +1,4 @@
 ﻿using Agiper.Object;
-using FluentValidation;
 
 namespace Iconlook.Object
 {
@@ -10,7 +9,7 @@ namespace Iconlook.Object
         protected override void AddRules(Validator<BlockchainUpdatedSignal> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Blockchain).NotNull().SetValidator(BlockchainResponse.Validator);
+            validator.RuleFor(x => x.Blockchain).SetValidator(BlockchainResponse.Validator);
         }
     }
 }
