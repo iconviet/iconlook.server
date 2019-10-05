@@ -15,7 +15,7 @@ namespace Iconlook.Entity
         [Required]
         [References(typeof(Block))]
         public long Block { get; set; }
-        
+
         [Required]
         [StringLength(42)]
         public string From { get; set; }
@@ -26,7 +26,7 @@ namespace Iconlook.Entity
 
         [Required]
         public decimal Amount { get; set; }
-        
+
         [Required]
         public decimal Fee { get; set; }
 

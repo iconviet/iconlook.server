@@ -10,22 +10,22 @@ namespace Iconlook.Entity
     {
         [PrimaryKey]
         public long Height { get; set; }
-        
+
         [StringLength(42)]
         public string PeerId { get; set; }
-        
+
         [StringLength(66)]
         public string Hash { get; set; }
 
         [StringLength(66)]
         public string PrevHash { get; set; }
-        
+
         [Required]
         public decimal Amount { get; set; }
 
         [Required]
         public decimal Fee { get; set; }
-        
+
         [Required]
         public int Transactions { get; set; }
 
