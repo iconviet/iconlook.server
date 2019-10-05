@@ -1,13 +1,13 @@
 ﻿using Agiper.Server;
 using Serilog;
 
-namespace Iconlook.Service.Job.Prep
+namespace Iconlook.Service.Job.PRep
 {
-    public class VoteHistoryPrepJob : JobBase
+    public class VoteHistoryPRepJob : JobBase
     {
         public void Run()
         {
-            Log.Information("VoteHistoryPrepJob ran");
+            Log.Information("VoteHistoryPRepJob ran");
         }
     }
 }

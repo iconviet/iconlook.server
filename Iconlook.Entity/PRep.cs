@@ -6,8 +6,8 @@ using ServiceStack.DataAnnotations;
 
 namespace Iconlook.Entity
 {
-    [Alias(nameof(Prep))]
-    public class Prep : EntityBase<Prep>, IHasId<long>, IHasTimestamp, IHasState<PrepState>
+    [Alias(nameof(PRep))]
+    public class PRep : EntityBase<PRep>, IHasId<long>, IHasTimestamp, IHasState<PRepState>
     {
         [PrimaryKey]
         public long Id { get; set; }
@@ -15,8 +15,8 @@ namespace Iconlook.Entity
         [StringLength(18)]
         public string IdExternal { get; set; }
 
-        [ForeignKey(typeof(PrepState_))]
-        public PrepState State { get; set; }
+        [ForeignKey(typeof(PRepState_))]
+        public PRepState State { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -70,12 +70,12 @@ namespace Iconlook.Entity
 
         public DateTimeOffset Timestamp { get; set; }
 
-        protected override void AddRules(Validator<Prep> validator)
+        protected override void AddRules(Validator<PRep> validator)
         {
             base.AddRules(validator);
             validator.RuleFor(x => x.Id).NotEmpty();
-            validator.RuleFor(x => x.State).IsInEnum().NotEqual(PrepState.Empty);
-            validator.RuleFor(x => x.Address).Length(4).When(x => x.State != PrepState.Empty);
+            validator.RuleFor(x => x.State).IsInEnum().NotEqual(PRepState.Empty);
+            validator.RuleFor(x => x.Address).Length(4).When(x => x.State != PRepState.Empty);
         }
     }
 }

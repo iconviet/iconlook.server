@@ -36,23 +36,23 @@
 </style>
 <EjsGrid EnableHover="false"
          EnableAltRow="true"
-         TValue="PrepResponse"
+         TValue="PRepResponse"
          AllowPaging="@CanPage"
          AllowSelection="@CanEdit"
-         ModelType="@PrepModelType"
+         ModelType="@PRepModelType"
          GridLines="@GridLine.Horizontal"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
     <GridPageSettings PageSize="@PageSize" PageSizes="@PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="@CanEdit" Mode="@EditMode.Dialog"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="217" Field="@nameof(PrepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
+        <GridColumn Width="217" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep Name" IsPrimaryKey="true">
             <HeaderTemplate>
                 <span><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep Name</span>
             </HeaderTemplate>
             <Template>
                 @{
-                    if (context is PrepResponse prep)
+                    if (context is PRepResponse prep)
                     {
                         <div class="mt-1 d-flex align-items-center">
                             <img width="20" height="20" style="margin-right: 10px; margin-bottom: 1px;" class="prep-@prep.IdExternal rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
@@ -111,13 +111,13 @@
                 </EjsChipList>
             </Template>
         </GridColumn>
-        <GridColumn Width="91" Field="@nameof(PrepResponse.Score)" HeaderText="Score" TextAlign="@TextAlign.Right">
+        <GridColumn Width="91" Field="@nameof(PRepResponse.Score)" HeaderText="Score" TextAlign="@TextAlign.Right">
             <HeaderTemplate>
                 <div class="pr-2">Score&nbsp;</div>
             </HeaderTemplate>
             <Template>
                 @{
-                    if (context is PrepResponse prep)
+                    if (context is PRepResponse prep)
                     {
                         if (prep.Score > 0)
                         {
@@ -138,5 +138,5 @@
     </GridColumns>
 </EjsGrid>
 @code {
-    public PrepResponse PrepModelType = new PrepResponse();
+    public PRepResponse PRepModelType = new PRepResponse();
 }

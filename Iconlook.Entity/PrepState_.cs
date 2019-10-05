@@ -3,11 +3,11 @@ using ServiceStack.DataAnnotations;
 
 namespace Iconlook.Entity
 {
-    [Alias(nameof(PrepState))]
-    public class PrepState_ : EntityBase<PrepState_>
+    [Alias(nameof(PRepState))]
+    public class PRepState_ : EntityBase<PRepState_>
     {
         [PrimaryKey]
-        public PrepState State { get; set; }
+        public PRepState State { get; set; }
 
         [Required]
         [StringLength(50)]

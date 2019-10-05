@@ -3,7 +3,7 @@ using Agiper.Object;
 
 namespace Iconlook.Object
 {
-    public class PrepResponse : ResponseBase<PrepResponse>
+    public class PRepResponse : ResponseBase<PRepResponse>
     {
         public int Votes { get; set; }
         public int Score { get; set; }

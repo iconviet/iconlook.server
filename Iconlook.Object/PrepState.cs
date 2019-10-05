@@ -3,7 +3,7 @@
 namespace Iconlook.Object
 {
     [EnumAsInt]
-    public enum PrepState
+    public enum PRepState
     {
         Empty,
         Enabled,

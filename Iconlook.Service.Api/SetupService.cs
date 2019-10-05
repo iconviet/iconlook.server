@@ -40,14 +40,14 @@ namespace Iconlook.Service.Api
             {
                 Db.Instance().DropTable<Transaction>();
                 Db.Instance().DropTable<Block>();
-                Db.Instance().DropTable<Prep>();
-                Db.Instance().DropTable<PrepState_>();
+                Db.Instance().DropTable<PRep>();
+                Db.Instance().DropTable<PRepState_>();
             }
 
             public void CreateTables()
             {
-                Db.Instance().CreateTable<PrepState_>();
-                Db.Instance().CreateTable<Prep>();
+                Db.Instance().CreateTable<PRepState_>();
+                Db.Instance().CreateTable<PRep>();
                 Db.Instance().CreateTable<Block>();
                 Db.Instance().CreateTable<Transaction>();
             }
@@ -56,15 +56,15 @@ namespace Iconlook.Service.Api
             {
                 try
                 {
-                    typeof(PrepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PrepState_ { State = (PrepState) x.Key, Description = x.Value }));
+                    typeof(PRepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
                     var html = await new HtmlWeb().LoadFromWebAsync("http://icon.community/iconsensus/candidates");
                     var query = from t in html.DocumentNode.SelectNodes("//tbody")
                                 from r in t.SelectNodes("tr")
                                 select r;
-                    var preps = query.Select(x => new Prep
+                    var preps = query.Select(x => new PRep
                     {
                         Joined = DateTime.UtcNow,
-                        State = PrepState.Enabled,
+                        State = PRepState.Enabled,
                         LastSeen = DateTime.UtcNow,
                         Size = new Random().Next(1, 10),
                         Position = new Random().Next(1, 66),
