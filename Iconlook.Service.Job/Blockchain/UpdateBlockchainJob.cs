@@ -7,7 +7,6 @@ using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
-using ServiceStack;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job.Blockchain
@@ -41,6 +40,10 @@ namespace Iconlook.Service.Job.Blockchain
                 Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
             };
             await Task.WhenAll(
+                Channel.Publish(new BlockProducedSignal
+                {
+                    Block = block.ToResponse()
+                }),
                 Endpoint.Publish(new BlockProducedEvent
                 {
                     Block = block,
@@ -53,11 +56,6 @@ namespace Iconlook.Service.Job.Blockchain
                         BlockHeight = block.Height
                     }
                 }),
-                Channel.Publish(new BlockProducedSignal
-                    {
-                        Block = block.ConvertTo<BlockResponse>()
-                    }
-                ),
                 Endpoint.Publish(new BlockchainUpdatedEvent
                 {
                     BlockHeight = block.Height,
@@ -73,9 +71,9 @@ namespace Iconlook.Service.Job.Blockchain
                         await db.InsertAsync(block);
                         await db.InsertAllAsync(transactions);
                         var block_redis = Redis.Instance().As<BlockResponse>();
+                        block_redis.Store(block.ToResponse(), TimeSpan.FromMinutes(1));
                         var transaction_redis = Redis.Instance().As<TransactionResponse>();
-                        transactions.ForEach(x => transaction_redis.Store(x.ConvertTo<TransactionResponse>(), TimeSpan.FromMinutes(1)));
-                        block_redis.Store(block.ConvertTo<BlockResponse>().ThenDo(x => x.PRepName = x.Hash.Substring(0, 10)), TimeSpan.FromMinutes(1));
+                        transactions.ForEach(x => transaction_redis.Store(x.ToResponse(), TimeSpan.FromMinutes(1)));
                     }
                 }));
         }

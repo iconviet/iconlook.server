@@ -2,10 +2,8 @@
 using Agiper.Server;
 using DynamicData;
 using Iconlook.Message;
-using Iconlook.Object;
 using Iconlook.Service.Web.Sources;
 using NServiceBus;
-using ServiceStack;
 
 namespace Iconlook.Service.Web.Handlers
 {
@@ -13,8 +11,8 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockProducedEvent message, IMessageHandlerContext context)
         {
-            Source.Blocks.AddOrUpdate(message.ConvertTo<BlockResponse>());
-            Source.Transactions.AddOrUpdate(message.Transactions.ConvertAll(x => x.ConvertTo<TransactionResponse>()));
+            Source.Blocks.AddOrUpdate(message.Block.ToResponse());
+            Source.Transactions.AddOrUpdate(message.Transactions.ConvertAll(x => x.ToResponse()));
             return Task.CompletedTask;
         }
     }
