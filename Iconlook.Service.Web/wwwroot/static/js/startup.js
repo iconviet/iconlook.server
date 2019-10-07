@@ -12,7 +12,7 @@
         },
         success: function (selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
-                console.log("Received " + message.cmd, json);
+                // console.log("Received " + message.cmd, json);
             }
         }
     });

@@ -25,11 +25,11 @@ namespace Iconlook.Service.Api
                 var name = request.Filter
                     .Replace("substringof('", string.Empty)
                     .Replace("',tolower(Name))", string.Empty);
-                var PReps = await Db.SelectAsync(Db.From<PRep>().Where(x =>
+                var preps = await Db.SelectAsync(Db.From<PRep>().Where(x =>
                     x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
-                return new ListResponse<PRepResponse>(PReps.ConvertAll(x => x.ToResponse()))
+                return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = request.Skip, Take = request.Take, Count = PReps.Count
+                    Skip = request.Skip, Take = request.Take, Count = preps.Count
                 };
             }
             if (request.Edit.HasValue() && request.Edit != "all")
