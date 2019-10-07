@@ -82,18 +82,20 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="70" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="@TextAlign.Center">
+        <GridColumn Width="75" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
+                        <div class="text-center rounded-pill bg-secondary d-inline-block" style="width: 58px; margin: -2px 0; padding: 2px 0;">
+                            <span class="fs-n1 mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
+                        </div>
                     }
                 }
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="56" Field="@nameof(PRepResponse.LastSeen)" HeaderText="Status" TextAlign="@TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(PRepResponse.LastSeen)" HeaderText="Status" TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -106,7 +108,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Prod." TextAlign="@TextAlign.Center">
+        <GridColumn Width="50" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Prod." TextAlign="@TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -117,7 +119,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="85" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="80" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="@TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube positive-dark"></i>
             </HeaderTemplate>
