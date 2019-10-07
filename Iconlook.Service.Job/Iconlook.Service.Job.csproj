@@ -19,7 +19,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.15" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.16" />
     <PackageReference Include="Lykke.Icon.Sdk" Version="0.2.7" />
     <PackageReference Include="ServiceStack.HttpClient" Version="5.7.0" />
     <PackageReference Include="Twilio" Version="5.33.1" />
