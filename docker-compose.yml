@@ -6,6 +6,7 @@ services:
     ports:
       - "8080:80"
       - "5341:5341"
+    restart: always
     image: datalust/seq
     container_name: seq
     network_mode: bridge
@@ -17,6 +18,7 @@ services:
   redis:
     ports:
       - "6379:6379"
+    restart: always
     network_mode: bridge
     image: iconviet/redis
     container_name: redis
@@ -25,6 +27,7 @@ services:
 
   # RAVENDB
   ravendb:
+    restart: always
     ports:
       - "38888:38888"
     network_mode: bridge
@@ -35,6 +38,7 @@ services:
 
   # RABBITMQ
   rabbitmq:
+    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -50,6 +54,7 @@ services:
       - "5601:5601"
       - "9200:9200"
       - "9300:9300"
+    restart: always
     network_mode: bridge
     image: iconviet/elastic
     container_name: elastic
