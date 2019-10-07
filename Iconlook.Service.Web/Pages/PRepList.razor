@@ -185,13 +185,6 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@Contribution">
-                    <ContentTemplate>
-                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
-                            <PRepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListContributionGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
                 <TabItem Header="@Transparency">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
@@ -199,7 +192,14 @@
                         </div>
                     </ContentTemplate>
                 </TabItem>
-                <TabItem Header="@ScoreMatrix">
+                <TabItem Header="@Contribution" Disabled="true">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <PRepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListContributionGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem Header="@ScoreMatrix" Disabled="true">
                     <ContentTemplate>
                         <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
                             <PRepListScoreMatrixGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListScoreMatrixGrid>
@@ -208,5 +208,8 @@
                 </TabItem>
             </TabItems>
         </EjsTab>
+        <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
+            <a class="primary">FILTER</a>
+        </div>
     </div>
 </div>
