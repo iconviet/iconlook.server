@@ -39,43 +39,42 @@ namespace Iconlook.Service.Job.Blockchain
                 PrevHash = last_block.GetPrevBlockHash().ToString(),
                 Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
             };
-            await Task.WhenAll(
-                Channel.Publish(new BlockProducedSignal
+            await Channel.Publish(new BlockProducedSignal
+            {
+                Block = block.ToResponse()
+            });
+            await Endpoint.Publish(new BlockProducedEvent
+            {
+                Block = block,
+                Transactions = transactions
+            });
+            await Channel.Publish(new BlockchainUpdatedSignal
+            {
+                Blockchain = new BlockchainResponse
                 {
-                    Block = block.ToResponse()
-                }),
-                Endpoint.Publish(new BlockProducedEvent
+                    BlockHeight = block.Height
+                }
+            });
+            await Endpoint.Publish(new BlockchainUpdatedEvent
+            {
+                BlockHeight = block.Height,
+                Timestamp = block.Timestamp,
+                TotalTransactions = 71098147 + transactions.Count,
+                TokenSupply = (long) total_supply.DividePow(10, 18)
+            });
+            await Task.Run(async () =>
+            {
+                var db = Db.Instance();
+                if (!db.Exists<Block>(x => x.Height == block.Height))
                 {
-                    Block = block,
-                    Transactions = transactions
-                }),
-                Channel.Publish(new BlockchainUpdatedSignal
-                {
-                    Blockchain = new BlockchainResponse
-                    {
-                        BlockHeight = block.Height
-                    }
-                }),
-                Endpoint.Publish(new BlockchainUpdatedEvent
-                {
-                    BlockHeight = block.Height,
-                    Timestamp = block.Timestamp,
-                    TotalTransactions = 71098147 + transactions.Count,
-                    TokenSupply = (long) total_supply.DividePow(10, 18)
-                }),
-                new Task(async () =>
-                {
-                    var db = Db.Instance();
-                    if (!db.Exists<Block>(x => x.Height == block.Height))
-                    {
-                        await db.InsertAsync(block);
-                        await db.InsertAllAsync(transactions);
-                        var block_redis = Redis.Instance().As<BlockResponse>();
-                        block_redis.Store(block.ToResponse(), TimeSpan.FromMinutes(1));
-                        var transaction_redis = Redis.Instance().As<TransactionResponse>();
-                        transactions.ForEach(x => transaction_redis.Store(x.ToResponse(), TimeSpan.FromMinutes(1)));
-                    }
-                }));
+                    await db.InsertAsync(block);
+                    await db.InsertAllAsync(transactions);
+                    var block_redis = Redis.Instance().As<BlockResponse>();
+                    block_redis.Store(block.ToResponse(), TimeSpan.FromMinutes(1));
+                    var transaction_redis = Redis.Instance().As<TransactionResponse>();
+                    transactions.ForEach(x => transaction_redis.Store(x.ToResponse(), TimeSpan.FromMinutes(1)));
+                }
+            });
         }
     }
 }
