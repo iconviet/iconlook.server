@@ -12,17 +12,18 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid @ref="Grid"
-          RowHeight="40"
-          EnableHover="false"
-          EnableAltRow="false"
-          AllowSelection="false"
-          TValue="TransactionResponse"
-          GridLines="@GridLine.Horizontal"
-          ModelType="@TransactionModelType"
-          Query="new ej.data.Query().addParams('take', '13')">
+<EjsGrid RowHeight="40"
+         EnableHover="false"
+         EnableAltRow="false"
+         ID="transaction_grid"
+         AllowSelection="false"
+         @ref="TransactionGrid"
+         TValue="TransactionResponse"
+         GridLines="@GridLine.Horizontal"
+         ModelType="@TransactionModelType"
+         Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
-    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="EditMode.Batch"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="95" Field="@nameof(TransactionResponse.From)">
             <Template>
@@ -78,9 +79,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span>
-                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
-                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -90,7 +89,7 @@
 @code {
     private IDisposable _subscription;
 
-    public EjsGrid<TransactionResponse> Grid;
+    public EjsGrid<TransactionResponse> TransactionGrid;
 
     public TransactionResponse TransactionModelType = new TransactionResponse();
 
@@ -99,11 +98,11 @@
         var connection = Source.Transactions.Connect();
         _subscription = connection.Subscribe(changes =>
         {
-            if (Grid != null)
+            if (TransactionGrid != null)
             {
                 foreach (var change in changes)
                 {
-                    Grid.AddRecord(change.Current);
+                    TransactionGrid.AddRecord(change.Current);
                 }
             }
         });
@@ -113,5 +112,4 @@
     {
         _subscription.Dispose();
     }
-
 }
