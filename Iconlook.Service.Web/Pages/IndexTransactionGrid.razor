@@ -1,5 +1,4 @@
-﻿@implements IDisposable
-<style>
+﻿<style>
     .transaction-hash {
         padding: 5px 7px;
         border-radius: 3px;
@@ -12,15 +11,15 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid @ref="Grid"
-          RowHeight="40"
-          EnableHover="false"
-          EnableAltRow="false"
-          AllowSelection="false"
-          TValue="TransactionResponse"
-          GridLines="@GridLine.Horizontal"
-          ModelType="@TransactionModelType"
-          Query="new ej.data.Query().addParams('take', '13')">
+<EjsGrid ID="tx_grid"
+         RowHeight="40"
+         EnableHover="false"
+         EnableAltRow="false"
+         AllowSelection="false"
+         TValue="TransactionResponse"
+         GridLines="@GridLine.Horizontal"
+         ModelType="@TransactionModelType"
+         Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
@@ -88,30 +87,5 @@
     </GridColumns>
 </EjsGrid>
 @code {
-    private IDisposable _subscription;
-
-    public EjsGrid<TransactionResponse> Grid;
-
     public TransactionResponse TransactionModelType = new TransactionResponse();
-
-    protected override void OnInitialized()
-    {
-        var connection = Source.Transactions.Connect();
-        _subscription = connection.Subscribe(changes =>
-        {
-            if (Grid != null)
-            {
-                foreach (var change in changes)
-                {
-                    Grid.AddRecord(change.Current);
-                }
-            }
-        });
-    }
-
-    public void Dispose()
-    {
-        _subscription.Dispose();
-    }
-
 }

@@ -1,6 +1,6 @@
 ﻿$(document).ready(function() {
     console.log("Ready!!!!!");
-    var source = new EventSource('/sse/stream?channel=iconlook');
+    const source = new EventSource('/sse/stream?channel=iconlook');
     source.addEventListener('error', function (e) {
         console.log("ERROR", e);
     }, false);
@@ -12,11 +12,19 @@
         },
         success: function (selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
-                // console.log("Received " + message.cmd, json);
+                const block_grid = document.getElementById('block_grid');
+                if (block_grid != null) {
+                    if (message.cmd === 'BlockProducedSignal') {
+                        const instance = block_grid.ej2_instances[0];
+                        // instance.addRecord(json.block);
+                        console.log("Received " + message.cmd, json);
+                    }
+                }
+
             }
         }
     });
-    const click = rxjs.fromEvent(document, 'click');
-    const example = click.pipe(rxjs.operators.map(event => `Event time: ${event.timeStamp}`));
+    const click = window.rxjs.fromEvent(document, 'click');
+    const example = click.pipe(window.rxjs.operators.map(event => 'Event time: ${event.timeStamp}'));
     example.subscribe(val => console.log(val));
 })
