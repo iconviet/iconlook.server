@@ -12,9 +12,8 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid RowHeight="40"
-         ID="block_grid"
-         @ref="BlockGrid"
+<EjsGrid @ref="Grid"
+         RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
@@ -23,7 +22,7 @@
          GridLines="@GridLine.Horizontal"
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
-    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="EditMode.Batch"></GridEditSettings>
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
             <Template>
@@ -68,9 +67,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span>
-                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
-                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -90,7 +87,7 @@
 @code {
     private IDisposable _subscription;
 
-    public EjsGrid<BlockResponse> BlockGrid;
+    public EjsGrid<BlockResponse> Grid;
 
     public BlockResponse BlockModelType = new BlockResponse();
 
@@ -99,11 +96,11 @@
         var connection = Source.Blocks.Connect();
         _subscription = connection.Subscribe(changes =>
         {
-            if (BlockGrid != null)
+            if (Grid != null)
             {
                 foreach (var change in changes)
                 {
-                    BlockGrid.AddRecord(change.Current);
+                    Grid.AddRecord(change.Current);
                 }
             }
         });
