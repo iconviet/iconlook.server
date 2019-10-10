@@ -5,19 +5,22 @@
 
     public long Height { get; set; }
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        var connection = Source.Blockchain.Connect();
-        _subscription = connection.Subscribe(x =>
+        base.OnAfterRender(firstRender);
+        if (firstRender)
         {
-            Height = x.Last().Current.BlockHeight;
-            InvokeAsync(() => StateHasChanged());
-        });
+            var connection = Source.Blockchain.Connect();
+            _subscription = connection.Subscribe(x =>
+            {
+                Height = x.Last().Current.BlockHeight;
+                InvokeAsync(() => StateHasChanged());
+            });
+        }
     }
 
     public void Dispose()
     {
-        _subscription.Dispose();
+        _subscription?.Dispose();
     }
-
 }
