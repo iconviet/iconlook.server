@@ -93,24 +93,24 @@
 
     public BlockResponse BlockModelType = new BlockResponse();
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        var connection = Source.Blocks.Connect();
-        _subscription = connection.Subscribe(changes =>
+        base.OnAfterRender(firstRender);
+        if (firstRender)
         {
-            if (BlockGrid != null)
+            var connection = Source.Blocks.Connect();
+            _subscription = connection.Subscribe(changes =>
             {
                 foreach (var change in changes)
                 {
                     BlockGrid.AddRecord(change.Current);
                 }
-            }
-        });
+            });
+        }
     }
 
     public void Dispose()
     {
         _subscription.Dispose();
     }
-
 }

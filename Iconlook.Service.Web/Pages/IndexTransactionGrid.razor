@@ -22,8 +22,8 @@
          GridLines="GridLine.Horizontal"
          ModelType="TransactionModelType"
          Query="new ej.data.Query().addParams('take', '13')">
-    <EjsDataManager Url="/api/v1.0/transactions" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="EditMode.Batch"></GridEditSettings>
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/transactions" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="95" Field="@nameof(TransactionResponse.From)">
             <Template>
@@ -79,7 +79,9 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
+                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -93,19 +95,20 @@
 
     public TransactionResponse TransactionModelType = new TransactionResponse();
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        var connection = Source.Transactions.Connect();
-        _subscription = connection.Subscribe(changes =>
+        base.OnAfterRender(firstRender);
+        if (firstRender)
         {
-            if (TransactionGrid != null)
+            var connection = Source.Transactions.Connect();
+            _subscription = connection.Subscribe(changes =>
             {
                 foreach (var change in changes)
                 {
                     TransactionGrid.AddRecord(change.Current);
                 }
-            }
-        });
+            });
+        }
     }
 
     public void Dispose()
