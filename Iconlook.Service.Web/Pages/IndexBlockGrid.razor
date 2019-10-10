@@ -24,7 +24,7 @@
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="81" Field="nameof(BlockResponse.Height)" IsPrimaryKey="true">
+        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -36,7 +36,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" Field="nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
+        <GridColumn Width="145" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -50,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Right">
+        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -62,7 +62,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" Field="nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="130" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -74,7 +74,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="88" Field="nameof(BlockResponse.Timestamp)" TextAlign="TextAlign.Right">
+        <GridColumn Width="88" Field="@nameof(BlockResponse.Timestamp)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
