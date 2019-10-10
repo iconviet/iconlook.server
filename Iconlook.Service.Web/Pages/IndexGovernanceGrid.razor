@@ -2,10 +2,10 @@
          EnableHover="false"
          EnableAltRow="false"
          TValue="PRepResponse"
-         ModelType="@PRepModelType"
-         GridLines="@GridLine.Horizontal"
+         ModelType="PRepModelType"
+         GridLines="GridLine.Horizontal"
          Query="new ej.data.Query().addParams('take', '13')">
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="15">
             <Template>
@@ -24,7 +24,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="30" HeaderText="Position" Field="@nameof(PRepResponse.Position)">
+        <GridColumn Width="30" HeaderText="Position" Field="nameof(PRepResponse.Position)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -40,14 +40,14 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center">
-                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
                             <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+        <GridColumn Width="50" Field="nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -58,7 +58,7 @@
             </Template>
             <EditTemplate/>
         </GridColumn>
-        <GridColumn Width="105" HeaderText="Votes" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="105" HeaderText="Votes" Field="nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -69,7 +69,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" HeaderText="% Supply" Field="@nameof(PRepResponse.DelegatedPercentage)" TextAlign="TextAlign.Right">
+        <GridColumn Width="60" HeaderText="% Supply" Field="nameof(PRepResponse.DelegatedPercentage)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
