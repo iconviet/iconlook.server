@@ -19,13 +19,12 @@
          EnableAltRow="false"
          TValue="BlockResponse"
          AllowSelection="false"
-         ModelType="@BlockModelType"
-         GridLines="@GridLine.Horizontal"
-         Query="new ej.data.Query().addParams('take', '13')">
-    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="@Adaptors.WebApiAdaptor"></EjsDataManager>
-    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="EditMode.Batch"></GridEditSettings>
+         ModelType="BlockModelType"
+         GridLines="GridLine.Horizontal">
+    <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
+    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)">
+        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -37,7 +36,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" Field="@nameof(BlockResponse.Hash)" TextAlign="@TextAlign.Center">
+        <GridColumn Width="145" Field="@nameof(BlockResponse.Hash)" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -51,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="60" Field="@nameof(BlockResponse.Transactions)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -63,17 +62,19 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" Field="@nameof(BlockResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="130" Field="@nameof(BlockResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@block.Amount.ToString("N0")</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
+                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="88" Field="@nameof(BlockResponse.Timestamp)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="88" Field="@nameof(BlockResponse.Timestamp)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)

@@ -39,7 +39,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="25" TextAlign="@TextAlign.Center">
+        <GridColumn Width="25" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     <span class="mt-1 fs-n1">to</span>
@@ -74,7 +74,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="150" Field="@nameof(TransactionResponse.Amount)" TextAlign="@TextAlign.Right">
+        <GridColumn Width="150" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
