@@ -1,5 +1,4 @@
-﻿@implements IDisposable
-<style>
+﻿<style>
     .block-hash {
         padding: 5px 8px;
         border-radius: 4px;
@@ -14,12 +13,11 @@
 </style>
 <EjsGrid RowHeight="40"
          ID="block_grid"
-         @ref="BlockGrid"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
          AllowSelection="false"
-         ModelType="BlockModelType"
+         ModelType="new BlockResponse()"
          GridLines="GridLine.Horizontal">
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
@@ -86,31 +84,3 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-@code {
-    private IDisposable _subscription;
-
-    public EjsGrid<BlockResponse> BlockGrid;
-
-    public BlockResponse BlockModelType = new BlockResponse();
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-        if (firstRender)
-        {
-            var connection = Source.Blocks.Connect();
-            _subscription = connection.Subscribe(changes =>
-            {
-                foreach (var change in changes)
-                {
-                    BlockGrid.AddRecord(change.Current);
-                }
-            });
-        }
-    }
-
-    public void Dispose()
-    {
-        _subscription.Dispose();
-    }
-}
