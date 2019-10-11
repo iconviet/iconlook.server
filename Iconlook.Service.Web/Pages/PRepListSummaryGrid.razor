@@ -52,7 +52,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="38" Field="@nameof(PRepResponse.Position)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
@@ -63,7 +63,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="233" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep" IsPrimaryKey="true">
             <HeaderTemplate>
@@ -75,12 +75,12 @@
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
                             <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                            <a class="secondary @(prep.Position <= 22 ? "font-weight-semibolder": null)" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                            <a class="secondary @(prep.Position <= 22 ? "font-weight-semibolder" : null)" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="75" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Role" TextAlign="TextAlign.Center">
             <Template>
@@ -93,7 +93,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="75" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
             <Template>
@@ -101,12 +101,12 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1 mono @(prep.Position <= 22 ? "font-weight-semibolder": null)">@prep.DelegatedPercentage.ToString("P2")</span>
+                            <span class="fs-n1 mono @(prep.Position <= 22 ? "font-weight-semibolder" : null)">@prep.DelegatedPercentage.ToString("P2")</span>
                         </div>
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="75" Field="@nameof(PRepResponse.LastSeen)" HeaderText="Status" TextAlign="TextAlign.Center">
             <Template>
@@ -119,7 +119,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="85" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
@@ -133,7 +133,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="55" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
@@ -147,7 +147,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="60" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
             <Template>
@@ -158,7 +158,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <HeaderTemplate>
@@ -173,7 +173,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="65" HeaderText="% 24h" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.ProductivityPercentage)">
             <Template>
@@ -191,7 +191,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="55" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0">
             <Template>
@@ -202,7 +202,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
         <GridColumn Width="135" Field="@nameof(PRepResponse.Balance)" TextAlign="TextAlign.Right">
             <HeaderTemplate>
@@ -217,7 +217,7 @@
                     }
                 }
             </Template>
-            <EditTemplate />
+            <EditTemplate/>
         </GridColumn>
     </GridColumns>
 </EjsGrid>

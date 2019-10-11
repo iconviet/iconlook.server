@@ -79,7 +79,9 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span><span class="mono ls-n2 tx-light font-weight-light">.0000</span><span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
+                        <span class="mono ls-n2">@transaction.Amount.ToString("N0")</span>
+                        <span class="mono ls-n2 tx-light font-weight-light">.0000</span>
+                        <span class="pl-1 tx-light font-weight-light">&nbsp;ICX</span>
                     }
                 }
             </Template>
@@ -113,4 +115,5 @@
     {
         _subscription.Dispose();
     }
+
 }
