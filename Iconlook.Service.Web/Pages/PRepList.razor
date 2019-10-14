@@ -3,14 +3,21 @@
 @page "/preps/edit/{key}"
 @code {
     [Parameter]
-    public string Key { get; set; }
+    public int Size { get; set; }
+
+    public bool Page { get; set; }
 
     [Parameter]
-    public int Size { get; set; } = 22;
+    public string Key { get; set; }
 
-    public bool Page { get; set; } = true;
+    public object Sizes { get; set; } 
 
-    public object Sizes { get; } = new[] { 22, 50, 100 };
+    protected override void OnInitialized()
+    {
+        Size = 22;
+        Page = true;
+        Sizes = new[] { 22, 50, 100 };
+    }
 }
 <style type="text/css">
     .main.card { min-height: 740px; }
