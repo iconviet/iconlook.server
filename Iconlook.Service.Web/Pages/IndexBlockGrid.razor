@@ -20,7 +20,8 @@
          TValue="BlockResponse"
          AllowSelection="false"
          ModelType="BlockModelType"
-         GridLines="GridLine.Horizontal">
+         GridLines="GridLine.Horizontal"
+         Query="new ej.data.Query().addParams('take', '13')">
     <GridEditSettings AllowAdding="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
