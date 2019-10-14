@@ -48,7 +48,7 @@ namespace Iconlook.Service.Api
                 var preps = await Db.SelectAsync(query.OrderBy(x => x.Position));
                 var response = new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = request.Skip, Take = request.Take, Count = (int) await Db.CountAsync<PRep>()
+                    Skip = request.Skip, Take = request.Take, Count = await Db.CountAsync<PRep>()
                 };
                 return response;
             }
