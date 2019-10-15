@@ -3,14 +3,21 @@
 @page "/preps/edit/{key}"
 @code {
     [Parameter]
-    public string Key { get; set; }
+    public int Size { get; set; }
+
+    public bool Page { get; set; }
 
     [Parameter]
-    public int Size { get; set; } = 22;
+    public string Key { get; set; }
 
-    public bool Page { get; set; } = true;
+    public object Sizes { get; set; } 
 
-    public object Sizes { get; } = new[] { 22, 50, 100 };
+    protected override void OnInitialized()
+    {
+        Size = 22;
+        Page = true;
+        Sizes = new[] { 22, 50, 100 };
+    }
 }
 <style type="text/css">
     .main.card { min-height: 740px; }
@@ -81,13 +88,14 @@
                     <div class="col d-inline-flex border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 tx-light">CURRENT PRODUCER</div>
-                            <div class="fs-1 tx-dark tx-condensed font-weight-semibold">
-                                Block42 Blockchain Company
+                            <div class="d-flex align-items-center">
+                                <img width="16" height="16" style="margin-right: 8px;" class="prep-110 rounded-circle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                                <a class="tx-dark font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">ICONVIET</a>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 tx-light">20 SECONDS</div>
-                            <div class="fs-2 tx-light mono-lg">
+                            <div class="fs-1 tx-light mono-lg">
                                 ❚❚❚❚❚❚❚❚❚
                             </div>
                         </div>

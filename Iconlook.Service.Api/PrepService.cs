@@ -43,13 +43,14 @@ namespace Iconlook.Service.Api
             }
             {
                 var query = Db.From<PRep>();
-                if (request.Take == 0) request.Take = 100;
+                if (request.Skip > 0) query.Skip(request.Skip);
                 if (request.Take > 0) query.Take(request.Take);
-                var preps = await Db.SelectAsync(query.Skip(0).OrderBy(x => x.Position));
-                return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
+                var preps = await Db.SelectAsync(query.OrderBy(x => x.Position));
+                var response = new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = request.Skip, Take = request.Take, Count = preps.Count
+                    Skip = request.Skip, Take = request.Take, Count = await Db.CountAsync<PRep>()
                 };
+                return response;
             }
         }
     }
