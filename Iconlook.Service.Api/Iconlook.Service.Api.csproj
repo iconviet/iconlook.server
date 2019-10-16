@@ -5,7 +5,7 @@
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
     <TieredCompilation>true</TieredCompilation>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>

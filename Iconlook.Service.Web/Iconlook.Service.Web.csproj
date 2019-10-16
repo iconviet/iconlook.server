@@ -5,7 +5,7 @@
     <OutputType>Exe</OutputType>
     <LangVersion>preview</LangVersion>
     <TieredCompilation>true</TieredCompilation>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
@@ -23,11 +23,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.1.430" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.0-preview1.19508.20" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0-preview1.19508.20" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.0-preview1.19508.20" />
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.3.0.17-beta" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.17" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.7.0" />
   </ItemGroup>
 </Project>
