@@ -25,7 +25,7 @@
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsIdentity="true" IsPrimaryKey="true">
+        <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsPrimaryKey="true">
             <Template>
                 @{
                     if (context is BlockResponse block)
