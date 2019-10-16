@@ -31,11 +31,14 @@
          AllowSelection="CanEdit"
          ModelType="PRepModelType"
          GridLines="GridLine.Horizontal"
+         Toolbar="@(new List<string> { "Search"})"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <GridSearchSettings Operator=Operator.Contains IgnoreCase="true"></GridSearchSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
+        <GridColumn Field="@nameof(PRepResponse.IdExternal)" Visible="false" IsPrimaryKey="true"></GridColumn>
         <GridColumn Width="30" HeaderText="⇵" TextAlign="TextAlign.Center">
             <Template>
                 @{
@@ -63,7 +66,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="233" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep" IsPrimaryKey="true">
+        <GridColumn Width="233" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>
                 <span><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep</span>
             </HeaderTemplate>

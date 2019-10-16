@@ -60,7 +60,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" Field="@nameof(TransactionResponse.Hash)" IsIdentity="true" IsPrimaryKey="true" TextAlign="TextAlign.Right">
+        <GridColumn Width="140" Field="@nameof(TransactionResponse.Hash)" IsPrimaryKey="true" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
