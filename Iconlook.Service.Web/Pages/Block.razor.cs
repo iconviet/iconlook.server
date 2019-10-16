@@ -6,7 +6,7 @@ namespace Iconlook.Service.Web.Pages
     {
         [Parameter]
         public int Height { get; set; }
-        
+
         [Parameter]
         public string Hash { get; set; }
     }
