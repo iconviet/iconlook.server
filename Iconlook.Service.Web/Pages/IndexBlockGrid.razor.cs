@@ -8,14 +8,7 @@ namespace Iconlook.Service.Web.Pages
     public partial class IndexBlockGrid : IDisposable
     {
         protected IDisposable Subscription;
-        protected BlockResponse BlockModelType;
         protected EjsGrid<BlockResponse> BlockGrid;
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            BlockModelType = new BlockResponse();
-        }
 
         protected override void OnAfterRender(bool firstRender)
         {
