@@ -1,12 +1,5 @@
 ﻿@page "/block/{hash}"
 @page "/block/{height:int}"
-@code {
-    [Parameter]
-    public int Height { get; set; }
-
-    [Parameter]
-    public string Hash { get; set; }
-}
 <h1>
     @Hash
 </h1>
