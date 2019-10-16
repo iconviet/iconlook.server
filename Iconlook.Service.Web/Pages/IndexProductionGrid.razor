@@ -2,8 +2,8 @@
          EnableHover="false"
          EnableAltRow="false"
          TValue="PRepResponse"
-         ModelType="PRepModelType"
          GridLines="GridLine.Horizontal"
+         ModelType="PRepResponse.ModelType"
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
@@ -97,6 +97,3 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-@code {
-    public PRepResponse PRepModelType = new PRepResponse();
-}

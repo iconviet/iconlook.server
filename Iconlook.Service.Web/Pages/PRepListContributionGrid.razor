@@ -29,8 +29,8 @@
          TValue="PRepResponse"
          AllowPaging="CanPage"
          AllowSelection="CanEdit"
-         ModelType="PRepModelType"
          GridLines="GridLine.Horizontal"
+         ModelType="PRepResponse.ModelType"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
@@ -120,6 +120,3 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-@code {
-    public PRepResponse PRepModelType = new PRepResponse();
-}

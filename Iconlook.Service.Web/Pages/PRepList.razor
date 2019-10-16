@@ -1,24 +1,6 @@
 ﻿@page "/preps"
 @page "/preps/{size:int}"
 @page "/preps/edit/{key}"
-@code {
-    [Parameter]
-    public int Size { get; set; }
-
-    public bool Page { get; set; }
-
-    [Parameter]
-    public string Key { get; set; }
-
-    public object Sizes { get; set; } 
-
-    protected override void OnInitialized()
-    {
-        Size = 22;
-        Page = true;
-        Sizes = new[] { 22, 50, 100 };
-    }
-}
 <style type="text/css">
     .main.card { min-height: 740px; }
 
@@ -150,26 +132,6 @@
 </div>
 <div class="row mb-5">
     <div class="col">
-        @code {
-
-            public TabHeader Summary = new TabHeader { Text = "SUMMARY" };
-
-            public TabHeader Background = new TabHeader { Text = "BACKGROUND" };
-
-            public TabHeader Capability = new TabHeader { Text = "CAPABILITY" };
-
-            public TabHeader Contribution = new TabHeader { Text = "CONTRIBUTION" };
-
-            public TabHeader Transparency = new TabHeader { Text = "TRANSPARENCY" };
-
-            public TabHeader ScoreMatrix = new TabHeader { Text = "SCORE MATRIX" };
-
-            public TabAnimationSettings Animation { get; } = new TabAnimationSettings
-            {
-                Next = new TabAnimationNext { Duration = 0 },
-                Previous = new TabAnimationPrevious { Duration = 0 }
-            };
-        }
         <EjsTab Animation="Animation" CssClass="main card shadow-sm">
             <TabItems>
                 <TabItem Header="Summary">

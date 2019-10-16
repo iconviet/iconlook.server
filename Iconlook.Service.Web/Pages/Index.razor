@@ -124,16 +124,6 @@
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto d-none d-sm-block">
                     <EjsDropDownButton Items="SearchItems" CssClass="search-filter">EVERYTHING</EjsDropDownButton>
-                    @code {
-
-                        public List<ItemModel> SearchItems = new List<ItemModel>
-                        {
-                            new ItemModel { Text = "P-REP", IconCss = "fal fa-users-class" },
-                            new ItemModel { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
-                            new ItemModel { Text = "TRANSACTION", IconCss = "fal fa-dice" }
-                        };
-
-                    }
                 </div>
                 <div class="col">
                     <EjsAutoComplete MinLength="3"
@@ -166,16 +156,6 @@
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto d-none d-sm-block">
                     <EjsDropDownButton Items="ToolItems" CssClass="search-filter">ROUND</EjsDropDownButton>
-                    @code {
-
-                        public List<ItemModel> ToolItems = new List<ItemModel>
-                        {
-                            new ItemModel { Text = "ROUND", IconCss = "fal fa-users-class" },
-                            new ItemModel { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
-                            new ItemModel { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
-                        };
-
-                    }
                 </div>
                 <div class="col">
                     <EjsAutoComplete MinLength="3"
@@ -258,22 +238,6 @@
     </div>
 </div>
 <div class="row mb-3">
-    @code {
-        public TabAnimationSettings Animation { get; } = new TabAnimationSettings
-        {
-            Next = new TabAnimationNext { Duration = 0 },
-            Previous = new TabAnimationPrevious { Duration = 0 }
-        };
-        public TabHeader Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
-
-        public TabHeader Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
-
-        public TabHeader Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
-
-        public TabHeader Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
-
-        public TabHeader Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
-    }
     <div class="col-md mr-md-n3">
         <EjsTab Animation="Animation" CssClass="main card mb-3 shadow-sm">
             <TabItems>
