@@ -2,7 +2,7 @@
 using System.Linq;
 using Iconlook.Service.Web.Sources;
 
-namespace Iconlook.Service.Web.Components
+namespace Iconlook.Service.Web.Views
 {
     public partial class BlockHeight : IDisposable
     {

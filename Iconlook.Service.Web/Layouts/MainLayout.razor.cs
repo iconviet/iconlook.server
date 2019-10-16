@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Syncfusion.EJ2.Blazor.Navigations;
 
-namespace Iconlook.Service.Web.Shared
+namespace Iconlook.Service.Web.Layouts
 {
     public partial class MainLayout
     {
