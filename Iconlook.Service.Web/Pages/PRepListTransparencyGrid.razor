@@ -11,21 +11,6 @@
         background-color: #e1fafd;
     }
 </style>
-@code {
-    [Parameter]
-    public int PageSize { get; set; }
-
-    [Parameter]
-    public bool CanPage { get; set; }
-
-    [Parameter]
-    public string EditKey { get; set; }
-
-    [Parameter]
-    public object PageSizes { get; set; }
-
-    public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
-}
 <EjsGrid EnableHover="false"
          EnableAltRow="true"
          TValue="PRepResponse"

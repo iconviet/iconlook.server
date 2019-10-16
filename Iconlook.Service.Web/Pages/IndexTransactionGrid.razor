@@ -1,5 +1,4 @@
-﻿@implements IDisposable
-<style>
+﻿<style>
     .transaction-hash {
         padding: 5px 7px;
         border-radius: 3px;
@@ -20,7 +19,7 @@
          @ref="TransactionGrid"
          TValue="TransactionResponse"
          GridLines="GridLine.Horizontal"
-         ModelType="TransactionModelType"
+         ModelType="TransactionResponse.ModelType"
          Query="new ej.data.Query().addParams('take', '13')">
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
@@ -86,32 +85,3 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-@code {
-    private IDisposable _subscription;
-
-    public EjsGrid<TransactionResponse> TransactionGrid;
-
-    public TransactionResponse TransactionModelType = new TransactionResponse();
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-        if (firstRender)
-        {
-            var connection = Source.Transactions.Connect();
-            _subscription = connection.Subscribe(changes =>
-            {
-                foreach (var change in changes)
-                {
-                    TransactionGrid.AddRecord(change.Current);
-                }
-            });
-        }
-    }
-
-    public void Dispose()
-    {
-        _subscription.Dispose();
-    }
-
-}

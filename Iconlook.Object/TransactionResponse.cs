@@ -17,5 +17,7 @@ namespace Iconlook.Object
         public decimal Amount { get; set; }
         public float StepPrice { get; set; }
         public DateTimeOffset Timestamp { get; set; }
+
+        public static TransactionResponse ModelType = new TransactionResponse();
     }
 }
