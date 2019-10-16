@@ -31,11 +31,10 @@
          AllowSelection="CanEdit"
          ModelType="PRepModelType"
          GridLines="GridLine.Horizontal"
-         Toolbar="@(new List<string> { "Search"})"
          Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <GridSearchSettings Operator=Operator.Contains IgnoreCase="true"></GridSearchSettings>
+    <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Field="@nameof(PRepResponse.IdExternal)" Visible="false" IsPrimaryKey="true"></GridColumn>
