@@ -5,9 +5,9 @@ namespace Iconlook.Service.Job
 {
     public class Program : ProgramBase
     {
-        public static async Task Main()
+        public static Task Main()
         {
-            await StartAsync(new JobHost(), 82);
+            return StartAsync(new JobHost(), 82);
         }
     }
 }

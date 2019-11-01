@@ -5,9 +5,9 @@ namespace Iconlook.Service.Api
 {
     public class Program : ProgramBase
     {
-        public static async Task Main()
+        public static Task Main()
         {
-            await StartAsync(new ApiHost(), 81);
+            return StartAsync(new ApiHost(), 81);
         }
     }
 }

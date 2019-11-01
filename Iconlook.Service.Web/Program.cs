@@ -24,7 +24,7 @@ namespace Iconlook.Service.Web
 {
     public class Program : ProgramBase
     {
-        public static async Task Main()
+        public static Task Main()
         {
             ConfigureServices = host => services =>
             {
@@ -112,7 +112,7 @@ namespace Iconlook.Service.Web
                 ConfigureApplicationDefault(host, application); // TODO: Remove this
             };
             SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMjdLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
-            await StartAsync(new WebHost(), 80);
+            return StartAsync(new WebHost(), 80);
         }
     }
 }
