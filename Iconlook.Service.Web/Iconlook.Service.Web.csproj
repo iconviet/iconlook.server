@@ -26,8 +26,8 @@
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.0-preview2.19528.8" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0-preview2.19528.8" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.0-preview2.19528.8" />
-    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.3.0.21-beta" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.3.0.26-beta" />
+    <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.26" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.7.0" />
   </ItemGroup>
 </Project>
