@@ -22,14 +22,14 @@ namespace Iconlook.Service.Api
 
         public string Any(SetupRequest _)
         {
-            BackgroundJob.Enqueue<SetupJob>(x => x.Run());
+            BackgroundJob.Enqueue<SetupJob>(x => x.RunAsync());
             Log.Information("Setup Job Ran.");
             return "SETUP JOB IS RUNNING";
         }
 
         public class SetupJob : JobBase
         {
-            public Task Run()
+            public override Task RunAsync()
             {
                 DropTables();
                 CreateTables();

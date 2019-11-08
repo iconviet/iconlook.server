@@ -22,9 +22,9 @@ namespace Iconlook.Service.Job
         {
             Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x =>
             {
-                await Resolve<UpdateBlockchainJob>().Run();
+                await Resolve<UpdateBlockchainJob>().RunAsync();
             });
-            RecurringJob.AddOrUpdate<UpdateBlockchainJob>(x => x.Run(), "*/30 * * * * *");
+            RecurringJob.AddOrUpdate<UpdateBlockchainJob>(x => x.RunAsync(), "*/30 * * * * *");
         }
 
         protected override void ConfigureNServiceBusSqlServerTransportRouting<T>(RoutingSettings<T> routing)

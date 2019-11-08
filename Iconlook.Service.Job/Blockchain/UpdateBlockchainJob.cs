@@ -13,7 +13,7 @@ namespace Iconlook.Service.Job.Blockchain
 {
     public class UpdateBlockchainJob : JobBase
     {
-        public async Task Run()
+        public override async Task RunAsync()
         {
             var client = new IconClient();
             var last_block = await client.GetLastBlock();
@@ -59,7 +59,7 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 BlockHeight = block.Height,
                 Timestamp = block.Timestamp,
-                TotalTransactions = 71098147 + transactions.Count,
+                TotalTransactions = transactions.Count + 71098147,
                 TokenSupply = (long) total_supply.DividePow(10, 18)
             });
             await Task.Run(async () =>
