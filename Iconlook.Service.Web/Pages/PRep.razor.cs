@@ -2,7 +2,7 @@
 
 namespace Iconlook.Service.Web.Pages
 {
-    public partial class PRepDetail
+    public partial class PRep
     {
         [Parameter]
         public int Id { get; set; }
