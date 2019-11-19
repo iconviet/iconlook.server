@@ -30,7 +30,7 @@ namespace Iconlook.Service.Job
         protected override void ConfigureNServiceBusSqlServerTransportRouting<T>(RoutingSettings<T> routing)
         {
             base.ConfigureNServiceBusSqlServerTransportRouting(routing);
-            routing.RegisterPublisher(typeof(JobHost).Assembly, EndpointName);
+            // routing.RegisterPublisher(typeof(JobHost).Assembly, EndpointName);
         }
     }
 }
