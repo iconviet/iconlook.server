@@ -1,6 +1,6 @@
-﻿using Iconlook.Server;
+﻿using System.Reflection;
+using Iconlook.Server;
 using ServiceStack.Api.Swagger;
-using System.Reflection;
 
 namespace Iconlook.Service.Api
 {

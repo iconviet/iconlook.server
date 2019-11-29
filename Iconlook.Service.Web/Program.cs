@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
 using Microsoft.AspNetCore.Builder;
@@ -13,11 +18,6 @@ using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using StackExchange.Redis;
 using Syncfusion.Licensing;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using WebMarkupMin.AspNetCore3;
 
 namespace Iconlook.Service.Web

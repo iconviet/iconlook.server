@@ -1,4 +1,7 @@
-﻿using Agiper;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Agiper;
 using Agiper.Server;
 using Hangfire;
 using HtmlAgilityPack;
@@ -7,9 +10,6 @@ using Iconlook.Object;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Iconlook.Service.Api
 {
@@ -56,7 +56,7 @@ namespace Iconlook.Service.Api
             {
                 try
                 {
-                    typeof(PRepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PRepState_ { State = (PRepState)x.Key, Description = x.Value }));
+                    typeof(PRepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
                     var html = await new HtmlWeb().LoadFromWebAsync("http://icon.community/iconsensus/candidates");
                     var query = from t in html.DocumentNode.SelectNodes("//tbody")
                                 from r in t.SelectNodes("tr")
@@ -80,7 +80,7 @@ namespace Iconlook.Service.Api
                         Name = x.SelectNodes("td")[2].InnerText.Trim().ToTitleCase(),
                         ProductivityPercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
                         Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
-                        DelegatedPercentage = (double)new Random().Next(1000000, 10000000) / 490000000,
+                        DelegatedPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
                         Identity = new[] { "Verified", "Unknown", "Anonymous" }[new Random().Next(0, 3)],
                         Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
                         Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],

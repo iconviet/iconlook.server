@@ -1,8 +1,8 @@
-﻿using Agiper.Object;
+﻿using System;
+using Agiper.Object;
 using FluentValidation;
 using Iconlook.Object;
 using ServiceStack.DataAnnotations;
-using System;
 
 namespace Iconlook.Entity
 {

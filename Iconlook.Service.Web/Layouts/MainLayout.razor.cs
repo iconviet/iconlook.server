@@ -1,5 +1,5 @@
-﻿using Syncfusion.EJ2.Blazor.Navigations;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Syncfusion.EJ2.Blazor.Navigations;
 
 namespace Iconlook.Service.Web.Layouts
 {
