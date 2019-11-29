@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Agiper.Object;
+﻿using Agiper.Object;
 using Agiper.Server;
 using FluentValidation;
 using Iconlook.Entity;
+using System.Collections.Generic;
 
 namespace Iconlook.Message
 {

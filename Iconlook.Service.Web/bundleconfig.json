@@ -17,7 +17,7 @@
       "wwwroot/static/js/rxjs.min.js",
       "wwwroot/static/js/jquery.min.js",
       "wwwroot/static/js/ss-utils.min.js",
-      "wwwroot/static/js/startup.js"
+      "wwwroot/static/js/site.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
   },
@@ -25,10 +25,10 @@
     "minify": { "enabled": true },
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
-      "wwwroot/static/css/bootstrap.css",
+      "wwwroot/static/css/bootstrap.min.css",
       "wwwroot/static/css/ej2-*.min.css",
-      "wwwroot/static/css/gf-*.css",
-      "wwwroot/static/css/fa-*.css",
+      "wwwroot/static/css/gf-*.min.css",
+      "wwwroot/static/css/fa-*.min.css",
       "wwwroot/static/css/site*.css"
     ],
     "outputFileName": "wwwroot/static/css/bundle.min.css"

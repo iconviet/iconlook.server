@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Agiper.Server;
+﻿using Agiper.Server;
 using DynamicData;
 using Iconlook.Message;
 using Iconlook.Service.Web.Sources;
 using NServiceBus;
+using System.Threading.Tasks;
 
 namespace Iconlook.Service.Web.Handlers
 {

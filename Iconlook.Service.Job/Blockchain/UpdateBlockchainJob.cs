@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Agiper.Server;
+﻿using Agiper.Server;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
 using ServiceStack.OrmLite;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Iconlook.Service.Job.Blockchain
 {
@@ -23,21 +23,21 @@ namespace Iconlook.Service.Job.Blockchain
                 To = x.GetTo()?.ToString(),
                 From = x.GetFrom()?.ToString(),
                 Hash = x.GetTxHash()?.ToString(),
-                Block = (long) last_block.GetHeight(),
-                Fee = x.GetFee().HasValue ? (decimal) x.GetFee().Value.DividePow(10, 18) : 0,
-                Amount = x.GetValue().HasValue ? (decimal) x.GetValue().Value.DividePow(10, 18) : 0,
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) x.GetTimestamp().Value.DividePow(10, 3))
+                Block = (long)last_block.GetHeight(),
+                Fee = x.GetFee().HasValue ? (decimal)x.GetFee().Value.DividePow(10, 18) : 0,
+                Amount = x.GetValue().HasValue ? (decimal)x.GetValue().Value.DividePow(10, 18) : 0,
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long)x.GetTimestamp().Value.DividePow(10, 3))
             }).ToList();
             var block = new Block
             {
                 PeerId = last_block.GetPeerId(),
                 Transactions = transactions.Count,
                 Fee = transactions.Sum(x => x.Fee),
-                Height = (long) last_block.GetHeight(),
+                Height = (long)last_block.GetHeight(),
                 Amount = transactions.Sum(x => x.Amount),
                 Hash = last_block.GetBlockHash()?.ToString(),
                 PrevHash = last_block.GetPrevBlockHash()?.ToString(),
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long)last_block.GetTimestamp().DividePow(10, 3))
             };
             await Channel.Publish(new BlockProducedSignal
             {
@@ -60,7 +60,7 @@ namespace Iconlook.Service.Job.Blockchain
                 BlockHeight = block.Height,
                 Timestamp = block.Timestamp,
                 TotalTransactions = transactions.Count + 71098147,
-                TokenSupply = (long) total_supply.DividePow(10, 18)
+                TokenSupply = (long)total_supply.DividePow(10, 18)
             });
             await Task.Run(async () =>
             {

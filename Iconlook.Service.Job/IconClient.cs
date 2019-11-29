@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Numerics;
-using System.Threading.Tasks;
-using Lykke.Icon.Sdk;
+﻿using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
 using ServiceStack;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace Iconlook.Service.Job
 {

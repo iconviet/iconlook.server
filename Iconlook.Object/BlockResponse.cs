@@ -1,6 +1,6 @@
-﻿using System;
-using Agiper.Object;
+﻿using Agiper.Object;
 using FluentValidation;
+using System;
 
 namespace Iconlook.Object
 {

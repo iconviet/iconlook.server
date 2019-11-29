@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Agiper.Server;
+﻿using Agiper.Server;
 using Serilog;
+using System.Threading.Tasks;
 
 namespace Iconlook.Service.Job.PRep
 {

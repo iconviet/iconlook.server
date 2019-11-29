@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Agiper;
+﻿using Agiper;
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Entity;
@@ -8,6 +6,8 @@ using Iconlook.Message;
 using Iconlook.Object;
 using Serilog;
 using ServiceStack.OrmLite;
+using System;
+using System.Threading.Tasks;
 
 namespace Iconlook.Service.Api
 {
@@ -29,7 +29,9 @@ namespace Iconlook.Service.Api
                     x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
                 return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = request.Skip, Take = request.Take, Count = preps.Count
+                    Skip = request.Skip,
+                    Take = request.Take,
+                    Count = preps.Count
                 };
             }
             if (request.Edit.HasValue() && request.Edit != "all")
@@ -38,7 +40,9 @@ namespace Iconlook.Service.Api
                     Db.From<PRep>().Where(x => x.IdExternal == request.Edit));
                 return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = 0, Take = 1, Count = 1
+                    Skip = 0,
+                    Take = 1,
+                    Count = 1
                 };
             }
             {
@@ -48,7 +52,9 @@ namespace Iconlook.Service.Api
                 var preps = await Db.SelectAsync(query.OrderBy(x => x.Position));
                 var response = new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
-                    Skip = request.Skip, Take = request.Take, Count = await Db.CountAsync<PRep>()
+                    Skip = request.Skip,
+                    Take = request.Take,
+                    Count = await Db.CountAsync<PRep>()
                 };
                 return response;
             }

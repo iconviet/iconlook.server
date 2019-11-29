@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using Agiper.Server;
+﻿using Agiper.Server;
 using NServiceBus;
 using ServiceStack;
+using System.Reflection;
 
 namespace Iconlook.Server
 {
