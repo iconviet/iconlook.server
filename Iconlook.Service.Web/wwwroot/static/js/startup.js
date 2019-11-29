@@ -15,9 +15,7 @@
                 const block_grid = document.getElementById('block_grid');
                 if (block_grid != null && block_grid.ej2_instances != null) {
                     if (message.cmd === 'BlockProducedSignal') {
-                        // const instance = block_grid.ej2_instances[0];
-                        // instance.addRecord(json.block);
-                        // console.log("Received " + message.cmd, json);
+                        console.log("Received " + message.cmd, json);
                     }
                 }
 
