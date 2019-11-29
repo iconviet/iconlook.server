@@ -9,8 +9,9 @@
     <base href="~/"/>
     <meta charset="utf-8"/>
     <title>ICONLOOK | ICON Ecosystem Explorer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="~/static/css/bundle.min.css?v=@version" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="~/static/css/bundle.min.css?v=@version" />
+    <script type="text/javascript" src="~/static/js/bundle.min.js?v=@version"></script>
 </head>
 <body>
 <div id="components-reconnect-modal">
@@ -20,8 +21,7 @@
     </div>
 </div>
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-<script src="~/static/js/bundle.min.js?v=@version"></script>
-<script src="_framework/blazor.server.js?v=@version" autostart="false"></script>
-<script>Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
+<script type="text/javascript" src="_framework/blazor.server.js?v=@version" autostart="false"></script>
+<script type="text/javascript">Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
 </body>
 </html>
