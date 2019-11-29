@@ -20,7 +20,7 @@ namespace Iconlook.Service.Web.Pages
                 {
                     foreach (var change in changes)
                     {
-                        BlockGrid.AddRecord(change.Current);
+                        // BlockGrid.AddRecord(change.Current);
                     }
                 });
             }

@@ -10,7 +10,7 @@
     <meta charset="utf-8"/>
     <title>ICONLOOK | ICON Ecosystem Explorer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <environment names="Localhost">
+    <environment names="Localhost_">
         <link href="~/static/css/bootstrap.css" rel="stylesheet"/>
         <link href="~/static/css/gf-ibmplexsans.css" rel="stylesheet"/>
         <link href="~/static/css/gf-ibmplexsanscondensed.css" rel="stylesheet"/>
@@ -27,7 +27,7 @@
         <link href="~/static/css/site.connection.css" rel="stylesheet"/>
         <link href="~/static/css/site.prep-sprite.css" rel="stylesheet"/>
     </environment>
-    <environment names="Development, Testing, Staging, Production">
+    <environment names="Localhost, Development, Testing, Staging, Production">
         <link href="~/static/css/bundle.min.css?v=@version" rel="stylesheet"/>
     </environment>
 </head>
@@ -39,15 +39,15 @@
     </div>
 </div>
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-<environment names="Localhost, Development">
-    <script src="~/static/js/ej2.min.js"></script>
-    <script src="~/static/js/ejs.interop.min.js"></script>
-    <script src="~/static/js/rxjs.min.js"></script>
-    <script src="~/static/js/jquery.min.js"></script>
-    <script src="~/static/js/ss-utils.min.js"></script>
-    <script src="~/static/js/startup.js"></script>
+<environment names="Localhost">
+    <script src="~/static/js/ej2.min.js?v=@version"></script>
+    <script src="~/static/js/ejs.interop.min.js?v=@version"></script>
+    <script src="~/static/js/rxjs.min.js?v=@version"></script>
+    <script src="~/static/js/jquery.min.js?v=@version"></script>
+    <script src="~/static/js/ss-utils.min.js?v=@version"></script>
+    <script src="~/static/js/startup.js?v=@version"></script>
 </environment>
-<environment names="Testing, Staging, Production">
+<environment names="Localhost_, Development, Testing, Staging, Production">
     <script async src="~/static/js/bundle.min.js?v=@version"></script>
 </environment>
 <script src="_framework/blazor.server.js?v=@version" autostart="false"></script>
