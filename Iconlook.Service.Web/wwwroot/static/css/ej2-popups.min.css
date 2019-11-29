@@ -52,15 +52,13 @@
   width: auto;
 }
 
-.e-dialog .e-dlg-header,
-.e-dialog .e-dlg-header * {
+.e-dialog .e-dlg-header {
   display: block;
   font-size: 18px;
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-user-select: none;
-     -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   vertical-align: top;
@@ -389,7 +387,7 @@
 
 .e-dialog {
   background-color: #fff;
-  box-shadow: 0 12px 40px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
 .e-dlg-overlay {
@@ -645,7 +643,6 @@
 
 .e-tooltip-wrap .e-tip-content {
   color: #fff;
-  font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif", "-apple-system", "BlinkMacSystemFont";
   font-size: 11px;
 }
 
@@ -686,7 +683,6 @@
   text-align: center;
   top: 0;
   -webkit-user-select: none;
-     -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   vertical-align: middle;
