@@ -4,10 +4,12 @@
     <Authors>Tom Nuen</Authors>
     <OutputType>Exe</OutputType>
     <LangVersion>preview</LangVersion>
+    <RunAnalyzers>false</RunAnalyzers>
     <TieredCompilation>true</TieredCompilation>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Dockerfile">
