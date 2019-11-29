@@ -39,7 +39,7 @@
     </div>
 </div>
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-<environment names="Localhost">
+<environment names="Localhost, Development">
     <script src="~/static/js/ej2.min.js"></script>
     <script src="~/static/js/ejs.interop.min.js"></script>
     <script src="~/static/js/rxjs.min.js"></script>
@@ -47,7 +47,7 @@
     <script src="~/static/js/ss-utils.min.js"></script>
     <script src="~/static/js/startup.js"></script>
 </environment>
-<environment names="Development, Testing, Staging, Production">
+<environment names="Testing, Staging, Production">
     <script async src="~/static/js/bundle.min.js?v=@version"></script>
 </environment>
 <script src="_framework/blazor.server.js?v=@version" autostart="false"></script>
