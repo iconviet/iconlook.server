@@ -1,5 +1,4 @@
 ﻿$(document).ready(function() {
-    console.log("Ready!!!!!");
     const source = new EventSource('/sse/stream?channel=iconlook');
     source.addEventListener('error', function (e) {
         console.log("ERROR", e);
@@ -7,7 +6,7 @@
     $(source).handleServerEvents({
         handlers: {
             onConnect: function (subscription) {
-                console.log("Connected ***", subscription);
+                console.log("[ICONLOOK] Channel connected.");
             }
         },
         success: function (selector, json, message) {
@@ -19,6 +18,6 @@
         }
     });
     const click = window.rxjs.fromEvent(document, 'click');
-    const example = click.pipe(window.rxjs.operators.map(event => 'Event time: ${event.timeStamp}'));
+    const example = click.pipe(window.rxjs.operators.map(event => '[ICONLOOK] Event time: ' + event.timeStamp));
     example.subscribe(val => console.log(val));
 })
