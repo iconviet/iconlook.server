@@ -12,11 +12,7 @@
         },
         success: function (selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
-                const block_grid = document.getElementById('block_grid');
-                if (block_grid != null && block_grid.ej2_instances != null) {
-                    if (message.cmd === 'BlockProducedSignal') {
-                        console.log("Received " + message.cmd, json);
-                    }
+                if (message.cmd === 'BlockProducedSignal') {
                 }
 
             }
