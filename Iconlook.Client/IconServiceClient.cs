@@ -7,15 +7,15 @@ using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
 using ServiceStack;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Client
 {
-    public class IconClient : JsonHttpClient, IIconService
+    public class IconServiceClient : JsonHttpClient, IIconService
     {
         private readonly IconService _service;
 
         private static readonly HttpClient IconHttpClient = new HttpClient();
 
-        public IconClient() : base("https://ctz.solidwallet.io/api/v3")
+        public IconServiceClient() : base("https://ctz.solidwallet.io/api/v3")
         {
             _service = new IconService(new HttpProvider(HttpClient = IconHttpClient, BaseUri));
         }

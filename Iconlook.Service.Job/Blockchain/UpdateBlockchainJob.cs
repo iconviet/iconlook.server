@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
+using Iconlook.Client;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
@@ -15,7 +16,7 @@ namespace Iconlook.Service.Job.Blockchain
     {
         public override async Task RunAsync()
         {
-            var client = new IconClient();
+            var client = new IconServiceClient();
             var last_block = await client.GetLastBlock();
             var total_supply = await client.GetTotalSupply();
             var transactions = last_block.GetTransactions().Select(x => new Transaction
