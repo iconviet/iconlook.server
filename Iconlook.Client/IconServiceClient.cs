@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
+using Iconlook.Client.Data;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
+using Lykke.Icon.Sdk.Transport.JsonRpc;
 using ServiceStack;
 
 namespace Iconlook.Client
@@ -68,6 +71,25 @@ namespace Iconlook.Client
         public Task<Bytes> SendTransaction(SignedTransaction transaction)
         {
             return _service.SendTransaction(transaction);
+        }
+
+        public async Task<PRep> GetPRep(Address address)
+        {
+            var response = await CallAsync(new Call.Builder()
+                .Method("getPRep")
+                .To(new Address("cx0000000000000000000000000000000000000000"))
+                .Params(new RpcObject.Builder().Put("address", new RpcValue(address)).Build())
+                .Build());
+            return new PRep(response.ToObject());
+        }
+
+        public async Task<List<PRep>> GetPReps()
+        {
+            var response = await CallAsync(new Call.Builder()
+                .Method("getPReps")
+                .To(new Address("cx0000000000000000000000000000000000000000"))
+                .Build());
+            return response.ToObject().GetItem("preps").ToArray().Select(x => new PRep(x.ToObject())).ToList();
         }
     }
 }
