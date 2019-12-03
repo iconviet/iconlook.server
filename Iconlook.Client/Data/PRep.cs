@@ -53,9 +53,15 @@ namespace Iconlook.Client.Data
             return _properties.GetItem("totalBlocks")?.ToInteger() ?? 0;
         }
 
-        public BigInteger ValidatedBlocks()
+        public BigInteger GetValidatedBlocks()
         {
             return _properties.GetItem("validatedBlocks")?.ToInteger() ?? 0;
         }
+
+        public BigInteger GetUnvalidatedSequenceBlocks()
+        {
+            return _properties.GetItem("unvalidatedSequenceBlocks")?.ToInteger() ?? 0;
+        }
+
     }
 }

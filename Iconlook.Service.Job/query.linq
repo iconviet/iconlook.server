@@ -1,9 +1,7 @@
 <Query Kind="Statements">
-  <Reference Relative="bin\Debug\netcoreapp3.1\Iconlook.Service.Job.dll">C:\GitHub\iconlook.server\Iconlook.Service.Job\bin\Debug\netcoreapp3.1\Iconlook.Service.Job.dll</Reference>
-  <NuGetReference>Lykke.Icon.Sdk</NuGetReference>
-  <Namespace>Iconlook.Service.Job</Namespace>
-  <Namespace>Iconlook.Service.Job.Blockchain</Namespace>
-  <Namespace>Iconlook.Service.Job.PRep</Namespace>
+  <Reference Relative="..\Iconlook.Client\bin\Debug\netstandard2.1\Iconlook.Client.dll">C:\GitHub\iconlook.server\Iconlook.Client\bin\Debug\netstandard2.1\Iconlook.Client.dll</Reference>
+  <Namespace>Iconlook.Client</Namespace>
+  <Namespace>Iconlook.Client.Data</Namespace>
   <Namespace>Lykke.Icon.Sdk</Namespace>
   <Namespace>Lykke.Icon.Sdk.Crypto</Namespace>
   <Namespace>Lykke.Icon.Sdk.Data</Namespace>
@@ -11,11 +9,7 @@
   <Namespace>Lykke.Icon.Sdk.Transport.JsonRpc</Namespace>
 </Query>
 
-var client = new Iconlook.Service.Job.IconClient();
-var call = new Call.Builder()
-			.Method("getPReps")
-			.To(new Address("cx0000000000000000000000000000000000000000"))
-			.From(new Address("hx0000000000000000000000000000000000000000"))
-			.Build();
-var item = await client.CallAsync(call);
-item.ToObject().GetItem("preps").ToArray().Dump();
+var client = new Iconlook.Client.IconServiceClient();
+var response = await client.GetPReps();
+var delegated = response[8].GetValidatedBlocks().ToDecimal() / response[8].GetTotalBlocks().ToDecimal();
+delegated.Dump();

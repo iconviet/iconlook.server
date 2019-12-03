@@ -25,8 +25,8 @@ namespace Iconlook.Service.Job.Blockchain
                 From = x.GetFrom()?.ToString(),
                 Hash = x.GetTxHash()?.ToString(),
                 Block = (long) last_block.GetHeight(),
-                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcx() : 0,
-                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcx() : 0,
+                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
+                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0,
                 Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(x.GetTimestamp().Value.ToMilliseconds())
             }).ToList();
             var block = new Block
@@ -60,7 +60,7 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 BlockHeight = block.Height,
                 Timestamp = block.Timestamp,
-                TokenSupply = (long) total_supply.ToIcx(),
+                TokenSupply = (long) total_supply.ToIcxFromLoop(),
                 TotalTransactions = transactions.Count + 71098147
             });
             await Task.Run(async () =>
