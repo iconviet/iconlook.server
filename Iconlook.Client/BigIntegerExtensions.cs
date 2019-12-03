@@ -1,17 +1,18 @@
 ﻿using System.Numerics;
+using Lykke.Icon.Sdk.Data;
 
 namespace Iconlook.Client
 {
     public static class BigIntegerExtensions
     {
-        public static decimal ToDecimal(this BigInteger instance)
+        public static long ToMilliseconds(this BigInteger instance)
         {
-            return decimal.Parse(BigInteger.Divide(instance, BigInteger.Pow(10, 18)).ToString());
+            return (long) BigInteger.Divide(instance, BigInteger.Pow(10, 3));
         }
 
-        public static BigInteger DividePow(this BigInteger instance, BigInteger value, int exponent)
+        public static decimal ToIcx(this BigInteger instance)
         {
-            return BigInteger.Divide(instance, BigInteger.Pow(value, exponent));
+            return decimal.Parse(IconAmount.Of(instance, IconAmount.Unit.Loop).ConvertUnit(IconAmount.Unit.ICX).ToString());
         }
     }
 }

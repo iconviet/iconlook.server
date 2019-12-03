@@ -25,9 +25,9 @@ namespace Iconlook.Service.Job.Blockchain
                 From = x.GetFrom()?.ToString(),
                 Hash = x.GetTxHash()?.ToString(),
                 Block = (long) last_block.GetHeight(),
-                Fee = x.GetFee().HasValue ? (decimal) x.GetFee().Value.DividePow(10, 18) : 0,
-                Amount = x.GetValue().HasValue ? (decimal) x.GetValue().Value.DividePow(10, 18) : 0,
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) x.GetTimestamp().Value.DividePow(10, 3))
+                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcx() : 0,
+                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcx() : 0,
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(x.GetTimestamp().Value.ToMilliseconds())
             }).ToList();
             var block = new Block
             {
@@ -38,7 +38,7 @@ namespace Iconlook.Service.Job.Blockchain
                 Amount = transactions.Sum(x => x.Amount),
                 Hash = last_block.GetBlockHash()?.ToString(),
                 PrevHash = last_block.GetPrevBlockHash()?.ToString(),
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds((long) last_block.GetTimestamp().DividePow(10, 3))
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
             };
             await Channel.Publish(new BlockProducedSignal
             {
@@ -60,8 +60,8 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 BlockHeight = block.Height,
                 Timestamp = block.Timestamp,
-                TotalTransactions = transactions.Count + 71098147,
-                TokenSupply = (long) total_supply.DividePow(10, 18)
+                TokenSupply = (long) total_supply.ToIcx(),
+                TotalTransactions = transactions.Count + 71098147
             });
             await Task.Run(async () =>
             {
