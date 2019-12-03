@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Client;
+using Iconlook.Client.Service;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;

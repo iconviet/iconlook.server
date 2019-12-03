@@ -11,4 +11,7 @@
     <PackageReference Include="Lykke.Icon.Sdk" Version="0.2.8" />
     <PackageReference Include="ServiceStack.HttpClient" Version="5.7.0" />
    </ItemGroup>
+   <ItemGroup>
+     <ProjectReference Include="..\Iconlook.Object\Iconlook.Object.csproj" />
+   </ItemGroup>
 </Project>

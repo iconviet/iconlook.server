@@ -2,7 +2,7 @@
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.JsonRpc;
 
-namespace Iconlook.Client.Data
+namespace Iconlook.Client.Service
 {
     public class PRep
     {

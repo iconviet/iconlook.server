@@ -3,74 +3,76 @@ using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
-using Iconlook.Client.Data;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
 using Lykke.Icon.Sdk.Transport.JsonRpc;
 using ServiceStack;
 
-namespace Iconlook.Client
+namespace Iconlook.Client.Service
 {
-    public class IconServiceClient : JsonHttpClient, IIconService
+    public class IconServiceClient : IIconService
     {
-        private readonly IconService _service;
+        private readonly IconService _icon;
+        private readonly JsonHttpClient _json;
 
-        private static readonly HttpClient IconHttpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient();
 
-        public IconServiceClient() : base("https://ctz.solidwallet.io/api/v3")
+        public IconServiceClient()
         {
-            _service = new IconService(new HttpProvider(HttpClient = IconHttpClient, BaseUri));
+            const string url = "https://ctz.solidwallet.io/api/v3";
+            _icon = new IconService(new HttpProvider(HttpClient, url));
+            _json = new JsonHttpClient(url) { HttpClient = HttpClient };
         }
 
         public Task<Block> GetLastBlock()
         {
-            return _service.GetLastBlock();
+            return _icon.GetLastBlock();
         }
 
         public Task<Block> GetBlock(Bytes hash)
         {
-            return _service.GetBlock(hash);
+            return _icon.GetBlock(hash);
         }
 
         public Task<BigInteger> GetTotalSupply()
         {
-            return _service.GetTotalSupply();
+            return _icon.GetTotalSupply();
         }
 
         public Task<T> CallAsync<T>(Call<T> call)
         {
-            return _service.CallAsync(call);
+            return _icon.CallAsync(call);
         }
 
         public Task<Block> GetBlock(BigInteger height)
         {
-            return _service.GetBlock(height);
+            return _icon.GetBlock(height);
         }
 
         public Task<BigInteger> GetBalance(Address address)
         {
-            return _service.GetBalance(address);
+            return _icon.GetBalance(address);
         }
 
         public Task<List<ScoreApi>> GetScoreApi(Address address)
         {
-            return _service.GetScoreApi(address);
+            return _icon.GetScoreApi(address);
         }
 
         public Task<ConfirmedTransaction> GetTransaction(Bytes hash)
         {
-            return _service.GetTransaction(hash);
+            return _icon.GetTransaction(hash);
         }
 
         public Task<TransactionResult> GetTransactionResult(Bytes hash)
         {
-            return _service.GetTransactionResult(hash);
+            return _icon.GetTransactionResult(hash);
         }
 
         public Task<Bytes> SendTransaction(SignedTransaction transaction)
         {
-            return _service.SendTransaction(transaction);
+            return _icon.SendTransaction(transaction);
         }
 
         public async Task<IissInfo> GetIissInfo()

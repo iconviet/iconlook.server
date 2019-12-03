@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using Lykke.Icon.Sdk.Transport.JsonRpc;
 
-namespace Iconlook.Client.Data
+namespace Iconlook.Client.Service
 {
     public class IissInfo
     {
