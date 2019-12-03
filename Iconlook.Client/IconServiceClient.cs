@@ -73,6 +73,15 @@ namespace Iconlook.Client
             return _service.SendTransaction(transaction);
         }
 
+        public async Task<IissInfo> GetIissInfo()
+        {
+            var response = await CallAsync(new Call.Builder()
+                .Method("getIISSInfo")
+                .To(new Address("cx0000000000000000000000000000000000000000"))
+                .Build());
+            return new IissInfo(response.ToObject());
+        }
+
         public async Task<PRep> GetPRep(Address address)
         {
             var response = await CallAsync(new Call.Builder()
