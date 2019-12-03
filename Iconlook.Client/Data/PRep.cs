@@ -1,4 +1,6 @@
-﻿using Lykke.Icon.Sdk.Transport.JsonRpc;
+﻿using System.Numerics;
+using Lykke.Icon.Sdk.Data;
+using Lykke.Icon.Sdk.Transport.JsonRpc;
 
 namespace Iconlook.Client.Data
 {
@@ -14,6 +16,46 @@ namespace Iconlook.Client.Data
         public string GetName()
         {
             return _properties.GetItem("name")?.ToString();
+        }
+
+        public string GetCity()
+        {
+            return _properties.GetItem("city")?.ToString();
+        }
+
+        public string GetCountry()
+        {
+            return _properties.GetItem("country")?.ToString();
+        }
+
+        public Address GetAddress()
+        {
+            return _properties.GetItem("address")?.ToAddress();
+        }
+
+        public BigInteger GetIrep()
+        {
+            return _properties.GetItem("irep")?.ToInteger() ?? 0;
+        }
+
+        public BigInteger GetStake()
+        {
+            return _properties.GetItem("stake")?.ToInteger() ?? 0;
+        }
+
+        public BigInteger GetDelegated()
+        {
+            return _properties.GetItem("delegated")?.ToInteger() ?? 0;
+        }
+
+        public BigInteger GetTotalBlocks()
+        {
+            return _properties.GetItem("totalBlocks")?.ToInteger() ?? 0;
+        }
+
+        public BigInteger ValidatedBlocks()
+        {
+            return _properties.GetItem("validatedBlocks")?.ToInteger() ?? 0;
         }
     }
 }
