@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using ServiceStack;
-using ServiceStack.Text;
 
 namespace Iconlook.Client.Tracker
 {
@@ -18,10 +17,10 @@ namespace Iconlook.Client.Tracker
             _json = new JsonHttpClient(url) { HttpClient = HttpClient };
         }
 
-        public async Task<List<PRep>> GetPReps()
+        public async Task<Response<List<PRep>>> GetPReps()
         {
-            var response = await _json.GetAsync<JsonObject>("/iiss/prep/list?count=100");
-            return response.Get<List<PRep>>("data");
+            var response = await _json.GetAsync<Response<List<PRep>>>("/iiss/prep/list?count=100");
+            return response;
         }
     }
 }
