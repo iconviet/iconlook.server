@@ -62,6 +62,5 @@ namespace Iconlook.Client.Service
         {
             return _properties.GetItem("unvalidatedSequenceBlocks")?.ToInteger() ?? 0;
         }
-
     }
 }
