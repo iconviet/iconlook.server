@@ -251,15 +251,15 @@ button.secondary, button .secondary {
     letter-spacing: -2.0px;
 }
 
-.tx-dark {
+.text-dark {
     color: #111111 !important;
 }
 
-.tx-light {
+.text-light {
     color: #888888 !important;
 }
 
-.tx-condensed {
+.text-condensed {
     font-family: 'IBM Plex Sans Condensed';
 }
 

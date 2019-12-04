@@ -26,7 +26,7 @@
     <GridColumns>
         <GridColumn Width="220" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>
-                <span class="tx-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep</span>
+                <span class="text-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep</span>
             </HeaderTemplate>
             <Template>
                 @{
@@ -63,7 +63,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
@@ -77,7 +77,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
@@ -91,7 +91,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
-                        <span class="pl-1 tx-light font-weight-light">ICX</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
@@ -112,7 +112,7 @@
         </GridColumn>
         <GridColumn HeaderText="Description" TextAlign="TextAlign.Right">
             <Template>
-                <span class="tx-light">Lorem ipsum</span>
+                <span class="text-light">Lorem ipsum</span>
             </Template>
         </GridColumn>
     </GridColumns>

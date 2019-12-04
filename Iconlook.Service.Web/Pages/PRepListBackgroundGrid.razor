@@ -13,7 +13,7 @@
     <GridColumns>
         <GridColumn Width="220" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>
-                <span class="tx-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep</span>
+                <span class="text-condensed"><i class='far pl-1 pr-2 fal fa-users'></i>&nbsp;P-Rep</span>
             </HeaderTemplate>
             <Template>
                 @{
@@ -35,7 +35,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="pt-1 tx-condensed">@prep.Location</span>
+                        <span class="pt-1 text-condensed">@prep.Location</span>
                     }
                 }
             </Template>
@@ -45,7 +45,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="tx-condensed">@prep.Joined.ToString("dd MMM, yyyy")</span>
+                        <span class="text-condensed">@prep.Joined.ToString("dd MMM, yyyy")</span>
                     }
                 }
             </Template>
@@ -66,7 +66,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="font-weight-bold">3</span>
-                        <span class="pl-1 fs-n1 tx-light">people</span>
+                        <span class="pl-1 fs-n1 text-light">people</span>
                     }
                 }
             </Template>
@@ -86,7 +86,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="tx-condensed">Dev, Biz, Marketing</span>
+                        <span class="text-condensed">Dev, Biz, Marketing</span>
                     }
                 }
             </Template>
@@ -99,7 +99,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://www.iconviet.io">iconviet.io</a>
+                        <a class="primary text-condensed" href="https://www.iconviet.io">iconviet.io</a>
                     }
                 }
             </Template>
@@ -112,7 +112,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://twitter.com/iconviet">iconviet</a>
+                        <a class="primary text-condensed" href="https://twitter.com/iconviet">iconviet</a>
                     }
                 }
             </Template>
@@ -125,7 +125,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <a class="primary tx-condensed" href="https://t.me/iconviet">iconviet</a>
+                        <a class="primary text-condensed" href="https://t.me/iconviet">iconviet</a>
                     }
                 }
             </Template>
