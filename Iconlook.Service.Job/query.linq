@@ -12,4 +12,4 @@
 
 var client = new Iconlook.Client.Tracker.IconTrackerClient();
 var response = await client.GetPReps();
-response.Dump();
+response.Data.Dump();
