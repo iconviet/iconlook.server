@@ -90,7 +90,8 @@ namespace Iconlook.Service.Web
                     context.Response.OnStarting(state =>
                     {
                         var http_context = (HttpContext) state;
-                        http_context.Response.Headers["X-Powered-By"] = host.EndpointInstanceId.ToLower();
+                        var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME")?.ToLower();
+                        http_context.Response.Headers["X-Powered-By"] = hostname.HasValue() ? $"{hostname}.{host.EndpointName}" : host.EndpointInstanceId.ToLower();
                         return Task.CompletedTask;
                     }, context);
                     return next();
