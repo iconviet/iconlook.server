@@ -12,6 +12,7 @@
         success: function (selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
                 if (message.cmd === 'BlockProducedSignal') {
+                    console.log("Received " + message.cmd, json);
                 }
 
             }
