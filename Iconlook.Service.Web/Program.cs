@@ -30,33 +30,26 @@ namespace Iconlook.Service.Web
             ConfigureServices = host => services =>
             {
                 services.AddServerSideBlazor();
-                services.Configure<KestrelServerOptions>(options =>
+                services.Configure<KestrelServerOptions>(x =>
                 {
-                    options.AllowSynchronousIO = true;
+                    x.AllowSynchronousIO = true;
                 });
-                services.Configure<HubOptions>(options =>
+                services.Configure<HubOptions>(x =>
                 {
-                    options.EnableDetailedErrors = true;
-                    options.MaximumReceiveMessageSize = 1024 * 1024;
+                    x.EnableDetailedErrors = true;
+                    x.MaximumReceiveMessageSize = 1024 * 1024;
                 });
-                services.AddWebMarkupMin(options =>
+                services.Configure<ForwardedHeadersOptions>(x =>
                 {
-                    options.DisablePoweredByHttpHeaders = true;
-                    options.AllowMinificationInDevelopmentEnvironment = true;
-                }).AddHtmlMinification(options =>
-                {
-                    options.MinificationSettings.RemoveHtmlComments = false;
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
                 });
-                services.Configure<ForwardedHeadersOptions>(options =>
+                services.AddWebMarkupMin(x =>
                 {
-                    options.KnownProxies.Clear();
-                    options.KnownNetworks.Clear();
-                    options.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
-                });
-                services.AddRazorPages(options =>
-                {
-                    options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
-                });
+                    x.DisablePoweredByHttpHeaders = true;
+                    x.AllowMinificationInDevelopmentEnvironment = true;
+                }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
                 var redis = host.HostConfiguration.GetConnectionString("redis");
                 if (redis.HasValue())
                 {
@@ -78,6 +71,7 @@ namespace Iconlook.Service.Web
                         .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name)
                         .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redis), host.ProjectName);
                 }
+                services.AddRazorPages(x => x.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
             };
             ConfigureApplication = host => application =>
             {
