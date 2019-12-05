@@ -1,8 +1,7 @@
 ﻿@page "/"
-@using Agiper
+@using Iconlook.Server
 @namespace Iconlook.Service.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{ var version = typeof(WebHost).Assembly.InformationVersion(); }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +9,8 @@
     <meta charset="utf-8"/>
     <title>ICONLOOK | ICON Ecosystem Explorer</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=@version"/>
-    <script async type="text/javascript" src="~/static/js/bundle.min.js?v=@version"></script>
+    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=@Host.Current.VersionInformation"/>
+    <script async type="text/javascript" src="~/static/js/bundle.min.js?v=@Host.Current.VersionInformation"></script>
 </head>
 <body>
 <div id="components-reconnect-modal">
@@ -21,7 +20,7 @@
     </div>
 </div>
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-<script type="text/javascript" src="_framework/blazor.server.js?v=@version" autostart="false"></script>
+<script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
 <script type="text/javascript">Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
 </body>
 </html>
