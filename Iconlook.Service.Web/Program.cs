@@ -7,6 +7,7 @@ using Agiper;
 using Agiper.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,7 @@ namespace Iconlook.Service.Web
                 });
                 services.AddWebMarkupMin(options =>
                 {
+                    options.DisablePoweredByHttpHeaders = true;
                     options.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(options =>
                 {
@@ -79,14 +81,20 @@ namespace Iconlook.Service.Web
             };
             ConfigureApplication = host => application =>
             {
-                if (host.Environment != Environment.Localhost)
+                application.Use((context, next) =>
                 {
-                    application.Use((context, next) =>
+                    if (host.Environment != Environment.Localhost)
                     {
                         context.Request.Scheme = "https";
-                        return next();
-                    });
-                }
+                    }
+                    context.Response.OnStarting(state =>
+                    {
+                        var http_context = (HttpContext) state;
+                        http_context.Response.Headers["X-Powered-By"] = host.EndpointInstanceId.ToLower();
+                        return Task.CompletedTask;
+                    }, context);
+                    return next();
+                });
                 application.UseForwardedHeaders();
                 application.UseStaticFiles();
                 application.Use((context, next) =>
