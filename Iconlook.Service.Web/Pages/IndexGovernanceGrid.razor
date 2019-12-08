@@ -34,7 +34,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="190" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
+        <GridColumn Width="240" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -47,38 +47,27 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+        <GridColumn Width="40" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
+                        <span class="mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
+                        <span class="mono ls-n2 text-light" style="margin-right: 2px;">@prep.Votes.ToString("N0")</span><span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="% Supply" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <span class="mono text-light font-weight-light">(@prep.DelegatedPercentage.ToString("P"))</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="55" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)

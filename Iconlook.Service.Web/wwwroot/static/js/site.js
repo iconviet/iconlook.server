@@ -12,7 +12,7 @@
         success: function (selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
                 if (message.cmd === 'BlockProducedSignal') {
-                    console.log("Received " + message.cmd, json);
+                    // console.log("Received " + message.cmd, json);
                 }
 
             }
@@ -20,5 +20,5 @@
     });
     const click = window.rxjs.fromEvent(document, 'click');
     const example = click.pipe(window.rxjs.operators.map(event => '[ICONLOOK] Event time: ' + event.timeStamp));
-    example.subscribe(val => console.log(val));
+    // example.subscribe(val => console.log(val));
 })
