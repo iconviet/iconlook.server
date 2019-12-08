@@ -2,7 +2,8 @@
     .prep-status {
         padding: 5px 8px;
         border-radius: 4px;
-        background-color: #e1fafd;
+        color: #fd0262;
+        background-color: #fbeaf1;
     }
 </style>
 <EjsGrid RowHeight="40"
@@ -42,7 +43,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="180" HeaderText="P-Rep">
+        <GridColumn Width="190" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -65,13 +66,13 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="85" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="75" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 text-light">@prep.ProducedBlocks.ToString("N0")</span>
-                        <i class="fal pl-1 fs-n2 fa-cube positive-dark"></i>
+                        <span class="mono fs-n1 ls-n1 text-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        <i class="far ml-1 fs-n2 fa-cube positive-dark" style="opacity: 0.75;"></i>
                     }
                 }
             </Template>
@@ -81,8 +82,8 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 text-light">@prep.MissedBlocks.ToString("N0")</span>
-                        <i class="fal pl-1 fs-n2 fa-cube negative-dark"></i>
+                        <span class="mono fs-n1 ls-n1 text-light">@prep.MissedBlocks.ToString("N0")</span>
+                        <i class="far ml-1 fs-n2 fa-cube negative-dark" style="opacity: 0.75;"></i>
                     }
                 }
             </Template>
@@ -92,7 +93,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 font-weight-semibold">99.95%</span>
+                        <span class="mono fs-n1 ls-n1 font-weight-semibold">98.60%</span>
                     }
                 }
             </Template>
