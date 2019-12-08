@@ -1,7 +1,15 @@
-﻿<EjsGrid RowHeight="40"
+﻿<style>
+    .prep-status {
+        padding: 5px 8px;
+        border-radius: 4px;
+        background-color: #e1fafd;
+    }
+</style>
+<EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="PRepResponse"
+         AllowSelection="false"
          GridLines="GridLine.Horizontal"
          ModelType="PRepResponse.ModelType"
          Query="new ej.data.Query().addParams('take', '13')">
@@ -34,7 +42,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="195" HeaderText="P-Rep">
+        <GridColumn Width="180" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -47,24 +55,34 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="40" HeaderText="Status" TextAlign="TextAlign.Center">
+        <GridColumn Width="65" HeaderText="Status" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="fs-n1 font-weight-bold">main</span>
+                        <span class="fs-n1 mono-lg prep-status">leader</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="160" HeaderText="Votes" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right">
+        <GridColumn Width="85" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2 text-light font-weight-light">@prep.Votes.ToString("N0")</span>
-                        <span class="font-weight-lighter"> / </span>
-                        <span class="mono ls-n2 text-light font-weight-lighter">@prep.Votes.ToString("N0")</span>
+                        <span class="mono fs-n1 text-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        <i class="fal pl-1 fs-n2 fa-cube positive-dark"></i>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="65" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono fs-n1 text-light">@prep.MissedBlocks.ToString("N0")</span>
+                        <i class="fal pl-1 fs-n2 fa-cube negative-dark"></i>
                     }
                 }
             </Template>
@@ -74,7 +92,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-semibold">@prep.ProductivityPercentage.ToString("P2")</span>
+                        <span class="mono fs-n1 font-weight-semibold">99.95%</span>
                     }
                 }
             </Template>
