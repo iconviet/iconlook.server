@@ -4,7 +4,7 @@ using Iconlook.Service.Web.Sources;
 
 namespace Iconlook.Service.Web.Views
 {
-    public partial class TotalTransactions : IDisposable
+    public partial class TransactionCount : IDisposable
     {
         protected long Count;
 
@@ -18,7 +18,7 @@ namespace Iconlook.Service.Web.Views
                 var connection = Source.Blockchain.Connect();
                 Subscription = connection.Subscribe(x =>
                 {
-                    Count = x.Last().Current.TotalTransactions;
+                    Count = x.Last().Current.TransactionCount;
                     InvokeAsync(() => StateHasChanged());
                 });
             }

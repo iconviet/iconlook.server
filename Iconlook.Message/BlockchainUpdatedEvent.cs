@@ -7,7 +7,7 @@ namespace Iconlook.Message
     {
         public long BlockHeight { get; set; }
         public long TokenSupply { get; set; }
-        public long TotalTransactions { get; set; }
+        public long TransactionCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }
     }
 }

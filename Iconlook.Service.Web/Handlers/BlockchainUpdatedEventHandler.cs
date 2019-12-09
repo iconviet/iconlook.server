@@ -16,7 +16,7 @@ namespace Iconlook.Service.Web.Handlers
             {
                 Timestamp = message.Timestamp,
                 BlockHeight = message.BlockHeight,
-                TotalTransactions = message.TotalTransactions
+                TransactionCount = message.TransactionCount
             });
             return Task.CompletedTask;
         }
