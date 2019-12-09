@@ -54,7 +54,8 @@ namespace Iconlook.Service.Job.Blockchain
             {
                 Blockchain = new BlockchainResponse
                 {
-                    BlockHeight = block.Height
+                    BlockHeight = block.Height,
+                    TotalTransactions = transactions.Count + 71098147
                 }
             });
             await Endpoint.Publish(new BlockchainUpdatedEvent
