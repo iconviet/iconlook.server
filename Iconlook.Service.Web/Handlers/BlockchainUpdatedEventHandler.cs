@@ -2,7 +2,6 @@
 using Agiper.Server;
 using DynamicData;
 using Iconlook.Message;
-using Iconlook.Object;
 using Iconlook.Service.Web.Sources;
 using NServiceBus;
 
@@ -12,12 +11,7 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockchainUpdatedEvent message, IMessageHandlerContext context)
         {
-            Source.Blockchain.AddOrUpdate(new BlockchainResponse
-            {
-                Timestamp = message.Timestamp,
-                BlockHeight = message.BlockHeight,
-                TransactionCount = message.TransactionCount
-            });
+            Source.Blockchain.AddOrUpdate(message.Blockchain);
             return Task.CompletedTask;
         }
     }

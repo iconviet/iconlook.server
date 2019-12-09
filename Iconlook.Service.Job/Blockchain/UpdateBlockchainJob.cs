@@ -5,12 +5,10 @@ using Agiper.Server;
 using Iconlook.Client;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;
-using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
-using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job.Blockchain
 {
@@ -28,7 +26,7 @@ namespace Iconlook.Service.Job.Blockchain
                 var prep_info = await Service.GetPRepInfo();
                 var last_block = await Service.GetLastBlock();
                 var total_supply = await Service.GetTotalSupply();
-                var transactions = last_block.GetTransactions().Select(x => new Transaction
+                var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
                     To = x.GetTo()?.ToString(),
                     From = x.GetFrom()?.ToString(),
@@ -38,7 +36,7 @@ namespace Iconlook.Service.Job.Blockchain
                     Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0,
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(x.GetTimestamp().Value.ToMilliseconds())
                 }).ToList();
-                var block = new Block
+                var block = new BlockResponse
                 {
                     PeerId = last_block.GetPeerId(),
                     Transactions = transactions.Count,
@@ -49,48 +47,44 @@ namespace Iconlook.Service.Job.Blockchain
                     PrevHash = last_block.GetPrevBlockHash()?.ToString(),
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
+                var blockchain = new BlockchainResponse
+                {
+                    MarketCap = (long) main_info.GetMarketCap(),
+                    IcxSupply = (long) main_info.GetIcxSupply(),
+                    BlockHeight = (long) iiss_info.GetBlockHeight(),
+                    IcxCirculation = (long) main_info.GetIcxCirculation(),
+                    PublicTreasury = (long) main_info.GetPublicTreasury(),
+                    TransactionCount = (long) main_info.GetTransactionCount(),
+                    TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
+                    TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop(),
+                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
+                };
                 await Channel.Publish(new BlockProducedSignal
                 {
-                    Block = block.ToResponse()
+                    Block = block
                 });
                 await Endpoint.Publish(new BlockProducedEvent
                 {
                     Block = block,
                     Transactions = transactions
                 });
-                await Endpoint.Publish(new BlockchainUpdatedEvent
-                {
-                    BlockHeight = block.Height,
-                    Timestamp = block.Timestamp,
-                    IcxSupply = (long) total_supply.ToIcxFromLoop()
-                });
                 await Channel.Publish(new BlockchainUpdatedSignal
                 {
-                    Blockchain = new BlockchainResponse
-                    {
-                        Timestamp = block.Timestamp,
-                        MarketCap = (long) main_info.GetMarketCap(),
-                        IcxSupply = (long) main_info.GetIcxSupply(),
-                        BlockHeight = (long) iiss_info.GetBlockHeight(),
-                        IcxCirculation = (long) main_info.GetIcxCirculation(),
-                        PublicTreasury = (long) main_info.GetPublicTreasury(),
-                        TransactionCount = (long) main_info.GetTransactionCount(),
-                        TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
-                        TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop()
-                    }
+                    Blockchain = blockchain
                 });
-                await Task.Run(async () =>
+                await Endpoint.Publish(new BlockchainUpdatedEvent
                 {
-                    var db = Db.Instance();
-                    if (!db.Exists<Block>(x => x.Height == block.Height))
-                    {
-                        await db.InsertAsync(block);
-                        // await db.InsertAllAsync(transactions);
-                        var block_redis = Redis.Instance().As<BlockResponse>();
-                        block_redis.Store(block.ToResponse(), TimeSpan.FromMinutes(1));
-                        var transaction_redis = Redis.Instance().As<TransactionResponse>();
-                        transactions.ForEach(x => transaction_redis.Store(x.ToResponse(), TimeSpan.FromMinutes(1)));
-                    }
+                    Blockchain = blockchain
+                });
+                await Task.Run(() =>
+                {
+                    var block_redis = Redis.Instance().As<BlockResponse>();
+                    var blockchain_redis = Redis.Instance().As<BlockchainResponse>();
+                    var transaction_redis = Redis.Instance().As<TransactionResponse>();
+
+                    block_redis.Store(block, TimeSpan.FromMinutes(1));
+                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(1));
+                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(1)));
                 });
             }
             catch

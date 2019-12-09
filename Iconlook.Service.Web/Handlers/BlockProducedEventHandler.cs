@@ -11,8 +11,8 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockProducedEvent message, IMessageHandlerContext context)
         {
-            Source.Blocks.AddOrUpdate(message.Block.ToResponse());
-            Source.Transactions.AddOrUpdate(message.Transactions.ConvertAll(x => x.ToResponse()));
+            Source.Blocks.AddOrUpdate(message.Block);
+            Source.Transactions.AddOrUpdate(message.Transactions);
             return Task.CompletedTask;
         }
     }

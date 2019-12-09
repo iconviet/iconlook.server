@@ -1,14 +1,10 @@
-﻿using System;
-using Agiper.Server;
+﻿using Agiper.Server;
+using Iconlook.Object;
 
 namespace Iconlook.Message
 {
     public class BlockchainUpdatedEvent : EventBase<BlockchainUpdatedEvent>
     {
-        public long IcxSupply { get; set; }
-        public long BlockHeight { get; set; }
-        public long IcxCirculation { get; set; }
-        public long TransactionCount { get; set; }
-        public DateTimeOffset Timestamp { get; set; }
+        public BlockchainResponse Blockchain { get; set; }
     }
 }
