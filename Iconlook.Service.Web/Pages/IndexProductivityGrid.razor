@@ -1,9 +1,14 @@
 ﻿<style>
-    .prep-status {
-        padding: 5px 8px;
-        border-radius: 4px;
-        color: #fd0262;
-        background-color: #fbeaf1;
+    .prep-main-status {
+        padding: 2px 5px;
+        border-radius: 3px;
+        background-color: #1aaaba;
+    }
+
+    .prep-leader-status {
+        padding: 2px 5px;
+        border-radius: 3px;
+        background-color: #007bff;
     }
 </style>
 <EjsGrid RowHeight="40"
@@ -33,7 +38,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="30" HeaderText="Position" Field="@nameof(PRepResponse.Position)">
+        <GridColumn Width="30" Field="@nameof(PRepResponse.Position)" HeaderText="Position">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -61,7 +66,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="fs-n1 mono-lg prep-status">leader</span>
+                        <span class="fs-n3 ls-2 text-white font-weight-semibold prep-@(prep.Position != 6 ? "main" : "leader")-status">@(prep.Position != 6 ? "MAIN" : "LEADER")</span>
                     }
                 }
             </Template>
