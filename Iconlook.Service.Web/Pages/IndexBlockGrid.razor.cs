@@ -18,10 +18,6 @@ namespace Iconlook.Service.Web.Pages
                 var connection = Source.Blocks.Connect();
                 Subscription = connection.Subscribe(changes =>
                 {
-                    foreach (var change in changes)
-                    {
-                        // BlockGrid.AddRecord(change.Current);
-                    }
                 });
             }
         }

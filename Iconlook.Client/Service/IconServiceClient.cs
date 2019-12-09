@@ -20,7 +20,7 @@ namespace Iconlook.Client.Service
 
         public IconServiceClient()
         {
-            const string url = "https://ctz.solidwallet.io/api/v3";
+            const string url = "http://95.179.230.6:9000/api/v3";
             _icon = new IconService(new HttpProvider(HttpClient, url));
             _json = new JsonHttpClient(url) { HttpClient = HttpClient };
         }

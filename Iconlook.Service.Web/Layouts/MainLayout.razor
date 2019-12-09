@@ -20,8 +20,8 @@
         </div>
     </header>
     <main>
-        <div class="container">
-            <div class="row py-3 align-items-center" style="min-height: 52px;">
+        <div class="container d-none d-sm-block">
+            <div class="row pt-3 align-items-center" style="min-height: 36px;">
                 <div class="col">
                     Welcome to <span>ICONLOOK</span>. If you like this site, please delegate some votes to <NavLink class="primary" href="/">ICONVIET</NavLink> so that we can continue to build more stuff for the ICON ecosystem. Thanks!
                 </div>
@@ -29,6 +29,8 @@
                     <EjsSwitch Checked="true"></EjsSwitch>
                 </div>
             </div>
+        </div>
+        <div class="container pt-3">
             @Body
         </div>
     </main>
