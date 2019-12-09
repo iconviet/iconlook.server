@@ -76,9 +76,9 @@ namespace Iconlook.Service.Job.Blockchain
                     var blockchain_redis = Redis.Instance().As<BlockchainResponse>();
                     var transaction_redis = Redis.Instance().As<TransactionResponse>();
 
-                    block_redis.Store(block, TimeSpan.FromMinutes(1));
-                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(1));
-                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(1)));
+                    block_redis.Store(block, TimeSpan.FromMinutes(5));
+                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(5));
+                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(5)));
                 });
             }
             catch
