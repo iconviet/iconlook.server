@@ -16,7 +16,10 @@
                     $('.BlockchainResponse_MarketCap').text(json.blockchain.marketCap.toLocaleString());
                     $('.BlockchainResponse_IcxSupply').text(json.blockchain.icxSupply.toLocaleString());
                     $('.BlockchainResponse_BlockHeight').text(json.blockchain.blockHeight.toLocaleString());
+                    $('.BlockchainResponse_TotalStaked').text(json.blockchain.totalStaked.toLocaleString());
+                    $('.BlockchainResponse_TotalDelegated').text(json.blockchain.totalDelegated.toLocaleString());
                     $('.BlockchainResponse_IcxCirculation').text(json.blockchain.icxCirculation.toLocaleString());
+                    $('.BlockchainResponse_PublicTreasury').text(json.blockchain.publicTreasury.toLocaleString());
                     $('.BlockchainResponse_TransactionCount').text(json.blockchain.transactionCount.toLocaleString());
                 }
                 if (message.cmd === 'BlockProducedSignal') {

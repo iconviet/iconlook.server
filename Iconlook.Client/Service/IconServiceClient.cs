@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -84,6 +83,15 @@ namespace Iconlook.Client.Service
             return new IissInfo(response.ToObject());
         }
 
+        public async Task<PRepInfo> GetPRepInfo()
+        {
+            var response = await CallAsync(new Call.Builder()
+                .Method("getPReps")
+                .To(new Address("cx0000000000000000000000000000000000000000"))
+                .Build());
+            return new PRepInfo(response.ToObject());
+        }
+
         public async Task<PRep> GetPRep(Address address)
         {
             var response = await CallAsync(new Call.Builder()
@@ -92,15 +100,6 @@ namespace Iconlook.Client.Service
                 .Params(new RpcObject.Builder().Put("address", new RpcValue(address)).Build())
                 .Build());
             return new PRep(response.ToObject());
-        }
-
-        public async Task<List<PRep>> GetPReps()
-        {
-            var response = await CallAsync(new Call.Builder()
-                .Method("getPReps")
-                .To(new Address("cx0000000000000000000000000000000000000000"))
-                .Build());
-            return response.ToObject().GetItem("preps").ToArray().Select(x => new PRep(x.ToObject())).ToList();
         }
     }
 }

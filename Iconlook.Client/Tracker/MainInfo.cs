@@ -17,6 +17,11 @@ namespace Iconlook.Client.Tracker
             return BigDecimal.Parse(TmainInfo.Get("icxSupply")).ToBigInteger();
         }
 
+        public BigInteger GetPublicTreasury()
+        {
+            return BigDecimal.Parse(TmainInfo.Get("publicTreasury")).ToBigInteger();
+        }
+
         public BigInteger GetIcxCirculation()
         {
             return BigDecimal.Parse(TmainInfo.Get("icxCirculationy")).ToBigInteger();

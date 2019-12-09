@@ -23,8 +23,9 @@ namespace Iconlook.Service.Job.Blockchain
         {
             try
             {
-                var iiss_info = await Service.GetIissInfo();
                 var main_info = await Tracker.GetMainInfo();
+                var iiss_info = await Service.GetIissInfo();
+                var prep_info = await Service.GetPRepInfo();
                 var last_block = await Service.GetLastBlock();
                 var total_supply = await Service.GetTotalSupply();
                 var transactions = last_block.GetTransactions().Select(x => new Transaction
@@ -72,7 +73,10 @@ namespace Iconlook.Service.Job.Blockchain
                         IcxSupply = (long) main_info.GetIcxSupply(),
                         BlockHeight = (long) iiss_info.GetBlockHeight(),
                         IcxCirculation = (long) main_info.GetIcxCirculation(),
-                        TransactionCount = (long) main_info.GetTransactionCount()
+                        PublicTreasury = (long) main_info.GetPublicTreasury(),
+                        TransactionCount = (long) main_info.GetTransactionCount(),
+                        TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
+                        TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop()
                     }
                 });
                 await Task.Run(async () =>

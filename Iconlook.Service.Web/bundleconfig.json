@@ -16,6 +16,7 @@
       "wwwroot/static/js/ejs.interop.min.js",
       "wwwroot/static/js/rxjs.min.js",
       "wwwroot/static/js/jquery.min.js",
+      "wwwroot/static/js/jquery.animate-number.min.js",
       "wwwroot/static/js/ss-utils.min.js",
       "wwwroot/static/js/site.js"
     ],
