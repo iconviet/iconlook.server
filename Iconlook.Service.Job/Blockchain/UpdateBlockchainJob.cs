@@ -61,12 +61,13 @@ namespace Iconlook.Service.Job.Blockchain
                 {
                     BlockHeight = block.Height,
                     Timestamp = block.Timestamp,
-                    TokenSupply = (long) total_supply.ToIcxFromLoop()
+                    IcxSupply = (long) total_supply.ToIcxFromLoop()
                 });
                 await Channel.Publish(new BlockchainUpdatedSignal
                 {
                     Blockchain = new BlockchainResponse
                     {
+                        Timestamp = block.Timestamp,
                         MarketCap = (long) main_info.GetMarketCap(),
                         IcxSupply = (long) main_info.GetIcxSupply(),
                         BlockHeight = (long) iiss_info.GetBlockHeight(),

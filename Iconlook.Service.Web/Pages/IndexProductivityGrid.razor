@@ -5,7 +5,7 @@
         background-color: #1aaaba;
     }
 
-    .prep-leader-status {
+    .prep-lead-status {
         padding: 2px 5px;
         border-radius: 3px;
         background-color: #007bff;
@@ -66,7 +66,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="fs-n3 ls-2 text-white font-weight-semibold prep-@(prep.Position != 6 ? "main" : "leader")-status">@(prep.Position != 6 ? "MAIN" : "LEADER")</span>
+                        <span class="fs-n3 ls-2 text-white font-weight-semibold prep-@(prep.Position != 6 ? "main" : "lead")-status">@(prep.Position != 6 ? "MAIN" : "LEAD")</span>
                     }
                 }
             </Template>
