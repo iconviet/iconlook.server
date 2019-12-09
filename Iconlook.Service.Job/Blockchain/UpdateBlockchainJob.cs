@@ -25,7 +25,6 @@ namespace Iconlook.Service.Job.Blockchain
                 var iiss_info = await Service.GetIissInfo();
                 var prep_info = await Service.GetPRepInfo();
                 var last_block = await Service.GetLastBlock();
-                var total_supply = await Service.GetTotalSupply();
                 var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
                     To = x.GetTo()?.ToString(),
@@ -68,14 +67,8 @@ namespace Iconlook.Service.Job.Blockchain
                     Block = block,
                     Transactions = transactions
                 });
-                await Channel.Publish(new BlockchainUpdatedSignal
-                {
-                    Blockchain = blockchain
-                });
-                await Endpoint.Publish(new BlockchainUpdatedEvent
-                {
-                    Blockchain = blockchain
-                });
+                await Channel.Publish(new BlockchainUpdatedSignal { Blockchain = blockchain });
+                await Endpoint.Publish(new BlockchainUpdatedEvent { Blockchain = blockchain });
                 await Task.Run(() =>
                 {
                     var block_redis = Redis.Instance().As<BlockResponse>();
