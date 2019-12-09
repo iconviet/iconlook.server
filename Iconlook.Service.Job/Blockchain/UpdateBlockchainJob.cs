@@ -60,7 +60,8 @@ namespace Iconlook.Service.Job.Blockchain
                 };
                 await Channel.Publish(new BlockProducedSignal
                 {
-                    Block = block
+                    Block = block,
+                    Transactions = transactions
                 });
                 await Endpoint.Publish(new BlockProducedEvent
                 {
