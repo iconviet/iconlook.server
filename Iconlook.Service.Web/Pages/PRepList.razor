@@ -137,6 +137,7 @@
 <div class="row mb-5">
     <div class="col">
         <EjsTab Animation="Animation" CssClass="main card shadow-sm">
+            <TabEvents Selecting="Select" />
             <TabItems>
                 <TabItem Header="Summary">
                     <ContentTemplate>
@@ -187,3 +188,12 @@
         </div>
     </div>
 </div>
+@code {
+    public void Select(SelectingEventArgs args)
+    {
+        if (args.IsSwiped)
+        {
+            args.Cancel = true;
+        }
+    }
+}

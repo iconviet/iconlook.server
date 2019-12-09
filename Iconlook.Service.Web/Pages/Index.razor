@@ -240,6 +240,7 @@
     <div class="col-md mr-md-n3">
         <div class="main card mb-3 shadow-sm" style="min-height: 567px;">
             <EjsTab Animation="Animation">
+                <TabEvents Selecting="Select" />
                 <TabItems>
                     <TabItem Header="Governance">
                         <ContentTemplate>
@@ -265,6 +266,7 @@
     <div class="col-md">
         <div class="main card mb-3 shadow-sm" style="min-height: 567px;">
             <EjsTab Animation="Animation">
+                <TabEvents Selecting="Select" />
                 <TabItems>
                     <TabItem Header="Blocks">
                         <ContentTemplate>
@@ -294,3 +296,12 @@
         </div>
     </div>
 </div>
+@code {
+    public void Select(SelectingEventArgs args)
+    {
+        if(args.IsSwiped)
+        {
+            args.Cancel = true;
+        }
+    }
+}
