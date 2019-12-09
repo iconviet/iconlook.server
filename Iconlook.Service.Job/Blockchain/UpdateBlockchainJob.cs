@@ -38,11 +38,11 @@ namespace Iconlook.Service.Job.Blockchain
                 var block = new BlockResponse
                 {
                     PeerId = last_block.GetPeerId(),
-                    Transactions = transactions.Count,
                     Fee = transactions.Sum(x => x.Fee),
+                    TransactionCount = transactions.Count,
                     Height = (long) last_block.GetHeight(),
-                    Amount = transactions.Sum(x => x.Amount),
                     Hash = last_block.GetBlockHash()?.ToString(),
+                    TotalAmount = transactions.Sum(x => x.Amount),
                     PrevHash = last_block.GetPrevBlockHash()?.ToString(),
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
