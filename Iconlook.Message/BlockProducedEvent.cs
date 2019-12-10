@@ -20,6 +20,7 @@ namespace Iconlook.Message
         {
             base.AddRules(validator);
             validator.RuleFor(x => x.Block).SetValidator(BlockResponse.Validator);
+            validator.RuleFor(x => x.Transactions).ForEach(x => x.SetValidator(TransactionResponse.Validator));
         }
     }
 

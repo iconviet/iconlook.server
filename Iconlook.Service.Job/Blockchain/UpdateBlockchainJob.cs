@@ -25,7 +25,6 @@ namespace Iconlook.Service.Job.Blockchain
                 var iiss_info = await Service.GetIissInfo();
                 var prep_info = await Service.GetPRepInfo();
                 var last_block = await Service.GetLastBlock();
-                var total_supply = await Service.GetTotalSupply();
                 var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
                     To = x.GetTo()?.ToString(),
@@ -39,11 +38,11 @@ namespace Iconlook.Service.Job.Blockchain
                 var block = new BlockResponse
                 {
                     PeerId = last_block.GetPeerId(),
-                    Transactions = transactions.Count,
                     Fee = transactions.Sum(x => x.Fee),
+                    TransactionCount = transactions.Count,
                     Height = (long) last_block.GetHeight(),
-                    Amount = transactions.Sum(x => x.Amount),
                     Hash = last_block.GetBlockHash()?.ToString(),
+                    TotalAmount = transactions.Sum(x => x.Amount),
                     PrevHash = last_block.GetPrevBlockHash()?.ToString(),
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
@@ -61,30 +60,25 @@ namespace Iconlook.Service.Job.Blockchain
                 };
                 await Channel.Publish(new BlockProducedSignal
                 {
-                    Block = block
+                    Block = block,
+                    Transactions = transactions
                 });
                 await Endpoint.Publish(new BlockProducedEvent
                 {
                     Block = block,
                     Transactions = transactions
                 });
-                await Channel.Publish(new BlockchainUpdatedSignal
-                {
-                    Blockchain = blockchain
-                });
-                await Endpoint.Publish(new BlockchainUpdatedEvent
-                {
-                    Blockchain = blockchain
-                });
+                await Channel.Publish(new BlockchainUpdatedSignal { Blockchain = blockchain });
+                await Endpoint.Publish(new BlockchainUpdatedEvent { Blockchain = blockchain });
                 await Task.Run(() =>
                 {
                     var block_redis = Redis.Instance().As<BlockResponse>();
                     var blockchain_redis = Redis.Instance().As<BlockchainResponse>();
                     var transaction_redis = Redis.Instance().As<TransactionResponse>();
 
-                    block_redis.Store(block, TimeSpan.FromMinutes(1));
-                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(1));
-                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(1)));
+                    block_redis.Store(block, TimeSpan.FromMinutes(5));
+                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(5));
+                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(5)));
                 });
             }
             catch
