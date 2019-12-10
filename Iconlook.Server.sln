@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Client", "Iconlook
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Client", "1.Client", "{DCE7086B-67C5-4062-8C1D-65A61F8B98B7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Mon", "Iconlook.Service.Mon\Iconlook.Service.Mon.csproj", "{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{851696F7-D1BB-44CE-9387-2F073F7845C7} = {D9B4D14D-CB67-45D7-9442-8F9C5D2EDFA9}
 		{39C8DF5C-9246-42B7-B19D-3FBDDBC65DA9} = {754E3BDB-5BC1-4306-949A-AD265A16EB54}
 		{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC} = {DCE7086B-67C5-4062-8C1D-65A61F8B98B7}
+		{6086F5B7-7782-41EA-86C2-EE0389E3D5FB} = {D9B4D14D-CB67-45D7-9442-8F9C5D2EDFA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E03994E5-C745-4A37-82E3-448E886898FB}
