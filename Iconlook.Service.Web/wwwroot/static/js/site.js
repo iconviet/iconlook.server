@@ -23,14 +23,25 @@
                     $('.BlockchainResponse_TransactionCount').text(json.blockchain.transactionCount.toLocaleString());
                 }
                 if (message.cmd === 'BlockProducedSignal') {
-                    if ($('#block_grid_content_table > tbody > tr').length === 13) {
-                        $('#block_grid_content_table .BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
-                        $('#block_grid_content_table .BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
-                        $('#block_grid_content_table .BlockResponse_TransactionCount').text(json.block.transactionCount.toLocaleString());
-                        $('#block_grid_content_table .BlockResponse_TotalAmount').text(json.block.totalAmount.toLocaleString());
-                    }
+                    var row = $('#block_grid_content_table tr').first().clone();
+                    $(row).find('.BlockResponse_TotalAmount').animateNumber({
+                        number: json.block.totalAmount,
+                        numberStep: $.animateNumber.numberStepFactories.separator(',')
+                    });
+                    $(row).find('.BlockResponse_TransactionCount').animateNumber({
+                        number: json.block.transactionCount,
+                        numberStep: $.animateNumber.numberStepFactories.separator(',')
+                    });
+                    $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
+                    $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
+                    $(row).hide().prependTo($('#block_grid_content_table tbody'));
+                    $(row).fadeIn(750, function() {
+                        if ($('#block_grid_content_table tr').length === 14) {
+                            $('#block_grid_content_table tr').last().remove();
+                        }
+                        console.log("Length : " + $('#block_grid_content_table tr').length);
+                    });
                 }
-                
             }
         }
     });
