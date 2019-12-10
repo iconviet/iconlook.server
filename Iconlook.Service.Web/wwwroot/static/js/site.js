@@ -39,7 +39,6 @@
                         if ($('#block_grid_content_table tr').length === 14) {
                             $('#block_grid_content_table tr').last().remove();
                         }
-                        console.log("Length : " + $('#block_grid_content_table tr').length);
                     });
                 }
             }
