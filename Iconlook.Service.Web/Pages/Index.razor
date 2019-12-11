@@ -178,6 +178,40 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-xl mb-3 mr-xl-n4">
+        <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
+            <div class="pr-5 d-inline-flex">
+                <i class="fad mr-3 fa-vote-yea text-white" style="font-size: 20px;"></i>
+                <a class="flex-fill text-white text-center font-weight-semibold" href="/">Please vote for ICONVIET</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl mb-3 mr-xl-n3">
+        <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
+            <div class="pr-5 d-inline-flex">
+                <i class="fad mr-3 fa-sort-numeric-up text-white" style="font-size: 20px;"></i>
+                <a class="flex-fill text-white text-center font-weight-semibold" href="/">Help us reach 10M votes</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl mb-3 mr-xl-n4">
+        <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
+            <div class="pr-5 d-inline-flex">
+                <i class="fad mr-3 fa-mobile-alt text-white" style="font-size: 20px;"></i>
+                <a class="flex-fill text-white text-center font-weight-semibold" href="/">Mobile app coming soon</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl mb-3">
+        <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
+            <div class="pr-5 d-inline-flex">
+                <i class="fad mr-3 fa-user-secret text-white" style="font-size: 20px;"></i>
+                <a class="flex-fill text-white text-center font-weight-semibold" href="/">Vote buying is a crime</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-md mb-3 mr-md-n3">
         <div class="card shadow-sm border-bottom-0">
             <div class="container">
@@ -248,17 +282,17 @@
             <EjsTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
+                    <TabItem Header="Production">
+                        <ContentTemplate>
+                            <div class="card-body px-4 pt-1 pb-0">
+                                <IndexProductionGrid></IndexProductionGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
                     <TabItem Header="Governance">
                         <ContentTemplate>
                             <div class="card-body px-4 pt-1 pb-0">
                                 <IndexGovernanceGrid></IndexGovernanceGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                    <TabItem Header="Productivity">
-                        <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
-                                <IndexProductivityGrid></IndexProductivityGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>

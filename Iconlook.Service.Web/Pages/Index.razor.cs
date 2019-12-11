@@ -8,8 +8,8 @@ namespace Iconlook.Service.Web.Pages
     {
         protected TabHeader Votes;
         protected TabHeader Blocks;
+        protected TabHeader Production;
         protected TabHeader Governance;
-        protected TabHeader Productivity;
         protected TabHeader Transactions;
         protected List<ItemModel> ToolItems;
         protected List<ItemModel> SearchItems;
@@ -37,7 +37,7 @@ namespace Iconlook.Service.Web.Pages
             };
             Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
             Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
-            Productivity = new TabHeader { Text = "PRODUCTIVITY", IconCss = "fal fa-server" };
+            Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
             Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
             Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
         }
