@@ -42,8 +42,8 @@ namespace Iconlook.Service.Job.Blockchain
                     TransactionCount = transactions.Count,
                     Height = (long) last_block.GetHeight(),
                     Hash = last_block.GetBlockHash()?.ToString(),
+                    TotalAmount = transactions.Sum(x => x.Amount),
                     PrevHash = last_block.GetPrevBlockHash()?.ToString(),
-                    TotalAmount = transactions.Sum(x => x.Amount) + 0.1234m,
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
                 var blockchain = new BlockchainResponse

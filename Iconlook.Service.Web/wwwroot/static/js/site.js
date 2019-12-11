@@ -15,8 +15,10 @@
                 if (message.cmd === 'BlockProducedSignal') {
                     var row = $('#block_grid_content_table tr').first().clone();
                     $(row).find('.BlockResponse_TotalAmount').animateNumber({
-                        number: json.block.totalAmount,
-                        numberStep: $.animateNumber.numberStepFactories.separator(',')
+                        number: json.block.totalAmount * Math.pow(10, 4),
+                        numberStep: function(now, tween) {
+                            $(tween.elem).text((Math.floor(now) / Math.pow(10, 4)).toFixed(4));
+                        }
                     });
                     $(row).find('.BlockResponse_TransactionCount').animateNumber({
                         number: json.block.transactionCount,

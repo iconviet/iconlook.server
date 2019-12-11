@@ -50,25 +50,25 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(BlockResponse.TransactionCount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" Field="@nameof(BlockResponse.TransactionCount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
                         <a class="primary no-underline" href="/">
-                            <span class="pr-1 mono BlockResponse_TransactionCount">@block.TransactionCount.ToString("000")</span><span class="text-light">txns</span>
+                            <span class="pr-1 mono BlockResponse_TransactionCount">@block.TransactionCount.ToString("0000")</span>
+                            <span class="text-light">txns</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" Field="@nameof(BlockResponse.TotalAmount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="125" Field="@nameof(BlockResponse.TotalAmount)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
-                        <span class="mono ls-n2 BlockResponse_TotalAmount">@block.TotalAmount.ToString("N0")</span>
-                        <span class="mono ml-n1 ls-n2 text-light font-weight-light">.<span class="BlockResponse_TotalAmountDecimals">0000</span></span>
+                        <span class="mono ls-n2 BlockResponse_TotalAmount">@block.TotalAmount.ToString("N4")</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
