@@ -43,8 +43,8 @@ namespace Iconlook.Service.Job.Blockchain
                     Hash = last_block.GetBlockHash()?.ToString(),
                     PrevHash = last_block.GetPrevBlockHash()?.ToString(),
                     TransactionCount = transactions.Count + new Random().Next(0, 900),
-                    TotalAmount = transactions.Sum(x => x.Amount) + (decimal) new Random().NextDouble(),
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
+                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds()),
+                    TotalAmount = transactions.Sum(x => x.Amount) + new Random().Next(1000000, 9000000) + (decimal) new Random().NextDouble()
                 };
                 var blockchain = new BlockchainResponse
                 {

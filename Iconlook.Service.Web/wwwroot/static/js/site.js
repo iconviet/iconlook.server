@@ -34,7 +34,7 @@
                     $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
                     $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
                     $(row).hide().prependTo($('#block_grid_content_table tbody'));
-                    $(row).fadeIn(750, function() {
+                    $(row).slideDown(250, function() {
                         if ($('#block_grid_content_table tr').length === 14) {
                             $('#block_grid_content_table tr').last().remove();
                         }
