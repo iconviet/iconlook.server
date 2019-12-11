@@ -18,8 +18,6 @@
       "wwwroot/static/js/jquery.min.js",
       "wwwroot/static/js/ss-utils.min.js",
       "wwwroot/static/js/jquery.moment.min.js",
-      "wwwroot/static/js/jquery.handlebars.min.js",
-      "wwwroot/static/js/jquery.countimator.min.js",
       "wwwroot/static/js/jquery.animate-number.min.js",
       "wwwroot/static/js/site.js"
     ],
