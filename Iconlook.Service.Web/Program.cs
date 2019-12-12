@@ -29,6 +29,15 @@ namespace Iconlook.Service.Web
             ConfigureServices = host => services =>
             {
                 services.AddServerSideBlazor();
+                services.Configure<KestrelServerOptions>(x =>
+                {
+                    x.AllowSynchronousIO = true;
+                });
+                services.Configure<HubOptions>(x =>
+                {
+                    x.EnableDetailedErrors = true;
+                    x.MaximumReceiveMessageSize = 1024 * 1024;
+                });
                 services.AddWebMarkupMin(x =>
                 {
                     x.DisablePoweredByHttpHeaders = true;
