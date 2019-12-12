@@ -1,13 +1,12 @@
 ﻿@page "/"
 <style type="text/css">
-    
-    .main.card .e-grid { min-height: 520px; }
+    .e-tab { background-color: white; }
 
     .e-grid .e-gridheader { display: none; }
 
-    .e-tab { background-color: white; }
-
     .main.card { height: 567px !important; }
+
+    .main.card .e-grid { min-height: 520px; }
 
     button.submit-button:hover,
     button.search-filter:hover { color: #1aaaba !important; }
@@ -178,7 +177,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl mb-3 mr-xl-n4">
+    <div class="col-xl mb-3 d-none mr-xl-n4 d-md-block">
         <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
             <div class="pr-5 d-inline-flex">
                 <i class="fad mr-3 fa-vote-yea text-white" style="font-size: 20px;"></i>
@@ -186,7 +185,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl mb-3 mr-xl-n3">
+    <div class="col-xl mb-3 d-none mr-xl-n3 d-md-block">
         <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
             <div class="pr-5 d-inline-flex">
                 <i class="fad mr-3 fa-sort-numeric-up text-white" style="font-size: 20px;"></i>
@@ -194,7 +193,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl mb-3 mr-xl-n4">
+    <div class="col-xl mb-3 d-none mr-xl-n4 d-md-block">
         <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
             <div class="pr-5 d-inline-flex">
                 <i class="fad mr-3 fa-mobile-alt text-white" style="font-size: 20px;"></i>
@@ -202,7 +201,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl mb-3">
+    <div class="col-xl mb-3 d-none d-md-block">
         <div class="px-3 py-3 card rounded gradient shadow-sm border-0">
             <div class="pr-5 d-inline-flex">
                 <i class="fad mr-3 fa-user-secret text-white" style="font-size: 20px;"></i>
@@ -284,14 +283,14 @@
                 <TabItems>
                     <TabItem Header="Production">
                         <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
+                            <div class="card-body px-3 pt-1 pb-0">
                                 <IndexProductionGrid></IndexProductionGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
                     <TabItem Header="Governance">
                         <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
+                            <div class="card-body px-3 pt-1 pb-0">
                                 <IndexGovernanceGrid></IndexGovernanceGrid>
                             </div>
                         </ContentTemplate>
@@ -310,21 +309,21 @@
                 <TabItems>
                     <TabItem Header="Blocks">
                         <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
+                            <div class="card-body px-3 pt-1 pb-0">
                                 <IndexBlockGrid></IndexBlockGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
                     <TabItem Header="Transactions">
                         <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
+                            <div class="card-body px-3 pt-1 pb-0">
                                 <IndexTransactionGrid></IndexTransactionGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
                     <TabItem Header="Votes">
                         <ContentTemplate>
-                            <div class="card-body px-4 pt-1 pb-0">
+                            <div class="card-body px-3 pt-1 pb-0">
                             </div>
                         </ContentTemplate>
                     </TabItem>

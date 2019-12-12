@@ -1,14 +1,23 @@
 ﻿<style>
-    .prep-main-status {
-        padding: 2px 5px;
-        border-radius: 3px;
-        background-color: #1aaaba;
+    .prep-state-bad {
+        color: white;
+        padding: 10px 0;
+        border-radius: 4px;
+        background-color: #dc3545;
     }
 
-    .prep-lead-status {
-        padding: 2px 5px;
-        border-radius: 3px;
-        background-color: #007bff;
+    .prep-state-idle {
+        color: #888888;
+        padding: 10px 0;
+        border-radius: 4px;
+        background-color: #eeeeee;
+    }
+
+    .prep-state-busy {
+        color: #212529;
+        padding: 10px 0;
+        border-radius: 4px;
+        background-color: #ffc107;
     }
 </style>
 <EjsGrid RowHeight="40"
@@ -32,7 +41,7 @@
                         }
                         else
                         {
-                            <i class="fas fa-caret-down negative-light" style="opacity: 0.75"></i>
+                            <i class="fas fa-caret-bad negative-light" style="opacity: 0.75"></i>
                         }
                     }
                 }
@@ -66,7 +75,12 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="fs-n3 ls-2 text-white font-weight-semibold prep-@(prep.Position != 6 ? "main" : "lead")-status">@(prep.Position != 6 ? "MAIN" : "LEAD")</span>
+                        var name = "idle";
+                        if (prep.Position == 3) { name = "bad"; }
+                        if (prep.Position == 6) { name = "busy"; }
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state-@name justify-content-center">
+                            <span style="margin-top: 1px; margin-left: 1px;">@name.ToUpper()</span>
+                        </div>
                     }
                 }
             </Template>
