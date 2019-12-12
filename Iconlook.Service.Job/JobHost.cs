@@ -18,7 +18,7 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x => Resolve<UpdateBlockchainJob>().RunAsync().ConfigureAwait(false));
+            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateBlockchainJob>().RunAsync());
         }
     }
 }

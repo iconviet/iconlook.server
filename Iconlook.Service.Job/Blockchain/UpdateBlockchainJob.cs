@@ -27,24 +27,24 @@ namespace Iconlook.Service.Job.Blockchain
                 var last_block = await Service.GetLastBlock();
                 var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
-                    To = x.GetTo()?.ToString(),
-                    From = x.GetFrom()?.ToString(),
-                    Hash = x.GetTxHash()?.ToString(),
+                    Hash = x.GetTxHash().ToString(),
                     Block = (long) last_block.GetHeight(),
                     Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
                     Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0,
+                    To = x.GetTo()?.ToString() ?? "cx0000000000000000000000000000000000000000",
+                    From = x.GetFrom()?.ToString() ?? "cx0000000000000000000000000000000000000000",
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(x.GetTimestamp().Value.ToMilliseconds())
                 }).ToList();
                 var block = new BlockResponse
                 {
                     PeerId = last_block.GetPeerId(),
                     Fee = transactions.Sum(x => x.Fee),
+                    TransactionCount = transactions.Count,
                     Height = (long) last_block.GetHeight(),
-                    Hash = last_block.GetBlockHash()?.ToString(),
-                    PrevHash = last_block.GetPrevBlockHash()?.ToString(),
-                    TransactionCount = transactions.Count + new Random().Next(0, 900),
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds()),
-                    TotalAmount = transactions.Sum(x => x.Amount) + new Random().Next(1000000, 9000000) + (decimal) new Random().NextDouble()
+                    Hash = last_block.GetBlockHash().ToString(),
+                    TotalAmount = transactions.Sum(x => x.Amount),
+                    PrevHash = last_block.GetPrevBlockHash().ToString(),
+                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
                 var blockchain = new BlockchainResponse
                 {
