@@ -1,35 +1,10 @@
-﻿using System;
-using Iconlook.Object;
-using Iconlook.Service.Web.Sources;
+﻿using Iconlook.Object;
 using Syncfusion.EJ2.Blazor.Grids;
 
 namespace Iconlook.Service.Web.Pages
 {
-    public partial class IndexTransactionGrid : IDisposable
+    public partial class IndexTransactionGrid
     {
-        protected IDisposable Subscription;
-
         protected EjsGrid<TransactionResponse> TransactionGrid;
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
-            if (firstRender)
-            {
-                var connection = Source.Transactions.Connect();
-                Subscription = connection.Subscribe(changes =>
-                {
-                    foreach (var change in changes)
-                    {
-                        TransactionGrid.AddRecord(change.Current);
-                    }
-                });
-            }
-        }
-
-        public void Dispose()
-        {
-            Subscription.Dispose();
-        }
     }
 }

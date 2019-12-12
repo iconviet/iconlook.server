@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Iconlook.Object
 {
-    public class BlockchainResponse : ResponseBase<BlockchainResponse>
+    public class ChainResponse : ResponseBase<ChainResponse>
     {
         public long MarketCap { get; set; }
         public long IcxSupply { get; set; }
@@ -17,7 +17,7 @@ namespace Iconlook.Object
         public long TransactionCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }
 
-        protected override void AddRules(Validator<BlockchainResponse> validator)
+        protected override void AddRules(Validator<ChainResponse> validator)
         {
             base.AddRules(validator);
             validator.RuleFor(x => x.MarketCap).GreaterThan(0);

@@ -2,13 +2,13 @@
 using Agiper.Server;
 using Serilog;
 
-namespace Iconlook.Service.Job.PRep
+namespace Iconlook.Service.Job
 {
-    public class VoteHistoryPRepJob : JobBase
+    public class UpdatePRepsJob : JobBase
     {
         public override Task RunAsync()
         {
-            Log.Information("VoteHistoryPRepJob ran");
+            Log.Information("UpdatePRepsJob ran");
             return Task.CompletedTask;
         }
     }

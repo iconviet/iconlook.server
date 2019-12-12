@@ -7,11 +7,11 @@ using NServiceBus;
 
 namespace Iconlook.Service.Web.Handlers
 {
-    public class BlockchainUpdatedEventHandler : HandlerBase, IHandleMessages<BlockchainUpdatedEvent>
+    public class ChainUpdatedEventHandler : HandlerBase, IHandleMessages<ChainUpdatedEvent>
     {
-        public Task Handle(BlockchainUpdatedEvent message, IMessageHandlerContext context)
+        public Task Handle(ChainUpdatedEvent message, IMessageHandlerContext context)
         {
-            Source.Blockchain.AddOrUpdate(message.Blockchain);
+            Source.Chain.AddOrUpdate(message.Chain);
             return Task.CompletedTask;
         }
     }

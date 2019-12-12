@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using System.Reflection;
 using Iconlook.Server;
-using Iconlook.Service.Job.Blockchain;
 
 namespace Iconlook.Service.Job
 {
@@ -18,7 +17,7 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateBlockchainJob>().RunAsync());
+            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateChainJob>().RunAsync());
         }
     }
 }

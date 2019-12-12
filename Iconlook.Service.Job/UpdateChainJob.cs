@@ -10,9 +10,9 @@ using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
 
-namespace Iconlook.Service.Job.Blockchain
+namespace Iconlook.Service.Job
 {
-    public class UpdateBlockchainJob : JobBase
+    public class UpdateChainJob : JobBase
     {
         private static readonly IconServiceClient Service = new IconServiceClient();
         private static readonly IconTrackerClient Tracker = new IconTrackerClient();
@@ -46,7 +46,7 @@ namespace Iconlook.Service.Job.Blockchain
                     PrevHash = last_block.GetPrevBlockHash().ToString(),
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
                 };
-                var blockchain = new BlockchainResponse
+                var chain = new ChainResponse
                 {
                     MarketCap = (long) main_info.GetMarketCap(),
                     IcxSupply = (long) main_info.GetIcxSupply(),
@@ -68,16 +68,16 @@ namespace Iconlook.Service.Job.Blockchain
                     Block = block,
                     Transactions = transactions
                 });
-                await Channel.Publish(new BlockchainUpdatedSignal { Blockchain = blockchain });
-                await Endpoint.Publish(new BlockchainUpdatedEvent { Blockchain = blockchain });
+                await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
+                await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
                 await Task.Run(() =>
                 {
                     var block_redis = Redis.Instance().As<BlockResponse>();
-                    var blockchain_redis = Redis.Instance().As<BlockchainResponse>();
+                    var chain_redis = Redis.Instance().As<ChainResponse>();
                     var transaction_redis = Redis.Instance().As<TransactionResponse>();
 
                     block_redis.Store(block, TimeSpan.FromMinutes(5));
-                    blockchain_redis.Store(blockchain, TimeSpan.FromMinutes(5));
+                    chain_redis.Store(chain, TimeSpan.FromMinutes(5));
                     transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(5)));
                 });
             }

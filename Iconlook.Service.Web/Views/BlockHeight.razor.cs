@@ -14,7 +14,7 @@ namespace Iconlook.Service.Web.Views
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                var connection = Source.Blockchain.Connect();
+                var connection = Source.Chain.Connect();
                 Subscription = connection.Subscribe(x =>
                 {
                     Height = x.Last().Current.BlockHeight;
