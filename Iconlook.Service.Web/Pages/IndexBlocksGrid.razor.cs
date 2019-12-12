@@ -3,7 +3,7 @@ using Syncfusion.EJ2.Blazor.Grids;
 
 namespace Iconlook.Service.Web.Pages
 {
-    public partial class IndexBlockGrid
+    public partial class IndexBlocksGrid
     {
         protected EjsGrid<BlockResponse> BlockGrid;
     }
