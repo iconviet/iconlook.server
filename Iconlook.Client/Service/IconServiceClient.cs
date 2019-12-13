@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -105,7 +106,7 @@ namespace Iconlook.Client.Service
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPReps")
-                .Params(new { endRanking = 100 })
+                .Params(new { endRanking = "1" })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
             return new PRepInfo(response.ToObject());
@@ -119,6 +120,16 @@ namespace Iconlook.Client.Service
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
             return new PRep(response.ToObject());
+        }
+
+        public async Task<List<PRep>> GetPReps()
+        {
+            var response = await CallAsync(new Call.Builder()
+                .Method("getPReps")
+                .Params(new { endRanking = "100" })
+                .To(new Address("cx0000000000000000000000000000000000000000"))
+                .Build());
+            return response.ToObject().GetItem("preps").ToArray().Select(x => new PRep(x.ToObject())).ToList();
         }
     }
 }

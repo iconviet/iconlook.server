@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Lykke.Icon.Sdk.Transport.JsonRpc;
 
 namespace Iconlook.Client.Service
@@ -22,11 +20,6 @@ namespace Iconlook.Client.Service
         public BigInteger GetTotalDelegated()
         {
             return _properties.GetItem("totalDelegated")?.ToInteger() ?? 0;
-        }
-
-        public List<PRep> GetPReps()
-        {
-            return _properties.GetItem("preps").ToArray().Select(x => new PRep(x.ToObject())).ToList();
         }
     }
 }

@@ -12,7 +12,7 @@ using NServiceBus;
 
 namespace Iconlook.Service.Job
 {
-    public class UpdateChainJob : JobBase
+    public class UpdateBlockchainJob : JobBase
     {
         private static readonly IconServiceClient Service = new IconServiceClient();
         private static readonly IconTrackerClient Tracker = new IconTrackerClient();

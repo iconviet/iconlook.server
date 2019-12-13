@@ -13,24 +13,16 @@ namespace Iconlook.Service.Mon
 {
     public class UpdatePeersJob : JobBase
     {
-        private static readonly JsonHttpClient Json;
-        private static readonly IconServiceClient Icon;
-        private static readonly Dictionary<string, PRep> PReps;
-        private static readonly ConcurrentDictionary<string, PRep> Peers;
-
-        static UpdatePeersJob()
-        {
-            Json = new JsonHttpClient();
-            Icon = new IconServiceClient();
-            PReps = new Dictionary<string, PRep>();
-            Peers = new ConcurrentDictionary<string, PRep>();
-        }
+        private static readonly JsonHttpClient Json = new JsonHttpClient();
+        private static readonly IconServiceClient Icon = new IconServiceClient();
+        private static readonly Dictionary<string, PRep> PReps = new Dictionary<string, PRep>();
+        private static readonly ConcurrentDictionary<string, PRep> Peers = new ConcurrentDictionary<string, PRep>();
 
         public override async Task RunAsync()
         {
             if (!PReps.Any())
             {
-                foreach (var prep in (await Icon.GetPRepInfo()).GetPReps())
+                foreach (var prep in await Icon.GetPReps())
                 {
                     PReps.TryAdd(prep.GetAddress().ToString(), prep);
                 }
