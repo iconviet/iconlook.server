@@ -18,7 +18,7 @@ namespace Iconlook.Entity
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-        
+
         [Required]
         [StringLength(100)]
         public string P2PEndpoint { get; set; }
