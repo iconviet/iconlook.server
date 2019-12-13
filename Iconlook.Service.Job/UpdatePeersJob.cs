@@ -10,7 +10,7 @@ using Iconlook.Server;
 using Serilog;
 using ServiceStack;
 
-namespace Iconlook.Service.Mon
+namespace Iconlook.Service.Job
 {
     public class UpdatePeersJob : JobBase
     {
