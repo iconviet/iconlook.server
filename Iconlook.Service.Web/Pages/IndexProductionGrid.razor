@@ -57,7 +57,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="190" HeaderText="P-Rep">
+        <GridColumn Width="175" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -70,33 +70,31 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="Status" TextAlign="TextAlign.Left">
+        <GridColumn Width="65" HeaderText="Status" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
                         var name = "idle";
-                        if (prep.Ranking == 3) { name = "bad"; }
-                        if (prep.Ranking == 6) { name = "busy"; }
-                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state-@name justify-content-center">
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state-idle justify-content-center">
                             <span style="margin-top: 1px; margin-left: 1px;">@name.ToUpper()</span>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="95" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2 text-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
                         <i class="far ml-1 fs-n2 fa-cube positive-dark" style="opacity: 0.75;"></i>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="70" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -107,7 +105,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="60" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)

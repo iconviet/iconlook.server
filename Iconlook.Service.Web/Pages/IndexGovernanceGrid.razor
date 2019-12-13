@@ -35,7 +35,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="240" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
+        <GridColumn Width="225" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -48,7 +48,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="40" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+        <GridColumn Width="45" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -58,7 +58,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="115" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
+        <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
