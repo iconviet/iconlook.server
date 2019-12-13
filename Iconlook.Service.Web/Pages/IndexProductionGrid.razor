@@ -30,21 +30,9 @@
          Query="new ej.data.Query().addParams('take', '13')">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="15">
+        <GridColumn Width="20">
             <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        if (prep.Direction)
-                        {
-                            <i class="fas fa-caret-up positive-light" style="opacity: 0.75"></i>
-                        }
-                        else
-                        {
-                            <i class="fas fa-caret-bad negative-light" style="opacity: 0.75"></i>
-                        }
-                    }
-                }
+                <i class="fad fs-n1 fa-cube positive-light" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="30" Field="@nameof(PRepResponse.Ranking)" HeaderText="Position">
@@ -52,19 +40,19 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono">@prep.Ranking</span>
+                        <span class="mono font-weight-bold">@prep.Ranking</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="175" HeaderText="P-Rep">
+        <GridColumn Width="170" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
-                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.Id rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                            <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                            <img width="20" height="20" style="margin-top: -1px; margin-right: 8px;" class="prep-114 rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary font-weight-semibold" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
                 }
@@ -89,7 +77,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
-                        <i class="far ml-1 fs-n2 fa-cube positive-dark" style="opacity: 0.75;"></i>
+                        <i class="fal ml-1 fs-n2 fa-cubes positive-dark"></i>
                     }
                 }
             </Template>
@@ -100,7 +88,7 @@
                     if (context is PRepResponse prep)
                     {
                         <span class="mono ls-n2 text-light">@prep.MissedBlocks.ToString("N0")</span>
-                        <i class="far ml-1 fs-n2 fa-cube negative-dark" style="opacity: 0.75;"></i>
+                        <i class="fal ml-1 fs-n2 fa-cubes negative-dark"></i>
                     }
                 }
             </Template>
