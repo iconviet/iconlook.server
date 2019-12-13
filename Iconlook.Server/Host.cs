@@ -14,7 +14,6 @@ namespace Iconlook.Server
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Memory;
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;
         }
 

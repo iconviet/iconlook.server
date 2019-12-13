@@ -1,4 +1,5 @@
 ﻿using System;
+using Agiper.Server;
 using Funq;
 using Iconlook.Server;
 using Iconlook.Service.Api;
@@ -10,6 +11,7 @@ namespace Iconlook.Service.Web
     {
         public WebHost() : base("Web", typeof(WebHost).Assembly)
         {
+            HangfireJobPersistence = HangfireJobPersistence.Redis;
         }
 
         public override void Configure(Container container)

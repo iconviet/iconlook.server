@@ -7,6 +7,7 @@ using Agiper;
 using Agiper.Server;
 using Iconlook.Object;
 using Iconlook.Server;
+using Serilog;
 using ServiceStack;
 
 namespace Iconlook.Service.Mon
@@ -48,6 +49,7 @@ namespace Iconlook.Service.Mon
                     }, cancelation.Token));
                 }));
                 await Channel.Publish(new PeersUpdatedSignal { Peers = peers });
+                Log.Information("{Job} ran at {Time}", nameof(UpdatePeersJob), DateTimeOffset.UtcNow);
             }
         }
     }
