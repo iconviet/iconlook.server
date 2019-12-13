@@ -17,8 +17,7 @@ namespace Iconlook.Service.Mon
 
         protected override void OnStart()
         {
-            BackgroundJob.Enqueue<UpdatePeersJob>(x => x.RunAsync());
-            RecurringJob.AddOrUpdate<UpdatePeersJob>(x => x.RunAsync(), "* * * ? * *");
+            RecurringJob.AddOrUpdate<UpdatePeersJob>(x => x.RunAsync(), "* * * ? * *", null, HangfireQueueName);
         }
     }
 }
