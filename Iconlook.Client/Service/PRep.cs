@@ -43,6 +43,11 @@ namespace Iconlook.Client.Service
             return _properties.GetItem("stake")?.ToInteger() ?? 0;
         }
 
+        public string GetP2PEndpoint()
+        {
+            return _properties.GetItem("p2pEndpoint")?.ToString();
+        }
+
         public BigInteger GetDelegated()
         {
             return _properties.GetItem("delegated")?.ToInteger() ?? 0;

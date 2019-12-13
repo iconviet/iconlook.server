@@ -3,7 +3,7 @@
     <Version>0.0.0.0</Version>
     <Authors>Tom Nuen</Authors>
     <OutputType>Exe</OutputType>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>latest</LangVersion>
     <RunAnalyzers>false</RunAnalyzers>
     <TieredCompilation>true</TieredCompilation>
     <TargetFramework>netcoreapp3.1</TargetFramework>

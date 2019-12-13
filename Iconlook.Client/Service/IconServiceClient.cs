@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
-using Lykke.Icon.Sdk.Transport.JsonRpc;
 using ServiceStack;
 
 namespace Iconlook.Client.Service
@@ -14,12 +13,16 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _icon;
         private readonly JsonHttpClient _json;
+        private static readonly HttpClient HttpClient;
 
-        private static readonly HttpClient HttpClient = new HttpClient();
+        static IconServiceClient()
+        {
+            HttpClient = new HttpClient();
+        }
 
         public IconServiceClient()
         {
-            const string url = "http://95.179.230.6:9000/api/v3";
+            const string url = "https://ctz.solidwallet.io/api/v3";
             _icon = new IconService(new HttpProvider(HttpClient, url));
             _json = new JsonHttpClient(url) { HttpClient = HttpClient };
         }
@@ -44,14 +47,29 @@ namespace Iconlook.Client.Service
             return _icon.CallAsync(call);
         }
 
+        public Task<PRep> GetPRep(string address)
+        {
+            return GetPRep(new Address(address));
+        }
+
         public Task<Block> GetBlock(BigInteger height)
         {
             return _icon.GetBlock(height);
         }
 
+        public Task<BigInteger> GetBalance(string address)
+        {
+            return GetBalance(new Address(address));
+        }
+
         public Task<BigInteger> GetBalance(Address address)
         {
             return _icon.GetBalance(address);
+        }
+
+        public Task<List<ScoreApi>> GetScoreApi(string address)
+        {
+            return GetScoreApi(new Address(address));
         }
 
         public Task<List<ScoreApi>> GetScoreApi(Address address)
@@ -87,6 +105,7 @@ namespace Iconlook.Client.Service
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPReps")
+                .Params(new { endRanking = 100 })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
             return new PRepInfo(response.ToObject());
@@ -96,8 +115,8 @@ namespace Iconlook.Client.Service
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPRep")
+                .Params(new { address })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
-                .Params(new RpcObject.Builder().Put("address", new RpcValue(address)).Build())
                 .Build());
             return new PRep(response.ToObject());
         }
