@@ -11,20 +11,19 @@ using ServiceStack;
 
 namespace Iconlook.Service.Mon
 {
-    public class UpdatePeerJob : JobBase
+    public class UpdatePeersJob : JobBase
     {
         private static readonly JsonHttpClient Json;
         private static readonly IconServiceClient Icon;
         private static readonly Dictionary<string, PRep> PReps;
         private static readonly ConcurrentDictionary<string, PRep> Peers;
 
-        static UpdatePeerJob()
+        static UpdatePeersJob()
         {
             Json = new JsonHttpClient();
             Icon = new IconServiceClient();
             PReps = new Dictionary<string, PRep>();
             Peers = new ConcurrentDictionary<string, PRep>();
-            // Json.GetHttpClient().Timeout = TimeSpan.FromSeconds(2);
         }
 
         public override async Task RunAsync()
@@ -60,7 +59,15 @@ namespace Iconlook.Service.Mon
                         var url = $"http://{endpoint}/api/v1/status/peer";
                         var json = await Json.GetAsync<string>(url, cancelation.Token);
                         var response = DynamicJson.Deserialize(json);
-                        peers.Add(new PeerResponse { Address = response.peer_id, State = response.state });
+                        peers.Add(new PeerResponse
+                        {
+                            State = response.state,
+                            Status = response.status,
+                            PeerId = response.peer_id,
+                            Name = PReps[response.peer_id].GetName(),
+                            PeerType = int.Parse(response.peer_type),
+                            BlockHeight = long.Parse(response.block_height)
+                        });
                     }
                     catch
                     {
