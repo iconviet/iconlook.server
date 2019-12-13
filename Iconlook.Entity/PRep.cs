@@ -7,40 +7,43 @@ using ServiceStack.DataAnnotations;
 namespace Iconlook.Entity
 {
     [Alias(nameof(PRep))]
-    public class PRep : EntityBase<PRep>, IHasId<long>, IHasTimestamp, IHasState<PRepState>
+    public class PRep : EntityBase<PRep>, IHasTimestamp, IHasState<PRepState>
     {
         [PrimaryKey]
-        public long Id { get; set; }
+        [StringLength(100)]
+        public string Id { get; set; }
 
-        [StringLength(18)]
-        public string IdExternal { get; set; }
+        public long Ranking { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        public string P2PEndpoint { get; set; }
 
         [ForeignKey(typeof(PRepState_))]
         public PRepState State { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
-
-        [StringLength(42)]
-        public string Address { get; set; }
+        [StringLength(100)]
+        public string Country { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Location { get; set; }
+        [StringLength(100)]
+        public string City { get; set; }
 
         [Required]
         public DateTimeOffset Joined { get; set; }
 
-        public int Votes { get; set; }
+        public long Votes { get; set; }
 
-        public int Voters { get; set; }
+        public long Voters { get; set; }
 
-        public int Score { get; set; }
+        public long Score { get; set; }
 
         public string Goals { get; set; }
-
-        public int Position { get; set; }
 
         public string Entity { get; set; }
 
@@ -52,7 +55,7 @@ namespace Iconlook.Entity
 
         public bool Testnet { get; set; }
 
-        public int Size { get; set; }
+        public long Size { get; set; }
 
         public bool Direction { get; set; }
 
@@ -60,9 +63,9 @@ namespace Iconlook.Entity
 
         public DateTimeOffset LastSeen { get; set; }
 
-        public int MissedBlocks { get; set; }
+        public long MissedBlocks { get; set; }
 
-        public int ProducedBlocks { get; set; }
+        public long ProducedBlocks { get; set; }
 
         public double ProductivityPercentage { get; set; }
 
@@ -73,9 +76,8 @@ namespace Iconlook.Entity
         protected override void AddRules(Validator<PRep> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Id).NotEmpty();
+            validator.RuleFor(x => x.Id).NotEmpty().Length(42);
             validator.RuleFor(x => x.State).IsInEnum().NotEqual(PRepState.Empty);
-            validator.RuleFor(x => x.Address).Length(4).When(x => x.State != PRepState.Empty);
         }
     }
 }

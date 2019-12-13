@@ -37,7 +37,7 @@ namespace Iconlook.Service.Api
             if (request.Edit.HasValue() && request.Edit != "all")
             {
                 var preps = await Db.SelectAsync(
-                    Db.From<PRep>().Where(x => x.IdExternal == request.Edit));
+                    Db.From<PRep>().Where(x => x.Id == request.Edit));
                 return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
                     Skip = 0,
@@ -49,7 +49,7 @@ namespace Iconlook.Service.Api
                 var query = Db.From<PRep>();
                 if (request.Skip > 0) query.Skip(request.Skip);
                 if (request.Take > 0) query.Take(request.Take);
-                var preps = await Db.SelectAsync(query.OrderBy(x => x.Position));
+                var preps = await Db.SelectAsync(query.OrderBy(x => x.Ranking));
                 var response = new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
                     Skip = request.Skip,

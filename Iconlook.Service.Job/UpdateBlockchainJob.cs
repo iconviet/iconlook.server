@@ -76,9 +76,9 @@ namespace Iconlook.Service.Job
                     var chain_redis = Redis.Instance().As<ChainResponse>();
                     var transaction_redis = Redis.Instance().As<TransactionResponse>();
 
-                    block_redis.Store(block, TimeSpan.FromMinutes(5));
-                    chain_redis.Store(chain, TimeSpan.FromMinutes(5));
-                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(5)));
+                    block_redis.Store(block, TimeSpan.FromMinutes(1));
+                    chain_redis.Store(chain, TimeSpan.FromMinutes(1));
+                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(1)));
                 });
             }
             catch

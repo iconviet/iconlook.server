@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Reflection;
+using Hangfire;
 using Iconlook.Server;
 
 namespace Iconlook.Service.Job
@@ -17,7 +18,8 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(9)).Subscribe(async x => await Resolve<UpdatePRepsJob>().RunAsync());
+            BackgroundJob.Enqueue<UpdatePRepsJob>(x => x.RunAsync());
+            RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "0 * * ? * *");
             Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateBlockchainJob>().RunAsync());
         }
     }

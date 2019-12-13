@@ -33,21 +33,21 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center">
-                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.Id rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
                             <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" Field="@nameof(PRepResponse.Address)" HeaderText="Wallet" TextAlign="TextAlign.Center">
+        <GridColumn Width="105" Field="@nameof(PRepResponse.Id)" HeaderText="Wallet" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <a class="primary no-underline" href="address/@prep.Address">
+                        <a class="primary no-underline" href="address/@prep.Id">
                             <span class="fs-n1 mono transaction-address">
-                                <span class="font-weight-semibold">@prep.Address.Substring(0, 2)</span>@prep.Address.Substring(2, 10)
+                                <span class="font-weight-semibold">@prep.Id.Substring(0, 2)</span>@prep.Id.Substring(2, 10)
                             </span>
                         </a>
                     }
@@ -96,14 +96,14 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="135" Field="@nameof(PRepResponse.Address)" HeaderText="Last TX Out" TextAlign="TextAlign.Center">
+        <GridColumn Width="135" Field="@nameof(PRepResponse.Id)" HeaderText="Last TX Out" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <a class="secondary no-underline" href="transaction/@prep.Address">
+                        <a class="secondary no-underline" href="transaction/@prep.Id">
                             <span class="fs-n1 mono transaction-hash">
-                                <span class="font-weight-semibold">@prep.Address.Substring(0, 2)</span>@prep.Address.Substring(0, 10)
+                                <span class="font-weight-semibold">@prep.Id.Substring(0, 2)</span>@prep.Id.Substring(0, 10)
                             </span>
                         </a>
                     }

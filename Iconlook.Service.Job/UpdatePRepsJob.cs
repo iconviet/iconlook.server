@@ -1,58 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
+using Iconlook.Client;
 using Iconlook.Client.Service;
+using Iconlook.Entity;
+using Iconlook.Message;
 using Iconlook.Object;
+using Serilog;
+using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job
 {
     public class UpdatePRepsJob : JobBase
     {
         private static readonly IconServiceClient Icon = new IconServiceClient();
-        private static readonly Dictionary<string, PRepRpc> PReps = new Dictionary<string, PRepRpc>();
 
         public override async Task RunAsync()
         {
-            if (!PReps.Any())
+            var preps = await Icon.GetPReps();
+            var prep_info = await Icon.GetPRepInfo();
+            var entities = new ConcurrentBag<PRep>();
+            Redis.Instance().As<PRepResponse>().DeleteAll();
+            await Task.WhenAll(preps.Select(prep => Task.Run(async () =>
             {
-                foreach (var prep in await Icon.GetPReps())
+                var ranking = preps.IndexOf(prep) + 1;
+                prep = await Icon.GetPRep(prep.GetAddress());
+                entities.Add(new PRep
                 {
-                    PReps.TryAdd(prep.GetAddress().ToString(), prep);
-                }
-            }
-        }
-
-        public Entity.PRep GetNewPRep()
-        {
-            return new Entity.PRep
-            {
-                Name = "",
-                Location = "",
-                IdExternal = "",
-                Joined = DateTime.UtcNow,
-                State = PRepState.Enabled,
-                LastSeen = DateTime.UtcNow,
-                Size = new Random().Next(1, 10),
-                Position = new Random().Next(1, 66),
-                Score = new Random().Next(-100, 100),
-                Voters = new Random().Next(100, 1000),
-                Votes = new Random().Next(1000000, 10000000),
-                Direction = new Random().NextDouble() >= 0.5,
-                Balance = new Random().Next(100000, 10000000),
-                MissedBlocks = new Random().Next(100, 1000),
-                ProducedBlocks = new Random().Next(100000, 1000000),
-                Address = "hxd2d001c3938c7f6d31bc76b1cda922a64c51c8bf",
-                Testnet = new[] { true, false }[new Random().Next(0, 1)],
-                ProductivityPercentage = new Random().NextDouble() * (0.1 - -0.1) + -0.1,
-                Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
-                DelegatedPercentage = (double) new Random().Next(1000000, 10000000) / 490000000,
-                Identity = new[] { "Verified", "Unknown", "Anonymous" }[new Random().Next(0, 3)],
-                Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
-                Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],
-                Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)]
-            };
+                    Ranking = ranking,
+                    Name = prep.GetName(),
+                    City = prep.GetCity(),
+                    Joined = DateTime.UtcNow,
+                    State = PRepState.Enabled,
+                    LastSeen = DateTime.UtcNow,
+                    Country = prep.GetCountry(),
+                    Size = new Random().Next(1, 10),
+                    Id = prep.GetAddress().ToString(),
+                    P2PEndpoint = prep.GetP2PEndpoint(),
+                    Score = new Random().Next(-100, 100),
+                    Voters = new Random().Next(100, 1000),
+                    Direction = new Random().NextDouble() >= 0.5,
+                    Balance = new Random().Next(100000, 10000000),
+                    ProducedBlocks = (long) prep.GetTotalBlocks(),
+                    Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
+                    Testnet = new[] { true, false }[new Random().Next(0, 1)],
+                    MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
+                    Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
+                    Identity = new[] { "Verified", "Unknown", "Anonymous" }[new Random().Next(0, 3)],
+                    Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
+                    Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],
+                    Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
+                    DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
+                    ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
+                });
+            })));
+            await Db.Instance().SaveAllAsync(entities.ToList());
+            Redis.Instance().As<PRepResponse>().StoreAll(entities.ToList().ConvertAll(x => x.ToResponse()));
+            Log.Information("UpdatePRepsJob ran");
         }
     }
 }

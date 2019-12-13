@@ -1,10 +1,10 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Agiper;
 using Agiper.Server;
-using Iconlook.Client.Service;
 using Iconlook.Object;
 using Iconlook.Server;
 using ServiceStack;
@@ -13,60 +13,42 @@ namespace Iconlook.Service.Mon
 {
     public class UpdatePeersJob : JobBase
     {
-        private static readonly JsonHttpClient Json = new JsonHttpClient();
-        private static readonly IconServiceClient Icon = new IconServiceClient();
-        private static readonly Dictionary<string, PRepRpc> PReps = new Dictionary<string, PRepRpc>();
-        private static readonly ConcurrentDictionary<string, PRepRpc> Peers = new ConcurrentDictionary<string, PRepRpc>();
-
         public override async Task RunAsync()
         {
-            if (!PReps.Any())
+            var redis = Redis.Instance().As<PRepResponse>();
+            var preps = redis.GetAll().ToDictionary(x => x.Id);
+            if (preps.Any())
             {
-                foreach (var prep in await Icon.GetPReps())
+                var peers = new List<PeerResponse>();
+                await Task.WhenAll(preps.Values.Select(prep =>
                 {
-                    PReps.TryAdd(prep.GetAddress().ToString(), prep);
-                }
-            }
-            if (!Peers.Any())
-            {
-                await Task.WhenAll(PReps.Values.Select(item =>
-                {
-                    return Task.Run(async () =>
+                    var cancelation = new CancellationTokenSource();
+                    cancelation.CancelAfter(1500);
+                    return Try.IgnoreAsync<Exception>(() => Task.Run(async () =>
                     {
-                        var prep = await Icon.GetPRep(item.GetAddress());
-                        Peers.AddOrUpdate(prep.GetP2PEndpoint(), prep, (ip, _) => prep);
-                    });
-                }));
-            }
-            var peers = new List<PeerResponse>();
-            await Task.WhenAll(Peers.Select(item =>
-            {
-                return Task.Run(async () =>
-                {
-                    try
-                    {
-                        var cancelation = new CancellationTokenSource();
-                        cancelation.CancelAfter(1500);
-                        var endpoint = item.Key.Replace("7100", "9000");
-                        var url = $"http://{endpoint}/api/v1/status/peer";
-                        var json = await Json.GetAsync<string>(url, cancelation.Token);
-                        var response = DynamicJson.Deserialize(json);
-                        peers.Add(new PeerResponse
+                        using (var json = new JsonHttpClient())
                         {
-                            State = response.state,
-                            Status = response.status,
-                            PeerId = response.peer_id,
-                            Name = PReps[response.peer_id].GetName(),
-                            PeerType = int.Parse(response.peer_type),
-                            BlockHeight = long.Parse(response.block_height)
-                        });
-                    }
-                    catch
-                    {
-                    }
-                });
-            }));
-            await Channel.Publish(new PeersUpdatedSignal { Peers = peers });
+                            var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
+                            var url = $"http://{endpoint}/api/v1/status/peer";
+                            var response = await json.GetAsync<string>(url, cancelation.Token);
+                            if (response.HasValue())
+                            {
+                                var @object = DynamicJson.Deserialize(response);
+                                peers.Add(new PeerResponse
+                                {
+                                    Name = prep.Name,
+                                    State = @object.state,
+                                    Status = @object.status,
+                                    PeerId = @object.peer_id,
+                                    PeerType = int.Parse(@object.peer_type),
+                                    BlockHeight = long.Parse(@object.block_height)
+                                });
+                            }
+                        }
+                    }, cancelation.Token));
+                }));
+                await Channel.Publish(new PeersUpdatedSignal { Peers = peers });
+            }
         }
     }
 }

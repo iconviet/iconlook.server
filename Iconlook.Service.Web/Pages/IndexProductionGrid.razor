@@ -47,12 +47,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="30" Field="@nameof(PRepResponse.Position)" HeaderText="Position">
+        <GridColumn Width="30" Field="@nameof(PRepResponse.Ranking)" HeaderText="Position">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono">@prep.Position</span>
+                        <span class="mono">@prep.Ranking</span>
                     }
                 }
             </Template>
@@ -63,7 +63,7 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
-                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.Id rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
                             <a class="secondary font-weight-semibolder" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
@@ -76,8 +76,8 @@
                     if (context is PRepResponse prep)
                     {
                         var name = "idle";
-                        if (prep.Position == 3) { name = "bad"; }
-                        if (prep.Position == 6) { name = "busy"; }
+                        if (prep.Ranking == 3) { name = "bad"; }
+                        if (prep.Ranking == 6) { name = "busy"; }
                         <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state-@name justify-content-center">
                             <span style="margin-top: 1px; margin-left: 1px;">@name.ToUpper()</span>
                         </div>
@@ -90,7 +90,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 ls-n1 text-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2 text-light">@prep.ProducedBlocks.ToString("N0")</span>
                         <i class="far ml-1 fs-n2 fa-cube positive-dark" style="opacity: 0.75;"></i>
                     }
                 }
@@ -101,7 +101,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 ls-n1 text-light">@prep.MissedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2 text-light">@prep.MissedBlocks.ToString("N0")</span>
                         <i class="far ml-1 fs-n2 fa-cube negative-dark" style="opacity: 0.75;"></i>
                     }
                 }
@@ -112,7 +112,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono fs-n1 ls-n1 font-weight-semibold">98.60%</span>
+                        <span class="mono fs-n1 ls-n1 font-weight-semibold">@prep.ProductivityPercentage.ToString("P2")</span>
                     }
                 }
             </Template>

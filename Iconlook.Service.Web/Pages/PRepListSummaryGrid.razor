@@ -39,12 +39,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="38" Field="@nameof(PRepResponse.Position)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
+        <GridColumn Width="38" Field="@nameof(PRepResponse.Ranking)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono">@prep.Position</span>
+                        <span class="mono">@prep.Ranking</span>
                     }
                 }
             </Template>
@@ -58,8 +58,8 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
-                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.IdExternal rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                            <a class="secondary @(prep.Position <= 22 ? "font-weight-semibolder" : null)" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
+                            <img width="20" height="20" style="margin-right: 10px;" class="prep-@prep.Id rounded-circle" alt="prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary @(prep.Ranking <= 22 ? "font-weight-semibolder" : null)" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@prep.Name</a>
                         </div>
                     }
                 }
@@ -70,8 +70,8 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <div class="text-center rounded-pill d-inline-block @(prep.Position <= 22 ? "bg-primary" : "bg-secondary")" style="width: 45px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1">@(prep.Position <= 22 ? "Main" : "Sub")</span>
+                        <div class="text-center rounded-pill d-inline-block @(prep.Ranking <= 22 ? "bg-primary" : "bg-secondary")" style="width: 45px; margin: -2px 0; padding: 2px 0;">
+                            <span class="fs-n1">@(prep.Ranking <= 22 ? "Main" : "Sub")</span>
                         </div>
                     }
                 }
@@ -83,7 +83,7 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1 mono @(prep.Position <= 22 ? "font-weight-semibolder" : null)">@prep.DelegatedPercentage.ToString("P2")</span>
+                            <span class="fs-n1 mono @(prep.Ranking <= 22 ? "font-weight-semibolder" : null)">@prep.DelegatedPercentage.ToString("P2")</span>
                         </div>
                     }
                 }
