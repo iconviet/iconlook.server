@@ -3,7 +3,7 @@ using ServiceStack.Text;
 
 namespace Iconlook.Client.Tracker
 {
-    public class MainInfo
+    public class MainResponse
     {
         public JsonObject TmainInfo { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Iconlook.Client.Tracker
 {
-    public class PRep
+    public class PRepResponse
     {
         public bool Active { get; set; }
         public string Name { get; set; }

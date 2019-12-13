@@ -17,15 +17,15 @@ namespace Iconlook.Client.Tracker
             _json = new JsonHttpClient(url) { HttpClient = HttpClient };
         }
 
-        public async Task<MainInfo> GetMainInfo()
+        public async Task<MainResponse> GetMainInfo()
         {
-            var response = await _json.GetAsync<MainInfo>("/v0/main/mainInfo");
+            var response = await _json.GetAsync<MainResponse>("/v0/main/mainInfo");
             return response;
         }
 
-        public async Task<Response<List<PRep>>> GetPReps()
+        public async Task<PageResponse<List<PRepResponse>>> GetPReps()
         {
-            var response = await _json.GetAsync<Response<List<PRep>>>("/v3/iiss/prep/list?count=100");
+            var response = await _json.GetAsync<PageResponse<List<PRepResponse>>>("/v3/iiss/prep/list?count=100");
             return response;
         }
     }

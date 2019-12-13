@@ -15,8 +15,8 @@ namespace Iconlook.Service.Mon
     {
         private static readonly JsonHttpClient Json = new JsonHttpClient();
         private static readonly IconServiceClient Icon = new IconServiceClient();
-        private static readonly Dictionary<string, PRep> PReps = new Dictionary<string, PRep>();
-        private static readonly ConcurrentDictionary<string, PRep> Peers = new ConcurrentDictionary<string, PRep>();
+        private static readonly Dictionary<string, PRepRpc> PReps = new Dictionary<string, PRepRpc>();
+        private static readonly ConcurrentDictionary<string, PRepRpc> Peers = new ConcurrentDictionary<string, PRepRpc>();
 
         public override async Task RunAsync()
         {

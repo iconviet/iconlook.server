@@ -4,11 +4,11 @@ using Lykke.Icon.Sdk.Transport.JsonRpc;
 
 namespace Iconlook.Client.Service
 {
-    public class PRep
+    public class PRepRpc
     {
         private readonly RpcObject _properties;
 
-        public PRep(RpcObject properties)
+        public PRepRpc(RpcObject properties)
         {
             _properties = properties;
         }

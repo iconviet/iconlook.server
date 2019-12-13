@@ -48,7 +48,7 @@ namespace Iconlook.Client.Service
             return _icon.CallAsync(call);
         }
 
-        public Task<PRep> GetPRep(string address)
+        public Task<PRepRpc> GetPRep(string address)
         {
             return GetPRep(new Address(address));
         }
@@ -93,43 +93,43 @@ namespace Iconlook.Client.Service
             return _icon.SendTransaction(transaction);
         }
 
-        public async Task<IissInfo> GetIissInfo()
+        public async Task<IissInfoRpc> GetIissInfo()
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getIISSInfo")
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
-            return new IissInfo(response.ToObject());
+            return new IissInfoRpc(response.ToObject());
         }
 
-        public async Task<PRepInfo> GetPRepInfo()
+        public async Task<PRepInfoRpc> GetPRepInfo()
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPReps")
                 .Params(new { endRanking = "1" })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
-            return new PRepInfo(response.ToObject());
+            return new PRepInfoRpc(response.ToObject());
         }
 
-        public async Task<PRep> GetPRep(Address address)
+        public async Task<PRepRpc> GetPRep(Address address)
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPRep")
                 .Params(new { address })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
-            return new PRep(response.ToObject());
+            return new PRepRpc(response.ToObject());
         }
 
-        public async Task<List<PRep>> GetPReps()
+        public async Task<List<PRepRpc>> GetPReps()
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPReps")
                 .Params(new { endRanking = "100" })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
-            return response.ToObject().GetItem("preps").ToArray().Select(x => new PRep(x.ToObject())).ToList();
+            return response.ToObject().GetItem("preps").ToArray().Select(x => new PRepRpc(x.ToObject())).ToList();
         }
     }
 }

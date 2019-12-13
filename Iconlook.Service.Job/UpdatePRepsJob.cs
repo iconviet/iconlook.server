@@ -11,7 +11,7 @@ namespace Iconlook.Service.Job
     public class UpdatePRepsJob : JobBase
     {
         private static readonly IconServiceClient Icon = new IconServiceClient();
-        private static readonly Dictionary<string, PRep> PReps = new Dictionary<string, PRep>();
+        private static readonly Dictionary<string, PRepRpc> PReps = new Dictionary<string, PRepRpc>();
 
         public override async Task RunAsync()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Iconlook.Client.Tracker
 {
-    public class Response<T>
+    public class PageResponse<T>
     {
         public T Data { get; set; }
         public int ListSize { get; set; }
