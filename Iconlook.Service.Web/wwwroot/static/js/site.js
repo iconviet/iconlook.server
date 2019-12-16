@@ -32,11 +32,7 @@
 });
 $(document).ready(function() {
     const source = new EventSource('/sse/stream?channel=iconlook');
-    source.addEventListener('error',
-        function(e) {
-            console.log("ERROR", e);
-        },
-        false);
+    source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         handlers: {
             onConnect: function() {
@@ -75,7 +71,4 @@ $(document).ready(function() {
             }
         }
     });
-    const click = window.rxjs.fromEvent(document, 'click');
-    const example = click.pipe(window.rxjs.operators.map(event => '[ICONLOOK] Event time: ' + event.timeStamp));
-    example.subscribe(val => console.log(val));
 });
