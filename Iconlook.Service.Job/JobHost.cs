@@ -18,8 +18,7 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            BackgroundJob.Enqueue<UpdatePRepsJob>(x => x.RunAsync());
-            RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "0 * * ? * *");
+            RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "* * * ? * *", null, HangfireQueueName);
             Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateBlockchainJob>().RunAsync());
         }
     }

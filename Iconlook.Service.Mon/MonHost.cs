@@ -1,7 +1,7 @@
-﻿using System;
-using System.Reactive.Linq;
-using System.Reflection;
+﻿using System.Reflection;
+using Hangfire;
 using Iconlook.Server;
+using Iconlook.Service.Job;
 
 namespace Iconlook.Service.Mon
 {
@@ -17,7 +17,7 @@ namespace Iconlook.Service.Mon
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdatePeersJob>().RunAsync());
+            RecurringJob.AddOrUpdate<UpdatePeersJob>(x => x.RunAsync(), "* * * ? * *", null, HangfireQueueName);
         }
     }
 }
