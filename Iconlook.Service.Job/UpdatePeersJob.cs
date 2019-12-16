@@ -49,7 +49,7 @@ namespace Iconlook.Service.Job
                     }, cancelation.Token));
                 }));
                 await Channel.Publish(new PeersUpdatedSignal { Peers = peers });
-                Log.Information("{Job} ran at {Time}", nameof(UpdatePeersJob), DateTimeOffset.UtcNow);
+                Log.Information("{Job} ran at {Time}", nameof(UpdatePeersJob), DateTimeOffset.Now);
             }
         }
     }

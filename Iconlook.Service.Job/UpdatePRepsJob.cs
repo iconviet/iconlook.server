@@ -58,7 +58,7 @@ namespace Iconlook.Service.Job
             })));
             await Db.Instance().SaveAllAsync(entities.ToList());
             Redis.Instance().As<PRepResponse>().StoreAll(entities.ToList().ConvertAll(x => x.ToResponse()));
-            Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.UtcNow);
+            Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.Now);
         }
     }
 }
