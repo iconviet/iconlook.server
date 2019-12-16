@@ -42,7 +42,12 @@ $(document).ready(function() {
         success: function(selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
                 if (message.cmd === 'PeersUpdatedSignal') {
-                    console.log("Received " + message.cmd, json);
+                    $('.prep-state').text('IDLE');
+                    $('.current-prep-name').text(json.busy.name);
+                    $('.prep-state').removeClass('prep-state-busy');
+                    $('.prep-state_' + json.busy.peerId).text('BUSY');
+                    $('.prep-state_' + json.busy.peerId).addClass('prep-state-busy');
+                    $('.prep-produced-blocks_' + json.busy.peerId).integer(json.busy.blockHeight);
                 }
                 if (message.cmd === 'ChainUpdatedSignal') {
                     $('.ChainResponse_MarketCap').integer(json.chain.marketCap);

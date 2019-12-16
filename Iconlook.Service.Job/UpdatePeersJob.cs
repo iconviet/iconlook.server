@@ -47,7 +47,10 @@ namespace Iconlook.Service.Job
                         }
                     }, cancelation.Token));
                 }));
-                await Channel.Publish(new PeersUpdatedSignal { Peers = peers });
+                await Channel.Publish(new PeersUpdatedSignal
+                {
+                    Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
+                });
             }
         }
     }

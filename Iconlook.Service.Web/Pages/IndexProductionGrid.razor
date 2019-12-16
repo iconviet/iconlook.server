@@ -1,5 +1,5 @@
 ﻿<style>
-    .prep-state-bad {
+    .prep-state-gone {
         color: white;
         padding: 10px 0;
         border-radius: 4px;
@@ -14,10 +14,10 @@
     }
 
     .prep-state-busy {
-        color: #212529;
         padding: 10px 0;
         border-radius: 4px;
-        background-color: #ffc107;
+        color: #212529 !important;
+        background-color: #ffc107 !important;
     }
 </style>
 <EjsGrid RowHeight="40"
@@ -64,19 +64,19 @@
                     if (context is PRepResponse prep)
                     {
                         var name = "idle";
-                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state-idle justify-content-center">
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state prep-state-idle prep-state_@prep.Id justify-content-center">
                             <span style="margin-top: 1px; margin-left: 1px;">@name.ToUpper()</span>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="95" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="100" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2 prep-produced-blocks_@prep.Id">@prep.ProducedBlocks.ToString("N0")</span>
                         <i class="fal ml-1 fs-n2 fa-cubes positive-dark"></i>
                     }
                 }
@@ -93,7 +93,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="55" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
