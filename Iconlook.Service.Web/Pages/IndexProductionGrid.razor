@@ -1,19 +1,19 @@
 ﻿<style>
-    .prep-state-gone {
+    .peer-state-gone {
         color: white;
         padding: 10px 0;
         border-radius: 4px;
         background-color: #dc3545;
     }
 
-    .prep-state-idle {
+    .peer-state-idle {
         color: #888888;
         padding: 10px 0;
         border-radius: 4px;
         background-color: #eeeeee;
     }
 
-    .prep-state-busy {
+    .peer-state-busy {
         padding: 10px 0;
         border-radius: 4px;
         color: #212529 !important;
@@ -27,7 +27,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          ModelType="PRepResponse.ModelType"
-         Query="new ej.data.Query().addParams('take', '13')">
+         Query="new ej.data.Query().addParams('take', '22')">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="20">
@@ -63,9 +63,8 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        var name = "idle";
-                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold prep-state prep-state-idle prep-state_@prep.Id justify-content-center">
-                            <span style="margin-top: 1px; margin-left: 1px;">@name.ToUpper()</span>
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold peer-state peer-state-idle peer-state-@prep.Id justify-content-center">
+                            <span style="margin-top: 1px; margin-left: 1px;">IDLE</span>
                         </div>
                     }
                 }
