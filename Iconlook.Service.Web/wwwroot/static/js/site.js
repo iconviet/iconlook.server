@@ -31,7 +31,7 @@
     }
 });
 $(document).ready(function() {
-    var currentPeerBlock = 0;
+    var currentPeerBlockCount = 1;
     const source = new EventSource('/sse/stream?channel=iconlook');
     source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
@@ -42,25 +42,6 @@ $(document).ready(function() {
         },
         success: function(selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
-                if (message.cmd === 'PeersUpdatedSignal') {
-                    $('.peer-state > span').text('IDLE');
-                    $('.peer-state').removeClass('peer-state-busy');
-                    if (json.busy != null) {
-                        var id = json.busy.peerId.toString();
-                        $('.peer-state-' + id + ' > span').text('BUSY');
-                        $('.peer-state-' + id).addClass('peer-state-busy');
-                        if ($('.current-peer-name').text() !== json.busy.name) {
-                            if (json.busy.madeBlockCount >= 10) {
-                                currentPeerBlock = 0;
-                            } else {
-                                currentPeerBlock = json.busy.madeBlockCount;
-                            }
-                            $('.current-peer-name').text(json.busy.name).hide().fadeIn(250);
-                            $('.current-peer-block').text(currentPeerBlock).hide().fadeIn(250);
-                            
-                        }
-                    }
-                }
                 if (message.cmd === 'ChainUpdatedSignal') {
                     $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
                     $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
@@ -72,8 +53,18 @@ $(document).ready(function() {
                     $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
                 }
                 if (message.cmd === 'BlockProducedSignal') {
-                    currentPeerBlock = currentPeerBlock + 1;
-                    $('.current-peer-block').text(currentPeerBlock);
+                    var currentPeerBlockMade = '';
+                    var currentPeerBlockRemaining = '';
+                    for (m = 0; m < currentPeerBlockCount; m++) {
+                        currentPeerBlockMade += '❚';
+                    }
+                    for (r = currentPeerBlockCount; r < 10; r++) {
+                        currentPeerBlockRemaining += '❚';
+                    }
+                    $('.current-peer-block-made').text(currentPeerBlockMade);
+                    $('.current-peer-block-count').text(currentPeerBlockCount);
+                    $('.current-peer-block-remaining').text(currentPeerBlockRemaining);
+                    if (currentPeerBlockCount < 10) currentPeerBlockCount = currentPeerBlockCount + 1;
                     if ($('#block_grid_content_table tr').length > 0) {
                         var row = $('#block_grid_content_table tr').first().clone().hide();
                         $(row).prependTo($('#block_grid_content_table tbody')).slideDown(250,
@@ -86,6 +77,28 @@ $(document).ready(function() {
                         $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
                         $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
                         $(row).find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
+                    }
+                }
+                if (message.cmd === 'PeersUpdatedSignal') {
+                    $('.peer-state > span').text('IDLE');
+                    $('.peer-state').removeClass('peer-state-busy');
+                    if (json.busy != null) {
+                        var id = json.busy.peerId.toString();
+                        $('.peer-state-' + id + ' > span').text('BUSY');
+                        $('.peer-state-' + id).addClass('peer-state-busy');
+                        if ($('.current-peer-name').text() !== json.busy.name) {
+                            $('.current-peer').hide().fadeIn(500);
+                            $('.current-peer-name').text(json.busy.name);
+                            $('.current-peer-block-count').text(currentPeerBlockCount);
+                            if (json.busy.madeBlockCount < 10) {
+                                currentPeerBlockCount = json.busy.madeBlockCount;
+                            } else {
+                                currentPeerBlockCount = 1;
+                                $('.current-peer-block-made').text('❚');
+                                $('.current-peer-block-count').text('1');
+                                $('.current-peer-block-remaining').text('❚❚❚❚❚❚❚❚❚');
+                            }
+                        }
                     }
                 }
             }
