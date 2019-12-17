@@ -264,7 +264,10 @@
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light"><span class="font-weight-bold">5</span> BLOCKS</div>
+                            <div class="py-1 fs-n3">
+                                <span class="font-weight-bold current-peer-block">0</span>
+                                <span class="text-light">BLOCK(S)</span>
+                            </div>
                             <div class="fs-1 mono-lg text-light">
                                 <span class="positive-light">❚❚❚❚❚</span>❚❚❚❚❚
                             </div>
@@ -281,17 +284,17 @@
             <EjsTab Animation="Animation" EnablePersistence="true">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
-                    <TabItem Header="Governance">
-                        <ContentTemplate>
-                            <div class="card-body px-3 pt-1 pb-0">
-                                <IndexGovernanceGrid></IndexGovernanceGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
                     <TabItem Header="Production">
                         <ContentTemplate>
                             <div class="card-body px-3 pt-1 pb-0">
                                 <IndexProductionGrid></IndexProductionGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Governance">
+                        <ContentTemplate>
+                            <div class="card-body px-3 pt-1 pb-0">
+                                <IndexGovernanceGrid></IndexGovernanceGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>

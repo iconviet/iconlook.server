@@ -41,16 +41,21 @@ namespace Iconlook.Service.Job
                                     Status = @object.status,
                                     PeerId = @object.peer_id,
                                     PeerType = int.Parse(@object.peer_type),
-                                    BlockHeight = long.Parse(@object.block_height)
+                                    BlockHeight = long.Parse(@object.block_height),
+                                    MadeBlockCount = int.Parse(@object.made_block_count),
+                                    LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count)
                                 });
                             }
                         }
                     }, cancelation.Token));
                 }));
-                await Channel.Publish(new PeersUpdatedSignal
+                if (peers.Any())
                 {
-                    Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
-                });
+                    await Channel.Publish(new PeersUpdatedSignal
+                    {
+                        Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
+                    });
+                }
             }
         }
     }

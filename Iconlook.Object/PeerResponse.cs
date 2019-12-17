@@ -13,5 +13,7 @@ namespace Iconlook.Object
         public long BlockHeight { get; set; }
         public int MissedBlocks { get; set; }
         public int ProducedBlocks { get; set; }
+        public int MadeBlockCount { get; set; }
+        public int LeaderMadeBlockCount { get; set; }
     }
 }

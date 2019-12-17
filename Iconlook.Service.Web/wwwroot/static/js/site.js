@@ -31,6 +31,7 @@
     }
 });
 $(document).ready(function() {
+    var currentPeerBlock = 0;
     const source = new EventSource('/sse/stream?channel=iconlook');
     source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
@@ -41,7 +42,25 @@ $(document).ready(function() {
         },
         success: function(selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
-                console.log('Received ' + message.cmd);
+                if (message.cmd === 'PeersUpdatedSignal') {
+                    $('.peer-state > span').text('IDLE');
+                    $('.peer-state').removeClass('peer-state-busy');
+                    if (json.busy != null) {
+                        var id = json.busy.peerId.toString();
+                        $('.peer-state-' + id + ' > span').text('BUSY');
+                        $('.peer-state-' + id).addClass('peer-state-busy');
+                        if ($('.current-peer-name').text() !== json.busy.name) {
+                            if (json.busy.madeBlockCount >= 10) {
+                                currentPeerBlock = 0;
+                            } else {
+                                currentPeerBlock = json.busy.madeBlockCount;
+                            }
+                            $('.current-peer-name').text(json.busy.name).hide().fadeIn(250);
+                            $('.current-peer-block').text(currentPeerBlock).hide().fadeIn(250);
+                            
+                        }
+                    }
+                }
                 if (message.cmd === 'ChainUpdatedSignal') {
                     $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
                     $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
@@ -52,29 +71,21 @@ $(document).ready(function() {
                     $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
                     $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
                 }
-                if (message.cmd === 'PeersUpdatedSignal') {
-                    var id = json.busy.peerId;
-                    console.log('Name: ' + json.busy.name + ' | ID: ' + id);
-                    $('.peer-state span').text('IDLE');
-                    $('.peer-state-' + id + ' span').text('BUSY');
-                    $('.peer-state').removeClass('peer-state-busy');
-                    $('.peer-state-' + id).addClass('peer-state-busy');
-                    if ($('.current-peer-name').text() !== json.busy.name) {
-                        $('.current-peer-name').text(json.busy.name).hide().fadeIn(250);
-                    }
-                }
                 if (message.cmd === 'BlockProducedSignal') {
+                    currentPeerBlock = currentPeerBlock + 1;
+                    $('.current-peer-block').text(currentPeerBlock);
                     if ($('#block_grid_content_table tr').length > 0) {
                         var row = $('#block_grid_content_table tr').first().clone().hide();
-                        $(row).find('.BlockResponse_TotalAmount').decimal(json.block.totalAmount, 4);
-                        $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
-                        $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
-                        $(row).find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
-                        $(row).prependTo($('#block_grid_content_table tbody')).slideDown(250, function() {
+                        $(row).prependTo($('#block_grid_content_table tbody')).slideDown(250,
+                            function() {
                             if ($('#block_grid_content_table tr').length >= 23) {
                                 $('#block_grid_content_table tr').last().remove();
                             }
                         });
+                        $(row).find('.BlockResponse_TotalAmount').decimal(json.block.totalAmount, 4);
+                        $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
+                        $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
+                        $(row).find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
                     }
                 }
             }
