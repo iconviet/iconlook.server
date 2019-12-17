@@ -80,12 +80,13 @@ $(document).ready(function() {
                     }
                 }
                 if (message.cmd === 'PeersUpdatedSignal') {
-                    $('.peer-state > span').text('IDLE');
-                    $('.peer-state').removeClass('peer-state-busy');
                     if (json.busy != null) {
                         var id = json.busy.peerId.toString();
-                        $('.peer-state-' + id + ' > span').text('BUSY');
-                        $('.peer-state-' + id).addClass('peer-state-busy');
+                        if ($('.peer-state-' + id + ' span').text() === 'IDLE') {
+                            $('.peer-state-' + id + ' span').text('BUSY');
+                            $('.peer-state-' + id).addClass('peer-state-busy');
+                            $('.peer-state-' + id).closest('tr').hide().fadeIn(500);
+                        }
                         if ($('.current-peer-name').text() !== json.busy.name) {
                             $('.current-peer').hide().fadeIn(500);
                             $('.current-peer-name').text(json.busy.name);
@@ -99,6 +100,8 @@ $(document).ready(function() {
                                 $('.current-peer-block-remaining').text('❚❚❚❚❚❚❚❚❚');
                             }
                         }
+                        $('.peer-state span').not('.peer-state-' + id + ' span').text('IDLE');
+                        $('.peer-state').not('.peer-state-' + id).removeClass('peer-state-busy');
                     }
                 }
             }
