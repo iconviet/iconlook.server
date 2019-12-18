@@ -6,6 +6,7 @@ namespace Iconlook.Object
 {
     public class BlockResponse : ResponseBase<BlockResponse>
     {
+        public long Id { get; set; }
         public int Size { get; set; }
         public long Height { get; set; }
         public string Hash { get; set; }

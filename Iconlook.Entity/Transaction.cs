@@ -10,7 +10,7 @@ namespace Iconlook.Entity
     {
         [PrimaryKey]
         [StringLength(66)]
-        public string Hash { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [References(typeof(Block))]
@@ -36,7 +36,7 @@ namespace Iconlook.Entity
         protected override void AddRules(Validator<Transaction> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Hash).NotNull().Length(66);
+            validator.RuleFor(x => x.Id).NotNull().Length(66);
         }
     }
 }

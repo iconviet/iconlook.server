@@ -9,7 +9,7 @@ namespace Iconlook.Entity
     public class Block : EntityBase<Block>, IHasTimestamp
     {
         [PrimaryKey]
-        public long Height { get; set; }
+        public long Id { get; set; }
 
         [StringLength(42)]
         public string PeerId { get; set; }
@@ -38,7 +38,7 @@ namespace Iconlook.Entity
         protected override void AddRules(Validator<Block> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Height).NotEmpty();
+            validator.RuleFor(x => x.Id).NotEmpty();
         }
     }
 }

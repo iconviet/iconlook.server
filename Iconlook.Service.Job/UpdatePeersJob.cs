@@ -37,6 +37,7 @@ namespace Iconlook.Service.Job
                                 peers.Add(new PeerResponse
                                 {
                                     Name = prep.Name,
+                                    Id = @object.peer_id,
                                     State = @object.state,
                                     Status = @object.status,
                                     PeerId = @object.peer_id,

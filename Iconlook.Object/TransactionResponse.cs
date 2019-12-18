@@ -5,6 +5,7 @@ namespace Iconlook.Object
 {
     public class TransactionResponse : ResponseBase<TransactionResponse>
     {
+        public string Id { get; set; }
         public int Steps { get; set; }
         public string To { get; set; }
         public long Block { get; set; }

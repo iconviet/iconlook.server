@@ -1,5 +1,10 @@
 ﻿@page "/"
 <style type="text/css">
+    .e-grid .e-rowcell {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
     .e-tab { background-color: white; }
 
     .e-grid .e-gridheader { display: none; }
@@ -8,28 +13,19 @@
 
     .main.card .e-grid { min-height: 880px; }
 
-    button.submit-button:hover,
-    button.search-filter:hover { color: #1aaaba !important; }
-
-    .e-grid .e-rowcell {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    .submit-button {
+        color: #666666 !important;
+        font-weight: bold !important;
+        background-color: white !important;
+        padding: 9px 12px 7px 8px !important;
     }
 
-    .submit-input .e-input-group::after,
-    .submit-input .e-input-group::before { background: none !important; }
-
-
-    button.search-filter.e-active { background-color: white !important; }
-
-    button.search-filter {
+    .search-filter {
         color: #666666 !important;
         font-weight: bold !important;
         background-color: white !important;
         padding: 9px 10px 7px 10px !important;
     }
-
-    .search-filter.e-dropdown-popup { color: #666666; }
 
     .search-filter.e-dropdown-popup .e-item {
         padding: 0 25px;
@@ -41,13 +37,13 @@
         background: none;
     }
 
-    button.submit-button {
-        color: #666666 !important;
-        font-weight: bold !important;
-        background-color: white !important;
-        padding: 9px 12px 7px 8px !important;
-    }
+    .search-filter.e-dropdown-popup { color: #666666; }
+    
+    .search-filter.e-active { background-color: white !important; }
 
+    .submit-button:hover, .search-filter:hover { color: #1aaaba !important; }
+    
+    .submit-input .e-input-group::after, .submit-input .e-input-group::before { background: none !important; }
 
     input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 5px 7px 0 7px !important; }
 

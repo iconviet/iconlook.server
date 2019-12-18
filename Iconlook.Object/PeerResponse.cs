@@ -5,6 +5,7 @@ namespace Iconlook.Object
     public class PeerResponse : ResponseBase<PeerResponse>
     {
         public int Rank { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string State { get; set; }
         public int PeerType { get; set; }

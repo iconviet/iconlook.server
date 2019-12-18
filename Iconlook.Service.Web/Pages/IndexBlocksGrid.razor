@@ -13,15 +13,14 @@
 </style>
 <EjsGrid RowHeight="40"
          ID="block_grid"
-         @ref="BlockGrid"
          EnableHover="false"
          EnableAltRow="false"
          TValue="BlockResponse"
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
+    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
-    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsPrimaryKey="true">
             <Template>

@@ -27,6 +27,7 @@ namespace Iconlook.Service.Job
                 var last_block = await Service.GetLastBlock();
                 var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
+                    Id = x.GetTxHash().ToString(),
                     Hash = x.GetTxHash().ToString(),
                     Block = (long) last_block.GetHeight(),
                     Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
@@ -38,6 +39,7 @@ namespace Iconlook.Service.Job
                 var block = new BlockResponse
                 {
                     PeerId = last_block.GetPeerId(),
+                    Id = (long) last_block.GetHeight(),
                     Fee = transactions.Sum(x => x.Fee),
                     TransactionCount = transactions.Count,
                     Height = (long) last_block.GetHeight(),

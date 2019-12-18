@@ -14,6 +14,7 @@ namespace Iconlook.Object
         public bool Testnet { get; set; }
         public string Goals { get; set; }
         public string Entity { get; set; }
+        public string Address { get; set; }
         public bool Direction { get; set; }
         public double Balance { get; set; }
         public string Hosting { get; set; }
