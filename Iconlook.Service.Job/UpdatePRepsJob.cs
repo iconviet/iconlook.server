@@ -8,7 +8,6 @@ using Iconlook.Client.Service;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
-using Serilog;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job
@@ -57,7 +56,6 @@ namespace Iconlook.Service.Job
             })));
             await Db.Instance().SaveAllAsync(prep_objs.ToList());
             Redis.Instance().StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
-            Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.Now);
         }
     }
 }

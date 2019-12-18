@@ -17,7 +17,7 @@ namespace Iconlook.Client.Service
         {
             _icon = new IconService(
                 new HttpProvider(new HttpClient(),
-                    "https://ctz.solidwallet.io/api/v3"));
+                    "http://210.180.69.101:9000/api/v3"));
         }
 
         public Task<Block> GetLastBlock()
