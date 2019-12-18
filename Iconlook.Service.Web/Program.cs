@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Agiper;
@@ -8,11 +6,10 @@ using Agiper.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
@@ -39,6 +36,12 @@ namespace Iconlook.Service.Web
                 {
                     x.EnableDetailedErrors = true;
                     x.MaximumReceiveMessageSize = 1024 * 1024;
+                });
+                services.Configure<ForwardedHeadersOptions>(x =>
+                {
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
                 });
                 services.AddWebMarkupMin(x =>
                 {
