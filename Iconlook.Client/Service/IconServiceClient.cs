@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
-using ServiceStack;
 
 namespace Iconlook.Client.Service
 {
     public class IconServiceClient : IIconService
     {
         private readonly IconService _icon;
-        private readonly JsonHttpClient _json;
-        private static readonly HttpClient HttpClient;
-
-        static IconServiceClient()
-        {
-            HttpClient = new HttpClient();
-        }
 
         public IconServiceClient()
         {
-            const string url = "https://ctz.solidwallet.io/api/v3";
-            _icon = new IconService(new HttpProvider(HttpClient, url));
-            _json = new JsonHttpClient(url) { HttpClient = HttpClient };
+            _icon = new IconService(
+                new HttpProvider(new HttpClient(),
+                    "https://ctz.solidwallet.io/api/v3"));
         }
 
         public Task<Block> GetLastBlock()

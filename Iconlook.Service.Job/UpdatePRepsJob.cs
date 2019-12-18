@@ -8,6 +8,7 @@ using Iconlook.Client.Service;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using Serilog;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job
@@ -21,7 +22,6 @@ namespace Iconlook.Service.Job
             var prep_objs = new List<PRep>();
             var prep_rpcs = await Icon.GetPReps();
             var prep_info = await Icon.GetPRepInfo();
-            Redis.Instance().As<PRepResponse>().DeleteAll();
             await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
             {
                 var ranking = prep_rpcs.IndexOf(prep) + 1;
@@ -56,7 +56,8 @@ namespace Iconlook.Service.Job
                 });
             })));
             await Db.Instance().SaveAllAsync(prep_objs.ToList());
-            Redis.Instance().As<PRepResponse>().StoreAll(prep_objs.ToList().ConvertAll(x => x.ToResponse()));
+            Redis.Instance().StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
+            Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.Now);
         }
     }
 }

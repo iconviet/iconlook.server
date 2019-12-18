@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using Agiper;
 using Agiper.Server;
 using Iconlook.Object;
 using Iconlook.Server;
+using Serilog;
 using ServiceStack;
 
 namespace Iconlook.Service.Job
@@ -14,8 +16,7 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
-            var redis = Redis.Instance().As<PRepResponse>();
-            var preps = redis.GetAll().ToDictionary(x => x.Id);
+            var preps = Redis.Instance().As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
             if (preps.Any())
             {
                 var peers = new List<PeerResponse>();
@@ -57,11 +58,21 @@ namespace Iconlook.Service.Job
                 }));
                 if (peers.Any())
                 {
+                    Redis.Instance().StoreAll(peers);
                     await Channel.Publish(new PeersUpdatedSignal
                     {
                         Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
                     });
+                    Log.Information("{Job} ran at {Time}", nameof(UpdatePeersJob), DateTimeOffset.Now);
                 }
+                else
+                {
+                    Log.Warning("No Peers Found.");
+                }
+            }
+            else
+            {
+                Log.Warning("No P-Reps Found.");
             }
         }
     }
