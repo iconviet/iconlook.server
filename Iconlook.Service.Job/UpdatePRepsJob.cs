@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
@@ -8,7 +8,6 @@ using Iconlook.Client.Service;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
-using Serilog;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Job
@@ -19,15 +18,15 @@ namespace Iconlook.Service.Job
 
         public override async Task RunAsync()
         {
-            var preps = await Icon.GetPReps();
+            var prep_objs = new List<PRep>();
+            var prep_rpcs = await Icon.GetPReps();
             var prep_info = await Icon.GetPRepInfo();
-            var entities = new ConcurrentBag<PRep>();
             Redis.Instance().As<PRepResponse>().DeleteAll();
-            await Task.WhenAll(preps.Select(prep => Task.Run(async () =>
+            await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
             {
-                var ranking = preps.IndexOf(prep) + 1;
+                var ranking = prep_rpcs.IndexOf(prep) + 1;
                 prep = await Icon.GetPRep(prep.GetAddress());
-                entities.Add(new PRep
+                prep_objs.Add(new PRep
                 {
                     Ranking = ranking,
                     Name = prep.GetName(),
@@ -56,9 +55,8 @@ namespace Iconlook.Service.Job
                     ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                 });
             })));
-            await Db.Instance().SaveAllAsync(entities.ToList());
-            Redis.Instance().As<PRepResponse>().StoreAll(entities.ToList().ConvertAll(x => x.ToResponse()));
-            Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.Now);
+            await Db.Instance().SaveAllAsync(prep_objs.ToList());
+            Redis.Instance().As<PRepResponse>().StoreAll(prep_objs.ToList().ConvertAll(x => x.ToResponse()));
         }
     }
 }
