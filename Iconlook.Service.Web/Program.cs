@@ -41,7 +41,7 @@ namespace Iconlook.Service.Web
                 {
                     x.KnownProxies.Clear();
                     x.KnownNetworks.Clear();
-                    x.ForwardedHeaders = ForwardedHeaders.XForwardedHost;
+                    x.ForwardedHeaders = ForwardedHeaders.All;
                 });
                 services.AddWebMarkupMin(x =>
                 {
