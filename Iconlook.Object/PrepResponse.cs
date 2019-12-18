@@ -28,7 +28,5 @@ namespace Iconlook.Object
         public DateTimeOffset Timestamp { get; set; }
         public double DelegatedPercentage { get; set; }
         public double ProductivityPercentage { get; set; }
-
-        public static PRepResponse ModelType = new PRepResponse();
     }
 }

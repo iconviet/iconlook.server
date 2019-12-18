@@ -17,8 +17,7 @@
          AllowPaging="CanPage"
          AllowSelection="CanEdit"
          GridLines="GridLine.Horizontal"
-         ModelType="PRepResponse.ModelType"
-         Query="@($"new ej.data.Query().addParams('edit', '{EditKey}')")">
+         Query="@(new Query().AddParams("edit", EditKey))">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>

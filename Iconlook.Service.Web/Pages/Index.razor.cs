@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Syncfusion.EJ2.Blazor.Navigations;
-using ItemModel = Syncfusion.EJ2.Blazor.SplitButtons.ItemModel;
+using Syncfusion.EJ2.Blazor.SplitButtons;
 
 namespace Iconlook.Service.Web.Pages
 {
@@ -11,9 +11,9 @@ namespace Iconlook.Service.Web.Pages
         protected TabHeader Production;
         protected TabHeader Governance;
         protected TabHeader Transactions;
-        protected List<ItemModel> ToolItems;
-        protected List<ItemModel> SearchItems;
         protected TabAnimationSettings Animation;
+        protected List<DropDownButtonItem> ToolItems;
+        protected List<DropDownButtonItem> SearchItems;
 
         protected override void OnInitialized()
         {
@@ -23,17 +23,17 @@ namespace Iconlook.Service.Web.Pages
                 Next = new TabAnimationNext { Duration = 0 },
                 Previous = new TabAnimationPrevious { Duration = 0 }
             };
-            ToolItems = new List<ItemModel>
+            ToolItems = new List<DropDownButtonItem>
             {
-                new ItemModel { Text = "ROUND", IconCss = "fal fa-users-class" },
-                new ItemModel { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
-                new ItemModel { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
+                new DropDownButtonItem { Text = "ROUND", IconCss = "fal fa-users-class" },
+                new DropDownButtonItem { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
+                new DropDownButtonItem { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
             };
-            SearchItems = new List<ItemModel>
+            SearchItems = new List<DropDownButtonItem>
             {
-                new ItemModel { Text = "P-REP", IconCss = "fal fa-users-class" },
-                new ItemModel { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
-                new ItemModel { Text = "TRANSACTION", IconCss = "fal fa-dice" }
+                new DropDownButtonItem { Text = "P-REP", IconCss = "fal fa-users-class" },
+                new DropDownButtonItem { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
+                new DropDownButtonItem { Text = "TRANSACTION", IconCss = "fal fa-dice" }
             };
             Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
             Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };

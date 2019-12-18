@@ -17,8 +17,6 @@ namespace Iconlook.Object
         public int TransactionCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }
 
-        public static BlockResponse ModelType = new BlockResponse();
-
         protected override void AddRules(Validator<BlockResponse> validator)
         {
             base.AddRules(validator);

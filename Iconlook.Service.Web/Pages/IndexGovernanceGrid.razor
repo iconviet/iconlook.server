@@ -4,8 +4,7 @@
          TValue="PRepResponse"
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
-         ModelType="PRepResponse.ModelType"
-         Query="new ej.data.Query().addParams('take', '22')">
+         Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="20">

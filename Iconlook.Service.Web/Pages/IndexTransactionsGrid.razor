@@ -19,8 +19,7 @@
          @ref="TransactionGrid"
          TValue="TransactionResponse"
          GridLines="GridLine.Horizontal"
-         ModelType="TransactionResponse.ModelType"
-         Query="new ej.data.Query().addParams('take', '13')">
+         Query="@(new Query().AddParams("take", 22))">
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <EjsDataManager Url="/api/v1.0/transactions" Adaptor="Adaptors.WebApiAdaptor" Offline="true"></EjsDataManager>
     <GridColumns>
