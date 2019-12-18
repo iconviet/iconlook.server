@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using Agiper;
 using Agiper.Server;
 using Iconlook.Object;
 using Iconlook.Server;
+using Serilog;
 using ServiceStack;
 
 namespace Iconlook.Service.Job
@@ -61,7 +63,16 @@ namespace Iconlook.Service.Job
                     {
                         Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
                     });
+                    Log.Information("{Job} ran at {Time}", nameof(UpdatePeersJob), DateTimeOffset.Now);
                 }
+                else
+                {
+                    Log.Warning("No Peers Found.");
+                }
+            }
+            else
+            {
+                Log.Warning("No P-Reps Found.");
             }
         }
     }
