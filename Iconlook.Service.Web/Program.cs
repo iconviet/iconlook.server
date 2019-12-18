@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using StackExchange.Redis;
+using Syncfusion.EJ2.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 
@@ -29,6 +30,7 @@ namespace Iconlook.Service.Web
             ConfigureServices = host => services =>
             {
                 services.AddServerSideBlazor();
+                services.AddSyncfusionBlazor();
                 services.Configure<KestrelServerOptions>(x =>
                 {
                     x.AllowSynchronousIO = true;
@@ -108,7 +110,7 @@ namespace Iconlook.Service.Web
                 });
                 ConfigureApplicationDefault(host, application); // TODO: Remove this
             };
-            SyncfusionLicenseProvider.RegisterLicense("MTI1OTM0QDMxMzcyZTMyMmUzMG0yUm01UnZ6U3pQMjdLdEM1Q3RSSE1YdHl2R0RmQWh2N0JuZEZrd1BTc2s9");
+            SyncfusionLicenseProvider.RegisterLicense("MTgzMzE3QDMxMzcyZTM0MmUzMGsxUUk0Rkp6Vk9zaGNsaWlIQVBRWlhhNEpYa0hNRlFOWUVYUFBtcFFIWDg9");
             return StartAsync(new WebHost(), 80);
         }
     }
