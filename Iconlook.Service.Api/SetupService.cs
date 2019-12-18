@@ -36,23 +36,23 @@ namespace Iconlook.Service.Api
 
             public void DropTables()
             {
-                Db.DropTable<Transaction>();
-                Db.DropTable<Block>();
-                Db.DropTable<PRep>();
-                Db.DropTable<PRepState_>();
+                Db.Instance().DropTable<Transaction>();
+                Db.Instance().DropTable<Block>();
+                Db.Instance().DropTable<PRep>();
+                Db.Instance().DropTable<PRepState_>();
             }
 
             public void CreateTables()
             {
-                Db.CreateTable<PRepState_>();
-                Db.CreateTable<PRep>();
-                Db.CreateTable<Block>();
-                Db.CreateTable<Transaction>();
+                Db.Instance().CreateTable<PRepState_>();
+                Db.Instance().CreateTable<PRep>();
+                Db.Instance().CreateTable<Block>();
+                Db.Instance().CreateTable<Transaction>();
             }
 
             public void PopulateTables()
             {
-                typeof(PRepState).ToDictionary(1).ForEach(x => Db.Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
+                typeof(PRepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
             }
         }
     }

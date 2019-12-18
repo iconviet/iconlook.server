@@ -43,19 +43,19 @@ namespace Iconlook.Service.Web
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 });
-                var redis = host.HostConfiguration.GetConnectionString("redis");
+                var connection = host.HostConfiguration.GetConnectionString("redis");
                 services.AddWebMarkupMin(x =>
                 {
                     x.DisablePoweredByHttpHeaders = true;
                     x.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
-                if (redis.HasValue())
+                if (connection.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
                     {
-                        redis = redis.Replace("redis", "localhost");
+                        connection = connection.Replace("redis", "localhost");
                     }
-                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(redis);
+                    services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection);
                 }
                 if (!OperatingSystem.IsWindows)
                 {
@@ -67,7 +67,7 @@ namespace Iconlook.Service.Web
                 {
                     services.AddDataProtection()
                         .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name)
-                        .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redis), host.ProjectName);
+                        .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(connection), host.ProjectName);
                 }
                 services.AddRazorPages(x => x.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
             };

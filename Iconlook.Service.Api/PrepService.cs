@@ -25,7 +25,7 @@ namespace Iconlook.Service.Api
                 var name = request.Filter
                     .Replace("substringof('", string.Empty)
                     .Replace("',tolower(Name))", string.Empty);
-                var preps = await Db.SelectAsync(Db.From<PRep>().Where(x =>
+                var preps = await Db.Instance().SelectAsync(Db.Instance().From<PRep>().Where(x =>
                     x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
                 return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
@@ -36,8 +36,8 @@ namespace Iconlook.Service.Api
             }
             if (request.Edit.HasValue() && request.Edit != "all")
             {
-                var preps = await Db.SelectAsync(
-                    Db.From<PRep>().Where(x => x.Id == request.Edit));
+                var preps = await Db.Instance().SelectAsync(
+                    Db.Instance().From<PRep>().Where(x => x.Id == request.Edit));
                 return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
                     Skip = 0,
@@ -46,15 +46,15 @@ namespace Iconlook.Service.Api
                 };
             }
             {
-                var query = Db.From<PRep>();
+                var query = Db.Instance().From<PRep>();
                 if (request.Skip > 0) query.Skip(request.Skip);
                 if (request.Take > 0) query.Take(request.Take);
-                var preps = await Db.SelectAsync(query.OrderBy(x => x.Ranking));
+                var preps = await Db.Instance().SelectAsync(query.OrderBy(x => x.Ranking));
                 var response = new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                 {
                     Skip = request.Skip,
                     Take = request.Take,
-                    Count = await Db.CountAsync<PRep>()
+                    Count = await Db.Instance().CountAsync<PRep>()
                 };
                 return response;
             }

@@ -9,7 +9,7 @@ namespace Iconlook.Service.Api
     {
         public object Get(PeerListRequest request)
         {
-            return new ListResponse<PeerResponse>(Redis.As<PeerResponse>().GetAll().Take(request.Take).OrderBy(x => x.Rank));
+            return new ListResponse<PeerResponse>(Redis.Instance().As<PeerResponse>().GetAll().Take(request.Take).OrderBy(x => x.Rank));
         }
     }
 }

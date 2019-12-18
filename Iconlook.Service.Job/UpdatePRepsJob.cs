@@ -55,8 +55,8 @@ namespace Iconlook.Service.Job
                     ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                 });
             })));
-            await Db.SaveAllAsync(prep_objs.ToList());
-            Redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
+            await Db.Instance().SaveAllAsync(prep_objs.ToList());
+            Redis.Instance().StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
             Log.Information("{Job} ran at {Time}", nameof(UpdatePRepsJob), DateTimeOffset.Now);
         }
     }
