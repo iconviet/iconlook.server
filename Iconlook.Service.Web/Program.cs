@@ -37,18 +37,12 @@ namespace Iconlook.Service.Web
                     x.EnableDetailedErrors = true;
                     x.MaximumReceiveMessageSize = 1024 * 1024;
                 });
-                services.Configure<ForwardedHeadersOptions>(x =>
-                {
-                    x.KnownProxies.Clear();
-                    x.KnownNetworks.Clear();
-                    x.ForwardedHeaders = ForwardedHeaders.All;
-                });
+                var redis = host.HostConfiguration.GetConnectionString("redis");
                 services.AddWebMarkupMin(x =>
                 {
                     x.DisablePoweredByHttpHeaders = true;
                     x.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
-                var redis = host.HostConfiguration.GetConnectionString("redis");
                 if (redis.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
@@ -77,7 +71,7 @@ namespace Iconlook.Service.Web
                 {
                     if (host.Environment != Environment.Localhost)
                     {
-                        context.Request.Scheme = "https";
+                        // context.Request.Scheme = "https";
                     }
                     context.Response.OnStarting(state =>
                     {
