@@ -74,13 +74,9 @@ namespace Iconlook.Service.Job
                 await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
                 await Task.Run(() =>
                 {
-                    var block_redis = Redis.Instance().As<BlockResponse>();
-                    var chain_redis = Redis.Instance().As<ChainResponse>();
-                    var transaction_redis = Redis.Instance().As<TransactionResponse>();
-
-                    block_redis.Store(block, TimeSpan.FromMinutes(1));
-                    chain_redis.Store(chain, TimeSpan.FromMinutes(1));
-                    transactions.ForEach(x => transaction_redis.Store(x, TimeSpan.FromMinutes(1)));
+                    Redis.As<BlockResponse>().Store(block, TimeSpan.FromMinutes(5));
+                    Redis.As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(5));
+                    transactions.ForEach(x => Redis.As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(5)));
                 });
             }
             catch
