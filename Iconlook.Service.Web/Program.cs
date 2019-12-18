@@ -37,6 +37,12 @@ namespace Iconlook.Service.Web
                     x.EnableDetailedErrors = true;
                     x.MaximumReceiveMessageSize = 1024 * 1024;
                 });
+                services.Configure<ForwardedHeadersOptions>(x =>
+                {
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
+                });
                 var redis = host.HostConfiguration.GetConnectionString("redis");
                 services.AddWebMarkupMin(x =>
                 {

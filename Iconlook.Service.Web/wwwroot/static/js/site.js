@@ -80,6 +80,7 @@ $(document).ready(function() {
                 if (message.cmd === 'PeersUpdatedSignal') {
                     if (json.busy != null) {
                         var id = json.busy.peerId.toString();
+                        console.log(json.busy.name);
                         if ($('.peer-state-' + id + ' span').text() === 'IDLE') {
                             $('.peer-state-' + id + ' span').text('BUSY');
                             $('.peer-name-' + id).addClass('font-weight-bold');
