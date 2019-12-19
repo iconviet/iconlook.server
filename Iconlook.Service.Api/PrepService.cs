@@ -22,45 +22,49 @@ namespace Iconlook.Service.Api
 
         public async Task<object> Get(PRepListRequest request)
         {
-            var db = Db.Instance();
-            if (request.Filter.HasValue())
+            using (var db = Db.Instance())
             {
-                var name = request.Filter
-                    .Replace("substringof('", string.Empty)
-                    .Replace("',tolower(Name))", string.Empty);
-                var entities = await db.SelectAsync(db.From<PRep>().Where(x =>
-                    x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
-                return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
+                if (request.Filter.HasValue())
+                {
+                    var name = request.Filter
+                        .Replace("substringof('", string.Empty)
+                        .Replace("',tolower(Name))", string.Empty);
+                    var entities = await db.SelectAsync(db.From<PRep>().Where(x =>
+                        x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
+                    return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
+                    {
+                        Skip = request.Skip,
+                        Take = request.Take,
+                        Count = entities.Count
+                    };
+                }
+                if (request.Edit.HasValue() && request.Edit != "all")
+                {
+                    var entities = await db.SelectAsync(
+                        db.From<PRep>().Where(x => x.Id == request.Edit));
+                    return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
+                    {
+                        Skip = 0,
+                        Take = 1,
+                        Count = 1
+                    };
+                }
+            }
+            using (var redis = Redis.Instance())
+            {
+                var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
+                if (!items.Any())
+                {
+                    await TryResolve<UpdatePRepsJob>().RunAsync();
+                    items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
+                }
+                return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))
                 {
                     Skip = request.Skip,
                     Take = request.Take,
-                    Count = entities.Count
+                    Count = items.Count
                 };
             }
-            if (request.Edit.HasValue() && request.Edit != "all")
-            {
-                var entities = await db.SelectAsync(
-                    db.From<PRep>().Where(x => x.Id == request.Edit));
-                return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
-                {
-                    Skip = 0,
-                    Take = 1,
-                    Count = 1
-                };
-            }
-            var redis = Redis.Instance();
-            var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
-            if (!items.Any())
-            {
-                await TryResolve<UpdatePRepsJob>().RunAsync();
-                items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
-            }
-            return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))
-            {
-                Skip = request.Skip,
-                Take = request.Take,
-                Count = items.Count
-            };
         }
     }
 }

@@ -9,9 +9,11 @@ namespace Iconlook.Service.Api
     {
         public object Any(BlockListRequest request)
         {
-            var redis = Redis.Instance().As<BlockResponse>();
-            var items = redis.GetAll().OrderByDescending(x => x.Height);
-            return new ListResponse<BlockResponse>(items.Skip(request.Skip).Take(request.Take));
+            using (var redis = Redis.Instance())
+            {
+                var items = redis.As<BlockResponse>().GetAll().OrderByDescending(x => x.Height);
+                return new ListResponse<BlockResponse>(items.Skip(request.Skip).Take(request.Take));
+            }
         }
     }
 }

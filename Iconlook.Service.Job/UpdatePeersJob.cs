@@ -14,53 +14,55 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
-            var redis = Redis.Instance();
-            var items = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
-            if (items.Any())
+            using (var redis = Redis.Instance())
             {
-                var peers = new List<PeerResponse>();
-                await Task.WhenAll(items.Values.Select(prep =>
+                var items = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
+                if (items.Any())
                 {
-                    return Task.Run(async () =>
+                    var peers = new List<PeerResponse>();
+                    await Task.WhenAll(items.Values.Select(prep =>
                     {
-                        using (var json = new JsonHttpClient())
+                        return Task.Run(async () =>
                         {
-                            var cancelation = new CancellationTokenSource();
-                            cancelation.CancelAfter(1500);
-                            var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
-                            var url = $"http://{endpoint}/api/v1/status/peer";
-                            try
+                            using (var json = new JsonHttpClient())
                             {
-                                var response = await json.GetAsync<string>(url, cancelation.Token);
-                                if (response.HasValue())
+                                var cancelation = new CancellationTokenSource();
+                                cancelation.CancelAfter(1500);
+                                var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
+                                var url = $"http://{endpoint}/api/v1/status/peer";
+                                try
                                 {
-                                    var @object = DynamicJson.Deserialize(response);
-                                    peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
+                                    var response = await json.GetAsync<string>(url, cancelation.Token);
+                                    if (response.HasValue())
                                     {
-                                        x.Id = @object.peer_id;
-                                        x.State = @object.state;
-                                        x.Status = @object.status;
-                                        x.PeerId = @object.peer_id;
-                                        x.PeerType = int.Parse(@object.peer_type);
-                                        x.BlockHeight = long.Parse(@object.block_height);
-                                        x.MadeBlockCount = int.Parse(@object.made_block_count);
-                                        x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
-                                    }));
+                                        var @object = DynamicJson.Deserialize(response);
+                                        peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
+                                        {
+                                            x.Id = @object.peer_id;
+                                            x.State = @object.state;
+                                            x.Status = @object.status;
+                                            x.PeerId = @object.peer_id;
+                                            x.PeerType = int.Parse(@object.peer_type);
+                                            x.BlockHeight = long.Parse(@object.block_height);
+                                            x.MadeBlockCount = int.Parse(@object.made_block_count);
+                                            x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
+                                        }));
+                                    }
+                                }
+                                catch
+                                {
                                 }
                             }
-                            catch
-                            {
-                            }
-                        }
-                    });
-                }));
-                if (peers.Any())
-                {
-                    redis.StoreAll(peers);
-                    await Channel.Publish(new PeersUpdatedSignal
+                        });
+                    }));
+                    if (peers.Any())
                     {
-                        Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
-                    });
+                        redis.StoreAll(peers);
+                        await Channel.Publish(new PeersUpdatedSignal
+                        {
+                            Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")
+                        });
+                    }
                 }
             }
         }

@@ -31,11 +31,13 @@ namespace Iconlook.Service.Api
 
             public override Task RunAsync()
             {
-                _db = Db.Instance();
-                DropTables();
-                CreateTables();
-                PopulateTables();
-                return Task.CompletedTask;
+                using (_db = Db.Instance())
+                {
+                    DropTables();
+                    CreateTables();
+                    PopulateTables();
+                    return Task.CompletedTask;
+                }
             }
 
             public void DropTables()
