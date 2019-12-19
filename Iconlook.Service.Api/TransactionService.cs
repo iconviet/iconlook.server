@@ -9,8 +9,9 @@ namespace Iconlook.Service.Api
     {
         public object Any(TransactionListRequest request)
         {
-            var redis = Redis.Instance();
-            return new ListResponse<TransactionResponse>(redis.As<TransactionResponse>().GetAll().Take(request.Take).OrderByDescending(x => x.Timestamp));
+            var redis = Redis.Instance().As<TransactionResponse>();
+            var items = redis.GetAll().OrderByDescending(x => x.Timestamp).ToList();
+            return new ListResponse<TransactionResponse>(items.Skip(request.Skip).Take(request.Take));
         }
     }
 }
