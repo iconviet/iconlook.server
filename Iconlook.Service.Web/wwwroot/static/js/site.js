@@ -52,31 +52,6 @@ $(document).ready(function() {
                     $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
                     $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
                 }
-                if (message.cmd === 'BlockProducedSignal') {
-                    var currentPeerBlockMade = '';
-                    var currentPeerBlockRemaining = '';
-                    for (m = 0; m < currentPeerBlockCount; m++) {
-                        currentPeerBlockMade += '❚';
-                    }
-                    for (r = currentPeerBlockCount; r < 10; r++) {
-                        currentPeerBlockRemaining += '❚';
-                    }
-                    $('.current-peer-block-made').text(currentPeerBlockMade);
-                    $('.current-peer-block-count').text(currentPeerBlockCount);
-                    if (currentPeerBlockCount < 10) currentPeerBlockCount += 1;
-                    $('.current-peer-block-remaining').text(currentPeerBlockRemaining);
-                    if ($('#block_grid .e-content tr').length > 0) {
-                        if ($('#block_grid .e-content tr').length >= 22) {
-                            $('#block_grid .e-content tr:last').remove();
-                        }
-                        var row = $('#block_grid .e-content tr:first').clone().hide();
-                        row.prependTo($('#block_grid .e-content tbody:first')).slideDown(250);
-                        $(row).find('.BlockResponse_TotalAmount').decimal(json.block.totalAmount, 4);
-                        $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
-                        $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
-                        $(row).find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
-                    }
-                }
                 if (message.cmd === 'PeersUpdatedSignal') {
                     if (json.busy != null) {
                         var id = json.busy.peerId.toString();
@@ -102,6 +77,31 @@ $(document).ready(function() {
                         }
                         $('.peer-state span').not('.peer-state-' + id + ' span').text('IDLE');
                         $('.peer-state').not('.peer-state-' + id).removeClass('peer-state-busy');
+                    }
+                }
+                if (message.cmd === 'BlockProducedSignal') {
+                    var currentPeerBlockMade = '';
+                    var currentPeerBlockRemaining = '';
+                    for (m = 0; m < currentPeerBlockCount; m++) {
+                        currentPeerBlockMade += '❚';
+                    }
+                    for (r = currentPeerBlockCount; r < 10; r++) {
+                        currentPeerBlockRemaining += '❚';
+                    }
+                    $('.current-peer-block-made').text(currentPeerBlockMade);
+                    $('.current-peer-block-count').text(currentPeerBlockCount);
+                    if (currentPeerBlockCount < 10) currentPeerBlockCount += 1;
+                    $('.current-peer-block-remaining').text(currentPeerBlockRemaining);
+                    if ($('#block_grid .e-content tr').length > 0) {
+                        if ($('#block_grid .e-content tr').length >= 22) {
+                            $('#block_grid .e-content tr:last').remove();
+                        }
+                        var row = $('#block_grid .e-content tr:first').clone().hide().css('opacity', 0);
+                        $(row).find('.BlockResponse_TotalAmount').decimal(json.block.totalAmount, 4);
+                        $(row).find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
+                        $(row).find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
+                        $(row).find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
+                        row.prependTo($('#block_grid .e-content tbody:first')).slideDown(250).animate({ opacity: 1 }, { queue: false, duration: 750 });
                     }
                 }
             }
