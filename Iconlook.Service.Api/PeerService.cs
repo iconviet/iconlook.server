@@ -12,11 +12,11 @@ namespace Iconlook.Service.Api
         public async Task<object> Get(PeerListRequest request)
         {
             var redis = Redis.Instance().As<PeerResponse>();
-            var items = redis.GetAll().OrderBy(x => x.Rank).ToList();
+            var items = redis.GetAll().OrderBy(x => x.Ranking).ToList();
             if (!items.Any())
             {
                 await TryResolve<UpdatePeersJob>().RunAsync();
-                items = redis.GetAll().OrderBy(x => x.Rank).ToList();
+                items = redis.GetAll().OrderBy(x => x.Ranking).ToList();
             }
             return new ListResponse<PeerResponse>(items.Skip(request.Skip).Take(request.Take));
         }

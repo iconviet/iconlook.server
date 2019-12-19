@@ -23,80 +23,80 @@
 <EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
-         TValue="PRepResponse"
+         TValue="PeerResponse"
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1.0/peers" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="20">
             <Template>
                 <i class="fad fs-n1 fa-cube positive-light" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="30" Field="@nameof(PRepResponse.Ranking)" HeaderText="Position">
+        <GridColumn Width="30">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
-                        <span class="mono font-weight-bold">@prep.Ranking</span>
+                        <span class="mono font-weight-bold">@peer.Ranking</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="P-Rep">
+        <GridColumn Width="170">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
-                            <img width="20" height="20" style="margin-top: -1px; margin-right: 8px;" class="prep-114 rounded-circle" alt="@prep.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                            <a class="secondary text-condensed font-weight-semibold peer-name peer-name-@prep.Id" href="address/@prep.Id">@prep.Name</a>
+                            <img width="20" height="20" style="margin-top: -1px; margin-right: 8px;" class="prep-114 rounded-circle" alt="@peer.Name" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
+                            <a class="secondary text-condensed font-weight-semibold peer-name peer-name-@peer.Id" href="address/@peer.Id">@peer.Name</a>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" HeaderText="Status" TextAlign="TextAlign.Right">
+        <GridColumn Width="65" TextAlign="TextAlign.Right">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
-                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold peer-state peer-state-idle peer-state-@prep.Id justify-content-center">
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold peer-state peer-state-idle peer-state-@peer.Id justify-content-center">
                             <span style="margin-top: 1px; margin-left: 1px;">IDLE</span>
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="100" TextAlign="TextAlign.Right">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
-                        <span class="mono ls-n2 prep-produced-blocks_@prep.Id">@prep.ProducedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2 peer-produced-blocks_@peer.Id">@peer.ProducedBlocks.ToString("N0")</span>
                         <i class="fal ml-1 fs-n2 fa-cubes positive-dark"></i>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="70" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Right">
+        <GridColumn Width="70" TextAlign="TextAlign.Right">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
-                        <span class="mono ls-n2 text-light">@prep.MissedBlocks.ToString("N0")</span>
+                        <span class="mono ls-n2 text-light">@peer.MissedBlocks.ToString("N0")</span>
                         <i class="fal ml-1 fs-n2 fa-cubes negative-dark"></i>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="55" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="55" TextAlign="TextAlign.Right">
             <Template>
                 @{
-                    if (context is PRepResponse prep)
+                    if (context is PeerResponse peer)
                     {
-                        <span class="mono fs-n1 ls-n1 font-weight-semibold">@prep.ProductivityPercentage.ToString("P2")</span>
+                        <span class="mono fs-n1 ls-n1 font-weight-semibold">@peer.ProductivityPercentage.ToString("P2")</span>
                     }
                 }
             </Template>

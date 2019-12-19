@@ -40,11 +40,15 @@ namespace Iconlook.Service.Job
                                         Name = prep.Name,
                                         Id = @object.peer_id,
                                         State = @object.state,
+                                        Ranking = prep.Ranking,
                                         Status = @object.status,
                                         PeerId = @object.peer_id,
+                                        MissedBlocks = prep.MissedBlocks,
+                                        ProducedBlocks = prep.ProducedBlocks,
                                         PeerType = int.Parse(@object.peer_type),
                                         BlockHeight = long.Parse(@object.block_height),
                                         MadeBlockCount = int.Parse(@object.made_block_count),
+                                        ProductivityPercentage = prep.ProductivityPercentage,
                                         LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count)
                                     });
                                 }
