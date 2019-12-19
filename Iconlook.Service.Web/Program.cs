@@ -77,7 +77,7 @@ namespace Iconlook.Service.Web
                 {
                     if (host.Environment != Environment.Localhost)
                     {
-                        // context.Request.Scheme = "https";
+                        context.Request.Scheme = "https";
                     }
                     context.Response.OnStarting(state =>
                     {
