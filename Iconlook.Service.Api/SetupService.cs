@@ -27,15 +27,11 @@ namespace Iconlook.Service.Api
 
         public class SetupJob : JobBase
         {
-            private readonly IDbConnection _db;
-
-            public SetupJob()
-            {
-                _db = Db.Instance();
-            }
+            private IDbConnection _db;
 
             public override Task RunAsync()
             {
+                _db = Db.Instance();
                 DropTables();
                 CreateTables();
                 PopulateTables();

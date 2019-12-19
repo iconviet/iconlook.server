@@ -45,6 +45,7 @@ namespace Iconlook.Service.Job
                     Balance = new Random().Next(100000, 10000000),
                     ProducedBlocks = (long) prep.GetTotalBlocks(),
                     Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
+                    LogoUrl = "https://everstake.one/img/Everstake-256.png",
                     Testnet = new[] { true, false }[new Random().Next(0, 1)],
                     MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
                     Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],

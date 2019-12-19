@@ -35,22 +35,17 @@ namespace Iconlook.Service.Job
                                 if (response.HasValue())
                                 {
                                     var @object = DynamicJson.Deserialize(response);
-                                    peers.Add(new PeerResponse
+                                    peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
                                     {
-                                        Name = prep.Name,
-                                        Id = @object.peer_id,
-                                        State = @object.state,
-                                        Ranking = prep.Ranking,
-                                        Status = @object.status,
-                                        PeerId = @object.peer_id,
-                                        MissedBlocks = prep.MissedBlocks,
-                                        ProducedBlocks = prep.ProducedBlocks,
-                                        PeerType = int.Parse(@object.peer_type),
-                                        BlockHeight = long.Parse(@object.block_height),
-                                        MadeBlockCount = int.Parse(@object.made_block_count),
-                                        ProductivityPercentage = prep.ProductivityPercentage,
-                                        LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count)
-                                    });
+                                        x.Id = @object.peer_id;
+                                        x.State = @object.state;
+                                        x.Status = @object.status;
+                                        x.PeerId = @object.peer_id;
+                                        x.PeerType = int.Parse(@object.peer_type);
+                                        x.BlockHeight = long.Parse(@object.block_height);
+                                        x.MadeBlockCount = int.Parse(@object.made_block_count);
+                                        x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
+                                    }));
                                 }
                             }
                             catch

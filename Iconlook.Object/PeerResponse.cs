@@ -11,6 +11,7 @@ namespace Iconlook.Object
         public int PeerType { get; set; }
         public string Status { get; set; }
         public string PeerId { get; set; }
+        public string LogoUrl { get; set; }
         public long BlockHeight { get; set; }
         public int MissedBlocks { get; set; }
         public int ProducedBlocks { get; set; }
