@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data;
+using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
 using Hangfire;
@@ -26,6 +27,13 @@ namespace Iconlook.Service.Api
 
         public class SetupJob : JobBase
         {
+            private readonly IDbConnection _db;
+
+            public SetupJob()
+            {
+                _db = Db.Instance();
+            }
+
             public override Task RunAsync()
             {
                 DropTables();
@@ -36,23 +44,23 @@ namespace Iconlook.Service.Api
 
             public void DropTables()
             {
-                Db.Instance().DropTable<Transaction>();
-                Db.Instance().DropTable<Block>();
-                Db.Instance().DropTable<PRep>();
-                Db.Instance().DropTable<PRepState_>();
+                _db.DropTable<Transaction>();
+                _db.DropTable<Block>();
+                _db.DropTable<PRep>();
+                _db.DropTable<PRepState_>();
             }
 
             public void CreateTables()
             {
-                Db.Instance().CreateTable<PRepState_>();
-                Db.Instance().CreateTable<PRep>();
-                Db.Instance().CreateTable<Block>();
-                Db.Instance().CreateTable<Transaction>();
+                _db.CreateTable<PRepState_>();
+                _db.CreateTable<PRep>();
+                _db.CreateTable<Block>();
+                _db.CreateTable<Transaction>();
             }
 
             public void PopulateTables()
             {
-                typeof(PRepState).ToDictionary(1).ForEach(x => Db.Instance().Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
+                typeof(PRepState).ToDictionary(1).ForEach(x => _db.Insert(new PRepState_ { State = (PRepState) x.Key, Description = x.Value }));
             }
         }
     }

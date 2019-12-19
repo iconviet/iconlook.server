@@ -17,6 +17,8 @@ namespace Iconlook.Service.Job
         private static readonly IconServiceClient Service = new IconServiceClient();
         private static readonly IconTrackerClient Tracker = new IconTrackerClient();
 
+        private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
+
         public override async Task RunAsync()
         {
             try
@@ -30,11 +32,11 @@ namespace Iconlook.Service.Job
                     Id = x.GetTxHash().ToString(),
                     Hash = x.GetTxHash().ToString(),
                     Block = (long) last_block.GetHeight(),
+                    To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
+                    From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
+                    Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
                     Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                    Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0,
-                    To = x.GetTo()?.ToString() ?? "cx0000000000000000000000000000000000000000",
-                    From = x.GetFrom()?.ToString() ?? "cx0000000000000000000000000000000000000000",
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(x.GetTimestamp().Value.ToMilliseconds())
+                    Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
                 }).ToList();
                 var block = new BlockResponse
                 {
@@ -46,7 +48,7 @@ namespace Iconlook.Service.Job
                     Hash = last_block.GetBlockHash().ToString(),
                     TotalAmount = transactions.Sum(x => x.Amount),
                     PrevHash = last_block.GetPrevBlockHash().ToString(),
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
+                    Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
                 };
                 var chain = new ChainResponse
                 {
@@ -55,10 +57,10 @@ namespace Iconlook.Service.Job
                     BlockHeight = (long) iiss_info.GetBlockHeight(),
                     IcxCirculation = (long) main_info.GetIcxCirculation(),
                     PublicTreasury = (long) main_info.GetPublicTreasury(),
+                    Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
                     TransactionCount = (long) main_info.GetTransactionCount(),
                     TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
-                    TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop(),
-                    Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(last_block.GetTimestamp().ToMilliseconds())
+                    TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop()
                 };
                 await Channel.Publish(new BlockProducedSignal
                 {
@@ -74,9 +76,10 @@ namespace Iconlook.Service.Job
                 await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
                 await Task.Run(() =>
                 {
-                    Redis.Instance().As<BlockResponse>().Store(block, TimeSpan.FromMinutes(2));
-                    Redis.Instance().As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(2));
-                    transactions.ForEach(x => Redis.Instance().As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(2)));
+                    var redis = Redis.Instance();
+                    redis.As<BlockResponse>().Store(block, TimeSpan.FromMinutes(2));
+                    redis.As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(2));
+                    transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(2)));
                 });
             }
             catch

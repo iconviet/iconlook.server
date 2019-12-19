@@ -14,7 +14,8 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
-            var preps = Redis.Instance().As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
+            var redis = Redis.Instance();
+            var preps = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
             if (preps.Any())
             {
                 var peers = new List<PeerResponse>();
@@ -56,7 +57,7 @@ namespace Iconlook.Service.Job
                 }));
                 if (peers.Any())
                 {
-                    Redis.Instance().StoreAll(peers);
+                    redis.StoreAll(peers);
                     await Channel.Publish(new PeersUpdatedSignal
                     {
                         Busy = peers.FirstOrDefault(x => x.State == "BlockGenerate")

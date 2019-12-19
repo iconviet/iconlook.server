@@ -18,6 +18,8 @@ namespace Iconlook.Service.Job
 
         public override async Task RunAsync()
         {
+            var db = Db.Instance();
+            var redis = Redis.Instance();
             var prep_objs = new List<PRep>();
             var prep_rpcs = await Icon.GetPReps();
             var prep_info = await Icon.GetPRepInfo();
@@ -54,8 +56,8 @@ namespace Iconlook.Service.Job
                     ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                 });
             })));
-            await Db.Instance().SaveAllAsync(prep_objs.ToList());
-            Redis.Instance().StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
+            await db.SaveAllAsync(prep_objs.ToList());
+            redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Lykke.Icon.Sdk.Data;
 
 namespace Iconlook.Client
@@ -13,6 +14,11 @@ namespace Iconlook.Client
         public static long ToMilliseconds(this BigInteger instance)
         {
             return (long) BigInteger.Divide(instance, BigInteger.Pow(10, 3));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this BigInteger instance)
+        {
+            return DateTimeOffset.FromUnixTimeMilliseconds(instance.ToMilliseconds());
         }
 
         public static decimal ToIcxFromLoop(this BigInteger instance)

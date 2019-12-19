@@ -9,7 +9,8 @@ namespace Iconlook.Service.Api
     {
         public object Any(BlockListRequest request)
         {
-            return new ListResponse<BlockResponse>(Redis.Instance().As<BlockResponse>().GetAll().OrderByDescending(x => x.Height).Take(request.Take));
+            var redis = Redis.Instance();
+            return new ListResponse<BlockResponse>(redis.As<BlockResponse>().GetAll().OrderByDescending(x => x.Height).Take(request.Take));
         }
     }
 }
