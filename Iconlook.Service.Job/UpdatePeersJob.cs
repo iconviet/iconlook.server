@@ -15,11 +15,11 @@ namespace Iconlook.Service.Job
         public override async Task RunAsync()
         {
             var redis = Redis.Instance();
-            var preps = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
-            if (preps.Any())
+            var items = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
+            if (items.Any())
             {
                 var peers = new List<PeerResponse>();
-                await Task.WhenAll(preps.Values.Select(prep =>
+                await Task.WhenAll(items.Values.Select(prep =>
                 {
                     return Task.Run(async () =>
                     {
