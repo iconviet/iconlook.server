@@ -16,28 +16,27 @@ namespace Iconlook.Service.Job
 {
     public class UpdatePRepsJob : JobBase
     {
-        private static readonly JsonHttpClient Json = new JsonHttpClient();
-        private static readonly IconServiceClient Icon = new IconServiceClient();
-
         public override async Task RunAsync()
         {
             using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
                 var prep_objs = new List<PRep>();
-                var prep_rpcs = await Icon.GetPReps();
-                var prep_info = await Icon.GetPRepInfo();
+                var icon = new IconServiceClient();
+                var prep_rpcs = await icon.GetPReps();
+                var prep_info = await icon.GetPRepInfo();
                 await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                 {
                     string logo_url = null;
                     var ranking = prep_rpcs.IndexOf(prep) + 1;
-                    prep = await Icon.GetPRep(prep.GetAddress());
+                    prep = await icon.GetPRep(prep.GetAddress());
                     try
                     {
                         var details = prep.GetDetails();
                         if (details.HasValue())
                         {
-                            var response = await Json.GetAsync<string>(details);
+                            var json = new JsonHttpClient();
+                            var response = await json.GetAsync<string>(details);
                             if (response.HasValue())
                             {
                                 var @object = DynamicJson.Deserialize(response);

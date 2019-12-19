@@ -14,19 +14,18 @@ namespace Iconlook.Service.Job
 {
     public class UpdateBlockchainJob : JobBase
     {
-        private static readonly IconServiceClient Service = new IconServiceClient();
-        private static readonly IconTrackerClient Tracker = new IconTrackerClient();
-
         private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
 
         public override async Task RunAsync()
         {
             try
             {
-                var main_info = await Tracker.GetMainInfo();
-                var iiss_info = await Service.GetIissInfo();
-                var prep_info = await Service.GetPRepInfo();
-                var last_block = await Service.GetLastBlock();
+                var service = new IconServiceClient();
+                var tracker = new IconTrackerClient();
+                var main_info = await tracker.GetMainInfo();
+                var iiss_info = await service.GetIissInfo();
+                var prep_info = await service.GetPRepInfo();
+                var last_block = await service.GetLastBlock();
                 var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                 {
                     Id = x.GetTxHash().ToString(),
