@@ -7,6 +7,7 @@ using Agiper.Server;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using Iconlook.Service.Job;
 using Serilog;
 using ServiceStack.OrmLite;
 
@@ -27,7 +28,7 @@ namespace Iconlook.Service.Api
                 var name = request.Filter
                     .Replace("substringof('", string.Empty)
                     .Replace("',tolower(Name))", string.Empty);
-                var entities = await db.SelectAsync(db.From<PRep>().Where(x => 
+                var entities = await db.SelectAsync(db.From<PRep>().Where(x =>
                     x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
                 return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
                 {
@@ -51,8 +52,7 @@ namespace Iconlook.Service.Api
             var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
             if (!items.Any())
             {
-                var entities = await db.SelectAsync(db.From<PRep>());
-                redis.StoreAll(entities.ConvertAll(x => x.ToResponse()));
+                await TryResolve<UpdatePRepsJob>().RunAsync();
                 items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
             }
             return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))

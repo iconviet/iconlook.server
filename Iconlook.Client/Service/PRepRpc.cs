@@ -28,6 +28,11 @@ namespace Iconlook.Client.Service
             return _properties.GetItem("country")?.ToString();
         }
 
+        public string GetDetails()
+        {
+            return _properties.GetItem("details")?.ToString();
+        }
+
         public Address GetAddress()
         {
             return _properties.GetItem("address")?.ToAddress();
