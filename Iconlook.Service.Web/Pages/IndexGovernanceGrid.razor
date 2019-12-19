@@ -22,7 +22,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="220" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
+        <GridColumn Width="225" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -45,13 +45,13 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
+        <GridColumn Width="120" Field="@nameof(PRepResponse.Votes)" HeaderText="Votes" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2 text-light" style="margin-right: 2px;">@prep.Votes.ToString("N0")</span>
-                        <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
+                        <span class="mono ls-n2 text-light font-weight-semibold">@prep.Votes.ToString("N0")</span>
+                        <span style="margin-left: 1px;" class="fs-n2 text-light font-weight-light">votes</span>
                     }
                 }
             </Template>

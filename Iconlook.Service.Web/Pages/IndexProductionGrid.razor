@@ -1,23 +1,24 @@
 ﻿<style>
-    .peer-state-gone {
-        color: white;
+    .peer-state-sync {
+        color: black;
         padding: 10px 0;
         border-radius: 4px;
-        background-color: #dc3545;
+        background-color: #ffc107;
     }
 
     .peer-state-idle {
-        color: #888888;
+        color: #969696;
         padding: 10px 0;
         border-radius: 4px;
-        background-color: #eeeeee;
+        background-color: #f5f5f5;
     }
 
     .peer-state-busy {
+        color: white;
         padding: 10px 0;
+        font-weight: bold;
         border-radius: 4px;
-        color: #212529 !important;
-        background-color: #ffc107 !important;
+        background-color: limegreen;
     }
 </style>
 <EjsGrid RowHeight="40"
@@ -31,7 +32,7 @@
     <GridColumns>
         <GridColumn Width="20">
             <Template>
-                <i class="fad fs-n1 fa-cube positive-light" style="margin-top: 2px;"></i>
+                <i class="fad fs-n1 fa-dot-circle positive-light" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="30">
@@ -62,8 +63,12 @@
                 @{
                     if (context is PeerResponse peer)
                     {
-                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex font-weight-bold peer-state peer-state-idle peer-state-@peer.Id justify-content-center">
-                            <span style="margin-top: 1px; margin-left: 1px;">IDLE</span>
+                        var state = "idle";
+                        if (peer.State == "Vote") { state = "idle"; }
+                        if (peer.State == "BlockSync") { state = "sync"; }
+                        if (peer.State == "BlockGenerate") { state = "busy"; }
+                        <div style="width: 45px;" class="fs-n3 ls-2 d-inline-flex peer-state peer-state-@state peer-state-@peer.Id justify-content-center">
+                            <span style="margin-top: 1px; margin-left: 1px;">@state.ToUpper()</span>
                         </div>
                     }
                 }
