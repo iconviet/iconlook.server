@@ -16,13 +16,13 @@ namespace Iconlook.Service.Web.Pages
         protected TabHeader Production;
         protected TabHeader Governance;
         protected TabHeader Transactions;
+        protected PeerResponse PeerResponse;
+        protected ChainResponse ChainResponse;
         protected TabAnimationSettings Animation;
         protected List<DropDownButtonItem> ToolItems;
         protected List<DropDownButtonItem> SearchItems;
 
-        protected PeerResponse Peer { get; set; } = new PeerResponse();
-        protected ChainResponse Chain { get; set; } = new ChainResponse();
-
+        
         protected override void OnInitialized()
         {
             Animation = new TabAnimationSettings
@@ -47,17 +47,10 @@ namespace Iconlook.Service.Web.Pages
             Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
             Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
             Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
+            using (var redis = Host.Current.Resolve<IRedisClient>())
             {
-                using (var redis = Host.Current.Resolve<IRedisClient>())
-                {
-                    Chain = redis.As<ChainResponse>().GetAll().OrderBy(x => x.Timestamp).FirstOrDefault();
-                    Peer = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
-                }
+                PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
+                ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
             }
         }
     }

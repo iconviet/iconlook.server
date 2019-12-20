@@ -62,7 +62,7 @@
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">MARKET CAP (USD)</div>
                             <div class="fs-2 mono-lg text-dark">
-                                $ <span class="ChainResponse_MarketCap">0</span>
+                                $ <span class="ChainResponse_MarketCap">@(ChainResponse?.MarketCap.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
                             <div>
                                 <span class="fs-2 mono-lg text-dark">
-                                    <span class="ChainResponse_IcxSupply">0</span>
+                                    <span class="ChainResponse_IcxSupply">@(ChainResponse?.IcxSupply.ToString("N0") ?? "0")</span>
                                 </span>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
                             <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_IcxCirculation">0</span>
+                                <span class="ChainResponse_IcxCirculation">@(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
@@ -96,7 +96,7 @@
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
                             <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_PublicTreasury">0</span>
+                                <span class="ChainResponse_PublicTreasury">@(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
@@ -212,16 +212,16 @@
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">
                                 <span>PRODUCER</span>&nbsp;
-                                <span class="current-peer-ranking font-weight-bold"></span>
+                                <span class="current-peer-ranking font-weight-bold">#@(PeerResponse?.Ranking.ToString() ?? "0")</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <img width="16" height="16" style="margin-right: 8px;" class="current-peer-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                                <a class="text-dark text-condensed font-weight-semibolder current-peer-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e"></a>
+                                <img width="16" height="16" style="margin-right: 8px;" class="current-peer-logo" src="@(PeerResponse?.LogoUrl ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=")">
+                                <a class="text-dark text-condensed font-weight-semibolder current-peer-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@(PeerResponse?.Name ?? "❚")</a>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">
-                                <span class="font-weight-bold current-peer-block-count">0</span>
+                                <span class="font-weight-bold current-peer-block-count">@(PeerResponse?.MadeBlockCount.ToString() ?? "0")</span>
                                 <span>&nbsp;BLOCKS MADE</span>
                             </div>
                             <div class="fs-2 mono-lg">
@@ -232,7 +232,9 @@
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
-                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">0</span>&nbsp;<span class="mono-lg text-light">•</span>&nbsp;<span class="mono-lg primary">18.07%</span></div>
+                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">@(ChainResponse?.TotalStaked.ToString("N0") ?? "0")</span>
+                            <span class="mono-lg text-light">•</span>
+                            <span class="mono-lg primary">18.07%</span></div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">UNSTAKING</div>
@@ -250,7 +252,9 @@
                     <div class="col d-inline-flex border-bottom border-right">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
-                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">0</span>&nbsp;<span class="mono-lg text-light">•</span>&nbsp;<span class="mono-lg primary">98.95%</span></div>
+                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
+                            <span class="mono-lg text-light">•</span>
+                            <span class="mono-lg primary">98.92%</span></div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">VOTERS</div>
@@ -261,13 +265,13 @@
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
                             <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_TransactionCount">0</span>
+                                <span class="ChainResponse_TransactionCount">@(ChainResponse?.TransactionCount.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">BLOCK HEIGHT</div>
                             <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_BlockHeight">0</span>
+                                <span class="ChainResponse_BlockHeight">@(ChainResponse?.BlockHeight.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                     </div>
