@@ -9,7 +9,6 @@ namespace Iconlook.Service.Web.Layouts
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
             MenuItems = new List<MenuItem>
             {
                 new MenuItem

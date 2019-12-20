@@ -25,7 +25,6 @@ namespace Iconlook.Service.Web.Pages
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
             Size = 22;
             Page = true;
             Sizes = new[] { 22, 50, 100 };
