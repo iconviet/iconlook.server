@@ -57,6 +57,7 @@ $(document).ready(function() {
                         var id = json.busy.peerId.toString();
                         if ($('.peer-state-' + id + ' span').text() === 'IDLE') {
                             $('.peer-state-' + id + ' span').text('BUSY');
+                            $('.peer-name-' + id).addClass('font-weight-bold');
                             $('.peer-state-' + id).addClass('peer-state-busy');
                             $('.peer-state-' + id).closest('tr').hide().fadeIn(500);
                         }
@@ -76,6 +77,7 @@ $(document).ready(function() {
                             }
                         }
                         $('.peer-state span').not('.peer-state-' + id + ' span').text('IDLE');
+                        $('.peer-name').not('.peer-name-' + id).removeClass('font-weight-bold');
                         $('.peer-state').not('.peer-state-' + id).removeClass('peer-state-busy');
                     }
                 }

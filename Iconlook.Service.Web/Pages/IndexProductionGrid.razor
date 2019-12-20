@@ -1,4 +1,8 @@
 ﻿<style>
+    .online-status {
+        color: #00a1b3;
+    }
+
     .peer-state-sync {
         color: black;
         padding: 10px 0;
@@ -32,7 +36,7 @@
     <GridColumns>
         <GridColumn Width="20">
             <Template>
-                <i class="fad fs-n1 fa-dot-circle positive-light" style="margin-top: 2px;"></i>
+                <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="30">
@@ -50,9 +54,11 @@
                 @{
                     if (context is PeerResponse peer)
                     {
+
+                        var font_weight = peer.State == "BlockGenerate" ? "font-weight-bold" : null;
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
                             <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" alt="@peer.Name" src="@peer.LogoUrl">
-                            <a class="secondary text-condensed font-weight-semibold peer-name peer-name-@peer.Id" href="address/@peer.Id">@peer.Name</a>
+                            <a class="secondary @font_weight text-condensed peer-name peer-name-@peer.Id" href="address/@peer.Id">@peer.Name</a>
                         </div>
                     }
                 }
