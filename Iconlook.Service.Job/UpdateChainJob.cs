@@ -12,7 +12,7 @@ using NServiceBus;
 
 namespace Iconlook.Service.Job
 {
-    public class UpdateBlockchainJob : JobBase
+    public class UpdateChainJob : JobBase
     {
         private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
 
