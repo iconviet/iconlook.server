@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Iconlook.Object;
-using Iconlook.Server;
-using ServiceStack.Redis;
 using Syncfusion.EJ2.Blazor.Navigations;
 using Syncfusion.EJ2.Blazor.SplitButtons;
 
@@ -22,7 +18,6 @@ namespace Iconlook.Service.Web.Pages
         protected List<DropDownButtonItem> ToolItems;
         protected List<DropDownButtonItem> SearchItems;
 
-        
         protected override void OnInitialized()
         {
             Animation = new TabAnimationSettings
@@ -47,11 +42,11 @@ namespace Iconlook.Service.Web.Pages
             Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
             Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
             Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
-            using (var redis = Host.Current.Resolve<IRedisClient>())
-            {
-                PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
-                ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
-            }
+            // using (var redis = Host.Current.Resolve<IRedisClient>())
+            // {
+            //     PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
+            //     ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+            // }
         }
     }
 }
