@@ -15,7 +15,7 @@ namespace Iconlook.Service.Api
 
         public ApiHost() : base("Api", typeof(ApiHost).Assembly)
         {
-            HangfireJobPersistence = HangfireJobPersistence.Redis;
+            Hosts["redis"] = "localhost";
         }
 
         public ApiHost(string name, Assembly assembly) : base(name, assembly)

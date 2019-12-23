@@ -13,7 +13,6 @@ namespace Iconlook.Server
 
         protected Host(string name, Assembly assembly) : base(name, assembly)
         {
-            Hosts["redis"] = "localhost";
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
             HangfireJobPersistence = HangfireJobPersistence.Redis;
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;
