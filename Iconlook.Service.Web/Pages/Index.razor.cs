@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Agiper;
 using Iconlook.Object;
 using Iconlook.Server;
+using Serilog;
 using ServiceStack.Redis;
 using Syncfusion.EJ2.Blazor.Navigations;
 using Syncfusion.EJ2.Blazor.SplitButtons;
@@ -45,10 +47,14 @@ namespace Iconlook.Service.Web.Pages
             Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
             Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
             Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
-            using (var redis = Host.Current.Resolve<IRedisClient>())
+            using (var rolex = new Rolex())
             {
-                PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
-                ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                using (var redis = Host.Current.Resolve<IRedisClient>())
+                {
+                    PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
+                    ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                }
+                Log.Information("Index Redis opertation took {Time}ms", rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

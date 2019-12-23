@@ -3,6 +3,7 @@ using Funq;
 using Iconlook.Server;
 using Iconlook.Service.Api;
 using ServiceStack;
+using Environment = Agiper.Environment;
 
 namespace Iconlook.Service.Web
 {
@@ -10,7 +11,10 @@ namespace Iconlook.Service.Web
     {
         public WebHost() : base("Web", typeof(WebHost).Assembly)
         {
-            Hosts["redis"] = "localhost";
+            if (Environment != Environment.Localhost)
+            {
+                Hosts["redis"] = "localhost";
+            }
         }
 
         public override void Configure(Container container)
