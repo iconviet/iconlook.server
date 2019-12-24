@@ -5,6 +5,7 @@
     "redis": "redis:6379",
     "ravendb": "ravendb:8080",
     "elastic": "elastic:9200",
-    "rabbitmq": "rabbitmq:5672"
+    "rabbitmq": "rabbitmq:5672",
+    "redis-replica": "172.17.0.1:6379"
   }
 }

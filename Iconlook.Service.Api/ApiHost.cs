@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Agiper;
 using Iconlook.Server;
 using ServiceStack.Api.Swagger;
 
@@ -14,7 +15,10 @@ namespace Iconlook.Service.Api
 
         public ApiHost() : base("Api", typeof(ApiHost).Assembly)
         {
-            ForceUseLocalRedis = true;
+            if (Environment != Environment.Localhost)
+            {
+                UseRedisReplica = true;
+            }
         }
 
         public ApiHost(string name, Assembly assembly) : base(name, assembly)

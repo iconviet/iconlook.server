@@ -4,62 +4,53 @@ services:
   # SEQ
   seq:
     ports:
-      - "8080:80"
-      - "5341:5341"
+      - 8080:80
+      - 5341:5341
     restart: always
     image: datalust/seq
     container_name: seq
-    network_mode: bridge
     environment:
-      - ACCEPT_EULA=Y
-      - ENVIRONMENT=localhost
+      ACCEPT_EULA: Y
 
   # REDIS
   redis:
     ports:
-      - "6379:6379"
+      - 6379:6379
     restart: always
-    network_mode: bridge
     image: iconviet/redis
     container_name: redis
-    environment:
-      - ENVIRONMENT=localhost
-
+ 
   # RAVENDB
   ravendb:
     restart: always
     ports:
-      - "38888:38888"
-    network_mode: bridge
+      - 38888:38888
     image: iconviet/ravendb
     container_name: ravendb
-    environment:
-      - ENVIRONMENT=localhost
 
   # RABBITMQ
   rabbitmq:
-    restart: always
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    network_mode: bridge
+      - 5672:5672
+      - 15672:15672
+    restart: always
     image: iconviet/rabbitmq
     container_name: rabbitmq
-    environment:
-      - ENVIRONMENT=localhost
 
   # ELASTIC
   elastic:
     ports:
-      - "5601:5601"
-      - "9200:9200"
-      - "9300:9300"
+      - 5601:5601
+      - 9200:9200
+      - 9300:9300
     restart: always
-    network_mode: bridge
     image: iconviet/elastic
     container_name: elastic
-    environment:
-      - ENVIRONMENT=localhost
-      - "bootstrap.memory_lock=true"
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-      - "cluster.name=iconlook_localhost"
+
+  # REDIS-REPLICA
+  redis-replica:
+    ports:
+      - 6380:6379
+    restart: always
+    image: iconviet/redis
+    container_name: redis-replica
