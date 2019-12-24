@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
@@ -9,6 +10,7 @@ using Iconlook.Client.Service;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
 
@@ -18,6 +20,7 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
+            using (var time = new Rolex())
             using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
@@ -35,8 +38,10 @@ namespace Iconlook.Service.Job
                         var details = prep.GetDetails();
                         if (details.HasValue())
                         {
+                            var cancelation = new CancellationTokenSource();
+                            cancelation.CancelAfter(60000);
                             var json = new JsonHttpClient();
-                            var response = await json.GetAsync<string>(details);
+                            var response = await json.GetAsync<string>(details, cancelation.Token);
                             if (response.HasValue())
                             {
                                 var @object = DynamicJson.Deserialize(response);
@@ -79,7 +84,11 @@ namespace Iconlook.Service.Job
                 })));
                 await db.SaveAllAsync(prep_objs.ToList());
                 redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
+                Log.Information("**************************************************");
+                Log.Information("{PReps} P-Reps latest information stored in {Elapsed}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
+                Log.Information("**************************************************");
             }
+
         }
     }
 }
