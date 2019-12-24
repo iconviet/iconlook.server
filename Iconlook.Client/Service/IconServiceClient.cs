@@ -12,12 +12,12 @@ namespace Iconlook.Client.Service
     public class IconServiceClient : IIconService
     {
         private readonly IconService _icon;
+        
+        private static readonly HttpClient HttpClient = new HttpClient();
 
-        public IconServiceClient()
+        public IconServiceClient(string endpoint = "https://ctz.solidwallet.io")
         {
-            _icon = new IconService(
-                new HttpProvider(new HttpClient(),
-                    "http://210.180.69.101:9000/api/v3"));
+            _icon = new IconService(new HttpProvider(HttpClient, $"{endpoint}/api/v3"));
         }
 
         public Task<Block> GetLastBlock()
