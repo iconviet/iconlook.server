@@ -51,10 +51,12 @@ namespace Iconlook.Service.Web.Pages
             {
                 using (var redis = Host.Current.Resolve<IRedisClient>())
                 {
-                    PeerResponse = redis.As<PeerResponse>().GetAll().FirstOrDefault(x => x.State == "BlockGenerate");
-                    ChainResponse = redis.As<ChainResponse>().GetAll().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                    var peers = redis.As<PeerResponse>().GetAll();
+                    var chains = redis.As<ChainResponse>().GetAll();
+                    PeerResponse = peers.FirstOrDefault(x => x.State == "BlockGenerate");
+                    ChainResponse = chains.OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                    Log.Information("{Peer} peers and {Chain} chains loaded in {Elapsed}ms", peers.Count, chains.Count, rolex.Elapsed.TotalMilliseconds);
                 }
-                Log.Information("Index Redis opertation took {Time}ms", rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
