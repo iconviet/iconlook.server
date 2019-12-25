@@ -47,6 +47,16 @@ services:
     image: iconviet/elastic
     container_name: elastic
 
+  # DOCKUPDATER
+  dockupdater:
+    environment:
+      LATEST: "true"
+      INTERVAL: "60"
+    image: iconviet/dockupdater
+    container_name: dockupdater
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   # REDIS-REPLICA
   redis-replica:
     ports:
@@ -54,4 +64,4 @@ services:
     restart: always
     image: iconviet/redis
     container_name: redis-replica
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--replicaof 172.17.0.1 6379"]
+    command: ["redis-server", "/var/lib/redis/redis.conf", "--replicaof 172.17.0.1 6379"]

@@ -43,18 +43,19 @@ namespace Iconlook.Service.Web
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 });
-                var connection = host.HostConfiguration.GetConnectionString("redis");
                 services.AddWebMarkupMin(x =>
                 {
                     x.DisablePoweredByHttpHeaders = true;
                     x.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
+                var connection = $"{host.HostConfiguration.GetConnectionString("redis")},password={host.DefaultPassword}";
                 if (connection.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
                     {
                         connection = connection.Replace("redis", "localhost");
                     }
+                    
                     services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection);
                 }
                 if (!OperatingSystem.IsWindows)
