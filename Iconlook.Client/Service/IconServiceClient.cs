@@ -15,7 +15,7 @@ namespace Iconlook.Client.Service
         
         private static readonly HttpClient HttpClient = new HttpClient();
 
-        public IconServiceClient(string endpoint = "https://ctz.solidwallet.io")
+        public IconServiceClient(string endpoint = "http://ctzn.iconviet.io:9000")
         {
             _icon = new IconService(new HttpProvider(HttpClient, $"{endpoint}/api/v3"));
         }
