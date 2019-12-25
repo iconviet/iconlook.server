@@ -11,7 +11,7 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Agiper.Server" Version="1.0.2-master-3591711" />
+    <PackageReference Include="Agiper.Server" Version="1.0.2-master-3591723" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
