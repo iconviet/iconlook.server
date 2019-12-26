@@ -40,7 +40,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="45" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+        <GridColumn Width="50" Field="@nameof(PRepResponse.DelegatedPercentage)" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -66,14 +66,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        if (prep.ProductivityPercentage > 0)
-                        {
-                            <span class="mono positive-dark">@(0m.ToString("P2"))</span>
-                        }
-                        if (prep.ProductivityPercentage <= 0)
-                        {
-                            <span class="mono negative-dark">@(0m.ToString("P2"))</span>
-                        }
+                        <span class="mono text-light">@(0m.ToString("P2"))</span>
                     }
                 }
             </Template>
