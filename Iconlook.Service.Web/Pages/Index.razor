@@ -49,12 +49,12 @@
 
     .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap { border-color: transparent !important; }
 </style>
-<div class="row mb-3">
-    <div class="col">
+<div class="row">
+    <div class="col-md mb-3 mr-md-n3">
         <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
-                    <div class="col d-inline-flex border-right border-bottom">
+                    <div class="col d-inline-flex leader border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">PRICE (USD)&nbsp;&nbsp;&nbsp;&nbsp;% 24H</div>
                             <div><span class="fs-2 mono-lg text-dark">0.2513</span>&nbsp;&nbsp;<span class="fs-2 mono-lg positive-dark" style="opacity: 0.8;">+5.06%</span></div>
@@ -80,7 +80,15 @@
                             <span class="fs-2 mono-lg negative-dark" style="opacity: 0.75;">2.7815%</span>
                         </div>
                     </div>
-                    <div class="col d-inline-flex border-bottom border-right">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md mb-3">
+        <div class="card shadow-sm border-bottom-0">
+            <div class="container">
+                <div class="row text-nowrap">
+                    <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
                             <div class="fs-2 mono-lg text-dark">
@@ -249,7 +257,7 @@
         <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
-                    <div class="col d-inline-flex border-bottom border-right">
+                    <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
                             <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
