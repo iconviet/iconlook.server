@@ -8,6 +8,7 @@ using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
 using Serilog;
+using ServiceStack;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Api
@@ -19,6 +20,7 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
+        [CacheResponse(Duration = 60, LocalCache = true)]
         public async Task<object> Get(PRepListRequest request)
         {
             using (var db = Db.Instance())

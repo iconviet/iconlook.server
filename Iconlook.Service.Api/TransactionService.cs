@@ -2,11 +2,13 @@
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
+using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class TransactionService : ServiceBase
     {
+        [CacheResponse(Duration = 2, LocalCache = true)]
         public object Any(TransactionListRequest request)
         {
             using (var redis = Redis.Instance())

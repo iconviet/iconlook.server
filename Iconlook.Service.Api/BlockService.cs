@@ -2,13 +2,17 @@
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
+using Serilog;
+using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class BlockService : ServiceBase
     {
+        [CacheResponse(Duration = 2, LocalCache = true)]
         public object Any(BlockListRequest request)
         {
+            Log.Information("Cache hit");
             using (var redis = Redis.Instance())
             {
                 var items = redis.As<BlockResponse>().GetAll().OrderByDescending(x => x.Height);
