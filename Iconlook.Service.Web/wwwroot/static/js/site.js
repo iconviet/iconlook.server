@@ -31,8 +31,8 @@
     }
 });
 $(document).ready(function() {
-    var currentPeerBlockCount = 1;
     const source = new EventSource('/sse/stream?channel=iconlook');
+    var leaderBlockCount = parseInt($('.leader-block-count').text());
     source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         handlers: {
@@ -54,46 +54,48 @@ $(document).ready(function() {
                 }
                 if (message.cmd === 'PeersUpdatedSignal') {
                     if (json.busy != null) {
-                        var id = json.busy.peerId.toString();
-                        if ($('.peer-state-' + id + ' span').text() === 'IDLE') {
-                            $('.peer-state-' + id + ' span').text('BUSY');
-                            $('.peer-name-' + id).addClass('font-weight-bold');
-                            $('.peer-state-' + id).addClass('peer-state-busy');
-                            $('.peer-state-' + id).closest('tr').hide().fadeIn(500);
-                        }
-                        if ($('.current-peer-name').text() !== json.busy.name) {
-                            $('.current-peer').hide().fadeIn(500);
-                            $('.current-peer-name').text(json.busy.name);
-                            $('.current-peer-logo').attr('src', json.busy.logoUrl);
-                            $('.current-peer-ranking').text('#' + json.busy.ranking);
-                            $('.current-peer-block-count').text(currentPeerBlockCount);
-                            if (json.busy.madeBlockCount < 10) {
-                                currentPeerBlockCount = json.busy.madeBlockCount;
-                            } else {
-                                currentPeerBlockCount = 1;
-                                $('.current-peer-block-made').text('❚');
-                                $('.current-peer-block-count').text('1');
-                                $('.current-peer-block-remaining').text('❚❚❚❚❚❚❚❚❚');
+                        json.busy.forEach(function(item, index) {
+                            var id = item.peerId.toString();
+                            if ($('.peer-state-' + id + ' span').text() === 'IDLE') {
+                                $('.peer-state-' + id + ' span').text('BUSY');
+                                $('.peer-name-' + id).addClass('font-weight-bold');
+                                $('.peer-state-' + id).addClass('peer-state-busy');
+                                $('.peer-state-' + id).closest('tr').hide().fadeIn(500);
                             }
-                        }
-                        $('.peer-state span').not('.peer-state-' + id + ' span').text('IDLE');
-                        $('.peer-name').not('.peer-name-' + id).removeClass('font-weight-bold');
-                        $('.peer-state').not('.peer-state-' + id).removeClass('peer-state-busy');
+                            if (index === 0 && $('.leader-name').text() !== item.name) {
+                                $('.leader').hide().fadeIn(500);
+                                $('.leader-name').text(item.name);
+                                $('.leader-logo').attr('src', item.logoUrl);
+                                $('.leader-ranking').text('#' + item.ranking);
+                                $('.leader-block-count').text(leaderBlockCount);
+                                if (item.madeBlockCount < 10) {
+                                    leaderBlockCount = item.madeBlockCount;
+                                } else {
+                                    leaderBlockCount = 1;
+                                    $('.leader-block-made').text('❚');
+                                    $('.leader-block-count').text('1');
+                                    $('.leader-block-remaining').text('❚❚❚❚❚❚❚❚❚');
+                                }
+                            }
+                            $('.peer-state span').not('.peer-state-' + id + ' span').text('IDLE');
+                            $('.peer-name').not('.peer-name-' + id).removeClass('font-weight-bold');
+                            $('.peer-state').not('.peer-state-' + id).removeClass('peer-state-busy');
+                        });
                     }
                 }
                 if (message.cmd === 'BlockProducedSignal') {
-                    var currentPeerBlockMade = '';
-                    var currentPeerBlockRemaining = '';
-                    for (m = 0; m < currentPeerBlockCount; m++) {
-                        currentPeerBlockMade += '❚';
+                    var leaderBlockMade = '';
+                    var leaderBlockRemaining = '';
+                    for (m = 0; m < leaderBlockCount; m++) {
+                        leaderBlockMade += '❚';
                     }
-                    for (r = currentPeerBlockCount; r < 10; r++) {
-                        currentPeerBlockRemaining += '❚';
+                    for (r = leaderBlockCount; r < 10; r++) {
+                        leaderBlockRemaining += '❚';
                     }
-                    $('.current-peer-block-made').text(currentPeerBlockMade);
-                    $('.current-peer-block-count').text(currentPeerBlockCount);
-                    if (currentPeerBlockCount < 10) currentPeerBlockCount += 1;
-                    $('.current-peer-block-remaining').text(currentPeerBlockRemaining);
+                    $('.leader-block-made').text(leaderBlockMade);
+                    $('.leader-block-count').text(leaderBlockCount);
+                    if (leaderBlockCount < 10) leaderBlockCount += 1;
+                    $('.leader-block-remaining').text(leaderBlockRemaining);
                     if ($('#block_grid .e-content tr').length > 0) {
                         if ($('#block_grid .e-content tr').length >= 22) {
                             $('#block_grid .e-content tr:last').remove();
