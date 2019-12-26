@@ -85,8 +85,8 @@
                 @{
                     if (context is PeerResponse peer)
                     {
-                        <span class="mono ls-n2 peer-produced-blocks_@peer.Id">@peer.ProducedBlocks.ToString("N0")</span>
-                        <i class="fal ml-1 fs-n2 fa-cubes positive-dark"></i>
+                        <span class="mono ls-n2 peer-produced-blocks-@peer.Id" number="@peer.ProducedBlocks">@peer.ProducedBlocks.ToString("N0")</span>
+                        <i class="fal ml-1 fs-n2 fa-cube positive-dark"></i>
                     }
                 }
             </Template>
@@ -96,8 +96,8 @@
                 @{
                     if (context is PeerResponse peer)
                     {
-                        <span class="mono ls-n2 text-light">@peer.MissedBlocks.ToString("N0")</span>
-                        <i class="fal ml-1 fs-n2 fa-cubes negative-dark"></i>
+                        <span class="mono ls-n2 text-light peer-missed-blocks-@peer.Id">@peer.MissedBlocks.ToString("N0")</span>
+                        <i class="fal ml-1 fs-n2 fa-cube negative-dark"></i>
                     }
                 }
             </Template>

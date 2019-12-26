@@ -31,7 +31,7 @@ namespace Iconlook.Service.Job
                                 using (var json = new JsonHttpClient())
                                 {
                                     var cancelation = new CancellationTokenSource();
-                                    cancelation.CancelAfter(1750);
+                                    cancelation.CancelAfter(1000);
                                     var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
                                     var url = $"http://{endpoint}/api/v1/status/peer";
                                     try

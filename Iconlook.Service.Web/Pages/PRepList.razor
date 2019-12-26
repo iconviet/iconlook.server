@@ -73,20 +73,20 @@
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">
                                 <span>LEADER</span>&nbsp;
-                                <span class="leader-ranking font-weight-bold"></span>
+                                <span class="leader-ranking font-weight-bold">#@(PeerResponse?.Ranking.ToString() ?? "0")</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <img width="16" height="16" style="margin-right: 8px;" class="leader-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=">
-                                <a class="text-dark text-condensed font-weight-semibolder leader-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e"></a>
+                                <img width="16" height="16" style="margin-right: 8px;" class="leader-logo" src="@(PeerResponse?.LogoUrl ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=")">
+                                <a class="text-dark text-condensed font-weight-semibolder leader-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@(PeerResponse?.Name.SafeSubstring(0, 24) ?? "❚")</a>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">
-                                <span class="font-weight-bold leader-block-count">0</span>
+                                <span class="font-weight-bold leader-block-mcount">@(PeerResponse?.MadeBlockCount.ToString() ?? "0")</span>
                                 <span>&nbsp;BLOCKS MADE</span>
                             </div>
                             <div class="fs-2 mono-lg">
-                                <span class="positive-light leader-block-made"></span><span class="text-light leader-block-remaining">❚❚❚❚❚❚❚❚❚❚</span>
+                                <span class="positive-light leader-block-elapse"></span><span class="text-light leader-block-remain">❚❚❚❚❚❚❚❚❚❚</span>
                             </div>
                         </div>
                     </div>

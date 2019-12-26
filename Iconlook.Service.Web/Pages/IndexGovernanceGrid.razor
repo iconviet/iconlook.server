@@ -68,11 +68,11 @@
                     {
                         if (prep.ProductivityPercentage > 0)
                         {
-                            <span class="mono positive-dark">@prep.ProductivityPercentage.ToString("P2")</span>
+                            <span class="mono positive-dark">@(0m.ToString("P2"))</span>
                         }
                         if (prep.ProductivityPercentage <= 0)
                         {
-                            <span class="mono negative-dark">@prep.ProductivityPercentage.ToString("P2")</span>
+                            <span class="mono negative-dark">@(0m.ToString("P2"))</span>
                         }
                     }
                 }

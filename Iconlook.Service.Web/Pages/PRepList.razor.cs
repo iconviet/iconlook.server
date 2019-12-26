@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Linq;
+using Agiper;
+using Iconlook.Object;
+using Iconlook.Server;
+using Microsoft.AspNetCore.Components;
+using Serilog;
+using ServiceStack.Redis;
 using Syncfusion.EJ2.Blazor.Navigations;
 
 namespace Iconlook.Service.Web.Pages
@@ -11,6 +17,8 @@ namespace Iconlook.Service.Web.Pages
         protected TabHeader ScoreMatrix;
         protected TabHeader Contribution;
         protected TabHeader Transparency;
+        protected PeerResponse PeerResponse;
+        protected ChainResponse ChainResponse;
         protected TabAnimationSettings Animation;
 
         [Parameter]
@@ -39,6 +47,17 @@ namespace Iconlook.Service.Web.Pages
                 Next = new TabAnimationNext { Duration = 0 },
                 Previous = new TabAnimationPrevious { Duration = 0 }
             };
+            using (var rolex = new Rolex())
+            {
+                using (var redis = Host.Current.Resolve<IRedisClient>())
+                {
+                    var peers = redis.As<PeerResponse>().GetAll();
+                    var chains = redis.As<ChainResponse>().GetAll();
+                    PeerResponse = peers.FirstOrDefault(x => x.State == "BlockGenerate");
+                    ChainResponse = chains.OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                    Log.Information("{Peer} peer data and {Chain} chain data loaded in {Elapsed}ms", peers.Count, chains.Count, rolex.Elapsed.TotalMilliseconds);
+                }
+            }
         }
     }
 }
