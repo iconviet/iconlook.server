@@ -68,16 +68,16 @@
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
-                            <div>
-                                <span class="fs-2 mono-lg text-dark">
-                                    <span class="ChainResponse_IcxSupply">@(ChainResponse?.IcxSupply.ToString("N0") ?? "0")</span>
-                                </span>
+                            <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
+                            <div class="fs-2 mono-lg text-dark">
+                                <span class="ChainResponse_IcxCirculation">@(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">% INFLATION</div>
-                            <span class="fs-2 mono-lg negative-dark" style="opacity: 0.75;">2.7815%</span>
+                            <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
+                            <div class="fs-2 mono-lg text-dark">
+                                <span class="ChainResponse_IcxSupply">@(ChainResponse?.IcxSupply.ToString("N0") ?? "0")</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,26 +90,29 @@
                 <div class="row text-nowrap">
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_IcxCirculation">@(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")</span>
-                            </div>
+                            <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
+                            <span class="fs-2 mono-lg primary">19.65%</span>&nbsp;
+                            <span class="fs-n2 ls-n2 mono text-light"><i>( r<sub>rep</sub> * 3 )</i></span>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">% DEFLATION</div>
-                            <span class="fs-2 mono-lg positive-dark" style="opacity: 0.75;">0.1578%</span>
-                        </div>
-                    </div>
-                    <div class="col d-inline-flex border-bottom">
-                        <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
                             <div class="fs-2 mono-lg text-dark">
                                 <span class="ChainResponse_PublicTreasury">@(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="col d-inline-flex border-bottom">
+                        <div class="px-1 py-3 mr-auto">
+                            <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
+                            <div class="fs-2 mono-lg text-dark">
+                                <span class="ChainResponse_TransactionCount">@(ChainResponse?.TransactionCount.ToString("N0") ?? "0")</span>
+                            </div>
+                        </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">% 24H CHG.</div>
-                            <span class="fs-2 mono-lg positive-dark" style="opacity: 0.75;">0.1578%</span>
+                            <div class="py-1 fs-n3 text-light">BLOCK HEIGHT</div>
+                            <div class="fs-2 mono-lg text-dark">
+                                <span class="ChainResponse_BlockHeight">@(ChainResponse?.BlockHeight.ToString("N0") ?? "0")</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -216,7 +219,44 @@
         <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
-                    <div class="col d-inline-flex leader border-right border-bottom">
+                    <div class="col d-inline-flex border-right border-bottom">
+                        <div class="px-1 py-3 mr-auto">
+                            <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
+                            <div>
+                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">@(ChainResponse?.TotalStaked.ToString("N0") ?? "0")</span>
+                                <span class="mono-lg text-light">•</span>
+                                <span class="fs-2 mono-lg primary">18.07%</span>
+                            </div>
+                        </div>
+                        <div class="px-1 py-3 text-right">
+                            <div class="py-1 fs-n3 text-light">UNSTAKING</div>
+                            <div class="fs-2 mono-lg text-dark">885,638</div>
+                        </div>
+                        
+                    </div>
+                    <div class="col d-inline-flex border-right border-bottom">
+                        <div class="px-1 py-3 mr-auto">
+                            <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
+                            <div>
+                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
+                                <span class="mono-lg text-light">•</span>
+                                <span class="mono-lg text-light">98.92%</span>
+                            </div>
+                        </div>
+                        <div class="px-1 py-3 text-right">
+                            <div class="py-1 fs-n3 text-light">VOTERS</div>
+                            <div class="fs-2 mono-lg text-dark">15,638</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md mb-3">
+        <div class="card shadow-sm border-bottom-0">
+            <div class="container">
+                <div class="row text-nowrap">
+                    <div class="col leader d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">
                                 <span>LEADER</span>&nbsp;
@@ -237,50 +277,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
-                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">@(ChainResponse?.TotalStaked.ToString("N0") ?? "0")</span>
-                            <span class="mono-lg text-light">•</span>
-                            <span class="mono-lg primary">18.07%</span></div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">UNSTAKING</div>
-                            <div class="fs-2 mono-lg text-dark">885,638</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md mb-3">
-        <div class="card shadow-sm border-bottom-0">
-            <div class="container">
-                <div class="row text-nowrap">
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
-                            <div><span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
-                            <span class="mono-lg text-light">•</span>
-                            <span class="mono-lg primary">98.92%</span></div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">VOTERS</div>
-                            <div class="fs-2 mono-lg text-dark">15,638</div>
-                        </div>
-                    </div>
                     <div class="col d-inline-flex border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
+                            <div class="py-1 fs-n3 text-light">I-SCORE IN</div>
                             <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_TransactionCount">@(ChainResponse?.TransactionCount.ToString("N0") ?? "0")</span>
+                                1h 50m 30s
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">BLOCK HEIGHT</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_BlockHeight">@(ChainResponse?.BlockHeight.ToString("N0") ?? "0")</span>
-                            </div>
+                            <div class="py-1 fs-n3 text-light">NEXT TERM</div>
+                            <span class="fs-2 mono-lg text-dark">13,456,789</span>
                         </div>
                     </div>
                 </div>
