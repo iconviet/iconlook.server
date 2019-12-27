@@ -49,7 +49,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170">
+        <GridColumn Width="225">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -64,7 +64,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" TextAlign="TextAlign.Right">
+        <GridColumn Width="50">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -80,29 +80,20 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" TextAlign="TextAlign.Right">
+        <GridColumn Width="110" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PeerResponse peer)
                     {
-                        <span class="mono ls-n2 peer-produced-blocks-@peer.Id" number="@peer.ProducedBlocks">@peer.ProducedBlocks.ToString("N0")</span>
-                        <i class="fal ml-1 fs-n2 fa-cube positive-dark"></i>
+                        <div class="text-light">
+                            <span class="mono ls-n2 peer-produced-blocks-@peer.Id" number="@peer.ProducedBlocks">@peer.ProducedBlocks.ToString("N0")</span>
+                            <i class="fal ml-1 fs-n2 fa-cube"></i>
+                        </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="70" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PeerResponse peer)
-                    {
-                        <span class="mono ls-n2 text-light peer-missed-blocks-@peer.Id">@peer.MissedBlocks.ToString("N0")</span>
-                        <i class="fal ml-1 fs-n2 fa-cube negative-dark"></i>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="55" TextAlign="TextAlign.Right">
+        <GridColumn Width="80" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PeerResponse peer)
