@@ -18,6 +18,16 @@ namespace Iconlook.Service.Web
             }
         }
 
+        public void ConfigureCulture(Container container)
+        {
+            var culture = CultureInfo.InvariantCulture;
+            var current = culture.Clone() as CultureInfo;
+            current.NumberFormat.PercentPositivePattern = 1;
+            current.NumberFormat.PercentNegativePattern = 1;
+            CultureInfo.DefaultThreadCurrentCulture = current;
+            CultureInfo.DefaultThreadCurrentUICulture = current;
+        }
+
         public override void Configure(Container container)
         {
             base.Configure(container);
@@ -25,15 +35,6 @@ namespace Iconlook.Service.Web
             Config.EnableFeatures = Feature.Json;
             SetConfig(new HostConfig { UseCamelCase = false });
             RegisterServicesInAssembly(typeof(ApiHost).Assembly);
-        }
-
-        public void ConfigureCulture(Container container)
-        {
-            var culture = CultureInfo.InvariantCulture.Clone() as CultureInfo;
-            culture.NumberFormat.PercentPositivePattern = 1;
-            culture.NumberFormat.PercentNegativePattern = 1;
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
 
         public override RouteAttribute[] GetRouteAttributes(Type type)

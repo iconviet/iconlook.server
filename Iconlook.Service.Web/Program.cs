@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -56,7 +55,7 @@ namespace Iconlook.Service.Web
                     {
                         connection = connection.Replace("redis", "localhost");
                     }
-                    
+
                     services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection);
                 }
                 if (!OperatingSystem.IsWindows)

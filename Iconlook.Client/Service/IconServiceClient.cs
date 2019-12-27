@@ -13,7 +13,7 @@ namespace Iconlook.Client.Service
     public class IconServiceClient : IIconService
     {
         private readonly IconService _client;
-        
+
         private static readonly HttpClient HttpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(2)
