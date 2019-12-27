@@ -17,7 +17,7 @@ namespace Iconlook.Service.Job
     {
         private static readonly HttpClient HttpClient = new HttpClient
         {
-            Timeout = TimeSpan.FromMilliseconds(1000)
+            Timeout = TimeSpan.FromSeconds(1)
         };
 
         public override async Task RunAsync()

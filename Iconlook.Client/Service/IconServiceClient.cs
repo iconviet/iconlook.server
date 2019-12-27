@@ -16,7 +16,7 @@ namespace Iconlook.Client.Service
 
         private static readonly HttpClient HttpClient = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(2)
+            Timeout = TimeSpan.FromSeconds(30)
         };
 
         public IconServiceClient(string endpoint = "http://ctzn.iconviet.io:9000")

@@ -11,7 +11,7 @@ namespace Iconlook.Client.Tracker
 
         private static readonly HttpClient HttpClient = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(10)
+            Timeout = TimeSpan.FromSeconds(30)
         };
 
         public IconTrackerClient()
