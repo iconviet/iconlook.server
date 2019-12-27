@@ -19,7 +19,9 @@ namespace Iconlook.Object
         public long StakingAddressCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public long UnstakingAddressCount { get; set; }
-
+        public double StakedPercentage => (double) TotalStaked / IcxSupply;
+        public double DelegatedPercentage => (double) TotalDelegated / IcxSupply;
+        
         protected override void AddRules(Validator<ChainResponse> validator)
         {
             base.AddRules(validator);

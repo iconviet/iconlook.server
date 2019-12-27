@@ -229,7 +229,9 @@
                                     @(ChainResponse?.TotalStaked.ToString("N0") ?? "0")
                                 </span>
                                 <span class="mono-lg text-light">•</span>
-                                <span class="mono-lg primary">18.07%</span>
+                                <span class="mono-lg primary">
+                                    @(ChainResponse?.StakedPercentage.ToString("P2") ?? "0")
+                                </span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
@@ -242,13 +244,15 @@
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">ICX DELEGATED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
+                            <div class="py-1 fs-n3 text-light">ICX VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
                             <div>
                                 <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">
                                     @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
                                 </span>
                                 <span class="mono-lg text-light">•</span>
-                                <span class="mono-lg text-light">98.92%</span>
+                                <span class="mono-lg text-light">
+                                    @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0")
+                                </span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
