@@ -21,7 +21,7 @@ namespace Iconlook.Service.Job
     {
         private static readonly HttpClient HttpClient = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(60)
+            Timeout = TimeSpan.FromSeconds(5)
         };
 
         public override async Task RunAsync()
@@ -100,7 +100,7 @@ namespace Iconlook.Service.Job
             }
             catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePRepsJob), exception.Message);
+                Log.Error("{Job} failed. Error: {Message}. {StackTrace}", nameof(UpdatePRepsJob), exception.Message, exception.StackTrace);
             }
         }
     }

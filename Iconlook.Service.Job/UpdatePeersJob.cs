@@ -71,7 +71,7 @@ namespace Iconlook.Service.Job
             }
             catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), exception.Message);
+                //Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), exception.Message);
             }
         }
     }
