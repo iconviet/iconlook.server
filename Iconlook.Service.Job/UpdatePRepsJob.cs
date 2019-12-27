@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
@@ -18,6 +18,11 @@ namespace Iconlook.Service.Job
 {
     public class UpdatePRepsJob : JobBase
     {
+        private static readonly HttpClient HttpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(60)
+        };
+
         public override async Task RunAsync()
         {
             try
@@ -25,12 +30,12 @@ namespace Iconlook.Service.Job
                 using (var r1 = new Rolex())
                 using (var db = Db.Instance())
                 using (var redis = Redis.Instance())
-                using (var json = new JsonHttpClient())
                 {
                     var prep_objs = new List<PRep>();
                     var icon = new IconServiceClient();
                     var prep_rpcs = await icon.GetPReps();
                     var prep_info = await icon.GetPRepInfo();
+                    var json = new JsonHttpClient { HttpClient = HttpClient };
                     await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                     {
                         using (var r2 = new Rolex())
@@ -43,9 +48,7 @@ namespace Iconlook.Service.Job
                                 var details = prep.GetDetails();
                                 if (details.HasValue())
                                 {
-                                    var cancelation = new CancellationTokenSource();
-                                    cancelation.CancelAfter(60000);
-                                    var response = await json.GetAsync<string>(details, cancelation.Token);
+                                    var response = await json.GetAsync<string>(details);
                                     if (response.HasValue())
                                     {
                                         var @object = DynamicJson.Deserialize(response);
@@ -98,9 +101,9 @@ namespace Iconlook.Service.Job
                     Log.Information("**************************************************");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePRepsJob), ex.Message);
+                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePRepsJob), exception.Message);
             }
         }
     }

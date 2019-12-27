@@ -21,7 +21,7 @@ namespace Iconlook.Object
         protected override void AddRules(Validator<BlockResponse> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.Height).GreaterThan(0);
+            validator.RuleFor(x => x.Id).NotEmpty();
         }
     }
 }

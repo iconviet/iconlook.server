@@ -1,4 +1,5 @@
 ﻿using Agiper.Object;
+using FluentValidation;
 
 namespace Iconlook.Object
 {
@@ -18,5 +19,11 @@ namespace Iconlook.Object
         public int MadeBlockCount { get; set; }
         public int LeaderMadeBlockCount { get; set; }
         public double ProductivityPercentage { get; set; }
+
+        protected override void AddRules(Validator<PeerResponse> validator)
+        {
+            base.AddRules(validator);
+            validator.RuleFor(x => x.Id).NotEmpty();
+        }
     }
 }

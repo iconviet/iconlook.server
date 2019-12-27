@@ -1,5 +1,6 @@
 ﻿using System;
 using Agiper.Object;
+using FluentValidation;
 
 namespace Iconlook.Object
 {
@@ -18,5 +19,11 @@ namespace Iconlook.Object
         public decimal Amount { get; set; }
         public float StepPrice { get; set; }
         public DateTimeOffset Timestamp { get; set; }
+
+        protected override void AddRules(Validator<TransactionResponse> validator)
+        {
+            base.AddRules(validator);
+            validator.RuleFor(x => x.Id).NotEmpty();
+        }
     }
 }

@@ -96,9 +96,9 @@ namespace Iconlook.Service.Job
                 }
                 LastBlockHeight = (long) last_block.GetHeight();
             }
-            catch(Exception ex)
+            catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}", nameof(UpdateChainJob), ex.Message);
+                Log.Error("{Job} failed. Error: {Message}", nameof(UpdateChainJob), exception.Message);
             }
         }
     }

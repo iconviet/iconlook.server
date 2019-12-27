@@ -10,7 +10,10 @@ namespace Iconlook.Client.Chainalytic
     {
         private readonly JsonHttpClient _client;
 
-        private static readonly HttpClient HttpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(2)
+        };
 
         public ChainalyticClient()
         {

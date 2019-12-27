@@ -1,5 +1,6 @@
 ﻿using System;
 using Agiper.Object;
+using FluentValidation;
 
 namespace Iconlook.Object
 {
@@ -30,5 +31,11 @@ namespace Iconlook.Object
         public DateTimeOffset Timestamp { get; set; }
         public double DelegatedPercentage { get; set; }
         public double ProductivityPercentage { get; set; }
+
+        protected override void AddRules(Validator<PRepResponse> validator)
+        {
+            base.AddRules(validator);
+            validator.RuleFor(x => x.Id).NotEmpty();
+        }
     }
 }

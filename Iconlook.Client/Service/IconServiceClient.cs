@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Numerics;
@@ -11,33 +12,36 @@ namespace Iconlook.Client.Service
 {
     public class IconServiceClient : IIconService
     {
-        private readonly IconService _icon;
+        private readonly IconService _client;
         
-        private static readonly HttpClient HttpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(2)
+        };
 
         public IconServiceClient(string endpoint = "http://ctzn.iconviet.io:9000")
         {
-            _icon = new IconService(new HttpProvider(HttpClient, $"{endpoint}/api/v3"));
+            _client = new IconService(new HttpProvider(HttpClient, $"{endpoint}/api/v3"));
         }
 
         public Task<Block> GetLastBlock()
         {
-            return _icon.GetLastBlock();
+            return _client.GetLastBlock();
         }
 
         public Task<Block> GetBlock(Bytes hash)
         {
-            return _icon.GetBlock(hash);
+            return _client.GetBlock(hash);
         }
 
         public Task<BigInteger> GetTotalSupply()
         {
-            return _icon.GetTotalSupply();
+            return _client.GetTotalSupply();
         }
 
         public Task<T> CallAsync<T>(Call<T> call)
         {
-            return _icon.CallAsync(call);
+            return _client.CallAsync(call);
         }
 
         public Task<PRepRpc> GetPRep(string address)
@@ -47,7 +51,7 @@ namespace Iconlook.Client.Service
 
         public Task<Block> GetBlock(BigInteger height)
         {
-            return _icon.GetBlock(height);
+            return _client.GetBlock(height);
         }
 
         public Task<BigInteger> GetBalance(string address)
@@ -57,7 +61,7 @@ namespace Iconlook.Client.Service
 
         public Task<BigInteger> GetBalance(Address address)
         {
-            return _icon.GetBalance(address);
+            return _client.GetBalance(address);
         }
 
         public Task<List<ScoreApi>> GetScoreApi(string address)
@@ -67,22 +71,22 @@ namespace Iconlook.Client.Service
 
         public Task<List<ScoreApi>> GetScoreApi(Address address)
         {
-            return _icon.GetScoreApi(address);
+            return _client.GetScoreApi(address);
         }
 
         public Task<ConfirmedTransaction> GetTransaction(Bytes hash)
         {
-            return _icon.GetTransaction(hash);
+            return _client.GetTransaction(hash);
         }
 
         public Task<TransactionResult> GetTransactionResult(Bytes hash)
         {
-            return _icon.GetTransactionResult(hash);
+            return _client.GetTransactionResult(hash);
         }
 
         public Task<Bytes> SendTransaction(SignedTransaction transaction)
         {
-            return _icon.SendTransaction(transaction);
+            return _client.SendTransaction(transaction);
         }
 
         public async Task<IissInfoRpc> GetIissInfo()

@@ -23,16 +23,7 @@ namespace Iconlook.Object
         protected override void AddRules(Validator<ChainResponse> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.MarketCap).GreaterThan(0);
-            validator.RuleFor(x => x.IcxSupply).GreaterThan(0);
             validator.RuleFor(x => x.BlockHeight).GreaterThan(0);
-            validator.RuleFor(x => x.TotalStaked).GreaterThan(0);
-            validator.RuleFor(x => x.TotalUnstaking).GreaterThan(0);
-            validator.RuleFor(x => x.TotalDelegated).GreaterThan(0);
-            validator.RuleFor(x => x.IcxCirculation).GreaterThan(0);
-            validator.RuleFor(x => x.PublicTreasury).GreaterThan(0);
-            validator.RuleFor(x => x.TransactionCount).GreaterThan(0);
-            validator.RuleFor(x => x.StakingAddressCount).GreaterThan(0);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
@@ -14,6 +14,11 @@ namespace Iconlook.Service.Job
 {
     public class UpdatePeersJob : JobBase
     {
+        private static readonly HttpClient HttpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromMilliseconds(1000)
+        };
+
         public override async Task RunAsync()
         {
             try
@@ -28,35 +33,31 @@ namespace Iconlook.Service.Job
                         {
                             return Task.Run(async () =>
                             {
-                                using (var json = new JsonHttpClient())
+                                var client = new JsonHttpClient { HttpClient = HttpClient };
+                                var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
+                                var url = $"http://{endpoint}/api/v1/status/peer";
+                                try
                                 {
-                                    var cancelation = new CancellationTokenSource();
-                                    cancelation.CancelAfter(1000);
-                                    var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
-                                    var url = $"http://{endpoint}/api/v1/status/peer";
-                                    try
+                                    var response = await client.GetAsync<string>(url);
+                                    if (response.HasValue())
                                     {
-                                        var response = await json.GetAsync<string>(url, cancelation.Token);
-                                        if (response.HasValue())
+                                        var @object = DynamicJson.Deserialize(response);
+                                        peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
                                         {
-                                            var @object = DynamicJson.Deserialize(response);
-                                            peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
-                                            {
-                                                x.Id = @object.peer_id;
-                                                x.State = @object.state;
-                                                x.Status = @object.status;
-                                                x.PeerId = @object.peer_id;
-                                                x.Name = x.Name.SafeSubstring(0, 24);
-                                                x.PeerType = int.Parse(@object.peer_type);
-                                                x.BlockHeight = long.Parse(@object.block_height);
-                                                x.MadeBlockCount = int.Parse(@object.made_block_count);
-                                                x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
-                                            }));
-                                        }
+                                            x.Id = @object.peer_id;
+                                            x.State = @object.state;
+                                            x.Status = @object.status;
+                                            x.PeerId = @object.peer_id;
+                                            x.Name = x.Name.SafeSubstring(0, 24);
+                                            x.PeerType = int.Parse(@object.peer_type);
+                                            x.BlockHeight = long.Parse(@object.block_height);
+                                            x.MadeBlockCount = int.Parse(@object.made_block_count);
+                                            x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
+                                        }));
                                     }
-                                    catch
-                                    {
-                                    }
+                                }
+                                catch
+                                {
                                 }
                             });
                         }));
@@ -73,9 +74,9 @@ namespace Iconlook.Service.Job
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), ex.Message);
+                Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), exception.Message);
             }
         }
     }

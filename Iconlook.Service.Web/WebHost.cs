@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Funq;
 using Iconlook.Server;
 using Iconlook.Service.Api;
@@ -20,9 +21,19 @@ namespace Iconlook.Service.Web
         public override void Configure(Container container)
         {
             base.Configure(container);
+            ConfigureCulture(container);
             Config.EnableFeatures = Feature.Json;
             SetConfig(new HostConfig { UseCamelCase = false });
             RegisterServicesInAssembly(typeof(ApiHost).Assembly);
+        }
+
+        public void ConfigureCulture(Container container)
+        {
+            var culture = CultureInfo.InvariantCulture.Clone() as CultureInfo;
+            culture.NumberFormat.PercentPositivePattern = 1;
+            culture.NumberFormat.PercentNegativePattern = 1;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
 
         public override RouteAttribute[] GetRouteAttributes(Type type)
