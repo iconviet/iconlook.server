@@ -61,22 +61,22 @@
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">MARKET CAP (USD)</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                $ <span class="ChainResponse_MarketCap">@(ChainResponse?.MarketCap.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_MarketCap">
+                                $ @(ChainResponse?.MarketCap.ToString("N0") ?? "0")
                             </div>
                         </div>
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_IcxCirculation">@(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_IcxCirculation">
+                                @(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_IcxSupply">@(ChainResponse?.IcxSupply.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_IcxSupply">
+                                @(ChainResponse?.IcxSupply.ToString("N0") ?? "0")
                             </div>
                         </div>
                     </div>
@@ -96,22 +96,22 @@
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_PublicTreasury">@(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_PublicTreasury">
+                                @(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")
                             </div>
                         </div>
                     </div>
                     <div class="col d-inline-flex border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_TransactionCount">@(ChainResponse?.TransactionCount.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_TransactionCount">
+                                @(ChainResponse?.TransactionCount.ToString("N0") ?? "0")
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">BLOCK HEIGHT</div>
-                            <div class="fs-2 mono-lg text-dark">
-                                <span class="ChainResponse_BlockHeight">@(ChainResponse?.BlockHeight.ToString("N0") ?? "0")</span>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_BlockHeight">
+                                @(ChainResponse?.BlockHeight.ToString("N0") ?? "0")
                             </div>
                         </div>
                     </div>
@@ -221,31 +221,39 @@
                 <div class="row text-nowrap">
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
+                            <div class="py-1 fs-n3 text-light">ICX STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
                             <div>
-                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">@(ChainResponse?.TotalStaked.ToString("N0") ?? "0")</span>
+                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">
+                                    @(ChainResponse?.TotalStaked.ToString("N0") ?? "0")
+                                </span>
                                 <span class="mono-lg text-light">•</span>
                                 <span class="mono-lg primary">18.07%</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">UNSTAKING</div>
-                            <div class="fs-2 mono-lg text-dark ChainResponse_TotalUnstaking">@(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")</div>
+                            <div class="py-1 fs-n3 text-light">ICX UNSTAKING</div>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_TotalUnstaking">
+                                @(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")
+                            </div>
                         </div>
                         
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
+                            <div class="py-1 fs-n3 text-light">ICX DELEGATED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
                             <div>
-                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
+                                <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">
+                                    @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
+                                </span>
                                 <span class="mono-lg text-light">•</span>
                                 <span class="mono-lg text-light">98.92%</span>
                             </div>
                         </div>
                         <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">VOTERS</div>
-                            <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount">@(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")</div>
+                            <div class="py-1 fs-n3 text-light">STAKERS</div>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount">
+                                @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
+                            </div>
                         </div>
                     </div>
                 </div>

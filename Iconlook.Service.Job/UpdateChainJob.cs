@@ -10,6 +10,7 @@ using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
 using NServiceBus;
+using Serilog;
 
 namespace Iconlook.Service.Job
 {
@@ -95,8 +96,9 @@ namespace Iconlook.Service.Job
                 }
                 LastBlockHeight = (long) last_block.GetHeight();
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error("{Job} failed. Error: {Message}", nameof(UpdateChainJob), ex.Message);
             }
         }
     }
