@@ -19,7 +19,7 @@ namespace Iconlook.Client.Service
             Timeout = TimeSpan.FromSeconds(30)
         };
 
-        public IconServiceClient(string endpoint = "http://ctzn.iconviet.io:9000")
+        public IconServiceClient(string endpoint = "http://199.247.5.144:9000")
         {
             _client = new IconService(new HttpProvider(HttpClient, $"{endpoint}/api/v3"));
         }
