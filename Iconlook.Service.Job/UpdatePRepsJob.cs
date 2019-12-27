@@ -44,21 +44,17 @@ namespace Iconlook.Service.Job
                             string logo_url = null;
                             var ranking = prep_rpcs.IndexOf(prep) + 1;
                             prep = await icon.GetPRep(prep.GetAddress());
-                            try
+                            var details = prep.GetDetails();
+                            if (details.HasValue())
                             {
-                                var details = prep.GetDetails();
-                                if (details.HasValue())
+                                var response = await json.GetAsync<string>(details);
+                                if (response.HasValue())
                                 {
-                                    var response = await json.GetAsync<string>(details);
-                                    if (response.HasValue())
-                                    {
-                                        var @object = DynamicJson.Deserialize(response);
-                                        logo_url = @object?.representative?.logo?.logo_256;
-                                        // Log.Information("{Name} latest information loaded in {Elapsed}ms", prep.GetName(), r2.Elapsed.TotalMilliseconds);
-                                    }
+                                    var @object = DynamicJson.Deserialize(response);
+                                    logo_url = @object?.representative?.logo?.logo_256;
                                 }
                             }
-                            catch
+                            else
                             {
                                 Log.Warning("{Name} information failed to load in {Elapsed}ms", prep.GetName(), r2.Elapsed.TotalMilliseconds);
                             }

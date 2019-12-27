@@ -25,76 +25,79 @@ namespace Iconlook.Service.Job
             try
             {
                 var service = new IconServiceClient();
-                var chainalytic = new ChainalyticClient();
                 var last_block = await service.GetLastBlock();
-                if (last_block.GetHeight() > LastBlockHeight)
+                if (last_block != null)
                 {
-                    var tracker = new IconTrackerClient();
-                    var main_info = await tracker.GetMainInfo();
-                    var iiss_info = await service.GetIissInfo();
-                    var prep_info = await service.GetPRepInfo();
-                    var staking_info = await chainalytic.GetStakingInfo();
-                    var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
+                    if (last_block.GetHeight() > LastBlockHeight)
                     {
-                        Id = x.GetTxHash().ToString(),
-                        Hash = x.GetTxHash().ToString(),
-                        Block = (long) last_block.GetHeight(),
-                        To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
-                        From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
-                        Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
-                        Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                        Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
-                    }).ToList();
-                    var block = new BlockResponse
-                    {
-                        PeerId = last_block.GetPeerId(),
-                        Id = (long) last_block.GetHeight(),
-                        Fee = transactions.Sum(x => x.Fee),
-                        TransactionCount = transactions.Count,
-                        Height = (long) last_block.GetHeight(),
-                        Hash = last_block.GetBlockHash().ToString(),
-                        TotalAmount = transactions.Sum(x => x.Amount),
-                        PrevHash = last_block.GetPrevBlockHash().ToString(),
-                        Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
-                    };
-                    var chain = new ChainResponse
-                    {
-                        MarketCap = (long) main_info.GetMarketCap(),
-                        IcxSupply = (long) main_info.GetIcxSupply(),
-                        BlockHeight = (long) iiss_info.GetBlockHeight(),
-                        IcxCirculation = (long) main_info.GetIcxCirculation(),
-                        PublicTreasury = (long) main_info.GetPublicTreasury(),
-                        Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
-                        TransactionCount = (long) main_info.GetTransactionCount(),
-                        TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
-                        StakingAddressCount = (long) staking_info.GetStakingAddressCount(),
-                        TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop(),
-                        UnstakingAddressCount = (long) staking_info.GetUnstakingAddressCount(),
-                        TotalUnstaking = (long) staking_info.GetTotalUnstaking().ToBigInteger()
-                    };
-                    await Channel.Publish(new BlockProducedSignal
-                    {
-                        Block = block,
-                        Transactions = transactions
-                    });
-                    await Endpoint.Publish(new BlockProducedEvent
-                    {
-                        Block = block,
-                        Transactions = transactions
-                    });
-                    await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
-                    await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
-                    await Task.Run(() =>
-                    {
-                        using (var redis = Redis.Instance())
+                        var tracker = new IconTrackerClient();
+                        var chainalytic = new ChainalyticClient();
+                        var main_info = await tracker.GetMainInfo();
+                        var iiss_info = await service.GetIissInfo();
+                        var prep_info = await service.GetPRepInfo();
+                        var staking_info = await chainalytic.GetStakingInfo();
+                        var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                         {
-                            redis.As<BlockResponse>().Store(block, TimeSpan.FromMinutes(2));
-                            redis.As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(2));
-                            transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(2)));
-                        }
-                    });
+                            Id = x.GetTxHash().ToString(),
+                            Hash = x.GetTxHash().ToString(),
+                            Block = (long) last_block.GetHeight(),
+                            To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
+                            From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
+                            Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
+                            Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
+                            Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
+                        }).ToList();
+                        var block = new BlockResponse
+                        {
+                            PeerId = last_block.GetPeerId(),
+                            Id = (long) last_block.GetHeight(),
+                            Fee = transactions.Sum(x => x.Fee),
+                            TransactionCount = transactions.Count,
+                            Height = (long) last_block.GetHeight(),
+                            Hash = last_block.GetBlockHash().ToString(),
+                            TotalAmount = transactions.Sum(x => x.Amount),
+                            PrevHash = last_block.GetPrevBlockHash().ToString(),
+                            Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
+                        };
+                        var chain = new ChainResponse
+                        {
+                            MarketCap = (long) main_info?.GetMarketCap(),
+                            IcxSupply = (long) main_info?.GetIcxSupply(),
+                            BlockHeight = (long) iiss_info?.GetBlockHeight(),
+                            IcxCirculation = (long) main_info?.GetIcxCirculation(),
+                            PublicTreasury = (long) main_info?.GetPublicTreasury(),
+                            Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
+                            TransactionCount = (long) main_info?.GetTransactionCount(),
+                            TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
+                            StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
+                            TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcxFromLoop(),
+                            UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
+                            TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
+                        };
+                        await Channel.Publish(new BlockProducedSignal
+                        {
+                            Block = block,
+                            Transactions = transactions
+                        });
+                        await Endpoint.Publish(new BlockProducedEvent
+                        {
+                            Block = block,
+                            Transactions = transactions
+                        });
+                        await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
+                        await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
+                        await Task.Run(() =>
+                        {
+                            using (var redis = Redis.Instance())
+                            {
+                                redis.As<BlockResponse>().Store(block, TimeSpan.FromMinutes(2));
+                                redis.As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(2));
+                                transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromMinutes(2)));
+                            }
+                        });
+                    }
+                    LastBlockHeight = (long) last_block.GetHeight();
                 }
-                LastBlockHeight = (long) last_block.GetHeight();
             }
             catch (Exception exception)
             {

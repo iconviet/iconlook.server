@@ -22,14 +22,12 @@ namespace Iconlook.Client.Tracker
 
         public async Task<MainResponse> GetMainInfo()
         {
-            var response = await _client.GetAsync<MainResponse>("/v0/main/mainInfo");
-            return response;
+            return await _client.GetAsync<MainResponse>("/v0/main/mainInfo");
         }
 
         public async Task<PageResponse<List<PRepResponse>>> GetPReps()
         {
-            var response = await _client.GetAsync<PageResponse<List<PRepResponse>>>("/v3/iiss/prep/list?count=100");
-            return response;
+            return await _client.GetAsync<PageResponse<List<PRepResponse>>>("/v3/iiss/prep/list?count=100");
         }
     }
 }
