@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Client;
+using Iconlook.Client.Chainalytic;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;
 using Iconlook.Message;
@@ -23,6 +24,7 @@ namespace Iconlook.Service.Job
             try
             {
                 var service = new IconServiceClient();
+                var chainalytic = new ChainalyticClient();
                 var last_block = await service.GetLastBlock();
                 if (last_block.GetHeight() > LastBlockHeight)
                 {
@@ -30,6 +32,7 @@ namespace Iconlook.Service.Job
                     var main_info = await tracker.GetMainInfo();
                     var iiss_info = await service.GetIissInfo();
                     var prep_info = await service.GetPRepInfo();
+                    var staking_info = await chainalytic.GetStakingInfo();
                     var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                     {
                         Id = x.GetTxHash().ToString(),
@@ -63,7 +66,10 @@ namespace Iconlook.Service.Job
                         Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
                         TransactionCount = (long) main_info.GetTransactionCount(),
                         TotalStaked = (long) prep_info.GetTotalStaked().ToIcxFromLoop(),
-                        TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop()
+                        StakingAddressCount = (long) staking_info.GetStakingAddressCount(),
+                        TotalDelegated = (long) prep_info.GetTotalDelegated().ToIcxFromLoop(),
+                        UnstakingAddressCount = (long) staking_info.GetUnstakingAddressCount(),
+                        TotalUnstaking = (long) staking_info.GetTotalUnstaking().ToBigInteger()
                     };
                     await Channel.Publish(new BlockProducedSignal
                     {

@@ -54,7 +54,7 @@
         <div class="card shadow-sm border-bottom-0">
             <div class="container">
                 <div class="row text-nowrap">
-                    <div class="col d-inline-flex leader border-right border-bottom">
+                    <div class="col d-inline-flex border-right border-bottom">
                         <div class="px-1 py-3 mr-auto">
                             <div class="py-1 fs-n3 text-light">PRICE (USD)&nbsp;&nbsp;&nbsp;&nbsp;% 24H</div>
                             <div><span class="fs-2 mono-lg text-dark">0.2513</span>&nbsp;&nbsp;<span class="fs-2 mono-lg positive-dark" style="opacity: 0.8;">+5.06%</span></div>
@@ -230,7 +230,7 @@
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">UNSTAKING</div>
-                            <div class="fs-2 mono-lg text-dark">885,638</div>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_TotalUnstaking">@(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")</div>
                         </div>
                         
                     </div>
@@ -245,7 +245,7 @@
                         </div>
                         <div class="px-1 py-3 text-right">
                             <div class="py-1 fs-n3 text-light">VOTERS</div>
-                            <div class="fs-2 mono-lg text-dark">15,638</div>
+                            <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount">@(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")</div>
                         </div>
                     </div>
                 </div>
