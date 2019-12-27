@@ -13,6 +13,7 @@ using Iconlook.Object;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
+using JsonHttpClient = Iconlook.Client.JsonHttpClient;
 
 namespace Iconlook.Service.Job
 {

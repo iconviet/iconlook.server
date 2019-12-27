@@ -9,6 +9,7 @@ using Iconlook.Object;
 using Iconlook.Server;
 using Serilog;
 using ServiceStack;
+using JsonHttpClient = Iconlook.Client.JsonHttpClient;
 
 namespace Iconlook.Service.Job
 {

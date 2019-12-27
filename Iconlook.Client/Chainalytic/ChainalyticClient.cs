@@ -47,7 +47,7 @@ namespace Iconlook.Client.Chainalytic
                         ApiId = "get_staking_info_last_block"
                     }
                 });
-                return response;
+                return response ?? new StakingInfoRpc { Id = 123 };
             }
         }
     }

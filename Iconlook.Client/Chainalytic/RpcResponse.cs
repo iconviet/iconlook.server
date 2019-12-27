@@ -2,8 +2,13 @@
 {
     public class RpcResponse
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Jsonrpc { get; set; }
         public dynamic Result { get; set; }
+
+        public RpcResponse()
+        {
+            Jsonrpc = "2.0";
+        }
     }
 }
