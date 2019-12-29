@@ -1,13 +1,9 @@
 ﻿<style>
     .address-name {
-        padding: 5px 7px;
-        border-radius: 3px;
-        background-color: #fde1e4;
-    }
-    .address-hash {
-        padding: 5px 7px;
+        padding: 5px 10px;
         border-radius: 3px;
         background-color: #e1fafd;
+        border: solid 0.5px #1aaaba;
     }
 </style>
 <EjsGrid EnableHover="false"
@@ -25,18 +21,16 @@
                     {
                         if (address.Name != null)
                         {
-                            <a class="special no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
-                                <span class="fs-n1 ls-2 mono address-name">
-                                    <span class="font-weight-semibold">@address.Name</span>
+                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                                <span class="fs-n1 address-name font-weight-semibold">
+                                    @address.Name
                                 </span>
                             </a>
                         }
                         else
                         {
                             <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
-                                <span class="fs-n1 mono address-hash">
-                                    <span>@address.Hash</span>
-                                </span>
+                                <span class="fs-n1 mono">@address.Hash</span>
                             </a>                            
                         }                        
                     }
