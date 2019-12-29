@@ -97,7 +97,7 @@ namespace Iconlook.Service.Job
             }
             catch (Exception exception)
             {
-                Log.Error("{Job} failed. Error: {Message}. {StackTrace}", nameof(UpdatePRepsJob), exception.Message, exception.StackTrace);
+                Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePRepsJob), exception.Message);
             }
         }
     }
