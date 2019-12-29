@@ -16,20 +16,27 @@ namespace Iconlook.Service.Api
         {
             if (request.State == "unstaking")
             {
-                var chainalytic = new ChainalyticClient();
-                var unstaking_info = await chainalytic.GetUnstakingInfo();
-                return new UnstakingAddressListResponse(unstaking_info.GetWallets().Select(x =>
+                using (var redis = Redis.Instance())
                 {
-                    var tuple = x.Value.Split(':');
-                    return new AddressResponse
-                    {
-                        Id = x.Key,
-                        Hash = x.Key,
-                        UnstakedBlockHeight = long.Parse(tuple[2]),
-                        Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
-                        Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
-                    };
-                })).ThenDo(x => x.BlockHeight = (long) unstaking_info.GetBlockHeight());
+                    var chainalytic = new ChainalyticClient();
+                    var unstaking_info = await chainalytic.GetUnstakingInfo();
+                    return new UnstakingAddressListResponse(unstaking_info
+                        .GetWallets().Skip(request.Skip).Take(request.Take).Select(x =>
+                        {
+                            var tuple = x.Value.Split(':');
+                            var name = redis.As<PRepResponse>().GetById(x.Key)?.Name;
+                            return new AddressResponse
+                            {
+                                Id = x.Key,
+                                Name = name,
+                                Hash = x.Key,
+                                UnstakedBlockHeight = long.Parse(tuple[2]),
+                                Description = name == null ? null : "ICON P-Rep",
+                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
+                                Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
+                            };
+                        })).ThenDo(x => x.BlockHeight = (long) unstaking_info.GetBlockHeight());
+                }
             }
             return new ListResponse<AddressResponse>();
         }

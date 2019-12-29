@@ -7,10 +7,12 @@ namespace Iconlook.Object
     {
         public string Id { get; set; }
         public string Hash { get; set; }
+        public string Name { get; set; }
         public decimal Voted { get; set; }
         public decimal Staked { get; set; }
         public decimal Unstaking { get; set; }
         public decimal Available { get; set; }
+        public string Description { get; set; }
         public decimal IcxBalance { get; set; }
         public decimal IscoreBalance { get; set; }
         public long UnstakedBlockHeight { get; set; }
