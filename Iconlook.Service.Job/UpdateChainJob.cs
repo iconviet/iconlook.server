@@ -91,7 +91,7 @@ namespace Iconlook.Service.Job
                             using (var redis = Redis.Instance())
                             {
                                 redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
-                                redis.As<ChainResponse>().Store(chain, TimeSpan.FromMinutes(61));
+                                redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
                                 transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
                             }
                         });
