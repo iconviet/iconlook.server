@@ -1,4 +1,3 @@
-﻿FROM iconviet/aspnet
+﻿FROM iconviet/dotnet
 ADD . .
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["dotnet", "Iconlook.Service.Web.dll"]
