@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Iconlook.Object
 {
-    [Route("/v1.0/peers", "GET")]
+    [Route("/v1/peers", "GET")]
     public class PeerListRequest : ListRequestBase<PeerListRequest, PeerResponse>, IGet
     {
     }

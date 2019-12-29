@@ -4,7 +4,7 @@ using ServiceStack;
 namespace Iconlook.Object
 {
     // TODO: switch route to /prep
-    [Route("/v1.0/preps", "PUT")]
+    [Route("/v1/preps", "PUT")]
     public class PRepListUpdateRequest : RequestBase<PRepListUpdateRequest>, IPut
     {
         public int Score { get; set; }

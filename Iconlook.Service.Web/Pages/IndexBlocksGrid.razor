@@ -19,7 +19,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
-    <EjsDataManager Url="/api/v1.0/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="81" Field="@nameof(BlockResponse.Height)" IsPrimaryKey="true">

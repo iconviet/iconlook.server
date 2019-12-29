@@ -8,7 +8,7 @@
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
-    <EjsDataManager Url="/api/v1.0/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="220" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>

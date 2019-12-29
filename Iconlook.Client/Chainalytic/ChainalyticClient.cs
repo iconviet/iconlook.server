@@ -50,5 +50,28 @@ namespace Iconlook.Client.Chainalytic
                 return response ?? new StakingInfoRpc { Id = 123 };
             }
         }
+
+        public async Task<UnstakingInfoRpc> GetUnstakingInfo()
+        {
+            using (JsConfig.With(new Config { TextCase = TextCase.SnakeCase }))
+            {
+                var response = await _client.PostAsync<UnstakingInfoRpc>("/", new RpcRequest
+                {
+                    Id = 123,
+                    Jsonrpc = "2.0",
+                    Method = "_call",
+                    Params = new
+                    {
+                        CallId = "api_call",
+                        ApiId = "latest_unstake_state",
+                        ApiParams = new
+                        {
+                            transform_id = "stake_history"
+                        }
+                    }
+                });
+                return response ?? new UnstakingInfoRpc { Id = 123 };
+            }
+        }
     }
 }
