@@ -1,0 +1,50 @@
+﻿<EjsGrid EnableHover="true"
+         EnableAltRow="true"
+         AllowPaging="CanPage"
+         TValue="AddressResponse"
+         GridLines="GridLine.Horizontal">
+    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
+    <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=200" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="150" Field="@nameof(AddressResponse.Id)" HeaderText="Id">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        <span class="mono">@address.Id</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="100" Field="@nameof(AddressResponse.Name)" HeaderText="Name">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        <span class="font-weight-semibold">@address.Name</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="100" Field="@nameof(AddressResponse.Unstaking)" HeaderText="Amount">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        <span class="mono-lg">@address.Unstaking.ToString("N4")</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="100" Field="@nameof(AddressResponse.UnstakedBlockHeight)" HeaderText="Block">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        <span class="mono-lg">@address.UnstakedBlockHeight</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>

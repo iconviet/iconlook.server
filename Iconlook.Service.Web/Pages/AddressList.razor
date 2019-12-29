@@ -3,7 +3,7 @@
     .e-grid { min-height: 700px; }
 
     .main.card { min-height: 740px; }
-    
+
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
         padding-left: 5px !important;
@@ -21,9 +21,7 @@
         padding-left: 20px !important;
         padding-right: 5px !important;
     }
-
-    .e-grid .e-row .e-selectionbackground { background-color: #ffe100; }
-    </style>
+</style>
 <div class="row mb-3">
     <div class="col">
         <div class="card shadow-sm border-bottom-0">
@@ -134,3 +132,30 @@
         </div>
     </div>
 </div>
+<div class="row mb-5">
+    <div class="col">
+        <EjsTab Animation="Animation" CssClass="main card shadow-sm">
+            <TabEvents Selecting="Select" />
+            <TabItems>
+                <TabItem Header="Unstaking">
+                    <ContentTemplate>
+                        <div class="card-body px-0 pt-0 pb-1" style="min-height: 700px;">
+                            <AddressListUnstakingGrid CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></AddressListUnstakingGrid>
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+            </TabItems>
+        </EjsTab>
+    </div>
+</div>
+@code {
+
+    public void Select(SelectingEventArgs args)
+    {
+        if (args.IsSwiped)
+        {
+            args.Cancel = true;
+        }
+    }
+
+}
