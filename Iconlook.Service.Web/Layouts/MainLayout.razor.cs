@@ -56,8 +56,9 @@ namespace Iconlook.Service.Web.Layouts
                 {
                     Text = "BLOCKCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
                     {
+                        new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
                         new MenuItem { Text = "Top 10 Addresses *" },
-                        new MenuItem { Text = "Wellknown Wallets *" },
+                        new MenuItem { Text = "Wellknown Addresses *" },
                         new MenuItem { Text = "Suspicious Transactions *" }
                     }
                 },
