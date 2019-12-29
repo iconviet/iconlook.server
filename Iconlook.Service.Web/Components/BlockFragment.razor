@@ -1,0 +1,16 @@
+﻿@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+}
+<div class="px-1 py-3 mr-auto">
+    <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_TransactionCount">
+        @(ChainResponse?.TransactionCount.ToString("N0") ?? "0")
+    </div>
+</div>
+<div class="px-1 py-3 text-right">
+    <div class="py-1 fs-n3 text-light">BLOCK HEIGHT</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_BlockHeight">
+        @(ChainResponse?.BlockHeight.ToString("N0") ?? "0")
+    </div>
+</div>

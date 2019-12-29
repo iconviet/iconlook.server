@@ -1,0 +1,16 @@
+﻿@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+}
+<div class="px-1 py-3 mr-auto">
+    <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_IcxCirculation">
+        @(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")
+    </div>
+</div>
+<div class="px-1 py-3 text-right">
+    <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_IcxSupply">
+        @(ChainResponse?.IcxSupply.ToString("N0") ?? "0")
+    </div>
+</div>

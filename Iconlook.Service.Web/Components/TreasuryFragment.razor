@@ -1,0 +1,17 @@
+﻿@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+}
+<div class="px-1 py-3 mr-auto">
+    <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
+    <span class="fs-2 mono-lg primary">19.65%</span>&nbsp;
+    <span class="fs-n2 ls-n1 mono text-light">
+        <i>( r<sub>rep</sub> * 3 )</i>
+    </span>
+</div>
+<div class="px-1 py-3 text-right">
+    <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_PublicTreasury">
+        @(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")
+    </div>
+</div>

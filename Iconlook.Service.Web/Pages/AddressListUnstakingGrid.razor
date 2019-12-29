@@ -1,49 +1,83 @@
-﻿<EjsGrid EnableHover="true"
-         EnableAltRow="true"
+﻿<style>
+    .address-name {
+        padding: 5px 7px;
+        border-radius: 3px;
+        background-color: #fde1e4;
+    }
+    .address-hash {
+        padding: 5px 7px;
+        border-radius: 3px;
+        background-color: #e1fafd;
+    }
+</style>
+<EjsGrid EnableHover="false"
+         EnableAltRow="false"
          AllowPaging="CanPage"
          TValue="AddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=200" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="150" Field="@nameof(AddressResponse.Id)" HeaderText="Id">
+        <GridColumn Width="100" Field="@nameof(AddressResponse.Hash)" HeaderText="Address">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono">@address.Id</span>
+                        if (address.Name != null)
+                        {
+                            <a class="special no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                                <span class="fs-n1 ls-2 mono address-name">
+                                    <span class="font-weight-semibold">@address.Name</span>
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                                <span class="fs-n1 mono address-hash">
+                                    <span>@address.Hash</span>
+                                </span>
+                            </a>                            
+                        }                        
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(AddressResponse.Name)" HeaderText="Name">
+        <GridColumn Width="50" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="font-weight-semibold">@address.Name</span>
+                        <span class="mono ls-n2 font-weight-bold">@address.Unstaking.ToString("N4")</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(AddressResponse.Unstaking)" HeaderText="Amount">
+        <GridColumn Width="50" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono-lg">@address.Unstaking.ToString("N4")</span>
+                        <span class="mono ls-n2 ">@address.Staked.ToString("N4")</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" Field="@nameof(AddressResponse.UnstakedBlockHeight)" HeaderText="Block">
+        <GridColumn Width="50" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono-lg">@address.UnstakedBlockHeight</span>
+                        <span class="mono ls-n2">@address.UnstakedBlockHeight.ToString("N0")</span>
                     }
                 }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="50" HeaderText="Countdown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <Template>
+                <span class="text-light">6d 5h 18m</span>
             </Template>
         </GridColumn>
     </GridColumns>

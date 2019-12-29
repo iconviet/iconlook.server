@@ -1,0 +1,22 @@
+﻿@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+}
+<div class="px-1 py-3 mr-auto">
+    <div class="py-1 fs-n3 text-light">ICX VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
+    <div>
+        <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">
+            @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
+        </span>
+        <span class="mono-lg text-light">•</span>
+        <span class="mono-lg text-light">
+            @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0")
+        </span>
+    </div>
+</div>
+<div class="px-1 py-3 text-right">
+    <div class="py-1 fs-n3 text-light">VOTERS</div>
+    <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount">
+        @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
+    </div>
+</div>

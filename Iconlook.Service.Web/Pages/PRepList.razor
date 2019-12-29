@@ -38,57 +38,16 @@
             <div class="container">
                 <div class="row text-nowrap">
                     <div class="col d-inline-flex border-right border-bottom">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
-                            <div><span class="fs-1 mono-lg text-dark ChainResponse_TotalStaked">0</span>&nbsp;<span class="mono-lg text-light">•</span>&nbsp;<span class="mono-lg primary">18.07%</span></div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">UNSTAKING</div>
-                            <div class="fs-1 mono-lg text-dark">885,638</div>
-                        </div>
+                        <StakingFragment ChainResponse="ChainResponse"></StakingFragment>
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
-                            <div><span class="fs-1 mono-lg text-dark ChainResponse_TotalDelegated">0</span>&nbsp;<span class="mono-lg text-light">•</span>&nbsp;<span class="mono-lg primary">98.95%</span></div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">VOTERS</div>
-                            <div class="fs-1 mono-lg text-dark">15,638</div>
-                        </div>
+                        <VotingFragment ChainResponse="ChainResponse"></VotingFragment>
                     </div>
                     <div class="col d-inline-flex border-right border-bottom">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
-                            <div class="fs-1 mono-lg text-dark">
-                                <span class="ChainResponse_PublicTreasury">0</span><span class="fs-n2 text-light font-weight-light">.1699</span>
-                            </div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">% 24H CHG.</div>
-                            <span class="fs-1 mono-lg positive-dark" style="opacity: 0.75;">0.1578%</span>
-                        </div>
+                        <TreasuryFragment ChainResponse="ChainResponse"></TreasuryFragment>
                     </div>
                     <div class="col d-inline-flex border-bottom leader">
-                        <div class="px-1 py-3 mr-auto">
-                            <div class="py-1 fs-n3 text-light">
-                                <span>LEADER</span>&nbsp;
-                                <span class="leader-ranking font-weight-bold">#@(PeerResponse?.Ranking.ToString() ?? "0")</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <img width="16" height="16" style="margin-right: 8px;" class="leader-logo" src="@(PeerResponse?.LogoUrl ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAtAQMAAADWcaq8AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA1JREFUeNpjYBgF9AAAAWgAAUrs9XsAAAAASUVORK5CYII=")">
-                                <a class="text-dark text-condensed font-weight-semibolder leader-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@(PeerResponse?.Name.SafeSubstring(0, 24) ?? "❚")</a>
-                            </div>
-                        </div>
-                        <div class="px-1 py-3 text-right">
-                            <div class="py-1 fs-n3 text-light">
-                                <span class="font-weight-bold leader-block-mcount">@(PeerResponse?.MadeBlockCount.ToString() ?? "0")</span>
-                                <span>&nbsp;BLOCKS MADE</span>
-                            </div>
-                            <div class="fs-2 mono-lg">
-                                <span class="positive-light leader-block-elapse"></span><span class="text-light leader-block-remain">❚❚❚❚❚❚❚❚❚❚</span>
-                            </div>
-                        </div>
+                        <LeaderFragment PeerResponse="PeerResponse"></LeaderFragment>
                     </div>
                 </div>
             </div>
