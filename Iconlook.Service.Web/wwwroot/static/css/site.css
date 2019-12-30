@@ -223,6 +223,15 @@ button.secondary, button .secondary {
     font-size: 16px;
 }
 
+.number-part {
+    font-weight: 400;
+}
+
+.fraction-part {
+    color: #888888;
+    font-weight: 300;
+}
+
 .ls-0 {
     letter-spacing: 0;
 }
@@ -262,6 +271,8 @@ button.secondary, button .secondary {
 .text-condensed {
     font-family: 'IBM Plex Sans Condensed';
 }
+
+
 
 /*
     CARD
