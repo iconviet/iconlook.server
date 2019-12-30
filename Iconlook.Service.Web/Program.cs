@@ -48,7 +48,7 @@ namespace Iconlook.Service.Web
                     x.DisablePoweredByHttpHeaders = true;
                     x.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
-                var connection = $"{host.HostConfiguration.GetConnectionString("redis")},password={host.DefaultPassword}";
+                var connection = $"{host.HostConfiguration.GetConnectionString("redis")},password={host.ServicePassword}";
                 if (connection.HasValue())
                 {
                     if (host.Environment == Environment.Localhost)
