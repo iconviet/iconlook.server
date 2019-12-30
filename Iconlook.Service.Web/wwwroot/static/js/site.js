@@ -1,12 +1,19 @@
 ﻿jQuery.fn.extend({
+    decimal: function(number, fraction) {
+        return this.each(function() {
+            var factor = Math.pow(10, fraction);
+            $(this).animateNumber({
+                number: number * factor,
+                numberStep: function(now, tween) {
+                    var text = (Math.floor(now) / factor).toFixed(fraction);
+                    $(tween.elem).prop('number',  Math.round(now)).text(text);
+                }
+            });
+        });
+    },
     integer: function(number, padding) {
         return this.each(function() {
-            if (padding == null) {
-                $(this).animateNumber({
-                    number: number,
-                    numberStep: $.animateNumber.numberStepFactories.separator(',')
-                });
-            } else {
+            if (padding != null) {
                 $(this).animateNumber({
                     number: number,
                     numberStep: function(now, tween) {
@@ -15,18 +22,12 @@
                         $(tween.elem).prop('number', Math.round(now)).text(text);
                     }
                 });
+            } else {
+                $(this).animateNumber({
+                    number: number,
+                    numberStep: $.animateNumber.numberStepFactories.separator(',')
+                });
             }
-        });
-    },
-    decimal: function(number, fraction) {
-        return this.each(function() {
-            var factor = Math.pow(10, fraction);
-            $(this).animateNumber({
-                number: number * factor,
-                numberStep: function(now, tween) {
-                    $(tween.elem).text((Math.floor(now) / factor).toFixed(fraction));
-                }
-            });
         });
     }
 });
