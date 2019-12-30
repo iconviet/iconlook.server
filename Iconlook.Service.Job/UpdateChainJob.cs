@@ -74,6 +74,10 @@ namespace Iconlook.Service.Job
                             UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
                             TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                         };
+                        chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
+                        chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
+                        chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
+
                         await Channel.Publish(new BlockProducedSignal
                         {
                             Block = block,

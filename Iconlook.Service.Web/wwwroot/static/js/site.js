@@ -48,6 +48,7 @@ $(document).ready(function() {
                 if (message.cmd === 'ChainUpdatedSignal') {
                     $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
                     $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
+                    $('.ChainResponse_IcxPrice').decimal(json.chain.icxPrice, 4);
                     $('.ChainResponse_BlockHeight').integer(json.chain.blockHeight);
                     $('.ChainResponse_TotalStaked').integer(json.chain.totalStaked);
                     $('.ChainResponse_TotalUnstaking').integer(json.chain.totalUnstaking);
