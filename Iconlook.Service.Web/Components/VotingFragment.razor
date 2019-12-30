@@ -5,18 +5,18 @@
 <div class="px-1 py-3 mr-auto">
     <div class="py-1 fs-n3 text-light">ICX VOTED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% STAKED</div>
     <div>
-        <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated">
+        <span class="fs-2 mono-lg text-dark ChainResponse_TotalDelegated" number="@(ChainResponse?.TotalDelegated ?? 0)">
             @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
         </span>
         <span class="mono-lg text-light">•</span>
         <span class="mono-lg text-light ChainResponse_DelegatedPercentage">
-            @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0")
+            @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0.00%")
         </span>
     </div>
 </div>
 <div class="px-1 py-3 text-right">
     <div class="py-1 fs-n3 text-light">VOTERS</div>
-    <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount">
-        @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
+    <div class="fs-2 mono-lg text-dark ChainResponse_StakingAddressCount" number="@(ChainResponse?.StakingAddressCount ?? 0)">
+        @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0.00%")
     </div>
 </div>

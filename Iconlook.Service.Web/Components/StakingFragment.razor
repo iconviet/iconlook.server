@@ -5,7 +5,7 @@
 <div class="px-1 py-3 mr-auto">
     <div class="py-1 fs-n3 text-light">ICX STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
     <div>
-        <span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked">
+        <span class="fs-2 mono-lg text-dark ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">
             @(ChainResponse?.TotalStaked.ToString("N0") ?? "0")
         </span>
         <span class="mono-lg text-light">•</span>
@@ -16,7 +16,7 @@
 </div>
 <div class="px-1 py-3 text-right">
     <div class="py-1 fs-n3 text-light">ICX UNSTAKING</div>
-    <div class="fs-2 mono-lg text-dark ChainResponse_TotalUnstaking">
+    <div class="fs-2 mono-lg text-dark ChainResponse_TotalUnstaking" number="@(ChainResponse?.TotalUnstaking ?? 0)">
         @(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")
     </div>
 </div>

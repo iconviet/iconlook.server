@@ -2,6 +2,9 @@
     decimal: function(number, fraction) {
         return this.each(function() {
             var factor = Math.pow(10, fraction);
+            if ($(this).attr('number') != null) {
+                $(this).prop('number', $(this).attr('number'));
+            }
             $(this).animateNumber({
                 number: number * factor,
                 numberStep: function(now, tween) {
@@ -11,8 +14,26 @@
             });
         });
     },
+    percent: function(number) {
+        return this.each(function() {
+            var factor = Math.pow(10, 4);
+            if ($(this).attr('number') != null) {
+                $(this).prop('number', $(this).attr('number'));
+            }
+            $(this).animateNumber({
+                number: number * factor,
+                numberStep: function(now, tween) {
+                    var text = (Math.floor(now) / factor * 100).toFixed(2);
+                    $(tween.elem).prop('number', Math.round(now)).text(text + '%');
+                }
+            });
+        });
+    },
     integer: function(number, padding) {
         return this.each(function() {
+            if ($(this).attr('number') != null) {
+                $(this).prop('number', $(this).attr('number'));
+            }
             if (padding != null) {
                 $(this).animateNumber({
                     number: number,
@@ -57,6 +78,8 @@ $(document).ready(function() {
                     $('.ChainResponse_PublicTreasury').integer(json.chain.publicTreasury);
                     $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
                     $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
+                    $('.ChainResponse_StakedPercentage').percent(json.chain.stakedPercentage);
+                    $('.ChainResponse_DelegatedPercentage').percent(json.chain.delegatedPercentage);
                     $('.ChainResponse_StakingAddressCount').integer(json.chain.stakingAddressCount);
                 }
                 // *****************************
