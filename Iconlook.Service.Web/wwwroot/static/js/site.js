@@ -3,6 +3,7 @@
         return this.each(function() {
             if ($(this).attr('number') != null) {
                 $(this).prop('number', $(this).attr('number'));
+                $(this).removeAttr('number');
             }
             if (padding != null) {
                 $(this).animateNumber({
@@ -26,6 +27,7 @@
             var factor = Math.pow(10, 4);
             if ($(this).attr('number') != null) {
                 $(this).prop('number', $(this).attr('number'));
+                $(this).removeAttr('number');
             }
             $(this).animateNumber({
                 number: number * factor,
@@ -41,6 +43,7 @@
             var factor = Math.pow(10, fraction);
             if ($(this).attr('number') != null) {
                 $(this).prop('number', $(this).attr('number'));
+                $(this).removeAttr('number');
             }
             $(this).animateNumber({
                 number: number * factor,
