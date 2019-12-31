@@ -13,7 +13,7 @@ namespace Iconlook.Service.Api
 {
     public class SetupService : ServiceBase
     {
-        [Route("/api/setup", "GET")]
+        [Route("/api/v1/setup", "GET")]
         public class SetupRequest : IReturn<string>, IGet
         {
         }
