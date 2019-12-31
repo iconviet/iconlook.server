@@ -2,7 +2,7 @@
     [Parameter]
     public PeerResponse PeerResponse { get; set; }
 }
-<div class="px-1 py-3 mr-auto">
+<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">
         <span>LEADER</span>&nbsp;
         <span class="leader-ranking font-weight-bold">#@(PeerResponse?.Ranking.ToString() ?? "0")</span>
@@ -12,7 +12,7 @@
         <a class="text-dark text-condensed font-weight-semibolder leader-name" href="address/hx47cd300865284000bdb154a90fc13e6a7bb2421e">@(PeerResponse?.Name.SafeSubstring(0, 24) ?? "❚")</a>
     </div>
 </div>
-<div class="px-1 py-3 text-right">
+<div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">
         <span class="font-weight-bold leader-block-mcount">@(PeerResponse?.MadeBlockCount.ToString() ?? "0")</span>
         <span>&nbsp;BLOCK(S)</span>

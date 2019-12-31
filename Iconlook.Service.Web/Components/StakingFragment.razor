@@ -2,7 +2,7 @@
     [Parameter]
     public ChainResponse ChainResponse { get; set; }
 }
-<div class="px-1 py-3 mr-auto">
+<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ICX STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
     <div>
         <span class="fs-1 mono-lg ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">
@@ -14,7 +14,7 @@
         </span>
     </div>
 </div>
-<div class="px-1 py-3 text-right">
+<div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">ICX UNSTAKING</div>
     <div class="mono-lg ChainResponse_TotalUnstaking" number="@(ChainResponse?.TotalUnstaking ?? 0)">
         @(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")

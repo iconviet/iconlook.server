@@ -2,7 +2,7 @@
     [Parameter]
     public ChainResponse ChainResponse { get; set; }
 }
-<div class="px-1 py-3 mr-auto">
+<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
     <div>
         <span class="fs-1 mono-lg">19.65%</span>&nbsp;
@@ -11,7 +11,7 @@
         </span>
     </div>
 </div>
-<div class="px-1 py-3 text-right">
+<div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
     <div class="fs-1 mono-lg ChainResponse_PublicTreasury" number="@(ChainResponse?.PublicTreasury ?? 0)">
         @(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")

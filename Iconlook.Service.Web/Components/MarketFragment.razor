@@ -2,7 +2,7 @@
     [Parameter]
     public ChainResponse ChainResponse { get; set; }
 }
-<div class="px-1 py-3 mr-auto">
+<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">USD PRICE&nbsp;&nbsp;•&nbsp;&nbsp;% 24H</div>
     <div>
         <span class="fs-1 mono-lg ChainResponse_IcxPrice">
@@ -12,7 +12,7 @@
         <span class="mono-lg positive-dark ChainResponse_IcxPricePercentage">0.00%</span>
     </div>
 </div>
-<div class="px-1 py-3 text-right">
+<div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">USD MARKET CAP</div>
     <div class="fs-1 mono-lg ChainResponse_MarketCap" number="@(ChainResponse?.MarketCap ?? 0)">
         $ @(ChainResponse?.MarketCap.ToString("N0") ?? "0")
