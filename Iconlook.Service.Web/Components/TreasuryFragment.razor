@@ -4,14 +4,16 @@
 }
 <div class="px-1 py-3 mr-auto">
     <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
-    <span class="fs-2 mono-lg">19.65%</span>&nbsp;
-    <span class="fs-n2 ls-n1 mono text-light">
-        <i>( r<sub>rep</sub> * 3 )</i>
-    </span>
+    <div>
+        <span class="fs-1 mono-lg">19.65%</span>&nbsp;
+        <span class="fs-n2 ls-n1 mono text-light">
+            <i>( r<sub>rep</sub> * 3 )</i>
+        </span>
+    </div>
 </div>
 <div class="px-1 py-3 text-right">
     <div class="py-1 fs-n3 text-light">PUBLIC TREASURY</div>
-    <div class="fs-2 mono-lg text-dark ChainResponse_PublicTreasury" number="@(ChainResponse?.PublicTreasury ?? 0)">
+    <div class="fs-1 mono-lg ChainResponse_PublicTreasury" number="@(ChainResponse?.PublicTreasury ?? 0)">
         @(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")
     </div>
 </div>
