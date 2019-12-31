@@ -5,6 +5,14 @@
         background-color: #e1fafd;
         border: solid 0.5px #1aaaba;
     }
+
+    .unstaking_amount .number-part {
+        font-weight: 700;
+    }
+
+    .unstaking_amount .fraction-part {
+        font-weight: 500;
+    }
 </style>
 <EjsGrid EnableHover="false"
          AllowSorting="true"
@@ -45,23 +53,23 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
+        <GridColumn Width="50" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono ls-n2 font-weight-bold">@address.Unstaking.ToString("N4")</span>
-                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToNumberFractionMarkupString()</span>
+                        <span class="pl-1 text-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
+        <GridColumn Width="50" HeaderText="Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono ls-n2 ">@address.Staked.ToString("N4")</span>
+                        <span class="mono ls-n2 staked_amount">@address.Staked.ToNumberFractionMarkupString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Components;
 
 namespace Iconlook.Service.Web
 {
@@ -11,7 +12,7 @@ namespace Iconlook.Service.Web
             if (part.Length == 2)
             {
                 var zero = "number-part";
-                if (int.Parse(part[0]) == 0 && int.Parse(part[1]) == 0)
+                if (int.Parse(part[0], NumberStyles.Number) == 0 && int.Parse(part[1], NumberStyles.Number) == 0)
                 {
                     zero = "fraction-part";
                 }
