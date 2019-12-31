@@ -43,11 +43,11 @@ namespace Iconlook.Service.Job
                                     var @object = DynamicJson.Deserialize(response);
                                     peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
                                     {
+                                        x.Name = x.Name;
                                         x.Id = @object.peer_id;
                                         x.State = @object.state;
                                         x.Status = @object.status;
                                         x.PeerId = @object.peer_id;
-                                        x.Name = x.Name.SafeSubstring(0, 24);
                                         x.PeerType = int.Parse(@object.peer_type);
                                         x.BlockHeight = long.Parse(@object.block_height);
                                         x.MadeBlockCount = int.Parse(@object.made_block_count);

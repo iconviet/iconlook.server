@@ -8,6 +8,7 @@
          EnableAltRow="false"
          TValue="PRepResponse"
          AllowSelection="false"
+         ClipMode="ClipMode.Ellipsis"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
@@ -33,8 +34,8 @@
                     if (context is PRepResponse prep)
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
-                            <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" alt="@prep.Name" src="@prep.LogoUrl">
-                            <a class="secondary text-condensed" href="address/@prep.Id">@prep.Name</a>
+                            <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" src="@StringHelpers.ParseLogoUrl(prep.LogoUrl)">
+                            <a class="secondary" href="address/@prep.Id">@prep.Name</a>
                         </div>
                     }
                 }

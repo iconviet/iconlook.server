@@ -167,7 +167,7 @@ $(document).ready(function() {
                     $('.leader-block-mcount').text(leaderBlockMCount);
                     $('.leader-block-elapse').text(leaderBlockElapse);
                     $('.leader-block-remain').text(leaderBlockRemain);
-                    if ($('#block_grid .e-content tr').length > 0) {
+                    if ($('#block_grid .e-content tr').length > 1) {
                         if ($('#block_grid .e-content tr').length >= 22) {
                             $('#block_grid .e-content tr:last').remove();
                         }

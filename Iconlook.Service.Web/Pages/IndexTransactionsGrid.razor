@@ -76,7 +76,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToString("N4")</span>
+                        <span class="mono ls-n2">@transaction.Amount.ToNumberFractionMarkupString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
