@@ -1,4 +1,8 @@
 ﻿<style>
+    .number-part {
+        font-weight: 500;
+    }
+
     .transaction-hash {
         padding: 5px 7px;
         border-radius: 3px;
@@ -28,9 +32,7 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.From">
-                            <span class="fs-n1 mono-lg transaction-address">
-                                <span class="font-weight-semibold">@transaction.From?.Substring(0, 10)..</span>
-                            </span>
+                            <span class="fs-n1 mono-lg transaction-address font-weight-semibold TransactionResponse_From">@transaction.From?.Substring(0, 10)..</span>
                         </a>
                     }
                 }
@@ -49,9 +51,7 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="primary no-underline" href="address/@transaction.To">
-                            <span class="fs-n1 mono-lg transaction-address">
-                                <span class="font-weight-semibold">@transaction.To?.Substring(0, 10)..</span>
-                            </span>
+                            <span class="fs-n1 mono-lg transaction-address font-weight-semibold TransactionResponse_To">@transaction.To?.Substring(0, 10)..</span>
                         </a>
                     }
                 }
@@ -63,9 +63,7 @@
                     if (context is TransactionResponse transaction)
                     {
                         <a class="secondary no-underline" href="transaction/@transaction.Hash">
-                            <span class="fs-n1 mono-lg transaction-hash">
-                                <span class="font-weight-semibold">@(transaction.Hash?.Substring(0, 16))..</span>
-                            </span>
+                            <span class="fs-n1 mono-lg transaction-hash font-weight-semibold TransactionResponse_Hash">@(transaction.Hash?.Substring(0, 16))..</span>
                         </a>
                     }
                 }
@@ -76,7 +74,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <span class="mono ls-n2">@transaction.Amount.ToNumberFractionMarkupString()</span>
+                        <span class="mono ls-n2 TransactionResponse_Amount">@transaction.Amount.ToNumberFractionMarkupString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }

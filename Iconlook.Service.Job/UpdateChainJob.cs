@@ -37,16 +37,16 @@ namespace Iconlook.Service.Job
                         var prep_info = await service.GetPRepInfo();
                         var staking_info = await chainalytic.GetStakingInfo();
                         var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
-                        {
-                            Id = x.GetTxHash().ToString(),
-                            Hash = x.GetTxHash().ToString(),
-                            Block = (long) last_block.GetHeight(),
-                            To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
-                            From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
-                            Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
-                            Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                            Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
-                        }).ToList();
+                            {
+                                Id = x.GetTxHash().ToString(),
+                                Hash = x.GetTxHash().ToString(),
+                                Block = (long) last_block.GetHeight(),
+                                To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
+                                From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
+                                Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
+                                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
+                                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
+                            }).ToList();
                         var block = new BlockResponse
                         {
                             PeerId = last_block.GetPeerId(),
