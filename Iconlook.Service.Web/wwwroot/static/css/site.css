@@ -49,6 +49,11 @@ header {
     COLORS
 */
 
+.secondary.underline {
+    text-decoration: underline;
+    text-decoration-color: #cccccc;
+}
+
 .special {
     color: #e3165b !important;
     border-color: #e3165b !important;
@@ -123,6 +128,26 @@ header {
 /*  
     LINK
 */
+a:hover.special {
+    text-decoration: none;
+    color: #e3165b !important;
+}
+
+a:hover.primary {
+    text-decoration: none;
+    color: #12cade !important;
+}
+
+a:hover.tertiary {
+    text-decoration: none;
+    color: #1aaaba !important;
+}
+
+a:hover.secondary {
+    text-decoration: none;
+    color: #1aaaba !important;
+}
+
 a.special, a:visited.special {
     color: #e3165b !important;
 }
@@ -139,30 +164,15 @@ a.secondary, a:visited.secondary {
     color: #000000 !important;
 }
 
-a:hover.special {
-    color: #e3165b !important;
-    text-decoration: none !important;
-}
-
-a:hover.primary {
-    color: #12cade !important;
-    text-decoration: none !important;
-}
-
-a:hover.tertiary {
-    color: #1aaaba !important;
-    text-decoration: none !important;
-}
-
-a:hover.secondary {
-    color: #1aaaba !important;
-    text-decoration: none !important;
-}
-
 a:hover.no-underline {
     text-decoration: none !important;
 }
 
+a:hover.secondary.underline {
+    color: #1aaaba !important;
+    text-decoration: underline;
+    text-decoration-color: #1aaaba;
+}
 
 
 
@@ -502,10 +512,6 @@ button.secondary, button .secondary {
 /*
     EFFECTS
 */
-.underline {
-    text-decoration: underline;
-}
-
 .gradient {
     -ms-background-repeat: repeat-x;
     background-repeat: repeat-x;

@@ -69,6 +69,7 @@
     },
 });
 $(document).ready(function() {
+    $('[data-toggle=tooltip]').tooltip({ delay: { show: 0 } });
     const source = new EventSource('/sse/stream?channel=iconlook');
     var leader_block_mcount = parseInt($('.leader-block-mcount').text());
     source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
@@ -203,9 +204,9 @@ $(document).ready(function() {
                                 trans_row.slideDown(150).animate({ opacity: 1 }, { queue: true, duration: 300 });
                             }
                         });
-                        $('#transactions_grid .e-content tr').toArray().forEach(function(row, index) {
-                            $(row).attr('aria-rowindex', index);
-                            $(row).attr('data-uid', 'grid-row' + index);
+                        $('#transactions_grid .e-content tr').toArray().forEach(function(item, index) {
+                            $(item).attr('aria-rowindex', index);
+                            $(item).attr('data-uid', 'grid-row' + index);
                         });
                     }
                 }
