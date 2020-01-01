@@ -1,9 +1,7 @@
 ﻿using System.Linq;
-using Agiper;
 using Iconlook.Object;
 using Iconlook.Server;
 using Microsoft.AspNetCore.Components;
-using Serilog;
 using ServiceStack.Redis;
 using Syncfusion.EJ2.Blazor.Navigations;
 
@@ -12,6 +10,7 @@ namespace Iconlook.Service.Web.Pages
     public partial class AddressList
     {
         protected TabHeader Unstaking;
+        protected TabHeader Undelegated;
         protected PeerResponse PeerResponse;
         protected ChainResponse ChainResponse;
         protected TabAnimationSettings Animation;
@@ -31,6 +30,7 @@ namespace Iconlook.Service.Web.Pages
             Size = 200;
             Sizes = new[] { 22, 50, 100 };
             Unstaking = new TabHeader { Text = "UNSTAKING" };
+            Undelegated = new TabHeader { Text = "UNDELEGATED" };
             Animation = new TabAnimationSettings
             {
                 Next = new TabAnimationNext { Duration = 0 },

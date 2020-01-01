@@ -29,7 +29,7 @@
     </GridSortSettings>
     <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=200" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="100" Field="@nameof(AddressResponse.Hash)" HeaderText="Address">
+        <GridColumn Width="320" Field="@nameof(AddressResponse.Hash)" HeaderText="Address">
             <Template>
                 @{
                     if (context is AddressResponse address)
@@ -53,7 +53,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
+        <GridColumn Width="155" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is AddressResponse address)
@@ -64,7 +64,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" HeaderText="Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
+        <GridColumn Width="155" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
             <Template>
                 @{
                     if (context is AddressResponse address)
@@ -75,7 +75,17 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="210" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <Template>
+                <span>24/12/2020 12:35:25 PM</span>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="130" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <Template>
+                <span class="text-light">6d 5h 18m</span>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="130" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is AddressResponse address)
@@ -83,11 +93,6 @@
                         <span class="mono ls-n2">@address.UnstakedBlockHeight.ToString("N0")</span>
                     }
                 }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="50" HeaderText="Countdown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
-            <Template>
-                <span class="text-light">6d 5h 18m</span>
             </Template>
         </GridColumn>
     </GridColumns>
