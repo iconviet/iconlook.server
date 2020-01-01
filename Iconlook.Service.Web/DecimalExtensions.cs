@@ -5,7 +5,7 @@ namespace Iconlook.Service.Web
 {
     public static class DecimalExtensions
     {
-        public static MarkupString ToNumberFractionMarkupString(this decimal instance)
+        public static MarkupString ToMarkupString(this decimal instance)
         {
             var text = instance.ToString("N4");
             var part = text.Split('.');

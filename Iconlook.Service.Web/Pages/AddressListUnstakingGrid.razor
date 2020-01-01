@@ -58,7 +58,7 @@
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToNumberFractionMarkupString()</span>
+                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToMarkupString()</span>
                         <span class="pl-1 text-light">ICX</span>
                     }
                 }
@@ -69,7 +69,7 @@
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono ls-n2 staked_amount">@address.Staked.ToNumberFractionMarkupString()</span>
+                        <span class="mono ls-n2 staked_amount">@address.Staked.ToMarkupString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
