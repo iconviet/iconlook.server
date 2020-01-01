@@ -5,11 +5,11 @@
 <div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ICX STAKED&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;% SUPPLY</div>
     <div>
-        <span class="fs-1 mono-lg ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">
+        <span class="fs-2 mono-lg ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">
             @(ChainResponse?.TotalStaked.ToString("N0") ?? "0")
         </span>
         <span class="mono-lg text-light">•</span>
-        <span class="fs-n1 mono-lg primary ChainResponse_StakedPercentage">
+        <span class="mono-lg primary ChainResponse_StakedPercentage">
             @(ChainResponse?.StakedPercentage.ToString("P2") ?? "0")
         </span>
     </div>
