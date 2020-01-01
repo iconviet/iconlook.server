@@ -8,12 +8,12 @@ namespace Iconlook.Client.Chainalytic
     {
         public BigInteger GetBlockHeight()
         {
-            return BigInteger.Parse(Result?.result.wallets.height ?? "0");
+            return BigInteger.Parse(Result?.result.height ?? "0");
         }
 
         public Dictionary<string, string> GetWallets()
         {
-            return Result != null ? TypeSerializer.ToStringDictionary(JsonObject.Parse(Result.result.wallets.wallets.ToString())) : new Dictionary<string, string>();
+            return Result != null ? TypeSerializer.ToStringDictionary(JsonObject.Parse(Result.result.wallets.ToString())) : new Dictionary<string, string>();
         }
     }
 }
