@@ -35,7 +35,7 @@ namespace Iconlook.Service.Api
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
-                        }).OrderBy(x => x.UnstakedBlockHeight)).ThenDo(x => x.BlockHeight = (long) unstaking_info.GetBlockHeight());
+                        }).OrderByDescending(x => x.UnstakedBlockHeight)).ThenDo(x => x.BlockHeight = (long) unstaking_info.GetBlockHeight());
                 }
             }
             return new ListResponse<AddressResponse>();

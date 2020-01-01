@@ -31,7 +31,7 @@
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <a class="primary no-underline" href="address/@transaction.From">
+                        <a class="primary no-underline" href="https://tracker.icon.foundation/address/@transaction.From">
                             <span class="fs-n1 mono-lg transaction-address font-weight-semibold TransactionResponse_From">@transaction.From?.Substring(0, 10)..</span>
                         </a>
                     }
@@ -45,31 +45,31 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="95" Field="@nameof(TransactionResponse.To)" TextAlign="TextAlign.Center">
+        <GridColumn Width="95" TextAlign="TextAlign.Center" Field="@nameof(TransactionResponse.To)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <a class="primary no-underline" href="address/@transaction.To">
+                        <a class="primary no-underline" href="https://tracker.icon.foundation/address/@transaction.To">
                             <span class="fs-n1 mono-lg transaction-address font-weight-semibold TransactionResponse_To">@transaction.To?.Substring(0, 10)..</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" Field="@nameof(TransactionResponse.Hash)" TextAlign="TextAlign.Right" IsPrimaryKey="true">
+        <GridColumn Width="140" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Hash)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
-                        <a class="secondary no-underline" href="transaction/@transaction.Hash">
+                        <a class="secondary no-underline" href="https://tracker.icon.foundation/transaction/@transaction.Hash">
                             <span class="fs-n1 mono-lg transaction-hash font-weight-semibold TransactionResponse_Hash">@(transaction.Hash?.Substring(0, 16))..</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="150" Field="@nameof(TransactionResponse.Amount)" TextAlign="TextAlign.Right">
+        <GridColumn Width="150" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Amount)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
