@@ -59,6 +59,7 @@ namespace Iconlook.Service.Job
                         prep_objs.Add(new PRep
                         {
                             Ranking = ranking,
+                            LogoUrl = logo_url,
                             Name = prep.GetName(),
                             City = prep.GetCity(),
                             Joined = DateTime.UtcNow,
@@ -83,10 +84,7 @@ namespace Iconlook.Service.Job
                             Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
                             DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
                             ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
-                        }.ThenDo(x =>
-                        {
-                            if (logo_url != null) x.LogoUrl = logo_url;
-                        }));
+                        });
                     })));
                     await db.SaveAllAsync(prep_objs.ToList());
                     redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
