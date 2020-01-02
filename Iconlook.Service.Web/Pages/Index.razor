@@ -49,6 +49,25 @@
 
     .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap { border-color: transparent !important; }
 </style>
+<div class="card px-3 py-3 mb-3 rounded gradient shadow-sm border-0 d-lg-none d-md-block">
+    <div class="row no-gutters" style="background-color: white;">
+        <div class="col">
+            <EjsAutoComplete MinLength="3"
+                                TValue="string"
+                                Highlight="true"
+                                SuggestionCount="5"
+                                CssClass="submit-input"
+                                ShowClearButton="false"
+                                Placeholder="Search P-Rep / D-App / Address / Transaction">
+                <AutoCompleteFieldSettings Value="Name"></AutoCompleteFieldSettings>
+                <EjsDataManager Url="/api/v1/preps?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+            </EjsAutoComplete>
+        </div>
+        <div class="col col-auto">
+            <EjsButton CssClass="e-flat submit-button" IconCss="far fa-search"></EjsButton>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md mb-3 mr-md-n3">
         <div class="card shadow-sm border-bottom-0">
@@ -90,7 +109,7 @@
                 </div>
             </div>
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
-                <div class="col col-auto d-none d-sm-block">
+                <div class="col col-auto">
                     <EjsDropDownButton Content="EVERYTHING" Items="SearchItems" CssClass="search-filter"></EjsDropDownButton>
                 </div>
                 <div class="col">
@@ -121,7 +140,7 @@
                 </div>
             </div>
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
-                <div class="col col-auto d-none d-sm-block">
+                <div class="col col-auto">
                     <EjsDropDownButton Content="ROUND" Items="ToolItems" CssClass="search-filter"></EjsDropDownButton>
                 </div>
                 <div class="col">
