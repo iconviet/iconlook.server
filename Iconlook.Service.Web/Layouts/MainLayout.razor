@@ -1,19 +1,19 @@
 ﻿@using Iconlook.Server
 @inherits LayoutComponentBase
 <div class="body">
-    <header class="d-none d-sm-block">
+    <header>
         <div class="container">
             <div class="row no-gutters align-items-center" style="min-height: 52px;">
                 <div class="col-auto">
                     <a href="/">
-                        <span class="special font-weight-bold">[ICONLOOK LOGO]</span>
+                        <span class="special font-weight-bold">[ICONLOOK]</span>
                     </a>
                 </div>
                 <div class="col pb-1 d-inline-flex justify-content-end align-items-center">
-                    <img alt="ICONVIET" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-top: 1px; margin-right: -40px;"/>
-                    <EjsMenu Items="MenuItems" CssClass="ejs-menu"></EjsMenu>
+                    <img class="d-none d-md-block" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-top: 1px; margin-right: -40px;"/>
+                    <EjsMenu Items="MenuItems" CssClass="ejs-menu d-none d-md-block"></EjsMenu>
                 </div>
-                <div class="col-auto fs-2 pl-3 pb-1">
+                <div class="col-auto fs-2 pl-3 pb-1 d-none d-md-block">
                     <i class="fas fa-signal positive-dark"></i>
                 </div>
             </div>
