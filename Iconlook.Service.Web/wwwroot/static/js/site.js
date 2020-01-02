@@ -1,16 +1,11 @@
-﻿const channel = '/sse/stream?channel=iconlook';
-$(document).ready(function() {
-    const source = new EventSource(channel);
-    const observable = rxjs.fromEvent(source, 'onmessage');
+﻿$(document).ready(function() {
     $('[data-toggle=tooltip]').tooltip({ delay: { show: 0 } });
+    const source = new EventSource('/sse/stream?channel=iconlook');
     var leader_block_mcount = parseInt($('.leader-block-mcount').text());
     source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         handlers: {
             onConnect: function() {
-                observable.subscribe(function(x) {
-                    console.log(x);
-                });
                 console.log("[ICONLOOK] Channel connected.");
             }
         },
