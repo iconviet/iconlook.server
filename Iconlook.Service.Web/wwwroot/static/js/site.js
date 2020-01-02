@@ -1,4 +1,5 @@
 ﻿$(document).ready(function() {
+    const subject = new rxjs.Subject();
     $('[data-toggle=tooltip]').tooltip({ delay: { show: 0 } });
     const source = new EventSource('/sse/stream?channel=iconlook');
     var leader_block_mcount = parseInt($('.leader-block-mcount').text());
@@ -7,10 +8,14 @@
         handlers: {
             onConnect: function() {
                 console.log("[ICONLOOK] Channel connected.");
+                subject.pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
+                    console.log(signal.name);
+                });
             }
         },
         success: function(selector, json, message) {
             if (!selector.startsWith('cmd.on')) {
+                subject.next({ name: message.cmd, body: json });
                 // *****************************
                 // * Handle ChainUpdatedSignal *
                 // *****************************
