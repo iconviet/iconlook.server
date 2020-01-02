@@ -20,25 +20,25 @@
         </div>
     </header>
     <header class="d-lg-none d-md-block">
-        <div class="container p-0">
+        <div class="container px-0 py-2">
             <nav class="navbar navbar-light">
                 <div>
-                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -15px;" />
+                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;" />
                 </div>
-                <div class="navbar-toggler" style="border: none; padding-right: 5px;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
+                <button type="button" class="navbar-toggler" style="border: none;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
                     <span>
                         <i class="fas fa-bars"></i>
                     </span>
-                </div>
+                </button>
                 <div id="navbar_content" style="padding: 0 4px;" class="ejs-menu collapse navbar-collapse">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav" style="padding-top: 13px;">
                         @{
                             foreach(var item in MenuItems.Where(x => !string.IsNullOrEmpty(x.Text)))
                             {
                                 <li class="e-menu-item e-menu-caret-icon">
                                     <a class="nav-link" href="@item.Url">
                                         <span style="width: 25px !important;" class="primary e-menu-icon @item.IconCss"></span>
-                                        <span class="fs-0 font-weight-bold">@item.Text</span>
+                                        <span class="fs-n1 font-weight-semibold">@item.Text</span>
                                     </a>
                                 </li>
                             }
