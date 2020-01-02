@@ -1,8 +1,9 @@
 ﻿$(document).ready(function() {
+    let subscriptions = [];
     const subject = new rxjs.Subject();
     $("[data-toggle=tooltip]").tooltip({ delay: { show: 0 } });
     const source = new EventSource("/sse/stream?channel=iconlook");
-    var leader_block_mcount = parseInt($(".leader-block-mcount").text());
+    let leader_block_mcount = parseInt($(".leader-block-mcount").text());
     source.addEventListener("error", function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         success: function(selector, json, message) {
@@ -11,12 +12,21 @@
             }
         },
         handlers: {
+            onReconnect: function() {
+                console.log("[ICONLOOK] Channel re-connected.");
+            },
             onConnect: function() {
+                subscriptions.forEach(subscription => {
+                    subscription.unsubscribe();
+                    subscription = null;
+                });
+                subscriptions = [];
                 console.log("[ICONLOOK] Channel connected.");
                 // ******************************************
                 // *          ChainUpdatedSignal            *
                 // ******************************************
-                subject.pipe(rxjs.operators.filter(x => x.name === "ChainUpdatedSignal"))
+                subscriptions.push(subject
+                    .pipe(rxjs.operators.filter(x => x.name === "ChainUpdatedSignal"))
                     .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
                         $(".ChainResponse_MarketCap").integer(signal.body.chain.marketCap);
                         $(".ChainResponse_IcxSupply").integer(signal.body.chain.icxSupply);
@@ -31,11 +41,12 @@
                         $(".ChainResponse_StakedPercentage").percent(signal.body.chain.stakedPercentage);
                         $(".ChainResponse_DelegatedPercentage").percent(signal.body.chain.delegatedPercentage);
                         $(".ChainResponse_StakingAddressCount").integer(signal.body.chain.stakingAddressCount);
-                    });
+                    }));
                 // ******************************************
                 // *          PeersUpdatedSignal            *
                 // ******************************************
-                subject.pipe(rxjs.operators.filter(x => x.name === "PeersUpdatedSignal"))
+                subscriptions.push(subject
+                    .pipe(rxjs.operators.filter(x => x.name === "PeersUpdatedSignal"))
                     .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
                         if (signal.body.busy != null) {
                             signal.body.busy.forEach(function(item, index) {
@@ -82,14 +93,15 @@
                                     parseInt(peer_produced_blocks.attr("number")).toLocaleString());
                             });
                         }
-                    });
+                    }));
                 // ******************************************
                 // *          BlockProducedSignal           *
                 // ******************************************
-                subject.pipe(rxjs.operators.filter(x => x.name === "BlockProducedSignal"))
+                subscriptions.push(subject
+                    .pipe(rxjs.operators.filter(x => x.name === "BlockProducedSignal"))
                     .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
-                        var leader_block_elapse = "";
-                        var leader_block_remain = "";
+                        let leader_block_elapse = "";
+                        let leader_block_remain = "";
                         if (leader_block_mcount < 10) {
                             leader_block_mcount += 1;
                         }
@@ -149,7 +161,7 @@
                                 $(item).attr("data-uid", `grid-row${index}`);
                             });
                         }
-                    });
+                    }));
             }
         }
     });
