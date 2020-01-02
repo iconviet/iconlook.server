@@ -14,81 +14,81 @@
             onConnect: function() {
                 console.log("[ICONLOOK] Channel connected.");
                 // subject.pipe(rxjs.operators.throttle(() => rxjs.interval(500))).subscribe(signal => {
-                subject.subscribe(signal => {
-                    const name = signal.name;
+                subject.pipe(rxjs.operators.filter(x => x.name === 'ChainUpdatedSignal')).subscribe(signal => {
                     const json = signal.body;
                     // *****************************
                     // * Handle ChainUpdatedSignal *
                     // *****************************
-                    if (name === 'ChainUpdatedSignal') {
-                        $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
-                        $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
-                        $('.ChainResponse_IcxPrice').decimal(json.chain.icxPrice, 4);
-                        $('.ChainResponse_BlockHeight').integer(json.chain.blockHeight);
-                        $('.ChainResponse_TotalStaked').integer(json.chain.totalStaked);
-                        $('.ChainResponse_TotalUnstaking').integer(json.chain.totalUnstaking);
-                        $('.ChainResponse_IcxCirculation').integer(json.chain.icxCirculation);
-                        $('.ChainResponse_PublicTreasury').integer(json.chain.publicTreasury);
-                        $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
-                        $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
-                        $('.ChainResponse_StakedPercentage').percent(json.chain.stakedPercentage);
-                        $('.ChainResponse_DelegatedPercentage').percent(json.chain.delegatedPercentage);
-                        $('.ChainResponse_StakingAddressCount').integer(json.chain.stakingAddressCount);
-                    }
-                    // *****************************
+                    $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
+                    $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
+                    $('.ChainResponse_IcxPrice').decimal(json.chain.icxPrice, 4);
+                    $('.ChainResponse_BlockHeight').integer(json.chain.blockHeight);
+                    $('.ChainResponse_TotalStaked').integer(json.chain.totalStaked);
+                    $('.ChainResponse_TotalUnstaking').integer(json.chain.totalUnstaking);
+                    $('.ChainResponse_IcxCirculation').integer(json.chain.icxCirculation);
+                    $('.ChainResponse_PublicTreasury').integer(json.chain.publicTreasury);
+                    $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
+                    $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
+                    $('.ChainResponse_StakedPercentage').percent(json.chain.stakedPercentage);
+                    $('.ChainResponse_DelegatedPercentage').percent(json.chain.delegatedPercentage);
+                    $('.ChainResponse_StakingAddressCount').integer(json.chain.stakingAddressCount);
+                });
+                subject.pipe(rxjs.operators.filter(x => x.name === 'PeersUpdatedSignal')).subscribe(signal => {
+                    const json = signal.body;
+                      // *****************************
                     // * Handle PeersUpdatedSignal *
                     // *****************************
-                    if (name === 'PeersUpdatedSignal') {
-                        if (json.busy != null) {
-                            json.busy.forEach(function(item, index) {
-                                // ***********************
-                                // * Update Leader State *
-                                // ***********************
-                                if (index === 0 && $('.leader-name').text() !== item.name) {
-                                    $('.leader').hide().fadeIn(500);
-                                    $('.leader-name').text(item.name);
-                                    $('.leader-logo').attr('src', item.logoUrl);
-                                    $('.leader-ranking').text('#' + item.ranking);
-                                    $('.leader-block-mcount').text(leader_block_mcount);
-                                    if (item.madeBlockCount < 10) {
-                                        leader_block_mcount = item.madeBlockCount;
-                                    } else {
-                                        leader_block_mcount = 0;
-                                        $('.leader-block-mcount').text('0');
-                                        $('.leader-block-elapse').text(' ');
-                                        $('.leader-block-remain').text('❚❚❚❚❚❚❚❚❚❚');
-                                    }
+                    if (json.busy != null) {
+                        json.busy.forEach(function(item, index) {
+                            // ***********************
+                            // * Update Leader State *
+                            // ***********************
+                            if (index === 0 && $('.leader-name').text() !== item.name) {
+                                $('.leader').hide().fadeIn(500);
+                                $('.leader-name').text(item.name);
+                                $('.leader-logo').attr('src', item.logoUrl);
+                                $('.leader-ranking').text('#' + item.ranking);
+                                $('.leader-block-mcount').text(leader_block_mcount);
+                                if (item.madeBlockCount < 10) {
+                                    leader_block_mcount = item.madeBlockCount;
+                                } else {
+                                    leader_block_mcount = 0;
+                                    $('.leader-block-mcount').text('0');
+                                    $('.leader-block-elapse').text(' ');
+                                    $('.leader-block-remain').text('❚❚❚❚❚❚❚❚❚❚');
                                 }
-                                // ***************************
-                                // * Update Production State *
-                                // ***************************
-                                const id = item.peerId.toString();
-                                const peer_name = $('.peer-name-' + id);
-                                const peer_state = $('.peer-state-' + id);
-                                const peer_state_span = $('.peer-state-' + id + ' span');
-                                const peer_produced_blocks = $('.peer-produced-blocks-' + id);
-                                
-                                if (peer_state_span.text() === 'IDLE') {
-                                    peer_state_span.text('BUSY');
-                                    peer_name.addClass('font-weight-bold');
-                                    peer_state.addClass('peer-state-busy');
-                                    peer_state.closest('tr').hide().fadeIn(500);
-                                }
+                            }
+                            // ***************************
+                            // * Update Production State *
+                            // ***************************
+                            const id = item.peerId.toString();
+                            const peer_name = $('.peer-name-' + id);
+                            const peer_state = $('.peer-state-' + id);
+                            const peer_state_span = $('.peer-state-' + id + ' span');
+                            const peer_produced_blocks = $('.peer-produced-blocks-' + id);
+                            
+                            if (peer_state_span.text() === 'IDLE') {
+                                peer_state_span.text('BUSY');
+                                peer_name.addClass('font-weight-bold');
+                                peer_state.addClass('peer-state-busy');
+                                peer_state.closest('tr').hide().fadeIn(500);
+                            }
 
-                                $('.peer-state span').not(peer_state_span).text('IDLE');
-                                $('.peer-name').not(peer_name).removeClass('font-weight-bold');
-                                $('.peer-state').not(peer_state).removeClass('peer-state-busy');
+                            $('.peer-state span').not(peer_state_span).text('IDLE');
+                            $('.peer-name').not(peer_name).removeClass('font-weight-bold');
+                            $('.peer-state').not(peer_state).removeClass('peer-state-busy');
 
-                                peer_produced_blocks.attr('number', parseInt(peer_produced_blocks.attr('number')) + 1);
-                                peer_produced_blocks.text(parseInt(peer_produced_blocks.attr('number')).toLocaleString());
-                            });
-                        }
+                            peer_produced_blocks.attr('number', parseInt(peer_produced_blocks.attr('number')) + 1);
+                            peer_produced_blocks.text(parseInt(peer_produced_blocks.attr('number')).toLocaleString());
+                        });
                     }
+                });
+                subject.pipe(rxjs.operators.filter(x => x.name === 'BlockProducedSignal')).subscribe(signal => {
+                    const json = signal.body;
                     // ******************************
                     // * Handle BlockProducedSignal *
                     // ******************************
-                    if (name === 'BlockProducedSignal') {
-                        var leader_block_elapse = '';
+                    var leader_block_elapse = '';
                         var leader_block_remain = '';
                         if (leader_block_mcount < 10) {
                             leader_block_mcount += 1;
@@ -143,7 +143,6 @@
                                 $(item).attr('data-uid', 'grid-row' + index);
                             });
                         }
-                    }
                 });
             }
         }
