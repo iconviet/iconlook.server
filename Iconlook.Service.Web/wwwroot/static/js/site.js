@@ -1,149 +1,155 @@
 ﻿$(document).ready(function() {
     const subject = new rxjs.Subject();
-    $('[data-toggle=tooltip]').tooltip({ delay: { show: 0 } });
-    const source = new EventSource('/sse/stream?channel=iconlook');
-    var leader_block_mcount = parseInt($('.leader-block-mcount').text());
-    source.addEventListener('error', function(e) { console.log("ERROR", e); }, false);
+    $("[data-toggle=tooltip]").tooltip({ delay: { show: 0 } });
+    const source = new EventSource("/sse/stream?channel=iconlook");
+    var leader_block_mcount = parseInt($(".leader-block-mcount").text());
+    source.addEventListener("error", function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         success: function(selector, json, message) {
-            if (!selector.startsWith('cmd.on')) {
+            if (!selector.startsWith("cmd.on")) {
                 subject.next({ name: message.cmd, body: json });
             }
         },
         handlers: {
             onConnect: function() {
                 console.log("[ICONLOOK] Channel connected.");
-                // subject.pipe(rxjs.operators.throttle(() => rxjs.interval(500))).subscribe(signal => {
-                subject.pipe(rxjs.operators.filter(x => x.name === 'ChainUpdatedSignal')).subscribe(signal => {
-                    const json = signal.body;
-                    // *****************************
-                    // * Handle ChainUpdatedSignal *
-                    // *****************************
-                    $('.ChainResponse_MarketCap').integer(json.chain.marketCap);
-                    $('.ChainResponse_IcxSupply').integer(json.chain.icxSupply);
-                    $('.ChainResponse_IcxPrice').decimal(json.chain.icxPrice, 4);
-                    $('.ChainResponse_BlockHeight').integer(json.chain.blockHeight);
-                    $('.ChainResponse_TotalStaked').integer(json.chain.totalStaked);
-                    $('.ChainResponse_TotalUnstaking').integer(json.chain.totalUnstaking);
-                    $('.ChainResponse_IcxCirculation').integer(json.chain.icxCirculation);
-                    $('.ChainResponse_PublicTreasury').integer(json.chain.publicTreasury);
-                    $('.ChainResponse_TotalDelegated').integer(json.chain.totalDelegated);
-                    $('.ChainResponse_TransactionCount').integer(json.chain.transactionCount);
-                    $('.ChainResponse_StakedPercentage').percent(json.chain.stakedPercentage);
-                    $('.ChainResponse_DelegatedPercentage').percent(json.chain.delegatedPercentage);
-                    $('.ChainResponse_StakingAddressCount').integer(json.chain.stakingAddressCount);
-                });
-                subject.pipe(rxjs.operators.filter(x => x.name === 'PeersUpdatedSignal')).subscribe(signal => {
-                    const json = signal.body;
-                      // *****************************
-                    // * Handle PeersUpdatedSignal *
-                    // *****************************
-                    if (json.busy != null) {
-                        json.busy.forEach(function(item, index) {
-                            // ***********************
-                            // * Update Leader State *
-                            // ***********************
-                            if (index === 0 && $('.leader-name').text() !== item.name) {
-                                $('.leader').hide().fadeIn(500);
-                                $('.leader-name').text(item.name);
-                                $('.leader-logo').attr('src', item.logoUrl);
-                                $('.leader-ranking').text('#' + item.ranking);
-                                $('.leader-block-mcount').text(leader_block_mcount);
-                                if (item.madeBlockCount < 10) {
-                                    leader_block_mcount = item.madeBlockCount;
-                                } else {
-                                    leader_block_mcount = 0;
-                                    $('.leader-block-mcount').text('0');
-                                    $('.leader-block-elapse').text(' ');
-                                    $('.leader-block-remain').text('❚❚❚❚❚❚❚❚❚❚');
+                // ******************************************
+                // *          ChainUpdatedSignal            *
+                // ******************************************
+                subject.pipe(rxjs.operators.filter(x => x.name === "ChainUpdatedSignal"))
+                    .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
+                        $(".ChainResponse_MarketCap").integer(signal.body.chain.marketCap);
+                        $(".ChainResponse_IcxSupply").integer(signal.body.chain.icxSupply);
+                        $(".ChainResponse_IcxPrice").decimal(signal.body.chain.icxPrice, 4);
+                        $(".ChainResponse_BlockHeight").integer(signal.body.chain.blockHeight);
+                        $(".ChainResponse_TotalStaked").integer(signal.body.chain.totalStaked);
+                        $(".ChainResponse_TotalUnstaking").integer(signal.body.chain.totalUnstaking);
+                        $(".ChainResponse_IcxCirculation").integer(signal.body.chain.icxCirculation);
+                        $(".ChainResponse_PublicTreasury").integer(signal.body.chain.publicTreasury);
+                        $(".ChainResponse_TotalDelegated").integer(signal.body.chain.totalDelegated);
+                        $(".ChainResponse_TransactionCount").integer(signal.body.chain.transactionCount);
+                        $(".ChainResponse_StakedPercentage").percent(signal.body.chain.stakedPercentage);
+                        $(".ChainResponse_DelegatedPercentage").percent(signal.body.chain.delegatedPercentage);
+                        $(".ChainResponse_StakingAddressCount").integer(signal.body.chain.stakingAddressCount);
+                    });
+                // ******************************************
+                // *          PeersUpdatedSignal            *
+                // ******************************************
+                subject.pipe(rxjs.operators.filter(x => x.name === "PeersUpdatedSignal"))
+                    .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
+                        if (signal.body.busy != null) {
+                            signal.body.busy.forEach(function(item, index) {
+                                // **************************
+                                // *  Update Leader State   *
+                                // **************************
+                                if (index === 0 && $(".leader-name").text() !== item.name) {
+                                    $(".leader").hide().fadeIn(500);
+                                    $(".leader-name").text(item.name);
+                                    $(".leader-logo").attr("src", item.logoUrl);
+                                    $(".leader-ranking").text(`#${item.ranking}`);
+                                    $(".leader-block-mcount").text(leader_block_mcount);
+                                    if (item.madeBlockCount < 10) {
+                                        leader_block_mcount = item.madeBlockCount;
+                                    } else {
+                                        leader_block_mcount = 0;
+                                        $(".leader-block-mcount").text("0");
+                                        $(".leader-block-elapse").text(" ");
+                                        $(".leader-block-remain").text("❚❚❚❚❚❚❚❚❚❚");
+                                    }
                                 }
-                            }
-                            // ***************************
-                            // * Update Production State *
-                            // ***************************
-                            const id = item.peerId.toString();
-                            const peer_name = $('.peer-name-' + id);
-                            const peer_state = $('.peer-state-' + id);
-                            const peer_state_span = $('.peer-state-' + id + ' span');
-                            const peer_produced_blocks = $('.peer-produced-blocks-' + id);
-                            
-                            if (peer_state_span.text() === 'IDLE') {
-                                peer_state_span.text('BUSY');
-                                peer_name.addClass('font-weight-bold');
-                                peer_state.addClass('peer-state-busy');
-                                peer_state.closest('tr').hide().fadeIn(500);
-                            }
+                                // ***************************
+                                // * Update Production State *
+                                // ***************************
+                                const id = item.peerId.toString();
+                                const peer_name = $(`.peer-name-${id}`);
+                                const peer_state = $(`.peer-state-${id}`);
+                                const peer_state_span = $(`.peer-state-${id} span`);
+                                const peer_produced_blocks = $(`.peer-produced-blocks-${id}`);
 
-                            $('.peer-state span').not(peer_state_span).text('IDLE');
-                            $('.peer-name').not(peer_name).removeClass('font-weight-bold');
-                            $('.peer-state').not(peer_state).removeClass('peer-state-busy');
+                                if (peer_state_span.text() === "IDLE") {
+                                    peer_state_span.text("BUSY");
+                                    peer_name.addClass("font-weight-bold");
+                                    peer_state.addClass("peer-state-busy");
+                                    peer_state.closest("tr").hide().fadeIn(500);
+                                }
 
-                            peer_produced_blocks.attr('number', parseInt(peer_produced_blocks.attr('number')) + 1);
-                            peer_produced_blocks.text(parseInt(peer_produced_blocks.attr('number')).toLocaleString());
-                        });
-                    }
-                });
-                subject.pipe(rxjs.operators.filter(x => x.name === 'BlockProducedSignal')).subscribe(signal => {
-                    const json = signal.body;
-                    // ******************************
-                    // * Handle BlockProducedSignal *
-                    // ******************************
-                    var leader_block_elapse = '';
-                        var leader_block_remain = '';
+                                $(".peer-state span").not(peer_state_span).text("IDLE");
+                                $(".peer-name").not(peer_name).removeClass("font-weight-bold");
+                                $(".peer-state").not(peer_state).removeClass("peer-state-busy");
+
+                                peer_produced_blocks.attr("number", parseInt(peer_produced_blocks.attr("number")) + 1);
+                                peer_produced_blocks.text(
+                                    parseInt(peer_produced_blocks.attr("number")).toLocaleString());
+                            });
+                        }
+                    });
+                // ******************************************
+                // *          BlockProducedSignal           *
+                // ******************************************
+                subject.pipe(rxjs.operators.filter(x => x.name === "BlockProducedSignal"))
+                    .pipe(rxjs.operators.throttle(() => rxjs.interval(1000))).subscribe(signal => {
+                        var leader_block_elapse = "";
+                        var leader_block_remain = "";
                         if (leader_block_mcount < 10) {
                             leader_block_mcount += 1;
                         }
                         for (m = 0; m < leader_block_mcount; m++) {
-                            leader_block_elapse += '❚';
+                            leader_block_elapse += "❚";
                         }
                         for (r = leader_block_mcount; r < 10; r++) {
-                            leader_block_remain += '❚';
+                            leader_block_remain += "❚";
                         }
-                        $('.leader-block-mcount').text(leader_block_mcount);
-                        $('.leader-block-elapse').text(leader_block_elapse);
-                        $('.leader-block-remain').text(leader_block_remain);
-                        if ($('#block_grid').length) {
-                            if ($('#block_grid .e-content tr').length > 1) {
-                                if ($('#block_grid .e-content tr').length >= 22) {
-                                    $('#block_grid .e-content tr:last').remove();
+                        $(".leader-block-mcount").text(leader_block_mcount);
+                        $(".leader-block-elapse").text(leader_block_elapse);
+                        $(".leader-block-remain").text(leader_block_remain);
+                        if ($("#block_grid").length) {
+                            if ($("#block_grid .e-content tr").length > 1) {
+                                if ($("#block_grid .e-content tr").length >= 22) {
+                                    $("#block_grid .e-content tr:last").remove();
                                 }
-                                const block_row = $('#block_grid .e-content tr:first').clone();
-                                block_row.find('.BlockResponse_TotalAmount').decimal(json.block.totalAmount, 4, true);
-                                block_row.find('.BlockResponse_BlockHeight').text(json.block.height.toLocaleString());
-                                block_row.find('.BlockResponse_BlockHash').text(json.block.hash.substring(0, 16) + '..');
-                                block_row.find('.BlockResponse_TransactionCount').integer(json.block.transactionCount, '0000');
-                                block_row.hide().css('opacity', 0).css('background-color', '#ffffe1');
-                                block_row.prependTo($('#block_grid .e-content tbody:first'));
-                                block_row.slideDown(150).animate({ opacity: 1 }, 450).animate({ queue: true, 'background-color': '#ffffff' }, 300);
+                                const block_row = $("#block_grid .e-content tr:first").clone();
+                                block_row.find(".BlockResponse_TotalAmount")
+                                    .decimal(signal.body.block.totalAmount, 4, true);
+                                block_row.find(".BlockResponse_BlockHeight")
+                                    .text(signal.body.block.height.toLocaleString());
+                                block_row.find(".BlockResponse_BlockHash")
+                                    .text(signal.body.block.hash.substring(0, 16) + "..");
+                                block_row.find(".BlockResponse_TransactionCount")
+                                    .integer(signal.body.block.transactionCount, "0000");
+                                block_row.hide().css("opacity", 0).css("background-color", "#ffffe1");
+                                block_row.prependTo($("#block_grid .e-content tbody:first"));
+                                block_row.slideDown(150).animate({ opacity: 1 }, 450)
+                                    .animate({ queue: true, 'background-color': "#ffffff" }, 300);
                             }
-                            $('#block_grid .e-content tr').toArray().forEach(function(item, index) {
-                                $(item).attr('aria-rowindex', index);
-                                $(item).attr('data-uid', 'grid-row' + index);
+                            $("#block_grid .e-content tr").toArray().forEach(function(item, index) {
+                                $(item).attr("aria-rowindex", index);
+                                $(item).attr("data-uid", `grid-row${index}`);
                             });
                         }
-                        if ($('#transaction_grid').length) {
-                            json.transactions.forEach(function(item, index) {
-                                if ($('#transaction_grid .e-content tr').length > 1) {
-                                    if ($('#transaction_grid .e-content tr').length >= 22) {
-                                        $('#transaction_grid .e-content tr:last').remove();
+                        if ($("#transaction_grid").length) {
+                            signal.body.transactions.forEach(function(item, index) {
+                                if ($("#transaction_grid .e-content tr").length > 1) {
+                                    if ($("#transaction_grid .e-content tr").length >= 22) {
+                                        $("#transaction_grid .e-content tr:last").remove();
                                     }
-                                    const trans_row = $('#transaction_grid .e-content tr:first').clone();
-                                    trans_row.attr('aria-rowindex', index).attr('data-uid', 'grid-row' + index);
-                                    trans_row.find('.TransactionResponse_Amount').decimal(item.amount, 4, true);
-                                    trans_row.find('.TransactionResponse_To').text(item.to.substring(0, 10) + '..');
-                                    trans_row.find('.TransactionResponse_From').text(item.from.substring(0, 10) + '..');
-                                    trans_row.find('.TransactionResponse_Hash').text(item.hash.substring(0, 16) + '..');
-                                    trans_row.hide().css('opacity', 0).css('background-color', '#fffff0');
-                                    trans_row.prependTo($('#transaction_grid .e-content tbody:first'));
-                                    trans_row.slideDown(150).animate({ opacity: 1 }, 450).animate({ queue: true, 'background-color': '#ffffff' }, 300);
+                                    const trans_row = $("#transaction_grid .e-content tr:first").clone();
+                                    trans_row.attr("aria-rowindex", index).attr("data-uid", `grid-row${index}`);
+                                    trans_row.find(".TransactionResponse_Amount").decimal(item.amount, 4, true);
+                                    trans_row.find(".TransactionResponse_To").text(item.to.substring(0, 10) + "..");
+                                    trans_row.find(".TransactionResponse_From").text(item.from.substring(0, 10) + "..");
+                                    trans_row.find(".TransactionResponse_Hash").text(item.hash.substring(0, 16) + "..");
+                                    trans_row.hide().css("opacity", 0).css("background-color", "#fffff0");
+                                    trans_row.prependTo($("#transaction_grid .e-content tbody:first"));
+                                    trans_row.slideDown(150).animate({ opacity: 1 }, 450)
+                                        .animate({ queue: true, 'background-color': "#ffffff" }, 300);
                                 }
                             });
-                            $('#transactions_grid .e-content tr').toArray().forEach(function(item, index) {
-                                $(item).attr('aria-rowindex', index);
-                                $(item).attr('data-uid', 'grid-row' + index);
+                            $("#transactions_grid .e-content tr").toArray().forEach(function(item, index) {
+                                $(item).attr("aria-rowindex", index);
+                                $(item).attr("data-uid", `grid-row${index}`);
                             });
                         }
-                });
+                    });
             }
         }
     });
