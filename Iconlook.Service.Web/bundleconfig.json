@@ -21,6 +21,7 @@
       "wwwroot/static/js/bootstrap.min.js",
       "wwwroot/static/js/jquery.moment.min.js",
       "wwwroot/static/js/jquery.animate-number.min.js",
+      "wwwroot/static/js/jquery.animate-number.extend.min.js",
       "wwwroot/static/js/site.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
