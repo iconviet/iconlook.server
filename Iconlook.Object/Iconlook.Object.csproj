@@ -8,6 +8,6 @@
     <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Agiper.Object" Version="1.0.2-master-3590603" />
+    <PackageReference Include="Agiper.Object" Version="1.0.3-master-0020939" />
   </ItemGroup>
 </Project>

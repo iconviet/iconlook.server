@@ -293,12 +293,11 @@ button.secondary, button .secondary {
 }
 
 .card {
-    overflow: hidden;
     border: solid 1px#e7eaee;
 }
 
 .card .card-body {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .card .card-header .far,
