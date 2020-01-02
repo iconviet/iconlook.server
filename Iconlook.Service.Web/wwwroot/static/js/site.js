@@ -22,6 +22,21 @@
                 });
                 subscriptions = [];
                 console.log("[ICONLOOK] Channel connected.");
+                subscriptions.push(subject.subscribe(() => {
+                        if (leader_block_mcount <= 10) {
+                            let leader_block_elapse = "";
+                            let leader_block_remain = "";
+                            for (let i = 0; i < leader_block_mcount; i++) {
+                                leader_block_elapse += "❚";
+                            }
+                            for (let i = leader_block_mcount; i < 10; i++) {
+                                leader_block_remain += "❚";
+                            }
+                            $(".leader-block-mcount").text(leader_block_mcount);
+                            $(".leader-block-elapse").text(leader_block_elapse);
+                            $(".leader-block-remain").text(leader_block_remain);
+                        }
+                    }));
                 // ******************************************
                 // *          ChainUpdatedSignal            *
                 // ******************************************
@@ -54,19 +69,14 @@
                                 // *  Update Leader State   *
                                 // **************************
                                 if (index === 0 && $(".leader-name").text() !== item.name) {
+                                    leader_block_mcount = 0;
                                     $(".leader").hide().fadeIn(500);
                                     $(".leader-name").text(item.name);
+                                    $(".leader-block-mcount").text("0");
+                                    $(".leader-block-elapse").text(null);
                                     $(".leader-logo").attr("src", item.logoUrl);
                                     $(".leader-ranking").text(`#${item.ranking}`);
-                                    $(".leader-block-mcount").text(leader_block_mcount);
-                                    if (item.madeBlockCount < 10) {
-                                        leader_block_mcount = item.madeBlockCount;
-                                    } else {
-                                        leader_block_mcount = 0;
-                                        $(".leader-block-mcount").text("0");
-                                        $(".leader-block-elapse").text(" ");
-                                        $(".leader-block-remain").text("❚❚❚❚❚❚❚❚❚❚");
-                                    }
+                                    $(".leader-block-remain").text("❚❚❚❚❚❚❚❚❚❚");
                                 }
                                 // ***************************
                                 // * Update Production State *
@@ -100,20 +110,7 @@
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "BlockProducedSignal"))
                     .pipe(rxjs.operators.throttleTime(1000)).subscribe(signal => {
-                        let leader_block_elapse = "";
-                        let leader_block_remain = "";
-                        if (leader_block_mcount < 10) {
-                            leader_block_mcount += 1;
-                        }
-                        for (m = 0; m < leader_block_mcount; m++) {
-                            leader_block_elapse += "❚";
-                        }
-                        for (r = leader_block_mcount; r < 10; r++) {
-                            leader_block_remain += "❚";
-                        }
-                        $(".leader-block-mcount").text(leader_block_mcount);
-                        $(".leader-block-elapse").text(leader_block_elapse);
-                        $(".leader-block-remain").text(leader_block_remain);
+                        leader_block_mcount += 1;
                         if ($("#block_grid").length) {
                             if ($("#block_grid .e-content tr").length > 1) {
                                 if ($("#block_grid .e-content tr").length >= 22) {
@@ -125,7 +122,7 @@
                                 block_row.find(".BlockResponse_BlockHeight")
                                     .text(signal.body.block.height.toLocaleString());
                                 block_row.find(".BlockResponse_BlockHash")
-                                    .text(signal.body.block.hash.substring(0, 16) + "..");
+                                    .text(`${signal.body.block.hash.substring(0, 16)}..`);
                                 block_row.find(".BlockResponse_TransactionCount")
                                     .integer(signal.body.block.transactionCount, "0000");
                                 block_row.hide().css("opacity", 0).css("background-color", "#ffffe1");
@@ -147,9 +144,9 @@
                                     const trans_row = $("#transaction_grid .e-content tr:first").clone();
                                     trans_row.attr("aria-rowindex", index).attr("data-uid", `grid-row${index}`);
                                     trans_row.find(".TransactionResponse_Amount").decimal(item.amount, 4, true);
-                                    trans_row.find(".TransactionResponse_To").text(item.to.substring(0, 10) + "..");
-                                    trans_row.find(".TransactionResponse_From").text(item.from.substring(0, 10) + "..");
-                                    trans_row.find(".TransactionResponse_Hash").text(item.hash.substring(0, 16) + "..");
+                                    trans_row.find(".TransactionResponse_To").text(`${item.to.substring(0, 10)}..`);
+                                    trans_row.find(".TransactionResponse_From").text(`${item.from.substring(0, 10)}..`);
+                                    trans_row.find(".TransactionResponse_Hash").text(`${item.hash.substring(0, 16)}..`);
                                     trans_row.hide().css("opacity", 0).css("background-color", "#fffff0");
                                     trans_row.prependTo($("#transaction_grid .e-content tbody:first"));
                                     trans_row.slideDown(150).animate({ opacity: 1 }, 450)
