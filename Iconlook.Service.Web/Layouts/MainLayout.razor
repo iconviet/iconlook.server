@@ -1,22 +1,49 @@
 ﻿@using Iconlook.Server
 @inherits LayoutComponentBase
 <div class="body">
-    <header>
+    <header class="d-none d-lg-block">
         <div class="container">
             <div class="row no-gutters align-items-center" style="min-height: 52px;">
                 <div class="col-auto">
                     <a href="/">
-                        <span class="special font-weight-bold">[ICONLOOK]</span>
+                        <span class="special font-weight-bold">[ICONLOOK LOGO]</span>
                     </a>
                 </div>
                 <div class="col pb-1 d-inline-flex justify-content-end align-items-center">
-                    <img class="d-none d-md-block" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-top: 1px; margin-right: -40px;"/>
-                    <EjsMenu Items="MenuItems" CssClass="ejs-menu d-none d-md-block"></EjsMenu>
+                    <img src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-top: 1px; margin-right: -40px;"/>
+                    <EjsMenu Items="MenuItems" CssClass="ejs-menu"></EjsMenu>
                 </div>
-                <div class="col-auto fs-2 pl-3 pb-1 d-none d-md-block">
+                <div class="col-auto fs-2 pl-3 pb-1">
                     <i class="fas fa-signal positive-dark"></i>
                 </div>
             </div>
+        </div>
+    </header>
+    <header class="d-lg-none d-md-block">
+        <div class="container p-0">
+            <nav class="navbar navbar-light">
+                <div>
+                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -15px;" />
+                </div>
+                <div class="navbar-toggler" style="border: none; padding-right: 5px;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
+                    <span>
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar_content">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </header>
     <main>
