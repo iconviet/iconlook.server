@@ -17,9 +17,8 @@ namespace Iconlook.Service.Job
 {
     public class UpdateChainJob : JobBase
     {
-        public static long LastBlockHeight;
-
         private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
+        public static long LastBlockHeight;
 
         public override async Task RunAsync()
         {
@@ -36,18 +35,20 @@ namespace Iconlook.Service.Job
                         var main_info = await tracker.GetMainInfo();
                         var iiss_info = await service.GetIissInfo();
                         var prep_info = await service.GetPRepInfo();
+                        var cu = iiss_info.GetNextPRepTerm();
+                        var chim = iiss_info.GetNextCalculation();
                         var staking_info = await chainalytic.GetStakingInfo();
                         var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
-                            {
-                                Id = x.GetTxHash().ToString(),
-                                Hash = x.GetTxHash().ToString(),
-                                Block = (long) last_block.GetHeight(),
-                                To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
-                                From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
-                                Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
-                                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
-                            }).ToList();
+                        {
+                            Id = x.GetTxHash().ToString(),
+                            Hash = x.GetTxHash().ToString(),
+                            Block = (long) last_block.GetHeight(),
+                            To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
+                            From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
+                            Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
+                            Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
+                            Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
+                        }).ToList();
                         var block = new BlockResponse
                         {
                             PeerId = last_block.GetPeerId(),
@@ -69,6 +70,7 @@ namespace Iconlook.Service.Job
                             IcxCirculation = (long) main_info?.GetIcxCirculation(),
                             PublicTreasury = (long) main_info?.GetPublicTreasury(),
                             Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
+                            NextTermBlockHeight = (long) iiss_info.GetNextPRepTerm(),
                             TransactionCount = (long) main_info?.GetTransactionCount(),
                             RRepPercentage = (double) (iiss_info.GetRRep() * 3) / 10000,
                             TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
@@ -77,13 +79,11 @@ namespace Iconlook.Service.Job
                             UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
                             TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                         };
-                        var calculator = new BlockCalculator(chain.BlockHeight);
-                        chain.NextTermCountdown = calculator.GetNextTermCountdown();
-                        chain.NextTermBlockHeight = calculator.GetNextTermBlockHeight();
                         chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
                         chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
                         chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
-
+                        var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
+                        chain.NextTermCountdown = calculator.GetNextTermCountdown();
                         await Channel.Publish(new BlockProducedSignal
                         {
                             Block = block,

@@ -4,33 +4,28 @@ namespace Iconlook.Calculator
 {
     public class BlockCalculator
     {
-        private readonly long _currentBlockHeight;
-        
-        private readonly long _lastTermBlockHeight = 13251043;
+        private readonly long _next;
+        private readonly long _height;
 
-        public BlockCalculator(long height)
+        public BlockCalculator(long height, long next)
         {
-            _currentBlockHeight = height;
+            _next = next;
+            _height = height;
         }
 
-        public long GetNextTermBlockHeight()
+        public TimeSpan GetNextTermDuration()
         {
-            return _lastTermBlockHeight + 43200;
+            return TimeSpan.FromSeconds((_next - _height) * 2);
         }
 
         public string GetNextTermCountdown()
         {
             var duration = GetNextTermDuration();
-            if (Math.Abs(duration.TotalHours) < 0)
-                return Math.Abs(duration.TotalMinutes) < 0
+            if (duration.Hours == 0)
+                return duration.Minutes == 0
                     ? $"{duration:%s}s"
                     : $"{duration:%m}m {duration:%s}s";
             return $"{duration:%h}h {duration:%m}m {duration:%s}s";
-        }
-
-        public TimeSpan GetNextTermDuration()
-        {
-            return TimeSpan.FromSeconds((GetNextTermBlockHeight() - _currentBlockHeight) * 2);
         }
     }
 }
