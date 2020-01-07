@@ -22,11 +22,6 @@
          TValue="AddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <GridSortSettings>
-        <GridSortColumns>
-            <GridSortColumn Field="Unstaking" Direction="SortDirection.Descending"></GridSortColumn>
-        </GridSortColumns>
-    </GridSortSettings>
     <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=200" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="320" Field="@nameof(AddressResponse.Hash)" HeaderText="Address">
