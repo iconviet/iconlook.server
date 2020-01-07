@@ -22,6 +22,7 @@ namespace Iconlook.Service.Web
         {
             var culture = CultureInfo.InvariantCulture;
             var current = culture.Clone() as CultureInfo;
+            current.NumberFormat.CurrencySymbol = "$";
             current.NumberFormat.PercentPositivePattern = 1;
             current.NumberFormat.PercentNegativePattern = 1;
             CultureInfo.DefaultThreadCurrentCulture = current;

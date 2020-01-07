@@ -43,9 +43,9 @@
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "ChainUpdatedSignal"))
                     .pipe(rxjs.operators.debounceTime(1000)).subscribe(signal => {
+                        $(".ChainResponse_IcxPrice").money(signal.body.chain.icxPrice, 4);
                         $(".ChainResponse_MarketCap").integer(signal.body.chain.marketCap);
                         $(".ChainResponse_IcxSupply").integer(signal.body.chain.icxSupply);
-                        $(".ChainResponse_IcxPrice").decimal(signal.body.chain.icxPrice, 4);
                         $(".ChainResponse_BlockHeight").integer(signal.body.chain.blockHeight);
                         $(".ChainResponse_TotalStaked").integer(signal.body.chain.totalStaked);
                         $(".ChainResponse_TotalUnstaking").integer(signal.body.chain.totalUnstaking);
