@@ -11,6 +11,8 @@ namespace Iconlook.Object
         public long BlockHeight { get; set; }
         public long TotalStaked { get; set; }
         public decimal IcxPrice { get; set; }
+        public double TotalRRep { get; set; }
+        public decimal TotalIRep { get; set; }
         public long TotalUnstaking { get; set; }
         public long TotalDelegated { get; set; }
         public long IcxCirculation { get; set; }
