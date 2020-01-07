@@ -1,16 +1,21 @@
 ﻿@using Iconlook.Server
 @inherits LayoutComponentBase
+<style>
+    .ejs-menu > .e-menu > .e-menu-item {
+        height: 48px;
+    }
+</style>
 <div class="body">
     <header class="d-none d-lg-block">
         <div class="container">
-            <div class="row no-gutters align-items-center" style="min-height: 52px;">
+            <div class="row no-gutters align-items-center">
                 <div class="col-auto">
                     <a href="/">
                         <span class="special font-weight-bold">[ICONLOOK LOGO]</span>
                     </a>
                 </div>
-                <div class="col pb-1 d-inline-flex justify-content-end align-items-center">
-                    <img src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-top: 1px; margin-right: -40px;"/>
+                <div class="col d-inline-flex justify-content-end align-items-center">
+                    <img src="static/images/iconviet.png" style="opacity: 0.85; max-width: 112px; margin-top: -6px; margin-right: -40px;"/>
                     <EjsMenu Items="MenuItems" CssClass="ejs-menu"></EjsMenu>
                 </div>
                 <div class="col-auto fs-2 pl-3 pb-1">
