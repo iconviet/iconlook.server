@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
+using Iconlook.Calculator;
 using Iconlook.Client;
 using Iconlook.Client.Chainalytic;
 using Iconlook.Client.Service;
@@ -74,6 +75,9 @@ namespace Iconlook.Service.Job
                             UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
                             TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                         };
+                        var calculator = new BlockCalculator(chain.BlockHeight);
+                        chain.NextTermCountdown = calculator.GetNextTermCountdown();
+                        chain.NextTermBlockHeight = calculator.GetNextTermBlockHeight();
                         chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
                         chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
                         chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;

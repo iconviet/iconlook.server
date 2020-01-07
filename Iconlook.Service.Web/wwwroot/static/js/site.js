@@ -52,10 +52,12 @@
                         $(".ChainResponse_IcxCirculation").integer(signal.body.chain.icxCirculation);
                         $(".ChainResponse_PublicTreasury").integer(signal.body.chain.publicTreasury);
                         $(".ChainResponse_TotalDelegated").integer(signal.body.chain.totalDelegated);
+                        $(".ChainResponse_NextTermCountdown").text(signal.body.chain.nextTermCountdown);
                         $(".ChainResponse_TransactionCount").integer(signal.body.chain.transactionCount);
                         $(".ChainResponse_StakedPercentage").percent(signal.body.chain.stakedPercentage);
                         $(".ChainResponse_DelegatedPercentage").percent(signal.body.chain.delegatedPercentage);
                         $(".ChainResponse_StakingAddressCount").integer(signal.body.chain.stakingAddressCount);
+                        $(".ChainResponse_NextTermBlockHeight").integer(signal.body.chain.nextTermBlockHeight);
                     }));
                 // ******************************************
                 // *          PeersUpdatedSignal            *

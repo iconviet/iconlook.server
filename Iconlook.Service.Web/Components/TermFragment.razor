@@ -1,0 +1,16 @@
+﻿@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+}
+<div class="px-1 py-3 flex-fill">
+    <div class="py-1 fs-n3 text-light">NEXT TERM</div>
+    <div class="fs-2 ls-n1 mono-lg ChainResponse_NextTermBlockHeight" number="@(ChainResponse?.NextTermBlockHeight ?? 0)">
+        @(ChainResponse?.NextTermBlockHeight.ToString("N0") ?? "0")
+    </div>
+</div>
+<div class="px-1 py-3 flex-fill text-right">
+    <div class="py-1 fs-n3 text-light"><i class="fal pr-2 fa-stopwatch"></i>TIME LEFT</div>
+    <div class="fs-2 ls-n1 mono-lg ChainResponse_NextTermCountdown">
+        @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
+    </div>
+</div>

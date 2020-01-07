@@ -17,6 +17,8 @@ namespace Iconlook.Object
         public long PublicTreasury { get; set; }
         public long TransactionCount { get; set; }
         public double StakedPercentage { get; set; }
+        public long NextTermBlockHeight { get; set; }
+        public string NextTermCountdown { get; set; }
         public long StakingAddressCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public long UnstakingAddressCount { get; set; }

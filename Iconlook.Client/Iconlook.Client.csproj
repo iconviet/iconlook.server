@@ -13,6 +13,7 @@
     <PackageReference Include="ServiceStack.HttpClient" Version="5.7.0" />
    </ItemGroup>
    <ItemGroup>
+     <ProjectReference Include="..\Iconlook.Calculator\Iconlook.Calculator.csproj" />
      <ProjectReference Include="..\Iconlook.Object\Iconlook.Object.csproj" />
    </ItemGroup>
 </Project>
