@@ -449,6 +449,18 @@ button.secondary, button .secondary {
 
 
 /*
+    EJS-BUTTON
+*/
+.e-dropdown-btn .e-caret::before,
+.e-dropdown-btn.e-btn .e-caret::before {
+    content: "";
+    font-weight: 500;
+    font-family: "Font Awesome 5 Pro";
+}
+
+
+
+/*
     EJS-MENU
 */
 .ejs-menu {

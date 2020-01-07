@@ -14,17 +14,22 @@
     .main.card .e-grid { min-height: 880px; }
 
     .submit-button {
+        font-weight: bold;
+        padding: 9px 12px 7px 8px;
         color: #666666 !important;
-        font-weight: bold !important;
         background-color: white !important;
-        padding: 9px 12px 7px 8px !important;
     }
 
     .search-filter {
+        font-weight: bold;
         color: #666666 !important;
-        font-weight: bold !important;
+        padding: 9px 10px 7px 10px;
         background-color: white !important;
-        padding: 9px 10px 7px 10px !important;
+    }
+
+    .search-filter.e-dropdown-popup {
+        padding: 0;
+        color: #666666;
     }
 
     .search-filter.e-dropdown-popup .e-item {
@@ -36,13 +41,15 @@
         color: #1aaaba;
         background: none;
     }
+    
+    button.submit-button:hover, button.search-filter:hover {
+        color: #1aaaba !important;
+    }
 
-    .search-filter.e-dropdown-popup { color: #666666; }
-
-    .search-filter.e-active { background-color: white !important; }
-
-    .submit-button:hover, .search-filter:hover { color: #1aaaba !important; }
-
+    button.submit-button.e-active, button.search-filter.e-active {
+        color: #1aaaba !important;
+    }
+    
     .submit-input .e-input-group::after, .submit-input .e-input-group::before { background: none !important; }
 
     input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 5px 7px 0 7px !important; }
