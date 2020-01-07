@@ -22,13 +22,13 @@ namespace Iconlook.Client.Service
             return _properties.GetItem("nextPRepTerm")?.ToInteger() ?? 0;
         }
 
-        public BigInteger GetTotalIRep()
+        public BigInteger GetIRep()
         {
             var variable = _properties.GetItem("variable");
             return variable?.ToObject().GetItem("irep")?.ToInteger() ?? 0;
         }
 
-        public BigInteger GetTotalRRep()
+        public BigInteger GetRRep()
         {
             var variable = _properties.GetItem("variable");
             return variable?.ToObject().GetItem("rrep")?.ToInteger() ?? 0;

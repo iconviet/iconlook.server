@@ -50,6 +50,7 @@
                         $(".ChainResponse_TotalStaked").integer(signal.body.chain.totalStaked);
                         $(".ChainResponse_TotalUnstaking").integer(signal.body.chain.totalUnstaking);
                         $(".ChainResponse_IcxCirculation").integer(signal.body.chain.icxCirculation);
+                        $(".ChainResponse_RRepPercentage").percent(signal.body.chain.rRepPercentage);
                         $(".ChainResponse_PublicTreasury").integer(signal.body.chain.publicTreasury);
                         $(".ChainResponse_TotalDelegated").integer(signal.body.chain.totalDelegated);
                         $(".ChainResponse_NextTermCountdown").text(signal.body.chain.nextTermCountdown);

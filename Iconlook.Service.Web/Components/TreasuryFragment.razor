@@ -5,7 +5,9 @@
 <div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
     <div>
-        <span class="fs-1 mono-lg primary">19.65%</span>&nbsp;
+        <span class="fs-1 mono-lg primary ChainResponse_RRepPercentage">
+            @(ChainResponse?.RRepPercentage.ToString("P2") ?? "0.00%")
+        </span>&nbsp;
         <span class="fs-n2 ls-n1 mono text-light">
             <i>( r<sub>rep</sub> * 3 )</i>
         </span>

@@ -62,15 +62,15 @@ namespace Iconlook.Service.Job
                         };
                         var chain = new ChainResponse
                         {
+                            IRep = iiss_info.GetIRep().ToIcxFromLoop(),
                             MarketCap = (long) main_info?.GetMarketCap(),
                             IcxSupply = (long) main_info?.GetIcxSupply(),
                             BlockHeight = (long) iiss_info?.GetBlockHeight(),
-                            TotalIRep = iiss_info.GetTotalIRep().ToIcxFromLoop(),
                             IcxCirculation = (long) main_info?.GetIcxCirculation(),
                             PublicTreasury = (long) main_info?.GetPublicTreasury(),
                             Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
-                            TotalRRep = (double) (iiss_info.GetTotalRRep() * 3) / 100,
                             TransactionCount = (long) main_info?.GetTransactionCount(),
+                            RRepPercentage = (double) (iiss_info.GetRRep() * 3) / 10000,
                             TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
                             StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
                             TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcxFromLoop(),
