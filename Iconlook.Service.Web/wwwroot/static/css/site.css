@@ -453,8 +453,9 @@ button.secondary, button .secondary {
 */
 .e-dropdown-btn .e-caret::before,
 .e-dropdown-btn.e-btn .e-caret::before {
-    content: "";
-    font-weight: 500;
+    content: "";
+    font-size: 12px;
+    font-weight: 700;
     font-family: "Font Awesome 5 Pro";
 }
 
