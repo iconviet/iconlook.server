@@ -1,4 +1,4 @@
-/*
+﻿/*
     GLOBAL
 */
 app {
@@ -496,6 +496,13 @@ button.secondary, button .secondary {
     color: #1aaaba;
     font-size: 1rem;
     margin-top: -1px;
+}
+
+.e-menu-wrapper ul .e-menu-item .e-caret::before {
+    content: "";
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Font Awesome 5 Pro";
 }
 
 .e-menu-wrapper .e-menu-item.e-selected .e-menu-icon {
