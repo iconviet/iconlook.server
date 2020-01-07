@@ -19,7 +19,7 @@
         <i class="fal pr-1 fa-question-circle" data-toggle="tooltip" title="Total ICX awaiting unstaked. Click for more details."></i>UNSTAKING
     </div>
     <a class="secondary underline" href="/addresses?state=unstaking">
-        <div class="fs-2 ls-n1 mono-lg ChainResponse_TotalUnstaking" number="@(ChainResponse?.TotalUnstaking ?? 0)">
+        <div class="fs-2 ls-n1 mono-lg text-light ChainResponse_TotalUnstaking" number="@(ChainResponse?.TotalUnstaking ?? 0)">
             @(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")
         </div>
     </a>

@@ -16,9 +16,11 @@
 </div>
 <div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">
-        <i class="fal pr-2 fa-user" data-toggle="tooltip" title="Total number of unique stakers / voters."></i>VOTERS
+        <i class="fal pr-2 fa-user" data-toggle="tooltip" title="Total number of unique stakers / voters."></i>STAKERS
     </div>
-    <div class="fs-2 ls-n1 mono-lg ChainResponse_StakingAddressCount" number="@(ChainResponse?.StakingAddressCount ?? 0)">
-        @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
-    </div>
+    <a class="secondary underline" href="/addresses?state=unstaking">
+        <div class="fs-2 ls-n1 mono-lg text-light ChainResponse_StakingAddressCount" number="@(ChainResponse?.StakingAddressCount ?? 0)">
+            @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
+        </div>
+    </a>
 </div>

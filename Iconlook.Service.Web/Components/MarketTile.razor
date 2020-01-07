@@ -14,7 +14,7 @@
 </div>
 <div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">USD MARKET CAP</div>
-    <div class="fs-2 ls-n1 mono-lg ChainResponse_MarketCap" number="@(ChainResponse?.MarketCap ?? 0)">
+    <div class="fs-2 ls-n1 mono-lg text-light ChainResponse_MarketCap" number="@(ChainResponse?.MarketCap ?? 0)">
         @(ChainResponse?.MarketCap.ToString("C0") ?? "$0")
     </div>
 </div>
