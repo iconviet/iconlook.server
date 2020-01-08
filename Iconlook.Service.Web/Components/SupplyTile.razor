@@ -4,13 +4,13 @@
 }
 <div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ICX CIRCULATION</div>
-    <div class="fs-2 ls-n1 mono-lg text-light ChainResponse_IcxCirculation" number="@(ChainResponse?.IcxCirculation ?? 0)">
+    <div class="fs-2 ls-n1 mono-lg ChainResponse_IcxCirculation" number="@(ChainResponse?.IcxCirculation ?? 0)">
         @(ChainResponse?.IcxCirculation.ToString("N0") ?? "0")
     </div>
 </div>
 <div class="px-1 py-3 flex-fill text-right">
     <div class="py-1 fs-n3 text-light">ICX SUPPLY</div>
-    <div class="fs-2 ls-n1 mono-lg text-light ChainResponse_IcxSupply" number="@(ChainResponse?.IcxSupply ?? 0)">
+    <div class="fs-2 ls-n1 mono-lg ChainResponse_IcxSupply" number="@(ChainResponse?.IcxSupply ?? 0)">
         @(ChainResponse?.IcxSupply.ToString("N0") ?? "0")
     </div>
 </div>
