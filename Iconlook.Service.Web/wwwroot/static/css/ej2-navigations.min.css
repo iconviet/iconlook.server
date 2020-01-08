@@ -4240,12 +4240,6 @@
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 480px) {
-  .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
-    font-size: 14px;
-  }
-}
-
 .e-tab .e-tab-header .e-toolbar-item.e-active {
   margin: 0;
   padding-bottom: 0;

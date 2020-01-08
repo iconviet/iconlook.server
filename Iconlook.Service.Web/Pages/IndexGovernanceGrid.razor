@@ -46,7 +46,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
+                        <span class="mono text-light">@prep.DelegatedPercentage.ToString("P2")</span>
                     }
                 }
             </Template>
@@ -56,7 +56,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2 text-light font-weight-semibold">@prep.Votes.ToString("N0")</span>
+                        <span class="mono ls-n2 font-weight-semibold">@prep.Votes.ToString("N0")</span>
                         <span style="margin-left: 1px;" class="fs-n2 text-light font-weight-light">votes</span>
                     }
                 }
@@ -65,9 +65,10 @@
         <GridColumn Width="65" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="% 24h Chg" TextAlign="TextAlign.Right">
             <Template>
                 @{
+                    var random = -0.02 + (0.02 - -0.02) * new Random().NextDouble();
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono text-light">@(0m.ToString("P2"))</span>
+                        <span class="mono font-weight-light @(random > 0 ? "positive-dark" : "negative-dark")">@random.ToString("P2")</span>
                     }
                 }
             </Template>
