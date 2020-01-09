@@ -34,12 +34,7 @@ namespace Iconlook.Service.Job
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var tracker = new IconTrackerClient(2);
-                            var chainalytic = new ChainalyticClient(2);
-                            var main_info = await tracker.GetMainInfo();
-                            var iiss_info = await service.GetIissInfo();
-                            var prep_info = await service.GetPRepInfo();
-                            var staking_info = await chainalytic.GetStakingInfo();
+                            // BlockResponse
                             var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                             {
                                 Id = x.GetTxHash().ToString(),
@@ -63,6 +58,32 @@ namespace Iconlook.Service.Job
                                 PrevHash = last_block.GetPrevBlockHash().ToString(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
                             };
+                            await Channel.Publish(new BlockProducedSignal
+                            {
+                                Block = block,
+                                Transactions = transactions
+                            }).ConfigureAwait(false);
+                            await Endpoint.Publish(new BlockProducedEvent
+                            {
+                                Block = block,
+                                Transactions = transactions
+                            }).ConfigureAwait(false);
+                            await Task.Run(() =>
+                            {
+                                using (var redis = Redis.Instance())
+                                {
+                                    redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
+                                    transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(60)));
+                                }
+                            }).ConfigureAwait(false);
+
+                            // ChainResponse
+                            var tracker = new IconTrackerClient(2);
+                            var chainalytic = new ChainalyticClient(2);
+                            var main_info = await tracker.GetMainInfo();
+                            var iiss_info = await service.GetIissInfo();
+                            var prep_info = await service.GetPRepInfo();
+                            var staking_info = await chainalytic.GetStakingInfo();
                             var chain = new ChainResponse
                             {
                                 IRep = iiss_info.GetIRep().ToIcxFromLoop(),
@@ -86,37 +107,26 @@ namespace Iconlook.Service.Job
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
                             var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
                             chain.NextTermCountdown = calculator.GetNextTermCountdown();
-                            await Channel.Publish(new BlockProducedSignal
-                            {
-                                Block = block,
-                                Transactions = transactions
-                            });
-                            await Endpoint.Publish(new BlockProducedEvent
-                            {
-                                Block = block,
-                                Transactions = transactions
-                            });
-                            await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
-                            await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
+                            await Channel.Publish(new ChainUpdatedSignal { Chain = chain }).ConfigureAwait(false);
+                            await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain }).ConfigureAwait(false);
                             await Task.Run(() =>
                             {
                                 using (var redis = Redis.Instance())
                                 {
-                                    redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
-                                    redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
-                                    transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
+                                    redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(60));
                                 }
-                            });
-                            if (rolex.Elapsed.TotalSeconds > 2)
-                            {
-                                Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
-                            }
+                            }).ConfigureAwait(false);
                         }
                     }
                 }
                 catch (Exception exception)
                 {
                     Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
+                }
+                Log.Information("{Job} ran in {Elapsed}ms.", nameof(UpdateChainJob), rolex.Elapsed.TotalMilliseconds);
+                if (rolex.Elapsed.TotalSeconds > 2)
+                {
+                    Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
                 }
             }
         }

@@ -16,56 +16,64 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
-            try
+            using (var rolex = new Rolex())
             {
-                using (var redis = Redis.Instance())
+                try
                 {
-                    var items = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
-                    if (items.Any())
+                    using (var redis = Redis.Instance())
                     {
-                        var peers = new List<PeerResponse>();
-                        await Task.WhenAll(items.Values.Select(prep =>
+                        var items = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Id);
+                        if (items.Any())
                         {
-                            return Task.Run(async () =>
+                            var peers = new List<PeerResponse>();
+                            await Task.WhenAll(items.Values.Select(prep =>
                             {
-                                var client = new JsonHttpClient(2);
-                                var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
-                                var url = $"http://{endpoint}/api/v1/status/peer";
-                                var response = await client.GetAsync<string>(url);
-                                if (response.HasValue())
+                                return Task.Run(async () =>
                                 {
-                                    var @object = DynamicJson.Deserialize(response);
-                                    peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
+                                    var client = new JsonHttpClient(1.75);
+                                    var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
+                                    var url = $"http://{endpoint}/api/v1/status/peer";
+                                    var response = await client.GetAsync<string>(url);
+                                    if (response.HasValue())
                                     {
-                                        x.Name = x.Name;
-                                        x.Id = @object.peer_id;
-                                        x.State = @object.state;
-                                        x.Status = @object.status;
-                                        x.PeerId = @object.peer_id;
-                                        x.PeerType = int.Parse(@object.peer_type);
-                                        x.BlockHeight = long.Parse(@object.block_height);
-                                        x.MadeBlockCount = int.Parse(@object.made_block_count);
-                                        x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
-                                    }));
-                                }
-                            });
-                        }));
-                        if (peers.Any())
-                        {
-                            redis.StoreAll(peers);
-                            await Channel.Publish(new PeersUpdatedSignal
+                                        var @object = DynamicJson.Deserialize(response);
+                                        peers.Add(prep.ConvertTo<PeerResponse>().ThenDo(x =>
+                                        {
+                                            x.Name = x.Name;
+                                            x.Id = @object.peer_id;
+                                            x.State = @object.state;
+                                            x.Status = @object.status;
+                                            x.PeerId = @object.peer_id;
+                                            x.PeerType = int.Parse(@object.peer_type);
+                                            x.BlockHeight = long.Parse(@object.block_height);
+                                            x.MadeBlockCount = int.Parse(@object.made_block_count);
+                                            x.LeaderMadeBlockCount = int.Parse(@object.leader_made_block_count);
+                                        }));
+                                    }
+                                });
+                            }));
+                            if (peers.Any())
                             {
-                                Sync = peers.Where(x => x.State == "BlockSync").ToList(),
-                                Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
-                                Down = peers.Where(x => x.State == "LeaderComplain").ToList()
-                            });
+                                redis.StoreAll(peers);
+                                await Channel.Publish(new PeersUpdatedSignal
+                                {
+                                    Sync = peers.Where(x => x.State == "BlockSync").ToList(),
+                                    Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
+                                    Down = peers.Where(x => x.State == "LeaderComplain").ToList()
+                                });
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception exception)
-            {
-                Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePeersJob), exception.Message);
+                catch (Exception exception)
+                {
+                    Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePeersJob), exception.Message);
+                }
+                Log.Information("{Job} ran in {Elapsed}ms.", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
+                if (rolex.Elapsed.TotalSeconds > 2)
+                {
+                    Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdatePeersJob));
+                }
             }
         }
     }
