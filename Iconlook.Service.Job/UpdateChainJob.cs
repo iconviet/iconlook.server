@@ -24,7 +24,6 @@ namespace Iconlook.Service.Job
 
         public override async Task RunAsync()
         {
-            Log.Information("UpdateChainJob started");
             using (var rolex = new Rolex())
             {
                 try
@@ -121,7 +120,6 @@ namespace Iconlook.Service.Job
                 {
                     Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
                 }
-                Log.Information("UpdateChainJob stopped in {Elapsed}ms", rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
