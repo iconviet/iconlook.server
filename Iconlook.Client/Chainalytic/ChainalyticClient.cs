@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ServiceStack;
 using ServiceStack.Text;
 
@@ -8,11 +9,10 @@ namespace Iconlook.Client.Chainalytic
     {
         private readonly JsonHttpClient _client;
 
-        public ChainalyticClient()
+        public ChainalyticClient(int timeout = 30)
         {
             _client = new JsonHttpClient("http://45.76.184.255:5530")
             {
-                HttpClient = HttpClientPool.Instance,
                 ResultsFilterResponse = (res, dto, method, uri, req) =>
                 {
                     if (dto is RpcResponse response)
@@ -20,6 +20,7 @@ namespace Iconlook.Client.Chainalytic
                             JsonSerializer.SerializeToString(response.Result));
                 }
             };
+            _client.GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }
 
         public async Task<StakingInfoRpc> GetStakingInfo()

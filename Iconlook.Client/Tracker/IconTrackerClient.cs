@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Iconlook.Client.Tracker
@@ -7,10 +8,10 @@ namespace Iconlook.Client.Tracker
     {
         private readonly JsonHttpClient _client;
 
-        public IconTrackerClient()
+        public IconTrackerClient(int timeout = 30)
         {
-            const string url = "https://tracker.icon.foundation";
-            _client = new JsonHttpClient(url);
+            _client = new JsonHttpClient("https://tracker.icon.foundation");
+            _client.GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }
 
         public async Task<MainResponse> GetMainInfo()

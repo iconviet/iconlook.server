@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Numerics;
@@ -13,9 +14,10 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _client;
 
-        public IconServiceClient(string endpoint = "http://ctzn.iconviet.io:9000")
+        public IconServiceClient(int timeout = 30, string endpoint = "http://ctzn.iconviet.io:9000")
         {
-            _client = new IconService(new HttpProvider(HttpClientPool.Instance, $"{endpoint}/api/v3"));
+            var http_client = new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) };
+            _client = new IconService(new HttpProvider(http_client, $"{endpoint}/api/v3"));
         }
 
         public Task<PRepRpc> GetPRep(string address)

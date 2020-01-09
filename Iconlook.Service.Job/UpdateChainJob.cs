@@ -18,8 +18,9 @@ namespace Iconlook.Service.Job
 {
     public class UpdateChainJob : JobBase
     {
-        private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
         public static long LastBlockHeight;
+
+        private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
 
         public override async Task RunAsync()
         {
@@ -27,14 +28,14 @@ namespace Iconlook.Service.Job
             {
                 try
                 {
-                    var service = new IconServiceClient();
+                    var service = new IconServiceClient(1);
                     var last_block = await service.GetLastBlock();
                     if (last_block != null)
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var tracker = new IconTrackerClient();
-                            var chainalytic = new ChainalyticClient();
+                            var tracker = new IconTrackerClient(1);
+                            var chainalytic = new ChainalyticClient(1);
                             var main_info = await tracker.GetMainInfo();
                             var iiss_info = await service.GetIissInfo();
                             var prep_info = await service.GetPRepInfo();

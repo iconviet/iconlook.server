@@ -29,7 +29,7 @@ namespace Iconlook.Service.Job
                         {
                             return Task.Run(async () =>
                             {
-                                var client = new JsonHttpClient();
+                                var client = new JsonHttpClient(2);
                                 var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
                                 var url = $"http://{endpoint}/api/v1/status/peer";
                                 var response = await client.GetAsync<string>(url);

@@ -27,13 +27,10 @@ namespace Iconlook.Service.Job
                 using (var redis = Redis.Instance())
                 {
                     var prep_objs = new List<PRep>();
+                    var json = new JsonHttpClient(60);
                     var icon = new IconServiceClient();
                     var prep_rpcs = await icon.GetPReps();
                     var prep_info = await icon.GetPRepInfo();
-                    var json = new JsonHttpClient
-                    {
-                        HttpClient = HttpClientPool.Get(TimeSpan.FromSeconds(60))
-                    };
                     await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                     {
                         try

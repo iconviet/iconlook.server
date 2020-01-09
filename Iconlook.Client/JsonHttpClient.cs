@@ -10,14 +10,22 @@ namespace Iconlook.Client
     {
         public JsonHttpClient()
         {
-            HttpClient = HttpClientPool.Instance;
             RequestCompressionType = CompressionTypes.GZip;
         }
 
         public JsonHttpClient(string uri) : base(uri)
         {
-            HttpClient = HttpClientPool.Instance;
             RequestCompressionType = CompressionTypes.GZip;
+        }
+
+        public JsonHttpClient(int timeout = 30) : this()
+        {
+            GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
+        }
+
+        public JsonHttpClient(string uri, int timeout = 30) : this(uri)
+        {
+            GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }
 
         private bool IsHttpGet(object request)
