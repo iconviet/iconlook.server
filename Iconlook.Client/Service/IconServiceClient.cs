@@ -14,7 +14,7 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _client;
 
-        public IconServiceClient(int timeout = 30, string endpoint = "http://ctzn.iconviet.io:9000")
+        public IconServiceClient(int timeout = 30, string endpoint = "https://ctz.solidwallet.io")
         {
             var http_client = new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) };
             _client = new IconService(new HttpProvider(http_client, $"{endpoint}/api/v3"));
