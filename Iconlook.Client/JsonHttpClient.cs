@@ -18,12 +18,12 @@ namespace Iconlook.Client
             RequestCompressionType = CompressionTypes.GZip;
         }
 
-        public JsonHttpClient(int timeout = 30) : this()
+        public JsonHttpClient(double timeout = 30) : this()
         {
             GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }
 
-        public JsonHttpClient(string uri, int timeout = 30) : this(uri)
+        public JsonHttpClient(string uri, double timeout = 30) : this(uri)
         {
             GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }

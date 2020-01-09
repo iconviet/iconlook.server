@@ -9,7 +9,7 @@ namespace Iconlook.Client.Chainalytic
     {
         private readonly JsonHttpClient _client;
 
-        public ChainalyticClient(int timeout = 30)
+        public ChainalyticClient(double timeout = 30)
         {
             _client = new JsonHttpClient("http://45.76.184.255:5530")
             {

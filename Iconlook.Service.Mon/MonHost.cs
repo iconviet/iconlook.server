@@ -18,7 +18,7 @@ namespace Iconlook.Service.Mon
 
         protected override void OnStart()
         {
-            Observable.FromAsync(() => Resolve<UpdatePeersJob>().RunAsync()).Delay(TimeSpan.FromMilliseconds(500)).Repeat().Subscribe();
+            Observable.FromAsync(() => Resolve<UpdatePeersJob>().RunAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Throttle(TimeSpan.FromSeconds(2)).Subscribe();
         }
     }
 }

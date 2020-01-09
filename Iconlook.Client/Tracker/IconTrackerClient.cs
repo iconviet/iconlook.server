@@ -8,7 +8,7 @@ namespace Iconlook.Client.Tracker
     {
         private readonly JsonHttpClient _client;
 
-        public IconTrackerClient(int timeout = 30)
+        public IconTrackerClient(double timeout = 30)
         {
             _client = new JsonHttpClient("https://tracker.icon.foundation");
             _client.GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
