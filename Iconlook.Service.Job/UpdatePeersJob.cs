@@ -26,11 +26,11 @@ namespace Iconlook.Service.Job
                         if (items.Any())
                         {
                             var peers = new List<PeerResponse>();
-                            await Task.WhenAll(items.Values.Select(prep =>
+                            await Task.WhenAll(items.Values.Where(x => x.Ranking <= 22).Select(prep =>
                             {
                                 return Task.Run(async () =>
                                 {
-                                    var client = new JsonHttpClient(1.75);
+                                    var client = new JsonHttpClient(2);
                                     var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
                                     var url = $"http://{endpoint}/api/v1/status/peer";
                                     var response = await client.GetAsync<string>(url);
@@ -54,13 +54,13 @@ namespace Iconlook.Service.Job
                             }));
                             if (peers.Any())
                             {
-                                redis.StoreAll(peers);
                                 await Channel.Publish(new PeersUpdatedSignal
                                 {
                                     Sync = peers.Where(x => x.State == "BlockSync").ToList(),
                                     Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
                                     Down = peers.Where(x => x.State == "LeaderComplain").ToList()
-                                });
+                                }).ConfigureAwait(false);
+                                await Task.Run(() => redis.StoreAll(peers)).ConfigureAwait(false);
                             }
                         }
                     }
@@ -70,7 +70,7 @@ namespace Iconlook.Service.Job
                     Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePeersJob), exception.Message);
                 }
                 Log.Information("{Job} ran in {Elapsed}ms.", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
-                if (rolex.Elapsed.TotalSeconds > 2)
+                if (rolex.Elapsed.TotalSeconds > 2.5)
                 {
                     Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdatePeersJob));
                 }

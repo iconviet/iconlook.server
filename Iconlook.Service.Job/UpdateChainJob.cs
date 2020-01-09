@@ -124,7 +124,7 @@ namespace Iconlook.Service.Job
                     Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
                 }
                 Log.Information("{Job} ran in {Elapsed}ms.", nameof(UpdateChainJob), rolex.Elapsed.TotalMilliseconds);
-                if (rolex.Elapsed.TotalSeconds > 2)
+                if (rolex.Elapsed.TotalSeconds > 2.5)
                 {
                     Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
                 }
