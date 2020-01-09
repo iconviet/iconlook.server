@@ -18,8 +18,8 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Resolve<UpdateChainJob>().RunAsync());
             RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "*/2 * * * *", TimeZoneInfo.Utc, HangfireQueueName);
+            Observable.FromAsync(() => Resolve<UpdateChainJob>().RunAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
         }
     }
 }

@@ -10,11 +10,13 @@ namespace Iconlook.Client
     {
         public JsonHttpClient()
         {
+            HttpClient = HttpClientPool.Instance;
             RequestCompressionType = CompressionTypes.GZip;
         }
 
-        public JsonHttpClient(string baseUri) : base(baseUri)
+        public JsonHttpClient(string uri) : base(uri)
         {
+            HttpClient = HttpClientPool.Instance;
             RequestCompressionType = CompressionTypes.GZip;
         }
 
@@ -31,19 +33,74 @@ namespace Iconlook.Client
             return policy.Result;
         }
 
-        public new Task<T> GetAsync<T>(string url) => SendAsync<T>(HttpMethods.Get, ResolveUrl(HttpMethods.Get, url), null);
-        public new Task<T> GetAsync<T>(object request) => SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
-        public new Task<T> GetAsync<T>(IReturn<T> request) => SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
-        public new Task GetAsync(IReturnVoid request) => SendAsync<byte[]>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
-        public new Task<T> PostAsync<T>(object request) => SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request);
-        public new Task<T> PostAsync<T>(string url, object request) => SendAsync<T>(HttpMethods.Post, ResolveUrl(HttpMethods.Post, url), request);
-        public new Task<T> PostAsync<T>(IReturn<T> request) => SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request);
-        public new Task<T> GetAsync<T>(string url, CancellationToken token) => SendAsync<T>(HttpMethods.Get, ResolveUrl(HttpMethods.Get, url), null, token);
-        public new Task<T> GetAsync<T>(object request, CancellationToken token) => SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
-        public new Task<T> GetAsync<T>(IReturn<T> request, CancellationToken token) => SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
-        public new Task GetAsync(IReturnVoid request, CancellationToken token) => SendAsync<byte[]>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
-        public new Task<T> PostAsync<T>(object request, CancellationToken token) => SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request, token);
-        public new Task<T> PostAsync<T>(string url, object request, CancellationToken token) => SendAsync<T>(HttpMethods.Post, ResolveUrl(HttpMethods.Post, url), request, token);
-        public new Task<T> PostAsync<T>(IReturn<T> request, CancellationToken token) => SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request, token);
+        public new Task<T> GetAsync<T>(string url)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveUrl(HttpMethods.Get, url), null);
+        }
+
+        public new Task<T> GetAsync<T>(object request)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
+        }
+
+        public new Task<T> GetAsync<T>(IReturn<T> request)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
+        }
+
+        public new Task GetAsync(IReturnVoid request)
+        {
+            return SendAsync<byte[]>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null);
+        }
+
+        public new Task<T> PostAsync<T>(object request)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request);
+        }
+
+        public new Task<T> PostAsync<T>(string url, object request)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveUrl(HttpMethods.Post, url), request);
+        }
+
+        public new Task<T> PostAsync<T>(IReturn<T> request)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request);
+        }
+
+        public new Task<T> GetAsync<T>(string url, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveUrl(HttpMethods.Get, url), null, token);
+        }
+
+        public new Task<T> GetAsync<T>(object request, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
+        }
+
+        public new Task<T> GetAsync<T>(IReturn<T> request, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
+        }
+
+        public new Task GetAsync(IReturnVoid request, CancellationToken token)
+        {
+            return SendAsync<byte[]>(HttpMethods.Get, ResolveTypedUrl(HttpMethods.Get, request), null, token);
+        }
+
+        public new Task<T> PostAsync<T>(object request, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request, token);
+        }
+
+        public new Task<T> PostAsync<T>(string url, object request, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveUrl(HttpMethods.Post, url), request, token);
+        }
+
+        public new Task<T> PostAsync<T>(IReturn<T> request, CancellationToken token)
+        {
+            return SendAsync<T>(HttpMethods.Post, ResolveTypedUrl(HttpMethods.Post, request), request, token);
+        }
     }
 }

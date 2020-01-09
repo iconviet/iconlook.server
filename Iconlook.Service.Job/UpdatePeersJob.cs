@@ -15,11 +15,6 @@ namespace Iconlook.Service.Job
 {
     public class UpdatePeersJob : JobBase
     {
-        private static readonly HttpClient HttpClient = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(1)
-        };
-
         public override async Task RunAsync()
         {
             try
@@ -34,7 +29,7 @@ namespace Iconlook.Service.Job
                         {
                             return Task.Run(async () =>
                             {
-                                var client = new JsonHttpClient { HttpClient = HttpClient };
+                                var client = new JsonHttpClient();
                                 var endpoint = prep.P2PEndpoint.Replace("7100", "9000");
                                 var url = $"http://{endpoint}/api/v1/status/peer";
                                 var response = await client.GetAsync<string>(url);

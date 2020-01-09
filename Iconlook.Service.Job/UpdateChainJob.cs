@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Agiper;
 using Agiper.Server;
 using Iconlook.Calculator;
 using Iconlook.Client;
@@ -22,96 +23,99 @@ namespace Iconlook.Service.Job
 
         public override async Task RunAsync()
         {
-            try
+            using (var rolex = new Rolex())
             {
-                var service = new IconServiceClient();
-                var last_block = await service.GetLastBlock();
-                if (last_block != null)
+                try
                 {
-                    if (last_block.GetHeight() > LastBlockHeight)
+                    var service = new IconServiceClient();
+                    var last_block = await service.GetLastBlock();
+                    if (last_block != null)
                     {
-                        var tracker = new IconTrackerClient();
-                        var chainalytic = new ChainalyticClient();
-                        var main_info = await tracker.GetMainInfo();
-                        var iiss_info = await service.GetIissInfo();
-                        var prep_info = await service.GetPRepInfo();
-                        var cu = iiss_info.GetNextPRepTerm();
-                        var chim = iiss_info.GetNextCalculation();
-                        var staking_info = await chainalytic.GetStakingInfo();
-                        var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
+                        if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            Id = x.GetTxHash().ToString(),
-                            Hash = x.GetTxHash().ToString(),
-                            Block = (long) last_block.GetHeight(),
-                            To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
-                            From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
-                            Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
-                            Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                            Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
-                        }).ToList();
-                        var block = new BlockResponse
-                        {
-                            PeerId = last_block.GetPeerId(),
-                            Id = (long) last_block.GetHeight(),
-                            Fee = transactions.Sum(x => x.Fee),
-                            TransactionCount = transactions.Count,
-                            Height = (long) last_block.GetHeight(),
-                            Hash = last_block.GetBlockHash().ToString(),
-                            TotalAmount = transactions.Sum(x => x.Amount),
-                            PrevHash = last_block.GetPrevBlockHash().ToString(),
-                            Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
-                        };
-                        var chain = new ChainResponse
-                        {
-                            IRep = iiss_info.GetIRep().ToIcxFromLoop(),
-                            MarketCap = (long) main_info?.GetMarketCap(),
-                            IcxSupply = (long) main_info?.GetIcxSupply(),
-                            BlockHeight = (long) iiss_info?.GetBlockHeight(),
-                            IcxCirculation = (long) main_info?.GetIcxCirculation(),
-                            PublicTreasury = (long) main_info?.GetPublicTreasury(),
-                            Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
-                            NextTermBlockHeight = (long) iiss_info.GetNextPRepTerm(),
-                            TransactionCount = (long) main_info?.GetTransactionCount(),
-                            RRepPercentage = (double) (iiss_info.GetRRep() * 3) / 10000,
-                            TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
-                            StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
-                            TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcxFromLoop(),
-                            UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
-                            TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
-                        };
-                        chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
-                        chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
-                        chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
-                        var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
-                        chain.NextTermCountdown = calculator.GetNextTermCountdown();
-                        await Channel.Publish(new BlockProducedSignal
-                        {
-                            Block = block,
-                            Transactions = transactions
-                        });
-                        await Endpoint.Publish(new BlockProducedEvent
-                        {
-                            Block = block,
-                            Transactions = transactions
-                        });
-                        await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
-                        await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
-                        await Task.Run(() =>
-                        {
-                            using (var redis = Redis.Instance())
+                            var tracker = new IconTrackerClient();
+                            var chainalytic = new ChainalyticClient();
+                            var main_info = await tracker.GetMainInfo();
+                            var iiss_info = await service.GetIissInfo();
+                            var prep_info = await service.GetPRepInfo();
+                            var staking_info = await chainalytic.GetStakingInfo();
+                            var transactions = last_block.GetTransactions().Select(x => new TransactionResponse
                             {
-                                redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
-                                redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
-                                transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
-                            }
-                        });
+                                Id = x.GetTxHash().ToString(),
+                                Hash = x.GetTxHash().ToString(),
+                                Block = (long) last_block.GetHeight(),
+                                To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
+                                From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
+                                Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
+                                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
+                                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
+                            }).ToList();
+                            var block = new BlockResponse
+                            {
+                                PeerId = last_block.GetPeerId(),
+                                Id = (long) last_block.GetHeight(),
+                                Fee = transactions.Sum(x => x.Fee),
+                                TransactionCount = transactions.Count,
+                                Height = (long) last_block.GetHeight(),
+                                Hash = last_block.GetBlockHash().ToString(),
+                                TotalAmount = transactions.Sum(x => x.Amount),
+                                PrevHash = last_block.GetPrevBlockHash().ToString(),
+                                Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
+                            };
+                            var chain = new ChainResponse
+                            {
+                                IRep = iiss_info.GetIRep().ToIcxFromLoop(),
+                                MarketCap = (long) main_info?.GetMarketCap(),
+                                IcxSupply = (long) main_info?.GetIcxSupply(),
+                                IcxCirculation = (long) main_info?.GetIcxCirculation(),
+                                PublicTreasury = (long) main_info?.GetPublicTreasury(),
+                                Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
+                                NextTermBlockHeight = (long) iiss_info.GetNextPRepTerm(),
+                                TransactionCount = (long) main_info?.GetTransactionCount(),
+                                RRepPercentage = (double) (iiss_info.GetRRep() * 3) / 10000,
+                                TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
+                                BlockHeight = LastBlockHeight = (long) iiss_info?.GetBlockHeight(),
+                                StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
+                                TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcxFromLoop(),
+                                UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
+                                TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
+                            };
+                            chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
+                            chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
+                            chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
+                            var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
+                            chain.NextTermCountdown = calculator.GetNextTermCountdown();
+                            await Task.WhenAll(
+                                Channel.Publish(new BlockProducedSignal
+                                {
+                                    Block = block,
+                                    Transactions = transactions
+                                }),
+                                Endpoint.Publish(new BlockProducedEvent
+                                {
+                                    Block = block,
+                                    Transactions = transactions
+                                }),
+                                Channel.Publish(new ChainUpdatedSignal { Chain = chain }),
+                                Endpoint.Publish(new ChainUpdatedEvent { Chain = chain }),
+                                Task.Run(() =>
+                                {
+                                    using (var redis = Redis.Instance())
+                                    {
+                                        redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
+                                        redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
+                                        transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
+                                    }
+                                })
+                            );
+                            if (rolex.Elapsed.TotalSeconds > 2) Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
+                        }
                     }
-                    LastBlockHeight = (long) last_block.GetHeight();
                 }
-            }
-            catch (Exception exception)
-            {
-                Log.Error("{Job} failed. Error: {Message}.", nameof(UpdateChainJob), exception.Message);
+                catch (Exception exception)
+                {
+                    Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
+                }
             }
         }
     }

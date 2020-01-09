@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ServiceStack;
 using ServiceStack.Text;
 
@@ -10,23 +8,16 @@ namespace Iconlook.Client.Chainalytic
     {
         private readonly JsonHttpClient _client;
 
-        private static readonly HttpClient HttpClient = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(2)
-        };
-
         public ChainalyticClient()
         {
             _client = new JsonHttpClient("http://45.76.184.255:5530")
             {
-                HttpClient = HttpClient,
+                HttpClient = HttpClientPool.Instance,
                 ResultsFilterResponse = (res, dto, method, uri, req) =>
                 {
                     if (dto is RpcResponse response)
-                    {
                         response.Result = DynamicJson.Deserialize(
                             JsonSerializer.SerializeToString(response.Result));
-                    }
                 }
             };
         }
