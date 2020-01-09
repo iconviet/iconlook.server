@@ -40,7 +40,7 @@
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="30">
+        <GridColumn Width="30" Field="@nameof(PeerResponse.Ranking)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -50,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="225">
+        <GridColumn Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -65,7 +65,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50">
+        <GridColumn Width="50" Field="@nameof(PeerResponse.State)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -81,7 +81,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="110" TextAlign="TextAlign.Right">
+        <GridColumn Width="110" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -94,7 +94,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" TextAlign="TextAlign.Right">
+        <GridColumn Width="80" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
