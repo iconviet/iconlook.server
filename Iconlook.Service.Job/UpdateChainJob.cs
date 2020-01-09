@@ -24,18 +24,19 @@ namespace Iconlook.Service.Job
 
         public override async Task RunAsync()
         {
+            Log.Information("UpdateChainJob started");
             using (var rolex = new Rolex())
             {
                 try
                 {
-                    var service = new IconServiceClient(1);
+                    var service = new IconServiceClient(2);
                     var last_block = await service.GetLastBlock();
                     if (last_block != null)
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var tracker = new IconTrackerClient(1);
-                            var chainalytic = new ChainalyticClient(1);
+                            var tracker = new IconTrackerClient(2);
+                            var chainalytic = new ChainalyticClient(2);
                             var main_info = await tracker.GetMainInfo();
                             var iiss_info = await service.GetIissInfo();
                             var prep_info = await service.GetPRepInfo();
@@ -109,7 +110,10 @@ namespace Iconlook.Service.Job
                                     }
                                 })
                             );
-                            if (rolex.Elapsed.TotalSeconds > 2) Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
+                            if (rolex.Elapsed.TotalSeconds > 2)
+                            {
+                                Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
+                            }
                         }
                     }
                 }
@@ -117,6 +121,7 @@ namespace Iconlook.Service.Job
                 {
                     Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
                 }
+                Log.Information("UpdateChainJob stopped in {Elapsed}ms", rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

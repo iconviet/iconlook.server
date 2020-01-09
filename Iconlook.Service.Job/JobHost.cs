@@ -19,7 +19,7 @@ namespace Iconlook.Service.Job
         protected override void OnStart()
         {
             RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "*/2 * * * *", TimeZoneInfo.Utc, HangfireQueueName);
-            Observable.FromAsync(() => Resolve<UpdateChainJob>().RunAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Throttle(TimeSpan.FromSeconds(2)).Subscribe();
+            Observable.FromAsync(() => Resolve<UpdateChainJob>().RunAsync()).Sample(TimeSpan.FromSeconds(2)).Repeat().Subscribe();
         }
     }
 }
