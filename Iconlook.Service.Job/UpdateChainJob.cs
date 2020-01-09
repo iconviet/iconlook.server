@@ -86,29 +86,27 @@ namespace Iconlook.Service.Job
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
                             var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
                             chain.NextTermCountdown = calculator.GetNextTermCountdown();
-                            await Task.WhenAll(
-                                Channel.Publish(new BlockProducedSignal
+                            await Channel.Publish(new BlockProducedSignal
+                            {
+                                Block = block,
+                                Transactions = transactions
+                            });
+                            await Endpoint.Publish(new BlockProducedEvent
+                            {
+                                Block = block,
+                                Transactions = transactions
+                            });
+                            await Channel.Publish(new ChainUpdatedSignal { Chain = chain });
+                            await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain });
+                            await Task.Run(() =>
+                            {
+                                using (var redis = Redis.Instance())
                                 {
-                                    Block = block,
-                                    Transactions = transactions
-                                }),
-                                Endpoint.Publish(new BlockProducedEvent
-                                {
-                                    Block = block,
-                                    Transactions = transactions
-                                }),
-                                Channel.Publish(new ChainUpdatedSignal { Chain = chain }),
-                                Endpoint.Publish(new ChainUpdatedEvent { Chain = chain }),
-                                Task.Run(() =>
-                                {
-                                    using (var redis = Redis.Instance())
-                                    {
-                                        redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
-                                        redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
-                                        transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
-                                    }
-                                })
-                            );
+                                    redis.As<BlockResponse>().Store(block, TimeSpan.FromSeconds(60));
+                                    redis.As<ChainResponse>().Store(chain, TimeSpan.FromSeconds(61));
+                                    transactions.ForEach(x => redis.As<TransactionResponse>().Store(x, TimeSpan.FromSeconds(62)));
+                                }
+                            });
                             if (rolex.Elapsed.TotalSeconds > 2)
                             {
                                 Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdateChainJob));
