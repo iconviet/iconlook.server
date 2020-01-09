@@ -35,12 +35,12 @@
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/peers" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="20">
+        <GridColumn Width="20" HideAtMedia="(min-width: 480px)">
             <Template>
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="30" Field="@nameof(PeerResponse.Ranking)">
+        <GridColumn Width="30" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.Ranking)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -94,7 +94,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProductivityPercentage)">
+        <GridColumn Width="80" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
