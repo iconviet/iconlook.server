@@ -14,7 +14,8 @@ namespace Iconlook.Service.Api
             using (var redis = Redis.Instance())
             {
                 var items = redis.As<PeerResponse>().GetAll()
-                    .Where(x => x.State == "Vote").OrderBy(x => x.Ranking).ToList();
+                    .Where(x => x.State == "Vote" ||
+                                x.State == "BlockGenerate").OrderBy(x => x.Ranking).ToList();
                 return new ListResponse<PeerResponse>(items.Skip(request.Skip).Take(request.Take));
             }
         }

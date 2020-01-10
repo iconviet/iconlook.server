@@ -26,14 +26,15 @@ namespace Iconlook.Service.Job
                 Log.Information("{Job} started", nameof(UpdateChainJob));
                 try
                 {
-                    var service = new IconServiceClient();
+                    var service = new IconServiceClient(2);
                     var last_block = await service.GetLastBlock();
+                    var total_supply = await service.GetTotalSupply();
                     if (last_block != null)
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
                             var tracker = new IconTrackerClient();
-                            var chainalytic = new ChainalyticClient();
+                            var chainalytic = new ChainalyticClient(2);
                             var main_info = await tracker.GetMainInfo();
                             var iiss_info = await service.GetIissInfo();
                             var prep_info = await service.GetPRepInfo();
@@ -42,7 +43,7 @@ namespace Iconlook.Service.Job
                             {
                                 IRep = iiss_info.GetIRep().ToIcxFromLoop(),
                                 MarketCap = (long) main_info?.GetMarketCap(),
-                                IcxSupply = (long) main_info?.GetIcxSupply(),
+                                IcxSupply = (long) total_supply.ToIcxFromLoop(),
                                 IcxCirculation = (long) main_info?.GetIcxCirculation(),
                                 PublicTreasury = (long) main_info?.GetPublicTreasury(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
