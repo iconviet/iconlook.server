@@ -30,7 +30,8 @@ namespace Iconlook.Service.Api
                                 Id = x.Key,
                                 Name = name,
                                 Hash = x.Key,
-                                UnstakedBlockHeight = long.Parse(tuple[2]),
+                                UnstakedBlockHeight = long.Parse(tuple[3]),
+                                RequestedBlockHeight = long.Parse(tuple[3]),
                                 Description = name == null ? null : "ICON P-Rep",
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())

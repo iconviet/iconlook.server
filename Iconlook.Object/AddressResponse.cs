@@ -16,6 +16,7 @@ namespace Iconlook.Object
         public decimal IcxBalance { get; set; }
         public decimal IscoreBalance { get; set; }
         public long UnstakedBlockHeight { get; set; }
+        public long RequestedBlockHeight { get; set; }
 
         protected override void AddRules(Validator<AddressResponse> validator)
         {
