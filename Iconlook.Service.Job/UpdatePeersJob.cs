@@ -18,6 +18,7 @@ namespace Iconlook.Service.Job
         {
             using (var rolex = new Rolex())
             {
+                Log.Information("{Job} started.", nameof(UpdatePeersJob));
                 try
                 {
                     using (var redis = Redis.Instance())
@@ -69,11 +70,7 @@ namespace Iconlook.Service.Job
                 {
                     Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePeersJob), exception.Message);
                 }
-                Log.Information("{Job} ran in {Elapsed}ms.", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
-                if (rolex.Elapsed.TotalSeconds > 2.5)
-                {
-                    Log.Warning("{Job} completed in more than 2 seconds!", nameof(UpdatePeersJob));
-                }
+                Log.Information("{Job} stopped. {Elapsed}ms.", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
