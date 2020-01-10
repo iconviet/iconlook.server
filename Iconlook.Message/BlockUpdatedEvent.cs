@@ -6,17 +6,17 @@ using Iconlook.Object;
 
 namespace Iconlook.Message
 {
-    public class BlockProducedEvent : EventBase<BlockProducedEvent>
+    public class BlockUpdatedEvent : EventBase<BlockUpdatedEvent>
     {
         public BlockResponse Block { get; set; }
         public List<TransactionResponse> Transactions { get; set; }
 
-        public BlockProducedEvent()
+        public BlockUpdatedEvent()
         {
             Transactions = new List<TransactionResponse>();
         }
 
-        protected override void AddRules(Validator<BlockProducedEvent> validator)
+        protected override void AddRules(Validator<BlockUpdatedEvent> validator)
         {
             base.AddRules(validator);
             validator.RuleFor(x => x.Block).SetValidator(BlockResponse.Validator);
@@ -24,11 +24,11 @@ namespace Iconlook.Message
         }
     }
 
-    public class BlockProducedEventValidator : AbstractValidator<BlockProducedEvent>
+    public class BlockUpdatedEventValidator : AbstractValidator<BlockUpdatedEvent>
     {
-        public BlockProducedEventValidator()
+        public BlockUpdatedEventValidator()
         {
-            Include(BlockProducedEvent.Validator);
+            Include(BlockUpdatedEvent.Validator);
         }
     }
 }

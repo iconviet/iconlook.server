@@ -14,6 +14,7 @@ namespace Iconlook.Object
         public string PeerId { get; set; }
         public string PrevHash { get; set; }
         public string PRepName { get; set; }
+        public string PRepLogoUrl { get; set; }
         public decimal TotalAmount { get; set; }
         public int TransactionCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }

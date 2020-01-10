@@ -57,6 +57,7 @@ namespace Iconlook.Service.Job
                             {
                                 await Channel.Publish(new PeersUpdatedSignal
                                 {
+                                    Idle = peers.Where(x => x.State == "Vote").ToList(),
                                     Sync = peers.Where(x => x.State == "BlockSync").ToList(),
                                     Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
                                     Down = peers.Where(x => x.State == "LeaderComplain").ToList()
@@ -70,7 +71,7 @@ namespace Iconlook.Service.Job
                 {
                     Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), exception.Message);
                 }
-                Log.Information("{Job} stopped. {Elapsed:N0}ms", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
