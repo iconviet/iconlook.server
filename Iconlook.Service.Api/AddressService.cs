@@ -18,10 +18,13 @@ namespace Iconlook.Service.Api
             {
                 using (var redis = Redis.Instance())
                 {
+                    long requested;
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
                     return new UnstakingAddressListResponse(unstaking_info
-                        .GetWallets().Skip(request.Skip).Take(request.Take).Select(x =>
+                        .GetWallets().Skip(request.Skip).Take(request.Take)
+                        .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out requested))
+                        .Select(x =>
                         {
                             var tuple = x.Value.Split(':');
                             var name = redis.As<PRepResponse>().GetById(x.Key)?.Name;
@@ -31,7 +34,7 @@ namespace Iconlook.Service.Api
                                 Name = name,
                                 Hash = x.Key,
                                 UnstakedBlockHeight = long.Parse(tuple[3]),
-                                RequestedBlockHeight = long.Parse(tuple[3]),
+                                RequestedBlockHeight = long.Parse(tuple[2]),
                                 Description = name == null ? null : "ICON P-Rep",
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())

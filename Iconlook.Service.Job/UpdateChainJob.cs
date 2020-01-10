@@ -26,7 +26,7 @@ namespace Iconlook.Service.Job
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Job} started.", nameof(UpdateChainJob));
+                Log.Information("{Job} started", nameof(UpdateChainJob));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -115,9 +115,9 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed to load. {Message}.", nameof(UpdateChainJob), exception.Message);
+                    Log.Error("{Job} failed to load. {Message}", nameof(UpdateChainJob), exception.Message);
                 }
-                Log.Information("{Job} stopped. {Elapsed}ms.", nameof(UpdateChainJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Job} stopped. {Elapsed:N0}ms", nameof(UpdateChainJob), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

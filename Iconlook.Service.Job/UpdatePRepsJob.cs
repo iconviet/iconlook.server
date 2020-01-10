@@ -90,7 +90,7 @@ namespace Iconlook.Service.Job
                     await db.SaveAllAsync(prep_objs.ToList());
                     redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
                     Log.Information("**************************************************");
-                    Log.Information("{PReps} P-Reps latest information stored in {Elapsed}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
+                    Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
                     Log.Information("**************************************************");
                 }
             }

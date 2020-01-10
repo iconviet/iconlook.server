@@ -18,7 +18,7 @@ namespace Iconlook.Service.Job
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Job} started.", nameof(UpdatePeersJob));
+                Log.Information("{Job} started", nameof(UpdatePeersJob));
                 try
                 {
                     using (var redis = Redis.Instance())
@@ -27,7 +27,7 @@ namespace Iconlook.Service.Job
                         if (items.Any())
                         {
                             var peers = new List<PeerResponse>();
-                            await Task.WhenAll(items.Values.Where(x => x.Ranking <= 22).Select(prep =>
+                            await Task.WhenAll(items.Values.Select(prep =>
                             {
                                 return Task.Run(async () =>
                                 {
@@ -68,9 +68,9 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePeersJob), exception.Message);
+                    Log.Error("{Job} failed. Error: {Message}", nameof(UpdatePeersJob), exception.Message);
                 }
-                Log.Information("{Job} stopped. {Elapsed}ms.", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Job} stopped. {Elapsed:N0}ms", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
