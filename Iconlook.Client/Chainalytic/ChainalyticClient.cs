@@ -11,7 +11,7 @@ namespace Iconlook.Client.Chainalytic
 
         public ChainalyticClient(double timeout = 30)
         {
-            _client = new JsonHttpClient("http://140.82.11.203:5531")
+            _client = new JsonHttpClient("http://140.82.11.203:5530")
             {
                 ResultsFilterResponse = (res, dto, method, uri, req) =>
                 {
