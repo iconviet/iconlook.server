@@ -22,7 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.17" />
-    <PackageReference Include="ServiceStack.Api.Swagger" Version="5.7.0" />
+    <PackageReference Include="ServiceStack.Api.Swagger" Version="5.8.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Server\Iconlook.Server.csproj" />
