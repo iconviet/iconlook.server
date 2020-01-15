@@ -17,11 +17,8 @@ namespace Iconlook.Service.Web
                 {
                     zero = "fraction-part";
                 }
-                text = $"<span class=\"{zero}\">{part[0]}</span>";
-                if (part[1] != "0000")
-                {
-                    text += $"<span class=\"fraction-part\">.{part[1]}</span>";
-                }
+                text = $"<span class=\"{zero}\">{part[0]}</span>" +
+                       $"<span class=\"fraction-part\">.{part[1]}</span>";
             }
             return new MarkupString(text);
         }
