@@ -42,7 +42,7 @@
                 // ******************************************
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "ChainUpdatedSignal"))
-                    .pipe(rxjs.operators.debounceTime(500)).subscribe(signal => {
+                    .pipe(rxjs.operators.throttleTime(1000)).subscribe(signal => {
                         $(".ChainResponse_IcxPrice").money(signal.body.chain.icxPrice, 4);
                         $(".ChainResponse_MarketCap").integer(signal.body.chain.marketCap);
                         $(".ChainResponse_IcxSupply").integer(signal.body.chain.icxSupply);
@@ -64,7 +64,7 @@
                 // ******************************************
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "PeersUpdatedSignal"))
-                    .pipe(rxjs.operators.debounceTime(500)).subscribe(signal => {
+                    .pipe(rxjs.operators.throttleTime(1000)).subscribe(signal => {
                         if (signal.body.busy != null) {
                             signal.body.busy.forEach(function(item, index) {
                                 // **************************
@@ -112,7 +112,7 @@
                 // ******************************************
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "BlockUpdatedSignal"))
-                    .pipe(rxjs.operators.debounceTime(500)).subscribe(signal => {
+                    .pipe(rxjs.operators.throttleTime(1000)).subscribe(signal => {
                         $(".BlockResponse_Height").integer(signal.body.block.height);
                         leader_block_mcount += 1;
                         if ($("#block_grid").length) {
