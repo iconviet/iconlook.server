@@ -5,14 +5,6 @@
         background-color: #e1fafd;
         border: solid 0.5px #1aaaba;
     }
-
-    .unstaking_amount .number-part {
-        font-weight: 700;
-    }
-
-    .unstaking_amount .fraction-part {
-        font-weight: 500;
-    }
 </style>
 <EjsGrid EnableHover="false"
          AllowSorting="true"
@@ -48,29 +40,37 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="155" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
+        <GridColumn Width="170" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is AddressResponse address)
                     {
-                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToMarkupString()</span>
-                        <span class="pl-1 text-light">ICX</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="155" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
-            <Template>
-                @{
-                    if (context is AddressResponse address)
-                    {
-                        <span class="mono ls-n2 staked_amount">@address.Staked.ToMarkupString()</span>
+                        <span class="mono ls-n2">@address.Unstaking.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="210" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(AddressResponse.Staked)">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        if (address.Staked == 0)
+                        {
+                            <span class="pl-1 text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2">@address.Staked.ToIcxString()</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)">
             <Template>
                 @if (context is AddressResponse address)
                 {
@@ -78,12 +78,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="120" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)">
             <Template>
                 <span class="text-light">6d 5h 18m</span>
             </Template>
         </GridColumn>
-        <GridColumn Width="130" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is AddressResponse address)

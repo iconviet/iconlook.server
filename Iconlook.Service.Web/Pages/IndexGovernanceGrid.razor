@@ -55,10 +55,10 @@
         <GridColumn Width="50" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 480px)">
             <Template>
                 @{
-                    var random = -0.02 + (0.02 - -0.02) * new Random().NextDouble();
+                    var random = -0.05 + (0.05 - -0.05) * new Random().NextDouble();
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-light @(random > 0 ? "positive-dark" : "negative-dark")">@Math.Abs(random).ToString("P2")</span>
+                        <span class="mono font-weight-lighter @(random > 0 ? "positive-dark" : "negative-dark")">@((random * 100).ToString("N2"))K</span>
                     }
                 }
             </Template>
