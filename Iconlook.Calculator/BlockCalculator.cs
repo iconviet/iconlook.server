@@ -13,6 +13,13 @@ namespace Iconlook.Calculator
             _height = height;
         }
 
+        public string GetNextTermLocalTime()
+        {
+            var duration = GetNextTermDuration();
+            var local_time = DateTime.UtcNow.Add(duration);
+            return local_time.ToString("hh:mm:ss tt");
+        }
+
         public TimeSpan GetNextTermDuration()
         {
             return TimeSpan.FromSeconds((_next - _height) * 2);

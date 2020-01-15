@@ -61,6 +61,7 @@ namespace Iconlook.Service.Job
                             chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
                             var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
+                            chain.NextTermLocalTime = calculator.GetNextTermLocalTime();
                             chain.NextTermCountdown = calculator.GetNextTermCountdown();
                             await Channel.Publish(new ChainUpdatedSignal { Chain = chain }).ConfigureAwait(false);
                             await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain }).ConfigureAwait(false);

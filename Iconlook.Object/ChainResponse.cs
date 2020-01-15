@@ -22,6 +22,7 @@ namespace Iconlook.Object
         public double RRepPercentage { get; set; }
         public double StakedPercentage { get; set; }
         public long NextTermBlockHeight { get; set; }
+        public string NextTermLocalTime { get; set; }
         public string NextTermCountdown { get; set; }
         public long StakingAddressCount { get; set; }
         public DateTimeOffset Timestamp { get; set; }

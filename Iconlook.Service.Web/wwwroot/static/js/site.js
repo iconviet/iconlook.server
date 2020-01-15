@@ -52,6 +52,7 @@
                         $(".ChainResponse_RRepPercentage").percent(signal.body.chain.rRepPercentage);
                         $(".ChainResponse_PublicTreasury").integer(signal.body.chain.publicTreasury);
                         $(".ChainResponse_TotalDelegated").integer(signal.body.chain.totalDelegated);
+                        $(".ChainResponse_NextTermLocalTime").text(signal.body.chain.nextTermLocalTime);
                         $(".ChainResponse_NextTermCountdown").text(signal.body.chain.nextTermCountdown);
                         $(".ChainResponse_TransactionCount").integer(signal.body.chain.transactionCount);
                         $(".ChainResponse_StakedPercentage").percent(signal.body.chain.stakedPercentage);

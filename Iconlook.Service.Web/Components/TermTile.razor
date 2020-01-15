@@ -3,9 +3,9 @@
     public ChainResponse ChainResponse { get; set; }
 }
 <div class="px-1 py-3 flex-fill">
-    <div class="py-1 fs-n3 text-light">NEXT TERM</div>
+    <div class="py-1 fs-n3 text-light">NEXT TERM (UTC)</div>
     <div class="fs-2 ls-n1 mono-lg ChainResponse_NextTermLocalTime">
-        6:30:56 PM
+        @(ChainResponse?.NextTermLocalTime ?? "00:00:00")
     </div>
 </div>
 <div class="px-1 py-3 flex-fill text-right">

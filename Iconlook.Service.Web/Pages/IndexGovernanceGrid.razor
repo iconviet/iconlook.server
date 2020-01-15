@@ -28,7 +28,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="227" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Width="233" Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -41,7 +41,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
+        <GridColumn Width="103" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -52,13 +52,15 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 480px)">
+        <GridColumn Width="45" TextAlign="TextAlign.Left">
             <Template>
                 @{
                     var random = -0.05 + (0.05 - -0.05) * new Random().NextDouble();
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono font-weight-lighter @(random > 0 ? "positive-dark" : "negative-dark")">@((random * 100).ToString("N2"))K</span>
+                        <div style="padding-top: 1px; padding-left: 5px;" class="mono fs-n2 @(random > 0 ? "positive-dark" : "negative-dark")">
+                            @((random * 100).ToString("+0.0;-0.0;0"))K
+                        </div>
                     }
                 }
             </Template>
