@@ -18,12 +18,11 @@ namespace Iconlook.Service.Api
             {
                 using (var redis = Redis.Instance())
                 {
-                    long requested;
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
                     return new UnstakingAddressListResponse(unstaking_info
                         .GetWallets().Skip(request.Skip).Take(request.Take)
-                        .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out requested))
+                        .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out _))
                         .Select(x =>
                         {
                             var tuple = x.Value.Split(':');
