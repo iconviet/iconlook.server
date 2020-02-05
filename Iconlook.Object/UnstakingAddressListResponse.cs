@@ -5,8 +5,6 @@ namespace Iconlook.Object
 {
     public class UnstakingAddressListResponse : ListResponse<AddressResponse>
     {
-        public long BlockHeight { get; set; }
-
         public UnstakingAddressListResponse()
         {
         }

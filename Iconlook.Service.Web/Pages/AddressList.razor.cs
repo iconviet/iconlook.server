@@ -32,8 +32,8 @@ namespace Iconlook.Service.Web.Pages
 
         protected override void OnInitialized()
         {
-            Paging = true;
             PageSize = 20;
+            Paging = false;
             Sorting = true;
             PageSizes = new[] { 20, 50, 100 };
             Unstaking = new TabHeader { Text = "UNSTAKING" };
