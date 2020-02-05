@@ -460,13 +460,28 @@ button.secondary, button .secondary {
 }
 
 
+/*
+    EJS-CHIP
+*/
+.e-chip-list.e-chip,
+.e-chip-list .e-chip {
+    height: 24px;
+    padding: 0 14px;
+    font-size: 11px;
+}
+
+.e-chip-list.e-chip .e-chip-avatar,
+.e-chip-list .e-chip .e-chip-avatar {
+    margin: 0 8px 0 -14px;
+}
+
 
 /*
     EJS-MENU
 */
-.ejs-menu {
-    background-color: initial;
-}
+    .ejs-menu {
+        background-color: initial;
+    }
 
 .e-menu-wrapper li .e-menu-url {
     color: #666666 !important;

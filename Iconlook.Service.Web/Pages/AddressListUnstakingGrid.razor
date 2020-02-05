@@ -14,6 +14,21 @@
         font-weight: 500;
     }
 </style>
+<div class="px-2 py-1 border-bottom">
+    <EjsChipList Selection="Selection.Single" SelectedChips="1">
+        <ChipListEvents OnClick="@OnClick"></ChipListEvents>
+        <ChipCollection>
+            <ChipListChip Text="ALL"></ChipListChip>
+            <ChipListChip Text="LAST 24H"></ChipListChip>
+            <ChipListChip Text="DUE TODAY"></ChipListChip>
+            <ChipListChip Text="P-REP ONLY"></ChipListChip>
+            <ChipListChip Text="10,000+ ICX"></ChipListChip>
+            <ChipListChip Text="100,000+ ICX"></ChipListChip>
+            <ChipListChip Text="500,000+ ICX"></ChipListChip>
+            <ChipListChip Text="1,000,000+ ICX"></ChipListChip>
+        </ChipCollection>
+    </EjsChipList>
+</div>
 <EjsGrid EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
@@ -22,7 +37,7 @@
          TValue="AddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=65535" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=20" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="320" HeaderText="Address" Field="@nameof(AddressResponse.Hash)">
             <Template>
@@ -107,3 +122,11 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
+@code
+{
+    private void OnClick(Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs args)
+    {
+        StateHasChanged();
+        Console.WriteLine(args.Text);
+    }
+}
