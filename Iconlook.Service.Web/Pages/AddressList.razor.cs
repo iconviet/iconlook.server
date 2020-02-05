@@ -16,19 +16,26 @@ namespace Iconlook.Service.Web.Pages
         protected TabAnimationSettings Animation;
 
         [Parameter]
-        public int Size { get; set; }
+        public bool Paging { get; set; }
 
-        public bool Page { get; set; }
-
-        public object Sizes { get; set; }
+        [Parameter]
+        public int PageSize { get; set; }
+        
+        [Parameter]
+        public bool Sorting { get; set; }
 
         [Parameter]
         public string State { get; set; }
+        
+        [Parameter]
+        public object PageSizes { get; set; }
 
         protected override void OnInitialized()
         {
-            Size = 200;
-            Sizes = new[] { 22, 50, 100 };
+            Paging = true;
+            PageSize = 20;
+            Sorting = true;
+            PageSizes = new[] { 20, 50, 100 };
             Unstaking = new TabHeader { Text = "UNSTAKING" };
             Undelegated = new TabHeader { Text = "UNDELEGATED" };
             Animation = new TabAnimationSettings

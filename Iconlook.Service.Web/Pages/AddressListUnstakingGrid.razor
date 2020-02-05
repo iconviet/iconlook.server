@@ -15,16 +15,16 @@
     }
 </style>
 <EjsGrid EnableHover="false"
-         AllowSorting="true"
+         AllowPaging="Paging"
          EnableAltRow="false"
-         AllowPaging="CanPage"
+         AllowSorting="Sorting"
          AllowSelection="false"
          TValue="AddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/list?state=unstaking&take=65535" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="320" Field="@nameof(AddressResponse.Hash)" HeaderText="Address">
+        <GridColumn Width="320" HeaderText="Address" Field="@nameof(AddressResponse.Hash)">
             <Template>
                 @{
                     if (context is AddressResponse address)

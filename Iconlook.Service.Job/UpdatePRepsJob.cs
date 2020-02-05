@@ -20,11 +20,12 @@ namespace Iconlook.Service.Job
     {
         public override async Task RunAsync()
         {
-            try
+            using (var time = new Rolex())
+            using (var db = Db.Instance())
+            using (var redis = Redis.Instance())
             {
-                using (var time = new Rolex())
-                using (var db = Db.Instance())
-                using (var redis = Redis.Instance())
+                Log.Information("{Job} started", nameof(UpdatePRepsJob));
+                try
                 {
                     var prep_objs = new List<PRep>();
                     var json = new JsonHttpClient(60);
@@ -93,10 +94,11 @@ namespace Iconlook.Service.Job
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
                     Log.Information("**************************************************");
                 }
-            }
-            catch (Exception exception)
-            {
-                Log.Error("{Job} failed. Error: {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                catch (Exception exception)
+                {
+                    Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                }
+                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), time.Elapsed.TotalMilliseconds);
             }
         }
     }

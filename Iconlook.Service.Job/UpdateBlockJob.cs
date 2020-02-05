@@ -78,7 +78,7 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed to load. {Message}", nameof(UpdateBlockJob), exception.Message);
+                    Log.Error("{Job} failed to run. {Message}", nameof(UpdateBlockJob), exception.Message);
                 }
                 Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockJob), rolex.Elapsed.TotalMilliseconds);
             }
