@@ -67,9 +67,14 @@
                 @{
                     if (context is AddressResponse address)
                     {
-                        if (address.Unstaking >= 500000)
+                        if (address.Unstaking >= 1000000)
                         {
-                            <i class="fas mb-2 mr-1 special fa-whale"></i>
+                            <i class="fas mb-2 mr-1 fa-whale primary"></i>
+                            
+                        }
+                        if (address.Unstaking > 100000 && address.Unstaking < 1000000)
+                        {
+                            <i class="fal mb-1 mr-1 fa-fish  primary"></i>
                         }
                         <span class="mono ls-n2 requested_amount">@address.Unstaking.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
