@@ -40,7 +40,7 @@
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="30" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.Ranking)">
+        <GridColumn Width="30" Field="@nameof(PeerResponse.Ranking)">
             <Template>
                 @{
                     if (context is PeerResponse peer)

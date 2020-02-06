@@ -118,7 +118,7 @@
                         leader_block_mcount += 1;
                         if ($("#block_grid").length) {
                             if ($("#block_grid .e-content tr").length > 1) {
-                                if ($("#block_grid .e-content tr").length >= 22) {
+                                if ($("#block_grid .e-content tr").length >= 21) {
                                     $("#block_grid .e-content tr:last").remove();
                                 }
                                 const block_row = $("#block_grid .e-content tr:first").clone();

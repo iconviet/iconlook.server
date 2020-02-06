@@ -4,7 +4,6 @@
 
 .e-icon-back::before {
   content: '\e85b';
-  font-size: auto;
 }
 
 .e-bigger .e-listview .e-list-item,
@@ -61,7 +60,6 @@
 .e-listview {
   -webkit-overflow-scrolling: touch;
   border: 0 solid;
-  border-color: none;
   border-radius: 0;
   display: block;
   overflow: auto;
