@@ -57,7 +57,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Hash)">
+        <GridColumn Width="140" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(TransactionResponse.Hash)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
