@@ -50,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="227" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Width="217" Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -81,7 +81,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
+        <GridColumn Width="110" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -94,7 +94,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
+        <GridColumn Width="85" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
