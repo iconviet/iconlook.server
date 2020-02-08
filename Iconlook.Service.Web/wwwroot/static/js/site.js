@@ -143,7 +143,7 @@
                         if ($("#transaction_grid").length) {
                             signal.body.transactions.forEach(function(item, index) {
                                 if ($("#transaction_grid .e-content tr").length > 1) {
-                                    if ($("#transaction_grid .e-content tr").length >= 22) {
+                                    if ($("#transaction_grid .e-content tr").length >= 23) {
                                         $("#transaction_grid .e-content tr:last").remove();
                                     }
                                     const trans_row = $("#transaction_grid .e-content tr:first").clone();

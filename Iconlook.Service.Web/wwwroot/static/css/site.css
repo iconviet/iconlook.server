@@ -506,7 +506,6 @@ button.secondary, button .secondary {
     background-color: initial;
 }
 
-
 .e-menu-wrapper ul .e-menu-item .e-menu-icon {
     width: 16px;
     color: #1aaaba;
@@ -514,11 +513,15 @@ button.secondary, button .secondary {
     margin-top: -1px;
 }
 
-.e-menu-wrapper .e-menu-item.e-selected .e-menu-icon {
+.e-menu-wrapper ul .e-menu-item.e-selected .e-caret {
     color: #1aaaba;
 }
 
-.e-menu-wrapper .e-ul .e-menu-item.e-focused .e-menu-icon {
+.e-menu-wrapper ul .e-menu-item.e-selected .e-menu-icon {
+    color: #1aaaba;
+}
+
+.e-menu-wrapper ul .e-menu-item.e-focused .e-menu-icon {
     color: #1aaaba;
 }
 
