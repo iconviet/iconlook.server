@@ -69,6 +69,10 @@ namespace Iconlook.Service.Web.Layouts
                         new MenuItem { Text = "Staking Reward *" },
                         new MenuItem { Text = "Representative Reward *" }
                     }
+                },
+                new MenuItem
+                {
+                    Text = "LOGIN", Id = "login-menuitem", IconCss = "fal fa-sign-in"
                 }
             };
         }

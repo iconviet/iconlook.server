@@ -449,18 +449,6 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-BUTTON
-*/
-.e-dropdown-btn .e-caret::before,
-.e-dropdown-btn.e-btn .e-caret::before {
-    content: "";
-    font-size: 12px;
-    font-weight: 700;
-    font-family: "Font Awesome 5 Pro";
-}
-
-
-/*
     EJS-CHIP
 */
 .e-chip-list.e-chip,
@@ -479,9 +467,9 @@ button.secondary, button .secondary {
 /*
     EJS-MENU
 */
-    .ejs-menu {
-        background-color: initial;
-    }
+.ejs-menu {
+    background-color: initial;
+}
 
 .e-menu-wrapper li .e-menu-url {
     color: #666666 !important;
@@ -524,13 +512,6 @@ button.secondary, button .secondary {
     color: #1aaaba;
     font-size: 1rem;
     margin-top: -1px;
-}
-
-.e-menu-wrapper ul .e-menu-item .e-caret::before {
-    content: "";
-    font-size: 14px;
-    font-weight: 500;
-    font-family: "Font Awesome 5 Pro";
 }
 
 .e-menu-wrapper .e-menu-item.e-selected .e-menu-icon {
