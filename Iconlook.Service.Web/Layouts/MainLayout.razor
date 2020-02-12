@@ -1,9 +1,7 @@
 ﻿@using Iconlook.Server
 @inherits LayoutComponentBase
 <style>
-    .ejs-menu > .e-menu > .e-menu-item {
-        height: 48px;
-    }
+    .ejs-menu > .e-menu > .e-menu-item { height: 48px; }
 </style>
 <div class="body">
     <header class="d-none d-lg-block">
@@ -28,7 +26,7 @@
         <div class="container px-0 py-2">
             <nav class="navbar navbar-light">
                 <div>
-                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;" />
+                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;"/>
                 </div>
                 <button type="button" class="navbar-toggler" style="border: none;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
                     <span>
@@ -38,7 +36,7 @@
                 <div id="navbar_content" style="padding: 0 4px;" class="ejs-menu collapse navbar-collapse">
                     <ul class="navbar-nav" style="padding-top: 13px;">
                         @{
-                            foreach(var item in MenuItems.Where(x => !string.IsNullOrEmpty(x.Text)))
+                            foreach (var item in MenuItems.Where(x => !string.IsNullOrEmpty(x.Text)))
                             {
                                 <li class="e-menu-item e-menu-caret-icon">
                                     <a class="nav-link" href="@item.Url">

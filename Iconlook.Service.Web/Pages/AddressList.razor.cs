@@ -20,13 +20,13 @@ namespace Iconlook.Service.Web.Pages
 
         [Parameter]
         public int PageSize { get; set; }
-        
+
         [Parameter]
         public bool Sorting { get; set; }
 
         [Parameter]
         public string State { get; set; }
-        
+
         [Parameter]
         public object PageSizes { get; set; }
 

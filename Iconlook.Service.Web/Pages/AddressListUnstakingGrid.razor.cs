@@ -9,10 +9,10 @@ namespace Iconlook.Service.Web.Pages
 
         [Parameter]
         public bool Sorting { get; set; }
-        
+
         [Parameter]
         public int PageSize { get; set; }
-        
+
         [Parameter]
         public object PageSizes { get; set; }
     }

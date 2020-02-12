@@ -41,15 +41,11 @@
         color: #1aaaba;
         background: none;
     }
-    
-    button.submit-button:hover, button.search-filter:hover {
-        color: #1aaaba !important;
-    }
 
-    button.submit-button.e-active, button.search-filter.e-active {
-        color: #1aaaba !important;
-    }
-    
+    button.submit-button:hover, button.search-filter:hover { color: #1aaaba !important; }
+
+    button.submit-button.e-active, button.search-filter.e-active { color: #1aaaba !important; }
+
     .submit-input .e-input-group::after, .submit-input .e-input-group::before { background: none !important; }
 
     input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 5px 7px 0 7px !important; }
@@ -60,12 +56,12 @@
     <div class="row no-gutters align-items-center" style="border-radius: 3px; background-color: white;">
         <div class="col">
             <EjsAutoComplete MinLength="3"
-                                TValue="string"
-                                Highlight="true"
-                                SuggestionCount="5"
-                                CssClass="submit-input"
-                                ShowClearButton="false"
-                                Placeholder="Search P-Rep / D-App / Address / Transaction">
+                             TValue="string"
+                             Highlight="true"
+                             SuggestionCount="5"
+                             CssClass="submit-input"
+                             ShowClearButton="false"
+                             Placeholder="Search P-Rep / D-App / Address / Transaction">
                 <AutoCompleteFieldSettings Value="Name"></AutoCompleteFieldSettings>
                 <EjsDataManager Url="/api/v1/preps?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
             </EjsAutoComplete>
@@ -283,6 +279,7 @@
         </div>
     </div>
 </div>
+
 @code {
 
     public void Select(SelectingEventArgs args)
