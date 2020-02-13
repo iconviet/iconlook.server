@@ -13,7 +13,8 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid RowHeight="40"
+<EjsGrid Height="880"
+         RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          ID="transaction_grid"
@@ -55,19 +56,19 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(TransactionResponse.Hash)">
+        <GridColumn Width="115" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(TransactionResponse.Hash)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
                     {
                         <a class="secondary no-underline" href="https://tracker.icon.foundation/transaction/@transaction.Hash">
-                            <span class="fs-n1 mono-lg transaction-hash font-weight-semibold TransactionResponse_Hash">@(transaction.Hash?.Substring(0, 16))..</span>
+                            <span class="fs-n1 mono-lg transaction-hash font-weight-semibold TransactionResponse_Hash">@(transaction.Hash?.Substring(0, 12))..</span>
                         </a>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="150" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Amount)">
+        <GridColumn Width="160" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Amount)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)

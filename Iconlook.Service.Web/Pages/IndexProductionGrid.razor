@@ -23,7 +23,9 @@
         background-color: limegreen;
     }
 </style>
-<EjsGrid RowHeight="40"
+<EjsGrid 
+    Height="100%"
+         RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="PeerResponse"
@@ -48,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="217" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Width="202" Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PeerResponse peer)

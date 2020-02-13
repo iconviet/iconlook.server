@@ -118,7 +118,7 @@
                         leader_block_mcount += 1;
                         if ($("#block_grid").length) {
                             if ($("#block_grid .e-content tr").length > 1) {
-                                if ($("#block_grid .e-content tr").length >= 21) {
+                                if ($("#block_grid .e-content tr").length >= 22) {
                                     $("#block_grid .e-content tr:last").remove();
                                 }
                                 const block_row = $("#block_grid .e-content tr:first").clone();
@@ -127,7 +127,7 @@
                                 block_row.find(".BlockResponse_BlockHeight")
                                     .text(signal.body.block.height.toLocaleString());
                                 block_row.find(".BlockResponse_BlockHash")
-                                    .text(`${signal.body.block.hash.substring(0, 16)}..`);
+                                    .text(`${signal.body.block.hash.substring(0, 12)}..`);
                                 block_row.find(".BlockResponse_TransactionCount")
                                     .integer(signal.body.block.transactionCount, "0000");
                                 block_row.hide().css("opacity", 0).css("background-color", "#ffffe1");
@@ -143,7 +143,7 @@
                         if ($("#transaction_grid").length) {
                             signal.body.transactions.forEach(function(item, index) {
                                 if ($("#transaction_grid .e-content tr").length > 1) {
-                                    if ($("#transaction_grid .e-content tr").length >= 23) {
+                                    if ($("#transaction_grid .e-content tr").length >= 22) {
                                         $("#transaction_grid .e-content tr:last").remove();
                                     }
                                     const trans_row = $("#transaction_grid .e-content tr:first").clone();
@@ -151,7 +151,7 @@
                                     trans_row.find(".TransactionResponse_Amount").decimal(item.amount, 4, true);
                                     trans_row.find(".TransactionResponse_To").text(`${item.to.substring(0, 10)}..`);
                                     trans_row.find(".TransactionResponse_From").text(`${item.from.substring(0, 10)}..`);
-                                    trans_row.find(".TransactionResponse_Hash").text(`${item.hash.substring(0, 16)}..`);
+                                    trans_row.find(".TransactionResponse_Hash").text(`${item.hash.substring(0, 12)}..`);
                                     trans_row.hide().css("opacity", 0).css("background-color", "#fffff0");
                                     trans_row.prependTo($("#transaction_grid .e-content tbody:first"));
                                     trans_row.slideDown(150).animate({ opacity: 1 }, 450)

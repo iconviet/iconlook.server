@@ -13,7 +13,8 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid RowHeight="40"
+<EjsGrid Height="880"
+         RowHeight="40"
          ID="block_grid"
          EnableHover="false"
          EnableAltRow="false"
@@ -36,14 +37,14 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 480px)" Field="@nameof(BlockResponse.Hash)">
+        <GridColumn Width="125" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 480px)" Field="@nameof(BlockResponse.Hash)">
             <Template>
                 @{
                     if (context is BlockResponse block)
                     {
                         <a class="secondary no-underline" href="block/@block.Hash">
                             <span class="fs-n1 mono-lg block-hash">
-                                <span class="font-weight-semibold BlockResponse_BlockHash">@(block.Hash.Substring(0, 16))..</span>
+                                <span class="font-weight-semibold BlockResponse_BlockHash">@(block.Hash.Substring(0, 12))..</span>
                             </span>
                         </a>
                     }
@@ -63,7 +64,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" TextAlign="TextAlign.Right" Field="@nameof(BlockResponse.TotalAmount)">
+        <GridColumn Width="150" TextAlign="TextAlign.Right" Field="@nameof(BlockResponse.TotalAmount)">
             <Template>
                 @{
                     if (context is BlockResponse block)

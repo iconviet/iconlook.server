@@ -1,7 +1,8 @@
 ﻿<style>
     .online-status { color: #00a1b3; }
 </style>
-<EjsGrid RowHeight="40"
+<EjsGrid Height="880"
+         RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="PRepResponse"
@@ -26,7 +27,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="223" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Width="208" Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PRepResponse prep)

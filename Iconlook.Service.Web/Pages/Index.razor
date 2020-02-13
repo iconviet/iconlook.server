@@ -9,10 +9,8 @@
 
     .e-grid .e-gridheader { display: none; }
 
-    .main.card { height: 927px !important; }
-
-    .main.card .e-grid { min-height: 880px; }
-
+    .main.card { height: 932px !important; }
+    
     .submit-button {
         font-weight: bold;
         padding: 9px 12px 7px 8px;
@@ -227,7 +225,7 @@
 </div>
 <div class="row">
     <div class="col-sm mb-3 mr-sm-n3">
-        <div class="main card mb-3 shadow-sm" style="min-height: 927px;">
+        <div class="main card mb-3 shadow-sm">
             <EjsTab Animation="Animation" EnablePersistence="true">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
@@ -253,20 +251,20 @@
         </div>
     </div>
     <div class="col-sm mb-3">
-        <div class="main card mb-3 shadow-sm" style="min-height: 927px;">
+        <div class="main card mb-3 shadow-sm">
             <EjsTab Animation="Animation" EnablePersistence="true">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Blocks">
                         <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
+                            <div class="card-body py-1 overflow-hidden">
                                 <IndexBlocksGrid></IndexBlocksGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
                     <TabItem Header="Transactions">
                         <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
+                            <div class="card-body py-1 overflow-hidden">
                                 <IndexTransactionsGrid></IndexTransactionsGrid>
                             </div>
                         </ContentTemplate>
