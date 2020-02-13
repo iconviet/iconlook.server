@@ -366,6 +366,10 @@ button.secondary, button .secondary {
     display: none;
 }
 
+.e-pager .e-pagerdropdown {
+    margin-top: -30px;
+}
+
 .e-grid .e-altrow {
     background-color: #fbfbfb;
 }
