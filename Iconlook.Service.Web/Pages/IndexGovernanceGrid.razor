@@ -1,8 +1,7 @@
 ﻿<style>
     .online-status { color: #00a1b3; }
 </style>
-<EjsGrid Height="880"
-         RowHeight="40"
+<EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="PRepResponse"
@@ -12,7 +11,7 @@
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="20" HideAtMedia="(min-width: 480px)">
+        <GridColumn Width="20">
             <Template>
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
@@ -27,7 +26,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="208" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PRepResponse prep)

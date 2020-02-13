@@ -13,8 +13,7 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid Height="880"
-         RowHeight="40"
+<EjsGrid RowHeight="40"
          ID="block_grid"
          EnableHover="false"
          EnableAltRow="false"
@@ -64,7 +63,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="150" TextAlign="TextAlign.Right" Field="@nameof(BlockResponse.TotalAmount)">
+        <GridColumn TextAlign="TextAlign.Right" Field="@nameof(BlockResponse.TotalAmount)">
             <Template>
                 @{
                     if (context is BlockResponse block)

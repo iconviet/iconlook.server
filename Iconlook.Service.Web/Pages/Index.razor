@@ -7,10 +7,12 @@
 
     .e-tab { background-color: white; }
 
+    .main.card .e-grid { height: 880px; }
+
     .e-grid .e-gridheader { display: none; }
 
-    .main.card { height: 932px !important; }
-    
+    .main.card { height: 932px !important; }     
+
     .submit-button {
         font-weight: bold;
         padding: 9px 12px 7px 8px;
@@ -226,7 +228,7 @@
 <div class="row">
     <div class="col-sm mb-3 mr-sm-n3">
         <div class="main card mb-3 shadow-sm">
-            <EjsTab Animation="Animation" EnablePersistence="true">
+            <EjsTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Governance">
@@ -252,7 +254,7 @@
     </div>
     <div class="col-sm mb-3">
         <div class="main card mb-3 shadow-sm">
-            <EjsTab Animation="Animation" EnablePersistence="true">
+            <EjsTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Blocks">

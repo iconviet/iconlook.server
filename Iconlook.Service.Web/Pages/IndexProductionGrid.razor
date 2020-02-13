@@ -23,9 +23,7 @@
         background-color: limegreen;
     }
 </style>
-<EjsGrid 
-    Height="100%"
-         RowHeight="40"
+<EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          TValue="PeerResponse"
@@ -35,7 +33,7 @@
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/peers" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="20" HideAtMedia="(min-width: 480px)">
+        <GridColumn Width="20">
             <Template>
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
@@ -50,7 +48,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="202" Field="@nameof(PRepResponse.Name)">
+        <GridColumn Field="@nameof(PRepResponse.Name)">
             <Template>
                 @{
                     if (context is PeerResponse peer)

@@ -13,8 +13,7 @@
         background-color: #e1fafd;
     }
 </style>
-<EjsGrid Height="880"
-         RowHeight="40"
+<EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          ID="transaction_grid"
@@ -68,7 +67,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="160" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Amount)">
+        <GridColumn TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Amount)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)
