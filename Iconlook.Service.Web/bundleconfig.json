@@ -3,6 +3,17 @@
     "minify": { "enabled": false },
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
+      "wwwroot/static/js/ej2-base.min.js",
+      "wwwroot/static/js/ej2-data.min.js",
+      "wwwroot/static/js/ej2-lists.min.js",
+      "wwwroot/static/js/ej2-inputs.min.js",
+      "wwwroot/static/js/ej2-buttons.min.js",
+      "wwwroot/static/js/ej2-popups.min.js",
+      "wwwroot/static/js/ej2-splitbuttons.min.js",
+      "wwwroot/static/js/ej2-dropdowns.min.js",
+      "wwwroot/static/js/ej2-navigations.min.js",
+      "wwwroot/static/js/ej2-grids.min.js",
+      "wwwroot/static/js/ejs.interop.min.js",
       "wwwroot/static/js/rxjs.min.js",
       "wwwroot/static/js/jquery.min.js",
       "wwwroot/static/js/ss-utils.min.js",
@@ -20,6 +31,7 @@
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/css/bootstrap.min.css",
+      "wwwroot/static/css/ej2-*.min.css",
       "wwwroot/static/css/gf-*.min.css",
       "wwwroot/static/css/fa-*.min.css",
       "wwwroot/static/css/site*.css"
