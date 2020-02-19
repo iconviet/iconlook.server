@@ -446,10 +446,15 @@ button.secondary, button .secondary {
     margin: 0 0 0 7px !important;
 }
 
+@media screen and (max-width: 480px) {
+    .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
+        font-size: unset;
+    }
+}
+
 .e-tab .e-tab-header .e-active .e-tab-icon.e-icon-left {
     color: #1aaaba !important;
 }
-
 
 
 /*
