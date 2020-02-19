@@ -11,12 +11,12 @@
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="20" MaxWidth="20">
+        <GridColumn Width="20">
             <Template>
                 <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="40" MaxWidth="40" Field="@nameof(PRepResponse.Ranking)">
+        <GridColumn Width="40" Field="@nameof(PRepResponse.Ranking)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -39,7 +39,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="103" MaxWidth="103" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
+        <GridColumn Width="103" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -50,7 +50,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" MaxWidth="60" TextAlign="TextAlign.Right">
+        <GridColumn Width="60" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     var random = -0.05 + (0.05 - -0.05) * new Random().NextDouble();
@@ -63,7 +63,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="75" MaxWidth="75" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PRepResponse.DelegatedPercentage)">
+        <GridColumn Width="75" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PRepResponse.DelegatedPercentage)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
