@@ -63,7 +63,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="75" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PRepResponse.DelegatedPercentage)">
+        <GridColumn Width="75" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.DelegatedPercentage)">
             <Template>
                 @{
                     if (context is PRepResponse prep)

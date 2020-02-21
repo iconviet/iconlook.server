@@ -36,7 +36,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="125" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 480px)" Field="@nameof(BlockResponse.Hash)">
+        <GridColumn Width="125" TextAlign="TextAlign.Center" Field="@nameof(BlockResponse.Hash)">
             <Template>
                 @{
                     if (context is BlockResponse block)

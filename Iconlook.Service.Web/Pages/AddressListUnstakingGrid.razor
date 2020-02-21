@@ -77,7 +77,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(AddressResponse.Staked)">
+        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
             <Template>
                 @{
                     if (context is AddressResponse address)
@@ -95,7 +95,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)">
+        <GridColumn Width="200" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
                 @if (context is AddressResponse address)
                 {
@@ -103,12 +103,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)">
+        <GridColumn Width="120" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
                 <span class="text-light">6d 5h 18m</span>
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is AddressResponse address)

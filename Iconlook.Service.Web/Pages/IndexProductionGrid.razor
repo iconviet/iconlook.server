@@ -91,7 +91,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="85" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 480px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
+        <GridColumn Width="85" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)

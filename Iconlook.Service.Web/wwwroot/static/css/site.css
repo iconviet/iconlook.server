@@ -287,7 +287,6 @@ button.secondary, button .secondary {
 /*
     CARD
 */
-
 .card .e-grid {
     border: none;
 }
@@ -362,27 +361,29 @@ button.secondary, button .secondary {
 /*
     EJS-GRID
 */
-.e-grid .e-emptyrow {
-    display: none;
-}
+@media screen and (min-width: 590px) {
+    .e-grid .e-emptyrow {
+        display: none;
+    }
 
-.e-pager .e-pagerdropdown {
-    margin-top: -30px;
-}
+    .e-pager .e-pagerdropdown {
+        margin-top: -30px;
+    }
 
-.e-grid .e-altrow {
-    background-color: #fbfbfb;
-}
+    .e-grid .e-altrow {
+        background-color: #fbfbfb;
+    }
 
-.e-grid .e-rowcell {
-    font-size: inherit;
-    border-color: #e7eaee;
-    color: #111111 !important;
-}
+    .e-grid .e-rowcell {
+        font-size: inherit;
+        border-color: #e7eaee;
+        color: #111111 !important;
+    }
 
-.e-pager .e-currentitem,
-.e-pager .e-currentitem:hover {
-    background-color: #1aaaba !important;
+    .e-pager .e-currentitem,
+    .e-pager .e-currentitem:hover {
+        background-color: #1aaaba !important;
+    }
 }
 
 
@@ -457,6 +458,7 @@ button.secondary, button .secondary {
 }
 
 
+
 /*
     EJS-CHIP
 */
@@ -471,6 +473,7 @@ button.secondary, button .secondary {
 .e-chip-list .e-chip .e-chip-avatar {
     margin: 0 8px 0 -14px;
 }
+
 
 
 /*
