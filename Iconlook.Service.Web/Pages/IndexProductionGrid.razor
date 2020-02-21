@@ -41,6 +41,10 @@
     #production_grid td.e-rowcell:nth-child(5) {
         width: 90px;
     }
+
+    #production_grid td.e-rowcell:nth-child(1) .fa-dot-circle {
+        margin-top: 3px;
+    }
 </style>
 <EjsGrid RowHeight="40"
          EnableHover="false"
@@ -53,9 +57,9 @@
          Query="@(new Query().AddParams("take", 22))">
     <EjsDataManager Url="/api/v1/peers" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="20">
+        <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
             <Template>
-                <i class="fad fs-n1 fa-dot-circle positive-light" style="margin-top: 2px;"></i>
+                <i class="fad fs-n2 fa-dot-circle positive-light"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="40" Field="@nameof(PeerResponse.Ranking)">
@@ -98,7 +102,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="110" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
+        <GridColumn Width="110" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PeerResponse.ProducedBlocks)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
