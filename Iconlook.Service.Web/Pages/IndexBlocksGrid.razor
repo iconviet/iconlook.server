@@ -13,6 +13,23 @@
         background-color: #e1fafd;
     }
 </style>
+<style media="(max-width: 769px)">
+    #block_grid td.e-rowcell:nth-child(1) {
+        width: 85px;
+    }
+
+    #block_grid td.e-rowcell:nth-child(3) {
+        width: 65px;
+    }
+
+    #block_grid td.e-rowcell:nth-child(4) {
+        width: auto;
+    }
+
+    #block_grid td.e-rowcell:nth-child(5) {
+        width: 70px;
+    }
+</style>
 <EjsGrid RowHeight="40"
          ID="block_grid"
          EnableHover="false"
@@ -36,7 +53,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="125" TextAlign="TextAlign.Center" Field="@nameof(BlockResponse.Hash)">
+        <GridColumn Width="125" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 769px)" Field="@nameof(BlockResponse.Hash)">
             <Template>
                 @{
                     if (context is BlockResponse block)

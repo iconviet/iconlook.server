@@ -13,6 +13,23 @@
         background-color: #e1fafd;
     }
 </style>
+<style media="(max-width: 769px)">
+    #transaction_grid td.e-rowcell:nth-child(1) {
+        width: 95px;
+    }
+
+    #transaction_grid td.e-rowcell:nth-child(2) {
+        width: 25px;
+    }
+
+    #transaction_grid td.e-rowcell:nth-child(3) {
+        width: 95px;
+    }
+
+    #transaction_grid td.e-rowcell:nth-child(5) {
+        width: auto;
+    }
+</style>
 <EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
@@ -55,7 +72,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="115" TextAlign="TextAlign.Right" Field="@nameof(TransactionResponse.Hash)">
+        <GridColumn Width="115" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(TransactionResponse.Hash)">
             <Template>
                 @{
                     if (context is TransactionResponse transaction)

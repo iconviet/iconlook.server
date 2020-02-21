@@ -1,6 +1,4 @@
 ﻿<style>
-    .online-status { color: #00a1b3; }
-
     .peer-state-sync {
         color: black;
         padding: 10px 0;
@@ -23,9 +21,31 @@
         background-color: limegreen;
     }
 </style>
+<style media="(max-width: 769px)">
+    #production_grid td.e-rowcell:nth-child(1) {
+        width: 20px;
+    }
+
+    #production_grid td.e-rowcell:nth-child(2) {
+        width: 40px;
+    }
+
+    #production_grid td.e-rowcell:nth-child(3) {
+        width: auto;
+    }
+
+    #production_grid td.e-rowcell:nth-child(4) {
+        width: 45px;
+    }
+
+    #production_grid td.e-rowcell:nth-child(5) {
+        width: 90px;
+    }
+</style>
 <EjsGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
+         ID="production_grid"
          TValue="PeerResponse"
          AllowSelection="false"
          ClipMode="ClipMode.Ellipsis"
@@ -35,7 +55,7 @@
     <GridColumns>
         <GridColumn Width="20">
             <Template>
-                <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
+                <i class="fad fs-n1 fa-dot-circle positive-light" style="margin-top: 2px;"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="40" Field="@nameof(PeerResponse.Ranking)">
@@ -91,7 +111,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="85" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProductivityPercentage)">
+        <GridColumn Width="85" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
