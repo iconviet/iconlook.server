@@ -65,11 +65,11 @@
                     {
                         if (address.Unstaking >= 1000000)
                         {
-                            <i class="fas mb-2 mr-1 fa-whale special"></i>
+                            <i class="fas mr-1 fs-n2 fa-whale special"></i>
                         }
                         if (address.Unstaking > 100000 && address.Unstaking < 1000000)
                         {
-                            <i class="far mt-1 mr-1 fa-fish special"></i>
+                            <i class="far mr-1 fs-n2 fa-fish special"></i>
                         }
                         <span class="mono ls-n2 requested_amount">@address.Unstaking.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
@@ -88,6 +88,14 @@
                         }
                         else
                         {
+                            if (address.Staked >= 1000000)
+                            {
+                                <i class="fas mb-2 mr-1 fs-n2 fa-whale special"></i>
+                            }
+                            if (address.Staked > 100000 && address.Staked < 1000000)
+                            {
+                                <i class="far mr-1 fs-n2 fa-fish special"></i>
+                            }
                             <span class="mono ls-n2">@address.Staked.ToIcxString()</span>
                             <span class="pl-1 text-light font-weight-light">ICX</span>
                         }
