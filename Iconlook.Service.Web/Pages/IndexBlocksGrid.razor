@@ -46,7 +46,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="primary no-underline" href="block/@block.Height">
+                        <a class="primary no-underline" href="https://tracker.icon.foundation/block/@block.Height">
                             <span class="fs-n1 mono-lg block-height BlockResponse_BlockHeight">@block.Height.ToString("N0")</span>
                         </a>
                     }
@@ -58,7 +58,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="secondary no-underline" href="block/@block.Hash">
+                        <a class="secondary no-underline" href="https://tracker.icon.foundation/block/@block.Height">
                             <span class="fs-n1 mono-lg block-hash">
                                 <span class="font-weight-semibold BlockResponse_BlockHash">@(block.Hash.Substring(0, 12))..</span>
                             </span>
@@ -72,7 +72,7 @@
                 @{
                     if (context is BlockResponse block)
                     {
-                        <a class="primary no-underline" href="/">
+                        <a class="primary no-underline" href="https://tracker.icon.foundation/blocktx/@block.Height">
                             <span class="pr-1 mono BlockResponse_TransactionCount">@block.TransactionCount.ToString("0000")</span>
                             <span class="text-light">txns</span>
                         </a>
