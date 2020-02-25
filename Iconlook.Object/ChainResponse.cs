@@ -28,6 +28,7 @@ namespace Iconlook.Object
         public DateTimeOffset Timestamp { get; set; }
         public long UnstakingAddressCount { get; set; }
         public double DelegatedPercentage { get; set; }
+        public double IcxPriceChangePercentage { get; set; }
 
         protected override void AddRules(Validator<ChainResponse> validator)
         {

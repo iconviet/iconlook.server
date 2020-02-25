@@ -4,6 +4,7 @@ using Agiper;
 using Agiper.Server;
 using Iconlook.Calculator;
 using Iconlook.Client;
+using Iconlook.Client.Binance;
 using Iconlook.Client.Chainalytic;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;
@@ -33,16 +34,20 @@ namespace Iconlook.Service.Job
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var tracker = new IconTrackerClient();
+                            var binance = new BinanceClient(2);
+                            var tracker = new IconTrackerClient(2);
                             var chainalytic = new ChainalyticClient(2);
                             var main_info = await tracker.GetMainInfo();
                             var iiss_info = await service.GetIissInfo();
                             var prep_info = await service.GetPRepInfo();
+                            var ticker = await binance.GetTicker("ICXUSDT");
                             var staking_info = await chainalytic.GetStakingInfo();
                             var chain = new ChainResponse
                             {
+                                IcxPrice = ticker.LastPrice,
                                 IRep = iiss_info.GetIRep().ToIcxFromLoop(),
                                 MarketCap = (long) main_info?.GetMarketCap(),
+                                IcxPriceChangePercentage = ticker.PriceChange,
                                 IcxSupply = (long) total_supply.ToIcxFromLoop(),
                                 IcxCirculation = (long) main_info?.GetIcxCirculation(),
                                 PublicTreasury = (long) main_info?.GetPublicTreasury(),
@@ -57,7 +62,6 @@ namespace Iconlook.Service.Job
                                 UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
                                 TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                             };
-                            chain.IcxPrice = (decimal) chain.MarketCap / chain.IcxCirculation;
                             chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
                             var calculator = new BlockCalculator(chain.BlockHeight, chain.NextTermBlockHeight);

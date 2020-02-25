@@ -59,6 +59,7 @@
                         $(".ChainResponse_DelegatedPercentage").percent(signal.body.chain.delegatedPercentage);
                         $(".ChainResponse_StakingAddressCount").integer(signal.body.chain.stakingAddressCount);
                         $(".ChainResponse_NextTermBlockHeight").integer(signal.body.chain.nextTermBlockHeight);
+                        $(".ChainResponse_IcxPriceChangePercentage").percent(signal.body.chain.icxPriceChangePercentage);
                     }));
                 // ******************************************
                 // *          PeersUpdatedSignal            *
