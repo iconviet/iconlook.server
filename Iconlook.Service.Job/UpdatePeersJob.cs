@@ -27,7 +27,7 @@ namespace Iconlook.Service.Job
                         if (items.Any())
                         {
                             var peers = new List<PeerResponse>();
-                            await Task.WhenAll(items.Values.Select(prep =>
+                            await Task.WhenAll(items.Values.Where(x => x != null).Select(prep =>
                             {
                                 return Task.Run(async () =>
                                 {
@@ -57,10 +57,10 @@ namespace Iconlook.Service.Job
                             {
                                 await Channel.Publish(new PeersUpdatedSignal
                                 {
-                                    Idle = peers.Where(x => x?.State == "Vote").ToList(),
-                                    Sync = peers.Where(x => x?.State == "BlockSync").ToList(),
-                                    Busy = peers.Where(x => x?.State == "BlockGenerate").ToList(),
-                                    Down = peers.Where(x => x?.State == "LeaderComplain").ToList()
+                                    Idle = peers.Where(x => x.State == "Vote").ToList(),
+                                    Sync = peers.Where(x => x.State == "BlockSync").ToList(),
+                                    Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
+                                    Down = peers.Where(x => x.State == "LeaderComplain").ToList()
                                 }).ConfigureAwait(false);
                                 await Task.Run(() => redis.StoreAll(peers)).ConfigureAwait(false);
                             }
