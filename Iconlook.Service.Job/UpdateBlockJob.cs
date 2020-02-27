@@ -78,7 +78,10 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed to run. {Message}", nameof(UpdateBlockJob), exception.Message);
+                    if (!(exception is TaskCanceledException))
+                    {
+                        Log.Error("{Job} failed to run. {Message}", nameof(UpdateBlockJob), exception.Message);
+                    }
                 }
                 Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockJob), rolex.Elapsed.TotalMilliseconds);
             }

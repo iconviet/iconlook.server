@@ -96,7 +96,10 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                    if (!(exception is TaskCanceledException))
+                    {
+                        Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                    }
                 }
                 Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), time.Elapsed.TotalMilliseconds);
             }
