@@ -50,16 +50,17 @@ namespace Iconlook.Service.Api
                         Count = 1
                     };
                 }
-            }
-            using (var redis = Redis.Instance())
-            {
-                var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
-                return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))
+                using (var redis = Redis.Instance())
                 {
-                    Skip = request.Skip,
-                    Take = request.Take,
-                    Count = items.Count
-                };
+                    var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
+                    return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))
+                    {
+                        Skip = request.Skip,
+                        Take = request.Take,
+                        Count = items.Count
+                    };
+                }
+
             }
         }
     }
