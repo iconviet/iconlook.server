@@ -8,7 +8,6 @@ using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
 using Serilog;
-using ServiceStack;
 using ServiceStack.OrmLite;
 
 namespace Iconlook.Service.Api
@@ -20,7 +19,6 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
-        // [CacheResponse(Duration = 60, LocalCache = true)]
         public async Task<object> Get(PRepListRequest request)
         {
             using (var db = Db.Instance())
@@ -52,15 +50,14 @@ namespace Iconlook.Service.Api
                 }
                 using (var redis = Redis.Instance())
                 {
-                    var items = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
-                    return new ListResponse<PRepResponse>(items.Skip(request.Skip).Take(request.Take))
+                    var preps = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
+                    return new ListResponse<PRepResponse>(preps.Skip(request.Skip).Take(request.Take))
                     {
                         Skip = request.Skip,
                         Take = request.Take,
-                        Count = items.Count
+                        Count = preps.Count
                     };
                 }
-
             }
         }
     }
