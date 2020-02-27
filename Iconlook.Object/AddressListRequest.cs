@@ -7,5 +7,6 @@ namespace Iconlook.Object
     public class AddressListRequest : ListRequestBase<AddressListRequest, AddressResponse>, IGet
     {
         public string State { get; set; }
+        public string Param { get; set; }
     }
 }

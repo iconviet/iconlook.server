@@ -13,19 +13,20 @@
 </style>
 <div class="px-2 py-1 border-bottom">
     <EjsChipList Selection="Selection.Single" SelectedChips="1">
-        <ChipListEvents OnClick="@OnClick"></ChipListEvents>
+        <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="ALL"></ChipListChip>
-            <ChipListChip Text="LAST 24H"></ChipListChip>
-            <ChipListChip Text="DUE TODAY"></ChipListChip>
-            <ChipListChip Text="P-REP ONLY"></ChipListChip>
-            <ChipListChip Text="10,000+ ICX"></ChipListChip>
-            <ChipListChip Text="100,000+ ICX"></ChipListChip>
-            <ChipListChip Text="500,000+ ICX"></ChipListChip>
+            <ChipListChip Text="ALL" Value="0"></ChipListChip>
+            <ChipListChip Text="LAST 24H" Value="1"></ChipListChip>
+            <ChipListChip Text="DUE TODAY" Value="2"></ChipListChip>
+            <ChipListChip Text="P-REP ONLY" Value="3"></ChipListChip>
+            <ChipListChip Text="10,000+ ICX" Value="4"></ChipListChip>
+            <ChipListChip Text="100,000+ ICX" Value="5"></ChipListChip>
+            <ChipListChip Text="500,000+ ICX" Value="6"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
 </div>
-<EjsGrid EnableHover="false"
+<EjsGrid @ref="Grid"
+         EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
          AllowSorting="Sorting"
@@ -131,11 +132,11 @@
 
 @code
 {
+    EjsGrid<AddressResponse> Grid;
 
-    private void OnClick(ClickEventArgs args)
+    private void ChipListOnClick(ClickEventArgs args)
     {
-        StateHasChanged();
-        Console.WriteLine(args.Text);
+        Grid.Query = new Query().AddParams("param", ((dynamic) args.Data).value);
+        //Grid.Refresh();
     }
-
 }
