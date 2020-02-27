@@ -20,7 +20,7 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
-        [CacheResponse(Duration = 60, LocalCache = true)]
+        // [CacheResponse(Duration = 60, LocalCache = true)]
         public async Task<object> Get(PRepListRequest request)
         {
             using (var db = Db.Instance())

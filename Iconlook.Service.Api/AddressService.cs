@@ -12,7 +12,7 @@ namespace Iconlook.Service.Api
 {
     public class AddressService : ServiceBase
     {
-        [CacheResponse(Duration = 60, LocalCache = true)]
+        // [CacheResponse(Duration = 60, LocalCache = true)]
         public async Task<object> Any(AddressListRequest request)
         {
             if (request.State == "unstaking")
@@ -21,9 +21,11 @@ namespace Iconlook.Service.Api
                 {
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
+                    var unstaking_list = redis.As<AddressResponse>().GetAll();
                     var prep_dictionary = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Address);
-                    return new UnstakingAddressListResponse(
-                        unstaking_info.GetWallets()
+                    if (unstaking_list.IsEmpty())
+                    {
+                        redis.StoreAll(unstaking_info.GetWallets()
                             .Where(x => x.Value.Split(':').Length == 4 &&
                                         long.TryParse(x.Value.Split(':')[2], out _))
                             .Select(x =>
@@ -41,8 +43,14 @@ namespace Iconlook.Service.Api
                                     Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                     Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                                 };
-                            })
-                            .OrderByDescending(x => x.RequestedBlockHeight).Skip(request.Skip).Take(request.Take));
+                            }));
+                    }
+                    return new ListResponse<AddressResponse>(redis.As<AddressResponse>().GetAll().Skip(request.Skip).Take(request.Take))
+                    {
+                        Skip = request.Skip,
+                        Take = request.Take,
+                        Count = unstaking_list.Count
+                    };
                 }
             }
             return new ListResponse<AddressResponse>();

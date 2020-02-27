@@ -27,7 +27,7 @@ namespace Iconlook.Service.Job
                         if (items.Any())
                         {
                             var peers = new List<PeerResponse>();
-                            await Task.WhenAll(items.Values.Where(x => x != null).Select(prep =>
+                            await Task.WhenAll(items.Values.Select(prep =>
                             {
                                 return Task.Run(async () =>
                                 {

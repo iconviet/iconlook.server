@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Agiper;
@@ -6,10 +8,12 @@ using Agiper.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
@@ -92,6 +96,17 @@ namespace Iconlook.Service.Web
                 });
                 application.UseForwardedHeaders();
                 application.UseStaticFiles();
+                application.Use((context, next) =>
+                {
+                    if (context.Request.Path.StartsWithSegments("/api"))
+                    {
+                        var query = QueryHelpers.ParseQuery(context.Request.QueryString.Value);
+                        var builder = new QueryBuilder(query.SelectMany(x => x.Value, (x, y) =>
+                            new KeyValuePair<string, string>(x.Key.Replace("$", string.Empty).Replace("top", "take"), y)));
+                        context.Request.QueryString = builder.ToQueryString();
+                    }
+                    return next();
+                });
                 application.UseWhen(context => context.Request.Path.StartsWithSegments("/api") ||
                                                context.Request.Path.StartsWithSegments("/sse"), builder => builder.UseServiceStack(host));
                 application.UseRouting();
