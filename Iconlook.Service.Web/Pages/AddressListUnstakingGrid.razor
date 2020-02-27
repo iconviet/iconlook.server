@@ -137,6 +137,5 @@
     private void ChipListOnClick(ClickEventArgs args)
     {
         Grid.Query = new Query().AddParams("param", ((dynamic) args.Data).value);
-        //Grid.Refresh();
     }
 }
