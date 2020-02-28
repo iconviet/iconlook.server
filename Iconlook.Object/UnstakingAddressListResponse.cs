@@ -3,17 +3,17 @@ using Agiper.Object;
 
 namespace Iconlook.Object
 {
-    public class UnstakingAddressListResponse : ListResponse<AddressResponse>
+    public class UnstakingAddressListResponse : ListResponse<UnstakingAddressResponse>
     {
         public UnstakingAddressListResponse()
         {
         }
 
-        public UnstakingAddressListResponse(IList<AddressResponse> items) : base(items)
+        public UnstakingAddressListResponse(IList<UnstakingAddressResponse> items) : base(items)
         {
         }
 
-        public UnstakingAddressListResponse(IEnumerable<AddressResponse> items) : base(items)
+        public UnstakingAddressListResponse(IEnumerable<UnstakingAddressResponse> items) : base(items)
         {
         }
     }

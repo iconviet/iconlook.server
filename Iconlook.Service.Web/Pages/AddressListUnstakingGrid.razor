@@ -31,15 +31,15 @@
          EnableAltRow="false"
          AllowSorting="Sorting"
          AllowSelection="false"
-         TValue="AddressResponse"
+         TValue="UnstakingAddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/list?state=unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="320" HeaderText="Address" Field="@nameof(AddressResponse.Hash)">
+        <GridColumn Width="320" HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>
                 @{
-                    if (context is AddressResponse address)
+                    if (context is UnstakingAddressResponse address)
                     {
                         if (address.Name != null)
                         {
@@ -59,10 +59,10 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Unstaking)">
+        <GridColumn Width="170" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
-                    if (context is AddressResponse address)
+                    if (context is UnstakingAddressResponse address)
                     {
                         if (address.Unstaking >= 1000000)
                         {
@@ -78,10 +78,10 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.Staked)">
+        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
-                    if (context is AddressResponse address)
+                    if (context is UnstakingAddressResponse address)
                     {
                         if (address.Staked == 0)
                         {
@@ -98,7 +98,7 @@
         </GridColumn>
         <GridColumn Width="200" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
-                @if (context is AddressResponse address)
+                @if (context is UnstakingAddressResponse address)
                 {
                     <span class="mono ls-n2">@address.RequestedBlockHeight.ToString("N0")</span>
                 }
@@ -109,10 +109,10 @@
                 <span class="text-light">6d 5h 18m</span>
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(AddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
-                    if (context is AddressResponse address)
+                    if (context is UnstakingAddressResponse address)
                     {
                         <span class="mono ls-n2">@address.UnstakedBlockHeight.ToString("N0")</span>
                     }
@@ -123,7 +123,7 @@
 </EjsGrid>
 @code
 {
-    EjsGrid<AddressResponse> EjsGrid;
+    EjsGrid<UnstakingAddressResponse> EjsGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
