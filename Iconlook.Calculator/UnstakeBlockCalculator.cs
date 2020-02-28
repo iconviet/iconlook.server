@@ -15,14 +15,19 @@ namespace Iconlook.Calculator
             _requested = requested;
         }
 
-        public string GetUnstakingCountdown()
-        {
-            return "6d 4h 2m";
-        }
-
         public DateTime GetRequestDateTime()
         {
-            return DateTime.UtcNow;
+            return DateTime.UtcNow.AddSeconds((_requested - _height) * 2);
+        }
+
+        public string GetUnstakingCountdown()
+        {
+            var duration = TimeSpan.FromSeconds((_unstaked - _height) * 2);
+            if (duration.Days == 0)
+                return duration.Hours == 0
+                    ? $"{duration:%m}m"
+                    : $"{duration:%h}h {duration:%m}m";
+            return $"{duration:%d}d, {duration:%h}h, {duration:%m}m";
         }
     }
 }
