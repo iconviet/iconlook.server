@@ -17,15 +17,15 @@ namespace Iconlook.Service.Job
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
+                redis.As<AddressResponse>().DeleteAll();
                 Log.Information("{Job} started", nameof(UpdateAddressJob));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
                     var prep_dictionary = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Address);
-                    redis.StoreAll(unstaking_info.GetWallets()
-                        .Where(x => x.Value.Split(':').Length == 4 &&
-                                    long.TryParse(x.Value.Split(':')[2], out _))
+                    redis.As<AddressResponse>().StoreAll(unstaking_info.GetWallets()
+                        .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out _))
                         .Select(x =>
                         {
                             var tuple = x.Value.Split(':');
@@ -35,10 +35,11 @@ namespace Iconlook.Service.Job
                                 Id = x.Key,
                                 Name = name,
                                 Hash = x.Key,
+                                Type = AddressType.Wallet,
                                 UnstakedBlockHeight = long.Parse(tuple[3]),
                                 RequestedBlockHeight = long.Parse(tuple[2]),
-                                Description = name == null ? null : "P-Rep",
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
+                                Class = name == null ? AddressClass.Iconist : AddressClass.PRep,
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
                         }));

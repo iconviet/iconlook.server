@@ -15,17 +15,17 @@
     <EjsChipList Selection="Selection.Single" SelectedChips="1">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="ALL" Value="0"></ChipListChip>
-            <ChipListChip Text="LAST 24H" Value="1"></ChipListChip>
-            <ChipListChip Text="DUE TODAY" Value="2"></ChipListChip>
-            <ChipListChip Text="P-REP ONLY" Value="3"></ChipListChip>
-            <ChipListChip Text="10,000+ ICX" Value="4"></ChipListChip>
-            <ChipListChip Text="100,000+ ICX" Value="5"></ChipListChip>
-            <ChipListChip Text="500,000+ ICX" Value="6"></ChipListChip>
+            <ChipListChip Text="ALL" Value="everything"></ChipListChip>
+            <ChipListChip Text="LAST 24H" Value="last_24h"></ChipListChip>
+            <ChipListChip Text="DUE TODAY" Value="due_today"></ChipListChip>
+            <ChipListChip Text="P-REP ONLY" Value="prep_only"></ChipListChip>
+            <ChipListChip Text="10,000+ ICX" Value="10000icx"></ChipListChip>
+            <ChipListChip Text="100,000+ ICX" Value="100000icx"></ChipListChip>
+            <ChipListChip Text="500,000+ ICX" Value="500000icx"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
 </div>
-<EjsGrid @ref="Grid"
+<EjsGrid @ref="EjsGrid"
          EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
@@ -89,14 +89,6 @@
                         }
                         else
                         {
-                            if (address.Staked >= 1000000)
-                            {
-                                <i class="fas mb-2 mr-1 fs-n2 fa-whale special"></i>
-                            }
-                            if (address.Staked > 100000 && address.Staked < 1000000)
-                            {
-                                <i class="far mr-1 fs-n2 fa-fish special"></i>
-                            }
                             <span class="mono ls-n2">@address.Staked.ToIcxString()</span>
                             <span class="pl-1 text-light font-weight-light">ICX</span>
                         }
@@ -129,13 +121,12 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-
 @code
 {
-    EjsGrid<AddressResponse> Grid;
+    EjsGrid<AddressResponse> EjsGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        Grid.Query = new Query().AddParams("param", ((dynamic) args.Data).value);
+        EjsGrid.Query = new Query().AddParams("param", ((dynamic) args.Data).value);
     }
 }
