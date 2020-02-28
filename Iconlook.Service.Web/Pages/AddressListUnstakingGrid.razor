@@ -34,7 +34,7 @@
          TValue="UnstakingAddressResponse"
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <EjsDataManager Url="/api/v1/address/list?state=unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/address/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="320" HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>
@@ -100,13 +100,16 @@
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                    <span class="mono ls-n2">@address.RequestedBlockHeight.ToString("N0")</span>
+                    <span class="mono ls-n2">@address.RequestedDateTime.ToString("dd MM yyyy hh:mm tt")</span>
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Unstaked In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="120" HeaderText="Released In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
-                <span class="text-light">6d 5h 18m</span>
+                @if (context is UnstakingAddressResponse address)
+                {
+                <span class="text-light">@address.UnstakingCountdown</span>   
+                }
             </Template>
         </GridColumn>
         <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
@@ -127,6 +130,6 @@
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        EjsGrid.Query = new Query().AddParams("param", ((dynamic) args.Data).value);
+        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 }

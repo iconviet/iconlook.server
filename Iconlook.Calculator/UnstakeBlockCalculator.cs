@@ -1,4 +1,6 @@
-﻿namespace Iconlook.Calculator
+﻿using System;
+
+namespace Iconlook.Calculator
 {
     public class UnstakeBlockCalculator
     {
@@ -11,6 +13,16 @@
             _height = height;
             _unstaked = unstaked;
             _requested = requested;
+        }
+
+        public string GetUnstakingCountdown()
+        {
+            return "6d 4h 2m";
+        }
+
+        public DateTime GetRequestDateTime()
+        {
+            return DateTime.UtcNow;
         }
     }
 }

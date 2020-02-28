@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Reflection;
-using Hangfire;
 using Iconlook.Server;
 
 namespace Iconlook.Service.Job
@@ -18,10 +17,11 @@ namespace Iconlook.Service.Job
 
         protected override void OnStart()
         {
-            RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "*/2 * * * *", TimeZoneInfo.Utc, HangfireQueueName);
-            RecurringJob.AddOrUpdate<UpdateUnstakingJob>(x => x.RunAsync(), "*/2 * * * *", TimeZoneInfo.Utc, HangfireQueueName);
+            // RecurringJob.AddOrUpdate<UpdatePRepsJob>(x => x.RunAsync(), "*/2 * * * *", TimeZoneInfo.Utc, HangfireQueueName);
             Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x => Resolve<UpdateBlockJob>().RunAsync().ConfigureAwait(false));
             Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(x => Resolve<UpdateChainJob>().RunAsync().ConfigureAwait(false));
+            Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(x => Resolve<UpdatePRepsJob>().RunAsync().ConfigureAwait(false));
+            Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(x => Resolve<UpdateUnstakingJob>().RunAsync().ConfigureAwait(false));
         }
     }
 }

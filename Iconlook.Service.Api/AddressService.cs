@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
 
@@ -23,17 +22,13 @@ namespace Iconlook.Service.Api
                     case "500000icx":
                         addresses = addresses.Where(x => x.Unstaking >= 500000);
                         break;
-                    case "due_today":
-                        addresses = addresses.OrderBy(x => x.UnstakedBlockHeight);
-                        break;
                     case "prep_only":
                         addresses = addresses.Where(x => x.Class == AddressClass.PRep);
                         break;
-                    case "last_24h":
-                        addresses = addresses.OrderByDescending(x => x.UnstakedBlockHeight);
-                        break;
                 }
-                return new ListResponse<UnstakingAddressResponse>(addresses.Skip(request.Skip).Take(request.Take))
+                return new UnstakingAddressListResponse(addresses
+                    .OrderByDescending(x => x.UnstakedBlockHeight)
+                    .Skip(addresses.Count() > request.Take ? request.Skip : 0).Take(request.Take))
                 {
                     Skip = request.Skip,
                     Take = request.Take,
