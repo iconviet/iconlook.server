@@ -20,6 +20,8 @@
         border-radius: 4px;
         background-color: limegreen;
     }
+
+    .online-status { color: #00a1b3; }
 </style>
 <style media="(max-width: 769px)">
     #production_grid td.e-rowcell:nth-child(1) {
@@ -59,7 +61,7 @@
     <GridColumns>
         <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
             <Template>
-                <i class="fad fs-n2 fa-dot-circle positive-light"></i>
+                <i class="fad fs-n2 fa-dot-circle online-status"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="40" Field="@nameof(PeerResponse.Ranking)">

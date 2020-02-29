@@ -1,4 +1,7 @@
-﻿<style media="(max-width: 769px)">
+﻿<style>
+    .online-status { color: #00a1b3; }
+</style>
+<style media="(max-width: 769px)">
     #governance_grid td.e-rowcell:nth-child(1) {
         width: 20px;
     }
@@ -36,7 +39,7 @@
     <GridColumns>
         <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
             <Template>
-                <i class="fad fs-n2 fa-dot-circle positive-light"></i>
+                <i class="fad fs-n2 fa-dot-circle online-status"></i>
             </Template>
         </GridColumn>
         <GridColumn Width="40" Field="@nameof(PRepResponse.Ranking)">
