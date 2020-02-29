@@ -30,7 +30,6 @@ namespace Iconlook.Service.Web
         {
             ConfigureServices = host => services =>
             {
-                services.AddServerSideBlazor();
                 services.AddSyncfusionBlazor();
                 services.Configure<KestrelServerOptions>(x =>
                 {
@@ -46,6 +45,13 @@ namespace Iconlook.Service.Web
                     x.KnownProxies.Clear();
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
+                });
+                services.AddServerSideBlazor().AddCircuitOptions(x =>
+                {
+                    if (host.Environment != Environment.Production)
+                    {
+                        x.DetailedErrors = true;
+                    }
                 });
                 services.AddWebMarkupMin(x =>
                 {
