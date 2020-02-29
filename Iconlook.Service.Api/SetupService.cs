@@ -44,6 +44,7 @@ namespace Iconlook.Service.Api
             {
                 _db.DropTable<Transaction>();
                 _db.DropTable<Block>();
+                _db.DropTable<PRepHistory>();
                 _db.DropTable<PRep>();
                 _db.DropTable<PRepState_>();
             }
@@ -52,6 +53,7 @@ namespace Iconlook.Service.Api
             {
                 _db.CreateTable<PRepState_>();
                 _db.CreateTable<PRep>();
+                _db.CreateTable<PRepHistory>();
                 _db.CreateTable<Block>();
                 _db.CreateTable<Transaction>();
             }

@@ -32,6 +32,7 @@ namespace Iconlook.Service.Job
                     var icon = new IconServiceClient();
                     var prep_rpcs = await icon.GetPReps();
                     var prep_info = await icon.GetPRepInfo();
+                    var prep_history_objs = new List<PRepHistory>();
                     await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                     {
                         try
@@ -82,6 +83,11 @@ namespace Iconlook.Service.Job
                                 DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
                                 ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                             });
+                            prep_history_objs.Add(new PRepHistory
+                            {
+                                Address = prep.GetAddress().ToString(),
+                                Votes = (long) prep.GetDelegated().ToIcxFromLoop()
+                            });
                         }
                         catch
                         {
@@ -89,6 +95,7 @@ namespace Iconlook.Service.Job
                         }
                     })));
                     await db.SaveAllAsync(prep_objs.ToList());
+                    await db.SaveAllAsync(prep_history_objs.ToList());
                     redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
                     Log.Information("**************************************************");
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
