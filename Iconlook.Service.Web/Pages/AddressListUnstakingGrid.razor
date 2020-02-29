@@ -7,10 +7,6 @@
     #unstaking_grid td.e-rowcell:nth-child(2) {
         width: 145px;
     }
-
-    #unstaking_grid td.e-rowcell:nth-child(5) {
-        width: 185px;
-    }
 </style>
 <style>
     .address-name {
@@ -118,7 +114,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
