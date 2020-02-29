@@ -6,11 +6,11 @@
     }
 
     #unstaking_grid td.e-rowcell:nth-child(2) {
-        width: 125px;
+        width: 150px;
     }
 
     #unstaking_grid td.e-rowcell:nth-child(5) {
-        width: 125px;
+        width: 90px;
     }
 </style>
 <style>
@@ -78,7 +78,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+        <GridColumn Width="145" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -97,7 +97,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
+        <GridColumn Width="145" HeaderText="Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -115,7 +115,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+        <GridColumn Width="170" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
@@ -123,7 +123,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="185" HeaderText="Unstaked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
@@ -131,7 +131,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="135" HeaderText="Unstaked Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="135" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -155,9 +155,8 @@
         EjsGrid.Query = new Query().AddParams("filter", ((dynamic)args.Data).value);
     }
 
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].Contains("Mobile");
-        return base.OnInitializedAsync();
+        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
     }
 }
