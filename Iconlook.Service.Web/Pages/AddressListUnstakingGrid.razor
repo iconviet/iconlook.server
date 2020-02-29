@@ -1,11 +1,16 @@
-﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+﻿@inject HttpContextAccessor HttpContext
+@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
 <style media="(max-width: 769px)">
     #unstaking_grid td.e-rowcell:nth-child(1) {
         width: auto;
     }
 
     #unstaking_grid td.e-rowcell:nth-child(2) {
-        width: 145px;
+        width: 125px;
+    }
+
+    #unstaking_grid td.e-rowcell:nth-child(5) {
+        width: 125px;
     }
 </style>
 <style>
@@ -16,9 +21,13 @@
         border: solid 0.5px #1aaaba;
     }
 
-    .requested_amount .number-part { font-weight: 700; }
+    .requested_amount .number-part {
+        font-weight: 700;
+    }
 
-    .requested_amount .fraction-part { font-weight: 500; }
+    .requested_amount .fraction-part {
+        font-weight: 500;
+    }
 </style>
 <div class="px-2 py-1 border-bottom">
     <EjsChipList Selection="Selection.Single" SelectedChips="1">
@@ -114,11 +123,11 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                <span class="text-light text-condensed">@address.UnstakingCountdown</span>   
+                    <span class="text-light text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
                 }
             </Template>
         </GridColumn>
@@ -136,10 +145,19 @@
 </EjsGrid>
 @code
 {
+    bool IsMobileDevice = false;
+
     EjsGrid<UnstakingAddressResponse> EjsGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+
+        EjsGrid.Query = new Query().AddParams("filter", ((dynamic)args.Data).value);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].Contains("Mobile");
+        return base.OnInitializedAsync();
     }
 }

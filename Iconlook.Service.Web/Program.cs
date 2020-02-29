@@ -31,6 +31,8 @@ namespace Iconlook.Service.Web
             ConfigureServices = host => services =>
             {
                 services.AddSyncfusionBlazor();
+                services.AddHttpContextAccessor();
+                services.AddScoped<HttpContextAccessor>();
                 services.Configure<KestrelServerOptions>(x =>
                 {
                     x.AllowSynchronousIO = true;

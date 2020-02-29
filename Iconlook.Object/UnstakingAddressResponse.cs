@@ -8,5 +8,6 @@ namespace Iconlook.Object
         public long RequestedBlockHeight { get; set; }
         public string UnstakingCountdown { get; set; }
         public DateTime RequestedDateTime { get; set; }
+        public string UnstakingCountdownShort { get; set; }
     }
 }
