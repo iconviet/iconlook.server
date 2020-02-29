@@ -1,4 +1,17 @@
 ﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+<style media="(max-width: 769px)">
+    #unstaking_grid td.e-rowcell:nth-child(1) {
+        width: auto;
+    }
+
+    #unstaking_grid td.e-rowcell:nth-child(2) {
+        width: 145px;
+    }
+
+    #unstaking_grid td.e-rowcell:nth-child(5) {
+        width: 185px;
+    }
+</style>
 <style>
     .address-name {
         padding: 5px 10px;
@@ -26,6 +39,7 @@
     </EjsChipList>
 </div>
 <EjsGrid @ref="EjsGrid"
+         ID="unstaking_grid"
          EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
@@ -36,7 +50,7 @@
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
-        <GridColumn Width="320" HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
+        <GridColumn HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -59,7 +73,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+        <GridColumn Width="145" HeaderText="Requested Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -78,7 +92,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Staked)">
+        <GridColumn Width="145" HeaderText="Stake Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -96,23 +110,23 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="170" HeaderText="Requested Date" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                    <span class="mono ls-n2">@address.RequestedDateTime.ToString("dd MM yyyy hh:mm tt")</span>
+                    <span class="mono ls-n2">@address.RequestedDateTime.ToString("dd/MM/yyyy hh:mmtt")</span>
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Released In" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="185" HeaderText="Unstaked Coundown" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                <span class="text-light">@address.UnstakingCountdown</span>   
+                <span class="text-light text-condensed">@address.UnstakingCountdown</span>   
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="120" HeaderText="Block Height" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="135" HeaderText="Unstaked Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
