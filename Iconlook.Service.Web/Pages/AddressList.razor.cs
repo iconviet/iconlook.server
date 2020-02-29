@@ -34,7 +34,7 @@ namespace Iconlook.Service.Web.Pages
         {
             Paging = true;
             PageSize = 20;
-            PageSizes = new[] { 20, 50, 100 };
+            PageSizes = new[] { 20, 50, 100, 200, 500 };
             Unstaking = new TabHeader { Text = "UNSTAKING" };
             Undelegated = new TabHeader { Text = "UNDELEGATED" };
             Animation = new TabAnimationSettings
