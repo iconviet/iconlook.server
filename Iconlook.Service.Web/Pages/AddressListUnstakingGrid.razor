@@ -97,7 +97,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Remaining" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
+        <GridColumn Width="145" HeaderText="Balance" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -115,11 +115,11 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+        <GridColumn Width="170" HeaderText="Requested (UTC)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                    <span class="mono ls-n2">@address.RequestedDateTime.ToString("dd/MM/yyyy hh:mmtt")</span>
+                    <span class="text-condensed">@address.RequestedDateTime.ToString("dd MMM, yyyy hh:mm tt")</span>
                 }
             </Template>
         </GridColumn>
@@ -127,7 +127,7 @@
             <Template>
                 @if (context is UnstakingAddressResponse address)
                 {
-                    <span class="text-light text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
+                    <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
                 }
             </Template>
         </GridColumn>

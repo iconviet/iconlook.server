@@ -34,7 +34,9 @@ namespace Iconlook.Calculator
 
         public string GetUnstakingCountdown()
         {
-            return TimeSpan.FromSeconds((_unstaked - _height) * 2).Humanize(3, null, TimeUnit.Day).Replace("minute", "min");
+            return TimeSpan
+                .FromSeconds((_unstaked - _height) * 2)
+                .Humanize(3, null, TimeUnit.Day).Replace("minute", "min").Replace("second", "sec");
         }
     }
 }
