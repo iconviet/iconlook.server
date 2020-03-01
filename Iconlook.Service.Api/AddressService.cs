@@ -13,8 +13,11 @@ namespace Iconlook.Service.Api
                 var addresses = redis.As<UnstakingAddressResponse>().GetAll().AsEnumerable();
                 switch (request.Filter)
                 {
-                    case "due_today":
-                        addresses = addresses.OrderBy(x => x.UnstakedBlockHeight);
+                    case null:
+                        addresses = addresses.OrderByDescending(x => x.UnstakedBlockHeight);
+                        break;
+                    case "all":
+                        addresses = addresses.OrderByDescending(x => x.UnstakedBlockHeight);
                         break;
                     case "10000icx":
                         addresses = addresses.Where(x => x.Unstaking >= 10000).OrderByDescending(x => x.UnstakedBlockHeight);

@@ -33,12 +33,12 @@
     <EjsChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="LAST 24H" Value="last_24h"></ChipListChip>
-            <ChipListChip Text="DUE TODAY" Value="due_today"></ChipListChip>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
             <ChipListChip Text="P-REP ONLY" Value="prep_only"></ChipListChip>
             <ChipListChip Text="10,000+ ICX" Value="10000icx"></ChipListChip>
             <ChipListChip Text="100,000+ ICX" Value="100000icx"></ChipListChip>
             <ChipListChip Text="500,000+ ICX" Value="500000icx"></ChipListChip>
+            <ChipListChip Text="1,000,000+ ICX" Value="1000000icx"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
 </div>
@@ -122,14 +122,28 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="185" HeaderText="Unstaked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
-            <Template>
-                @if (context is UnstakingAddressResponse address)
-                {
-                    <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
-                }
-            </Template>
-        </GridColumn>
+        @if (IsMobileDevice)
+        {
+            <GridColumn Width="185" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
+                    }
+                </Template>
+            </GridColumn>
+        }
+        else
+        {
+            <GridColumn Width="185" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
+                    }
+                </Template>
+            </GridColumn>
+        }
         <GridColumn Width="135" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
