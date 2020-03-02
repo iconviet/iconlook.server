@@ -98,18 +98,16 @@ namespace Iconlook.Service.Job
                     })));
                     await db.SaveAllAsync(prep_list.ToList());
                     await db.InsertAllAsync(prep_history_list.ToList());
-                    var prep_history_24_h_list = await db.SelectAsync(db
-                        .From<PRepHistory>()
-                        .GroupBy(x => x.Address)
-                        .Select(x => new
-                        {
-                            x.Address,
-                            Id = Sql.Max(x.Id),
-                            Votes = Sql.Max(x.Votes),
-                            Timestamp = Sql.Max(x.Timestamp)
-                        })
-                        .OrderByDescending(x => x.Timestamp)
-                        .Where(x => x.Timestamp < DateTime.UtcNow.AddHours(-1)));
+                    var prep_history_24_h_list = await db.SelectAsync<PRepHistory>(@"
+                        SELECT *
+                        FROM [PRepHistory] p1
+                        WHERE [Timestamp] =
+                        (
+	                        SELECT MAX([p2].[Timestamp])
+	                        FROM [PRepHistory] p2
+	                        WHERE [p1].[Address] = [p2].[Address] AND
+                                  [p2].[Timestamp] < DATEADD(HOUR, -1, GETUTCDATE())
+                        )");
                     redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
                     {
                         var p = prep_history_24_h_list.SingleOrDefault(x => r.Id == x.Address);
