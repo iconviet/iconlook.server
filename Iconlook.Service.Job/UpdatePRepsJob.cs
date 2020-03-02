@@ -27,12 +27,12 @@ namespace Iconlook.Service.Job
                 Log.Information("{Job} started", nameof(UpdatePRepsJob));
                 try
                 {
-                    var prep_objs = new List<PRep>();
+                    var prep_list = new List<PRep>();
                     var json = new JsonHttpClient(60);
                     var icon = new IconServiceClient();
                     var prep_rpcs = await icon.GetPReps();
                     var prep_info = await icon.GetPRepInfo();
-                    var prep_history_objs = new List<PRepHistory>();
+                    var prep_history_list = new List<PRepHistory>();
                     await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                     {
                         try
@@ -54,7 +54,7 @@ namespace Iconlook.Service.Job
                                     Log.Warning("{Name} : Failed to load details.", prep.GetName());
                                 }
                             }
-                            prep_objs.Add(new PRep
+                            prep_list.Add(new PRep
                             {
                                 Ranking = ranking,
                                 LogoUrl = logo_url,
@@ -84,7 +84,7 @@ namespace Iconlook.Service.Job
                                 ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                             }.ThenDo(x =>
                             {
-                                prep_history_objs.Add(new PRepHistory
+                                prep_history_list.Add(new PRepHistory
                                 {
                                     Address = x.Id,
                                     Votes = x.Votes
@@ -96,19 +96,19 @@ namespace Iconlook.Service.Job
                             Log.Warning("{Name} : Failed to load information.", prep.GetName());
                         }
                     })));
-                    await db.SaveAllAsync(prep_objs.ToList());
-                    await db.SaveAllAsync(prep_history_objs.ToList());
-                    redis.StoreAll(prep_objs.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
+                    await db.SaveAllAsync(prep_list.ToList());
+                    await db.SaveAllAsync(prep_history_list.ToList());
+                    redis.StoreAll(prep_list.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
                     {
-                        var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
-                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
-                        if (prep_history != null)
-                        {
-                            response.Votes24HChange = entity.Votes - prep_history.Votes;
-                        }
+                        // var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
+                        //     response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
+                        // if (prep_history != null)
+                        // {
+                        //     response.Votes24HChange = entity.Votes - prep_history.Votes;
+                        // }
                     })));
                     Log.Information("**************************************************");
-                    Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
+                    Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
                     Log.Information("**************************************************");
                 }
                 catch (Exception exception)
