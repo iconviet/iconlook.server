@@ -1,33 +1,19 @@
 ﻿@inject HttpContextAccessor HttpContext
 <style>
-    .online-status {
-        color: #00a1b3;
-    }
+    .online-status { color: #00a1b3; }
 </style>
 <style media="(max-width: 769px)">
-    #governance_grid td.e-rowcell:nth-child(1) {
-        width: 20px;
-    }
+    #governance_grid td.e-rowcell:nth-child(1) { width: 20px; }
 
-    #governance_grid td.e-rowcell:nth-child(2) {
-        width: 30px;
-    }
+    #governance_grid td.e-rowcell:nth-child(2) { width: 30px; }
 
-    #governance_grid td.e-rowcell:nth-child(3) {
-        width: auto;
-    }
+    #governance_grid td.e-rowcell:nth-child(3) { width: auto; }
 
-    #governance_grid td.e-rowcell:nth-child(4) {
-        width: 105px;
-    }
+    #governance_grid td.e-rowcell:nth-child(4) { width: 105px; }
 
-    #governance_grid td.e-rowcell:nth-child(5) {
-        width: 45px;
-    }
+    #governance_grid td.e-rowcell:nth-child(5) { width: 45px; }
 
-    #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle {
-        margin-top: 3px;
-    }
+    #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
 </style>
 <EjsGrid RowHeight="40"
          EnableHover="false"
@@ -110,9 +96,10 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
+
 @code
 {
-    bool IsMobileDevice = false;
+    bool IsMobileDevice;
 
     protected override void OnInitialized()
     {

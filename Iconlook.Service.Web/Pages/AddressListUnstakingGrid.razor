@@ -1,17 +1,11 @@
-﻿@inject HttpContextAccessor HttpContext
-@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+@inject HttpContextAccessor HttpContext
 <style media="(max-width: 769px)">
-    #unstaking_grid td.e-rowcell:nth-child(1) {
-        width: auto;
-    }
+    #unstaking_grid td.e-rowcell:nth-child(1) { width: auto; }
 
-    #unstaking_grid td.e-rowcell:nth-child(2) {
-        width: 150px;
-    }
+    #unstaking_grid td.e-rowcell:nth-child(5) { width: 90px; }
 
-    #unstaking_grid td.e-rowcell:nth-child(5) {
-        width: 90px;
-    }
+    #unstaking_grid td.e-rowcell:nth-child(2) { width: 150px; }
 </style>
 <style>
     .address-name {
@@ -21,13 +15,9 @@
         border: solid 1px #1aaaba;
     }
 
-    .requested_amount .number-part {
-        font-weight: 700;
-    }
+    .requested_amount .number-part { font-weight: 700; }
 
-    .requested_amount .fraction-part {
-        font-weight: 500;
-    }
+    .requested_amount .fraction-part { font-weight: 500; }
 </style>
 <div class="px-2 py-1 border-bottom">
     <EjsChipList Selection="Selection.Single" SelectedChips="0">
@@ -43,14 +33,14 @@
     </EjsChipList>
 </div>
 <EjsGrid @ref="EjsGrid"
-         ID="unstaking_grid"
-         EnableHover="false"
-         AllowPaging="Paging"
-         EnableAltRow="false"
-         AllowSorting="Sorting"
-         AllowSelection="false"
-         TValue="UnstakingAddressResponse"
-         GridLines="GridLine.Horizontal">
+          ID="unstaking_grid"
+          EnableHover="false"
+          AllowPaging="Paging"
+          EnableAltRow="false"
+          AllowSorting="Sorting"
+          AllowSelection="false"
+          TValue="UnstakingAddressResponse"
+          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
@@ -165,16 +155,16 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
+
 @code
 {
-    bool IsMobileDevice = false;
+    bool IsMobileDevice;
 
     EjsGrid<UnstakingAddressResponse> EjsGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-
-        EjsGrid.Query = new Query().AddParams("filter", ((dynamic)args.Data).value);
+        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
     protected override void OnInitialized()

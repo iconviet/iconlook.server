@@ -79,7 +79,7 @@ namespace Iconlook.Service.Job
                         }
                     }
                 }
-                catch (Exception exception) 
+                catch (Exception exception)
                 {
                     if (!(exception is TaskCanceledException))
                     {
