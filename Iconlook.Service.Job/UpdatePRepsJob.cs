@@ -21,9 +21,7 @@ namespace Iconlook.Service.Job
         public override async Task RunAsync()
         {
             using (var time = new Rolex())
-            using (var db1 = Db.Instance())
-            using (var db2 = Db.Instance())
-            using (var db3 = Db.Instance())
+            using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
                 Log.Information("{Job} started", nameof(UpdatePRepsJob));
@@ -95,18 +93,29 @@ namespace Iconlook.Service.Job
                         }
                         catch
                         {
-                            Log.Warning("{Name} : Failed to load information.", prep.GetName());
+                            Log.Warning("{Name} : Failed to load info.", prep.GetName());
                         }
                     })));
-                    await db1.SaveAllAsync(prep_list.ToList());
-                    await db2.InsertAllAsync(prep_history_list.ToList());
-                    redis.StoreAll(prep_list.ConvertAll(entity => entity.ToResponse().ThenDo(async response =>
-                    {
-                        var prep_history = await db3.SingleAsync<PRepHistory>(history =>
-                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddMinutes(-2));
-                        if (prep_history != null)
+                    await db.SaveAllAsync(prep_list.ToList());
+                    await db.InsertAllAsync(prep_history_list.ToList());
+                    var prep_history_24_h_list = await db.SelectAsync(db
+                        .From<PRepHistory>()
+                        .GroupBy(x => x.Address)
+                        .Select(x => new
                         {
-                            response.Votes24HChange = entity.Votes - prep_history.Votes;
+                            x.Address,
+                            Id = Sql.Max(x.Id),
+                            Votes = Sql.Max(x.Votes),
+                            Timestamp = Sql.Max(x.Timestamp)
+                        })
+                        .OrderByDescending(x => x.Timestamp)
+                        .Where(x => x.Timestamp < DateTime.UtcNow.AddMinutes(-5)));
+                    redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
+                    {
+                        var p = prep_history_24_h_list.SingleOrDefault(x => r.Id == x.Address);
+                        if (p != null)
+                        {
+                            r.Votes24HChange = e.Votes - p.Votes;
                         }
                     })));
                     Log.Information("**************************************************");
