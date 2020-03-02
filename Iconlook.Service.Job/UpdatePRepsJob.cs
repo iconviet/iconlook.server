@@ -102,8 +102,8 @@ namespace Iconlook.Service.Job
                     {
                         try
                         {
-                            var prep_history = db.Select<PRepHistory>().FirstOrDefault(history =>
-                                response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddDays(-1));
+                            var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
+                                response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
                             if (prep_history != null)
                             {
                                 response.Votes24HChange = entity.Votes - prep_history.Votes;
