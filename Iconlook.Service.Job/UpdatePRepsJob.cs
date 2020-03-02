@@ -100,18 +100,11 @@ namespace Iconlook.Service.Job
                     await db.SaveAllAsync(prep_history_objs.ToList());
                     redis.StoreAll(prep_objs.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
                     {
-                        try
+                        var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
+                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
+                        if (prep_history != null)
                         {
-                            var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
-                                response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
-                            if (prep_history != null)
-                            {
-                                response.Votes24HChange = entity.Votes - prep_history.Votes;
-                            }
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Error("########## " + exception.Message);
+                            response.Votes24HChange = entity.Votes - prep_history.Votes;
                         }
                     })));
                     Log.Information("**************************************************");
@@ -122,7 +115,7 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                        Log.Error("{Job} failed to run. {Message}. {StackTrace}.", nameof(UpdatePRepsJob), exception.Message, exception.StackTrace);
                     }
                 }
                 Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), time.Elapsed.TotalMilliseconds);
