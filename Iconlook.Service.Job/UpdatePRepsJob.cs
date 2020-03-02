@@ -28,7 +28,7 @@ namespace Iconlook.Service.Job
                 try
                 {
                     var prep_list = new List<PRep>();
-                    var json = new JsonHttpClient(60);
+                    var json = new JsonHttpClient(30);
                     var icon = new IconServiceClient();
                     var prep_rpcs = await icon.GetPReps();
                     var prep_info = await icon.GetPRepInfo();
@@ -109,7 +109,7 @@ namespace Iconlook.Service.Job
                             Timestamp = Sql.Max(x.Timestamp)
                         })
                         .OrderByDescending(x => x.Timestamp)
-                        .Where(x => x.Timestamp < DateTime.UtcNow.AddMinutes(-5)));
+                        .Where(x => x.Timestamp < DateTime.UtcNow.AddHours(-1)));
                     redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
                     {
                         var p = prep_history_24_h_list.SingleOrDefault(x => r.Id == x.Address);
@@ -126,7 +126,7 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}. {StackTrace}.", nameof(UpdatePRepsJob), exception.Message, exception.StackTrace);
+                        Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
                     }
                 }
                 Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), time.Elapsed.TotalMilliseconds);
