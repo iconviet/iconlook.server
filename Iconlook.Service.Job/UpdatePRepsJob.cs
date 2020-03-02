@@ -21,7 +21,9 @@ namespace Iconlook.Service.Job
         public override async Task RunAsync()
         {
             using (var time = new Rolex())
-            using (var db = Db.Instance())
+            using (var db1 = Db.Instance())
+            using (var db2 = Db.Instance())
+            using (var db3 = Db.Instance())
             using (var redis = Redis.Instance())
             {
                 Log.Information("{Job} started", nameof(UpdatePRepsJob));
@@ -96,11 +98,11 @@ namespace Iconlook.Service.Job
                             Log.Warning("{Name} : Failed to load information.", prep.GetName());
                         }
                     })));
-                    await db.SaveAllAsync(prep_list.ToList());
-                    await db.SaveAllAsync(prep_history_list.ToList());
+                    await db1.SaveAllAsync(prep_list.ToList());
+                    await db2.InsertAllAsync(prep_history_list.ToList());
                     redis.StoreAll(prep_list.ConvertAll(entity => entity.ToResponse().ThenDo(async response =>
                     {
-                        var prep_history = await db.SingleAsync<PRepHistory>(history =>
+                        var prep_history = await db3.SingleAsync<PRepHistory>(history =>
                             response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddMinutes(-2));
                         if (prep_history != null)
                         {
