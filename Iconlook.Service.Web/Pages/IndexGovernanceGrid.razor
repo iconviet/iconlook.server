@@ -15,7 +15,7 @@
     }
 
     #governance_grid td.e-rowcell:nth-child(4) {
-        width: 100px;
+        width: 105px;
     }
 
     #governance_grid td.e-rowcell:nth-child(5) {
@@ -65,7 +65,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="103" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
+        <GridColumn Width="105" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.Votes)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -76,19 +76,19 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+        <GridColumn Width="60" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
                         <div style="padding-top: 1px; padding-left: 5px;" class="mono @(prep.Votes24HChange > 0 ? "positive" : "negative")-dark">
-                            @(((decimal)prep.Votes24HChange / 1000).ToString("+0.0;-0.0;0"))K
+                            @((prep.Votes24HChange / 1000).ToString("+0;-0;0"))K
                         </div>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PRepResponse.DelegatedPercentage)">
+        <GridColumn Width="70" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PRepResponse.DelegatedPercentage)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
