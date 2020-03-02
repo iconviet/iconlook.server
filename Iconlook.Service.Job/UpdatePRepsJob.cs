@@ -82,12 +82,14 @@ namespace Iconlook.Service.Job
                                 Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
                                 DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
                                 ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
-                            });
-                            prep_history_objs.Add(new PRepHistory
+                            }.ThenDo(x =>
                             {
-                                Address = prep.GetAddress().ToString(),
-                                Votes = (long) prep.GetDelegated().ToIcxFromLoop()
-                            });
+                                prep_history_objs.Add(new PRepHistory
+                                {
+                                    Address = x.Id,
+                                    Votes = x.Votes
+                                });
+                            }));
                         }
                         catch
                         {
@@ -96,7 +98,15 @@ namespace Iconlook.Service.Job
                     })));
                     await db.SaveAllAsync(prep_objs.ToList());
                     await db.SaveAllAsync(prep_history_objs.ToList());
-                    redis.StoreAll(prep_objs.ConvertAll(x => x.ToResponse()));
+                    redis.StoreAll(prep_objs.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
+                    {
+                        var prep_history = db.Select<PRepHistory>().FirstOrDefault(history =>
+                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddDays(-1));
+                        if (prep_history != null)
+                        {
+                            response.Votes24HChange = entity.Votes - prep_history.Votes;
+                        }
+                    })));
                     Log.Information("**************************************************");
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_objs.Count, time.Elapsed.TotalMilliseconds);
                     Log.Information("**************************************************");

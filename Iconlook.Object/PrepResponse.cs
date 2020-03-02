@@ -7,11 +7,11 @@ namespace Iconlook.Object
     public class PRepResponse : ResponseBase<PRepResponse>
     {
         public string Id { get; set; }
-        public int Votes { get; set; }
-        public int Score { get; set; }
-        public int Voters { get; set; }
+        public long Votes { get; set; }
+        public long Score { get; set; }
+        public long Voters { get; set; }
         public string Name { get; set; }
-        public int Ranking { get; set; }
+        public long Ranking { get; set; }
         public bool Testnet { get; set; }
         public string Goals { get; set; }
         public string Entity { get; set; }
@@ -23,9 +23,10 @@ namespace Iconlook.Object
         public string Regions { get; set; }
         public string Location { get; set; }
         public string Identity { get; set; }
-        public int MissedBlocks { get; set; }
+        public long MissedBlocks { get; set; }
         public string P2PEndpoint { get; set; }
-        public int ProducedBlocks { get; set; }
+        public long ProducedBlocks { get; set; }
+        public long Votes24HChange { get; set; }
         public DateTimeOffset Joined { get; set; }
         public DateTimeOffset LastSeen { get; set; }
         public DateTimeOffset Timestamp { get; set; }

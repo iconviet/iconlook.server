@@ -125,7 +125,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="145" HeaderText="Duration" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+            <GridColumn Width="145" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -136,7 +136,7 @@
         }
         else
         {
-            <GridColumn Width="170" HeaderText="Requested Time (UTC)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="170" HeaderText="Requested (UTC)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -144,7 +144,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="180" HeaderText="Unstaking Duration" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="180" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
