@@ -100,11 +100,18 @@ namespace Iconlook.Service.Job
                     await db.SaveAllAsync(prep_history_objs.ToList());
                     redis.StoreAll(prep_objs.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
                     {
-                        var prep_history = db.Select<PRepHistory>().FirstOrDefault(history =>
-                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddDays(-1));
-                        if (prep_history != null)
+                        try
                         {
-                            response.Votes24HChange = entity.Votes - prep_history.Votes;
+                            var prep_history = db.Select<PRepHistory>().FirstOrDefault(history =>
+                                response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddDays(-1));
+                            if (prep_history != null)
+                            {
+                                response.Votes24HChange = entity.Votes - prep_history.Votes;
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error("########## " + exception.Message);
                         }
                     })));
                     Log.Information("**************************************************");
