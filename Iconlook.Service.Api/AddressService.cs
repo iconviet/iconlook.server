@@ -28,6 +28,9 @@ namespace Iconlook.Service.Api
                     case "500000icx":
                         addresses = addresses.Where(x => x.Unstaking >= 500000).OrderByDescending(x => x.UnstakedBlockHeight);
                         break;
+                    case "1000000icx":
+                        addresses = addresses.Where(x => x.Unstaking >= 1000000).OrderByDescending(x => x.UnstakedBlockHeight);
+                        break;
                     case "prep_only":
                         addresses = addresses.Where(x => x.Class == AddressClass.PRep).OrderByDescending(x => x.UnstakedBlockHeight);
                         break;

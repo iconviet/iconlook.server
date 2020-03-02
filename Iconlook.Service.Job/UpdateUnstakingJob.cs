@@ -48,7 +48,9 @@ namespace Iconlook.Service.Job
                                 UpdateBlockJob.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
                             address.RequestedDateTime = calculator.GetRequestDateTime();
                             address.UnstakingCountdown = calculator.GetUnstakingCountdown();
+                            address.RequestedDateTimeAge = calculator.GetRequestDateTimeAge();
                             address.UnstakingCountdownShort = calculator.GetUnstakingCountdownShort();
+                            address.RequestedDateTimeAgeShort = calculator.GetRequestDateTimeAgeShort();
                             return address;
                         }));
                 }

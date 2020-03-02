@@ -15,10 +15,10 @@
 </style>
 <style>
     .address-name {
-        padding: 5px 10px;
+        padding: 3px 7px;
         border-radius: 3px;
         background-color: #e1fafd;
-        border: solid 0.5px #1aaaba;
+        border: solid 1px #1aaaba;
     }
 
     .requested_amount .number-part {
@@ -114,42 +114,51 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Requested (UTC)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
-            <Template>
-                @if (context is UnstakingAddressResponse address)
-                {
-                    <span class="text-condensed">@address.RequestedDateTime.ToString("dd MMM, yyyy hh:mm tt")</span>
-                }
-            </Template>
-        </GridColumn>
         @if (IsMobileDevice)
         {
-            <GridColumn Width="185" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="145" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
-                        <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
+                        <span class="text-condensed">@address.RequestedDateTimeAgeShort</span>
+                        <span class="text-light text-condensed font-weight-light">ago</span>
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="145" HeaderText="Duration" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-light text-condensed">@address.UnstakingCountdownShort</span>
                     }
                 </Template>
             </GridColumn>
         }
         else
         {
-            <GridColumn Width="185" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="170" HeaderText="Requested Time (UTC)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
-                        <span class="text-condensed">@(!IsMobileDevice ? address.UnstakingCountdown : address.UnstakingCountdownShort)</span>
+                        <span class="text-condensed">@address.RequestedDateTime.ToString("d MMM, yyyy hh:mm tt")</span>
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Width="180" HeaderText="Unstaking Duration" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-light text-condensed">@address.UnstakingCountdown</span>
                     }
                 </Template>
             </GridColumn>
         }
-        <GridColumn Width="135" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="125" HeaderText="Block #" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
                     {
-                        <span class="mono ls-n2">@address.UnstakedBlockHeight.ToString("N0")</span>
+                        <span class="mono ls-n2 text-light">@address.UnstakedBlockHeight.ToString("N0")</span>
                     }
                 }
             </Template>

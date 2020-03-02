@@ -17,6 +17,16 @@ namespace Iconlook.Calculator
             _requested = requested;
         }
 
+        public string GetRequestDateTimeAgeShort()
+        {
+            var duration = DateTime.UtcNow - GetRequestDateTime();
+            if (duration.Days == 0)
+                return duration.Hours == 0
+                    ? $"{duration:%m}m"
+                    : $"{duration:%h}h {duration:%m}m";
+            return $"{duration:%d}d {duration:%h}h {duration:%m}m";
+        }
+
         public DateTime GetRequestDateTime()
         {
             return DateTime.UtcNow.AddSeconds((_requested - _height) * 2);
@@ -34,9 +44,12 @@ namespace Iconlook.Calculator
 
         public string GetUnstakingCountdown()
         {
-            return TimeSpan
-                .FromSeconds((_unstaked - _height) * 2)
-                .Humanize(3, null, TimeUnit.Day).Replace("minute", "min").Replace("second", "sec");
+            return TimeSpan.FromSeconds((_unstaked - _height) * 2).Humanize(3, null, TimeUnit.Day, TimeUnit.Minute).Replace("minute", "min");
+        }
+
+        public string GetRequestDateTimeAge()
+        {
+            return $"{(DateTime.UtcNow - GetRequestDateTime()).Humanize(3, null, TimeUnit.Day, TimeUnit.Minute).Replace("minute", "min")} ago";
         }
     }
 }
