@@ -29,7 +29,7 @@
     }
 
     #production_grid td.e-rowcell:nth-child(2) {
-        width: 40px;
+        width: 30px;
     }
 
     #production_grid td.e-rowcell:nth-child(3) {
@@ -104,7 +104,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="110" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PeerResponse.ProducedBlocks)">
+        <GridColumn Width="110" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -122,7 +122,7 @@
                 @{
                     if (context is PeerResponse peer)
                     {
-                        <span class="mono fs-n1 ls-n1 font-weight-semibold">@peer.ProductivityPercentage.ToString("P2")</span>
+                        <span class="mono fs-n1 ls-n1 positive-dark font-weight-semibold">@peer.ProductivityPercentage.ToString("P2")</span>
                     }
                 }
             </Template>

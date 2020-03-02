@@ -1,5 +1,8 @@
-﻿<style>
-    .online-status { color: #00a1b3; }
+﻿@inject HttpContextAccessor HttpContext
+<style>
+    .online-status {
+        color: #00a1b3;
+    }
 </style>
 <style media="(max-width: 769px)">
     #governance_grid td.e-rowcell:nth-child(1) {
@@ -7,7 +10,7 @@
     }
 
     #governance_grid td.e-rowcell:nth-child(2) {
-        width: 40px;
+        width: 30px;
     }
 
     #governance_grid td.e-rowcell:nth-child(3) {
@@ -81,9 +84,16 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <div style="padding-top: 1px; padding-left: 5px;" class="mono @(prep.Votes24HChange > 0 ? "positive" : "negative")-dark">
-                            @((prep.Votes24HChange / 1000).ToString("+0;-0;0"))K
-                        </div>
+                        if (Math.Abs(prep.Votes24HChange) < 1000)
+                        {
+                            <div style="padding-top: 1px; padding-left: 5px;" class="mono text-light">0K</div>
+                        }
+                        else
+                        {
+                            <div style="padding-top: 1px; padding-left: 5px;" class="mono @(prep.Votes24HChange > 0 ? "positive" : "negative")-dark">
+                                @((prep.Votes24HChange / 1000).ToString("+###,##0;-###,##0"))K
+                            </div>
+                        }
                     }
                 }
             </Template>
@@ -93,10 +103,19 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono text-light font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
+                        <span class="mono font-weight-semibold">@prep.DelegatedPercentage.ToString("P2")</span>
                     }
                 }
             </Template>
         </GridColumn>
     </GridColumns>
 </EjsGrid>
+@code
+{
+    bool IsMobileDevice = false;
+
+    protected override void OnInitialized()
+    {
+        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}
