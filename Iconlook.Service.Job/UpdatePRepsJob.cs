@@ -98,14 +98,14 @@ namespace Iconlook.Service.Job
                     })));
                     await db.SaveAllAsync(prep_list.ToList());
                     await db.SaveAllAsync(prep_history_list.ToList());
-                    redis.StoreAll(prep_list.ConvertAll(entity => entity.ToResponse().ThenDo(response =>
+                    redis.StoreAll(prep_list.ConvertAll(entity => entity.ToResponse().ThenDo(async response =>
                     {
-                        // var prep_history = db.Select<PRepHistory>().FirstOrDefault(history => // TODO: optimize this query
-                        //     response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddHours(-24));
-                        // if (prep_history != null)
-                        // {
-                        //     response.Votes24HChange = entity.Votes - prep_history.Votes;
-                        // }
+                        var prep_history = await db.SingleAsync<PRepHistory>(history =>
+                            response.Id == history.Address && history.Timestamp < DateTime.UtcNow.AddMinutes(-2));
+                        if (prep_history != null)
+                        {
+                            response.Votes24HChange = entity.Votes - prep_history.Votes;
+                        }
                     })));
                     Log.Information("**************************************************");
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
