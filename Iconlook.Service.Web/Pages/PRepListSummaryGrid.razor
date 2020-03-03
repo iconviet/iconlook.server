@@ -66,7 +66,29 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="80" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
+                            <span class="fs-n1 mono @(prep.Ranking <= 22 ? "font-weight-semibolder" : null)">@prep.DelegatedPercentage.ToString("P2")</span>
+                        </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="50" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono">@prep.Voters.ToString("N0")</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="135" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <HeaderTemplate>
                 <div class="pl-2">Vote Count</div>
             </HeaderTemplate>
@@ -80,84 +102,89 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right" Format="N0">
+        <GridColumn Width="105" HeaderText="24h Change" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono">@prep.Voters.ToString("N0")</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1 mono @(prep.Ranking <= 22 ? "font-weight-semibolder" : null)">@prep.DelegatedPercentage.ToString("P2")</span>
-                        </div>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="90" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
-            <HeaderTemplate>
-                <i class="far pr-2 fa-cube positive-dark"></i> Produded
-            </HeaderTemplate>
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="60" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
-            <HeaderTemplate>
-                <i class="far pr-2 fa-cube negative-dark"></i> Missed
-            </HeaderTemplate>
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <span class="mono text-light">@prep.MissedBlocks.ToString("N0")</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <span class="mono">99.95%</span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="70" HeaderText="% 24h" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.ProductivityPercentage)">
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        if (prep.ProductivityPercentage > 0)
+                        if (Math.Abs(prep.Votes24HChange) < 1000)
                         {
-                            <span class="mono positive-dark">@prep.ProductivityPercentage.ToString("P")</span>
+                            <span class="mono text-light">-</span>
                         }
-                        if (prep.ProductivityPercentage < 0)
+                        else
                         {
-                            <span class="mono negative-dark">@prep.ProductivityPercentage.ToString("P")</span>
+                            var direction = prep.Votes24HChange > 0 ? "up" : "down";
+                            var color = prep.Votes24HChange > 0 ? "positive" : "negative";
+                            <div style="padding-top: 1px; padding-left: 5px;">
+                                <span class="fal @color-dark fa-caret-@direction" style="opacity: 0.75;"></span>
+                                <span class="mono @color-dark">@Math.Abs(prep.Votes24HChange).ToString("N0")</span>
+                                <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
+                            </div>
                         }
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" Field="@nameof(PRepResponse.Balance)" TextAlign="TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
-                <span>Balance</span>
+                <i class="far pr-2 fa-cube positive-dark"></i>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.ProducedBlocks == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2">@prep.ProducedBlocks.ToString("N0")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="65" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
+            <HeaderTemplate>
+                <i class="far pr-2 fa-cube negative-dark"></i>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.MissedBlocks == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono text-light">@prep.MissedBlocks.ToString("N0")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="105" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.ProductivityPercentage == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono">@prep.ProductivityPercentage.ToString("P")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="115" Field="@nameof(PRepResponse.Balance)" TextAlign="TextAlign.Right">
+            <HeaderTemplate>
+                <span>Monthly Reward</span>
             </HeaderTemplate>
             <Template>
                 @{
