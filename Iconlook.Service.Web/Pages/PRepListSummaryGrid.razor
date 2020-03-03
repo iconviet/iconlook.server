@@ -23,6 +23,17 @@
 
     .fa-star-half-alt:not(:last-child) { margin-right: 4px; }
 </style>
+<div class="px-2 py-1 border-bottom">
+    <EjsChipList Selection="Selection.Single" SelectedChips="0">
+        <ChipCollection>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
+            <ChipListChip Text="MAIN P-REP" Value="main_prep"></ChipListChip>
+            <ChipListChip Text="SUB P-PREP" Value="sub_prep"></ChipListChip>
+            <ChipListChip Text="CANDIDATE" Value="candidate"></ChipListChip>
+            <ChipListChip Text="DISQUALIFIED" Value="disqualified"></ChipListChip>
+        </ChipCollection>
+    </EjsChipList>
+</div>
 <EjsGrid EnableHover="true"
          EnableAltRow="true"
          TValue="PRepResponse"
