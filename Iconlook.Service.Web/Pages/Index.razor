@@ -10,13 +10,21 @@
         color: #666666;
     }
 
-    .e-tab { background-color: white; }
+    .e-tab {
+        background-color: white;
+    }
 
-    .main.card .e-grid { height: 880px; }
+    .main.card .e-grid {
+        height: 880px;
+    }
 
-    .main.card { height: 932px !important; }
+    .main.card {
+        height: 932px !important;
+    }
 
-    .e-grid .e-gridheader { display: none; }
+    .e-grid .e-gridheader {
+        display: none;
+    }
 
     .submit-button {
         font-weight: bold;
@@ -32,30 +40,44 @@
         background-color: white !important;
     }
 
-    .search-filter.e-dropdown-popup .e-item {
-        padding: 0 25px;
-        font-size: 13px;
+        .search-filter.e-dropdown-popup .e-item {
+            padding: 0 25px;
+            font-size: 13px;
+        }
+
+            .search-filter.e-dropdown-popup .e-item:hover {
+                color: #1aaaba;
+                background: none;
+            }
+
+    button.submit-button:hover, button.search-filter:hover {
+        color: #1aaaba !important;
     }
 
-    .search-filter.e-dropdown-popup .e-item:hover {
-        color: #1aaaba;
-        background: none;
+    button.submit-button.e-active, button.search-filter.e-active {
+        color: #1aaaba !important;
     }
 
-    button.submit-button:hover, button.search-filter:hover { color: #1aaaba !important; }
+    .submit-input .e-input-group::after, .submit-input .e-input-group::before {
+        background: none !important;
+    }
 
-    button.submit-button.e-active, button.search-filter.e-active { color: #1aaaba !important; }
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+        padding: 5px 7px 0 7px !important;
+    }
 
-    .submit-input .e-input-group::after, .submit-input .e-input-group::before { background: none !important; }
-
-    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 5px 7px 0 7px !important; }
-
-    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap { border-color: transparent !important; }
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap {
+        border-color: transparent !important;
+    }
 </style>
 <style media="(max-width: 769px)">
-    .submit-button { margin: -2px 5px 0 0 !important }
+    .submit-button {
+        margin: -2px 5px 0 0 !important
+    }
 
-    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 8px 7px 0 0 !important; }
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+        padding: 8px 7px 0 0 !important;
+    }
 </style>
 <div class="card px-3 py-3 mb-3 rounded gradient shadow-sm border-0 d-lg-none d-md-block">
     <div class="row no-gutters align-items-center" style="border-radius: 3px; background-color: white;">
@@ -166,6 +188,7 @@
         </div>
     </div>
 </div>
+<!--
 <div class="row">
     <div class="col-xl mb-3 d-none mr-xl-n4 d-md-block">
         <div class="px-3 py-3 card rounded shadow-sm">
@@ -200,6 +223,7 @@
         </div>
     </div>
 </div>
+-->
 <div class="row">
     <div class="col-md mb-3 mr-md-n3">
         <div class="card shadow-sm border-bottom-0">
@@ -234,7 +258,7 @@
     <div class="col-sm mb-3 mr-sm-n3">
         <div class="main card mb-3 shadow-sm">
             <EjsTab Animation="Animation">
-                <TabEvents Selecting="Select"/>
+                <TabEvents Selecting="Select" />
                 <TabItems>
                     <TabItem Header="Governance">
                         <ContentTemplate>
@@ -260,7 +284,7 @@
     <div class="col-sm mb-3">
         <div class="main card mb-3 shadow-sm">
             <EjsTab Animation="Animation">
-                <TabEvents Selecting="Select"/>
+                <TabEvents Selecting="Select" />
                 <TabItems>
                     <TabItem Header="Blocks">
                         <ContentTemplate>

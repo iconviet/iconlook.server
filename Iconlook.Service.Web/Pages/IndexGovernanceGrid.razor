@@ -11,7 +11,7 @@
 
     #governance_grid td.e-rowcell:nth-child(4) { width: 105px; }
 
-    #governance_grid td.e-rowcell:nth-child(5) { width: 45px; }
+    #governance_grid td.e-rowcell:nth-child(5) { width: 50px; }
 
     #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
 </style>
@@ -76,8 +76,11 @@
                         }
                         else
                         {
-                            <div style="padding-top: 1px; padding-left: 5px;" class="mono @(prep.Votes24HChange > 0 ? "positive" : "negative")-dark">
-                                @((prep.Votes24HChange / 1000).ToString("+###,##0;-###,##0"))K
+                            var direction = prep.Votes24HChange > 0 ? "up" : "down";
+                            var color = prep.Votes24HChange > 0 ? "positive" : "negative";
+                            <div style="padding-top: 1px; padding-left: 5px;">
+                                <span class="fal @color-dark fa-caret-@direction" style="opacity: 0.75;"></span>
+                                <span class="mono @color-dark">@((Math.Abs(prep.Votes24HChange) / 1000).ToString("###,##0"))K</span>
                             </div>
                         }
                     }
