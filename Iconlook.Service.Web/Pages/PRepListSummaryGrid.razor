@@ -4,7 +4,19 @@
         color: #ffdc85;
     }
 
-    .online-status { color: #00a1b3; }
+    .online-status {
+        color: #00a1b3;
+    }
+
+    .sub-prep {
+        color: black;
+        background-color: #ffc107;
+    }
+
+    .main-prep {
+        color: white;
+        background-color: #1aaaba;
+    }
 
     .fa-star:not(:last-child),
     .fas.fa-star, .fas.fa-star-half-alt { color: #eebf4a; }
@@ -59,8 +71,8 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking <= 22 ? "bg-primary" : "bg-secondary")" style="width: 45px; border-radius: 4px;">
-                            <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : "SUB")</span>
+                        <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking > 22 ? "sub-prep" : "main-prep")" style="width: 45px; border-radius: 4px;">
+                            <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking > 22 ? "SUB" : "MAIN")</span>
                         </div>
                     }
                 }
