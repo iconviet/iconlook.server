@@ -102,7 +102,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" HeaderText="24h Change" TextAlign="TextAlign.Right">
+        <GridColumn Width="80" HeaderText="24h Change" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -115,17 +115,16 @@
                         {
                             var direction = prep.Votes24HChange > 0 ? "up" : "down";
                             var color = prep.Votes24HChange > 0 ? "positive" : "negative";
-                            <div style="padding-top: 1px; padding-left: 5px;">
-                                <span class="fal @color-dark fa-caret-@direction" style="opacity: 0.75;"></span>
+                            <div style="padding-top: 1px;">
+                                <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
                                 <span class="mono @color-dark">@Math.Abs(prep.Votes24HChange).ToString("N0")</span>
-                                <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
                             </div>
                         }
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="115" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
+        <GridColumn Width="130" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube positive-dark"></i>
             </HeaderTemplate>
@@ -145,7 +144,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="65" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
             <HeaderTemplate>
                 <i class="far pr-2 fa-cube negative-dark"></i>
             </HeaderTemplate>
@@ -165,7 +164,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="105" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
+        <GridColumn Width="110" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)

@@ -3,6 +3,8 @@
     .online-status { color: #00a1b3; }
 </style>
 <style media="(max-width: 769px)">
+    .prep_votes24h_change { margin-top: 3px !important; }
+    
     #governance_grid td.e-rowcell:nth-child(1) { width: 20px; }
 
     #governance_grid td.e-rowcell:nth-child(2) { width: 30px; }
@@ -11,7 +13,7 @@
 
     #governance_grid td.e-rowcell:nth-child(4) { width: 105px; }
 
-    #governance_grid td.e-rowcell:nth-child(5) { width: 50px; }
+    #governance_grid td.e-rowcell:nth-child(5) { width: 48px; }
 
     #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
 </style>
@@ -78,8 +80,8 @@
                         {
                             var direction = prep.Votes24HChange > 0 ? "up" : "down";
                             var color = prep.Votes24HChange > 0 ? "positive" : "negative";
-                            <div style="padding-top: 1px; padding-left: 5px;">
-                                <span class="fal @color-dark fa-caret-@direction" style="opacity: 0.75;"></span>
+                            <div class="prep_votes24h_change" style="margin-top: 1px;">
+                                <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
                                 <span class="mono @color-dark">@((Math.Abs(prep.Votes24HChange) / 1000).ToString("###,##0"))K</span>
                             </div>
                         }
