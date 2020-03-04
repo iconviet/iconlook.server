@@ -106,7 +106,7 @@ namespace Iconlook.Service.Job
 	                        SELECT MAX([p2].[Timestamp])
 	                        FROM [PRepHistory] p2
 	                        WHERE [p1].[Address] = [p2].[Address] AND
-                                  [p2].[Timestamp] < DATEADD(HOUR, -12, GETUTCDATE())
+                                  [p2].[Timestamp] < DATEADD(HOUR, -24, GETUTCDATE())
                         )");
                     redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
                     {
