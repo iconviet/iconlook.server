@@ -89,7 +89,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="75" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+        <GridColumn Width="70" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -101,18 +101,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="55" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
-            <Template>
-                @{
-                    if (context is PRepResponse prep)
-                    {
-                        <span class="mono">@prep.Voters.ToString("N0")</span>
-                        <span><i class="fal fs-n3 fa-user text-light"></i></span>
-                    }
-                }
-            </Template>
-        </GridColumn>
-        <GridColumn Width="135" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+        <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
             <HeaderTemplate>
                 <div class="pl-2">Vote Count</div>
             </HeaderTemplate>
@@ -126,7 +115,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" HeaderText="24h Chg" TextAlign="TextAlign.Right">
+        <GridColumn Width="45" HeaderText="24h" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -141,9 +130,20 @@
                             var color = prep.Votes24HChange > 0 ? "positive" : "negative";
                             <div style="padding-top: 1px;">
                                 <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
-                                <span class="mono @color-dark">@Math.Abs(prep.Votes24HChange).ToString("N0")</span>
+                                <span class="mono @color-dark">@((Math.Abs(prep.Votes24HChange) / 1000).ToString("###,##0"))K</span>
                             </div>
                         }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="80" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono">@prep.Voters.ToString("N0")</span>
+                        <span><i class="fal fs-n3 fa-user text-light"></i></span>
                     }
                 }
             </Template>
