@@ -2,9 +2,9 @@
 @page "/preps/{size:int}"
 @page "/preps/edit/{key}"
 <style type="text/css">
-    .e-grid { min-height: 700px; }
-
-    .main.card { min-height: 740px; }
+    .main.card .e-grid .e-content {
+        min-height: 924px;
+    }
 
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
@@ -105,58 +105,60 @@
 -->
 <div class="row mb-5">
     <div class="col">
-        <EjsTab Animation="Animation" CssClass="main card shadow-sm">
-            <TabEvents Selecting="Select" />
-            <TabItems>
-                <TabItem Header="Summary">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListSummaryGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListSummaryGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="Background">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListBackgroundGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListBackgroundGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="Capability">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListCapabilityGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListCapabilityGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="Transparency">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListTransparencyGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListTransparencyGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="Contribution" Disabled="true">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListContributionGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="ScoreMatrix" Disabled="true">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <PRepListScoreMatrixGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListScoreMatrixGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-            </TabItems>
-        </EjsTab>
+        <div class="main card shadow-sm" style="min-height: 1107px;">
+            <EjsTab Animation="Animation">
+                <TabEvents Selecting="Select" />
+                <TabItems>
+                    <TabItem Header="Summary">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListSummaryGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListSummaryGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Background">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListBackgroundGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListBackgroundGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Capability">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListCapabilityGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListCapabilityGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Transparency">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListTransparencyGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListTransparencyGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Contribution" Disabled="true">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListContributionGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="ScoreMatrix" Disabled="true">
+                        <ContentTemplate>
+                            <div class="card-body p-0" style="min-height: 700px;">
+                                <PRepListScoreMatrixGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListScoreMatrixGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                </TabItems>
+            </EjsTab>
+        </div>
         <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
             <a class="primary">FILTER</a>
         </div>
+        </div>
     </div>
-</div>
 
 @code {
 

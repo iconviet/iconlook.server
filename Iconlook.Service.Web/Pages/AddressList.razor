@@ -1,8 +1,8 @@
 ﻿@page "/address/list"
 <style type="text/css">
-    .e-grid { min-height: 700px; }
-
-    .main.card { min-height: 740px; }
+    .main.card .e-grid .e-content {
+        min-height: 791px;
+    }
 
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
@@ -95,20 +95,22 @@
 -->
 <div class="row mb-5">
     <div class="col">
-        <EjsTab Animation="Animation" CssClass="main card shadow-sm">
-            <TabEvents Selecting="Select"/>
-            <TabItems>
-                <TabItem Header="Unstaking">
-                    <ContentTemplate>
-                        <div class="card-body p-0" style="min-height: 700px;">
-                            <AddressListUnstakingGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></AddressListUnstakingGrid>
-                        </div>
-                    </ContentTemplate>
-                </TabItem>
-                <TabItem Header="Undelegated">
-                </TabItem>
-            </TabItems>
-        </EjsTab>
+        <div class="main card shadow-sm" style="min-height: 974px;">
+            <EjsTab Animation="Animation">
+                <TabEvents Selecting="Select" />
+                <TabItems>
+                    <TabItem Header="Unstaking">
+                        <ContentTemplate>
+                            <div class="card-body p-0">
+                                <AddressListUnstakingGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></AddressListUnstakingGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Undelegated">
+                    </TabItem>
+                </TabItems>
+            </EjsTab>
+        </div>
     </div>
 </div>
 

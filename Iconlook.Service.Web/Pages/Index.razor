@@ -1,5 +1,17 @@
 ﻿@page "/"
 <style type="text/css">
+    .main.card .e-grid {
+        min-height: 880px;
+    }
+
+    .e-grid .e-gridheader {
+        display: none;
+    }
+
+    .e-tab {
+        background-color: white;
+    }
+
     .e-grid .e-rowcell {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -8,22 +20,6 @@
     .search-filter.e-dropdown-popup {
         padding: 0;
         color: #666666;
-    }
-
-    .e-tab {
-        background-color: white;
-    }
-
-    .main.card .e-grid {
-        height: 880px;
-    }
-
-    .main.card {
-        height: 932px !important;
-    }
-
-    .e-grid .e-gridheader {
-        display: none;
     }
 
     .submit-button {
@@ -40,15 +36,15 @@
         background-color: white !important;
     }
 
-        .search-filter.e-dropdown-popup .e-item {
-            padding: 0 25px;
-            font-size: 13px;
-        }
+    .search-filter.e-dropdown-popup .e-item {
+        padding: 0 25px;
+        font-size: 13px;
+    }
 
-            .search-filter.e-dropdown-popup .e-item:hover {
-                color: #1aaaba;
-                background: none;
-            }
+    .search-filter.e-dropdown-popup .e-item:hover {
+        color: #1aaaba;
+        background: none;
+    }
 
     button.submit-button:hover, button.search-filter:hover {
         color: #1aaaba !important;
@@ -256,7 +252,7 @@
 </div>
 <div class="row">
     <div class="col-sm mb-3 mr-sm-n3">
-        <div class="main card mb-3 shadow-sm">
+        <div class="main card mb-3 shadow-sm" style="min-height: 932px;">
             <EjsTab Animation="Animation">
                 <TabEvents Selecting="Select" />
                 <TabItems>
