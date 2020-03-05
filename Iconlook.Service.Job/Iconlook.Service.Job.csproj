@@ -18,7 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.21" />
-    <PackageReference Include="Twilio" Version="5.37.5" />
+    <PackageReference Include="Twilio" Version="5.37.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Client\Iconlook.Client.csproj" />

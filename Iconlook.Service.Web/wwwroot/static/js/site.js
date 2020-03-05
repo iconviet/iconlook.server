@@ -96,16 +96,17 @@
                                     peer_state_span.text("BUSY");
                                     peer_name.addClass("font-weight-bold");
                                     peer_state.addClass("peer-state-busy");
+                                    peer_produced_blocks.addClass("font-weight-semibold");
                                     peer_state.closest("tr").hide().fadeIn(500);
                                 }
 
                                 $(".peer-state span").not(peer_state_span).text("IDLE");
                                 $(".peer-name").not(peer_name).removeClass("font-weight-bold");
                                 $(".peer-state").not(peer_state).removeClass("peer-state-busy");
+                                $(".peer-produced-blocks").not(peer_produced_blocks).removeClass("font-weight-semibold");
 
                                 peer_produced_blocks.attr("number", parseInt(peer_produced_blocks.attr("number")) + 1);
-                                peer_produced_blocks.text(
-                                    parseInt(peer_produced_blocks.attr("number")).toLocaleString());
+                                peer_produced_blocks.text(parseInt(peer_produced_blocks.attr("number")).toLocaleString());
                             });
                         }
                     }));

@@ -3,8 +3,10 @@
     .online-status { color: #00a1b3; }
 </style>
 <style media="(max-width: 769px)">
+    .prep_votes { font-weight: 300 !important; }
+
     .prep_votes24h_change { margin-top: 3px !important; }
-    
+        
     #governance_grid td.e-rowcell:nth-child(1) { width: 20px; }
 
     #governance_grid td.e-rowcell:nth-child(2) { width: 30px; }
@@ -50,7 +52,7 @@
                     {
                         <div class="d-flex align-items-center" style="margin-top: 1px;">
                             <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" src="@StringHelpers.ParseLogoUrl(prep.LogoUrl)">
-                            <a class="secondary" href="https://tracker.icon.foundation/address/@prep.Id">@prep.Name</a>
+                            <a class="prep_name secondary" href="https://tracker.icon.foundation/address/@prep.Id">@prep.Name</a>
                         </div>
                     }
                 }
@@ -61,7 +63,7 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
+                        <span class="mono ls-n2 prep_votes">@prep.Votes.ToString("N0")</span>
                         <span style="margin-left: 1px;" class="fs-n2 text-light font-weight-light">votes</span>
                     }
                 }

@@ -24,6 +24,13 @@
     .online-status { color: #00a1b3; }
 </style>
 <style media="(max-width: 769px)">
+    .peer-produced-blocks {
+        font-size: 12px;
+        font-weight: 300 !important;
+    }
+    
+    .peer-state span { margin-top: 0px !important; }
+
     #production_grid td.e-rowcell:nth-child(1) { width: 20px; }
 
     #production_grid td.e-rowcell:nth-child(2) { width: 30px; }
@@ -97,8 +104,9 @@
                 @{
                     if (context is PeerResponse peer)
                     {
+                        var font_weight = peer.State == "BlockGenerate" ? "font-weight-semibold" : null;
                         <div class="text-light">
-                            <span class="mono ls-n2 peer-produced-blocks-@peer.Id" number="@peer.ProducedBlocks">@peer.ProducedBlocks.ToString("N0")</span>
+                            <span class="mono ls-n2 @font_weight peer-produced-blocks peer-produced-blocks-@peer.Id" number="@peer.ProducedBlocks">@peer.ProducedBlocks.ToString("N0")</span>
                             <i class="fal ml-1 fs-n2 fa-cube"></i>
                         </div>
                     }
