@@ -42,14 +42,14 @@ namespace Iconlook.Calculator
             return $"{duration:%d}d {duration:%h}h {duration:%m}m";
         }
 
+        public string GetRequestDateTimeAge()
+        {
+            return $"{(DateTime.UtcNow - GetRequestDateTime()).Humanize(3, null, TimeUnit.Day, TimeUnit.Minute).Replace("minute", "min")}";
+        }
+
         public string GetUnstakingCountdown()
         {
             return TimeSpan.FromSeconds((_unstaked - _height) * 2).Humanize(3, null, TimeUnit.Day, TimeUnit.Minute).Replace("minute", "min");
-        }
-
-        public string GetRequestDateTimeAge()
-        {
-            return $"{(DateTime.UtcNow - GetRequestDateTime()).Humanize(3, null, TimeUnit.Day, TimeUnit.Minute).Replace("minute", "min")} ago";
         }
     }
 }
