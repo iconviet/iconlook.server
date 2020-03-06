@@ -115,7 +115,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="45" HeaderText="24h" TextAlign="TextAlign.Right">
+        <GridColumn Width="50" HeaderText="24h" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -126,11 +126,19 @@
                         }
                         else
                         {
+                            var vote24h = Math.Abs(prep.Votes24HChange);
                             var direction = prep.Votes24HChange > 0 ? "up" : "down";
                             var color = prep.Votes24HChange > 0 ? "positive" : "negative";
                             <div style="padding-top: 1px;">
                                 <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
-                                <span class="mono @color-dark">@((Math.Abs(prep.Votes24HChange) / 1000).ToString("###,##0"))K</span>
+                                @if (vote24h < 1000000)
+                                {
+                                    <span class="mono @color-dark">@($"{(vote24h / 1000).ToString("##0")}K")</span>
+                                }
+                                else
+                                {
+                                    <span class="mono @color-dark font-weight-semibold">@($"{(vote24h / 1000000m).ToString("0.##")}M")</span>
+                                }
                             </div>
                         }
                     }
