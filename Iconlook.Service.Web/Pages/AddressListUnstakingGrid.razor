@@ -139,7 +139,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="180" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="180" HeaderText="Period" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -148,7 +148,7 @@
                 </Template>
             </GridColumn>
         }
-        <GridColumn Width="120" HeaderText="Unstaked Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="120" HeaderText="Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
