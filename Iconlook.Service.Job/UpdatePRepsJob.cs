@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
+using Iconlook.Calculator;
 using Iconlook.Client;
 using Iconlook.Client.Service;
+using Iconlook.Client.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
@@ -28,10 +30,12 @@ namespace Iconlook.Service.Job
                 try
                 {
                     var prep_list = new List<PRep>();
-                    var json = new JsonHttpClient(30);
-                    var icon = new IconServiceClient();
-                    var prep_rpcs = await icon.GetPReps();
-                    var prep_info = await icon.GetPRepInfo();
+                    var http = new JsonHttpClient(30);
+                    var tracker = new IconTrackerClient();
+                    var service = new IconServiceClient();
+                    var prep_rpcs = await service.GetPReps();
+                    var iiss_info = await service.GetIissInfo();
+                    var prep_info = await service.GetPRepInfo();
                     var prep_history_list = new List<PRepHistory>();
                     await Task.WhenAll(prep_rpcs.Select(prep => Task.Run(async () =>
                     {
@@ -39,11 +43,11 @@ namespace Iconlook.Service.Job
                         {
                             string logo_url = null;
                             var ranking = prep_rpcs.IndexOf(prep) + 1;
-                            prep = await icon.GetPRep(prep.GetAddress());
+                            prep = await service.GetPRep(prep.GetAddress());
                             var details = prep.GetDetails();
                             if (details.HasValue())
                             {
-                                var response = await json.GetAsync<string>(details);
+                                var response = await http.GetAsync<string>(details);
                                 if (response.HasValue() && response.StartsWith('{'))
                                 {
                                     var @object = DynamicJson.Deserialize(response);
@@ -54,6 +58,7 @@ namespace Iconlook.Service.Job
                                     Log.Warning("{Name} : Failed to load details.", prep.GetName());
                                 }
                             }
+                            var delegates = await tracker.GetDelegates(prep.GetAddress().ToString());
                             prep_list.Add(new PRep
                             {
                                 Ranking = ranking,
@@ -64,11 +69,11 @@ namespace Iconlook.Service.Job
                                 State = PRepState.Enabled,
                                 LastSeen = DateTime.UtcNow,
                                 Country = prep.GetCountry(),
+                                Voters = delegates.TotalSize,
                                 Size = new Random().Next(1, 10),
                                 Id = prep.GetAddress().ToString(),
                                 P2PEndpoint = prep.GetP2PEndpoint(),
                                 Score = new Random().Next(-100, 100),
-                                Voters = new Random().Next(100, 1000),
                                 Direction = new Random().NextDouble() >= 0.5,
                                 Balance = new Random().Next(100000, 10000000),
                                 ProducedBlocks = (long) prep.GetTotalBlocks(),
@@ -110,11 +115,17 @@ namespace Iconlook.Service.Job
                         )");
                     redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
                     {
+                        var irep = iiss_info.GetIRep().ToIcxFromLoop();
                         var p = prep_history_24_h_list.SingleOrDefault(x => r.Id == x.Address);
                         if (p != null)
                         {
                             r.Votes24HChange = e.Votes - p.Votes;
                         }
+                        var calculator = new PRepRewardCalculator(irep, r.Ranking, r.DelegatedPercentage);
+                        r.DailyReward = (long) calculator.GetDailyReward();
+                        r.YearlyReward = (long) calculator.GetYearlyReward();
+                        r.MonthlyReward = (long) calculator.GetMonthlyReward();
+                        r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainJob.LastIcxPrice;
                     })));
                     Log.Information("**************************************************");
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);

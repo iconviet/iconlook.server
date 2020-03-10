@@ -68,7 +68,7 @@ namespace Iconlook.Client.Service
         {
             var response = await CallAsync(new Call.Builder()
                 .Method("getPReps")
-                .Params(new { endRanking = "100" })
+                .Params(new { endRanking = "200" })
                 .To(new Address("cx0000000000000000000000000000000000000000"))
                 .Build());
             return response.ToObject().GetItem("preps").ToArray().Select(x => new PRepRpc(x.ToObject())).ToList();

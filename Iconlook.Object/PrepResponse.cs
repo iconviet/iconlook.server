@@ -23,12 +23,16 @@ namespace Iconlook.Object
         public string Regions { get; set; }
         public string Location { get; set; }
         public string Identity { get; set; }
+        public long DailyReward { get; set; }
         public long MissedBlocks { get; set; }
+        public long YearlyReward { get; set; }
+        public long MonthlyReward { get; set; }        
         public string P2PEndpoint { get; set; }
         public long ProducedBlocks { get; set; }
         public long Votes24HChange { get; set; }
         public DateTimeOffset Joined { get; set; }
         public DateTimeOffset LastSeen { get; set; }
+        public decimal MonthlyRewardUsd { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public double DelegatedPercentage { get; set; }
         public double ProductivityPercentage { get; set; }

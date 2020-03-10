@@ -55,6 +55,11 @@ namespace Iconlook.Service.Job
                             }));
                             if (peers.Any())
                             {
+                                await Task.Run(() =>
+                                {
+                                    redis.As<PeerResponse>().DeleteAll();
+                                    redis.StoreAll(peers);
+                                }).ConfigureAwait(false);
                                 await Channel.Publish(new PeersUpdatedSignal
                                 {
                                     Idle = peers.Where(x => x.State == "Vote").ToList(),
@@ -62,7 +67,6 @@ namespace Iconlook.Service.Job
                                     Busy = peers.Where(x => x.State == "BlockGenerate").ToList(),
                                     Down = peers.Where(x => x.State == "LeaderComplain").ToList()
                                 }).ConfigureAwait(false);
-                                await Task.Run(() => redis.StoreAll(peers)).ConfigureAwait(false);
                             }
                         }
                     }

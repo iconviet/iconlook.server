@@ -19,7 +19,8 @@ namespace Iconlook.Service.Job
     public class UpdateChainJob : JobBase
     {
         public static long LastBlockHeight;
-
+        public static decimal LastIcxPrice;
+        
         public override async Task RunAsync()
         {
             using (var rolex = new Rolex())
@@ -44,7 +45,7 @@ namespace Iconlook.Service.Job
                             var staking_info = await chainalytic.GetStakingInfo();
                             var chain = new ChainResponse
                             {
-                                IcxPrice = ticker.LastPrice,
+                                IcxPrice = LastIcxPrice = ticker.LastPrice,
                                 IRep = iiss_info.GetIRep().ToIcxFromLoop(),
                                 MarketCap = (long) main_info?.GetMarketCap(),
                                 IcxSupply = (long) total_supply.ToIcxFromLoop(),

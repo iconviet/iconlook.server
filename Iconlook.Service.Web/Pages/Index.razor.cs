@@ -14,9 +14,9 @@ namespace Iconlook.Service.Web.Pages
     {
         protected TabHeader Votes;
         protected TabHeader Blocks;
+        protected TabHeader Funding;
         protected TabHeader Governance;
         protected TabHeader Production;
-        protected TabHeader Transparency;
         protected TabHeader Transactions;
         protected PeerResponse PeerResponse;
         protected ChainResponse ChainResponse;
@@ -46,7 +46,7 @@ namespace Iconlook.Service.Web.Pages
             Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
             Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
             Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
-            Transparency = new TabHeader { Text = "TRANSPARENCY", IconCss = "fal fa-money-check-alt" };
+            Funding = new TabHeader { Text = "FUNDING", IconCss = "fal fa-money-check-alt" };
             Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
             Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
             using (var rolex = new Rolex())

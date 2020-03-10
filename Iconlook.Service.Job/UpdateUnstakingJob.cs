@@ -18,13 +18,13 @@ namespace Iconlook.Service.Job
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                redis.As<UnstakingAddressResponse>().DeleteAll();
                 Log.Information("{Job} started", nameof(UpdateUnstakingJob));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
                     var prep_dictionary = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Address);
+                    redis.As<UnstakingAddressResponse>().DeleteAll();
                     redis.As<UnstakingAddressResponse>().StoreAll(unstaking_info.GetWallets()
                         .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out _))
                         .Select(x =>

@@ -21,17 +21,17 @@ namespace Iconlook.Service.Web.Layouts
                         new MenuItem { Text = "Reward Transparency" }
                     }
                 },
-                new MenuItem
-                {
-                    Text = "VOTERS", IconCss = "fal fa-person-sign", Items = new List<MenuItem>
-                    {
-                        new MenuItem { Text = "Who Should I Vote" },
-                        new MenuItem { Text = "Why Should I Care" },
-                        new MenuItem { Text = "How To Stake With Ledger *" },
-                        new MenuItem { Text = "How To Stake With ICONex *" },
-                        new MenuItem { Text = "How Much Reward Can I Get *" }
-                    }
-                },
+                // new MenuItem
+                // {
+                //     Text = "VOTERS", IconCss = "fal fa-person-sign", Items = new List<MenuItem>
+                //     {
+                //         new MenuItem { Text = "Who Should I Vote" },
+                //         new MenuItem { Text = "Why Should I Care" },
+                //         new MenuItem { Text = "How To Stake With Ledger *" },
+                //         new MenuItem { Text = "How To Stake With ICONex *" },
+                //         new MenuItem { Text = "How Much Reward Can I Get *" }
+                //     }
+                // },
                 new MenuItem
                 {
                     Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
@@ -54,7 +54,7 @@ namespace Iconlook.Service.Web.Layouts
                 },
                 new MenuItem
                 {
-                    Text = "BLOCKCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
+                    Text = "LOOPCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
                     {
                         new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
                         new MenuItem { Text = "Top 10 Addresses *" },
@@ -64,12 +64,22 @@ namespace Iconlook.Service.Web.Layouts
                 },
                 new MenuItem
                 {
-                    Text = "CALCULATOR", IconCss = "fal fa-calculator-alt", Items = new List<MenuItem>
+                    Text = "INTERCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
                     {
-                        new MenuItem { Text = "Staking Reward *" },
-                        new MenuItem { Text = "Representative Reward *" }
+                        new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
+                        new MenuItem { Text = "Top 10 Addresses *" },
+                        new MenuItem { Text = "Wellknown Addresses *" },
+                        new MenuItem { Text = "Suspicious Transactions *" }
                     }
                 },
+                // new MenuItem
+                // {
+                //     Text = "CALCULATOR", IconCss = "fal fa-calculator-alt", Items = new List<MenuItem>
+                //     {
+                //         new MenuItem { Text = "Staking Reward *" },
+                //         new MenuItem { Text = "Representative Reward *" }
+                //     }
+                // },
                 new MenuItem
                 {
                     Text = "LOGIN", Id = "login-menuitem", IconCss = "fal fa-sign-in"

@@ -21,7 +21,12 @@ namespace Iconlook.Client.Tracker
 
         public async Task<PageResponse<List<PRepResponse>>> GetPReps()
         {
-            return await _client.GetAsync<PageResponse<List<PRepResponse>>>("/v3/iiss/prep/list?count=100");
+            return await _client.GetAsync<PageResponse<List<PRepResponse>>>("/v3/iiss/prep/list?count=200");
+        }
+
+        public async Task<DelegateListResponse> GetDelegates(string address, int page = 1, int count = 1)
+        {
+            return await _client.GetAsync<DelegateListResponse>($"/v3/iiss/delegate/list?page={page}&count={count}&prep={address}");
         }
     }
 }

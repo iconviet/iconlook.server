@@ -8,14 +8,19 @@
         color: #00a1b3;
     }
 
+    .main-prep {
+        color: white;
+        background-color: #1aaaba;
+    }
+        
     .sub-prep {
         color: black;
         background-color: #ffc107;
     }
 
-    .main-prep {
-        color: white;
-        background-color: #1aaaba;
+    .candidate {
+        color: #808080;
+        background-color: #e7eaee;
     }
 
     .fa-star:not(:last-child),
@@ -30,6 +35,8 @@
             <ChipListChip Text="MAIN P-REP" Value="main_prep"></ChipListChip>
             <ChipListChip Text="SUB P-PREP" Value="sub_prep"></ChipListChip>
             <ChipListChip Text="CANDIDATE" Value="candidate"></ChipListChip>
+            <ChipListChip Text="CONTROVERSAL" Value="controversal"></ChipListChip>
+            <ChipListChip Text="NON-CONTR" Value="controversal"></ChipListChip>
             <ChipListChip Text="DISQUALIFIED" Value="disqualified"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
@@ -82,8 +89,8 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking > 22 ? "sub-prep" : "main-prep")" style="width: 45px; border-radius: 4px;">
-                            <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking > 22 ? "SUB" : "MAIN")</span>
+                        <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking <= 22 ? "main-prep" : prep.Ranking <= 100 ? "sub-prep" : "candidate")" style="width: 45px; border-radius: 4px;">
+                            <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : prep.Ranking <= 100 ? "SUB": "CAND")</span>
                         </div>
                     }
                 }
@@ -94,9 +101,16 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1 mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
-                        </div>
+                        if (prep.Ranking <= 100)
+                        {
+                            <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
+                                <span class="fs-n1 mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="fs-n1 mono font-weight-bold">-</span>
+                        }
                     }
                 }
             </Template>
@@ -145,13 +159,13 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="80" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
+        <GridColumn Width="85" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
                         <span class="mono">@prep.Voters.ToString("N0")</span>
-                        <span><i class="fal fs-n3 fa-user text-light"></i></span>
+                        <span><i class="fad fs-n3 fa-user text-light"></i></span>
                     }
                 }
             </Template>
@@ -213,15 +227,15 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="115" Field="@nameof(PRepResponse.Balance)" TextAlign="TextAlign.Right">
+        <GridColumn Width="115" Field="@nameof(PRepResponse.MonthlyReward)" TextAlign="TextAlign.Right">
             <HeaderTemplate>
-                <span>Monthly Reward</span>
+                <span>Reward</span>
             </HeaderTemplate>
             <Template>
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.Balance.ToString("N0")</span>
+                        <span class="mono ls-n2">@prep.MonthlyReward.ToString("N0")</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
