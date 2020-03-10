@@ -22,33 +22,34 @@ namespace Iconlook.Service.Api
         public async Task<object> Get(PRepListRequest request)
         {
             using (var db = Db.Instance())
+            using (var redis = Redis.Instance())
             {
                 if (request.Filter.HasValue())
                 {
                     var name = request.Filter
                         .Replace("substringof('", string.Empty)
                         .Replace("',tolower(Name))", string.Empty);
-                    var entities = await db.SelectAsync(db.From<PRep>().Where(x =>
-                        x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
-                    return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
+                    var preps = redis.As<PRepResponse>().GetAll()
+                        .Where(x => x.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                        .Skip(request.Skip).Take(request.Take);
+                    return new ListResponse<PRepResponse>(preps)
                     {
                         Skip = request.Skip,
                         Take = request.Take,
-                        Count = entities.Count
+                        Count = preps.Count()
                     };
                 }
                 if (request.Edit.HasValue() && request.Edit != "all")
                 {
-                    var entities = await db.SelectAsync(
+                    var preps = await db.SelectAsync(
                         db.From<PRep>().Where(x => x.Id == request.Edit));
-                    return new ListResponse<PRepResponse>(entities.ConvertAll(x => x.ToResponse()))
+                    return new ListResponse<PRepResponse>(preps.ConvertAll(x => x.ToResponse()))
                     {
                         Skip = 0,
                         Take = 1,
                         Count = 1
                     };
                 }
-                using (var redis = Redis.Instance())
                 {
                     var preps = redis.As<PRepResponse>().GetAll().OrderBy(x => x.Ranking).ToList();
                     return new ListResponse<PRepResponse>(preps.Skip(request.Skip).Take(request.Take))

@@ -63,7 +63,7 @@ namespace Iconlook.Service.Job
                                 UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
                                 TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                             };
-                            chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxSupply;
+                            chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxCirculation;
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
                             var next_term_calculator = new NextTermCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
                             chain.NextTermLocalTime = next_term_calculator.GetLocalTime();
