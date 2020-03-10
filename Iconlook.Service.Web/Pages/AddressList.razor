@@ -113,8 +113,27 @@
         </div>
     </div>
 </div>
-
 @code {
+    [Parameter]
+    public bool Paging { get; set; }
+
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public bool Sorting { get; set; }
+
+    [Parameter]
+    public string State { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
+
+    protected TabHeader Unstaking;
+    protected TabHeader Undelegated;
+    protected PeerResponse PeerResponse;
+    protected ChainResponse ChainResponse;
+    protected TabAnimationSettings Animation;
 
     public void Select(SelectingEventArgs args)
     {
@@ -124,4 +143,17 @@
         }
     }
 
+    protected override void OnInitialized()
+    {
+        Paging = true;
+        PageSize = 20;
+        PageSizes = new[] { 20, 50, 100, 200, 500 };
+        Unstaking = new TabHeader { Text = "UNSTAKING" };
+        Undelegated = new TabHeader { Text = "UNDELEGATED" };
+        Animation = new TabAnimationSettings
+        {
+            Next = new TabAnimationNext { Duration = 0 },
+            Previous = new TabAnimationPrevious { Duration = 0 }
+        };
+    }
 }

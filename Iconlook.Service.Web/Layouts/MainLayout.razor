@@ -1,7 +1,9 @@
 ﻿@using Iconlook.Server
 @inherits LayoutComponentBase
+@inject HttpContextAccessor HttpContext
 <style>
     footer .list-group-item {
+        color: #ffffff;
         font-size: 12px;
         font-weight: 500;
         padding: 0.3rem 0;
@@ -17,150 +19,219 @@
     footer .list-group-header {
         font-size: 13px;
         font-weight: 600;
+        border-bottom: 1px solid #e7eaf3;
         border-bottom: 1px solid rgba(231, 234, 243, .2);
     }
 </style>
 <div class="body">
-    <header class="d-none d-lg-block">
-        <div class="container">
-            <div class="row no-gutters align-items-center" style="min-height: 48px;">
-                <div class="col col-auto">
-                    <a href="/">
-                        <span class="fs-1 special font-weight-bold">ICONLOOK | Beta</span>
-                    </a>
-                </div>
-                <div class="col d-inline-flex justify-content-end align-items-center">
-                    <img src="static/images/iconviet.png" style="opacity: 0.85; max-width: 112px; margin-top: -4px; margin-right: -40px;"/>
-                    <EjsMenu Items="MenuItems" CssClass="ejs-menu"></EjsMenu>
-                </div>
-                <div class="col col-auto fs-2 pl-3 pb-1">
-                    <i class="fas fa-signal positive-dark"></i>
-                </div>
+<header class="d-none d-lg-block">
+    <div class="container">
+        <div class="row no-gutters align-items-center" style="min-height: 48px;">
+            <div class="col col-auto">
+                <a href="/">
+                    <span class="fs-1 special font-weight-bold">ICONLOOK | Beta</span>
+                </a>
+            </div>
+            <div class="col d-inline-flex justify-content-end align-items-center">
+                <img src="static/images/iconviet.png" style="opacity: 0.85; max-width: 112px; margin-top: -4px; margin-right: -40px;"/>
+                <EjsMenu Items="MenuItems" CssClass="ejs-menu"></EjsMenu>
+            </div>
+            <div class="col col-auto fs-2 pl-3 pb-1">
+                <i class="fas fa-signal positive-dark"></i>
             </div>
         </div>
-    </header>
-    <header class="d-lg-none d-md-block">
-        <div class="container px-0 py-2">
-            <nav class="navbar navbar-light">
-                <div>
-                    <a href="/">
-                        <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;"/>
-                    </a>
-                </div>
-                <button type="button" class="navbar-toggler" style="border: none;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
-                    <span>
-                        <i class="fas fa-bars"></i>
-                    </span>
-                </button>
-                <div id="navbar_content" style="padding: 0 4px;" class="ejs-menu collapse navbar-collapse">
-                    <ul class="navbar-nav" style="padding-top: 13px;">
-                        @{
-                            foreach (var item in MenuItems.Where(x => !string.IsNullOrEmpty(x.Text)))
-                            {
-                                <li class="e-menu-item e-menu-caret-icon">
-                                    <a class="nav-link" href="@item.Url">
-                                        <span style="width: 25px !important;" class="primary e-menu-icon @item.IconCss"></span>
-                                        <span class="fs-n1 font-weight-semibold">@item.Text</span>
-                                    </a>
-                                </li>
-                            }
+    </div>
+</header>
+<header class="d-lg-none d-md-block">
+    <div class="container px-0 py-2">
+        <nav class="navbar navbar-light">
+            <div>
+                <a href="/">
+                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;"/>
+                </a>
+            </div>
+            <button type="button" class="navbar-toggler" style="border: none;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
+                <span>
+                    <i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <div id="navbar_content" style="padding: 0 4px;" class="ejs-menu collapse navbar-collapse">
+                <ul class="navbar-nav" style="padding-top: 13px;">
+                    @{
+                        foreach (var item in MenuItems.Where(x => !string.IsNullOrEmpty(x.Text)))
+                        {
+                            <li class="e-menu-item e-menu-caret-icon">
+                                <a class="nav-link" href="@item.Url">
+                                    <span style="width: 25px !important;" class="primary e-menu-icon @item.IconCss"></span>
+                                    <span class="fs-n1 font-weight-semibold">@item.Text</span>
+                                </a>
+                            </li>
                         }
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <div class="container d-none d-sm-block">
-            <div class="row pt-3 align-items-center" style="min-height: 36px;">
-                <div class="col">
-                    Welcome to <a class="primary" href="https://iconlook.io">iconlook.io</a>. This site is still <strong>work in progress</strong>, new features and bug fixes will be rolled out daily in the coming weeks. Please check <a class="primary" href="/">release notes</a> often for more info.
-                </div>
-                <div class="col col-auto">
-                    <EjsSwitch Checked="true"></EjsSwitch>
-                </div>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="container d-none d-sm-block">
+        <div class="row pt-3 align-items-center" style="min-height: 36px;">
+            <div class="col font-weight-light">
+                Welcome to <a class="primary" href="https://iconlook.io">iconlook.io</a>. This site is still <span class="font-weight-normal">work in progress</span>, new features and bug fixes will be rolled out daily in the coming weeks. Please check <a class="primary" href="/">release notes</a> often for more info.
+            </div>
+            <div class="col col-auto">
+                <EjsSwitch Checked="true"></EjsSwitch>
             </div>
         </div>
-        <div class="container pt-3">
-            @Body
-        </div>
-    </main>
-    <footer class="gradient">
-        <div class="container">
-            <div class="row py-5 text-white justify-content-md-between" style="background: url(/static/images/world-map-white.png) no-repeat 0 30%;">
-                <div class="col-lg-3">
-                    <div class="h-100 d-flex flex-column">
-                        <div class="mb-4 d-flex align-items-center">
-                            <img width="25" src="/static/images/icon.png">
-                            <div class="h6 mb-0 ml-2">Powered by</div>
-                            <div class="h4 mb-0 ml-2">Chainalytic</div>
-                        </div>
-                        <p class="fs-n1">
-                            Iconlook is an Ecosystem Explorer and Analytics Platform for ICON, a first digital nation.
-                        </p>
-                        <p class="fs-n1 mt-1">
-                            <span class="font-weight-bold">Version</span>: @Host.Current.VersionInformation
-                        </p>
+    </div>
+    <div class="container pt-3">
+        @Body
+    </div>
+</main>
+<footer class="gradient">
+    <div class="container">
+        <div class="row py-5 text-white justify-content-md-between" style="background: url(/static/images/world-map-white.png) no-repeat 0 30%;">
+            <div class="col-lg-3">
+                <div class="h-100 d-flex flex-column">
+                    <div class="mb-4 d-flex align-items-center">
+                        <img width="25" src="/static/images/icon.png">
+                        <div class="h6 mb-0 ml-2">Powered by</div>
+                        <div class="h4 mb-0 ml-2">Chainalytic</div>
                     </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="mb-2 pb-2 list-group-header">
-                        About ICONVIET
-                    </div>
-                    <ul class="text-muted list-group list-unstyled list-group-flush">
-                        <li>
-                            <a class="list-group-item" href="/iconviet/who-are-we">Who Are We</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/iconviet/why-vote-for-us">Why Vote For Us</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/iconviet/active-governance">Active Governance</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/iconviet/financial-transparency">Financial Transparency</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="mb-2 pb-2 list-group-header">
-                        Tools & Resources
-                    </div>
-                    <ul class="text-muted list-group list-unstyled list-group-flush">
-                        <li>
-                            <a class="list-group-item" href="/preps">P-Rep Summary</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/">C-Rep Summary</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/">Loopchain Explorer</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="/">Interchain Explorer</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4 col-lg-2 d-none d-md-block">
-                    <div class="mb-2 pb-2 list-group-header">
-                        Contact Information
-                    </div>
-                    <ul class="text-muted list-group list-unstyled list-group-flush">
-                        <li>
-                            <a class="list-group-item" href="mailto:tomnuen@iconviet.io"><i class="fas fa-envelope mr-2"></i>E-mail</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="https://twitter.com/iconviet"><i class="fab fa-twitter mr-2"></i>Twitter</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="https://t.me/iconviet"><i class="fab fa-telegram mr-2"></i>Telegram</a>
-                        </li>
-                        <li>
-                            <a class="list-group-item" href="https://facebook.com/iconviet"><i class="fab fa-facebook mr-2"></i>Facebook</a>
-                        </li>
-                    </ul>
+                    <p class="fs-n1">
+                        Iconlook is an Ecosystem Explorer and Analytics Platform for ICON, a first digital nation.
+                    </p>
+                    <p class="fs-n1 mt-1">
+                        <span class="font-weight-bold">Version</span>: @Host.Current.VersionInformation
+                    </p>
                 </div>
             </div>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="mb-2 pb-2 list-group-header">
+                    About ICONVIET
+                </div>
+                <ul class="text-muted list-group list-unstyled list-group-flush">
+                    <li>
+                        <a class="list-group-item" href="/">Who Are We</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">Why Vote For Us</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">Active Governance</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">Financial Transparency</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="mb-2 pb-2 list-group-header">
+                    Tools & Resources
+                </div>
+                <ul class="text-muted list-group list-unstyled list-group-flush">
+                    <li>
+                        <a class="list-group-item" href="/">P-Rep Summary</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">C-Rep Summary</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">Loopchain Explorer</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="/">Interchain Explorer</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-lg-2 d-none d-md-block">
+                <div class="mb-2 pb-2 list-group-header">
+                    Contact Information
+                </div>
+                <ul class="text-muted list-group list-unstyled list-group-flush">
+                    <li>
+                        <a class="list-group-item" href="mailto:tomnuen@iconviet.io"><i class="fas fa-envelope mr-2"></i>E-mail</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="https://twitter.com/iconviet"><i class="fab fa-twitter mr-2"></i>Twitter</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="https://t.me/iconviet"><i class="fab fa-telegram mr-2"></i>Telegram</a>
+                    </li>
+                    <li>
+                        <a class="list-group-item" href="https://facebook.com/iconviet"><i class="fab fa-facebook mr-2"></i>Facebook</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </footer>
+    </div>
+</footer>
 </div>
+@code
+{
+    protected bool IsMobile;
+
+    protected List<MenuItem> MenuItems;
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+        MenuItems = new List<MenuItem>
+        {
+            new MenuItem
+            {
+                Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "Who Are We" },
+                    new MenuItem { Text = "Why Vote For Us" },
+                    new MenuItem { Text = "Active Governance" },
+                    new MenuItem { Text = "Reward Transparency" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "Ranking", Url = "/preps" },
+                    new MenuItem { Text = "Research" },
+                    new MenuItem { Text = "Contribution" },
+                    new MenuItem { Text = "Transactions *" },
+                    new MenuItem { Text = "Alll Penalties *" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "D-APPS", Url = "/dapps", IconCss = "fal fa-rocket", Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "View Top 10 D-Apps *" },
+                    new MenuItem { Text = "View D-Apps Transactions *" },
+                    new MenuItem { Text = "View Exclusively Top Tokens *" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "LOOPCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
+                    new MenuItem { Text = "Top 10 Addresses *" },
+                    new MenuItem { Text = "Wellknown Addresses *" },
+                    new MenuItem { Text = "Suspicious Transactions *" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "INTERCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
+                    new MenuItem { Text = "Top 10 Addresses *" },
+                    new MenuItem { Text = "Wellknown Addresses *" },
+                    new MenuItem { Text = "Suspicious Transactions *" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "LOGIN", Id = "login-menuitem", IconCss = "fal fa-sign-in"
+            }
+        };
+}
+}

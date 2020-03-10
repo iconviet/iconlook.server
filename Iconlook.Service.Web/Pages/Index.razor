@@ -1,16 +1,10 @@
 ﻿@page "/"
 <style type="text/css">
-    .main.card .e-grid {
-        min-height: 880px;
-    }
+    .main.card .e-grid { min-height: 880px; }
 
-    .e-grid .e-gridheader {
-        display: none;
-    }
+    .e-grid .e-gridheader { display: none; }
 
-    .e-tab {
-        background-color: white;
-    }
+    .e-tab { background-color: white; }
 
     .e-grid .e-rowcell {
         padding-left: 0 !important;
@@ -46,34 +40,20 @@
         background: none;
     }
 
-    button.submit-button:hover, button.search-filter:hover {
-        color: #1aaaba !important;
-    }
+    button.submit-button:hover, button.search-filter:hover { color: #1aaaba !important; }
 
-    button.submit-button.e-active, button.search-filter.e-active {
-        color: #1aaaba !important;
-    }
+    button.submit-button.e-active, button.search-filter.e-active { color: #1aaaba !important; }
 
-    .submit-input .e-input-group::after, .submit-input .e-input-group::before {
-        background: none !important;
-    }
+    .submit-input .e-input-group::after, .submit-input .e-input-group::before { background: none !important; }
 
-    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
-        padding: 5px 7px 0 7px !important;
-    }
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 5px 7px 0 7px !important; }
 
-    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap {
-        border-color: transparent !important;
-    }
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap { border-color: transparent !important; }
 </style>
 <style media="(max-width: 769px)">
-    .submit-button {
-        margin: -2px 5px 0 0 !important
-    }
+    .submit-button { margin: -2px 5px 0 0 !important }
 
-    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
-        padding: 8px 7px 0 0 !important;
-    }
+    input.e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input { padding: 8px 7px 0 0 !important; }
 </style>
 <div class="card px-3 py-3 mb-3 rounded gradient shadow-sm border-0 d-lg-none d-md-block">
     <div class="row no-gutters align-items-center" style="border-radius: 3px; background-color: white;">
@@ -84,7 +64,7 @@
                              SuggestionCount="5"
                              CssClass="submit-input"
                              ShowClearButton="false"
-                             Placeholder="Search P-Rep / D-App / Address / Transaction">
+                             Placeholder="Lookup P-Rep / D-App / Address / Transaction">
                 <AutoCompleteFieldSettings Value="Name"></AutoCompleteFieldSettings>
                 <EjsDataManager Url="/api/v1/preps?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
             </EjsAutoComplete>
@@ -254,7 +234,7 @@
     <div class="col-sm mb-3 mr-sm-n3">
         <div class="main card mb-3 shadow-sm" style="min-height: 932px;">
             <EjsTab Animation="Animation">
-                <TabEvents Selecting="Select" />
+                <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Governance">
                         <ContentTemplate>
@@ -287,7 +267,7 @@
     <div class="col-sm mb-3">
         <div class="main card mb-3 shadow-sm" style="min-height: 932px;">
             <EjsTab Animation="Animation">
-                <TabEvents Selecting="Select" />
+                <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Blocks">
                         <ContentTemplate>
@@ -311,15 +291,52 @@
         </div>
     </div>
 </div>
-
 @code {
+    protected TabHeader Votes;
+    protected TabHeader Blocks;
+    protected TabHeader Funding;
+    protected TabHeader Governance;
+    protected TabHeader Production;
+    protected TabHeader Transactions;
+    protected PeerResponse PeerResponse;
+    protected ChainResponse ChainResponse;
+    protected TabAnimationSettings Animation;
+    protected List<DropDownButtonItem> ToolItems;
+    protected List<DropDownButtonItem> SearchItems;
 
-    public void Select(SelectingEventArgs args)
+    protected void Select(SelectingEventArgs args)
     {
         if (args.IsSwiped)
         {
             args.Cancel = true;
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        Animation = new TabAnimationSettings
+        {
+            Next = new TabAnimationNext { Duration = 0 },
+            Previous = new TabAnimationPrevious { Duration = 0 }
+        };
+        ToolItems = new List<DropDownButtonItem>
+        {
+            new DropDownButtonItem { Text = "ROUND", IconCss = "fal fa-users-class" },
+            new DropDownButtonItem { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
+            new DropDownButtonItem { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
+        };
+        SearchItems = new List<DropDownButtonItem>
+        {
+            new DropDownButtonItem { Text = "P-REP", IconCss = "fal fa-users-class" },
+            new DropDownButtonItem { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
+            new DropDownButtonItem { Text = "TRANSACTION", IconCss = "fal fa-dice" }
+        };
+        Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
+        Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
+        Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
+        Funding = new TabHeader { Text = "FUNDING", IconCss = "fal fa-money-check-alt" };
+        Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
+        Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
     }
 
 }

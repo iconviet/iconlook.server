@@ -1,54 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Agiper;
 using Iconlook.Object;
 using Iconlook.Server;
 using Serilog;
 using ServiceStack.Redis;
-using Syncfusion.EJ2.Blazor.Navigations;
-using Syncfusion.EJ2.Blazor.SplitButtons;
 
 namespace Iconlook.Service.Web.Pages
 {
     public partial class Index
     {
-        protected TabHeader Votes;
-        protected TabHeader Blocks;
-        protected TabHeader Funding;
-        protected TabHeader Governance;
-        protected TabHeader Production;
-        protected TabHeader Transactions;
-        protected PeerResponse PeerResponse;
-        protected ChainResponse ChainResponse;
-        protected TabAnimationSettings Animation;
-        protected List<DropDownButtonItem> ToolItems;
-        protected List<DropDownButtonItem> SearchItems;
-
-        protected override void OnInitialized()
+        protected override Task OnInitializedAsync()
         {
-            Animation = new TabAnimationSettings
-            {
-                Next = new TabAnimationNext { Duration = 0 },
-                Previous = new TabAnimationPrevious { Duration = 0 }
-            };
-            ToolItems = new List<DropDownButtonItem>
-            {
-                new DropDownButtonItem { Text = "ROUND", IconCss = "fal fa-users-class" },
-                new DropDownButtonItem { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
-                new DropDownButtonItem { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
-            };
-            SearchItems = new List<DropDownButtonItem>
-            {
-                new DropDownButtonItem { Text = "P-REP", IconCss = "fal fa-users-class" },
-                new DropDownButtonItem { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
-                new DropDownButtonItem { Text = "TRANSACTION", IconCss = "fal fa-dice" }
-            };
-            Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
-            Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
-            Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
-            Funding = new TabHeader { Text = "FUNDING", IconCss = "fal fa-money-check-alt" };
-            Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
-            Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
             using (var rolex = new Rolex())
             {
                 using (var redis = Host.Current.Resolve<IRedisClient>())
@@ -60,6 +23,7 @@ namespace Iconlook.Service.Web.Pages
                     Log.Information("{Peer} peer data and {Chain} chain data loaded in {Elapsed}ms", peers.Count, chains.Count, rolex.Elapsed.TotalMilliseconds);
                 }
             }
+            return base.OnInitializedAsync();
         }
     }
 }

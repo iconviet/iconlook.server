@@ -114,10 +114,10 @@
 
 @code
 {
-    bool IsMobileDevice;
+    bool IsMobile;
 
     protected override void OnInitialized()
     {
-        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
     }
 }

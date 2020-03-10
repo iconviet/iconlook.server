@@ -108,7 +108,7 @@
                 }
             </Template>
         </GridColumn>
-        @if (IsMobileDevice)
+        @if (IsMobile)
         {
             <GridColumn Width="145" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
@@ -160,12 +160,23 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
-
 @code
 {
-    bool IsMobileDevice;
+    protected bool IsMobile;
 
-    EjsGrid<UnstakingAddressResponse> EjsGrid;
+    [Parameter]
+    public bool Paging { get; set; }
+
+    [Parameter]
+    public bool Sorting { get; set; }
+
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
+
+    protected EjsGrid<UnstakingAddressResponse> EjsGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
@@ -174,6 +185,6 @@
 
     protected override void OnInitialized()
     {
-        IsMobileDevice = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
     }
 }
