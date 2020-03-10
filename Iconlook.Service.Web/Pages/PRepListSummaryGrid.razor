@@ -4,15 +4,13 @@
         color: #ffdc85;
     }
 
-    .online-status {
-        color: #00a1b3;
-    }
+    .online-status { color: #00a1b3; }
 
     .main-prep {
         color: white;
         background-color: #1aaaba;
     }
-        
+
     .sub-prep {
         color: black;
         background-color: #ffc107;
@@ -89,7 +87,7 @@
                 if (context is PRepResponse prep)
                 {
                     <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking <= 22 ? "main-prep" : prep.Ranking <= 100 ? "sub-prep" : "candidate")" style="width: 45px; border-radius: 4px;">
-                        <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : prep.Ranking <= 100 ? "SUB": "CAND")</span>
+                        <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : prep.Ranking <= 100 ? "SUB" : "CAND")</span>
                     </div>
                 }
             }
@@ -164,7 +162,9 @@
                 if (context is PRepResponse prep)
                 {
                     <span class="mono">@prep.Voters.ToString("N0")</span>
-                    <span><i class="fad fs-n3 fa-user text-light"></i></span>
+                    <span>
+                        <i class="fad fs-n3 fa-user text-light"></i>
+                    </span>
                 }
             }
         </Template>
@@ -242,6 +242,7 @@
     </GridColumn>
 </GridColumns>
 </EjsGrid>
+
 @code {
     [Parameter]
     public int PageSize { get; set; }

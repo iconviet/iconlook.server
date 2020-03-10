@@ -20,7 +20,7 @@ namespace Iconlook.Service.Job
     {
         public static long LastBlockHeight;
         public static decimal LastIcxPrice;
-        
+
         public override async Task RunAsync()
         {
             using (var rolex = new Rolex())

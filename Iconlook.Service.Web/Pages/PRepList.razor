@@ -107,7 +107,7 @@
     <div class="col">
         <div class="main card shadow-sm" style="min-height: 1107px;">
             <EjsTab Animation="Animation">
-                <TabEvents Selecting="Select" />
+                <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Summary">
                         <ContentTemplate>
@@ -157,8 +157,9 @@
         <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
             <a class="primary">FILTER</a>
         </div>
-        </div>
     </div>
+</div>
+
 @code {
     [Parameter]
     public int Size { get; set; }
@@ -205,4 +206,5 @@
             Previous = new TabAnimationPrevious { Duration = 0 }
         };
     }
+
 }

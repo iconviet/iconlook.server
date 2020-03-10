@@ -26,7 +26,7 @@ namespace Iconlook.Object
         public long DailyReward { get; set; }
         public long MissedBlocks { get; set; }
         public long YearlyReward { get; set; }
-        public long MonthlyReward { get; set; }        
+        public long MonthlyReward { get; set; }
         public string P2PEndpoint { get; set; }
         public long ProducedBlocks { get; set; }
         public long Votes24HChange { get; set; }

@@ -1,12 +1,5 @@
 ﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
 @inject HttpContextAccessor HttpContext
-<style media="(max-width: 769px)">
-    #unstaking_grid td.e-rowcell:nth-child(1) { width: auto; }
-
-    #unstaking_grid td.e-rowcell:nth-child(5) { width: 90px; }
-
-    #unstaking_grid td.e-rowcell:nth-child(2) { width: 150px; }
-</style>
 <style>
     .address-name {
         padding: 3px 7px;
@@ -22,6 +15,19 @@
     .requested_amount .number-part { font-weight: 700; }
 
     .requested_amount .fraction-part { font-weight: 500; }
+</style>
+<style media="(max-width: 769px)">
+    #unstaking_grid td.e-rowcell:nth-child(1) {
+        width: auto;
+    }
+
+    #unstaking_grid td.e-rowcell:nth-child(5) {
+        width: 90px;
+    }
+
+    #unstaking_grid td.e-rowcell:nth-child(2) {
+        width: 150px;
+    }
 </style>
 <div class="px-2 py-1 border-bottom">
     <EjsChipList Selection="Selection.Single" SelectedChips="0">
@@ -160,6 +166,7 @@
         </GridColumn>
     </GridColumns>
 </EjsGrid>
+
 @code
 {
     protected bool IsMobile;

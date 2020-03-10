@@ -13,14 +13,14 @@
     <script async type="text/javascript" src="~/static/js/bundle.min.js?v=@Host.Current.VersionInformation"></script>
 </head>
 <body>
-    <div id="components-reconnect-modal">
-        <div class="d-flex h-100 flex-column text-center justify-content-center">
-            <span class="reconnecting">Server disconnected. Reconnecting...</span>
-            <span class="connection-lost">Server connection lost. Please refresh.</span>
-        </div>
+<div id="components-reconnect-modal">
+    <div class="d-flex h-100 flex-column text-center justify-content-center">
+        <span class="reconnecting">Server disconnected. Reconnecting...</span>
+        <span class="connection-lost">Server connection lost. Please refresh.</span>
     </div>
-    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-    <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
-    <script type="text/javascript">Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); } });</script>
+</div>
+<app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
+<script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
+<script type="text/javascript">Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
 </body>
 </html>
