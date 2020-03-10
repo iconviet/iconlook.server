@@ -4,24 +4,22 @@
 }
 
 <div class="px-1 py-3 flex-fill">
-    <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;•&nbsp;&nbsp;% CIRCULATION</div>
+    <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;•&nbsp;&nbsp;% SUPPLY</div>
     <div>
-        <span class="fs-2 ls-n1 mono-lg ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">
-            @(ChainResponse?.TotalStaked.ToString("N0") ?? "0")
+        <span class="fs-2 ls-n1 mono-lg ChainResponse_TotalDelegated" number="@(ChainResponse?.TotalDelegated ?? 0)">
+            @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
         </span>
         <span class="mono-lg text-light">•</span>
-        <span class="mono-lg primary ChainResponse_StakedPercentage">
-            @(ChainResponse?.StakedPercentage.ToString("P2") ?? "0")
+        <span class="mono-lg primary ChainResponse_DelegatedPercentage">
+            @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0.00%")
         </span>
     </div>
 </div>
 <div class="px-1 py-3 flex-fill text-right">
-    <div class="py-1 fs-n3 text-light">
-        <i class="fal pr-2 fa-user" data-toggle="tooltip" title="Total number of unique stakers / voters."></i>STAKERS
-    </div>
-    <a class="secondary underline" href="/addresses?state=unstaking">
-        <div class="fs-2 ls-n1 mono-lg ChainResponse_StakingAddressCount" number="@(ChainResponse?.StakingAddressCount ?? 0)">
-            @(ChainResponse?.StakingAddressCount.ToString("N0") ?? "0")
+    <div class="py-1 fs-n3 text-light">UNSTAKING</div>
+    <a class="secondary underline" href="/address/list">
+        <div class="fs-2 ls-n1 mono-lg ChainResponse_TotalUnstaking" number="@(ChainResponse?.TotalUnstaking ?? 0)">
+            @(ChainResponse?.TotalUnstaking.ToString("N0") ?? "0")
         </div>
     </a>
 </div>
