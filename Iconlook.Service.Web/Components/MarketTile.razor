@@ -10,7 +10,7 @@
             @(ChainResponse?.IcxPrice.ToString("C4") ?? "$0.0000")
         </span>
         <span class="mono-lg text-light">•</span>
-        <span class="mono-lg @(ChainResponse?.IcxPriceChangePercentage > 0 ? "positive" : "negative")-dark ChainResponse_IcxPriceChangePercentage" number="@(ChainResponse?.IcxPriceChangePercentage ?? 0)">
+        <span class="fs-1 mono-lg @(ChainResponse?.IcxPriceChangePercentage > 0 ? "positive" : "negative")-light ChainResponse_IcxPriceChangePercentage" number="@(ChainResponse?.IcxPriceChangePercentage ?? 0)">
             @(ChainResponse?.IcxPriceChangePercentage.ToString("P2") ?? "0.00%")
         </span>
     </div>
