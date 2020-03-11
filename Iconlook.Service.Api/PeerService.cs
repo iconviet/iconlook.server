@@ -2,11 +2,13 @@
 using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
+using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class PeerService : ServiceBase
     {
+        [CacheResponse(Duration = 20, LocalCache = true)]
         public object Get(PeerListRequest request)
         {
             using (var redis = Redis.Instance())

@@ -52,7 +52,7 @@
          GridLines="GridLine.Horizontal"
          TValue="UnstakingAddressResponse">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <EjsDataManager Url="/api/v1/address/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/address/list/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>

@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using Agiper.Server;
 using Iconlook.Object;
+using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class AddressService : ServiceBase
     {
+        [CacheResponse(Duration = 60, LocalCache = true)]
         public object Any(UnstakingAddressListRequest request)
         {
             using (var redis = Redis.Instance())

@@ -4,6 +4,7 @@ using Agiper.Object;
 using Agiper.Server;
 using Iconlook.Object;
 using Serilog;
+using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
@@ -14,6 +15,7 @@ namespace Iconlook.Service.Api
             Log.Information("Update", request);
         }
 
+        [CacheResponse(Duration = 60, LocalCache = true)]
         public object Get(PRepListRequest request)
         {
             using (var redis = Redis.Instance())
