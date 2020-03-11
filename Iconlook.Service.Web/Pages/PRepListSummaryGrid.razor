@@ -242,8 +242,15 @@
                 @{
                     if (context is PRepResponse prep)
                     {
-                        <span class="mono ls-n2">@prep.MonthlyReward.ToString("N0")</span>
-                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                        if (prep.Ranking > 100)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2">@prep.MonthlyReward.ToString("N0")</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
                     }
                 }
             </Template>
