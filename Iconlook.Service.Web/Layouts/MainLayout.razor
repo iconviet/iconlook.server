@@ -80,7 +80,7 @@
                     Welcome to <a class="primary" href="https://iconlook.io">iconlook.io</a>. This site is still <span class="font-weight-normal">work in progress</span>, new features and bug fixes will be rolled out daily in the coming weeks. Please check <a class="primary" href="/">release notes</a> often for more info.
                 </div>
                 <div class="col col-auto">
-                    <EjsSwitch Checked="true"></EjsSwitch>
+                    <EjsSwitch Checked="false"></EjsSwitch>
                 </div>
             </div>
         </div>
@@ -131,13 +131,13 @@
                     </div>
                     <ul class="text-muted list-group list-unstyled list-group-flush">
                         <li>
-                            <a class="list-group-item" href="/">P-Rep Summary</a>
+                            <a class="list-group-item" href="/">P-Rep Directory</a>
                         </li>
                         <li>
-                            <a class="list-group-item" href="/">C-Rep Summary</a>
+                            <a class="list-group-item" href="/">C-Rep Directory</a>
                         </li>
                         <li>
-                            <a class="list-group-item" href="/">Loopchain Explorer</a>
+                            <a class="list-group-item" href="/">Loopchain Browser</a>
                         </li>
                         <li>
                             <a class="list-group-item" href="/">Interchain Explorer</a>
@@ -183,39 +183,38 @@
             {
                 Items = new List<MenuItem>
                 {
-                    new MenuItem { Text = "Who Are We" },
-                    new MenuItem { Text = "Why Vote For Us" },
-                    new MenuItem { Text = "Active Governance" },
-                    new MenuItem { Text = "Reward Transparency" }
+                    new MenuItem { Text = "Who Are We *" },
+                    new MenuItem { Text = "Why Vote For Us *" },
+                    new MenuItem { Text = "Active Governance *" },
+                    new MenuItem { Text = "Reward Transparency *" }
                 }
             },
             new MenuItem
             {
                 Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
                 {
-                    new MenuItem { Text = "Ranking", Url = "/preps" },
-                    new MenuItem { Text = "Research" },
-                    new MenuItem { Text = "Contribution" },
-                    new MenuItem { Text = "Transactions *" },
-                    new MenuItem { Text = "Alll Penalties *" }
+                    new MenuItem { Text = "P-Rep Directory", Url = "/preps" },
+                    new MenuItem { Text = "Disqualified P-Reps *", Url = "/preps?filter=disqualified" },
+                    new MenuItem { Text = "Controversal P-Reps *", Url = "/preps?filter=controversal" }
                 }
             },
             new MenuItem
             {
-                Text = "D-APPS", Url = "/dapps", IconCss = "fal fa-rocket", Items = new List<MenuItem>
+                Text = "ICONCHAIN", IconCss = "fal fa-globe", Items = new List<MenuItem>
                 {
-                    new MenuItem { Text = "View Top 10 D-Apps *" },
-                    new MenuItem { Text = "View D-Apps Transactions *" },
-                    new MenuItem { Text = "View Exclusively Top Tokens *" }
-                }
-            },
-            new MenuItem
-            {
-                Text = "LOOPCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
-                {
-                    new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
-                    new MenuItem { Text = "Top 10 Addresses *" },
+                    new MenuItem { Text = "Unstaking Address", Url = "/address/list?filter=unstaking" },
+                    new MenuItem { Text = "Undelegated Address", Url = "/address/list?filter=undelegated" },
                     new MenuItem { Text = "Wellknown Addresses *" },
+                    new MenuItem { Text = "Suspicious Addresses *" }
+                }
+            },
+            new MenuItem
+            {
+                Text = "LOOPCHAIN", IconCss = "fal fa-network-wired", Items = new List<MenuItem>
+                {
+                    new MenuItem { Text = "Loopchain Browser *" },
+                    new MenuItem { Text = "Connector Directory *" },
+                    new MenuItem { Text = "Transaction Monitoring *" },
                     new MenuItem { Text = "Suspicious Transactions *" }
                 }
             },
@@ -223,10 +222,10 @@
             {
                 Text = "INTERCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
                 {
-                    new MenuItem { Text = "Unstaking Addresses", Url = "/addresses?state=unstaking" },
-                    new MenuItem { Text = "Top 10 Addresses *" },
-                    new MenuItem { Text = "Wellknown Addresses *" },
-                    new MenuItem { Text = "Suspicious Transactions *" }
+                    new MenuItem { Text = "IRC20 Swap History *" },
+                    new MenuItem { Text = "Interchain Explorer *" },
+                    new MenuItem { Text = "Crosschain Traffic Monior *" },
+                    new MenuItem { Text = "DEX Activity Visualization *" }
                 }
             },
             new MenuItem

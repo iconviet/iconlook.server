@@ -6,13 +6,9 @@
 <div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">VOTED&nbsp;&nbsp;•&nbsp;&nbsp;% SUPPLY</div>
     <div>
-        <span class="fs-2 ls-n1 mono-lg ChainResponse_TotalDelegated" number="@(ChainResponse?.TotalDelegated ?? 0)">
-            @(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")
-        </span>
+        <span class="fs-2 ls-n1 mono-lg ChainResponse_TotalDelegated" number="@(ChainResponse?.TotalDelegated ?? 0)">@(ChainResponse?.TotalDelegated.ToString("N0") ?? "0")</span>
         <span class="mono-lg text-light">•</span>
-        <span class="fs-1 mono-lg primary ChainResponse_DelegatedPercentage">
-            @(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0.00%")
-        </span>
+        <span class="mono-lg primary ChainResponse_DelegatedPercentage">@(ChainResponse?.DelegatedPercentage.ToString("P2") ?? "0.00%")</span>
     </div>
 </div>
 <div class="px-1 py-3 flex-fill text-right">
