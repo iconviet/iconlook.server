@@ -1,4 +1,4 @@
-﻿@page "/address/list"
+﻿@page "/address/list/{category}"
 <style type="text/css">
     .main.card .e-grid .e-content {
         min-height: 760px;
@@ -125,7 +125,7 @@
     public bool Sorting { get; set; }
 
     [Parameter]
-    public string State { get; set; }
+    public string Category { get; set; }
 
     [Parameter]
     public object PageSizes { get; set; }
