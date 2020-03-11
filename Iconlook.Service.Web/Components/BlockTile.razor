@@ -4,13 +4,17 @@
 }
 
 <div class="px-1 py-3 flex-fill">
-    <div class="py-1 fs-n3 text-light">TRANSACTIONS</div>
+    <div class="py-1 fs-n3 text-light">
+        TRANSACTIONS
+    </div>
     <div class="fs-2 ls-n1 mono-lg ChainResponse_TransactionCount" number="@(ChainResponse?.TransactionCount ?? 0)">
         @(ChainResponse?.TransactionCount.ToString("N0") ?? "0")
     </div>
 </div>
 <div class="px-1 py-3 flex-fill text-right">
-    <div class="py-1 fs-n3 text-light"><i class="fal pr-1 fa-cube primary"></i> BLOCK HEIGHT</div>
+    <div class="py-1 fs-n3 text-light">
+        <i class="far pr-1 fa-cube positive-light block_height_icon"></i> BLOCK HEIGHT
+    </div>
     <div class="fs-2 ls-n1 mono-lg BlockResponse_Height" number="@(ChainResponse?.BlockHeight ?? 0)">
         @(ChainResponse?.BlockHeight.ToString("N0") ?? "0")
     </div>

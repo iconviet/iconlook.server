@@ -287,17 +287,17 @@
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Funding">
-                        <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
-                                <IndexFundingGrid></IndexFundingGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
                     <TabItem Header="Production">
                         <ContentTemplate>
                             <div class="card-body pt-1 pb-0">
                                 <IndexProductionGrid></IndexProductionGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="Reward">
+                        <ContentTemplate>
+                            <div class="card-body pt-1 pb-0">
+                                <IndexRewardGrid></IndexRewardGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
@@ -339,7 +339,7 @@
 @code {
     protected TabHeader Votes;
     protected TabHeader Blocks;
-    protected TabHeader Funding;
+    protected TabHeader Reward;
     protected TabHeader Governance;
     protected TabHeader Production;
     protected TabHeader Transactions;
@@ -379,7 +379,7 @@
         Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
         Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };
         Production = new TabHeader { Text = "PRODUCTION", IconCss = "fal fa-server" };
-        Funding = new TabHeader { Text = "FUNDING", IconCss = "fal fa-money-check-alt" };
+        Reward = new TabHeader { Text = "REWARD", IconCss = "fal fa-money-check-alt" };
         Transactions = new TabHeader { Text = "TRANSACTIONS", IconCss = "fal fa-repeat" };
         Governance = new TabHeader { Text = "GOVERNANCE", IconCss = "fal fa-users-class" };
     }

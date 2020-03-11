@@ -116,7 +116,8 @@
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "BlockUpdatedSignal"))
                     .pipe(rxjs.operators.throttleTime(1000)).subscribe(signal => {
-                        $(".BlockResponse_Height").integer(signal.body.block.height);
+                        $(".block_height_icon").fadeOut(250);
+                        $(".BlockResponse_Height").integer(signal.body.block.height);                        
                         leader_block_mcount += 1;
                         if ($("#block_grid").length) {
                             if ($("#block_grid .e-content tr").length > 1) {
@@ -165,6 +166,7 @@
                                 $(item).attr("data-uid", `grid-row${index}`);
                             });
                         }
+                        $(".block_height_icon").fadeIn(500);
                     }));
             }
         }
