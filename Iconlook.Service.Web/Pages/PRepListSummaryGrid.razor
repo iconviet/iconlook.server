@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+<style>
     .fal.fa-star {
         opacity: 0.75;
         color: #ffdc85;
@@ -24,12 +25,17 @@
     }
 
     .fa-star:not(:last-child),
-    .fas.fa-star, .fas.fa-star-half-alt { color: #eebf4a; }
+    .fas.fa-star, .fas.fa-star-half-alt {
+        color: #eebf4a;
+    }
 
-    .fa-star-half-alt:not(:last-child) { margin-right: 4px; }
+    .fa-star-half-alt:not(:last-child) {
+        margin-right: 4px;
+    }
 </style>
 <div class="px-2 py-1 border-bottom">
     <EjsChipList Selection="Selection.Single" SelectedChips="0">
+        <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
             <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
             <ChipListChip Text="MAIN P-REP" Value="main_prep"></ChipListChip>
@@ -40,212 +46,214 @@
         </ChipCollection>
     </EjsChipList>
 </div>
-<EjsGrid EnableHover="true"
+<EjsGrid @ref="EjsGrid"
+         ID="summary_grid"
+         EnableHover="true"
          EnableAltRow="true"
          TValue="PRepResponse"
          AllowPaging="CanPage"
          AllowSelection="CanEdit"
-         GridLines="GridLine.Horizontal"
-         Query="@(new Query().AddParams("edit", EditKey))">
-<GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-<GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-<GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
-<EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-<GridColumns>
-    <GridColumn Width="40">
-        <Template>
-            <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
-        </Template>
-    </GridColumn>
-    <GridColumn Width="35" Field="@nameof(PRepResponse.Ranking)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <span class="mono font-weight-bold">@prep.Ranking</span>
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
-        <HeaderTemplate>
-            <span><i class="fal pl-1 pr-2 fa-users"></i>&nbsp;P-Rep</span>
-        </HeaderTemplate>
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <div class="d-flex align-items-center" style="margin-top: 1px;">
-                        <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" src="@StringHelpers.ParseLogoUrl(prep.LogoUrl)">
-                        <a class="secondary font-weight-semibold" href="https://tracker.icon.foundation/address/@prep.Id">@prep.Name</a>
-                    </div>
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="80" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Role" TextAlign="TextAlign.Center">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking <= 22 ? "main-prep" : prep.Ranking <= 100 ? "sub-prep" : "candidate")" style="width: 45px; border-radius: 4px;">
-                        <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : prep.Ranking <= 100 ? "SUB" : "CAND")</span>
-                    </div>
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="70" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    if (prep.Ranking <= 100)
+         GridLines="GridLine.Horizontal">
+    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
+    <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
+    <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn Width="40">
+            <Template>
+                <i class="fad fs-n1 fa-dot-circle online-status" style="margin-top: 2px;"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="35" Field="@nameof(PRepResponse.Ranking)" HeaderText="&nbsp;#" DisableHtmlEncode="false">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
                     {
-                        <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
-                            <span class="fs-n1 mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <span class="fs-n1 mono font-weight-bold">-</span>
+                        <span class="mono font-weight-bold">@prep.Ranking</span>
                     }
                 }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
-        <HeaderTemplate>
-            <div class="pl-2">Vote Count</div>
-        </HeaderTemplate>
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
-                    <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="50" HeaderText="24h" TextAlign="TextAlign.Right">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    if (Math.Abs(prep.Votes24HChange) < 1000)
+            </Template>
+        </GridColumn>
+        <GridColumn Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
+            <HeaderTemplate>
+                <span><i class="fal pl-1 pr-2 fa-users"></i>&nbsp;P-Rep</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
                     {
-                        <span class="mono text-light">-</span>
-                    }
-                    else
-                    {
-                        var vote24h = Math.Abs(prep.Votes24HChange);
-                        var direction = prep.Votes24HChange > 0 ? "up" : "down";
-                        var color = prep.Votes24HChange > 0 ? "positive" : "negative";
-                        <div style="padding-top: 1px;">
-                            <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
-                            @if (vote24h < 1000000)
-                            {
-                                <span class="mono @color-dark">@($"{(vote24h / 1000).ToString("##0")}K")</span>
-                            }
-                            else
-                            {
-                                <span class="mono @color-dark font-weight-semibold">@($"{(vote24h / 1000000m).ToString("0.0")}M")</span>
-                            }
+                        <div class="d-flex align-items-center" style="margin-top: 1px;">
+                            <img width="18" height="18" style="margin-top: -1px; margin-right: 8px;" src="@StringHelpers.ParseLogoUrl(prep.LogoUrl)">
+                            <a class="secondary font-weight-semibold" href="https://tracker.icon.foundation/address/@prep.Id">@prep.Name</a>
                         </div>
                     }
                 }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="85" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <span class="mono">@prep.Voters.ToString("N0")</span>
-                    <span>
-                        <i class="fad fs-n3 fa-user text-light"></i>
-                    </span>
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="125" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
-        <HeaderTemplate>
-            <i class="far pr-2 fa-cube positive-dark"></i>
-        </HeaderTemplate>
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    if (prep.ProducedBlocks == 0)
+            </Template>
+        </GridColumn>
+        <GridColumn Width="80" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Role" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
                     {
-                        <span class="mono text-light">-</span>
-                    }
-                    else
-                    {
-                        <span class="mono ls-n2 font-weight-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        <div class="ls-2 fs-n3 d-inline-block font-weight-semibold justify-content-center @(prep.Ranking <= 22 ? "main-prep" : prep.Ranking <= 100 ? "sub-prep" : "candidate")" style="width: 45px; border-radius: 4px;">
+                            <span style="margin-top: 1px; margin-left: 1px;">@(prep.Ranking <= 22 ? "MAIN" : prep.Ranking <= 100 ? "SUB" : "CAND")</span>
+                        </div>
                     }
                 }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="60" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
-        <HeaderTemplate>
-            <i class="far pr-2 fa-cube negative-dark"></i>
-        </HeaderTemplate>
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    if (prep.MissedBlocks == 0)
+            </Template>
+        </GridColumn>
+        <GridColumn Width="70" Field="@nameof(PRepResponse.DelegatedPercentage)" HeaderText="Power" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
                     {
-                        <span class="mono text-light">-</span>
-                    }
-                    else
-                    {
-                        <span class="mono text-light font-weight-light">@prep.MissedBlocks.ToString("N0")</span>
-                    }
-                }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="110" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    if (prep.ProductivityPercentage == 0)
-                    {
-                        <span class="mono text-light">-</span>
-                    }
-                    else
-                    {
-                        <span class="mono font-weight-light">@prep.ProductivityPercentage.ToString("P")</span>
+                        if (prep.Ranking <= 100)
+                        {
+                            <div class="text-center rounded-pill bg-secondary1 d-inline-block" style="width: 55px; margin: -2px 0; padding: 2px 0;">
+                                <span class="fs-n1 mono font-weight-bold">@prep.DelegatedPercentage.ToString("P2")</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="fs-n1 mono font-weight-bold">-</span>
+                        }
                     }
                 }
-            }
-        </Template>
-    </GridColumn>
-    <GridColumn Width="115" Field="@nameof(PRepResponse.MonthlyReward)" TextAlign="TextAlign.Right">
-        <HeaderTemplate>
-            <span>Reward</span>
-        </HeaderTemplate>
-        <Template>
-            @{
-                if (context is PRepResponse prep)
-                {
-                    <span class="mono ls-n2">@prep.MonthlyReward.ToString("N0")</span>
-                    <span class="pl-1 text-light font-weight-light">ICX</span>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="125" Field="@nameof(PRepResponse.Votes)" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <HeaderTemplate>
+                <div class="pl-2">Vote Count</div>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono ls-n2">@prep.Votes.ToString("N0")</span>
+                        <span class="pl-1 fs-n2 text-light font-weight-light">votes</span>
+                    }
                 }
-            }
-        </Template>
-    </GridColumn>
-</GridColumns>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="50" HeaderText="24h" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (Math.Abs(prep.Votes24HChange) < 1000)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            var vote24h = Math.Abs(prep.Votes24HChange);
+                            var direction = prep.Votes24HChange > 0 ? "up" : "down";
+                            var color = prep.Votes24HChange > 0 ? "positive" : "negative";
+                            <div style="padding-top: 1px;">
+                                <span class="fad fs-n2 @color-light fa-long-arrow-@direction" style="opacity: 0.75; margin-right: 2px;"></span>
+                                @if (vote24h < 1000000)
+                                {
+                                    <span class="mono @color-dark">@($"{(vote24h / 1000).ToString("##0")}K")</span>
+                                }
+                                else
+                                {
+                                    <span class="mono @color-dark font-weight-semibold">@($"{(vote24h / 1000000m).ToString("0.0")}M")</span>
+                                }
+                            </div>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="85" Field="@nameof(PRepResponse.Voters)" HeaderText="Voters" TextAlign="TextAlign.Right">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono">@prep.Voters.ToString("N0")</span>
+                        <span>
+                            <i class="fad fs-n3 fa-user text-light"></i>
+                        </span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="125" Field="@nameof(PRepResponse.ProducedBlocks)" TextAlign="TextAlign.Center">
+            <HeaderTemplate>
+                <i class="far pr-2 fa-cube positive-dark"></i>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.ProducedBlocks == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 font-weight-light">@prep.ProducedBlocks.ToString("N0")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="60" Field="@nameof(PRepResponse.MissedBlocks)" TextAlign="TextAlign.Center">
+            <HeaderTemplate>
+                <i class="far pr-2 fa-cube negative-dark"></i>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.MissedBlocks == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono text-light font-weight-light">@prep.MissedBlocks.ToString("N0")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="110" Field="@nameof(PRepResponse.ProductivityPercentage)" HeaderText="Uptime" TextAlign="TextAlign.Center">
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        if (prep.ProductivityPercentage == 0)
+                        {
+                            <span class="mono text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono font-weight-light">@prep.ProductivityPercentage.ToString("P")</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="115" Field="@nameof(PRepResponse.MonthlyReward)" TextAlign="TextAlign.Right">
+            <HeaderTemplate>
+                <span>Reward</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is PRepResponse prep)
+                    {
+                        <span class="mono ls-n2">@prep.MonthlyReward.ToString("N0")</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
 </EjsGrid>
 
 @code {
+    protected EjsGrid<PRepResponse> EjsGrid;
+
     [Parameter]
     public int PageSize { get; set; }
 
@@ -259,4 +267,10 @@
     public object PageSizes { get; set; }
 
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
+
+    private void ChipListOnClick(ClickEventArgs args)
+    {
+        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+    }
+
 }

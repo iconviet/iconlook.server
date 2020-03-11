@@ -43,14 +43,14 @@
     </EjsChipList>
 </div>
 <EjsGrid @ref="EjsGrid"
-          ID="unstaking_grid"
-          EnableHover="false"
-          AllowPaging="Paging"
-          EnableAltRow="false"
-          AllowSorting="Sorting"
-          AllowSelection="false"
-          TValue="UnstakingAddressResponse"
-          GridLines="GridLine.Horizontal">
+         ID="unstaking_grid"
+         EnableHover="false"
+         AllowPaging="Paging"
+         EnableAltRow="false"
+         AllowSorting="Sorting"
+         AllowSelection="false"
+         GridLines="GridLine.Horizontal"
+         TValue="UnstakingAddressResponse">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <EjsDataManager Url="/api/v1/address/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>

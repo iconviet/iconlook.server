@@ -34,9 +34,9 @@ namespace Iconlook.Service.Api
                 }
                 return new UnstakingAddressListResponse(addresses.Skip(addresses.Count() > request.Take ? request.Skip : 0).Take(request.Take))
                 {
-                    Skip = request.Skip,
                     Take = request.Take,
-                    Count = addresses.Count()
+                    Count = addresses.Count(),
+                    Skip = addresses.Count() > request.Take ? request.Skip : 0
                 };
             }
         }
