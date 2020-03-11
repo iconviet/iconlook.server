@@ -23,7 +23,7 @@ namespace Iconlook.Service.Api
                         .Skip(request.Skip).Take(request.Take);
                     return new ListResponse<LookupResponse>(preps.Select(x => new LookupResponse
                     {
-                        Result = $"{x.Ranking}. {x.Name} ({x.Votes:N0})"
+                        Result = $"#{x.Ranking}. {x.Name} ({x.Votes:N0} votes)"
                     }))
                     {
                         Skip = request.Skip,
