@@ -55,11 +55,10 @@ namespace Iconlook.Service.Job
                             }));
                             if (peers.Any())
                             {
-                                await Task.Run(() =>
+                                if (UpdateBlockJob.LastBlockHeight % 10 == 0)
                                 {
-                                    redis.As<PeerResponse>().DeleteAll();
                                     redis.StoreAll(peers);
-                                }).ConfigureAwait(false);
+                                }
                                 await Channel.Publish(new PeersUpdatedSignal
                                 {
                                     Idle = peers.Where(x => x.State == "Vote").ToList(),
