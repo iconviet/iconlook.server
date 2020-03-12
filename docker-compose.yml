@@ -7,7 +7,7 @@ services:
       - 8080:80
       - 5341:5341
     restart: always
-    image: datalust/seq
+    image: iconviet/seq
     container_name: seq
     environment:
       ACCEPT_EULA: Y
