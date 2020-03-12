@@ -48,5 +48,12 @@
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
 <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
 <script type="text/javascript">Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-160442792-1');
+</script>
 </body>
 </html>
