@@ -17,7 +17,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.21" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.22" />
     <PackageReference Include="Twilio" Version="5.37.6" />
   </ItemGroup>
   <ItemGroup>
