@@ -1,44 +1,44 @@
 ﻿using System.Linq;
 using Agiper.Server;
 using Iconlook.Object;
-using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
     public class AddressService : ServiceBase
     {
-        [CacheResponse(Duration = 60, LocalCache = true)]
         public object Any(UnstakingAddressListRequest request)
         {
             using (var redis = Redis.Instance())
             {
-                var addresses = redis.As<UnstakingAddressResponse>().GetAll().AsEnumerable();
+                var items = redis.As<UnstakingAddressResponse>().GetAll();
                 switch (request.Filter)
                 {
                     default:
-                        addresses = addresses.Where(x => x.Unstaking >= 100).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Unstaking >= 100).ToList();
                         break;
                     case "10000icx":
-                        addresses = addresses.Where(x => x.Unstaking >= 10000).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Unstaking >= 10000).ToList();
                         break;
                     case "100000icx":
-                        addresses = addresses.Where(x => x.Unstaking >= 100000).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Unstaking >= 100000).ToList();
                         break;
                     case "500000icx":
-                        addresses = addresses.Where(x => x.Unstaking >= 500000).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Unstaking >= 500000).ToList();
                         break;
                     case "1000000icx":
-                        addresses = addresses.Where(x => x.Unstaking >= 1000000).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Unstaking >= 1000000).ToList();
                         break;
                     case "prep_only":
-                        addresses = addresses.Where(x => x.Class == AddressClass.PRep).OrderByDescending(x => x.UnstakedBlockHeight);
+                        items = items.Where(x => x.Class == AddressClass.PRep).ToList();
                         break;
                 }
-                return new UnstakingAddressListResponse(addresses.Skip(addresses.Count() > request.Take ? request.Skip : 0).Take(request.Take))
+                return new UnstakingAddressListResponse(items
+                    .OrderByDescending(x => x.UnstakedBlockHeight)
+                    .Skip(items.Count > request.Take ? request.Skip : 0).Take(request.Take))
                 {
+                    Count = items.Count,
                     Take = request.Take,
-                    Count = addresses.Count(),
-                    Skip = addresses.Count() > request.Take ? request.Skip : 0
+                    Skip = items.Count > request.Take ? request.Skip : 0
                 };
             }
         }

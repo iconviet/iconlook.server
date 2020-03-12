@@ -20,10 +20,10 @@ namespace Iconlook.Service.Api
         {
             using (var redis = Redis.Instance())
             {
-                var preps = redis.As<PRepResponse>().GetAll().AsQueryable();
+                var items = redis.As<PRepResponse>().GetAll();
                 if (request.Edit.HasValue() && request.Edit != "all")
                 {
-                    return new ListResponse<PRepResponse>(preps.Where(x => x.Id == request.Edit))
+                    return new ListResponse<PRepResponse>(items.Where(x => x.Id == request.Edit))
                     {
                         Skip = 0,
                         Take = 1,
@@ -35,29 +35,28 @@ namespace Iconlook.Service.Api
                     switch (request.Filter)
                     {
                         case "main_prep":
-                            preps = preps.Where(x => x.Ranking <= 22);
+                            items = items.Where(x => x.Ranking <= 22).ToList();
                             break;
                         case "candidate":
-                            preps = preps.Where(x => x.Ranking > 100);
+                            items = items.Where(x => x.Ranking > 100).ToList();
                             break;
                         case "controversal":
-                            preps = preps.Where(x => x.Name == "controversal");
+                            items = items.Where(x => x.Name == "controversal").ToList();
                             break;
                         case "disqualified":
-                            preps = preps.Where(x => x.Name == "disqualified");
+                            items = items.Where(x => x.Name == "disqualified").ToList();
                             break;
                         case "sub_prep":
-                            preps = preps.Where(x => x.Ranking > 22 && x.Ranking <= 100);
+                            items = items.Where(x => x.Ranking > 22 && x.Ranking <= 100).ToList();
                             break;
                     }
                 }
-                return new ListResponse<PRepResponse>(preps
-                    .OrderBy(x => x.Ranking)
-                    .Skip(preps.Count() > request.Take ? request.Skip : 0).Take(request.Take))
+                return new ListResponse<PRepResponse>(items
+                    .OrderBy(x => x.Ranking).Skip(items.Count > request.Take ? request.Skip : 0).Take(request.Take))
                 {
+                    Count = items.Count,
                     Take = request.Take,
-                    Count = preps.Count(),
-                    Skip = preps.Count() > request.Take ? request.Skip : 0
+                    Skip = items.Count > request.Take ? request.Skip : 0
                 };
             }
         }
