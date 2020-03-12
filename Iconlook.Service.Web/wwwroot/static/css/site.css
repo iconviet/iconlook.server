@@ -361,11 +361,11 @@ button.secondary, button .secondary {
 /*
     EJS-GRID
 */
-@media screen and (min-width: 590px) {
-    .e-grid .e-emptyrow {
-        display: none;
-    }
+.e-grid .e-emptyrow {
+    display: none;
+}
 
+@media screen and (min-width: 590px) {
     .e-pager .e-pagerdropdown {
         margin-top: -30px;
     }
