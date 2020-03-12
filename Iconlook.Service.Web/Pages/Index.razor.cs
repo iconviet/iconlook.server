@@ -20,7 +20,10 @@ namespace Iconlook.Service.Web.Pages
                     var chains = redis.As<ChainResponse>().GetAll();
                     PeerResponse = peers.FirstOrDefault(x => x.State == "BlockGenerate");
                     ChainResponse = chains.OrderByDescending(x => x.Timestamp).FirstOrDefault();
-                    Log.Information("{Peer} peer data and {Chain} chain data loaded in {Elapsed}ms", peers.Count, chains.Count, rolex.Elapsed.TotalMilliseconds);
+                    if (rolex.Elapsed.Milliseconds > 500)
+                    {
+                        Log.Warning("{Peer} peer and {Chain} chain loaded in {Elapsed}ms", peers.Count, chains.Count, rolex.Elapsed.TotalMilliseconds);
+                    }
                 }
             }
             return base.OnInitializedAsync();
