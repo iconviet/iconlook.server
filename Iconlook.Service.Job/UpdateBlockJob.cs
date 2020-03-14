@@ -60,11 +60,11 @@ namespace Iconlook.Service.Job
                                 Block = block,
                                 Transactions = transactions
                             }).ConfigureAwait(false);
-                            // await Endpoint.Publish(new BlockUpdatedEvent
-                            // {
-                            //     Block = block,
-                            //     Transactions = transactions
-                            // }).ConfigureAwait(false);
+                            await Endpoint.Publish(new BlockUpdatedEvent
+                            {
+                                Block = block,
+                                Transactions = transactions
+                            }).ConfigureAwait(false);
                             await Task.Run(() =>
                             {
                                 using (var redis = Redis.Instance())
