@@ -2,7 +2,9 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Iconlook.Service.Job
 {
@@ -10,13 +12,16 @@ namespace Iconlook.Service.Job
     {
         public static Task Main()
         {
-            return StartAsync(new JobServerConfiguration(), c =>
-            {
-                Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Provider.GetService<UpdateBlockJob>().RunAsync());
-                Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Provider.GetService<UpdateChainJob>().RunAsync());
-                Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Provider.GetService<UpdatePRepsJob>().RunAsync());
-                Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Provider.GetService<UpdateUnstakingJob>().RunAsync());
-            });
+            var configuration = new JobServerConfiguration();
+            return StartAsync(configuration,
+                b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
+                c =>
+                {
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Provider.GetService<UpdateBlockJob>().RunAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Provider.GetService<UpdateChainJob>().RunAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Provider.GetService<UpdatePRepsJob>().RunAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Provider.GetService<UpdateUnstakingJob>().RunAsync());
+                });
         }
     }
 }
