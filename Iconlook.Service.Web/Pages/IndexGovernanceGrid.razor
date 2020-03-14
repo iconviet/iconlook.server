@@ -28,7 +28,7 @@
          ClipMode="ClipMode.Ellipsis"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
-    <EjsDataManager Url="/api/v1/preps" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <EjsDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
     <GridColumns>
         <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
             <Template>

@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Agiper.Server;
 using Iconlook.Object;
-using Iconlook.Server;
+using Microsoft.Extensions.DependencyInjection;
 using ServiceStack.Redis;
 
 namespace Iconlook.Service.Web.Pages
@@ -10,7 +11,8 @@ namespace Iconlook.Service.Web.Pages
     {
         protected override Task OnInitializedAsync()
         {
-            using (var redis = Host.Current.Resolve<IRedisClient>())
+            
+            using (var redis = ServerBase.Provider.GetService<IRedisClient>())
             {
                 var peers = redis.As<PeerResponse>().GetAll();
                 var chains = redis.As<ChainResponse>().GetAll();

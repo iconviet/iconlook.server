@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Object;
+using Agiper.Server;
 using ServiceStack;
 
 namespace Iconlook.Server
@@ -14,7 +15,7 @@ namespace Iconlook.Server
             signal.Timestamp = DateTimeOffset.UtcNow;
             if (signal.IsValid())
             {
-                instance.NotifyChannel(Host.Current.ChannelName, signal);
+                instance.NotifyChannel(ServerBase.Config.ChannelName, signal);
             }
             return Task.CompletedTask;
         }

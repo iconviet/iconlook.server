@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Globalization;
+using Agiper.Server;
 using Funq;
-using Iconlook.Server;
 using Iconlook.Service.Api;
 using ServiceStack;
-using Environment = Agiper.Environment;
 
 namespace Iconlook.Service.Web
 {
-    public class WebHost : Host
+    public class WebServiceHost : ServiceHostBase
     {
-        public WebHost() : base("Web", typeof(WebHost).Assembly)
+        public WebServiceHost(ServerConfiguration config) : base(config.HostName, typeof(WebServiceHost).Assembly, config)
         {
-            if (Environment != Environment.Localhost)
-            {
-                UseRedisReplica = true;
-            }
         }
 
         public void ConfigureCulture(Container container)
@@ -35,7 +30,13 @@ namespace Iconlook.Service.Web
             ConfigureCulture(container);
             Config.EnableFeatures = Feature.Json;
             SetConfig(new HostConfig { UseCamelCase = false });
-            RegisterServicesInAssembly(typeof(ApiHost).Assembly);
+            RegisterServicesInAssembly(typeof(ApiServiceHost).Assembly);
+        }
+
+        protected override void ConfigureFeature()
+        {
+            base.ConfigureFeature();
+            GetPlugin<ServerEventsFeature>().LimitToAuthenticatedUsers = false;
         }
 
         public override RouteAttribute[] GetRouteAttributes(Type type)

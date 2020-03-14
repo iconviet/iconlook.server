@@ -1,5 +1,4 @@
-﻿@using Iconlook.Server
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @inject HttpContextAccessor HttpContext
 <style>
     footer .list-group-item {
@@ -102,7 +101,7 @@
                             ICONLOOK is a real-time & data-rich blockchain intelligence, telemetry and analytics platform for ICON © 2020 ICONVIET.
                         </p>
                         <p class="fs-n1 mt-1">
-                            <span class="font-weight-bold">Version</span>: @Host.Current.VersionInformation
+                            <span class="font-weight-bold">Version</span>:
                         </p>
                     </div>
                 </div>
@@ -193,9 +192,9 @@
             {
                 Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
                 {
-                    new MenuItem { Text = "P-Rep Directory", Url = "/preps" },
-                    new MenuItem { Text = "Disqualified P-Reps *", Url = "/preps?filter=disqualified" },
-                    new MenuItem { Text = "Controversal P-Reps *", Url = "/preps?filter=controversal" }
+                    new MenuItem { Text = "P-Rep Directory", Url = "/prep/list" },
+                    new MenuItem { Text = "Disqualified P-Reps *", Url = "/prep/list?filter=disqualified" },
+                    new MenuItem { Text = "Controversal P-Reps *", Url = "/prep/list?filter=controversal" }
                 }
             },
             new MenuItem

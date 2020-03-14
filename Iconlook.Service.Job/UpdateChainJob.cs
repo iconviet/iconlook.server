@@ -58,10 +58,10 @@ namespace Iconlook.Service.Job
                                 RRepPercentage = (double) (iiss_info.GetRRep() * 3) / 10000,
                                 TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
                                 BlockHeight = LastBlockHeight = (long) iiss_info?.GetBlockHeight(),
-                                StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
+                                // StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
                                 TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcxFromLoop(),
-                                UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
-                                TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
+                                // UnstakingAddressCount = (long) staking_info?.GetUnstakingAddressCount(),
+                                // TotalUnstaking = (long) staking_info?.GetTotalUnstaking().ToBigInteger()
                             };
                             chain.StakedPercentage = (double) chain.TotalStaked / chain.IcxCirculation;
                             chain.DelegatedPercentage = (double) chain.TotalDelegated / chain.IcxSupply;
