@@ -13,7 +13,7 @@ namespace Iconlook.Service.Web
         {
         }
 
-        public void ConfigureCulture(Container container)
+        public void ConfigureDefaultCultures()
         {
             var culture = CultureInfo.InvariantCulture;
             var current = culture.Clone() as CultureInfo;
@@ -27,7 +27,7 @@ namespace Iconlook.Service.Web
         public override void Configure(Container container)
         {
             base.Configure(container);
-            ConfigureCulture(container);
+            ConfigureDefaultCultures();
             Config.EnableFeatures = Feature.Json;
             SetConfig(new HostConfig { UseCamelCase = false });
             RegisterServicesInAssembly(typeof(ApiServiceHost).Assembly);
