@@ -55,7 +55,7 @@ namespace Iconlook.Service.Job
                                 Height = LastBlockHeight = (long) last_block.GetHeight(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
                             };
-                            await Channel.Publish(new BlockUpdatedSignal
+                            await Channel.Instance().Publish(new BlockUpdatedSignal
                             {
                                 Block = block,
                                 Transactions = transactions

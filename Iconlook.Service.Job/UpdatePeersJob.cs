@@ -59,7 +59,7 @@ namespace Iconlook.Service.Job
                                 {
                                     redis.StoreAll(peers);
                                 }
-                                await Channel.Publish(new PeersUpdatedSignal
+                                await Channel.Instance().Publish(new PeersUpdatedSignal
                                 {
                                     Idle = peers.Where(x => x.State == "Vote").ToList(),
                                     Sync = peers.Where(x => x.State == "BlockSync").ToList(),

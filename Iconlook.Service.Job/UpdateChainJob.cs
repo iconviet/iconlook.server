@@ -68,7 +68,7 @@ namespace Iconlook.Service.Job
                             var next_term_calculator = new NextTermCalculator(chain.BlockHeight, chain.NextTermBlockHeight);
                             chain.NextTermLocalTime = next_term_calculator.GetLocalTime();
                             chain.NextTermCountdown = next_term_calculator.GetCountdown();
-                            await Channel.Publish(new ChainUpdatedSignal { Chain = chain }).ConfigureAwait(false);
+                            await Channel.Instance().Publish(new ChainUpdatedSignal { Chain = chain }).ConfigureAwait(false);
                             await Endpoint.Instance().Publish(new ChainUpdatedEvent { Chain = chain }).ConfigureAwait(false);
                             await Task.Run(() =>
                             {
