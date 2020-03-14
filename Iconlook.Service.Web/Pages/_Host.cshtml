@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Agiper.Server
 @namespace Iconlook.Service.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
@@ -34,25 +35,25 @@
     <meta property="og:image" content="https://iconlook.io/static/images/logo-256.png?44629809080" />
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET Labs." />
 
-    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=" />
-    <script async type="text/javascript" src="~/static/js/bundle.min.js?v="></script>
+    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=@ServerBase.Config.VersionInformation" />
+    <script async type="text/javascript" src="~/static/js/bundle.min.js?v=@ServerBase.Config.VersionInformation"></script>
 </head>
 <body>
-<div id="components-reconnect-modal">
-    <div class="d-flex h-100 flex-column text-center justify-content-center">
-        <span class="reconnecting">Server disconnected. Reconnecting...</span>
-        <span class="connection-lost">Server connection lost. Please refresh.</span>
+    <div id="components-reconnect-modal">
+        <div class="d-flex h-100 flex-column text-center justify-content-center">
+            <span class="reconnecting">Server disconnected. Reconnecting...</span>
+            <span class="connection-lost">Server connection lost. Please refresh.</span>
+        </div>
     </div>
-</div>
-<app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-<script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
-<script type="text/javascript">Blazor.start({ configureSignalR: function(builder) { builder.configureLogging(2); } });</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-160442792-1');
-</script>
+    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
+    <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
+    <script type="text/javascript">Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); } });</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-160442792-1');
+    </script>
 </body>
 </html>
