@@ -60,7 +60,7 @@ namespace Iconlook.Service.Job
                                 Block = block,
                                 Transactions = transactions
                             }).ConfigureAwait(false);
-                            await Endpoint.Publish(new BlockUpdatedEvent
+                            await Endpoint.Instance().Publish(new BlockUpdatedEvent
                             {
                                 Block = block,
                                 Transactions = transactions

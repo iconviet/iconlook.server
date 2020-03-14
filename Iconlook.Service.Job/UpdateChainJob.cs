@@ -69,7 +69,7 @@ namespace Iconlook.Service.Job
                             chain.NextTermLocalTime = next_term_calculator.GetLocalTime();
                             chain.NextTermCountdown = next_term_calculator.GetCountdown();
                             await Channel.Publish(new ChainUpdatedSignal { Chain = chain }).ConfigureAwait(false);
-                            await Endpoint.Publish(new ChainUpdatedEvent { Chain = chain }).ConfigureAwait(false);
+                            await Endpoint.Instance().Publish(new ChainUpdatedEvent { Chain = chain }).ConfigureAwait(false);
                             await Task.Run(() =>
                             {
                                 using (var redis = Redis.Instance())
