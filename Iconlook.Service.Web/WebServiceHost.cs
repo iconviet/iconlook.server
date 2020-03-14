@@ -33,12 +33,6 @@ namespace Iconlook.Service.Web
             RegisterServicesInAssembly(typeof(ApiServiceHost).Assembly);
         }
 
-        protected override void ConfigureFeature()
-        {
-            base.ConfigureFeature();
-            GetPlugin<ServerEventsFeature>().LimitToAuthenticatedUsers = false;
-        }
-
         public override RouteAttribute[] GetRouteAttributes(Type type)
         {
             var routes = base.GetRouteAttributes(type);
