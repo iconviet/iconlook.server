@@ -9,16 +9,16 @@ using Microsoft.Extensions.Hosting;
 
 namespace Iconlook.Service.Mon
 {
-    public class MonServer : ServerBase
+    public class MonHost : HostBase
     {
         public static Task Main()
         {
-            var configuration = new MonServerConfiguration();
+            var configuration = new MonHostConfiguration();
             return StartAsync(configuration,
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(_ => Provider.GetService<UpdatePeersJob>().RunAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(_ => Container.GetService<UpdatePeersJob>().RunAsync());
                 });
         }
     }

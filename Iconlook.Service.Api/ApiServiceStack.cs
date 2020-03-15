@@ -3,7 +3,7 @@ using ServiceStack.Api.Swagger;
 
 namespace Iconlook.Service.Api
 {
-    public class ApiServiceHost : ServiceHostBase
+    public class ApiServiceStack : ServiceStackBase
     {
         protected override void ConfigureFeature()
         {
@@ -11,7 +11,7 @@ namespace Iconlook.Service.Api
             Plugins.Add(new SwaggerFeature());
         }
 
-        public ApiServiceHost(ServerConfiguration config) : base(config.HostName, typeof(ApiServiceHost).Assembly, config)
+        public ApiServiceStack(HostConfiguration config) : base(config.HostName, typeof(ApiServiceStack).Assembly, config)
         {
         }
     }

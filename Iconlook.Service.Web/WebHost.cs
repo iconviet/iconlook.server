@@ -5,11 +5,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace Iconlook.Service.Web
 {
-    public class WebServer : ServerBase
+    public class WebHost : HostBase
     {
         public static Task Main()
         {
-            var configuration = new WebServerConfiguration();
+            var configuration = new WebHostConfiguration();
             return StartAsync(configuration, b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())));
         }
     }

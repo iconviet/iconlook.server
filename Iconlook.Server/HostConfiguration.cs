@@ -11,11 +11,11 @@ using NServiceBus;
 
 namespace Iconlook.Server
 {
-    public class ServerConfiguration : Agiper.Server.ServerConfiguration
+    public class HostConfiguration : Agiper.Server.HostConfiguration
     {
         public override string ProjectName => "Iconlook";
 
-        public ServerConfiguration(string hostname) : base(hostname)
+        public HostConfiguration(string hostname) : base(hostname)
         {
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
             HangfireJobPersistence = HangfireJobPersistence.Memory;
@@ -25,12 +25,12 @@ namespace Iconlook.Server
         protected override void ConfigureContainer(ContainerBuilder builder)
         {
             base.ConfigureContainer(builder);
-            builder.RegisterType<BinanceClient>();
-            builder.RegisterType<TelegramClient>();
-            builder.RegisterType<JsonHttpClient>();
-            builder.RegisterType<ChainalyticClient>();
-            builder.RegisterType<IconTrackerClient>();
-            builder.RegisterType<IconServiceClient>();
+            builder.RegisterType<BinanceClient>().PropertiesAutowired();
+            builder.RegisterType<TelegramClient>().PropertiesAutowired();
+            builder.RegisterType<JsonHttpClient>().PropertiesAutowired();
+            builder.RegisterType<ChainalyticClient>().PropertiesAutowired();
+            builder.RegisterType<IconTrackerClient>().PropertiesAutowired();
+            builder.RegisterType<IconServiceClient>().PropertiesAutowired();
         }
 
         public override void ConfigureNServiceBus(EndpointConfiguration configuration)

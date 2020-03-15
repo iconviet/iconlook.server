@@ -25,9 +25,9 @@ using WebMarkupMin.AspNetCore3;
 
 namespace Iconlook.Service.Web
 {
-    public class WebServerConfiguration : HttpServerConfiguration
+    public class WebHostConfiguration : HttpHostConfiguration
     {
-        public WebServerConfiguration() : base("Web", 80)
+        public WebHostConfiguration() : base("Web", 80)
         {
             if (Environment != Environment.Localhost)
             {
@@ -69,7 +69,7 @@ namespace Iconlook.Service.Web
             });
             application.UseWhen(
                 context => context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/sse"),
-                builder => builder.UseServiceStack(new WebServiceHost(this)));
+                builder => builder.UseServiceStack(new WebServiceStack(this)));
             application.UseRouting();
             application.UseWebMarkupMin();
             application.UseEndpoints(x =>

@@ -3,18 +3,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using ServiceStack;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Mon
 {
-    public class JobServerConfiguration : HttpServerConfiguration
+    public class MonHostConfiguration : HttpHostConfiguration
     {
-        public JobServerConfiguration() : base("Job", 82)
+        public MonHostConfiguration() : base("Mon", 83)
         {
         }
 
         public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
             base.Configure(application, environment);
-            application.UseServiceStack(new JobServiceHost(this));
+            application.UseServiceStack(new MonServiceStack(this));
         }
     }
 }

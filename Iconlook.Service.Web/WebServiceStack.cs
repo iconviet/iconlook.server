@@ -7,9 +7,9 @@ using ServiceStack;
 
 namespace Iconlook.Service.Web
 {
-    public class WebServiceHost : ServiceHostBase
+    public class WebServiceStack : ServiceStackBase
     {
-        public WebServiceHost(ServerConfiguration config) : base(config.HostName, typeof(WebServiceHost).Assembly, config)
+        public WebServiceStack(HostConfiguration config) : base(config.HostName, typeof(WebServiceStack).Assembly, config)
         {
         }
 
@@ -30,7 +30,7 @@ namespace Iconlook.Service.Web
             ConfigureDefaultCultures();
             Config.EnableFeatures = Feature.Json;
             SetConfig(new HostConfig { UseCamelCase = false });
-            RegisterServicesInAssembly(typeof(ApiServiceHost).Assembly);
+            RegisterServicesInAssembly(typeof(ApiServiceStack).Assembly);
         }
 
         public override RouteAttribute[] GetRouteAttributes(Type type)

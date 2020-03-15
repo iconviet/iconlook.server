@@ -6,9 +6,9 @@ using ServiceStack;
 
 namespace Iconlook.Service.Api
 {
-    public class ApiServerConfiguration : HttpServerConfiguration
+    public class ApiHostConfiguration : HttpHostConfiguration
     {
-        public ApiServerConfiguration() : base("Api", 81)
+        public ApiHostConfiguration() : base("Api", 81)
         {
             if (Environment != Environment.Localhost)
             {
@@ -19,7 +19,7 @@ namespace Iconlook.Service.Api
         public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
             base.Configure(application, environment);
-            application.UseServiceStack(new ApiServiceHost(this));
+            application.UseServiceStack(new ApiServiceStack(this));
         }
     }
 }

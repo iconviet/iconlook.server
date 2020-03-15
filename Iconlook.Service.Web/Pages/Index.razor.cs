@@ -35,7 +35,7 @@ namespace Iconlook.Service.Web.Pages
         {
             using (var rolex = new Rolex())
             {
-                using (var redis = ServerBase.Provider.GetService<IRedisClient>())
+                using (var redis = HostBase.Container.GetService<IRedisClient>())
                 {
                     var peers = redis.As<PeerResponse>().GetAll();
                     var chains = redis.As<ChainResponse>().GetAll();

@@ -5,11 +5,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace Iconlook.Service.Api
 {
-    public class ApiServer : ServerBase
+    public class ApiHost : HostBase
     {
         public static Task Main()
         {
-            var configuration = new ApiServerConfiguration();
+            var configuration = new ApiHostConfiguration();
             return StartAsync(configuration,
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())));
         }
