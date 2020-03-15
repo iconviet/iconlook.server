@@ -67,8 +67,8 @@ namespace Iconlook.Service.Web
                 }
                 return next();
             });
-            application.UseWhen(context =>
-                    context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/sse"),
+            application.UseWhen(
+                context => context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/sse"),
                 builder => builder.UseServiceStack(new WebServiceHost(this)));
             application.UseRouting();
             application.UseWebMarkupMin();
@@ -119,7 +119,6 @@ namespace Iconlook.Service.Web
                 {
                     connection = connection.Replace("redis", "localhost");
                 }
-
                 services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection);
             }
             if (!OperatingSystem.IsWindows)
