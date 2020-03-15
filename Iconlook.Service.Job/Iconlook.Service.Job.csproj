@@ -21,7 +21,6 @@
     <PackageReference Include="Twilio" Version="5.37.6" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Iconlook.Client\Iconlook.Client.csproj" />
     <ProjectReference Include="..\Iconlook.Server\Iconlook.Server.csproj" />
   </ItemGroup>
 </Project>
