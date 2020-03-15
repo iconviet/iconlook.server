@@ -20,6 +20,5 @@ namespace Iconlook.Service.Api
             base.Configure(application);
             application.UseServiceStack(new ApiServiceHost(this));
         }
-
     }
 }
