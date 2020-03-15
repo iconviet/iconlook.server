@@ -278,7 +278,6 @@
     private void ChipListOnClick(ClickEventArgs args)
     {
         EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
-        EjsGrid.Refresh();
     }
 
 }

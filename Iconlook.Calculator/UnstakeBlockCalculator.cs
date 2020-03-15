@@ -27,11 +27,6 @@ namespace Iconlook.Calculator
             return $"{duration:%d}d {duration:%h}h {duration:%m}m";
         }
 
-        public DateTime GetRequestDateTime()
-        {
-            return DateTime.UtcNow.AddSeconds((_requested - _height) * 2);
-        }
-
         public string GetUnstakingCountdownShort()
         {
             var duration = TimeSpan.FromSeconds((_unstaked - _height) * 2);
@@ -40,6 +35,11 @@ namespace Iconlook.Calculator
                     ? $"{duration:%m}m"
                     : $"{duration:%h}h {duration:%m}m";
             return $"{duration:%d}d {duration:%h}h {duration:%m}m";
+        }
+
+        public DateTime GetRequestDateTime()
+        {
+            return DateTime.UtcNow.AddSeconds((_requested - _height) * 2 - 120);
         }
 
         public string GetRequestDateTimeAge()

@@ -38,8 +38,8 @@ namespace Iconlook.Service.Job
                                 Hash = key,
                                 Name = name,
                                 Type = AddressType.Wallet,
-                                UnstakedBlockHeight = long.Parse(tuple[3]),
                                 RequestedBlockHeight = long.Parse(tuple[2]),
+                                UnstakedBlockHeight = long.Parse(tuple[3]) - 17, // TODO: offset for deviation
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Class = name == null ? AddressClass.Iconist : AddressClass.PRep,
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
