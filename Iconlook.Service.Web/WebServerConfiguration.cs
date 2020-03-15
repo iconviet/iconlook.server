@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ServiceStack;
 using StackExchange.Redis;
 using Syncfusion.EJ2.Blazor;
@@ -34,9 +35,9 @@ namespace Iconlook.Service.Web
             }
         }
 
-        public override void Configure(IApplicationBuilder application)
+        public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
-            base.Configure(application);
+            base.Configure(application, environment);
             application.Use((context, next) =>
             {
                 if (Environment != Environment.Localhost)

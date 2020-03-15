@@ -1,6 +1,7 @@
 ﻿using Agiper;
 using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using ServiceStack;
 
 namespace Iconlook.Service.Api
@@ -15,9 +16,9 @@ namespace Iconlook.Service.Api
             }
         }
 
-        public override void Configure(IApplicationBuilder application)
+        public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
-            base.Configure(application);
+            base.Configure(application, environment);
             application.UseServiceStack(new ApiServiceHost(this));
         }
     }
