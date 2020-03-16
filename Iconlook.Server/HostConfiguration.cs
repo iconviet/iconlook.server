@@ -44,7 +44,7 @@ namespace Iconlook.Server
         protected override void ConfigureNServiceBusTransportRouting(RoutingSettings routing)
         {
             base.ConfigureNServiceBusTransportRouting(routing);
-            routing.RouteToEndpoint(typeof(SendTelegramCommand), "Iconlook.Job");
+            routing.RouteToEndpoint(typeof(TextMessageCommand), "Iconlook.Job");
         }
     }
 }

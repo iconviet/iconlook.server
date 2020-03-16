@@ -10,15 +10,15 @@ using Serilog;
 using ServiceStack;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Job.Works
 {
-    public class UpdatePeersJob : JobBase
+    public class UpdatePeersWork : WorkBase
     {
-        public override async Task RunAsync()
+        public override async Task StartAsync()
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Job} started", nameof(UpdatePeersJob));
+                Log.Information("{Work} started", nameof(UpdatePeersWork));
                 try
                 {
                     using (var redis = Redis.Instance())
@@ -55,7 +55,7 @@ namespace Iconlook.Service.Job
                             }));
                             if (peers.Any())
                             {
-                                if (UpdateBlockJob.LastBlockHeight % 10 == 0)
+                                if (UpdateBlockWork.LastBlockHeight % 10 == 0)
                                 {
                                     redis.StoreAll(peers);
                                 }
@@ -72,9 +72,9 @@ namespace Iconlook.Service.Job
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Job} failed to run. {Message}", nameof(UpdatePeersJob), exception.Message);
+                    Log.Error("{Work} failed to run. {Message}", nameof(UpdatePeersWork), exception.Message);
                 }
-                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

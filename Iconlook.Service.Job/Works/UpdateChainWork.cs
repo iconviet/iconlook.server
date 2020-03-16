@@ -14,18 +14,18 @@ using Iconlook.Server;
 using NServiceBus;
 using Serilog;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Job.Works
 {
-    public class UpdateChainJob : JobBase
+    public class UpdateChainWork : WorkBase
     {
         public static long LastBlockHeight;
         public static decimal LastIcxPrice;
 
-        public override async Task RunAsync()
+        public override async Task StartAsync()
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Job} started", nameof(UpdateChainJob));
+                Log.Information("{Work} started", nameof(UpdateChainWork));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -84,10 +84,10 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}", nameof(UpdateChainJob), exception.Message);
+                        Log.Error("{Work} failed to run. {Message}", nameof(UpdateChainWork), exception.Message);
                     }
                 }
-                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateChainJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

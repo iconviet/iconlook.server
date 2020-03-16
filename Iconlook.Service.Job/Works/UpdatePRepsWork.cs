@@ -11,22 +11,24 @@ using Iconlook.Client.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using Lykke.Icon.Sdk.Data;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
+using StringExtensions = Agiper.StringExtensions;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Job.Works
 {
-    public class UpdatePRepsJob : JobBase
+    public class UpdatePRepsWork : WorkBase
     {
-        public override async Task RunAsync()
+        public override async Task StartAsync()
         {
             using (var time = new Rolex())
             using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
-                Log.Information("{Job} started", nameof(UpdatePRepsJob));
+                Log.Information("{Work} started", nameof(UpdatePRepsWork));
                 try
                 {
                     var prep_list = new List<PRep>();
@@ -43,9 +45,9 @@ namespace Iconlook.Service.Job
                         {
                             string logo_url = null;
                             var ranking = prep_rpcs.IndexOf(prep) + 1;
-                            prep = await service.GetPRep(prep.GetAddress());
+                            prep = await service.GetPRep((Address) prep.GetAddress());
                             var details = prep.GetDetails();
-                            if (details.HasValue())
+                            if (StringExtensions.HasValue(details))
                             {
                                 var response = await http.GetAsync<string>(details);
                                 if (response.HasValue() && response.StartsWith('{'))
@@ -55,7 +57,7 @@ namespace Iconlook.Service.Job
                                 }
                                 else
                                 {
-                                    Log.Warning("{Name} : Failed to load details.", prep.GetName());
+                                    Log.Warning<string>("{Name} : Failed to load details.", prep.GetName());
                                 }
                             }
                             var delegates = await tracker.GetDelegates(prep.GetAddress().ToString());
@@ -77,7 +79,7 @@ namespace Iconlook.Service.Job
                                 Direction = new Random().NextDouble() >= 0.5,
                                 Balance = new Random().Next(100000, 10000000),
                                 ProducedBlocks = (long) prep.GetTotalBlocks(),
-                                Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
+                                Votes = (long) BigIntegerExtensions.ToIcxFromLoop(prep.GetDelegated()),
                                 Testnet = new[] { true, false }[new Random().Next(0, 1)],
                                 MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
                                 Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
@@ -85,8 +87,8 @@ namespace Iconlook.Service.Job
                                 Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
                                 Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],
                                 Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
-                                DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
-                                ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
+                                DelegatedPercentage = (double) (BigIntegerExtensions.ToDecimal(prep.GetDelegated()) / prep_info.GetTotalDelegated().ToDecimal()),
+                                ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (BigIntegerExtensions.ToDecimal(prep.GetValidatedBlocks()) / BigIntegerExtensions.ToDecimal(prep.GetTotalBlocks())) : 0
                             }.ThenDo(x =>
                             {
                                 prep_history_list.Add(new PRepHistory
@@ -98,7 +100,7 @@ namespace Iconlook.Service.Job
                         }
                         catch
                         {
-                            Log.Warning("{Name} : Failed to load info.", prep.GetName());
+                            Log.Warning<string>("{Name} : Failed to load info.", prep.GetName());
                         }
                     })));
                     await db.SaveAllAsync(prep_list.ToList());
@@ -125,7 +127,7 @@ namespace Iconlook.Service.Job
                         r.DailyReward = (long) calculator.GetDailyReward();
                         r.YearlyReward = (long) calculator.GetYearlyReward();
                         r.MonthlyReward = (long) calculator.GetMonthlyReward();
-                        r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainJob.LastIcxPrice;
+                        r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainWork.LastIcxPrice;
                     })));
                     Log.Information("**************************************************");
                     Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
@@ -135,10 +137,10 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
+                        Log.Error("{Work} failed to run. {Message}.", nameof(UpdatePRepsWork), exception.Message);
                     }
                 }
-                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersJob), time.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }

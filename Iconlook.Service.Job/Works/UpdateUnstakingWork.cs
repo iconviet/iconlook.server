@@ -9,16 +9,16 @@ using Iconlook.Client.Chainalytic;
 using Iconlook.Object;
 using Serilog;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Job.Works
 {
-    public class UpdateUnstakingJob : JobBase
+    public class UpdateUnstakingWork : WorkBase
     {
-        public override async Task RunAsync()
+        public override async Task StartAsync()
         {
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                Log.Information("{Job} started", nameof(UpdateUnstakingJob));
+                Log.Information("{Work} started", nameof(UpdateUnstakingWork));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
@@ -45,7 +45,7 @@ namespace Iconlook.Service.Job
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
                             var calculator = new UnstakeBlockCalculator(
-                                UpdateBlockJob.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
+                                UpdateBlockWork.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
                             address.RequestedDateTime = calculator.GetRequestDateTime();
                             address.UnstakingCountdown = calculator.GetUnstakingCountdown();
                             address.RequestedDateTimeAge = calculator.GetRequestDateTimeAge();
@@ -58,10 +58,10 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}.", nameof(UpdateUnstakingJob), exception.Message);
+                        Log.Error("{Work} failed to run. {Message}.", nameof(UpdateUnstakingWork), exception.Message);
                     }
                 }
-                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateUnstakingJob), time.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateUnstakingWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }

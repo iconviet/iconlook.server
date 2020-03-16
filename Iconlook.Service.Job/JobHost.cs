@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Agiper.Server;
+using Iconlook.Service.Job.Works;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,10 +18,10 @@ namespace Iconlook.Service.Job
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateBlockJob>().RunAsync());
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateChainJob>().RunAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdatePRepsJob>().RunAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdateUnstakingJob>().RunAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateBlockWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateChainWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdatePRepsWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdateUnstakingWork>().StartAsync());
                 });
         }
     }

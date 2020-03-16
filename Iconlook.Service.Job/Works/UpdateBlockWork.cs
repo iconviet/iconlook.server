@@ -11,19 +11,19 @@ using Iconlook.Server;
 using NServiceBus;
 using Serilog;
 
-namespace Iconlook.Service.Job
+namespace Iconlook.Service.Job.Works
 {
-    public class UpdateBlockJob : JobBase
+    public class UpdateBlockWork : WorkBase
     {
         public static long LastBlockHeight;
 
         private const string EMPTY_ADDRESS = "cx0000000000000000000000000000000000000000";
 
-        public override async Task RunAsync()
+        public override async Task StartAsync()
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Job} started", nameof(UpdateBlockJob));
+                Log.Information("{Work} started", nameof(UpdateBlockWork));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -80,10 +80,10 @@ namespace Iconlook.Service.Job
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Job} failed to run. {Message}", nameof(UpdateBlockJob), exception.Message);
+                        Log.Error("{Work} failed to run. {Message}", nameof(UpdateBlockWork), exception.Message);
                     }
                 }
-                Log.Information("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockJob), rolex.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
