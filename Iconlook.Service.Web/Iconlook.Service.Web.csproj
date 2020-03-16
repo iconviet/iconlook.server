@@ -18,7 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Service.Api\Iconlook.Service.Api.csproj" />
-    <ProjectReference Include="..\Iconlook.Service.Job\Iconlook.Service.Job.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
