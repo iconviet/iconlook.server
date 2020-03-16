@@ -4,7 +4,7 @@ services:
   # SEQ
   seq:
     ports:
-      - 8080:80
+      - 5340:80
       - 5341:5341
     restart: always
     image: iconviet/seq
@@ -24,6 +24,7 @@ services:
   ravendb:
     restart: always
     ports:
+      - 8080:8080
       - 38888:38888
     image: iconviet/ravendb
     container_name: ravendb

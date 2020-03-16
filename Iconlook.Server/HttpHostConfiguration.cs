@@ -19,8 +19,8 @@ namespace Iconlook.Server
         {
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Memory;
-            NServiceBusPersistence = NServiceBusPersistence.SqlServer;
+            HangfireJobPersistence = HangfireJobPersistence.Redis;
+            NServiceBusPersistence = NServiceBusPersistence.RavenDB;
         }
 
         protected override void ConfigureContainer(ContainerBuilder builder)
