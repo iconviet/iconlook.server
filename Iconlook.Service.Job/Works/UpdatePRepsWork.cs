@@ -47,7 +47,7 @@ namespace Iconlook.Service.Job.Works
                             var ranking = prep_rpcs.IndexOf(prep) + 1;
                             prep = await service.GetPRep((Address) prep.GetAddress());
                             var details = prep.GetDetails();
-                            if (StringExtensions.HasValue(details))
+                            if (details.HasValue())
                             {
                                 var response = await http.GetAsync<string>(details);
                                 if (response.HasValue() && response.StartsWith('{'))
@@ -79,7 +79,7 @@ namespace Iconlook.Service.Job.Works
                                 Direction = new Random().NextDouble() >= 0.5,
                                 Balance = new Random().Next(100000, 10000000),
                                 ProducedBlocks = (long) prep.GetTotalBlocks(),
-                                Votes = (long) BigIntegerExtensions.ToIcxFromLoop(prep.GetDelegated()),
+                                Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
                                 Testnet = new[] { true, false }[new Random().Next(0, 1)],
                                 MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
                                 Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
@@ -87,8 +87,8 @@ namespace Iconlook.Service.Job.Works
                                 Regions = new[] { "Asia", "Europe", "US", "Australia" }[new Random().Next(0, 4)],
                                 Goals = new[] { "Development", "Awareness", "Expansion" }[new Random().Next(0, 3)],
                                 Hosting = new[] { "Azure", "Amazon", "Google", "Bare Metal" }[new Random().Next(0, 4)],
-                                DelegatedPercentage = (double) (BigIntegerExtensions.ToDecimal(prep.GetDelegated()) / prep_info.GetTotalDelegated().ToDecimal()),
-                                ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (BigIntegerExtensions.ToDecimal(prep.GetValidatedBlocks()) / BigIntegerExtensions.ToDecimal(prep.GetTotalBlocks())) : 0
+                                DelegatedPercentage = (double) (prep.GetDelegated().ToDecimal() / prep_info.GetTotalDelegated().ToDecimal()),
+                                ProductivityPercentage = prep.GetValidatedBlocks() > 0 ? (double) (prep.GetValidatedBlocks().ToDecimal() / prep.GetTotalBlocks().ToDecimal()) : 0
                             }.ThenDo(x =>
                             {
                                 prep_history_list.Add(new PRepHistory
@@ -100,7 +100,7 @@ namespace Iconlook.Service.Job.Works
                         }
                         catch
                         {
-                            Log.Warning<string>("{Name} : Failed to load info.", prep.GetName());
+                            Log.Warning("{Name} : Failed to load info.", prep.GetName());
                         }
                     })));
                     await db.SaveAllAsync(prep_list.ToList());
@@ -140,7 +140,7 @@ namespace Iconlook.Service.Job.Works
                         Log.Error("{Work} failed to run. {Message}.", nameof(UpdatePRepsWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), time.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }

@@ -10,12 +10,15 @@ using Serilog;
 using ServiceStack;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
 
-namespace Iconlook.Service.Job.Works
+namespace Iconlook.Service.Mon.Works
 {
     public class UpdatePeersWork : WorkBase
     {
+        public static long StartCount;
+
         public override async Task StartAsync()
         {
+            StartCount++;
             using (var rolex = new Rolex())
             {
                 Log.Information("{Work} started", nameof(UpdatePeersWork));
@@ -55,7 +58,7 @@ namespace Iconlook.Service.Job.Works
                             }));
                             if (peers.Any())
                             {
-                                if (UpdateBlockWork.LastBlockHeight % 10 == 0)
+                                if (StartCount % 10 == 0)
                                 {
                                     redis.StoreAll(peers);
                                 }

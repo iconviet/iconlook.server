@@ -19,6 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Client\Iconlook.Client.csproj" />
     <ProjectReference Include="..\Iconlook.Server\Iconlook.Server.csproj" />
-    <ProjectReference Include="..\Iconlook.Service.Job\Iconlook.Service.Job.csproj" />
   </ItemGroup>
 </Project>
