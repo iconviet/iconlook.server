@@ -1,5 +1,5 @@
 ﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
-@inject HttpContextAccessor HttpContext
+@inject HttpContextAccessor HttpAccessor
 <style>
     .address-name {
         padding: 3px 7px;
@@ -192,6 +192,6 @@
 
     protected override void OnInitialized()
     {
-        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
     }
 }

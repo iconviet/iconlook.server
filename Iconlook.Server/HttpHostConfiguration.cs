@@ -17,6 +17,7 @@ namespace Iconlook.Server
 
         public HttpHostConfiguration(string hostname, int port) : base(hostname, port)
         {
+            NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
             HangfireJobPersistence = HangfireJobPersistence.Memory;
             NServiceBusPersistence = NServiceBusPersistence.SqlServer;

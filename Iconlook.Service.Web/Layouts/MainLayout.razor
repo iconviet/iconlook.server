@@ -1,6 +1,6 @@
 ﻿@using Agiper.Server
 @inherits LayoutComponentBase
-@inject HttpContextAccessor HttpContext
+@inject HttpContextAccessor HttpAccessor
 <style>
     footer .list-group-item {
         color: #ffffff;
@@ -176,7 +176,7 @@
 
     protected override void OnInitialized()
     {
-        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
         MenuItems = new List<MenuItem>
         {
             new MenuItem

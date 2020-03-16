@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Agiper;
-using Iconlook.Object;
-using Serilog;
-using Microsoft.Extensions.DependencyInjection;
-using ServiceStack.Redis;
 using Agiper.Server;
-using Microsoft.AspNetCore.Components;
-using NServiceBus;
 using Iconlook.Message;
+using Iconlook.Object;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
+using NServiceBus;
+using Serilog;
+using ServiceStack.Redis;
 
 namespace Iconlook.Service.Web.Pages
 {
@@ -17,16 +17,17 @@ namespace Iconlook.Service.Web.Pages
         [Inject]
         public IMessageSession Endpoint { get; set; }
 
+        [Inject]
+        public HttpContextAccessor HttpAccessor { get; set; }
+
         protected override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                Endpoint.Send(new SendTelegramCommand
+                Endpoint.Publish(new UserTrackedEvent
                 {
-                    Id = -1001449380420,
-                    Text = "User Visited"
+                    Description = "User Visited"
                 }).ConfigureAwait(false);
-                Endpoint.Publish(new WebAccessedEvent()).ConfigureAwait(false);
             }
             return base.OnAfterRenderAsync(firstRender);
         }
