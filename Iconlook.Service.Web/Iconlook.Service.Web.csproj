@@ -4,8 +4,8 @@
     <Authors>Tom Nuen</Authors>
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Dockerfile">
@@ -21,9 +21,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.0-preview.1.20124.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.0-preview.1.20124.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="5.0.0-preview.1.20124.5" />
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.4.0.55" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.55" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.1" />

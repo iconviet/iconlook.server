@@ -4,8 +4,8 @@
     <Authors>Tom Nuen</Authors>
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Copyright>Copyright © ICONVIET 2018-2019</Copyright>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Dockerfile">
