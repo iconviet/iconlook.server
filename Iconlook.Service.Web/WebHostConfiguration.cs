@@ -59,12 +59,12 @@ namespace Iconlook.Service.Web
                     !context.Request.Path.StartsWithSegments("/_blazor"))
                 {
                     var user_hash_id = context.Request.Cookies[Cookies.USER_HASH_ID];
-                    var endpoint = context.RequestServices.GetService<IMessageSession>();
+                    var endpoint = context.RequestServices.TryResolve<IMessageSession>();
                     if (user_hash_id.HasValue())
                     {
                         endpoint.Publish(new WebAccessedEvent
                         {
-                            Description = $"[{user_hash_id.Substring(0, 4)}] Old User Revisited"
+                            Description = $"{user_hash_id.Substring(0, 4)} | Old User"
                         }).ConfigureAwait(false);
                     }
                     else
@@ -77,7 +77,7 @@ namespace Iconlook.Service.Web
                             });
                         endpoint.Publish(new WebAccessedEvent
                         {
-                            Description = $"[{user_hash_id.Substring(0, 4)}] *New User Visited*"
+                            Description = $"{user_hash_id.Substring(0, 4)} | NEW USER DETECTED"
                         }).ConfigureAwait(false);
                     }
                 }

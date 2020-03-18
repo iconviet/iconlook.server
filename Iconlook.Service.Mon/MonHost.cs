@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Agiper.Server;
 using Iconlook.Service.Mon.Works;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServiceStack;
 
 namespace Iconlook.Service.Mon
 {
@@ -18,7 +18,7 @@ namespace Iconlook.Service.Mon
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdatePeersWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdatePeersWork>().StartAsync());
                 });
         }
     }

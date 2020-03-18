@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
 using Iconlook.Object;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using ServiceStack;
 using ServiceStack.Redis;
 
 namespace Iconlook.Service.Web.Pages
@@ -15,7 +15,7 @@ namespace Iconlook.Service.Web.Pages
         {
             using (var rolex = new Rolex())
             {
-                using (var redis = HostBase.Container.GetService<IRedisClient>())
+                using (var redis = HostBase.Container.TryResolve<IRedisClient>())
                 {
                     var peers = redis.As<PeerResponse>().GetAll();
                     var chains = redis.As<ChainResponse>().GetAll();
