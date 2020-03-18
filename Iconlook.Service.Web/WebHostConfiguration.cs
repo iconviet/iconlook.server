@@ -64,7 +64,7 @@ namespace Iconlook.Service.Web
                     {
                         endpoint.Publish(new WebAccessedEvent
                         {
-                            Description = $"{user_hash_id.Substring(0, 4)} | Old User"
+                            Description = $"[{user_hash_id.Substring(0, 4)}| old user revisited!!!"
                         }).ConfigureAwait(false);
                     }
                     else
@@ -77,7 +77,7 @@ namespace Iconlook.Service.Web
                             });
                         endpoint.Publish(new WebAccessedEvent
                         {
-                            Description = $"{user_hash_id.Substring(0, 4)} | NEW USER DETECTED"
+                            Description = $"[{user_hash_id.Substring(0, 4)}] NEW USER DETECTED 🥳"
                         }).ConfigureAwait(false);
                     }
                 }
