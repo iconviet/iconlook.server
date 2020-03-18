@@ -1,0 +1,184 @@
+﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+@inject HttpContextAccessor HttpAccessor
+<style>
+    .address-name {
+        padding: 3px 7px;
+        border-radius: 3px;
+        background-color: #e1fafd;
+        border: solid 1px #1aaaba;
+    }
+
+    .staked_amount .number-part { font-weight: 600; }
+
+    .staked_amount .fraction-part { font-weight: 400; }
+
+    .delegated_amount .number-part { font-weight: 600; }
+
+    .delegated_amount .fraction-part {
+        font-weight: 400;
+    }
+
+    .undelegated_amount .number-part { font-weight: 700; }
+
+    .undelegated_amount .fraction-part { font-weight: 500; }
+</style>
+<style media="(max-width: 769px)">
+    #undelegated_grid td.e-rowcell:nth-child(1) {
+        width: auto;
+    }
+
+    #undelegated_grid td.e-rowcell:nth-child(2) {
+        width: 90px;
+    }
+
+    #undelegated_grid td.e-rowcell:nth-child(3) {
+        width: 150px;
+    }
+</style>
+<div class="px-2 py-1 border-bottom">
+    <EjsChipList Selection="Selection.Single" SelectedChips="0">
+        <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
+        <ChipCollection>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
+            <ChipListChip Text="FISHES" Value="100000icx"></ChipListChip>
+            <ChipListChip Text="WHALES" Value="1000000icx"></ChipListChip>
+        </ChipCollection>
+    </EjsChipList>
+</div>
+<EjsGrid @ref="EjsGrid"
+         EnableHover="false"
+         AllowPaging="Paging"
+         EnableAltRow="false"
+         ID="undelegated_grid"
+         AllowSorting="Sorting"
+         AllowSelection="false"
+         GridLines="GridLine.Horizontal"
+         TValue="UndelegatedAddressResponse">
+    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
+    <EjsDataManager Url="/api/v1/address/list/undelegated" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <GridColumns>
+        <GridColumn HeaderText="Address" Field="@nameof(UndelegatedAddressResponse.Hash)">
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        if (address.Name != null)
+                        {
+                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                                <span class="fs-n1 address-name font-weight-semibold">
+                                    @address.Name
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                                <span class="fs-n1 mono">@address.Hash</span>
+                            </a>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="180" HeaderText="Undelegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Undelegated)">
+            <Template>
+                @{
+                    if (context is UndelegatedAddressResponse address)
+                    {
+                        if (address.Staked - address.Delegated == 0)
+                        {
+                            <span class="pl-1 text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 undelegated_amount">@((address.Staked - address.Delegated).ToIcxString())</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="170" HeaderText="Delegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Delegated)">
+            <Template>
+                @{
+                    if (context is UndelegatedAddressResponse address)
+                    {
+                        if (address.Delegated == 0)
+                        {
+                            <span class="pl-1 text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 text-light delegated_amount">@address.Delegated.ToIcxString()</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="200" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Staked)">
+            <Template>
+                @{
+                    if (context is UndelegatedAddressResponse address)
+                    {
+                        if (address.Staked >= 1000000)
+                        {
+                            <i class="fas mr-1 fs-n2 fa-whale special"></i>
+                        }
+                        if (address.Staked > 100000 && address.Staked < 1000000)
+                        {
+                            <i class="far mr-1 fs-n2 fa-fish special"></i>
+                        }
+                        <span class="mono ls-n2 staked_amount">@address.Staked.ToIcxString()</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="250" HeaderText="Note" TextAlign="TextAlign.Center" Field="@nameof(UndelegatedAddressResponse.Comment)">
+            <HeaderTemplate>
+                <span><i class="fal pr-2 fa-comment"></i>Comment</span>
+            </HeaderTemplate>
+            <Template>
+                @{
+                    if (context is AddressResponse address)
+                    {
+                        if (address.Comment.HasValue())
+                        {
+                            <span class="pl-1 fs-n1 font-italic font-weight-light">@address.Comment</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</EjsGrid>
+
+@code
+{
+    protected bool IsMobile;
+
+    [Parameter]
+    public bool Paging { get; set; }
+
+    [Parameter]
+    public bool Sorting { get; set; }
+
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
+
+    protected EjsGrid<UndelegatedAddressResponse> EjsGrid;
+
+    private void ChipListOnClick(ClickEventArgs args)
+    {
+        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+    }
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}

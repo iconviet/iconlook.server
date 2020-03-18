@@ -21,7 +21,7 @@ namespace Iconlook.Service.Job
                     Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateBlockWork>().StartAsync());
                     Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.GetService<UpdateChainWork>().StartAsync());
                     Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdatePRepsWork>().StartAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.GetService<UpdateUnstakingWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(9)).Subscribe(async x => await Container.GetService<UpdateChainalyticWork>().StartAsync());
                 });
         }
     }

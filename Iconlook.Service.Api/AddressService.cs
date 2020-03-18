@@ -44,5 +44,40 @@ namespace Iconlook.Service.Api
                 };
             }
         }
+
+        [CacheResponse(Duration = 60, LocalCache = true)]
+        public object Any(UndelegatedAddressListRequest request)
+        {
+            using (var redis = Redis.Instance())
+            {
+                var items = redis.As<UndelegatedAddressResponse>().GetAll();
+                switch (request.Filter)
+                {
+                    default:
+                        items = items.Where(x => x.Staked >= 100).ToList();
+                        break;
+                    case "10000icx":
+                        items = items.Where(x => x.Staked >= 10000).ToList();
+                        break;
+                    case "100000icx":
+                        items = items.Where(x => x.Staked >= 100000).ToList();
+                        break;
+                    case "500000icx":
+                        items = items.Where(x => x.Staked >= 500000).ToList();
+                        break;
+                    case "1000000icx":
+                        items = items.Where(x => x.Staked >= 1000000).ToList();
+                        break;
+                }
+                return new UndelegatedAddressListResponse(items
+                    .OrderByDescending(x => x.Undelegated)
+                    .Skip(items.Count > request.Take ? request.Skip : 0).Take(request.Take))
+                {
+                    Count = items.Count,
+                    Take = request.Take,
+                    Skip = items.Count > request.Take ? request.Skip : 0
+                };
+            }
+        }
     }
 }

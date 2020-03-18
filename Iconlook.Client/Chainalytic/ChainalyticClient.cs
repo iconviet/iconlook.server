@@ -65,5 +65,24 @@ namespace Iconlook.Client.Chainalytic
                 return response ?? new UnstakingInfoRpc { Id = 123 };
             }
         }
+
+        public async Task<UndelegatedInfoRpc> GetUndelegatedInfo()
+        {
+            using (JsConfig.With(new Config { TextCase = TextCase.SnakeCase }))
+            {
+                var response = await _client.PostAsync<UndelegatedInfoRpc>("/", new RpcRequest
+                {
+                    Id = 123,
+                    Jsonrpc = "2.0",
+                    Method = "_call",
+                    Params = new
+                    {
+                        CallId = "api_call",
+                        ApiId = "abstention_stake"
+                    }
+                });
+                return response ?? new UndelegatedInfoRpc { Id = 123 };
+            }
+        }
     }
 }

@@ -8,13 +8,13 @@
         border: solid 1px #1aaaba;
     }
 
-    .balance_amount .number-part { font-weight: 600; }
+    .staked_amount .number-part { font-weight: 600; }
 
-    .balance_amount .fraction-part { font-weight: 400; }
+    .staked_amount .fraction-part { font-weight: 400; }
 
-    .requested_amount .number-part { font-weight: 700; }
+    .unstaking_amount .number-part { font-weight: 700; }
 
-    .requested_amount .fraction-part { font-weight: 500; }
+    .unstaking_amount .fraction-part { font-weight: 500; }
 </style>
 <style media="(max-width: 769px)">
     #unstaking_grid td.e-rowcell:nth-child(1) {
@@ -77,7 +77,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+        <GridColumn Width="145" HeaderText="Unstaking" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -90,13 +90,13 @@
                         {
                             <i class="far mr-1 fs-n2 fa-fish special"></i>
                         }
-                        <span class="mono ls-n2 requested_amount">@address.Unstaking.ToIcxString()</span>
+                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Balance" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
+        <GridColumn Width="140" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -107,7 +107,7 @@
                         }
                         else
                         {
-                            <span class="mono ls-n2 text-light balance_amount">@address.Staked.ToIcxString()</span>
+                            <span class="mono ls-n2 text-light staked_amount">@address.Staked.ToIcxString()</span>
                             <span class="pl-1 text-light font-weight-light">ICX</span>
                         }
                     }
@@ -125,7 +125,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="145" HeaderText="Time Left" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
+            <GridColumn Width="145" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -136,7 +136,7 @@
         }
         else
         {
-            <GridColumn Width="205" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="200" HeaderText="Requested Since" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -145,7 +145,7 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="180" HeaderText="Period" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="175" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -154,7 +154,7 @@
                 </Template>
             </GridColumn>
         }
-        <GridColumn Width="120" HeaderText="Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Width="115" HeaderText="At Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)

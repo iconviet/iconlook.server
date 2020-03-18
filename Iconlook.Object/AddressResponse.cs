@@ -9,8 +9,10 @@ namespace Iconlook.Object
         public string Hash { get; set; }
         public string Name { get; set; }
         public decimal Voted { get; set; }
+        public string Comment { get; set; }
         public decimal Staked { get; set; }
         public AddressType Type { get; set; }
+        public decimal Delegated { get; set; }
         public decimal Unstaking { get; set; }
         public decimal Available { get; set; }
         public AddressClass Class { get; set; }

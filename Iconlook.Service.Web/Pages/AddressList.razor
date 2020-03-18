@@ -108,6 +108,11 @@
                         </ContentTemplate>
                     </TabItem>
                     <TabItem Header="Undelegated">
+                        <ContentTemplate>
+                            <div class="card-body p-0">
+                                <AddressListUndelegatedGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></AddressListUndelegatedGrid>
+                            </div>
+                        </ContentTemplate>
                     </TabItem>
                 </TabItems>
             </EjsTab>

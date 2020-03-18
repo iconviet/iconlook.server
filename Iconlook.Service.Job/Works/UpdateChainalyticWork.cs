@@ -11,22 +11,44 @@ using Serilog;
 
 namespace Iconlook.Service.Job.Works
 {
-    public class UpdateUnstakingWork : WorkBase
+    public class UpdateChainalyticWork : WorkBase
     {
         public override async Task StartAsync()
         {
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                Log.Information("{Work} started", nameof(UpdateUnstakingWork));
+                Log.Information("{Work} started", nameof(UpdateChainalyticWork));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
                     var unstaking_info = await chainalytic.GetUnstakingInfo();
+                    var undelegated_info = await chainalytic.GetUndelegatedInfo();
                     var prep_dictionary = redis.As<PRepResponse>().GetAll().ToDictionary(x => x.Address);
                     redis.As<UnstakingAddressResponse>().DeleteAll();
+                    redis.As<UndelegatedAddressResponse>().DeleteAll();
+                    redis.As<UndelegatedAddressResponse>().StoreAll(undelegated_info.GetWallets()
+                        .Where(x => x.Value.Split(':').Length == 3)
+                        .Select(x =>
+                        {
+                            var (key, value) = x;
+                            var tuple = value.Split(':');
+                            var name = prep_dictionary.TryGet(key)?.Name;
+                            var address = new UndelegatedAddressResponse
+                            {
+                                Id = key,
+                                Hash = key,
+                                Name = name,
+                                Type = AddressType.Wallet,
+                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
+                                Class = name == null ? AddressClass.Iconist : AddressClass.PRep,
+                                Delegated = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString()),
+                                Undelegated = decimal.Parse(BigDecimal.Parse(tuple[2]).ToString())
+                            };
+                            return address;
+                        }));
                     redis.As<UnstakingAddressResponse>().StoreAll(unstaking_info.GetWallets()
-                        .Where(x => x.Value.Split(':').Length == 4 && long.TryParse(x.Value.Split(':')[2], out _))
+                        .Where(x => x.Value.Split(':').Length == 4)
                         .Select(x =>
                         {
                             var (key, value) = x;
@@ -58,10 +80,10 @@ namespace Iconlook.Service.Job.Works
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Work} failed to run. {Message}.", nameof(UpdateUnstakingWork), exception.Message);
+                        Log.Error("{Work} failed to run. {Message}.", nameof(UpdateChainalyticWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateUnstakingWork), time.Elapsed.TotalMilliseconds);
+                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }
