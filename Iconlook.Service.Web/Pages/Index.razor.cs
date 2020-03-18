@@ -2,11 +2,8 @@
 using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
-using Iconlook.Message;
 using Iconlook.Object;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
-using NServiceBus;
 using Serilog;
 using ServiceStack.Redis;
 
@@ -14,24 +11,6 @@ namespace Iconlook.Service.Web.Pages
 {
     public partial class Index
     {
-        [Inject]
-        public IMessageSession Endpoint { get; set; }
-
-        [Inject]
-        public HttpContextAccessor HttpAccessor { get; set; }
-
-        protected override Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                Endpoint.Publish(new UserTrackedEvent
-                {
-                    Description = "User Visited"
-                }).ConfigureAwait(false);
-            }
-            return base.OnAfterRenderAsync(firstRender);
-        }
-
         protected override Task OnInitializedAsync()
         {
             using (var rolex = new Rolex())

@@ -8,12 +8,12 @@ using Telegram.Bot.Types;
 
 namespace Iconlook.Service.Job.Handlers
 {
-    public class UserTrackedEventHandler : HandlerBase, IHandleMessages<UserTrackedEvent>
+    public class WebAccessedEventHandler : HandlerBase, IHandleMessages<WebAccessedEvent>
     {
         public TelegramClient Telegram { get; set; }
         public HostConfiguration Configuration { get; set; }
 
-        public Task Handle(UserTrackedEvent message, IMessageHandlerContext context)
+        public Task Handle(WebAccessedEvent message, IMessageHandlerContext context)
         {
             return Configuration.Environment == Environment.Localhost
                 ? Task.CompletedTask

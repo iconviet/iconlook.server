@@ -2,9 +2,8 @@
 
 namespace Iconlook.Message
 {
-    public class UserTrackedEvent : EventBase<UserTrackedEvent>
+    public class WebAccessedEvent : EventBase<WebAccessedEvent>
     {
-        public long UserId { get; set; }
         public string Description { get; set; }
     }
 }

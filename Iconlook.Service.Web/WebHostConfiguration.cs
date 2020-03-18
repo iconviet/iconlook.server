@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Agiper;
+using Iconlook.Message;
 using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -17,11 +18,14 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NServiceBus;
 using ServiceStack;
 using StackExchange.Redis;
 using Syncfusion.EJ2.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
+using Environment = Agiper.Environment;
+using OperatingSystem = Agiper.OperatingSystem;
 
 namespace Iconlook.Service.Web
 {
@@ -38,24 +42,54 @@ namespace Iconlook.Service.Web
         public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
             base.Configure(application, environment);
+            application.UseForwardedHeaders();
+            application.UseStaticFiles();
             application.Use((context, next) =>
             {
                 if (Environment != Environment.Localhost)
                 {
                     context.Request.Scheme = "https";
                 }
-                context.Response.OnStarting(state =>
-                {
-                    var http_context = (HttpContext) state;
-                    var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
-                    http_context.Response.Headers["X-Powered-By"] =
-                        (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
-                    return Task.CompletedTask;
-                }, context);
                 return next();
             });
-            application.UseForwardedHeaders();
-            application.UseStaticFiles();
+            application.Use((context, next) =>
+            {
+                if (!context.Request.Path.StartsWithSegments("/api") &&
+                    !context.Request.Path.StartsWithSegments("/sse") && 
+                    !context.Request.Path.StartsWithSegments("/_blazor"))
+                {
+                    var user_hash_id = context.Request.Cookies[Cookies.USER_HASH_ID];
+                    var endpoint = context.RequestServices.GetService<IMessageSession>();
+                    if (user_hash_id.HasValue())
+                    {
+                        endpoint.Publish(new WebAccessedEvent
+                        {
+                            Description = $"[{user_hash_id.Substring(0, 4)}] Old User Revisited"
+                        }).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        user_hash_id = Generate.FriendlyHashId();
+                        context.Response.Cookies.Append(
+                            Cookies.USER_HASH_ID, user_hash_id, new CookieOptions
+                            {
+                                Expires = DateTime.UtcNow.AddMonths(1)
+                            });
+                        endpoint.Publish(new WebAccessedEvent
+                        {
+                            Description = $"[{user_hash_id.Substring(0, 4)}] *New User Visited*"
+                        }).ConfigureAwait(false);
+                    }
+                }
+                return next();
+            });
+            application.Use((context, next) =>
+            {
+                var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
+                context.Response.Headers["X-Powered-By"] =
+                    (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
+                return next();
+            });
             application.Use((context, next) =>
             {
                 if (context.Request.Path.StartsWithSegments("/api"))
