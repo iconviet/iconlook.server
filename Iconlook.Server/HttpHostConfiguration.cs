@@ -19,7 +19,7 @@ namespace Iconlook.Server
         {
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Redis;
+            HangfireJobPersistence = HangfireJobPersistence.Memory;
             NServiceBusPersistence = NServiceBusPersistence.RavenDB;
         }
 

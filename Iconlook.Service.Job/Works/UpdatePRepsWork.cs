@@ -11,12 +11,10 @@ using Iconlook.Client.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
-using Lykke.Icon.Sdk.Data;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
-using StringExtensions = Agiper.StringExtensions;
 
 namespace Iconlook.Service.Job.Works
 {
@@ -45,7 +43,7 @@ namespace Iconlook.Service.Job.Works
                         {
                             string logo_url = null;
                             var ranking = prep_rpcs.IndexOf(prep) + 1;
-                            prep = await service.GetPRep((Address) prep.GetAddress());
+                            prep = await service.GetPRep(prep.GetAddress());
                             var details = prep.GetDetails();
                             if (details.HasValue())
                             {
@@ -57,7 +55,7 @@ namespace Iconlook.Service.Job.Works
                                 }
                                 else
                                 {
-                                    Log.Warning<string>("{Name} : Failed to load details.", prep.GetName());
+                                    Log.Warning("{Name} : Failed to load details.", prep.GetName());
                                 }
                             }
                             var delegates = await tracker.GetDelegates(prep.GetAddress().ToString());
