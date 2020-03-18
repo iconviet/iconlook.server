@@ -80,7 +80,7 @@ namespace Iconlook.Service.Job.Works
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error("{Work} failed to run. {Message}", nameof(UpdateBlockWork), exception.Message);
+                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWork), exception.Message);
                     }
                 }
                 Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWork), rolex.Elapsed.TotalMilliseconds);

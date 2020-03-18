@@ -75,7 +75,7 @@ namespace Iconlook.Service.Mon.Works
                 }
                 catch (Exception exception)
                 {
-                    Log.Error("{Work} failed to run. {Message}", nameof(UpdatePeersWork), exception.Message);
+                    Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdatePeersWork), exception.Message);
                 }
                 Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), rolex.Elapsed.TotalMilliseconds);
             }
