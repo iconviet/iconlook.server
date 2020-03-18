@@ -26,6 +26,6 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="5.0.0-preview.1.20124.5" />
     <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.4.0.55" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.55" />
-    <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.1" />
+    <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.2" />
   </ItemGroup>
 </Project>
