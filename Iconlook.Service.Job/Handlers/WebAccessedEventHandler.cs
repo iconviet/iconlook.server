@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Agiper;
 using Agiper.Server;
 using Iconlook.Client;
 using Iconlook.Message;
 using NServiceBus;
-using Serilog;
 using ServiceStack;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -26,10 +26,15 @@ namespace Iconlook.Service.Job.Handlers
                        $"<pre>Request: {message.Url}</pre>\n" +
                        (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
                        $"<pre>Browser: {user_agent.Device}, {user_agent.OS}, {user_agent.UA.Family}</pre>";
-            Log.Information(html);
-            return Configuration.Environment == Environment.Localhost
-                ? Task.CompletedTask
-                : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
+            if (!message.Url.Contains("apple-touch-icon") &&
+                new[] { "Other", "Spider" }.Contains(user_agent.Device.ToString()) &&
+                user_agent.OS.ToString() != "Other" && user_agent.UA.Family != "Other")
+            {
+                return Configuration.Environment == Environment.Localhost
+                    ? Task.CompletedTask
+                    : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
+            }
+            return Task.CompletedTask;
         }
     }
 }
