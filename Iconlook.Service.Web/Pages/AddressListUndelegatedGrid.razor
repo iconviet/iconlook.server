@@ -8,7 +8,7 @@
         border: solid 1px #1aaaba;
     }
 
-    .staked_amount .number-part { font-weight: 600; }
+    .staked_amount .number-part { font-weight: 500; }
 
     .staked_amount .fraction-part { font-weight: 400; }
 
@@ -40,8 +40,8 @@
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
             <ChipListChip Text="&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
-            <ChipListChip Text="FISHES" Value="100000icx"></ChipListChip>
-            <ChipListChip Text="WHALES" Value="1000000icx"></ChipListChip>
+            <ChipListChip Text="MARLIN" Value="100000icx"></ChipListChip>
+            <ChipListChip Text="WHALES" Value="500000icx"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
 </div>
@@ -93,7 +93,7 @@
                         {
                             if (IsMobile)
                             {
-                                <span class="mono ls-n2 font-weight-bold">@((address.Staked - address.Delegated).ToString("N0"))</span>
+                                <span class="mono ls-n2 font-weight-semibold">@((address.Staked - address.Delegated).ToString("N0"))</span>
                                 <span class="pl-1 text-light font-weight-light">ICX</span>
                             }
                             else
@@ -129,17 +129,17 @@
                 @{
                     if (context is UndelegatedAddressResponse address)
                     {
-                        if (address.Staked >= 1000000)
+                        if (address.Staked >= 500000)
                         {
                             <i class="fas mr-1 fs-n2 fa-whale special"></i>
                         }
-                        if (address.Staked > 100000 && address.Staked < 1000000)
+                        if (address.Staked > 100000 && address.Staked < 500000)
                         {
-                            <i class="far mr-1 fs-n2 fa-fish special"></i>
+                            <i class="fal mr-1 fs-n2 fa-fish special"></i>
                         }
                         if (IsMobile)
                         {
-                            <span class="mono ls-n2 font-weight-semibold">@address.Staked.ToString("N0")</span>
+                            <span class="mono ls-n2">@address.Staked.ToString("N0")</span>
                             <span class="pl-1 text-light font-weight-light">ICX</span>
                         }
                         else

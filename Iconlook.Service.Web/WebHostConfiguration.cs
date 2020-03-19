@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Agiper;
+using Agiper.Server;
 using Iconlook.Message;
-using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,7 @@ using Syncfusion.EJ2.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 using Environment = Agiper.Environment;
+using HttpHostConfiguration = Iconlook.Server.HttpHostConfiguration;
 using OperatingSystem = Agiper.OperatingSystem;
 
 namespace Iconlook.Service.Web
@@ -44,60 +46,79 @@ namespace Iconlook.Service.Web
             base.Configure(application, environment);
             application.UseForwardedHeaders();
             application.UseStaticFiles();
-            application.Use((context, next) =>
+            application.Use((http, next) =>
             {
                 if (Environment != Environment.Localhost)
                 {
-                    context.Request.Scheme = "https";
+                    http.Request.Scheme = "https";
                 }
                 return next();
             });
-            application.Use((context, next) =>
+            application.Use((http, next) =>
             {
-                if (!context.Request.Path.StartsWithSegments("/api") &&
-                    !context.Request.Path.StartsWithSegments("/sse") && 
-                    !context.Request.Path.StartsWithSegments("/_blazor"))
+                var new_user_hash_id = string.Empty;
+                var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
+                http.Response.OnStarting(x =>
                 {
-                    var user_hash_id = context.Request.Cookies[Cookies.USER_HASH_ID];
-                    var endpoint = context.RequestServices.TryResolve<IMessageSession>();
-                    if (user_hash_id.HasValue())
+                    var state = (HttpContext) x;
+                    if (!state.Request.Path.StartsWithSegments("/api") &&
+                        !state.Request.Path.StartsWithSegments("/sse") &&
+                        !state.Request.Path.StartsWithSegments("/_blazor"))
                     {
-                        endpoint.Publish(new WebAccessedEvent
+                        if (old_user_hash_id.IsNullOrEmpty())
                         {
-                            Description = $"[{user_hash_id.Substring(0, 4)}| old user revisited!!!"
-                        }).ConfigureAwait(false);
+                            new_user_hash_id = Generate.HashId(16).ToUpper();
+                            state.Response.Cookies.Append(
+                                Cookies.USER_HASH_ID, new_user_hash_id, new CookieOptions
+                                {
+                                    Expires = DateTime.UtcNow.AddMonths(1)
+                                });
+                        }
                     }
-                    else
+                    return Task.CompletedTask;
+                }, http);
+                http.Response.OnCompleted(x =>
+                {
+                    var state = (HttpContext) x;
+                    if (!state.Request.Path.StartsWithSegments("/api") &&
+                        !state.Request.Path.StartsWithSegments("/sse") &&
+                        !state.Request.Path.StartsWithSegments("/_blazor"))
                     {
-                        user_hash_id = Generate.FriendlyHashId();
-                        context.Response.Cookies.Append(
-                            Cookies.USER_HASH_ID, user_hash_id, new CookieOptions
+                        var endpoint = HostBase.Container.TryResolve<IMessageSession>();
+                        if (old_user_hash_id.HasValue())
+                        {
+                            endpoint.Publish(new WebAccessedEvent
                             {
-                                Expires = DateTime.UtcNow.AddMonths(1)
-                            });
-                        endpoint.Publish(new WebAccessedEvent
+                                Description = $"[{old_user_hash_id.Substring(0, 4)}] old user revisited"
+                            }).ConfigureAwait(false);
+                        }
+                        if (new_user_hash_id.HasValue())
                         {
-                            Description = $"[{user_hash_id.Substring(0, 4)}] NEW USER DETECTED 🥳"
-                        }).ConfigureAwait(false);
+                            endpoint.Publish(new WebAccessedEvent
+                            {
+                                Description = $"[{new_user_hash_id.Substring(0, 4)}] NEW USER DETECTED 🥳"
+                            }).ConfigureAwait(false);
+                        }
                     }
-                }
+                    return Task.CompletedTask;
+                }, http);
                 return next();
             });
-            application.Use((context, next) =>
+            application.Use((http, next) =>
             {
                 var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
-                context.Response.Headers["X-Powered-By"] =
+                http.Response.Headers["X-Powered-By"] =
                     (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
                 return next();
             });
-            application.Use((context, next) =>
+            application.Use((http, next) =>
             {
-                if (context.Request.Path.StartsWithSegments("/api"))
+                if (http.Request.Path.StartsWithSegments("/api"))
                 {
-                    var query = QueryHelpers.ParseQuery(context.Request.QueryString.Value);
+                    var query = QueryHelpers.ParseQuery(http.Request.QueryString.Value);
                     var builder = new QueryBuilder(query.SelectMany(x => x.Value, (x, y) =>
                         new KeyValuePair<string, string>(x.Key.Replace("$", string.Empty).Replace("top", "take"), y)));
-                    context.Request.QueryString = builder.ToQueryString();
+                    http.Request.QueryString = builder.ToQueryString();
                 }
                 return next();
             });

@@ -27,9 +27,6 @@ namespace Iconlook.Service.Api
                     case "500000icx":
                         items = items.Where(x => x.Unstaking >= 500000).ToList();
                         break;
-                    case "1000000icx":
-                        items = items.Where(x => x.Unstaking >= 1000000).ToList();
-                        break;
                     case "prep_only":
                         items = items.Where(x => x.Class == AddressClass.PRep).ToList();
                         break;
@@ -64,9 +61,6 @@ namespace Iconlook.Service.Api
                         break;
                     case "500000icx":
                         items = items.Where(x => x.Staked >= 500000).ToList();
-                        break;
-                    case "1000000icx":
-                        items = items.Where(x => x.Staked >= 1000000).ToList();
                         break;
                 }
                 return new UndelegatedAddressListResponse(items

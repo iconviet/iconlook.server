@@ -38,7 +38,6 @@
             <ChipListChip Text="10,000+ ICX" Value="10000icx"></ChipListChip>
             <ChipListChip Text="100,000+ ICX" Value="100000icx"></ChipListChip>
             <ChipListChip Text="500,000+ ICX" Value="500000icx"></ChipListChip>
-            <ChipListChip Text="1,000,000+ ICX" Value="1000000icx"></ChipListChip>
         </ChipCollection>
     </EjsChipList>
 </div>
@@ -82,13 +81,13 @@
                 @{
                     if (context is UnstakingAddressResponse address)
                     {
-                        if (address.Unstaking >= 1000000)
+                        if (address.Unstaking >= 500000)
                         {
                             <i class="fas mr-1 fs-n2 fa-whale special"></i>
                         }
-                        if (address.Unstaking > 100000 && address.Unstaking < 1000000)
+                        if (address.Unstaking > 100000 && address.Unstaking < 500000)
                         {
-                            <i class="far mr-1 fs-n2 fa-fish special"></i>
+                            <i class="fal mr-1 fs-n2 fa-fish special"></i>
                         }
                         <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
