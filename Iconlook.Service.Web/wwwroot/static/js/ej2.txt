@@ -1,5 +1,4 @@
-﻿https://cdn.syncfusion.com/ej2/17.4.55/dist/ejs.interop.min.js
-https://raw.githubusercontent.com/syncfusion/ej2-javascript-ui-controls/master/controls/base/dist/global/ej2-base.min.js
+﻿https://raw.githubusercontent.com/syncfusion/ej2-javascript-ui-controls/master/controls/base/dist/global/ej2-base.min.js
 https://raw.githubusercontent.com/syncfusion/ej2-javascript-ui-controls/master/controls/buttons/dist/global/ej2-buttons.min.js
 https://raw.githubusercontent.com/syncfusion/ej2-javascript-ui-controls/master/controls/data/dist/global/ej2-data.min.js
 https://raw.githubusercontent.com/syncfusion/ej2-javascript-ui-controls/master/controls/dropdowns/dist/global/ej2-dropdowns.min.js
