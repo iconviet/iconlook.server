@@ -4,6 +4,11 @@ namespace Iconlook.Message
 {
     public class WebAccessedEvent : EventBase<WebAccessedEvent>
     {
-        public string Description { get; set; }
+        public string Url { get; set; }
+        public string Referer { get; set; }
+        public string UserAgent { get; set; }
+        public string UserHashId { get; set; }
+        public string IconString { get; set; }
+        public string BodyString { get; set; }
     }
 }

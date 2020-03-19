@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Agiper;
-using Agiper.Server;
 using Iconlook.Message;
+using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +26,6 @@ using Syncfusion.EJ2.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 using Environment = Agiper.Environment;
-using HttpHostConfiguration = Iconlook.Server.HttpHostConfiguration;
 using OperatingSystem = Agiper.OperatingSystem;
 
 namespace Iconlook.Service.Web
@@ -57,6 +56,9 @@ namespace Iconlook.Service.Web
             application.Use((http, next) =>
             {
                 var new_user_hash_id = string.Empty;
+                var url = http.Request.GetDisplayUrl();
+                var referer = http.Request.Headers["Referer"].ToString();
+                var user_agent = http.Request.Headers["User-Agent"].ToString();
                 var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
                 http.Response.OnStarting(x =>
                 {
@@ -84,19 +86,29 @@ namespace Iconlook.Service.Web
                         !state.Request.Path.StartsWithSegments("/sse") &&
                         !state.Request.Path.StartsWithSegments("/_blazor"))
                     {
-                        var endpoint = HostBase.Container.TryResolve<IMessageSession>();
+                        var endpoint = application.ApplicationServices.TryResolve<IMessageSession>();
                         if (old_user_hash_id.HasValue())
                         {
                             endpoint.Publish(new WebAccessedEvent
                             {
-                                Description = $"[{old_user_hash_id.Substring(0, 4)}] old user revisited"
+                                Url = url,
+                                Referer = referer,
+                                IconString = "🔸",
+                                UserAgent = user_agent,
+                                UserHashId = old_user_hash_id,
+                                BodyString = "OLD USER REVISITED"
                             }).ConfigureAwait(false);
                         }
                         if (new_user_hash_id.HasValue())
                         {
                             endpoint.Publish(new WebAccessedEvent
                             {
-                                Description = $"[{new_user_hash_id.Substring(0, 4)}] NEW USER DETECTED 🥳"
+                                Url = url,
+                                Referer = referer,
+                                IconString = "💠",
+                                UserAgent = user_agent,
+                                UserHashId = new_user_hash_id,
+                                BodyString = "NEW USER DETECTED"
                             }).ConfigureAwait(false);
                         }
                     }
@@ -106,9 +118,14 @@ namespace Iconlook.Service.Web
             });
             application.Use((http, next) =>
             {
-                var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
-                http.Response.Headers["X-Powered-By"] =
-                    (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
+                http.Response.OnStarting(x =>
+                {
+                    var state = (HttpContext) x;
+                    var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
+                    state.Response.Headers["X-Powered-By"] =
+                        (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
+                    return Task.CompletedTask;
+                }, http);
                 return next();
             });
             application.Use((http, next) =>

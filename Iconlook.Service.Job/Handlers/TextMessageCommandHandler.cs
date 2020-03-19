@@ -5,6 +5,7 @@ using Iconlook.Client;
 using Iconlook.Message;
 using NServiceBus;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace Iconlook.Service.Job.Handlers
 {
@@ -17,7 +18,7 @@ namespace Iconlook.Service.Job.Handlers
         {
             return Configuration.Environment == Environment.Localhost
                 ? Task.CompletedTask
-                : Telegram.SendTextMessageAsync(new ChatId(message.Id), message.Text);
+                : Telegram.SendTextMessageAsync(new ChatId(message.Id), message.Text, ParseMode.Html);
         }
     }
 }
