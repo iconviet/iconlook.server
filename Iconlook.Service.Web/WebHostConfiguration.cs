@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Agiper;
-using Iconlook.Message;
 using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +15,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NServiceBus;
 using ServiceStack;
 using StackExchange.Redis;
 using Syncfusion.EJ2.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
-using Environment = Agiper.Environment;
-using OperatingSystem = Agiper.OperatingSystem;
 
 namespace Iconlook.Service.Web
 {
@@ -44,7 +37,7 @@ namespace Iconlook.Service.Web
         {
             base.Configure(application, environment);
             application.UseForwardedHeaders();
-            application.UseStaticFiles();
+            application.UseHeaderProcessor(this);
             application.Use((http, next) =>
             {
                 if (Environment != Environment.Localhost)
@@ -53,81 +46,7 @@ namespace Iconlook.Service.Web
                 }
                 return next();
             });
-            application.Use((http, next) =>
-            {
-                var new_user_hash_id = string.Empty;
-                var url = http.Request.GetDisplayUrl();
-                var referer = http.Request.Headers["Referer"].ToString();
-                var user_agent = http.Request.Headers["User-Agent"].ToString();
-                var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
-                http.Response.OnStarting(x =>
-                {
-                    var state = (HttpContext) x;
-                    if (!state.Request.Path.StartsWithSegments("/api") &&
-                        !state.Request.Path.StartsWithSegments("/sse") &&
-                        !state.Request.Path.StartsWithSegments("/_blazor"))
-                    {
-                        if (old_user_hash_id.IsNullOrEmpty())
-                        {
-                            new_user_hash_id = Generate.HashId(16).ToUpper();
-                            state.Response.Cookies.Append(
-                                Cookies.USER_HASH_ID, new_user_hash_id, new CookieOptions
-                                {
-                                    Expires = DateTime.UtcNow.AddMonths(1)
-                                });
-                        }
-                    }
-                    return Task.CompletedTask;
-                }, http);
-                http.Response.OnCompleted(x =>
-                {
-                    var state = (HttpContext) x;
-                    if (!state.Request.Path.StartsWithSegments("/api") &&
-                        !state.Request.Path.StartsWithSegments("/sse") &&
-                        !state.Request.Path.StartsWithSegments("/_blazor"))
-                    {
-                        var endpoint = application.ApplicationServices.TryResolve<IMessageSession>();
-                        if (old_user_hash_id.HasValue())
-                        {
-                            endpoint.Publish(new WebAccessedEvent
-                            {
-                                Url = url,
-                                Referer = referer,
-                                IconString = "🔸",
-                                UserAgent = user_agent,
-                                UserHashId = old_user_hash_id,
-                                BodyString = "OLD USER REVISITED"
-                            }).ConfigureAwait(false);
-                        }
-                        if (new_user_hash_id.HasValue())
-                        {
-                            endpoint.Publish(new WebAccessedEvent
-                            {
-                                Url = url,
-                                Referer = referer,
-                                IconString = "💠",
-                                UserAgent = user_agent,
-                                UserHashId = new_user_hash_id,
-                                BodyString = "NEW USER DETECTED"
-                            }).ConfigureAwait(false);
-                        }
-                    }
-                    return Task.CompletedTask;
-                }, http);
-                return next();
-            });
-            application.Use((http, next) =>
-            {
-                http.Response.OnStarting(x =>
-                {
-                    var state = (HttpContext) x;
-                    var hostname = System.Environment.GetEnvironmentVariable("HOSTNAME");
-                    state.Response.Headers["X-Powered-By"] =
-                        (hostname.HasValue() ? $"{hostname}.{EndpointName}" : EndpointInstanceId).ToLower();
-                    return Task.CompletedTask;
-                }, http);
-                return next();
-            });
+            application.UseStaticFiles();
             application.Use((http, next) =>
             {
                 if (http.Request.Path.StartsWithSegments("/api"))
@@ -142,6 +61,7 @@ namespace Iconlook.Service.Web
             application.UseWhen(
                 context => context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/sse"),
                 builder => builder.UseServiceStack(new WebServiceStack(this)));
+            application.UseCookieProcessor();
             application.UseRouting();
             application.UseWebMarkupMin();
             application.UseEndpoints(x =>

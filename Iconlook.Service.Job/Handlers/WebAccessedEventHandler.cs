@@ -4,6 +4,7 @@ using Agiper.Server;
 using Iconlook.Client;
 using Iconlook.Message;
 using NServiceBus;
+using Serilog;
 using ServiceStack;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -24,6 +25,7 @@ namespace Iconlook.Service.Job.Handlers
                        $"<pre>Request: {message.Url}</pre>\n" +
                        (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
                        $"<pre>Browser: {info.Device}, {info.OS}, {info.UA.Family}</pre>";
+            Log.Information(html);
             return Configuration.Environment == Environment.Localhost
                 ? Task.CompletedTask
                 : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
