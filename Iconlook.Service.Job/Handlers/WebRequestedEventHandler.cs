@@ -12,12 +12,12 @@ using UAParser;
 
 namespace Iconlook.Service.Job.Handlers
 {
-    public class WebAccessedEventHandler : HandlerBase, IHandleMessages<WebAccessedEvent>
+    public class WebRequestedEventHandler : HandlerBase, IHandleMessages<WebRequestedEvent>
     {
         public TelegramClient Telegram { get; set; }
         public HostConfiguration Configuration { get; set; }
 
-        public Task Handle(WebAccessedEvent message, IMessageHandlerContext context)
+        public Task Handle(WebRequestedEvent message, IMessageHandlerContext context)
         {
             var user_agent = Parser.GetDefault().Parse(message.UserAgent);
             var html = $"<b>{message.BodyString}</b> {message.IconString}\n" +

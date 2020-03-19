@@ -2,7 +2,7 @@
 
 namespace Iconlook.Message
 {
-    public class WebAccessedEvent : EventBase<WebAccessedEvent>
+    public class WebRequestedEvent : EventBase<WebRequestedEvent>
     {
         public string Url { get; set; }
         public string Referer { get; set; }

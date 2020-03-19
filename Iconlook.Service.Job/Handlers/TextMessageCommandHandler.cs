@@ -18,7 +18,7 @@ namespace Iconlook.Service.Job.Handlers
         {
             return Configuration.Environment == Environment.Localhost
                 ? Task.CompletedTask
-                : Telegram.SendTextMessageAsync(new ChatId(message.Id), message.Text, ParseMode.Html);
+                : Telegram.SendTextMessageAsync(new ChatId(message.ChatId), message.Text, ParseMode.Html);
         }
     }
 }

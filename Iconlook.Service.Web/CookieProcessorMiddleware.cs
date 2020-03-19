@@ -54,7 +54,7 @@ namespace Iconlook.Service.Web
                     var endpoint = _application.ApplicationServices.TryResolve<IMessageSession>();
                     if (old_user_hash_id.HasValue())
                     {
-                        endpoint.Publish(new WebAccessedEvent
+                        endpoint.Publish(new WebRequestedEvent
                         {
                             Url = url,
                             Referer = referer,
@@ -67,7 +67,7 @@ namespace Iconlook.Service.Web
                     }
                     if (new_user_hash_id.HasValue())
                     {
-                        endpoint.Publish(new WebAccessedEvent
+                        endpoint.Publish(new WebRequestedEvent
                         {
                             Url = url,
                             Referer = referer,
