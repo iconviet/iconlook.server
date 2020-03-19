@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Iconlook.Service.Web
 {
-    public static class DecimalExtensions
+    public static class DecimalMarkupExtensions
     {
         public static MarkupString ToIcxString(this decimal instance)
         {
