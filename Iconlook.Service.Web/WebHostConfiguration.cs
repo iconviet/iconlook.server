@@ -61,7 +61,7 @@ namespace Iconlook.Service.Web
             application.UseWhen(
                 context => context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/sse"),
                 builder => builder.UseServiceStack(new WebServiceStack(this)));
-            application.UseCookieProcessor();
+            application.UseCookieProcessor(); // DO NOT MOVE THIS !!!!
             application.UseRouting();
             application.UseWebMarkupMin();
             application.UseEndpoints(x =>

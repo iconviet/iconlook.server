@@ -6,6 +6,7 @@ namespace Iconlook.Message
     {
         public string Url { get; set; }
         public string Referer { get; set; }
+        public string Address { get; set; }
         public string UserAgent { get; set; }
         public string UserHashId { get; set; }
         public string IconString { get; set; }

@@ -27,6 +27,7 @@ namespace Iconlook.Service.Web
             var url = http.Request.GetDisplayUrl();
             var referer = http.Request.Headers["Referer"].ToString();
             var user_agent = http.Request.Headers["User-Agent"].ToString();
+            var address = http.Request.Headers["X-Forwarded-For"].ToString();
             var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
             http.Response.OnStarting(x =>
             {
@@ -57,6 +58,7 @@ namespace Iconlook.Service.Web
                         {
                             Url = url,
                             Referer = referer,
+                            Address = address,
                             IconString = "🔸",
                             UserAgent = user_agent,
                             UserHashId = old_user_hash_id,
