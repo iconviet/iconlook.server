@@ -100,20 +100,21 @@
 <div class="card px-3 py-3 mb-3 rounded gradient shadow-sm border-0 d-lg-none d-md-block">
     <div class="row no-gutters align-items-center" style="border-radius: 3px; background-color: white;">
         <div class="col">
-            <EjsAutoComplete MinLength="3"
-                             TValue="string"
-                             Highlight="true"
-                             SuggestionCount="10"
-                             CssClass="submit-input"
-                             ShowClearButton="false"
-                             Query="new ej.data.Query().requiresCount()"
-                             Placeholder="Lookup P-Rep / D-App / Address / Transaction">
+            <SfAutoComplete MinLength="3"
+                            TValue="string"
+                            Highlight="true"
+                            SuggestionCount="10"
+                            TItem="LookupResponse"
+                            CssClass="submit-input"
+                            ShowClearButton="false"
+                            Query="new Query().RequiresCount()"
+                            Placeholder="Lookup P-Rep / D-App / Address / Transaction">
                 <AutoCompleteFieldSettings Value="Result"></AutoCompleteFieldSettings>
-                <EjsDataManager Url="/api/v1/lookup" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-            </EjsAutoComplete>
+                <SfDataManager Url="/api/v1/lookup" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+            </SfAutoComplete>
         </div>
         <div class="col col-auto">
-            <EjsButton CssClass="e-flat submit-button" IconCss="far fa-search"></EjsButton>
+            <SfButton CssClass="e-flat submit-button" IconCss="far fa-search"></SfButton>
         </div>
     </div>
 </div>
@@ -159,23 +160,24 @@
             </div>
             <div class="row no-gutters align-items-center" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto">
-                    <EjsDropDownButton Content="EVERYTHING" Items="SearchItems" CssClass="search-filter"></EjsDropDownButton>
+                    <SfDropDownButton Content="EVERYTHING" Items="SearchItems" CssClass="search-filter"></SfDropDownButton>
                 </div>
                 <div class="col">
-                    <EjsAutoComplete MinLength="3"
-                                     TValue="string"
-                                     Highlight="true"
-                                     SuggestionCount="20"
-                                     CssClass="submit-input"
-                                     ShowClearButton="false"
-                                     Query="new ej.data.Query().requiresCount()"
-                                     Placeholder="Lookup P-Rep / D-App / Address / Transaction">
+                    <SfAutoComplete MinLength="3"
+                                    TValue="string"
+                                    Highlight="true"
+                                    SuggestionCount="20"
+                                    TItem="LookupResponse"
+                                    CssClass="submit-input"
+                                    ShowClearButton="false"
+                                    Query="new Query().RequiresCount()"
+                                    Placeholder="Lookup P-Rep / D-App / Address / Transaction">
                         <AutoCompleteFieldSettings Value="Result"></AutoCompleteFieldSettings>
-                        <EjsDataManager Url="/api/v1/lookup" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
-                    </EjsAutoComplete>
+                        <SfDataManager Url="/api/v1/lookup" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+                    </SfAutoComplete>
                 </div>
                 <div class="col col-auto">
-                    <EjsButton Content="SEARCH" CssClass="e-flat submit-button" IconCss="far fa-search"></EjsButton>
+                    <SfButton Content="SEARCH" CssClass="e-flat submit-button" IconCss="far fa-search"></SfButton>
                 </div>
             </div>
         </div>
@@ -191,18 +193,19 @@
             </div>
             <div class="row no-gutters" style="height: 32px; border-radius: 3px; background-color: white;">
                 <div class="col col-auto">
-                    <EjsDropDownButton Content="ROUND" Items="ToolItems" CssClass="search-filter"></EjsDropDownButton>
+                    <SfDropDownButton Content="ROUND" Items="ToolItems" CssClass="search-filter"></SfDropDownButton>
                 </div>
                 <div class="col">
-                    <EjsAutoComplete MinLength="3"
-                                     TValue="string"
-                                     CssClass="submit-input"
-                                     ShowClearButton="false"
-                                     Placeholder="Enter a wallet address to perform">
-                    </EjsAutoComplete>
+                    <SfAutoComplete MinLength="3"
+                                    TItem="string"
+                                    TValue="string"
+                                    CssClass="submit-input"
+                                    ShowClearButton="false"
+                                    Placeholder="Enter a wallet address to perform">
+                    </SfAutoComplete>
                 </div>
                 <div class="col col-auto">
-                    <EjsButton CssClass="e-flat submit-button" IconCss="far fa-search">SUBMIT</EjsButton>
+                    <SfButton CssClass="e-flat submit-button" IconCss="far fa-search">SUBMIT</SfButton>
                 </div>
             </div>
         </div>
@@ -277,7 +280,7 @@
 <div class="row">
     <div class="col-sm mb-3 mr-sm-n3">
         <div class="main card mb-3 shadow-sm" style="min-height: 932px;">
-            <EjsTab Animation="Animation">
+            <SfTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Governance">
@@ -302,7 +305,7 @@
                         </ContentTemplate>
                     </TabItem>
                 </TabItems>
-            </EjsTab>
+            </SfTab>
         </div>
         <div class="d-none d-lg-block font-weight-bold position-absolute" style="top: 11px; right: 34px;">
             <NavLink class="primary" href="/prep/list">MORE</NavLink>
@@ -310,7 +313,7 @@
     </div>
     <div class="col-sm mb-3">
         <div class="main card mb-3 shadow-sm" style="min-height: 932px;">
-            <EjsTab Animation="Animation">
+            <SfTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Blocks">
@@ -328,7 +331,7 @@
                         </ContentTemplate>
                     </TabItem>
                 </TabItems>
-            </EjsTab>
+            </SfTab>
         </div>
         <div class="d-none d-lg-block font-weight-bold position-absolute" style="top: 11px; right: 34px;">
             <NavLink class="primary" href="/prep/list">MORE</NavLink>

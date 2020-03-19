@@ -1,4 +1,4 @@
-﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+﻿@using ClickEventArgs = Syncfusion.Blazor.Buttons.ClickEventArgs
 @inject HttpContextAccessor HttpAccessor
 <style>
     .address-name {
@@ -36,16 +36,16 @@
     }
 </style>
 <div class="px-2 py-1 border-bottom">
-    <EjsChipList Selection="Selection.Single" SelectedChips="0">
+    <SfChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
-            <ChipListChip Text="MARLIN" Value="100000icx"></ChipListChip>
-            <ChipListChip Text="WHALES" Value="500000icx"></ChipListChip>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;" Value='"all"'></ChipListChip>
+            <ChipListChip Text="MARLIN" Value='"100000icx"'></ChipListChip>
+            <ChipListChip Text="WHALES" Value='"500000icx"'></ChipListChip>
         </ChipCollection>
-    </EjsChipList>
+    </SfChipList>
 </div>
-<EjsGrid @ref="EjsGrid"
+<SfGrid @ref="SfGrid"
          EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
@@ -55,7 +55,7 @@
          GridLines="GridLine.Horizontal"
          TValue="UndelegatedAddressResponse">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <EjsDataManager Url="/api/v1/address/list/undelegated" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/address/list/undelegated" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(UndelegatedAddressResponse.Hash)">
             <Template>
@@ -168,7 +168,7 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code
 {
@@ -186,11 +186,11 @@
     [Parameter]
     public object PageSizes { get; set; }
 
-    protected EjsGrid<UndelegatedAddressResponse> EjsGrid;
+    protected SfGrid<UndelegatedAddressResponse> SfGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
     protected override void OnInitialized()

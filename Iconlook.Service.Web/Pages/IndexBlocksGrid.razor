@@ -22,7 +22,7 @@
 
     #block_grid td.e-rowcell:nth-child(5) { width: 70px; }
 </style>
-<EjsGrid RowHeight="40"
+<SfGrid RowHeight="40"
          ID="block_grid"
          EnableHover="false"
          EnableAltRow="false"
@@ -30,7 +30,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
-    <EjsDataManager Url="/api/v1/blocks" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/blocks" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
         <GridColumn Width="81" IsPrimaryKey="true" Field="@nameof(BlockResponse.Height)">
@@ -94,4 +94,4 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>

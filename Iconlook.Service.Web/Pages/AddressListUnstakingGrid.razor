@@ -1,4 +1,4 @@
-﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+﻿@using ClickEventArgs = Syncfusion.Blazor.Buttons.ClickEventArgs
 @inject HttpContextAccessor HttpAccessor
 <style>
     .address-name {
@@ -30,18 +30,18 @@
     }
 </style>
 <div class="px-2 py-1 border-bottom">
-    <EjsChipList Selection="Selection.Single" SelectedChips="0">
+    <SfChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
-            <ChipListChip Text="P-REP ONLY" Value="prep_only"></ChipListChip>
-            <ChipListChip Text="10,000+ ICX" Value="10000icx"></ChipListChip>
-            <ChipListChip Text="100,000+ ICX" Value="100000icx"></ChipListChip>
-            <ChipListChip Text="500,000+ ICX" Value="500000icx"></ChipListChip>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value='"all"'></ChipListChip>
+            <ChipListChip Text="P-REP ONLY" Value='"prep_only"'></ChipListChip>
+            <ChipListChip Text="10,000+ ICX" Value='"10000icx"'></ChipListChip>
+            <ChipListChip Text="100,000+ ICX" Value='"100000icx"'></ChipListChip>
+            <ChipListChip Text="500,000+ ICX" Value='"500000icx"'></ChipListChip>
         </ChipCollection>
-    </EjsChipList>
+    </SfChipList>
 </div>
-<EjsGrid @ref="EjsGrid"
+<SfGrid @ref="SfGrid"
          ID="unstaking_grid"
          EnableHover="false"
          AllowPaging="Paging"
@@ -51,7 +51,7 @@
          GridLines="GridLine.Horizontal"
          TValue="UnstakingAddressResponse">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <EjsDataManager Url="/api/v1/address/list/unstaking" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/address/list/unstaking" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>
@@ -164,7 +164,7 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code
 {
@@ -182,11 +182,11 @@
     [Parameter]
     public object PageSizes { get; set; }
 
-    protected EjsGrid<UnstakingAddressResponse> EjsGrid;
+    protected SfGrid<UnstakingAddressResponse> SfGrid;
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
     protected override void OnInitialized()

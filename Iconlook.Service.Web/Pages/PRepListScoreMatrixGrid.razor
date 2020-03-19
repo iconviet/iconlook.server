@@ -19,7 +19,7 @@
 
     .development { background-color: rgba(3, 120, 213, 0.25) !important; }
 </style>
-<EjsGrid EnableHover="true"
+<SfGrid EnableHover="true"
          EnableAltRow="true"
          TValue="PRepResponse"
          AllowPaging="CanPage"
@@ -29,7 +29,7 @@
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
-    <EjsDataManager Url="/api/v1/prep/list?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/prep/list?take=22" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn Width="217" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>
@@ -49,50 +49,50 @@
         </GridColumn>
         <GridColumn Width="200" HeaderText="Development" TextAlign="TextAlign.Center">
             <Template>
-                <EjsChipList>
+                <SfChipList>
                     <ChipCollection>
                         <ChipListChip Text="D1A" CssClass="development"></ChipListChip>
                         <ChipListChip Text="D1B" CssClass="development"></ChipListChip>
                         <ChipListChip Text="D2A" CssClass="development"></ChipListChip>
                         <ChipListChip Text="D3A" CssClass="development"></ChipListChip>
                     </ChipCollection>
-                </EjsChipList>
+                </SfChipList>
             </Template>
         </GridColumn>
         <GridColumn Width="200" HeaderText="Awareness" TextAlign="TextAlign.Center">
             <Template>
-                <EjsChipList>
+                <SfChipList>
                     <ChipCollection>
                         <ChipListChip Text="A1A" CssClass="awareness"></ChipListChip>
                         <ChipListChip Text="A1B" CssClass="awareness"></ChipListChip>
                         <ChipListChip Text="A2A" CssClass="awareness"></ChipListChip>
                         <ChipListChip Text="A3A" CssClass="awareness"></ChipListChip>
                     </ChipCollection>
-                </EjsChipList>
+                </SfChipList>
             </Template>
         </GridColumn>
         <GridColumn Width="200" HeaderText="Business" TextAlign="TextAlign.Center">
             <Template>
-                <EjsChipList>
+                <SfChipList>
                     <ChipCollection>
                         <ChipListChip Text="B1A" CssClass="business"></ChipListChip>
                         <ChipListChip Text="B1B" CssClass="business"></ChipListChip>
                         <ChipListChip Text="B2A" CssClass="business"></ChipListChip>
                         <ChipListChip Text="B3A" CssClass="business"></ChipListChip>
                     </ChipCollection>
-                </EjsChipList>
+                </SfChipList>
             </Template>
         </GridColumn>
         <GridColumn Width="200" HeaderText="Finance" TextAlign="TextAlign.Center">
             <Template>
-                <EjsChipList>
+                <SfChipList>
                     <ChipCollection>
                         <ChipListChip Text="F1A" CssClass="finance"></ChipListChip>
                         <ChipListChip Text="F1B" CssClass="finance"></ChipListChip>
                         <ChipListChip Text="F2A" CssClass="finance"></ChipListChip>
                         <ChipListChip Text="F3A" CssClass="finance"></ChipListChip>
                     </ChipCollection>
-                </EjsChipList>
+                </SfChipList>
             </Template>
         </GridColumn>
         <GridColumn Width="91" Field="@nameof(PRepResponse.Score)" HeaderText="Score" TextAlign="TextAlign.Right">
@@ -120,7 +120,7 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code {
     [Parameter]

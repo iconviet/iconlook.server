@@ -1,4 +1,4 @@
-﻿@using ClickEventArgs = Syncfusion.EJ2.Blazor.Buttons.ClickEventArgs
+﻿@using ClickEventArgs = Syncfusion.Blazor.Buttons.ClickEventArgs
 <style>
     .fal.fa-star {
         opacity: 0.75;
@@ -34,19 +34,19 @@
     }
 </style>
 <div class="px-2 py-1 border-bottom">
-    <EjsChipList Selection="Selection.Single" SelectedChips="0">
+    <SfChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
         <ChipCollection>
-            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value="all"></ChipListChip>
-            <ChipListChip Text="MAIN P-REP" Value="main_prep"></ChipListChip>
-            <ChipListChip Text="SUB P-PREP" Value="sub_prep"></ChipListChip>
-            <ChipListChip Text="CANDIDATE" Value="candidate"></ChipListChip>
-            <ChipListChip Text="CONTROVERSAL" Value="controversal"></ChipListChip>
-            <ChipListChip Text="DISQUALIFIED" Value="disqualified"></ChipListChip>
+            <ChipListChip Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Value='"all"'></ChipListChip>
+            <ChipListChip Text="MAIN P-REP" Value='"main_prep"'></ChipListChip>
+            <ChipListChip Text="SUB P-PREP" Value='"sub_prep"'></ChipListChip>
+            <ChipListChip Text="CANDIDATE" Value='"candidate"'></ChipListChip>
+            <ChipListChip Text="CONTROVERSAL" Value='"controversal"'></ChipListChip>
+            <ChipListChip Text="DISQUALIFIED" Value='"disqualified"'></ChipListChip>
         </ChipCollection>
-    </EjsChipList>
+    </SfChipList>
 </div>
-<EjsGrid @ref="EjsGrid"
+<SfGrid @ref="SfGrid"
          ID="summary_grid"
          EnableHover="true"
          EnableAltRow="true"
@@ -56,7 +56,7 @@
          GridLines="GridLine.Horizontal">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
-    <EjsDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn Width="40">
             <Template>
@@ -259,10 +259,10 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code {
-    protected EjsGrid<PRepResponse> EjsGrid;
+    protected SfGrid<PRepResponse> SfGrid;
 
     [Parameter]
     public int PageSize { get; set; }
@@ -280,7 +280,7 @@
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        EjsGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
 }

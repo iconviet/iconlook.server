@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceStack;
 using StackExchange.Redis;
-using Syncfusion.EJ2.Blazor;
+using Syncfusion.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 
@@ -126,7 +126,7 @@ namespace Iconlook.Service.Web
                     .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(connection), ProjectName);
             }
             services.AddRazorPages(x => x.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
-            SyncfusionLicenseProvider.RegisterLicense("MTgzMzE3QDMxMzcyZTM0MmUzMGsxUUk0Rkp6Vk9zaGNsaWlIQVBRWlhhNEpYa0hNRlFOWUVYUFBtcFFIWDg9");
+            SyncfusionLicenseProvider.RegisterLicense("MjI0ODk5QDMxMzgyZTMxMmUzMGYrRTdlbUhkc0xDMXFMdlhiaDk3ZUtPVlN3c3lzQm9XeUNUdVVCQXhxNWc9");
         }
     }
 }

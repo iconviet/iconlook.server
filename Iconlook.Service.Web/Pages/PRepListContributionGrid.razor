@@ -9,7 +9,7 @@
     .fa-star:not(:last-child),
     .fa-star-half-alt:not(:last-child) { margin-right: 4px; }
 </style>
-<EjsGrid EnableHover="true"
+<SfGrid EnableHover="true"
          EnableAltRow="true"
          TValue="PRepResponse"
          AllowPaging="CanPage"
@@ -19,7 +19,7 @@
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
-    <EjsDataManager Url="/api/v1/prep/list?take=22" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/prep/list?take=22" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn Width="220" Field="@nameof(PRepResponse.Name)" HeaderText="P-Rep">
             <HeaderTemplate>
@@ -102,7 +102,7 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code {
     [Parameter]

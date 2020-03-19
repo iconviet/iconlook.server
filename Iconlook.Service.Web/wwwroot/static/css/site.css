@@ -336,7 +336,7 @@ button.secondary, button .secondary {
 
 
 /* 
-    EJS-DIALOG
+    SF-DIALOG
 */
 .e-dialog.e-edit-dialog {
     overflow: hidden;
@@ -359,7 +359,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-GRID
+    SF-GRID
 */
 .e-grid .e-emptyrow {
     display: none;
@@ -389,7 +389,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-SPINNER
+    SF-SPINNER
 */
 .e-spinner-pane .e-spin-material {
     stroke: #1aaaba !important;
@@ -398,7 +398,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-INPUT
+    SF-INPUT
 */
 .e-input-group::after,
 .e-input-group::before {
@@ -408,7 +408,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-SWITCH
+    SF-SWITCH
 */
     .e-switch-wrapper .e-switch-handle.e-switch-active {
     background-color: #1aaaba !important;
@@ -417,7 +417,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-TAB
+    SF-TAB
 */
 
 .e-tab .e-tab-header .e-indicator {
@@ -460,7 +460,7 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-CHIP
+    SF-CHIP
 */
 .e-chip-list.e-chip,
 .e-chip-list .e-chip {
@@ -477,9 +477,9 @@ button.secondary, button .secondary {
 
 
 /*
-    EJS-MENU
+    SF-MENU
 */
-.ejs-menu {
+.sf-menu {
     background-color: initial;
 }
 

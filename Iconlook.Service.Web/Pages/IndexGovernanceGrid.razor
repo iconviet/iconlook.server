@@ -19,7 +19,7 @@
 
     #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
 </style>
-<EjsGrid RowHeight="40"
+<SfGrid RowHeight="40"
          EnableHover="false"
          EnableAltRow="false"
          ID="governance_grid"
@@ -28,7 +28,7 @@
          ClipMode="ClipMode.Ellipsis"
          GridLines="GridLine.Horizontal"
          Query="@(new Query().AddParams("take", 22))">
-    <EjsDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></EjsDataManager>
+    <SfDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
             <Template>
@@ -110,7 +110,7 @@
             </Template>
         </GridColumn>
     </GridColumns>
-</EjsGrid>
+</SfGrid>
 
 @code
 {

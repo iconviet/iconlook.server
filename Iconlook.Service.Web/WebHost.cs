@@ -10,7 +10,7 @@ namespace Iconlook.Service.Web
         public static Task Main()
         {
             var configuration = new WebHostConfiguration();
-            return StartAsync(configuration, b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())));
+            return StartAsync(configuration, b => b.ConfigureWebHostDefaults(x => x.UseStaticWebAssets().UseStartup(configuration.GetType())));
         }
     }
 }
