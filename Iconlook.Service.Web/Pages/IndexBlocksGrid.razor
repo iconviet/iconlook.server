@@ -1,4 +1,5 @@
-﻿<style>
+﻿@inject HttpContextAccessor HttpAccessor
+<style>
     .block-hash {
         padding: 5px 8px;
         border-radius: 4px;
@@ -11,29 +12,20 @@
         background-color: #e1fafd;
     }
 
-    .number-part { font-weight: 500; }
-</style>
-<style media="(max-width: 769px)">
-    #block_grid td.e-rowcell:nth-child(1) { width: 85px; }
-
-    #block_grid td.e-rowcell:nth-child(3) { width: 65px; }
-
-    #block_grid td.e-rowcell:nth-child(4) { width: auto; }
-
-    #block_grid td.e-rowcell:nth-child(5) { width: 70px; }
+    .number-part {font-weight: 500; }
 </style>
 <SfGrid RowHeight="40"
-         ID="block_grid"
-         EnableHover="false"
-         EnableAltRow="false"
-         TValue="BlockResponse"
-         AllowSelection="false"
-         GridLines="GridLine.Horizontal"
-         Query="@(new Query().AddParams("take", 22))">
+        ID="block_grid"
+        EnableHover="false"
+        EnableAltRow="false"
+        TValue="BlockResponse"
+        AllowSelection="false"
+        GridLines="GridLine.Horizontal"
+        Query="@(new Query().AddParams("take", 22))">
     <SfDataManager Url="/api/v1/blocks" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
     <GridColumns>
-        <GridColumn Width="81" IsPrimaryKey="true" Field="@nameof(BlockResponse.Height)">
+        <GridColumn Width="@((IsMobile ? 90 : 81).ToString())" IsPrimaryKey="true" Field="@nameof(BlockResponse.Height)">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -45,7 +37,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="125" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 769px)" Field="@nameof(BlockResponse.Hash)">
+        <GridColumn Visible="@(!IsMobile)" Width="125" TextAlign="TextAlign.Center" Field="@nameof(BlockResponse.Hash)">
             <Template>
                 @{
                     if (context is BlockResponse block)
@@ -95,3 +87,12 @@
         </GridColumn>
     </GridColumns>
 </SfGrid>
+
+@code{
+    protected bool IsMobile;
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}

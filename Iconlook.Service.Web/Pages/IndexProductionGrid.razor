@@ -1,4 +1,5 @@
-﻿<style>
+﻿@inject HttpContextAccessor HttpContext
+<style>
     .peer-state-sync {
         color: black;
         padding: 10px 0;
@@ -21,45 +22,41 @@
         background-color: limegreen;
     }
 
-    .online-status { color: #00a1b3; }
+    .online-status {
+        color: #00a1b3;
+    }
 </style>
 <style media="(max-width: 769px)">
+        .peer-state span {
+        margin-top: 0px !important;
+    }
+
     .peer-produced-blocks {
         font-size: 12px;
         font-weight: 300 !important;
     }
 
-    .peer-state span { margin-top: 0px !important; }
-
-    #production_grid td.e-rowcell:nth-child(1) { width: 20px; }
-
-    #production_grid td.e-rowcell:nth-child(2) { width: 30px; }
-
-    #production_grid td.e-rowcell:nth-child(3) { width: auto; }
-
-    #production_grid td.e-rowcell:nth-child(4) { width: 45px; }
-
-    #production_grid td.e-rowcell:nth-child(5) { width: 90px; }
-
-    #production_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
+    #production_grid .e-rowcell .fa-dot-circle {
+        margin-top: 3px;
+    }
 </style>
 <SfGrid RowHeight="40"
-         EnableHover="false"
-         EnableAltRow="false"
-         ID="production_grid"
-         TValue="PeerResponse"
-         AllowSelection="false"
-         ClipMode="ClipMode.Ellipsis"
-         GridLines="GridLine.Horizontal"
-         Query="@(new Query().AddParams("take", 22))">
+        EnableHover="false"
+        EnableAltRow="false"
+        ID="production_grid"
+        TValue="PeerResponse"
+        AllowSelection="false"
+        ClipMode="ClipMode.Ellipsis"
+        GridLines="GridLine.Horizontal"
+        Query="@(new Query().AddParams("take", 22))">
     <SfDataManager Url="/api/v1/peers" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
-        <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
+        <GridColumn Width="@((IsMobile ? 15 : 20).ToString())" Field="@nameof(PRepResponse.Ranking)">
             <Template>
                 <i class="fad fs-n2 fa-dot-circle online-status"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="40" Field="@nameof(PeerResponse.Ranking)">
+        <GridColumn Width="@((IsMobile ? 30 : 40).ToString())" Field="@nameof(PeerResponse.Ranking)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -83,7 +80,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="50" Field="@nameof(PeerResponse.State)">
+        <GridColumn Width="@((IsMobile ? 45 : 50).ToString())" Field="@nameof(PeerResponse.State)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -99,7 +96,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
+        <GridColumn Width="@((IsMobile ? 85 : 100).ToString())" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProducedBlocks)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -113,7 +110,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="75" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PeerResponse.ProductivityPercentage)">
+        <GridColumn Visible="@(!IsMobile)" Width="75" TextAlign="TextAlign.Right" Field="@nameof(PeerResponse.ProductivityPercentage)">
             <Template>
                 @{
                     if (context is PeerResponse peer)
@@ -125,3 +122,13 @@
         </GridColumn>
     </GridColumns>
 </SfGrid>
+
+@code
+{
+    bool IsMobile;
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpContext.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}

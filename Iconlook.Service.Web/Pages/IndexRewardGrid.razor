@@ -7,15 +7,7 @@
 
     .prep_reward24h_change { margin-top: 3px !important; }
 
-    #governance_grid td.e-rowcell:nth-child(1) { width: 20px; }
-
-    #governance_grid td.e-rowcell:nth-child(2) { width: 30px; }
-
-    #governance_grid td.e-rowcell:nth-child(3) { width: auto; }
-
-    #governance_grid td.e-rowcell:nth-child(5) { width: 120px; }
-
-    #governance_grid td.e-rowcell:nth-child(1) .fa-dot-circle { margin-top: 3px; }
+    #governance_grid .e-rowcell .fa-dot-circle { margin-top: 3px; }
 </style>
 <SfGrid RowHeight="40"
          EnableHover="false"
@@ -28,12 +20,12 @@
          Query="@(new Query().AddParams("take", 22))">
     <SfDataManager Url="/api/v1/prep/list" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
-        <GridColumn Width="20" Field="@nameof(PRepResponse.Ranking)">
+        <GridColumn  Width="@((IsMobile ? 15 : 20).ToString())" Field="@nameof(PRepResponse.Ranking)">
             <Template>
                 <i class="fad fs-n2 fa-dot-circle online-status"></i>
             </Template>
         </GridColumn>
-        <GridColumn Width="40" Field="@nameof(PRepResponse.Ranking)">
+        <GridColumn  Width="@((IsMobile ? 30 : 40).ToString())" Field="@nameof(PRepResponse.Ranking)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
@@ -56,7 +48,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="130" TextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(PRepResponse.MonthlyReward)">
+        <GridColumn Visible="@(!IsMobile)" Width="130" TextAlign="TextAlign.Right" Field="@nameof(PRepResponse.MonthlyReward)">
             <Template>
                 @{
                     if (context is PRepResponse prep)
