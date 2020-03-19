@@ -27,7 +27,7 @@ namespace Iconlook.Service.Job.Handlers
                        (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
                        $"<pre>Browser: {user_agent.Device}, {user_agent.OS}, {user_agent.UA.Family}</pre>";
             if (!message.Url.Contains("apple-touch-icon") &&
-                (user_agent.OS.ToString() != "Other" || user_agent.UA.Family != "Other" || !new[] { "Other", "Spider" }.Contains(user_agent.Device.ToString())))
+                (user_agent.UA.Family != "Other" || user_agent.OS.ToString() != "Other" || !new[] { "Other", "Spider" }.Contains(user_agent.Device.ToString())))
             {
                 return Configuration.Environment == Environment.Localhost
                     ? Task.CompletedTask
