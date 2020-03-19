@@ -16,19 +16,6 @@
 
     .unstaking_amount .fraction-part { font-weight: 500; }
 </style>
-<style media="(max-width: 769px)">
-    #unstaking_grid td.e-rowcell:nth-child(1) {
-        width: auto;
-    }
-
-    #unstaking_grid td.e-rowcell:nth-child(5) {
-        width: 90px;
-    }
-
-    #unstaking_grid td.e-rowcell:nth-child(2) {
-        width: 150px;
-    }
-</style>
 <div class="px-2 py-1 border-bottom">
     <SfChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
@@ -95,7 +82,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="140" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.Staked)">
+        <GridColumn Visible="@(!IsMobile)" Width="@((IsMobile ? 90 : 140).ToString())" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
@@ -115,7 +102,7 @@
         </GridColumn>
         @if (IsMobile)
         {
-            <GridColumn Width="145" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="90" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAgeShort)">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -124,18 +111,10 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="145" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)">
-                <Template>
-                    @if (context is UnstakingAddressResponse address)
-                    {
-                        <span class="text-light text-condensed">@address.UnstakingCountdownShort</span>
-                    }
-                </Template>
-            </GridColumn>
         }
         else
         {
-            <GridColumn Width="200" HeaderText="Requested Since" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <GridColumn Width="200" HeaderText="Requested Since" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAge)">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
@@ -144,16 +123,16 @@
                     }
                 </Template>
             </GridColumn>
-            <GridColumn Width="175" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
-                <Template>
-                    @if (context is UnstakingAddressResponse address)
-                    {
-                        <span class="text-light text-condensed font-weight-light">@address.UnstakingCountdown</span>
-                    }
-                </Template>
-            </GridColumn>
         }
-        <GridColumn Width="115" HeaderText="At Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+        <GridColumn Visible="@(!IsMobile)" Width="175" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakingCountdown)">
+            <Template>
+                @if (context is UnstakingAddressResponse address)
+                {
+                    <span class="text-light text-condensed font-weight-light">@address.UnstakingCountdown</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Visible="@(!IsMobile)" Width="115" HeaderText="At Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)

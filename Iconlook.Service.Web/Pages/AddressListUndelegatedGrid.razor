@@ -20,19 +20,6 @@
 
     .undelegated_amount .fraction-part { font-weight: 500; }
 </style>
-<style media="(max-width: 769px)">
-    #undelegated_grid td.e-rowcell:nth-child(1) {
-        width: auto;
-    }
-
-    #undelegated_grid td.e-rowcell:nth-child(2) {
-        width: 125px;
-    }
-
-    #undelegated_grid td.e-rowcell:nth-child(4) {
-        width: 130px;
-    }
-</style>
 <div class="px-2 py-1 border-bottom">
     <SfChipList Selection="Selection.Single" SelectedChips="0">
         <ChipListEvents OnClick="@ChipListOnClick"></ChipListEvents>
@@ -78,7 +65,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="180" HeaderText="Undelegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Undelegated)">
+        <GridColumn Width="@((IsMobile ? 125 : 180).ToString())" HeaderText="Undelegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Undelegated)">
             <Template>
                 @{
                     if (context is UndelegatedAddressResponse address)
@@ -104,7 +91,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="170" HeaderText="Delegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" HideAtMedia="(min-width: 769px)" Field="@nameof(UndelegatedAddressResponse.Delegated)">
+        <GridColumn Visible="@(!IsMobile)" Width="170" HeaderText="Delegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Delegated)">
             <Template>
                 @{
                     if (context is UndelegatedAddressResponse address)
@@ -122,7 +109,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="200" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Staked)">
+        <GridColumn Width="@((IsMobile ? 130 : 200).ToString())" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Staked)">
             <Template>
                 @{
                     if (context is UndelegatedAddressResponse address)
@@ -149,7 +136,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="250" HeaderText="Note" TextAlign="TextAlign.Center" HideAtMedia="(min-width: 769px)" Field="@nameof(UndelegatedAddressResponse.Comment)">
+        <GridColumn Visible="@(!IsMobile)" Width="250" HeaderText="Note" TextAlign="TextAlign.Center" Field="@nameof(UndelegatedAddressResponse.Comment)">
             <HeaderTemplate>
                 <span><i class="fal pr-2 fa-comment"></i>Comment</span>
             </HeaderTemplate>
