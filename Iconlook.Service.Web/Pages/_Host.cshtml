@@ -35,8 +35,10 @@
     <meta property="og:image" content="https://iconlook.io/static/images/logo-256.png?44629809080" />
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
-    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
-    <script async type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <link rel="stylesheet" href="_content/Syncfusion.Blazor/styles/material.css?v=@HostBase.Configuration.VersionInformation" />
+    <link rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
+
+    <script type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -49,7 +51,7 @@
     <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
     <script type="text/javascript">Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); } });</script>
     <environment exclude="Localhost">
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
