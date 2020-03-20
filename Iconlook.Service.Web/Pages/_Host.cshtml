@@ -35,10 +35,6 @@
 
     <!-- Stylesheet Ref -->
     <link rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
-
-    <!-- Javascript Ref -->
-    <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
-    <script type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -48,7 +44,10 @@
         </div>
     </div>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-    <script type="text/javascript">Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); } });</script>
+    
+    <!-- Javascript Ref -->
+    <script type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script type="text/javascript" src="~/_framework/blazor.server.js?v=@HostBase.Configuration.VersionInformation"></script>
     <environment exclude="Localhost">
         <script src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script type="text/javascript">
