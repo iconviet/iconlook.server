@@ -26,6 +26,7 @@ namespace Iconlook.Service.Web
             var new_user_hash_id = string.Empty;
             var url = http.Request.GetDisplayUrl();
             var referer = http.Request.Headers["Referer"].ToString();
+            var country = http.Request.Headers["CF-IPCountry"].ToString();
             var user_agent = http.Request.Headers["User-Agent"].ToString();
             var address = http.Request.Headers["X-Forwarded-For"].ToString();
             var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
@@ -59,6 +60,7 @@ namespace Iconlook.Service.Web
                             Url = url,
                             Referer = referer,
                             Address = address,
+                            Country = country,
                             IconString = "🔸",
                             UserAgent = user_agent,
                             UserHashId = old_user_hash_id,
