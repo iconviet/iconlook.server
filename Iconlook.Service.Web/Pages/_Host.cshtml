@@ -1,5 +1,7 @@
 ﻿@page "/"
+@using Agiper 
 @using Syncfusion
+@using Microsoft.AspNetCore 
 @namespace Iconlook.Service.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
@@ -50,7 +52,7 @@
 
     <!-- Javascript Ref -->
     <script type="text/javascript" src="static/js/bundle.min.js?v=@CoreAssembly.StudioCoreVersion"></script>
-    <script async type="text/javascript" src="_framework/blazor.server.js?v=5.0.0-preview.1.20120.5"></script>
+    <script async type="text/javascript" src="_framework/blazor.server.js?v=@typeof(WebHost).Assembly.InformationVersion()"></script>
     <environment exclude="Localhost">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script type="text/javascript">
