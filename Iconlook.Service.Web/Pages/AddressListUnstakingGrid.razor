@@ -76,8 +76,16 @@
                         {
                             <i class="fal mr-1 fs-n2 fa-fish special"></i>
                         }
-                        <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
-                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                        if (IsMobile)
+                        {
+                            <span class="mono ls-n2 font-weight-semibold">@address.Unstaking.ToString("N0")</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
                     }
                 }
             </Template>
@@ -102,7 +110,7 @@
         </GridColumn>
         @if (IsMobile)
         {
-            <GridColumn Width="90" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAgeShort)">
+            <GridColumn Width="120" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAgeShort)">
                 <Template>
                     @if (context is UnstakingAddressResponse address)
                     {
