@@ -34,7 +34,7 @@
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
     <!-- Stylesheet Ref -->
-    <link rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
+    <link async rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -44,19 +44,19 @@
         </div>
     </div>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-    
+
     <!-- Javascript Ref -->
     <script type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
     <script type="text/javascript" src="_framework/blazor.server.js?v=@HostBase.Configuration.VersionInformation"></script>
     <environment exclude="Localhost">
-        <script src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script type="text/javascript">
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
             gtag('config', 'UA-160442792-1');
         </script>
-        <script type="text/javascript">
+        <script async type="text/javascript">
             (function (c, a) {
                 if (!a.__SV) {
                     var b = window; try { var d, m, j, k = b.location, f = k.hash; d = function (a, b) { return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null }; f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search))) } catch (n) { } var l, h; window.mixpanel = a; a._i = []; a.init = function (b, d, g) {
