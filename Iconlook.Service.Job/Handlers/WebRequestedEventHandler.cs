@@ -29,9 +29,9 @@ namespace Iconlook.Service.Job.Handlers
             if (!message.Url.Contains("apple-touch-icon") &&
                 (message.Url.StartsWith("https://iconlook.io") ||
                  message.Url.StartsWith("https://www.iconlook.io") &&
-                 (!new[] { "other" }.Any(user_agent.OS.ToString().ToLower().Contains) ||
-                  !new[] { "other", "bot" }.Any(user_agent.UA.Family.ToLower().Contains) ||
-                  !new[] { "other", "spider" }.Any(user_agent.Device.ToString().ToLower().Contains))))
+                 !new[] { "other" }.Any(user_agent.OS.ToString().ToLower().Contains) &&
+                 !new[] { "other", "bot" }.Any(user_agent.UA.Family.ToLower().Contains) &&
+                 !new[] { "other", "spider" }.Any(user_agent.Device.ToString().ToLower().Contains)))
             {
                 return Configuration.Environment == Environment.Localhost
                     ? Task.CompletedTask
