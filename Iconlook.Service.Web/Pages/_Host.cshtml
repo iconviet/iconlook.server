@@ -5,19 +5,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="~/" />
-
     <title>ICONLOOK | Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem</title>
 
+    <!-- Meta -->
     <meta charset="utf-8" />
-    <html prefix="og: http://ogp.me/ns#">
     <meta name="application-name" content="ICONLOOK | Beta">
     <meta name="author" content="🔸 Powered by Chainalytic">
     <meta name="copyright" content="🔸 Powered by Chainalytic">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
-    <!-- Twitter -->
+    <!-- Meta: Twitter -->
     <meta name="twitter:site" content="@@iconviet" />
     <meta name="twitter:creator" content="@@iconviet" />
     <meta name="twitter:card" value="summary_large_image">
@@ -26,7 +24,7 @@
     <meta name="twitter:image" content="https://iconlook.io/static/images/logo-256.png?44629809080" />
     <meta name="twitter:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
-    <!-- Telegram & Facebook -->
+    <!-- Meta: OpenGraph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://iconlook.io" />
@@ -35,9 +33,11 @@
     <meta property="og:image" content="https://iconlook.io/static/images/logo-256.png?44629809080" />
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
-    <link rel="stylesheet" href="_content/Syncfusion.Blazor/styles/material.css?v=@HostBase.Configuration.VersionInformation" />
+    <!-- Stylesheet Ref -->
     <link rel="stylesheet" href="~/static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
 
+    <!-- Javascript Ref -->
+    <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
     <script type="text/javascript" src="~/static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
 </head>
 <body>
@@ -48,11 +48,10 @@
         </div>
     </div>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-    <script type="text/javascript" src="_framework/blazor.server.js" autostart="false"></script>
     <script type="text/javascript">Blazor.start({ configureSignalR: function (builder) { builder.configureLogging(2); } });</script>
     <environment exclude="Localhost">
         <script src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
-        <script>
+        <script type="text/javascript">
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
@@ -74,9 +73,7 @@
                 }
             })(document, window.mixpanel || []);
             mixpanel.init("1d96b9e7cd7c3a6ee0b3f7fa7eff2828");
-        </script>
-        <script type="text/javascript">
-            mixpanel.track("New Visitor");
+            mixpanel.track("Session Started");
         </script>
     </environment>
 </body>

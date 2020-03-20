@@ -74,8 +74,8 @@ namespace Iconlook.Service.Web
         public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
-            services.AddSyncfusionBlazor();
             services.AddHttpContextAccessor();
+            services.AddSyncfusionBlazor(true);
             services.AddScoped<HttpContextAccessor>();
             services.Configure<KestrelServerOptions>(x =>
             {
