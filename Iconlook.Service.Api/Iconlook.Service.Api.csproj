@@ -6,6 +6,7 @@
     <LangVersion>latest</LangVersion>
     <TargetFramework>netcoreapp5.0</TargetFramework>
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
+    <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Dockerfile">
