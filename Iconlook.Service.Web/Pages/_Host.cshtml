@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using Agiper.Server
+@using Syncfusion
 @namespace Iconlook.Service.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
     <!-- Stylesheet Ref -->
-    <link async rel="stylesheet" href="static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
+    <link async rel="stylesheet" href="static/css/bundle.min.css?v=@CoreAssembly.StudioCoreVersion" />
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -49,8 +49,8 @@
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
 
     <!-- Javascript Ref -->
-    <script type="text/javascript" src="static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
-    <script type="text/javascript" src="_framework/blazor.server.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script type="text/javascript" src="static/js/bundle.min.js?v=@CoreAssembly.StudioCoreVersion"></script>
+    <script async type="text/javascript" src="_framework/blazor.server.js?v=5.0.0-preview.1.20120.5"></script>
     <environment exclude="Localhost">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script type="text/javascript">
