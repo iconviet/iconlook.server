@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.WebUtilities;
@@ -38,6 +39,7 @@ namespace Iconlook.Service.Web
             base.Configure(application, environment);
             application.UseForwardedHeaders();
             application.UseHeaderProcessor(this);
+            application.UseResponseCompression();
             application.Use((http, next) =>
             {
                 if (Environment != Environment.Localhost)
@@ -76,6 +78,19 @@ namespace Iconlook.Service.Web
             base.ConfigureServices(services);
             services.AddHttpContextAccessor();
             services.AddSyncfusionBlazor(true);
+            services.AddResponseCompression(x =>
+            {
+                x.MimeTypes = new[]
+                {
+                    "text/css",
+                    "text/html",
+                    "image/jpg",
+                    "image/png",
+                    "font/woff2",
+                    "application/javascript"
+                };
+                x.EnableForHttps = true;
+            });
             services.AddScoped<HttpContextAccessor>();
             services.Configure<KestrelServerOptions>(x =>
             {
