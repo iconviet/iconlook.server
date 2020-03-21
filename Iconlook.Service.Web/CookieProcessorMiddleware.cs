@@ -28,7 +28,7 @@ namespace Iconlook.Service.Web
             var referer = http.Request.Headers["Referer"].ToString();
             var country = http.Request.Headers["CF-IPCountry"].ToString();
             var user_agent = http.Request.Headers["User-Agent"].ToString();
-            var address = http.Request.Headers["X-Forwarded-For"].ToString();
+            var address = http.Request.Headers["CF-Connecting-IP"].ToString();
             var old_user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
             http.Response.OnStarting(x =>
             {

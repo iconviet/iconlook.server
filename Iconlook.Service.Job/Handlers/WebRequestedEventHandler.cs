@@ -20,24 +20,28 @@ namespace Iconlook.Service.Job.Handlers
 
         public Task Handle(WebRequestedEvent message, IMessageHandlerContext context)
         {
-            var user_agent = Parser.GetDefault().Parse(message.UserAgent);
-            var html = $"<b>{message.BodyString}</b> {message.IconString}\n" +
-                       $"<pre>Hash-ID: {message.UserHashId.SafeSubstring(0, 4)}</pre>\n" +
-                       (message.Country.HasValue() ? $"<pre>Country: {new RegionInfo(message.Country).EnglishName}</pre>\n" : string.Empty) +
-                       (message.Address.HasValue() ? $"<pre>Address: {message.Address}</pre>\n" : string.Empty) +
-                       $"<pre>Request: {message.Url}</pre>\n" +
-                       (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
-                       $"<pre>Browser: {user_agent.Device}, {user_agent.OS}, {user_agent.UA.Family}</pre>";
-            if (!message.Url.Contains("apple-touch-icon") &&
-                (message.Url.StartsWith("https://iconlook.io") ||
-                 message.Url.StartsWith("https://www.iconlook.io") &&
-                 (!new[] { "other" }.Any(user_agent.OS.ToString().ToLower().Contains) ||
-                  !new[] { "other", "bot" }.Any(user_agent.UA.Family.ToLower().Contains) ||
-                  !new[] { "other", "spider" }.Any(user_agent.Device.ToString().ToLower().Contains))))
+            if (message.Country.HasValue())
             {
-                return Configuration.Environment == Environment.Localhost
-                    ? Task.CompletedTask
-                    : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
+                var blacklist = new[] { "bot", "other", "spider" };
+                var ua = Parser.GetDefault().Parse(message.UserAgent);
+                var html = $"<b>{message.BodyString}</b> {message.IconString}\n" +
+                           $"<pre>Hash-ID: {message.UserHashId.SafeSubstring(0, 4)}</pre>\n" +
+                           $"<pre>Country: {new RegionInfo(message.Country).EnglishName}</pre>\n" +
+                           (message.Address.HasValue() ? $"<pre>Address: {message.Address}</pre>\n" : string.Empty) +
+                           $"<pre>Request: {message.Url}</pre>\n" +
+                           (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
+                           $"<pre>Browser: {ua.Device}, {ua.OS}, {ua.UA}</pre>";
+                if (!message.Url.Contains("apple-touch-icon") &&
+                    (message.Url.StartsWith("https://iconlook.io") ||
+                     message.Url.StartsWith("https://www.iconlook.io")) &&
+                    (!blacklist.Any(ua.OS.ToString().ToLower().Contains) ||
+                     !blacklist.Any(ua.UA.ToString().ToLower().Contains) ||
+                     !blacklist.Any(ua.Device.ToString().ToLower().Contains)))
+                {
+                    return Configuration.Environment == Environment.Localhost
+                        ? Task.CompletedTask
+                        : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
+                }
             }
             return Task.CompletedTask;
         }
