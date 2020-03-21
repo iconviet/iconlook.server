@@ -23,7 +23,7 @@ namespace Iconlook.Service.Job.Handlers
             var user_agent = Parser.GetDefault().Parse(message.UserAgent);
             var html = $"<b>{message.BodyString}</b> {message.IconString}\n" +
                        $"<pre>Hash-ID: {message.UserHashId.SafeSubstring(0, 4)}</pre>\n" +
-                       (message.Country.HasValue() ? $"<pre>Country: {new RegionInfo(message.Country).DisplayName}</pre>\n" : string.Empty) +
+                       (message.Country.HasValue() ? $"<pre>Country: {new RegionInfo(message.Country).EnglishName}</pre>\n" : string.Empty) +
                        (message.Address.HasValue() ? $"<pre>Address: {message.Address}</pre>\n" : string.Empty) +
                        $"<pre>Request: {message.Url}</pre>\n" +
                        (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
