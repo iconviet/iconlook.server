@@ -80,6 +80,7 @@ namespace Iconlook.Service.Web
             services.AddSyncfusionBlazor(true);
             services.AddResponseCompression(x =>
             {
+                x.EnableForHttps = true;
                 x.MimeTypes = new[]
                 {
                     "text/css",
@@ -89,7 +90,6 @@ namespace Iconlook.Service.Web
                     "font/woff2",
                     "application/javascript"
                 };
-                x.EnableForHttps = true;
             });
             services.AddScoped<HttpContextAccessor>();
             services.Configure<KestrelServerOptions>(x =>
