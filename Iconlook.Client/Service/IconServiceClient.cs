@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
+using Agiper;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
+using Environment = System.Environment;
 
 namespace Iconlook.Client.Service
 {
@@ -14,8 +16,15 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _client;
 
-        public IconServiceClient(double timeout = 30, string endpoint = "http://172.18.0.1:9000")
+        public IconServiceClient(double timeout = 30, string endpoint = "https://ctz.solidwallet.io")
         {
+            var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
+            if (environment.HasValue())
+            {
+                endpoint = environment != "Localhost"
+                    ? "http://172.18.0.1:9000" // local
+                    : "http://103.92.30.173:9000"; // iconviet-vnnode
+            }
             var http_client = new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) };
             _client = new IconService(new HttpProvider(http_client, $"{endpoint}/api/v3"));
         }
