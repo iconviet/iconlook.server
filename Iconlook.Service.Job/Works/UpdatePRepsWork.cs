@@ -11,6 +11,7 @@ using Iconlook.Client.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using NodaTime.Extensions;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
@@ -65,9 +66,7 @@ namespace Iconlook.Service.Job.Works
                                 LogoUrl = logo_url,
                                 Name = prep.GetName(),
                                 City = prep.GetCity(),
-                                Joined = DateTime.UtcNow,
                                 State = PRepState.Enabled,
-                                LastSeen = DateTime.UtcNow,
                                 Country = prep.GetCountry(),
                                 Voters = delegates.TotalSize,
                                 Size = new Random().Next(1, 10),
@@ -77,7 +76,9 @@ namespace Iconlook.Service.Job.Works
                                 Direction = new Random().NextDouble() >= 0.5,
                                 Balance = new Random().Next(100000, 10000000),
                                 ProducedBlocks = (long) prep.GetTotalBlocks(),
+                                Joined = Clock.Value.Instant().ToDateTimeOffset(),
                                 Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
+                                LastSeen = Clock.Value.Instant().ToDateTimeOffset(),
                                 Testnet = new[] { true, false }[new Random().Next(0, 1)],
                                 MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
                                 Entity = new[] { "Company", "Group", "Individual" }[new Random().Next(0, 3)],
