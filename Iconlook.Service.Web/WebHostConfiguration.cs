@@ -75,8 +75,8 @@ namespace Iconlook.Service.Web
         public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
+            services.AddSyncfusionBlazor();
             services.AddHttpContextAccessor();
-            services.AddSyncfusionBlazor(true);
             services.AddResponseCompression(x =>
             {
                 x.EnableForHttps = true;
