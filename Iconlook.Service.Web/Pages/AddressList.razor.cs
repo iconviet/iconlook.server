@@ -11,7 +11,6 @@ namespace Iconlook.Service.Web.Pages
     {
         protected override Task OnInitializedAsync()
         {
-            
             using (var redis = HostBase.Container.TryResolve<IRedisClient>())
             {
                 var peers = redis.As<PeerResponse>().GetAll();

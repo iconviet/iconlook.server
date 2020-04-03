@@ -12,7 +12,9 @@
         background-color: #e1fafd;
     }
 
-    .number-part {font-weight: 500; }
+    .number-part {
+        font-weight: 500;
+    }
 </style>
 <SfGrid RowHeight="40"
         ID="block_grid"
@@ -95,4 +97,5 @@
     {
         IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
     }
+
 }

@@ -40,7 +40,8 @@ namespace Iconlook.Service.Job.Handlers
                      !blacklist.Any(ua.Device.ToString().ToLower().Contains)))
                 {
                     return Configuration.Environment == Environment.Localhost
-                        ? Task.CompletedTask : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
+                        ? Task.CompletedTask
+                        : Telegram.SendTextMessageAsync(new ChatId(-1001449380420), html, ParseMode.Html);
                 }
             }
             return Task.CompletedTask;
