@@ -51,7 +51,7 @@
 <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
 
 <!-- Javascript Ref -->
-<script type="text/javascript" src="static/js/bundle.min.js?v=@CoreAssembly.StudioCoreVersion"></script>
+<script async type="text/javascript" src="static/js/bundle.min.js?v=@CoreAssembly.StudioCoreVersion"></script>
 <script async type="text/javascript" src="_framework/blazor.server.js?v=@typeof(WebHost).Assembly.InformationVersion()"></script>
 <environment exclude="Localhost">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
