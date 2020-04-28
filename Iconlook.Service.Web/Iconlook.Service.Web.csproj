@@ -22,12 +22,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.447" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.0-preview.2.20167.3" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.0-preview.3.20215.14" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.0-preview.2.20167.3" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="5.0.0-preview.2.20167.3" />
-    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.45" />
-    <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.45" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.0-preview.3.20215.14" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="5.0.0-preview.3.20215.14" />
+    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.46" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.46" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.2" />
   </ItemGroup>
 </Project>
