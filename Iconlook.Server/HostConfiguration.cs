@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Agiper.Server;
+using Iconviet.Server;
 using Autofac;
 using Iconlook.Client;
 using Iconlook.Client.Binance;
@@ -11,7 +11,7 @@ using NServiceBus;
 
 namespace Iconlook.Server
 {
-    public class HostConfiguration : Agiper.Server.HostConfiguration
+    public class HostConfiguration : Iconviet.Server.HostConfiguration
     {
         public override string ProjectName => "Iconlook";
 

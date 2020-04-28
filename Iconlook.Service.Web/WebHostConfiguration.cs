@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Agiper;
+using Iconviet;
 using Iconlook.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -75,8 +75,8 @@ namespace Iconlook.Service.Web
         public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
-            services.AddSyncfusionBlazor(true);
             services.AddHttpContextAccessor();
+            services.AddSyncfusionBlazor(true);
             services.AddResponseCompression(x =>
             {
                 x.EnableForHttps = true;
