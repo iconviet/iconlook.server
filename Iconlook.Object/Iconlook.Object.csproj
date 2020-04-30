@@ -7,6 +7,6 @@
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Iconviet.Object" Version="1.0.0-master-1191346" />
+    <PackageReference Include="Iconviet.Object" Version="1.0.0-master-1211242" />
   </ItemGroup>
 </Project>
