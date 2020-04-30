@@ -20,7 +20,7 @@ namespace Iconlook.Service.Job.Handlers
 
         public Task Handle(WebRequestedEvent message, IMessageHandlerContext context)
         {
-            var myself = new[] { "M878", "7E54", "J8R8" };
+            var myself = new[] { "M878", "7E54", "J8R8", "DDWW" };
             if (message.Country.HasValue() && !myself.Any(message.UserHashId.StartsWith))
             {
                 var blacklist = new[] { "bot", "other", "spider" };
