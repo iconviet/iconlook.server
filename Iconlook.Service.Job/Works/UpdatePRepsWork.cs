@@ -55,7 +55,7 @@ namespace Iconlook.Service.Job.Works
                                 }
                                 else
                                 {
-                                    Log.Warning("{Name} : Failed to load details.", prep.GetName());
+                                    Log.Debug("{Name} : Failed to load details.", prep.GetName());
                                 }
                             }
                             var delegates = await tracker.GetDelegates(prep.GetAddress().ToString());
