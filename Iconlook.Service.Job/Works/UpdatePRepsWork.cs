@@ -98,7 +98,7 @@ namespace Iconlook.Service.Job.Works
                         }
                         catch
                         {
-                            Log.Warning("{Name} : Failed to load info.", prep.GetName());
+                            Log.Debug("{Name} : Failed to load info.", prep.GetName());
                         }
                     })));
                     await db.SaveAllAsync(prep_list.ToList());

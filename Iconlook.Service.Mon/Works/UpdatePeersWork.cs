@@ -21,7 +21,7 @@ namespace Iconlook.Service.Mon.Works
             StartCount++;
             using (var rolex = new Rolex())
             {
-                Log.Information("{Work} started", nameof(UpdatePeersWork));
+                Log.Debug("{Work} started", nameof(UpdatePeersWork));
                 try
                 {
                     using (var redis = Redis.Instance())
@@ -77,7 +77,7 @@ namespace Iconlook.Service.Mon.Works
                 {
                     Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdatePeersWork), exception.Message);
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), rolex.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePeersWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }
