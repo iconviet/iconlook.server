@@ -26,7 +26,7 @@ namespace Iconlook.Service.Job.Works
             using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
-                Log.Information("{Work} started", nameof(UpdatePRepsWork));
+                Log.Debug("{Work} started", nameof(UpdatePRepsWork));
                 try
                 {
                     var prep_list = new List<PRep>();
@@ -127,9 +127,9 @@ namespace Iconlook.Service.Job.Works
                         r.MonthlyReward = (long) calculator.GetMonthlyReward();
                         r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainWork.LastIcxPrice;
                     })));
-                    Log.Information("**************************************************");
-                    Log.Information("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
-                    Log.Information("**************************************************");
+                    Log.Debug("**************************************************");
+                    Log.Debug("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
+                    Log.Debug("**************************************************");
                 }
                 catch (Exception exception)
                 {
@@ -138,7 +138,7 @@ namespace Iconlook.Service.Job.Works
                         Log.Error(exception, "{Work} failed to run. {Message}.", nameof(UpdatePRepsWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsWork), time.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }

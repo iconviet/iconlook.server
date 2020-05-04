@@ -83,7 +83,7 @@ namespace Iconlook.Service.Job.Works
                         Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWork), rolex.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

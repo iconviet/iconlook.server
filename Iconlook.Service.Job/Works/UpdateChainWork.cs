@@ -25,7 +25,7 @@ namespace Iconlook.Service.Job.Works
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Work} started", nameof(UpdateChainWork));
+                Log.Debug("{Work} started", nameof(UpdateChainWork));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -87,7 +87,7 @@ namespace Iconlook.Service.Job.Works
                         Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateChainWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWork), rolex.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWork), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

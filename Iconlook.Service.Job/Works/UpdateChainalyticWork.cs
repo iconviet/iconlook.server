@@ -18,7 +18,7 @@ namespace Iconlook.Service.Job.Works
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                Log.Information("{Work} started", nameof(UpdateChainalyticWork));
+                Log.Debug("{Work} started", nameof(UpdateChainalyticWork));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
@@ -83,7 +83,7 @@ namespace Iconlook.Service.Job.Works
                         Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWork), exception.Message);
                     }
                 }
-                Log.Information("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWork), time.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWork), time.Elapsed.TotalMilliseconds);
             }
         }
     }
