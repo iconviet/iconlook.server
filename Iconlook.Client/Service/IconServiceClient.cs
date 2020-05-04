@@ -23,7 +23,7 @@ namespace Iconlook.Client.Service
             {
                 endpoint = environment != "Localhost"
                     ? "http://172.18.0.1:9000" // local
-                    : "http://103.92.30.173:9000"; // iconviet-vnnode
+                    : "https://ctz.solidwallet.io"; // remote
             }
             var http_client = new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) };
             _client = new IconService(new HttpProvider(http_client, $"{endpoint}/api/v3"));
