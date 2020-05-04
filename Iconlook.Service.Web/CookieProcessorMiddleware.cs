@@ -41,7 +41,7 @@ namespace Iconlook.Service.Web
                         state.Response.Cookies.Append(
                             Cookies.USER_HASH_ID, new_user_hash_id, new CookieOptions
                             {
-                                Expires = DateTime.UtcNow.AddMonths(1)
+                                Expires = DateTime.UtcNow.AddYears(1)
                             });
                     }
                 }

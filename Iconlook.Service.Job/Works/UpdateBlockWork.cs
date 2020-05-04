@@ -23,7 +23,7 @@ namespace Iconlook.Service.Job.Works
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Work} started", nameof(UpdateBlockWork));
+                Log.Debug("{Work} started", nameof(UpdateBlockWork));
                 try
                 {
                     var service = new IconServiceClient(2);
