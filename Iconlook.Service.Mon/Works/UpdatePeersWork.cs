@@ -64,9 +64,9 @@ namespace Iconlook.Service.Mon.Works
                                 {
                                     redis.StoreAll(peers);
                                 }
-                                await Endpoint.Instance().Publish(new PeerUpdatedEvent
+                                await Endpoint.Instance().Publish(new PeersUpdatedEvent
                                 {
-                                    Peer = peers.First(x => x != null && x.State == "BlockGenerate")
+                                    Busy = peers.Where(x => x != null && x.State == "BlockGenerate").ToList()
                                 }).ConfigureAwait(false);
                                 await Channel.Instance().Publish(new PeersUpdatedSignal
                                 {

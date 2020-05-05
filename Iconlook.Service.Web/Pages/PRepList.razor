@@ -118,35 +118,35 @@
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Background" Disabled="true">
+                    <TabItem Header="Background" Visible="false">
                         <ContentTemplate>
                             <div class="card-body p-0" style="min-height: 700px;">
                                 <PRepListBackgroundGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListBackgroundGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Capability" Disabled="true">
+                    <TabItem Header="Capability" Visible="false">
                         <ContentTemplate>
                             <div class="card-body p-0" style="min-height: 700px;">
                                 <PRepListCapabilityGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListCapabilityGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Transparency" Disabled="true">
+                    <TabItem Header="Transparency" Visible="false">
                         <ContentTemplate>
                             <div class="card-body p-0" style="min-height: 700px;">
                                 <PRepListTransparencyGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListTransparencyGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Contribution" Disabled="true">
+                    <TabItem Header="Contribution" Visible="false">
                         <ContentTemplate>
                             <div class="card-body p-0" style="min-height: 700px;">
                                 <PRepListContributionGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListContributionGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="ScoreMatrix" Disabled="true">
+                    <TabItem Header="ScoreMatrix" Visible="false">
                         <ContentTemplate>
                             <div class="card-body p-0" style="min-height: 700px;">
                                 <PRepListScoreMatrixGrid EditKey="@Key" CanPage="@Page" PageSize="@Size" PageSizes="@Sizes"></PRepListScoreMatrixGrid>
@@ -156,7 +156,7 @@
                 </TabItems>
             </SfTab>
         </div>
-        <div class="font-weight-bold position-absolute" style="top: 12px; right: 34px;">
+        <div class="hide font-weight-bold position-absolute" style="top: 12px; right: 34px;">
             <a class="primary">FILTER</a>
         </div>
     </div>
