@@ -9,6 +9,9 @@
     <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\ApiProcessorMiddleware.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
