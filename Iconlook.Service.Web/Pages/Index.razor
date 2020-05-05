@@ -362,6 +362,8 @@
 
     protected override void OnInitialized()
     {
+        PeerResponse = LocalCache.LastPeerResponse;
+        ChainResponse = LocalCache.LastChainResponse;
         Animation = new TabAnimationSettings
         {
             Next = new TabAnimationNext { Duration = 0 },

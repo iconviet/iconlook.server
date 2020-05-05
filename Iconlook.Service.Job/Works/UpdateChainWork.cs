@@ -51,7 +51,7 @@ namespace Iconlook.Service.Job.Works
                                 IcxCirculation = (long) main_info?.GetIcxCirculation(),
                                 PublicTreasury = (long) main_info?.GetPublicTreasury(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
-                                NextTermBlockHeight = (long) iiss_info.GetNextPRepTerm(),
+                                NextTermBlockHeight = (long) iiss_info?.GetNextPRepTerm(),
                                 TransactionCount = (long) main_info?.GetTransactionCount(),
                                 IcxPrice = LastIcxPrice = ticker?.LastPrice ?? LastIcxPrice,
                                 RRepPercentage = (double) (iiss_info?.GetRRep() * 3) / 10000,

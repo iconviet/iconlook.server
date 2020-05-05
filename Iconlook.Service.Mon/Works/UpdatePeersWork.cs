@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Iconlook.Message;
 using Iconviet;
 using Iconviet.Server;
 using Iconlook.Object;
 using Iconlook.Server;
+using NServiceBus;
 using Serilog;
 using ServiceStack;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
@@ -62,6 +64,10 @@ namespace Iconlook.Service.Mon.Works
                                 {
                                     redis.StoreAll(peers);
                                 }
+                                await Endpoint.Instance().Publish(new PeerUpdatedEvent
+                                {
+                                    Peer = peers.First(x => x != null && x.State == "BlockGenerate")
+                                }).ConfigureAwait(false);
                                 await Channel.Instance().Publish(new PeersUpdatedSignal
                                 {
                                     Idle = peers.Where(x => x != null && x.State == "Vote").ToList(),

@@ -9,6 +9,7 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(ChainUpdatedEvent message, IMessageHandlerContext context)
         {
+            LocalCache.LastChainResponse = message.Chain;
             return Task.CompletedTask;
         }
     }

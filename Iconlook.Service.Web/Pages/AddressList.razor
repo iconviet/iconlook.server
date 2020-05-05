@@ -154,7 +154,9 @@
     {
         Paging = true;
         PageSize = 20;
-        PageSizes = new[] { 20, 50, 100, 200, 500 };
+        PeerResponse = LocalCache.LastPeerResponse;
+        ChainResponse = LocalCache.LastChainResponse;
+        PageSizes = new[] { 20, 50, 100, 500, 1000 };
         Unstaking = new TabHeader { Text = "UNSTAKING" };
         Undelegated = new TabHeader { Text = "UNDELEGATED" };
         Animation = new TabAnimationSettings

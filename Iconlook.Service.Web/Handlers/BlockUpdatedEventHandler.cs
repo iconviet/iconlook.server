@@ -9,6 +9,7 @@ namespace Iconlook.Service.Web.Handlers
     {
         public Task Handle(BlockUpdatedEvent message, IMessageHandlerContext context)
         {
+            LocalCache.LastBlockResponse = message.Block;
             return Task.CompletedTask;
         }
     }
