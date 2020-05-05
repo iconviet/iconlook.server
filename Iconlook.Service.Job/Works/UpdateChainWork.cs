@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Iconviet;
-using Iconviet.Server;
 using Iconlook.Calculator;
 using Iconlook.Client;
 using Iconlook.Client.Binance;
@@ -11,6 +9,8 @@ using Iconlook.Client.Tracker;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
+using Iconviet;
+using Iconviet.Server;
 using NServiceBus;
 using Serilog;
 
@@ -29,9 +29,9 @@ namespace Iconlook.Service.Job.Works
                 try
                 {
                     var service = new IconServiceClient(2);
-                    var last_block = await service.GetLastBlock();                    
+                    var last_block = await service.GetLastBlock();
                     if (last_block != null)
-                    {                        
+                    {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
                             var binance = new BinanceClient(2);
@@ -44,10 +44,10 @@ namespace Iconlook.Service.Job.Works
                             var total_supply = await service.GetTotalSupply();
                             var staking_info = await chainalytic.GetStakingInfo();
                             var chain = new ChainResponse
-                            {                                
+                            {
                                 MarketCap = (long) main_info?.GetMarketCap(),
-                                IRep = iiss_info?.GetIRep().ToIcxFromLoop()?? 0,
                                 IcxSupply = (long) total_supply.ToIcxFromLoop(),
+                                IRep = iiss_info?.GetIRep().ToIcxFromLoop() ?? 0,
                                 IcxCirculation = (long) main_info?.GetIcxCirculation(),
                                 PublicTreasury = (long) main_info?.GetPublicTreasury(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
@@ -55,7 +55,7 @@ namespace Iconlook.Service.Job.Works
                                 TransactionCount = (long) main_info?.GetTransactionCount(),
                                 IcxPrice = LastIcxPrice = ticker?.LastPrice ?? LastIcxPrice,
                                 RRepPercentage = (double) (iiss_info?.GetRRep() * 3) / 10000,
-                                IcxPriceChangePercentage = ticker?.PriceChangePercent ?? 0 / 100,
+                                IcxPriceChangePercentage = ticker?.PriceChangePercent / 100 ?? 0,
                                 TotalStaked = (long) prep_info?.GetTotalStaked().ToIcxFromLoop(),
                                 BlockHeight = LastBlockHeight = (long) iiss_info?.GetBlockHeight(),
                                 StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
