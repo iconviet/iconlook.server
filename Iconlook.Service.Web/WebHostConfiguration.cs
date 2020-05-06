@@ -33,7 +33,7 @@ namespace Iconlook.Service.Web
             base.Configure(application, environment);
             application.UseForwardedHeaders();
             application.UseHeaderProcessor(this);
-            application.UseResponseCompression();
+            // application.UseResponseCompression();
             application.MapWhen(
                 context => context.Request.Path.StartsWithSegments("/api") ||
                            context.Request.Path.StartsWithSegments("/sse"),
@@ -64,6 +64,7 @@ namespace Iconlook.Service.Web
                     "image/jpg",
                     "image/png",
                     "font/woff2",
+                    "application/json",
                     "application/javascript"
                 };
             });
