@@ -15,7 +15,6 @@ namespace Iconlook.Object
         public decimal Delegated { get; set; }
         public decimal Unstaking { get; set; }
         public decimal Available { get; set; }
-        public AddressClass Class { get; set; }
         public string Description { get; set; }
         public decimal IcxBalance { get; set; }
         public decimal IscoreBalance { get; set; }
@@ -26,7 +25,6 @@ namespace Iconlook.Object
             validator.RuleFor(x => x.Id).NotEmpty();
             validator.RuleFor(x => x.Hash).NotEmpty();
             validator.RuleFor(x => x.Type).IsInEnum().NotEqual(AddressType.Empty);
-            validator.RuleFor(x => x.Class).IsInEnum().NotEqual(AddressClass.Empty);
         }
     }
 }

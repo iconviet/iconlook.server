@@ -26,7 +26,7 @@ namespace Iconlook.Service.Api
                         items = items.Where(x => x.Unstaking >= 500000).ToList();
                         break;
                     case "prep_only":
-                        items = items.Where(x => x.Class == AddressClass.PRep).ToList();
+                        items = items.Where(x => x.Type == AddressType.PRep).ToList();
                         break;
                 }
                 return new UnstakingAddressListResponse(items

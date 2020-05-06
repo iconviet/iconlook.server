@@ -6,7 +6,10 @@ namespace Iconlook.Object
     public enum AddressType
     {
         Empty,
-        Wallet,
-        Contract
+        Ica,
+        PRep,
+        CRep,
+        Iconist,
+        Exchange
     }
 }
