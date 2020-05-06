@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Reflection;
 using Iconlook.Server;
 using Iconviet;
@@ -31,66 +32,70 @@ namespace Iconlook.Service.Web
         public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
         {
             base.Configure(application, environment);
-            application.UseForwardedHeaders();
-            application.UseHeaderProcessor(this);
-            // application.UseResponseCompression();
-            application.MapWhen(
-                context => context.Request.Path.StartsWithSegments("/api") ||
-                           context.Request.Path.StartsWithSegments("/sse"),
-                builder => builder.UseWebServiceStack(this));
-            application.UseStaticFiles();
-            application.UseCookieProcessor(); // DO NOT MOVE THIS !!!!
-            application.UseRouting();
-            application.UseWebMarkupMin();
-            application.UseEndpoints(x =>
-            {
-                x.MapBlazorHub();
-                x.MapFallbackToPage("/_Host");
-            });
+            application
+                .UseForwardedHeaders()
+                .UseHeaderProcessor(this)
+                .UseWhen(
+                    context => !context.Request.Headers["CF-Request-ID"].Any(),
+                    builder => builder.UseResponseCompression())
+                .MapWhen(
+                    context => context.Request.Path.StartsWithSegments("/api") ||
+                               context.Request.Path.StartsWithSegments("/sse"),
+                    builder => builder.UseWebServiceStack(this))
+                .UseStaticFiles()
+                .UseCookieProcessor()
+                .UseRouting()
+                .UseWebMarkupMin()
+                .UseEndpoints(x =>
+                {
+                    x.MapBlazorHub();
+                    x.MapFallbackToPage("/_Host");
+                });
         }
 
         public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
-            services.AddHttpContextAccessor();
-            services.AddSyncfusionBlazor(true);
-            services.AddResponseCompression(x =>
-            {
-                x.EnableForHttps = true;
-                x.MimeTypes = new[]
+            services
+                .AddHttpContextAccessor()
+                .AddSyncfusionBlazor(true)
+                .AddResponseCompression(x =>
                 {
-                    "text/css",
-                    "text/html",
-                    "image/jpg",
-                    "image/png",
-                    "font/woff2",
-                    "application/json",
-                    "application/javascript"
-                };
-            });
-            services.AddScoped<HttpContextAccessor>();
-            services.Configure<KestrelServerOptions>(x =>
-            {
-                x.AllowSynchronousIO = true;
-            });
-            services.Configure<HubOptions>(x =>
-            {
-                x.EnableDetailedErrors = true;
-                x.MaximumReceiveMessageSize = 1024 * 1024;
-            });
-            services.Configure<ForwardedHeadersOptions>(x =>
-            {
-                x.KnownProxies.Clear();
-                x.KnownNetworks.Clear();
-                x.ForwardedHeaders = ForwardedHeaders.All;
-            });
-            services.AddServerSideBlazor().AddCircuitOptions(x =>
-            {
-                if (Environment != Environment.Production)
+                    x.EnableForHttps = true;
+                    x.MimeTypes = new[]
+                    {
+                        "text/css",
+                        "text/html",
+                        "image/jpg",
+                        "image/png",
+                        "font/woff2",
+                        "application/json",
+                        "application/javascript"
+                    };
+                })
+                .AddScoped<HttpContextAccessor>()
+                .Configure<KestrelServerOptions>(x =>
                 {
-                    x.DetailedErrors = true;
-                }
-            });
+                    x.AllowSynchronousIO = true;
+                })
+                .Configure<HubOptions>(x =>
+                {
+                    x.EnableDetailedErrors = true;
+                    x.MaximumReceiveMessageSize = 1024 * 1024;
+                })
+                .Configure<ForwardedHeadersOptions>(x =>
+                {
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
+                    x.ForwardedHeaders = ForwardedHeaders.All;
+                })
+                .AddServerSideBlazor().AddCircuitOptions(x =>
+                {
+                    if (Environment != Environment.Production)
+                    {
+                        x.DetailedErrors = true;
+                    }
+                });
             services.AddWebMarkupMin(x =>
             {
                 x.DisablePoweredByHttpHeaders = true;
