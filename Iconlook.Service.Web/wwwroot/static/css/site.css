@@ -44,9 +44,29 @@ header {
 
 
 
+/*
+    OPACITY
+*/
+.opacity-25 {
+    opacity: 0.25;
+}
+
+.opacity-50 {
+    opacity: 0.50;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+.opacity-100 {
+    opacity: 1.00;
+}
+
+
 
 /*
-    COLORS
+    COLOR
 */
 
 .secondary.underline {
@@ -542,7 +562,15 @@ button.secondary, button .secondary {
 /*
     EFFECTS
 */
-.gradient {
+div.gradient a {
+    color: white;
+}
+div.gradient a:hover {
+    color: white;
+}
+div.gradient {
+    color: white;
+    border: none;
     -ms-background-repeat: repeat-x;
     background-repeat: repeat-x;
     -ms-background-attachment: fixed;

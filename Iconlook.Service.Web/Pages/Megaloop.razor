@@ -1,4 +1,4 @@
-﻿@page "/megaloop"
+﻿@page "/dapp/megaloop"
 <style type="text/css">
     .main.card .e-grid .e-content {
         min-height: 760px;
@@ -22,70 +22,82 @@
         padding-right: 5px !important;
     }
 </style>
-<div class="row mb-3 d-none d-md-block">
+<div class="row mb-3">
     <div class="col">
-        <div class="card shadow-sm border-bottom-0">
-            <div class="container">
-                <div class="row text-nowrap">
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <VotingTile ChainResponse="ChainResponse"></VotingTile>
+        <div class="px-5 py-4 card rounded shadow-sm gradient">
+            <div class="row">
+                <div class="col-4">
+                    <div class="d-inline-flex">
+                        <h1 class="font-weight-bold" style="font-family: Montserrat Subrayada;">MEGALOOP</h1>
                     </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <StakingTile ChainResponse="ChainResponse"></StakingTile>
+                    <div>
+                        <span class="opacity-50 font-weight-light">contract address</span>
+                        <span class="mono">cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff</span>
                     </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <TreasuryTile ChainResponse="ChainResponse"></TreasuryTile>
                     </div>
-                    <div class="col d-inline-flex border-bottom">
-                        <BlockTile ChainResponse="ChainResponse"></BlockTile>
+                <div class="col-2 text-right">
+                    <div class="mb-2 fs-n2">TOTAL PLAYER</div>
+                    <h2 class="mono pt-1 font-weight-bold">1,204</h2>
+                    <div class="opacity-50">participated</div>
+                </div>
+                <div class="col-3 text-right">
+                    <div class="mb-2 fs-n2">TIME TO DRAW</div>
+                    <h2 class="pt-1 font-weight-bold">6h 7m 30s</h2>
+                    <div class="opacity-50">remaining</div>
+                </div>
+                <div class="col-3 text-right">
+                    <div class="mb-2 fs-n2">POOL BALANCE</div>
+                    <div class="mt-1 d-inline-flex">
+                        <h2 class="mono font-weight-bold">23,430</h2>&nbsp;&nbsp;<h2 class="font-weight-light">ICX</h2>
                     </div>
+                    <div class="mono opacity-50">$4,576.02 <span class="fs-n1 font-weight-light">USD</span></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg mb-3 d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
+<div class="row mb-3">
+    <div class="col-lg d-none mr-lg-n4 d-md-block">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-4">
-                    <i class="fad fa-info text-white" style="font-size: 41px;"></i>
+                    <i class="fad fa-info secondary opacity-25" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">VOTE FOR US</a>
+                        <a class="primary font-weight-bold" href="/">WHAT IS MEGALOOP?</a>
                     </div>
-                    <div class="pt-1 text-white">we have contributed shit load, vote for us <span class="mono font-weight-bold">now</span></div>
+                    <div class="pt-1">simple global lottery built on <span class="mono font-weight-bold">ICON</span> smart contract</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg mb-3 d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
+    <div class="col-lg d-none mr-lg-n4 d-md-block">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-3">
-                    <i class="fad fa-circle text-white" style="font-size: 41px;"></i>
+                    <i class="fad fa-circle secondary opacity-25" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">CONTRIBUTION DAO</a>
+                        <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
                     </div>
-                    <div class="pt-1 text-white">alternative on-chain radical voting <span class="mono font-weight-bold">proposal</span></div>
+                    <div class="pt-1">send ICX to this <span class="mono font-weight-bold">contract</span> from your wallet</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg mb-3 d-none d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
+    <div class="col-lg d-none d-md-block">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-3">
-                    <i class="fad fa-mobile-alt text-white" style="font-size: 41px;"></i>
+                    <i class="fad secondary opacity-25 fa-mobile-alt" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">ICONLOOK MOBILE</a>
+                        <a class="primary font-weight-bold" href="/">WHEN YOU WIN</a>
                     </div>
-                    <div class="pt-1 text-white">Android and iOS apps is coming soon <span class="mono font-weight-bold">boys!</span></div>
+                    <div class="pt-1">ICX is paid to you after <span class="mono font-weight-bold">i-score</span> is available</div>
                 </div>
             </div>
         </div>
@@ -97,17 +109,16 @@
             <SfTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
-                    <TabItem Header="Unstaking">
+                    <TabItem Header="Players">
                         <ContentTemplate>
                             <div class="card-body p-0">
                                 <AddressListUnstakingGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></AddressListUnstakingGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="Undelegated">
+                    <TabItem Header="History">
                         <ContentTemplate>
                             <div class="card-body p-0">
-                                <AddressListUndelegatedGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></AddressListUndelegatedGrid>
                             </div>
                         </ContentTemplate>
                     </TabItem>
@@ -133,8 +144,9 @@
     [Parameter]
     public object PageSizes { get; set; }
 
-    protected TabHeader Unstaking;
-    protected TabHeader Undelegated;
+    protected TabHeader Current;
+    protected TabHeader Players;
+    protected TabHeader History;
     protected PeerResponse PeerResponse;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
@@ -154,8 +166,9 @@
         PeerResponse = LocalCache.LastPeerResponse;
         ChainResponse = LocalCache.LastChainResponse;
         PageSizes = new[] { 20, 50, 100, 500, 1000 };
-        Unstaking = new TabHeader { Text = "UNSTAKING" };
-        Undelegated = new TabHeader { Text = "UNDELEGATED" };
+        Current = new TabHeader { Text = "CURRENT" };
+        Players = new TabHeader { Text = "PLAYERS" };
+        History = new TabHeader { Text = "HISTORY" };
         Animation = new TabAnimationSettings
         {
             Next = new TabAnimationNext { Duration = 0 },
