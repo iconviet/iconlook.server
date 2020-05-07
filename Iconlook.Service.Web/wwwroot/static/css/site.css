@@ -562,12 +562,14 @@ button.secondary, button .secondary {
 /*
     EFFECTS
 */
-div.gradient a {
+div.gradient a, div.grabient a {
     color: white;
 }
-div.gradient a:hover {
+
+div.gradient a:hover, div.grabient a:hover {
     color: white;
 }
+
 div.gradient {
     color: white;
     border: none;
@@ -576,4 +578,14 @@ div.gradient {
     -ms-background-attachment: fixed;
     background-attachment: fixed;
     background-image: linear-gradient(150deg,#1aaaba,#0b464c);
+}
+
+div.grabient {
+    color: white;
+    border: none;
+    -ms-background-repeat: repeat-x;
+    background-repeat: repeat-x;
+    -ms-background-attachment: fixed;
+    background-attachment: fixed;
+    background-image: radial-gradient( circle farthest-corner at 47.4% 55%, rgba(218,61,61,1) 0%, rgba(170,13,71,0.81) 90% );
 }

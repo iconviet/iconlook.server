@@ -1,0 +1,168 @@
+﻿@using ClickEventArgs = Syncfusion.Blazor.Buttons.ClickEventArgs
+@inject HttpContextAccessor HttpAccessor
+<style>
+    .address-name {
+        padding: 3px 7px;
+        border-radius: 3px;
+        background-color: #e1fafd;
+        border: solid 1px #1aaaba;
+    }
+
+    .staked_amount .number-part {
+        font-weight: 600;
+    }
+
+    .staked_amount .fraction-part {
+        font-weight: 400;
+    }
+
+    .unstaking_amount .number-part {
+        font-weight: 700;
+    }
+
+    .unstaking_amount .fraction-part {
+        font-weight: 500;
+    }
+</style>
+<SfGrid @ref="SfGrid"
+         ID="players_grid"
+         EnableHover="false"
+         AllowPaging="Paging"
+         EnableAltRow="false"
+         AllowSorting="Sorting"
+         AllowSelection="false"
+         GridLines="GridLine.Horizontal"
+         TValue="UnstakingAddressResponse">
+    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
+    <SfDataManager Url="/api/v1/address/list/unstaking" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+    <GridColumns>
+        <GridColumn HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
+            <Template>
+                @{
+                    if (context is UnstakingAddressResponse address)
+                    {
+                        <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                            <span class="fs-n1 mono">@address.Hash</span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="145" HeaderText="Bet" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+            <Template>
+                @{
+                    if (context is UnstakingAddressResponse address)
+                    {
+                        if (address.Unstaking >= 500000)
+                        {
+                            <i class="fas mr-1 fs-n2 fa-whale special"></i>
+                        }
+                        if (address.Unstaking > 100000 && address.Unstaking < 500000)
+                        {
+                            <i class="fal mr-1 fs-n2 fa-fish special"></i>
+                        }
+                        if (IsMobile)
+                        {
+                            <span class="mono ls-n2 font-weight-semibold">@address.Unstaking.ToString("N0")</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Visible="@(!IsMobile)" Width="@((IsMobile ? 90 : 140).ToString())" HeaderText="Staked" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Staked)">
+            <Template>
+                @{
+                    if (context is UnstakingAddressResponse address)
+                    {
+                        if (address.Staked == 0)
+                        {
+                            <span class="pl-1 text-light">-</span>
+                        }
+                        else
+                        {
+                            <span class="mono ls-n2 text-light staked_amount">@address.Staked.ToIcxString()</span>
+                            <span class="pl-1 text-light font-weight-light">ICX</span>
+                        }
+                    }
+                }
+            </Template>
+        </GridColumn>
+        @if (IsMobile)
+        {
+            <GridColumn Width="120" HeaderText="Requested" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAgeShort)">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-condensed">@address.RequestedDateTimeAgeShort</span>
+                        <span class="text-light text-condensed font-weight-light">ago</span>
+                    }
+                </Template>
+            </GridColumn>
+        }
+        else
+        {
+            <GridColumn Width="200" HeaderText="Requested Since" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.RequestedDateTimeAge)">
+                <Template>
+                    @if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="text-condensed font-weight-semibold">@address.RequestedDateTimeAge</span>
+                        <span class="text-light text-condensed font-weight-light">ago</span>
+                    }
+                </Template>
+            </GridColumn>
+        }
+        <GridColumn Visible="@(!IsMobile)" Width="175" HeaderText="Time To Unstake" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakingCountdown)">
+            <Template>
+                @if (context is UnstakingAddressResponse address)
+                {
+                    <span class="text-light text-condensed font-weight-light">@address.UnstakingCountdown</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Visible="@(!IsMobile)" Width="115" HeaderText="At Block" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.UnstakedBlockHeight)">
+            <Template>
+                @{
+                    if (context is UnstakingAddressResponse address)
+                    {
+                        <span class="mono ls-n2 text-light">@address.UnstakedBlockHeight.ToString("N0")</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+
+@code
+{
+    protected bool IsMobile;
+
+    [Parameter]
+    public bool Paging { get; set; }
+
+    [Parameter]
+    public bool Sorting { get; set; }
+
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public object PageSizes { get; set; }
+
+    protected SfGrid<UnstakingAddressResponse> SfGrid;
+
+    private void ChipListOnClick(ClickEventArgs args)
+    {
+        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+    }
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}
