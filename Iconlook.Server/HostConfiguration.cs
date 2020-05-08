@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Iconviet.Server;
 using Autofac;
 using Iconlook.Client;
 using Iconlook.Client.Binance;
@@ -7,6 +6,7 @@ using Iconlook.Client.Chainalytic;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;
 using Iconlook.Message;
+using Iconviet.Server;
 using NServiceBus;
 
 namespace Iconlook.Server

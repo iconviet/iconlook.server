@@ -1,6 +1,6 @@
 ﻿using System;
-using Iconviet.Object;
 using FluentValidation;
+using Iconviet.Object;
 using ServiceStack.DataAnnotations;
 
 namespace Iconlook.Entity

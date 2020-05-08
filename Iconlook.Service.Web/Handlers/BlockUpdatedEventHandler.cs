@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Iconviet.Server;
 using Iconlook.Message;
+using Iconviet.Server;
 using NServiceBus;
 
 namespace Iconlook.Service.Web.Handlers

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Iconviet.Object;
 using FluentValidation;
+using Iconviet.Object;
 
 namespace Iconlook.Object
 {

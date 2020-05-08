@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Iconviet.Server;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Iconlook.Message;
+using Iconviet.Server;
 using NServiceBus;
-using System.Linq;
 
 namespace Iconlook.Service.Web.Handlers
 {

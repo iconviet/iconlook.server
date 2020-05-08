@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Iconviet;
-using Iconviet.Server;
 using Iconlook.Calculator;
 using Iconlook.Client;
 using Iconlook.Client.Service;
@@ -11,6 +9,8 @@ using Iconlook.Client.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
+using Iconviet;
+using Iconviet.Server;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;

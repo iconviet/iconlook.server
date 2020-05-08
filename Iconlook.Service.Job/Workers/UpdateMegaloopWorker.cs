@@ -14,9 +14,6 @@ namespace Iconlook.Service.Job.Workers
             {
                 Log.Information("{Work} started", nameof(UpdateMegaloopWorker));
                 var service = new IconServiceClient(2);
-                var megalook = await service.GetScoreApi("");
-                var name = megalook[0].GetScoreName();
-                var cu = name;
             }
         }
     }
