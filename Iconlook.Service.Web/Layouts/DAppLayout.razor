@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+@inject HttpContextAccessor HttpAccessor
+<style>
+    app {
+        background-color: #f8f9fa;
+    }
+</style>
+<main>
+    <div class="pt-5 container">
+        @Body
+    </div>
+</main>
+
+@code
+{
+    protected bool IsMobile;
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}
