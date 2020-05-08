@@ -2,7 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Iconviet.Server;
-using Iconlook.Service.Job.Works;
+using Iconlook.Service.Job.Workers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using ServiceStack;
@@ -18,11 +18,11 @@ namespace Iconlook.Service.Job
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateBlockWork>().StartAsync());
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateChainWork>().StartAsync());
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateMegaloopWork>().StartAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdatePRepsWork>().StartAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdateChainalyticWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateBlockWorker>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateChainWorker>().StartAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdatePRepsWorker>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateMegaloopWorker>().StartAsync());
+                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdateChainalyticWorker>().StartAsync());
                 });
         }
     }

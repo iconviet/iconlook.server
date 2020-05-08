@@ -11,9 +11,9 @@ using Iconlook.Server;
 using NServiceBus;
 using Serilog;
 
-namespace Iconlook.Service.Job.Works
+namespace Iconlook.Service.Job.Workers
 {
-    public class UpdateBlockWork : WorkBase
+    public class UpdateBlockWorker : WorkerBase
     {
         public static long LastBlockHeight;
 
@@ -23,7 +23,7 @@ namespace Iconlook.Service.Job.Works
         {
             using (var rolex = new Rolex())
             {
-                Log.Debug("{Work} started", nameof(UpdateBlockWork));
+                Log.Debug("{Work} started", nameof(UpdateBlockWorker));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -80,10 +80,10 @@ namespace Iconlook.Service.Job.Works
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWork), exception.Message);
+                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWorker), exception.Message);
                     }
                 }
-                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWork), rolex.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWorker), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

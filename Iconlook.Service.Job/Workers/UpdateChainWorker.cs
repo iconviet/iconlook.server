@@ -14,9 +14,9 @@ using Iconviet.Server;
 using NServiceBus;
 using Serilog;
 
-namespace Iconlook.Service.Job.Works
+namespace Iconlook.Service.Job.Workers
 {
-    public class UpdateChainWork : WorkBase
+    public class UpdateChainWorker : WorkerBase
     {
         public static long LastBlockHeight;
         public static decimal LastIcxPrice;
@@ -25,7 +25,7 @@ namespace Iconlook.Service.Job.Works
         {
             using (var rolex = new Rolex())
             {
-                Log.Debug("{Work} started", nameof(UpdateChainWork));
+                Log.Debug("{Work} started", nameof(UpdateChainWorker));
                 try
                 {
                     var service = new IconServiceClient(2);
@@ -84,10 +84,10 @@ namespace Iconlook.Service.Job.Works
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateChainWork), exception.Message);
+                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateChainWorker), exception.Message);
                     }
                 }
-                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWork), rolex.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWorker), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

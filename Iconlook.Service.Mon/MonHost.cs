@@ -2,7 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Iconviet.Server;
-using Iconlook.Service.Mon.Works;
+using Iconlook.Service.Mon.Workers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using ServiceStack;
@@ -18,7 +18,7 @@ namespace Iconlook.Service.Mon
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdatePeersWork>().StartAsync());
+                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdatePeersWorker>().StartAsync());
                 });
         }
     }

@@ -9,16 +9,16 @@ using Iconlook.Client.Chainalytic;
 using Iconlook.Object;
 using Serilog;
 
-namespace Iconlook.Service.Job.Works
+namespace Iconlook.Service.Job.Workers
 {
-    public class UpdateChainalyticWork : WorkBase
+    public class UpdateChainalyticWorker : WorkerBase
     {
         public override async Task StartAsync()
         {
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                Log.Debug("{Work} started", nameof(UpdateChainalyticWork));
+                Log.Debug("{Work} started", nameof(UpdateChainalyticWorker));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
@@ -65,7 +65,7 @@ namespace Iconlook.Service.Job.Works
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
                             var calculator = new UnstakeBlockCalculator(
-                                UpdateBlockWork.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
+                                UpdateBlockWorker.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
                             address.RequestedDateTime = calculator.GetRequestDateTime();
                             address.UnstakingCountdown = calculator.GetUnstakingCountdown();
                             address.RequestedDateTimeAge = calculator.GetRequestDateTimeAge();
@@ -78,10 +78,10 @@ namespace Iconlook.Service.Job.Works
                 {
                     if (!(exception is TaskCanceledException))
                     {
-                        Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWork), exception.Message);
+                        Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWorker), exception.Message);
                     }
                 }
-                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWork), time.Elapsed.TotalMilliseconds);
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWorker), time.Elapsed.TotalMilliseconds);
             }
         }
     }

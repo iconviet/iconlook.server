@@ -25,7 +25,7 @@ namespace Iconlook.Service.Api
             return "SETUP JOB IS RUNNING";
         }
 
-        public class SetupWork : WorkBase
+        public class SetupWork : WorkerBase
         {
             private IDbConnection _db;
 
