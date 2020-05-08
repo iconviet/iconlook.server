@@ -1,9 +1,17 @@
-﻿@page "/dapp/megaloop"
+﻿@page "/megaloop"
 <style type="text/css">
-    .main.card .e-grid .e-content {
+    .card .e-grid .e-content {
         min-height: 760px;
     }
 
+    .main-footer {
+        display: none !important;
+    }
+
+    .main-header-1, .main-header-1 {
+        display: none !important;
+    }
+    
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
         padding-left: 5px !important;
@@ -32,24 +40,26 @@
                     </div>
                     <div>
                         <span class="fs-n3">LAST WINNER</span>&nbsp;
-                        <span class="mono font-weight-bold">16,720</span>
+                        <span class="mono fs-n1 font-weight-bold">16,720</span>
                         <span class="font-weight-light">ICX</span>&nbsp;
                         <span class="fs-n1 opacity-50 font-weight-light">$ 4,265.45 USD</span>
                         <a class="mono fs-n1 font-weight-light" href="/">hx863e16bd18ceaa7d498b4b275e36cd58818b1f25</a>
                     </div>
                     </div>
                 <div class="col-2 text-right">
-                    <div class="mb-2 fs-n2">ALL COUNT</div>
+                    <div class="mb-2 fs-n2">PLAYERS</div>
                     <h2 class="mono pt-1 font-weight-bold">1,204</h2>
-                    <div class="opacity-50">players</div>
+                    <div class="opacity-50">participated</div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2">TIME LEFT</div>
-                    <h2 class="pt-1 font-weight-bold">6h 7m 30s</h2>
+                    <div class="mb-2 fs-n2"><i class="fal pr-1 fa-stopwatch"></i> TIME LEFT</div>
+                    <h2 class="pt-1 font-weight-bold ChainResponse_NextTermCountdown">
+                        @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
+                    </h2>
                     <div class="opacity-50">remaining</div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2">POOL SIZE</div>
+                    <div class="mb-2 fs-n2">DIVIDEND</div>
                     <div class="mt-1 d-inline-flex">
                         <h2 class="mono font-weight-bold">23,430</h2>&nbsp;&nbsp;<h2 class="font-weight-light">ICX</h2>
                     </div>
@@ -108,7 +118,7 @@
 </div>
 <div class="row mb-5">
     <div class="col">
-        <div class="main card shadow-sm" style="min-height: 943px;">
+        <div class="card shadow-sm" style="min-height: 943px;">
             <SfTab Animation="Animation">
                 <TabEvents Selecting="Select"/>
                 <TabItems>

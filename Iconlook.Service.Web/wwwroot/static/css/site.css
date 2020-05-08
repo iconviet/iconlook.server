@@ -7,11 +7,6 @@ app {
     flex-direction: column;
 }
 
-.body {
-    background-color: #f8f9fa;
-}
-
-
 html, body, .e-control {
     color: #222222;
     font-size: 13px;
@@ -34,12 +29,6 @@ html, body, .e-control {
 
 .mono-lg {
     font-family: 'Share Tech Mono';
-}
-
-header {
-    background-color: white;
-    box-shadow: 0 8px 11px -6px #000000;
-    box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
 }
 
 
@@ -562,15 +551,15 @@ button.secondary, button .secondary {
 /*
     EFFECTS
 */
-div.gradient a, div.grabient a {
+.gradient a, .grabient a {
     color: white;
 }
 
-div.gradient a:hover, div.grabient a:hover {
+.gradient a:hover, .grabient a:hover {
     color: white;
 }
 
-div.gradient {
+.gradient {
     color: white;
     border: none;
     -ms-background-repeat: repeat-x;
@@ -580,7 +569,7 @@ div.gradient {
     background-image: linear-gradient(150deg,#1aaaba,#0b464c);
 }
 
-div.grabient {
+.grabient {
     color: white;
     border: none;
     -ms-background-repeat: repeat-x;

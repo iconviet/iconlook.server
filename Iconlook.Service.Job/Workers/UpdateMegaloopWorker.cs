@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Iconlook.Client.Service;
 using Iconviet;
 using Iconviet.Server;
@@ -12,8 +13,19 @@ namespace Iconlook.Service.Job.Workers
         {
             using (var rolex = new Rolex())
             {
-                Log.Information("{Work} started", nameof(UpdateMegaloopWorker));
-                var service = new IconServiceClient(2);
+                Log.Debug("{Work} started", nameof(UpdateMegaloopWorker));
+                try
+                {
+                    var service = new IconServiceClient("https://bicon.net.solidwallet.io");
+                }
+                catch (Exception exception)
+                {
+                    if (!(exception is TaskCanceledException))
+                    {
+                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateMegaloopWorker), exception.Message);
+                    }
+                }
+                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateMegaloopWorker), rolex.Elapsed.TotalMilliseconds);
             }
         }
     }

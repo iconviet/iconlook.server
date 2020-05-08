@@ -16,6 +16,11 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _client;
 
+        public IconServiceClient(string endpoint, double timeout = 30) : this(timeout, endpoint)
+        {
+
+        }
+
         public IconServiceClient(double timeout = 30, string endpoint = "https://ctz.solidwallet.io")
         {
             var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
