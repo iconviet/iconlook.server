@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Iconlook.Client.Service;
+using Iconlook.Client;
+using Iconlook.Client.Megaloop;
+using Iconlook.Message;
+using Iconlook.Object;
+using Iconlook.Server;
 using Iconviet;
 using Iconviet.Server;
+using NServiceBus;
 using Serilog;
 
 namespace Iconlook.Service.Job.Workers
@@ -16,7 +21,14 @@ namespace Iconlook.Service.Job.Workers
                 Log.Debug("{Work} started", nameof(UpdateMegaloopWorker));
                 try
                 {
-                    var service = new IconServiceClient("https://bicon.net.solidwallet.io");
+                    var service = new MegaloopClient(Endpoints.TESTNET, 2);
+                    var pool_size = await service.GetPoolSize();
+                    var megaloop = new MegaloopResponse
+                    {
+                        PoolSize = pool_size.ToIcxFromLoop()
+                    };
+                    await Channel.Instance().Publish(new MegaloopUpdatedSignal { Megaloop = megaloop }).ConfigureAwait(false);
+                    await Endpoint.Instance().Publish(new MegaloopUpdatedEvent { Megaloop = megaloop }).ConfigureAwait(false);
                 }
                 catch (Exception exception)
                 {

@@ -38,6 +38,15 @@
                         }
                     }));
                 // ******************************************
+                // *         MegaloopUpdatedSignal          *
+                // ******************************************
+                subscriptions.push(subject
+                    .pipe(rxjs.operators.filter(x => x.name === "MegaloopUpdatedSignal"))
+                    .pipe(rxjs.operators.auditTime(1000)).subscribe(signal => {
+                        $(".MegaloopResponse_PoolSize").decimal(signal.body.megaloop.poolSize, 4);
+                    }));
+
+                // ******************************************
                 // *          ChainUpdatedSignal            *
                 // ******************************************
                 subscriptions.push(subject

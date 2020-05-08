@@ -1,46 +1,34 @@
 ﻿using System;
+using System.Net.Http;
+using System.Numerics;
 using System.Threading.Tasks;
-using ServiceStack;
-using ServiceStack.Text;
+using Lykke.Icon.Sdk;
+using Lykke.Icon.Sdk.Data;
+using Lykke.Icon.Sdk.Transport.Http;
 
 namespace Iconlook.Client.Megaloop
 {
     public class MegaloopClient
     {
-        private readonly JsonHttpClient _client;
+        private readonly IconService _client;
 
-        public MegaloopClient(double timeout = 30)
+        public MegaloopClient(double timeout) : this(Endpoints.MAINNET, timeout)
         {
-            _client = new JsonHttpClient("https://bicon.net.solidwallet.io")
-            {
-                ResultsFilterResponse = (res, dto, method, uri, req) =>
-                {
-                    if (dto is RpcResponse response)
-                        response.Result = DynamicJson.Deserialize(
-                            JsonSerializer.SerializeToString(response.Result));
-                }
-            };
-            _client.GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);
         }
 
-        public async Task<StakingInfoRpc> GetStakingInfo()
+        public MegaloopClient(string endpoint = Endpoints.MAINNET, double timeout = 30)
         {
-            using (JsConfig.With(new Config { TextCase = TextCase.SnakeCase }))
-            {
-                var response = await _client.PostAsync<StakingInfoRpc>("/", new RpcRequest
-                {
-                    Id = 123,
-                    Jsonrpc = "2.0",
-                    Method = "_call",
-                    Params = new
-                    {
-                        CallId = "api_call",
-                        ApiParams = new { },
-                        ApiId = "get_staking_info_last_block"
-                    }
-                });
-                return response ?? new StakingInfoRpc { Id = 123 };
-            }
+            _client = new IconService(new HttpProvider(
+                new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) }, $"{endpoint}/api/v3"));
+        }
+
+        public async Task<BigInteger> GetPoolSize()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("get_jackpot_size")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToInteger();
         }
     }
 }

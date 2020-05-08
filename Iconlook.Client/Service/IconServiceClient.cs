@@ -16,22 +16,22 @@ namespace Iconlook.Client.Service
     {
         private readonly IconService _client;
 
-        public IconServiceClient(string endpoint, double timeout = 30) : this(timeout, endpoint)
+        public IconServiceClient(double timeout) : this(Endpoints.MAINNET, timeout)
         {
-
         }
 
-        public IconServiceClient(double timeout = 30, string endpoint = "https://ctz.solidwallet.io")
+        public IconServiceClient(string endpoint = Endpoints.MAINNET, double timeout = 30)
         {
             var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
             if (environment.HasValue())
             {
-                endpoint = environment != "Localhost"
-                    ? "http://172.18.0.1:9000" // local
-                    : "https://ctz.solidwallet.io"; // remote
+                if (environment != Iconviet.Environment.Localhost.ToString())
+                {
+                    endpoint = Endpoints.CITIZEN;
+                }
             }
-            var http_client = new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) };
-            _client = new IconService(new HttpProvider(http_client, $"{endpoint}/api/v3"));
+            _client = new IconService(new HttpProvider(
+                new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) }, $"{endpoint}/api/v3"));
         }
 
         public Task<PRepRpc> GetPRep(string address)

@@ -46,43 +46,47 @@
         -ms-background-attachment: fixed;
         background-attachment: fixed;
         background-image: radial-gradient(circle farthest-corner at 10% 20%,rgba(0,141,149,1.0) 0, rgba(0,181,149,1.0) 90% );
-        <!-- background-image: radial-gradient( circle farthest-corner at 47.4% 55%, rgba(218,61,61,1) 0%, rgba(170,13,71,0.81) 90% ); -->
+        <!-- background-image: radial-gradient( circle farthest-corner at 47.4% 55%, rgba(218,61,61,1) 0, rgba(170,13,71,0.81) 90% ); -->
     }
 </style>
 <div class="row mb-3">
     <div class="col">
-        <div class="px-5 py-4 card header shadow rounded">
+        <div class="px-5 py-4 card header rounded shadow-sm">
             <div class="row">
                 <div class="col-4">
                     <div class="d-inline-flex">
-                        <h1 class="font-weight-bold" style="font-family: Montserrat Subrayada;">MEGALOOP</h1>
+                        <h1 class="font-weight-bold" style="font-family: Montserrat Subrayada; text-shadow: 1px 1px 1px rgb(9, 49, 42);">MEGALOOP</h1>
                     </div>
                     <div>
-                        <span class="fs-n3">LAST WINNER</span>&nbsp;
-                        <span class="mono fs-n2 font-weight-bold">16,720</span>
-                        <span class="fs-n1 font-weight-light">ICX</span>&nbsp;
-                        <span class="fs-n1 opacity-50 font-weight-light">$ 4,265.45 USD</span>
-                        <a class="mono fs-n1 font-weight-light" href="/">hx863e16bd18ceaa7d498b4b275e36cd58818b1f25</a>
+                        <span class="fs-n1 font-weight-bold">16,720 ICX</span>&nbsp;
+                        <span class="fs-n1 opacity-75 font-weight-light">$ 4,265.45</span>
+                        <span class="fs-n2 opacity-75">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
+                        <a class="mono fs-n1" href="/">hx863e16bd18ceaa7d498b4b275e36cd58818b1f25</a>
                     </div>
                 </div>
                 <div class="col-2 text-right">
-                    <div class="mb-2 fs-n2">PLAYERS</div>
+                    <div class="mb-2 fs-n2 font-weight-semibold">TOTAL NO.</div>
                     <h2 class="mono pt-1 font-weight-bold">1,204</h2>
-                    <div class="opacity-50">participated</div>
+                    <div class="opacity-50 font-weight-semibold">players</div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2"><i class="fal pr-1 fa-stopwatch"></i> TIME LEFT</div>
+                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fal pr-1 fa-stopwatch"></i> TIME LEFT</div>
                     <h2 class="pt-1 font-weight-bold ChainResponse_NextTermCountdown">
                         @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
                     </h2>
-                    <div class="opacity-50">remaining</div>
+                    <div class="opacity-50 font-weight-semibold">remaining</div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2">DIVIDEND</div>
+                    <div class="mb-2 fs-n2 font-weight-semibold">POOL SIZE</div>
                     <div class="mt-1 d-inline-flex">
-                        <h2 class="mono font-weight-bold">23,430</h2>&nbsp;&nbsp;<h2 class="font-weight-light">ICX</h2>
+                        <h2 class="mono font-weight-bold MegaloopResponse_PoolSize" number="@(MegaloopResponse?.PoolSize ?? 0)">
+                            @(MegaloopResponse?.PoolSize.ToString("N4") ?? "0.0000")
+                        </h2>&nbsp;&nbsp;
+                        <h2 class="font-weight-light">
+                            ICX
+                        </h2>
                     </div>
-                    <div class="mono opacity-75">$4,576.02 <span class="fs-n1 font-weight-light">USD</span></div>
+                    <div class="mono opacity-50 font-weight-semibold">$4,576.02 <span class="fs-n1">USD</span></div>
                 </div>
             </div>
         </div>
@@ -90,46 +94,46 @@
 </div>
 <div class="row mb-3">
     <div class="col-lg d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card shadow rounded">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-4">
-                    <i class="fad fa-info special opacity-50" style="font-size: 41px;"></i>
+                    <i class="fad fa-info special opacity-75" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="special font-weight-bold" href="/">WHAT IS THIS GAME?</a>
+                        <a class="primary font-weight-bold" href="/">WHAT IS THIS?</a>
                     </div>
-                    <div class="pt-1">simple global lottery built on <span class="mono font-weight-bold">ICON</span> smart contract</div>
+                    <div class="pt-1">Simple worldwide lottery built on <span class="mono font-weight-bold">ICON</span> blockchain</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card shadow rounded">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-3">
-                    <i class="fad fa-circle special opacity-50" style="font-size: 41px;"></i>
+                    <i class="fad fa-qrcode special opacity-75" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="special font-weight-bold" href="/">HOW DO I PLAY?</a>
+                        <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
                     </div>
-                    <div class="pt-1">send ICX to this <span class="mono font-weight-bold">contract</span> from your wallet</div>
+                    <div class="pt-1">Send ICX to this <span class="mono underline font-weight-bold">address</span> from your wallet</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg d-none d-md-block">
-        <div class="px-1 p-3 card shadow rounded">
+        <div class="px-1 p-3 card rounded shadow-sm">
             <div class="d-inline-flex">
                 <div class="ml-2 mr-3">
-                    <i class="fad special opacity-50 fa-mobile-alt" style="font-size: 41px;"></i>
+                    <i class="fad special opacity-75 fa-badge-dollar" style="font-size: 41px;"></i>
                 </div>
                 <div>
                     <div class="d-flex">
-                        <a class="special font-weight-bold" href="/">WHEN YOU WIN</a>
+                        <a class="primary font-weight-bold" href="/">WHAT IF I WON?</a>
                     </div>
-                    <div class="pt-1">ICX is paid to you after <span class="mono font-weight-bold">i-score</span> is available</div>
+                    <div class="pt-1"><span class="mono font-weight-bold">@(MegaloopResponse?.PoolSize.ToString("N4") ?? "0.0000")</span> ICX will be sent to your wallet after</div>
                 </div>
             </div>
         </div>
@@ -179,9 +183,9 @@
     protected TabHeader Current;
     protected TabHeader Players;
     protected TabHeader History;
-    protected PeerResponse PeerResponse;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
+    protected MegaloopResponse MegaloopResponse;
 
     public void Select(SelectingEventArgs args)
     {
@@ -195,12 +199,12 @@
     {
         Paging = true;
         PageSize = 20;
-        PeerResponse = LocalCache.LastPeerResponse;
-        ChainResponse = LocalCache.LastChainResponse;
         PageSizes = new[] { 20, 50, 100, 500, 1000 };
         Current = new TabHeader { Text = "CURRENT" };
         Players = new TabHeader { Text = "PLAYERS" };
         History = new TabHeader { Text = "HISTORY" };
+        ChainResponse = LocalCache.LastChainResponse;
+        MegaloopResponse = LocalCache.LastMegaloopResponse;
         Animation = new TabAnimationSettings
         {
             Next = new TabAnimationNext { Duration = 0 },
