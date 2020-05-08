@@ -1,5 +1,4 @@
-﻿@using ClickEventArgs = Syncfusion.Blazor.Buttons.ClickEventArgs
-@inject HttpContextAccessor HttpAccessor
+﻿@inject HttpContextAccessor HttpAccessor
 <style>
     .address-name {
         padding: 3px 7px;
@@ -27,14 +26,11 @@
 <SfGrid @ref="SfGrid"
          ID="players_grid"
          EnableHover="false"
-         AllowPaging="Paging"
          EnableAltRow="false"
-         AllowSorting="Sorting"
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          TValue="UnstakingAddressResponse">
-    <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
-    <SfDataManager Url="/api/v1/address/list/unstaking" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+    <SfDataManager Url="/api/v1/address/list/unstaking?take=12" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(UnstakingAddressResponse.Hash)">
             <Template>
@@ -48,31 +44,21 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Bet" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+        <GridColumn Width="100" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)
                     {
-                        if (address.Unstaking >= 500000)
-                        {
-                            <i class="fas mr-1 fs-n2 fa-whale special"></i>
-                        }
-                        if (address.Unstaking > 100000 && address.Unstaking < 500000)
-                        {
-                            <i class="fal mr-1 fs-n2 fa-fish special"></i>
-                        }
-                        if (IsMobile)
-                        {
-                            <span class="mono ls-n2 font-weight-semibold">@address.Unstaking.ToString("N0")</span>
-                            <span class="pl-1 text-light font-weight-light">ICX</span>
-                        }
-                        else
-                        {
-                            <span class="mono ls-n2 unstaking_amount">@address.Unstaking.ToIcxString()</span>
-                            <span class="pl-1 text-light font-weight-light">ICX</span>
-                        }
+
+                        <span class="mono ls-n2 unstaking_amount">@((address.Unstaking / 1000).ToIcxString())</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="100" HeaderText="Chance" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right">
+            <Template>
+                <span class="mono font-weight-bold">1.52%</span>
             </Template>
         </GridColumn>
     </GridColumns>
@@ -82,24 +68,7 @@
 {
     protected bool IsMobile;
 
-    [Parameter]
-    public bool Paging { get; set; }
-
-    [Parameter]
-    public bool Sorting { get; set; }
-
-    [Parameter]
-    public int PageSize { get; set; }
-
-    [Parameter]
-    public object PageSizes { get; set; }
-
     protected SfGrid<UnstakingAddressResponse> SfGrid;
-
-    private void ChipListOnClick(ClickEventArgs args)
-    {
-        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
-    }
 
     protected override void OnInitialized()
     {

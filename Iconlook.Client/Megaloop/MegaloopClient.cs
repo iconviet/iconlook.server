@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Lykke.Icon.Sdk;
 using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
+using Lykke.Icon.Sdk.Transport.JsonRpc;
 
 namespace Iconlook.Client.Megaloop
 {
@@ -29,6 +30,15 @@ namespace Iconlook.Client.Megaloop
                 .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
                 .Build());
             return response.ToInteger();
+        }
+
+        public async Task<RpcObject> GetPlayerList()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("ls_players")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToObject();
         }
     }
 }

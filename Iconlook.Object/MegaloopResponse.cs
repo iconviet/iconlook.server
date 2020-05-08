@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FluentValidation;
 using Iconviet.Object;
 
 namespace Iconlook.Object

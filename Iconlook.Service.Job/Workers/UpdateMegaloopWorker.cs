@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Iconlook.Client;
 using Iconlook.Client.Megaloop;
@@ -23,9 +24,11 @@ namespace Iconlook.Service.Job.Workers
                 {
                     var service = new MegaloopClient(Endpoints.TESTNET, 2);
                     var pool_size = await service.GetPoolSize();
+                    var player_list = await service.GetPlayerList();
                     var megaloop = new MegaloopResponse
                     {
-                        PoolSize = pool_size.ToIcxFromLoop()
+                        PoolSize = pool_size.ToIcxFromLoop(),
+                        Players = player_list.GetKeys().ToList()
                     };
                     await Channel.Instance().Publish(new MegaloopUpdatedSignal { Megaloop = megaloop }).ConfigureAwait(false);
                     await Endpoint.Instance().Publish(new MegaloopUpdatedEvent { Megaloop = megaloop }).ConfigureAwait(false);
