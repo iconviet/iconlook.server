@@ -140,8 +140,30 @@
     </div>
 </div>
 <div class="row mb-5">
+    <div class="col mr-sm-n3">
+        <div class="card shadow-sm" style="min-height: 895px;">
+            <SfTab Animation="Animation">
+                <TabEvents Selecting="Select" />
+                <TabItems>
+                    <TabItem Header="Current">
+                        <ContentTemplate>
+                            <div class="card-body p-0">
+                                <MegaloopCurrentGrid Paging="@Paging" Sorting="@Sorting" PageSize="@PageSize" PageSizes="@PageSizes"></MegaloopCurrentGrid>
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                    <TabItem Header="History">
+                        <ContentTemplate>
+                            <div class="card-body p-0">
+                            </div>
+                        </ContentTemplate>
+                    </TabItem>
+                </TabItems>
+            </SfTab>
+        </div>
+    </div>
     <div class="col">
-        <div class="card shadow" style="min-height: 895px;">
+        <div class="card shadow-sm" style="min-height: 895px;">
             <SfTab Animation="Animation">
                 <TabEvents Selecting="Select" />
                 <TabItems>
@@ -152,7 +174,7 @@
                             </div>
                         </ContentTemplate>
                     </TabItem>
-                    <TabItem Header="History">
+                    <TabItem Header="Chances">
                         <ContentTemplate>
                             <div class="card-body p-0">
                             </div>
@@ -181,8 +203,9 @@
     public object PageSizes { get; set; }
 
     protected TabHeader Current;
-    protected TabHeader Players;
     protected TabHeader History;
+    protected TabHeader Players;
+    protected TabHeader Chances;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
     protected MegaloopResponse MegaloopResponse;
@@ -201,8 +224,9 @@
         PageSize = 20;
         PageSizes = new[] { 20, 50, 100, 500, 1000 };
         Current = new TabHeader { Text = "CURRENT" };
-        Players = new TabHeader { Text = "PLAYERS" };
         History = new TabHeader { Text = "HISTORY" };
+        Players = new TabHeader { Text = "PLAYERS" };
+        Chances = new TabHeader { Text = "CHANCES" };
         ChainResponse = LocalCache.LastChainResponse;
         MegaloopResponse = LocalCache.LastMegaloopResponse;
         Animation = new TabAnimationSettings
