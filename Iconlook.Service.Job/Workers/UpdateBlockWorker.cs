@@ -40,8 +40,8 @@ namespace Iconlook.Service.Job.Workers
                                 To = x.GetTo()?.ToString() ?? EMPTY_ADDRESS,
                                 From = x.GetFrom()?.ToString() ?? EMPTY_ADDRESS,
                                 Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
-                                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcxFromLoop() : 0,
-                                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcxFromLoop() : 0
+                                Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcx() : 0,
+                                Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcx() : 0
                             }).ToList();
                             var block = new BlockResponse
                             {

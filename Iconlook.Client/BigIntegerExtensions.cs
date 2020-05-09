@@ -21,7 +21,7 @@ namespace Iconlook.Client
             return DateTimeOffset.FromUnixTimeMilliseconds(instance.ToMilliseconds());
         }
 
-        public static decimal ToIcxFromLoop(this BigInteger instance)
+        public static decimal ToIcx(this BigInteger instance)
         {
             return decimal.Parse(IconAmount.Of(instance, IconAmount.Unit.Loop).ConvertUnit(IconAmount.Unit.ICX).ToString());
         }

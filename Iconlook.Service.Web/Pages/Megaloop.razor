@@ -77,10 +77,15 @@
                         <h1 class="logotext font-weight-bold">MEGALO<span style="margin-left: -5px;">OP</span></h1>
                     </div>
                     <div>
-                        <span class="fs-n1 font-weight-bold">0.0000 ICX</span>&nbsp;
-                        <span class="fs-n1 opacity-75 font-weight-light">$ 0.00</span>
-                        <span class="fs-n2 opacity-75">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
-                        <a class="mono fs-n1" href="/">@(MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000")</a>
+                        @{
+                            var jackpot = MegaloopResponse?.LastWinner?.Jackpot.ToString("N4") ?? "0.0000";
+                            var jackpot_usd = MegaloopResponse?.LastWinner?.JackpotUsd.ToString("N2") ?? "0.00";
+                            var address = MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000";
+                            <span class="fs-n1 font-weight-bold">@jackpot ICX</span>
+                            <span class="fs-n1 opacity-75 font-weight-light">$@jackpot_usd USD</span>
+                            <span class="fs-n2 opacity-75">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
+                            <a class="mono fs-n1" href="https://bicon.tracker.solidwallet.io/address/@address">@address</a>
+                        }
                     </div>
                 </div>
                 <div class="col-2 text-right">

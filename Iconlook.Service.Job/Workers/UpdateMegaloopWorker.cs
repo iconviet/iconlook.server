@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Iconlook.Client;
 using Iconlook.Client.Megaloop;
@@ -29,17 +30,31 @@ namespace Iconlook.Service.Job.Workers
                     var jackpot_size = await service.GetJackpotSize();
                     var megaloop = new MegaloopResponse
                     {
-                        PlayerCount = players.GetKeys().Count(),
-                        JackpotSize = jackpot_size.ToIcxFromLoop(),
-                        LastPlayer = new MegaloopPlayerResponse { Address = last_player },
-                        LastWinner = new MegaloopWinnerResponse { Address = last_winner },
-                        JackpotSizeUsd = jackpot_size.ToIcxFromLoop() * UpdateChainWorker.LastIcxPrice,
-                        Players = players.GetKeys().Select(address => new MegaloopPlayerResponse
+                        PlayerCount = players.Count(),
+                        JackpotSize = jackpot_size.ToIcx(),
+                        LastPlayer = new MegaloopPlayerResponse
                         {
-                            Address = address,
-                            Amount = players.GetItem(address).ToInteger().ToIcxFromLoop(),
-                            Chance = players.GetItem(address).ToInteger().ToIcxFromLoop() / jackpot_size.ToIcxFromLoop()
-                        }).ToList()
+                            Address = last_player.Split(':')[0],
+                            Block = long.Parse(last_player.Split(':')[2]),
+                            Deposit = BigInteger.Parse(last_player.Split(':')[1]).ToIcx()
+                            
+                        },
+                        JackpotSizeUsd = jackpot_size.ToIcx() * UpdateChainWorker.LastIcxPrice,
+                        Players = players.Select(address => new MegaloopPlayerResponse
+                        {
+                            Address = address.ToString().Split(":")[0],
+                            Block =  long.Parse(address.ToString().Split(":")[2]),
+                            Deposit = BigInteger.Parse(address.ToString().Split(":")[1]).ToIcx(),
+                            Chance = BigInteger.Parse(address.ToString().Split(":")[1]).ToIcx() / jackpot_size.ToIcx()
+                        }).ToList(),
+                        LastWinner = new MegaloopWinnerResponse
+                        {
+                            Address = last_winner.Split(':')[0],
+                            Deposit = BigInteger.Parse(last_winner.Split(':')[1]).ToIcx(),
+                            Jackpot = BigInteger.Parse(last_winner.Split(':')[2]).ToIcx(),
+                            Subsidy = BigInteger.Parse(last_winner.Split(':')[3]).ToIcx(),
+                            JackpotUsd = BigInteger.Parse(last_winner.Split(':')[2]).ToIcx() * UpdateChainWorker.LastIcxPrice,
+                        }
                     };
                     await Channel.Instance().Publish(new MegaloopUpdatedSignal { Megaloop = megaloop }).ConfigureAwait(false);
                     await Endpoint.Instance().Publish(new MegaloopUpdatedEvent { Megaloop = megaloop }).ConfigureAwait(false);

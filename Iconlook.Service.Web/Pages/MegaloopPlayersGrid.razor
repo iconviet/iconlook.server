@@ -44,12 +44,12 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Amount)">
+        <GridColumn Width="100" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Deposit)">
             <Template>
                 @{
                     if (context is MegaloopPlayerResponse player)
                     {
-                        <span class="mono ls-n2 unstaking_amount">@player.Amount.ToIcxString()</span>
+                        <span class="mono ls-n2 unstaking_amount">@player.Deposit.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }

@@ -23,13 +23,13 @@ namespace Iconlook.Client.Megaloop
                 new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) }, $"{endpoint}/api/v3"));
         }
 
-        public async Task<RpcObject> GetPlayers()
+        public async Task<RpcArray> GetPlayers()
         {
             var response = await _client.CallAsync(new Call.Builder()
                 .Method("ls_players")
                 .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
                 .Build());
-            return response.ToObject();
+            return response.ToArray();
         }
 
         public async Task<string> GetLastPlayer()
@@ -56,7 +56,7 @@ namespace Iconlook.Client.Megaloop
                 .Method("get_jackpot_size")
                 .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
                 .Build());
-            return response.ToInteger();
+            return BigInteger.Parse(response.ToString());
         }
     }
 }

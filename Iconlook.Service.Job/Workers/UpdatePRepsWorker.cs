@@ -76,7 +76,7 @@ namespace Iconlook.Service.Job.Workers
                                 Balance = new Random().Next(100000, 10000000),
                                 ProducedBlocks = (long) prep.GetTotalBlocks(),
                                 Joined = Clock.Value.Instant().ToDateTimeOffset(),
-                                Votes = (long) prep.GetDelegated().ToIcxFromLoop(),
+                                Votes = (long) prep.GetDelegated().ToIcx(),
                                 LastSeen = Clock.Value.Instant().ToDateTimeOffset(),
                                 Testnet = new[] { true, false }[new Random().Next(0, 1)],
                                 MissedBlocks = (long) (prep.GetTotalBlocks() - prep.GetValidatedBlocks()),
@@ -115,7 +115,7 @@ namespace Iconlook.Service.Job.Workers
                         )");
                     redis.StoreAll(prep_list.ConvertAll(e => e.ToResponse().ThenDo(r =>
                     {
-                        var irep = iiss_info.GetIRep().ToIcxFromLoop();
+                        var irep = iiss_info.GetIRep().ToIcx();
                         var p = prep_history_24_h_list.SingleOrDefault(x => r.Id == x.Address);
                         if (p != null)
                         {
