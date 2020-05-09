@@ -6,6 +6,11 @@ namespace Iconlook.Client
 {
     public static class BigIntegerExtensions
     {
+        public static BigInteger ToLoop(this string instance)
+        {
+            return BigInteger.Parse(instance);
+        }
+
         public static decimal ToDecimal(this BigInteger instance)
         {
             return decimal.Parse(instance.ToString());
