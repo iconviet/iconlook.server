@@ -6,8 +6,9 @@ namespace Iconlook.Object
     public class MegaloopResponse : ScoreResponse<MegaloopResponse>
     {
         public decimal Limit { get; set; }
-        public decimal PoolSize { get; set; }
-        public List<string> Players { get; set; }
+        public int PlayerCount { get; set; }
+        public decimal JackpotSize { get; set; }
+        public List<MegaloopPlayerResponse> Players { get; set; }
 
         protected override void AddRules(Validator<MegaloopResponse> validator)
         {

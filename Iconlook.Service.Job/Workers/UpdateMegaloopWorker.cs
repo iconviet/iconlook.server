@@ -23,12 +23,18 @@ namespace Iconlook.Service.Job.Workers
                 try
                 {
                     var service = new MegaloopClient(Endpoints.TESTNET, 2);
-                    var pool_size = await service.GetPoolSize();
-                    var player_list = await service.GetPlayerList();
+                    var players = await service.GetPlayers();
+                    var jackpot_size = await service.GetJackpotSize();
                     var megaloop = new MegaloopResponse
                     {
-                        PoolSize = pool_size.ToIcxFromLoop(),
-                        Players = player_list.GetKeys().ToList()
+                        PlayerCount = players.GetKeys().Count(),
+                        JackpotSize = jackpot_size.ToIcxFromLoop(),
+                        Players = players.GetKeys().Select(address => new MegaloopPlayerResponse
+                        {
+                            Address = address,
+                            Amount = players.GetItem(address).ToInteger().ToIcxFromLoop(),
+                            Chance = players.GetItem(address).ToInteger().ToIcxFromLoop() / jackpot_size.ToIcxFromLoop()
+                        }).ToList()
                     };
                     await Channel.Instance().Publish(new MegaloopUpdatedSignal { Megaloop = megaloop }).ConfigureAwait(false);
                     await Endpoint.Instance().Publish(new MegaloopUpdatedEvent { Megaloop = megaloop }).ConfigureAwait(false);

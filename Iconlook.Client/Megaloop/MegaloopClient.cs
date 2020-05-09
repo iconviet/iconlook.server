@@ -23,22 +23,22 @@ namespace Iconlook.Client.Megaloop
                 new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) }, $"{endpoint}/api/v3"));
         }
 
-        public async Task<BigInteger> GetPoolSize()
-        {
-            var response = await _client.CallAsync(new Call.Builder()
-                .Method("get_jackpot_size")
-                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
-                .Build());
-            return response.ToInteger();
-        }
-
-        public async Task<RpcObject> GetPlayerList()
+        public async Task<RpcObject> GetPlayers()
         {
             var response = await _client.CallAsync(new Call.Builder()
                 .Method("ls_players")
                 .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
                 .Build());
             return response.ToObject();
+        }
+
+        public async Task<BigInteger> GetJackpotSize()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("get_jackpot_size")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToInteger();
         }
     }
 }
