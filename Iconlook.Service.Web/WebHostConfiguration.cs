@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +22,7 @@ namespace Iconlook.Service.Web
     {
         public WebHostConfiguration() : base("Web", 80)
         {
-            if (Environment != Environment.Localhost)
-            {
-                UseRedisReplica = true;
-            }
+            UseRedisReplica = Environment != Environment.Localhost;
         }
 
         public override void Configure(IApplicationBuilder application, IHostEnvironment environment)
@@ -74,28 +70,14 @@ namespace Iconlook.Service.Web
                     };
                 })
                 .AddScoped<HttpContextAccessor>()
-                .Configure<KestrelServerOptions>(x =>
-                {
-                    x.AllowSynchronousIO = true;
-                })
-                .Configure<HubOptions>(x =>
-                {
-                    x.EnableDetailedErrors = true;
-                    x.MaximumReceiveMessageSize = 1024 * 1024;
-                })
+                .Configure<HubOptions>(x => x.EnableDetailedErrors = Environment != Environment.Production)
                 .Configure<ForwardedHeadersOptions>(x =>
                 {
                     x.KnownProxies.Clear();
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 })
-                .AddServerSideBlazor().AddCircuitOptions(x =>
-                {
-                    if (Environment != Environment.Production)
-                    {
-                        x.DetailedErrors = true;
-                    }
-                });
+                .AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors = Environment != Environment.Production);
             services.AddWebMarkupMin(x =>
             {
                 x.DisablePoweredByHttpHeaders = true;
