@@ -24,11 +24,16 @@ namespace Iconlook.Service.Job.Workers
                 {
                     var service = new MegaloopClient(Endpoints.TESTNET, 2);
                     var players = await service.GetPlayers();
+                    var last_player = await service.GetLastPlayer();
+                    var last_winner = await service.GetLastWinner();
                     var jackpot_size = await service.GetJackpotSize();
                     var megaloop = new MegaloopResponse
                     {
                         PlayerCount = players.GetKeys().Count(),
                         JackpotSize = jackpot_size.ToIcxFromLoop(),
+                        LastPlayer = new MegaloopPlayerResponse { Address = last_player },
+                        LastWinner = new MegaloopWinnerResponse { Address = last_winner },
+                        JackpotSizeUsd = jackpot_size.ToIcxFromLoop() * UpdateChainWorker.LastIcxPrice,
                         Players = players.GetKeys().Select(address => new MegaloopPlayerResponse
                         {
                             Address = address,

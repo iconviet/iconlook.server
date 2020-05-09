@@ -32,6 +32,24 @@ namespace Iconlook.Client.Megaloop
             return response.ToObject();
         }
 
+        public async Task<string> GetLastPlayer()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("get_last_player")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToString();
+        }
+
+        public async Task<string> GetLastWinner()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("get_last_winner")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToString();
+        }
+
         public async Task<BigInteger> GetJackpotSize()
         {
             var response = await _client.CallAsync(new Call.Builder()
