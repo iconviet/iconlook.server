@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Reflection;
 using Iconlook.Server;
 using Iconviet;
@@ -31,9 +30,9 @@ namespace Iconlook.Service.Web
             application
                 .UseForwardedHeaders()
                 .UseHeaderProcessor(this)
-                .UseWhen(
-                    context => !context.Request.Headers["CF-Request-ID"].Any(),
-                    builder => builder.UseResponseCompression())
+                // .UseWhen(
+                //     context => !context.Request.Headers["CF-Request-ID"].Any(),
+                //     builder => builder.UseResponseCompression())
                 .MapWhen(
                     context => context.Request.Path.StartsWithSegments("/api") ||
                                context.Request.Path.StartsWithSegments("/sse"),
@@ -55,20 +54,20 @@ namespace Iconlook.Service.Web
             services
                 .AddHttpContextAccessor()
                 .AddSyncfusionBlazor(true)
-                .AddResponseCompression(x =>
-                {
-                    x.EnableForHttps = true;
-                    x.MimeTypes = new[]
-                    {
-                        "text/css",
-                        "text/html",
-                        "image/jpg",
-                        "image/png",
-                        "font/woff2",
-                        "application/json",
-                        "application/javascript"
-                    };
-                })
+                // .AddResponseCompression(x =>
+                // {
+                //     x.EnableForHttps = true;
+                //     x.MimeTypes = new[]
+                //     {
+                //         "text/css",
+                //         "text/html",
+                //         "image/jpg",
+                //         "image/png",
+                //         "font/woff2",
+                //         "application/json",
+                //         "application/javascript"
+                //     };
+                // })
                 .AddScoped<HttpContextAccessor>()
                 .Configure<HubOptions>(x => x.EnableDetailedErrors = Environment != Environment.Production)
                 .Configure<ForwardedHeadersOptions>(x =>
