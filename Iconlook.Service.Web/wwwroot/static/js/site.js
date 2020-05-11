@@ -43,6 +43,7 @@
                 subscriptions.push(subject
                     .pipe(rxjs.operators.filter(x => x.name === "MegaloopUpdatedSignal"))
                     .pipe(rxjs.operators.auditTime(1000)).subscribe(signal => {
+                        $(".MegaloopResponse_PlayerCount").integer(signal.body.playerCount);
                         $(".MegaloopResponse_JackpotSize").decimal(signal.body.jackpotSize, 4);
                         $(".MegaloopResponse_JackpotSizeUsd").decimal(signal.body.jackpotSizeUsd, 2);
                     }));

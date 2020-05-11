@@ -89,8 +89,8 @@
                 </div>
                 <div class="col-2 text-center">
                     <div class="mb-2 fs-n2 font-weight-semibold">READY TO WIN</div>
-                    <h2 class="mono pt-1 hero-text font-weight-bold">
-                        @(MegaloopResponse?.PlayerCount.ToString("N0") ?? "0")
+                    <h2 class="mono pt-1 hero-text font-weight-bold MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
+                        @(MegaloopResponse?.PlayerCount ?? 0)
                     </h2>
                     <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
                         players
