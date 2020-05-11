@@ -2,10 +2,6 @@
 @inherits LayoutComponentBase
 @inject HttpContextAccessor HttpAccessor
 <style>
-    app {
-        background-color: #f8f9fa;
-    }
-
     .sf-menu .e-menu .e-menu-item {
         height: 48px;
     }
@@ -35,6 +31,12 @@
         font-weight: 600;
         border-bottom: 1px solid #e7eaf3;
         border-bottom: 1px solid rgba(231, 234, 243, .2);
+    }
+
+    body {
+        background: #ece9e6;
+        background: linear-gradient(to top, #ece9e6, #ffffff);
+        background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
     }
 </style>
 <header class="d-none d-lg-block">

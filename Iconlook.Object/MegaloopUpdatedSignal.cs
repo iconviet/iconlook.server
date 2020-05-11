@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Iconviet.Object;
+﻿using Iconviet.Object;
 
 namespace Iconlook.Object
 {
@@ -10,15 +9,5 @@ namespace Iconlook.Object
         public decimal JackpotSizeUsd { get; set; }
         public MegaloopPlayerResponse LastPlayer { get; set; }
         public MegaloopPlayerResponse LastWinner { get; set; }
-
-        protected override void AddRules(Validator<MegaloopUpdatedSignal> validator)
-        {
-            base.AddRules(validator);
-            validator.RuleFor(x => x.LastPlayer).NotEmpty();
-            validator.RuleFor(x => x.LastWinner).NotEmpty();
-            validator.RuleFor(x => x.JackpotSize).NotEmpty();
-            validator.RuleFor(x => x.PlayerCount).NotEmpty();
-            validator.RuleFor(x => x.JackpotSizeUsd).NotEmpty();
-        }
     }
 }

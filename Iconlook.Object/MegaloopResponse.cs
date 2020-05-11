@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FluentValidation;
 using Iconviet.Object;
 
 namespace Iconlook.Object
@@ -17,16 +16,12 @@ namespace Iconlook.Object
         public MegaloopResponse()
         {
             Players = new List<MegaloopPlayerResponse>();
+            Winners = new List<MegaloopWinnerResponse>();
         }
 
         protected override void AddRules(Validator<MegaloopResponse> validator)
         {
             base.AddRules(validator);
-            validator.RuleFor(x => x.LastPlayer).NotEmpty();
-            validator.RuleFor(x => x.LastWinner).NotEmpty();
-            validator.RuleFor(x => x.JackpotSize).NotEmpty();
-            validator.RuleFor(x => x.PlayerCount).NotEmpty();
-            validator.RuleFor(x => x.JackpotSizeUsd).NotEmpty();
             validator.RuleForEach(x => x.Players).SetValidator(MegaloopPlayerResponse.Validator);
             validator.RuleForEach(x => x.Winners).SetValidator(MegaloopPlayerResponse.Validator);
         }
