@@ -31,10 +31,6 @@
         background: none !important;
     }
 
-    .e-tab .e-tab-header .e-active .e-tab-text {
-        color: #e3165b !important;
-    }
-
     .hero-text {
         text-shadow: 1px 1px 1px rgb(9, 49, 42);
     }
@@ -100,14 +96,14 @@
                     </div>
                 </div>
                 <div class="col-2 text-center">
-                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-stopwatch"></i> DRAW COUNTDOWN</div>
+                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-stopwatch"></i> TIME TO DRAW</div>
                     <h2 class="pt-1 ls-n2 hero-text font-weight-bold ChainResponse_NextTermCountdown">
                         @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
                     </h2>
                     <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">remaining</div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-award"></i> JACKPOT VALUE</div>
+                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-award"></i> TODAY JACKPOT</div>
                     <div class="mt-1 d-inline-flex">
                         <h2 class="mono hero-text font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
                             @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
@@ -141,7 +137,7 @@
                     <div class="d-flex">
                         <a class="primary font-weight-bold" href="/">HOW DOES IT WORK?</a>
                     </div>
-                    <div class="pt-1"><span class="mono font-weight-bold">One</span> winner will steal the pot every 24 hours</div>
+                    <div class="pt-1"><span class="special font-weight-bold">One</span> winner will steal the pot every 24 hours</div>
                 </div>
             </div>
         </div>
@@ -156,7 +152,7 @@
                     <div class="d-flex">
                         <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
                     </div>
-                    <div class="pt-1">Send ICX to this <span class="mono underline font-weight-bold">address</span> from your wallet</div>
+                    <div class="pt-1">Send ICX to this <span class="special underline font-weight-bold">address</span> from your wallet</div>
                 </div>
             </div>
         </div>
@@ -171,7 +167,7 @@
                     <div class="d-flex">
                         <a class="primary font-weight-bold" href="/">WHAT IF I WON?</a>
                     </div>
-                    <div class="pt-1"><span class="mono font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
+                    <div class="pt-1"><span class="mono special font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
                         @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
                     </span> ICX will be sent back to your wallet</div>
                 </div>
@@ -185,7 +181,7 @@
             <SfTab Animation="Animation">
                 <TabEvents Selecting="Select" />
                 <TabItems>
-                    <TabItem Header="Winners">
+                    <TabItem Header="Winning">
                         <ContentTemplate>
                             <div class="p-0 card-body">
                                 <MegaloopWinnersGrid></MegaloopWinnersGrid>
@@ -201,7 +197,7 @@
             <SfTab Animation="Animation">
                 <TabEvents Selecting="Select" />
                 <TabItems>
-                    <TabItem Header="Players">
+                    <TabItem Header="Current">
                         <ContentTemplate>
                             <div class="p-0 card-body">
                                 <MegaloopPlayersGrid></MegaloopPlayersGrid>
@@ -230,8 +226,8 @@
     [Parameter]
     public object PageSizes { get; set; }
 
-    protected TabHeader Winners;
-    protected TabHeader Players;
+    protected TabHeader Winning;
+    protected TabHeader Current;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
     protected MegaloopResponse MegaloopResponse;
@@ -249,10 +245,10 @@
         Paging = true;
         PageSize = 20;
         PageSizes = new[] { 20, 50, 100, 500, 1000 };
-        Winners = new TabHeader { Text = "WINNERS" };
-        Players = new TabHeader { Text = "PLAYERS" };
         ChainResponse = LocalCache.LastChainResponse;
         MegaloopResponse = LocalCache.LastMegaloopResponse;
+        Winning = new TabHeader { Text = "WINNING HISTORY" };
+        Current = new TabHeader { Text = "CURRENT PLAYERS" };
         Animation = new TabAnimationSettings
         {
             Next = new TabAnimationNext { Duration = 0 },
