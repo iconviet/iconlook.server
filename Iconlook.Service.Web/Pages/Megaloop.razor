@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-2 text-center">
                     <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-stopwatch"></i> NEXT DRAW IN</div>
-                    <h2 class="pt-1 hero-text font-weight-bold ChainResponse_NextTermCountdown">
+                    <h2 class="pt-1 ls-n2 hero-text font-weight-bold ChainResponse_NextTermCountdown">
                         @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
                     </h2>
                     <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">remaining</div>
@@ -112,9 +112,9 @@
                         <h2 class="mono hero-text font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
                             @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
                         </h2>&nbsp;&nbsp;
-                        <h3 class="font-weight-light">
+                        <h4 class="font-weight-light" style="margin-top: 6px;">
                             ICX
-                        </h3>
+                        </h4>
                     </div>
                     <div>
                         <div class="mono fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
