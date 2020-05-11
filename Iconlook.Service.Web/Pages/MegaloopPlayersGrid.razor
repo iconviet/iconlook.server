@@ -30,7 +30,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          TValue="MegaloopPlayerResponse"
-         DataSource="MegaloopResponse.Players.Take(14)">
+         DataSource="MegaloopResponse.Players.OrderByDescending(x => x.Block).Take(14)">
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(MegaloopPlayerResponse.Address)">
             <Template>
@@ -55,11 +55,19 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" HeaderText="Chance" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Chance)">
+        <GridColumn Width="80" HeaderText="Chance" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Chance)">
             <Template>
                 @if (context is MegaloopPlayerResponse player)
                 {
                     <span class="mono font-weight-bold">@player.Chance.ToString("P2")</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="90" HeaderText="Joined" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Chance)">
+            <Template>
+                @if (context is MegaloopPlayerResponse player)
+                {
+                    <span class="text-light font-weight-light">5m ago</span>
                 }
             </Template>
         </GridColumn>

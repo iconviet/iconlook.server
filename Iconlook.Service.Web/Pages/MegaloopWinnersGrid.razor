@@ -19,7 +19,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          TValue="MegaloopWinnerResponse"
-         DataSource="LocalCache.LastMegaloopResponse.Winners.Take(14)">
+         DataSource="LocalCache.LastMegaloopResponse.Winners.OrderByDescending(x => x.Block).Take(14)">
     <GridColumns>
         <GridColumn Width="35">
             <Template>
