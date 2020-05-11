@@ -13,6 +13,8 @@ namespace Iconlook.Object
         protected override void AddRules(Validator<MegaloopPlayerResponse> validator)
         {
             base.AddRules(validator);
+            validator.RuleFor(x => x.Block).NotEmpty();
+            validator.RuleFor(x => x.Chance).NotEmpty();
             validator.RuleFor(x => x.Deposit).NotEmpty();
             validator.RuleFor(x => x.Address).NotEmpty();
         }

@@ -1,0 +1,73 @@
+﻿@inject HttpContextAccessor HttpAccessor
+<style>
+    .winning-status {
+        color: #e3165b;
+    }
+
+    .prize_amount .number-part {
+        font-weight: 700;
+    }
+
+    .prize_amount .fraction-part {
+        font-weight: 500;
+    }
+</style>
+<SfGrid @ref="SfGrid"
+         ID="history_grid"
+         EnableHover="false"
+         EnableAltRow="false"
+         AllowSelection="false"
+         GridLines="GridLine.Horizontal"
+         TValue="MegaloopWinnerResponse"
+         DataSource="LocalCache.LastMegaloopResponse.Winners.Take(14)">
+    <GridColumns>
+        <GridColumn Width="35">
+            <Template>
+                <i class="fad fa-award winning-status" style="margin-top: 4px;"></i>
+            </Template>
+        </GridColumn>
+        <GridColumn Width="80" HeaderText="Block">
+            <Template>
+                @if (context is MegaloopWinnerResponse winner)
+                {
+                    <span class="mono">@winner.Block.ToString("N0")</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Width="115" HeaderText="Prize" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopWinnerResponse.Block)">
+            <Template>
+                @{
+                    if (context is MegaloopWinnerResponse winner)
+                    {
+                        <span class="mono ls-n2 prize_amount">@winner.Jackpot.ToIcxString()</span>
+                        <span class="pl-1 text-light font-weight-light">ICX</span>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn HeaderText="Address" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopWinnerResponse.Address)">
+            <Template>
+                @{
+                    if (context is MegaloopWinnerResponse winner)
+                    {
+                        <a class="primary no-underline" href="https://bicon.tracker.solidwallet.io/address/@winner.Address">
+                            <span class="fs-n1 mono">@winner.Address</span>
+                        </a>
+                    }
+                }
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+
+@code
+{
+    protected bool IsMobile;
+
+    protected SfGrid<MegaloopWinnerResponse> SfGrid;
+
+    protected override void OnInitialized()
+    {
+        IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
+    }
+}

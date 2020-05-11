@@ -24,38 +24,73 @@ namespace Iconlook.Service.Job.Workers
                 {
                     var service = new MegaloopClient(Endpoints.TESTNET, 2);
                     var players = await service.GetPlayers();
+                    var winners = await service.GetWinners();
                     var last_player = await service.GetLastPlayer();
                     var last_winner = await service.GetLastWinner();
                     var jackpot_size = await service.GetJackpotSize();
+                    var last_icx_price = UpdateChainWorker.LastIcxPrice;
                     var megaloop = new MegaloopResponse
                     {
                         PlayerCount = players.Count(),
                         JackpotSize = jackpot_size.ToIcx(),
-                        LastPlayer = new MegaloopPlayerResponse
+                        JackpotSizeUsd = jackpot_size.ToIcx() * last_icx_price
+                    };
+                    if (last_player.HasValue())
+                    {
+                        megaloop.LastPlayer = new MegaloopPlayerResponse
                         {
                             Address = last_player.Split(':')[0],
                             Block = long.Parse(last_player.Split(':')[2]),
                             Deposit = last_player.Split(':')[1].ToLoop().ToIcx()
-                        },
-                        JackpotSizeUsd = jackpot_size.ToIcx() * UpdateChainWorker.LastIcxPrice,
-                        Players = players.Select(address => new MegaloopPlayerResponse
+                        };
+                    }
+                    if (players.Any())
+                    {
+                        megaloop.Players = players.Select(player => new MegaloopPlayerResponse
                         {
-                            Address = address.ToString().Split(":")[0],
-                            Block = long.Parse(address.ToString().Split(":")[2]),
-                            Deposit = address.ToString().Split(":")[1].ToLoop().ToIcx(),
-                            Chance = address.ToString().Split(":")[1].ToLoop().ToIcx() / jackpot_size.ToIcx()
-                        }).ToList(),
-                        LastWinner = new MegaloopWinnerResponse
+                            Address = player.ToString().Split(":")[0],
+                            Block = long.Parse(player.ToString().Split(":")[2]),
+                            Deposit = player.ToString().Split(":")[1].ToLoop().ToIcx(),
+                            Chance = player.ToString().Split(":")[1].ToLoop().ToIcx() / jackpot_size.ToIcx()
+                        }).ToList();
+                    }
+                    if (last_winner.HasValue())
+                    {
+                        megaloop.LastWinner = new MegaloopWinnerResponse
                         {
-                            Address = last_winner.Split(':')[0],
-                            Deposit = last_winner.Split(':')[1].ToLoop().ToIcx(),
-                            Jackpot = last_winner.Split(':')[2].ToLoop().ToIcx(),
-                            Subsidy = last_winner.Split(':')[3].ToLoop().ToIcx(),
-                            JackpotUsd = last_winner.Split(':')[2].ToLoop().ToIcx() * UpdateChainWorker.LastIcxPrice,
-                        }
-                    };
-                    await Channel.Instance().Publish(new MegaloopUpdatedSignal { Megaloop = megaloop }).ConfigureAwait(false);
-                    await Endpoint.Instance().Publish(new MegaloopUpdatedEvent { Megaloop = megaloop }).ConfigureAwait(false);
+                            Address = last_winner.Split(':')[1],
+                            Deposit = last_winner.Split(':')[2].ToLoop().ToIcx(),
+                            Jackpot = last_winner.Split(':')[3].ToLoop().ToIcx(),
+                            Subsidy = last_winner.Split(':')[4].ToLoop().ToIcx(),
+                            JackpotUsd = last_winner.Split(':')[3].ToLoop().ToIcx() * last_icx_price,
+                            Chance = last_winner.Split(':')[3].ToLoop().ToIcx() / last_winner.Split(':')[2].ToLoop().ToIcx()
+                        };
+                    }
+                    if (winners.Any())
+                    {
+                        megaloop.Winners = winners.Select(winner => new MegaloopWinnerResponse
+                        {
+                            Address = winner.ToString().Split(':')[1],
+                            Block = long.Parse(winner.ToString().Split(':')[0]),
+                            Deposit = winner.ToString().Split(':')[2].ToLoop().ToIcx(),
+                            Jackpot = winner.ToString().Split(':')[3].ToLoop().ToIcx(),
+                            Subsidy = winner.ToString().Split(':')[4].ToLoop().ToIcx(),
+                            JackpotUsd = winner.ToString().Split(':')[3].ToLoop().ToIcx() * last_icx_price,
+                            Chance = winner.ToString().Split(':')[3].ToLoop().ToIcx() / last_winner.Split(':')[2].ToLoop().ToIcx()
+                        }).ToList();
+                    }
+                    await Endpoint.Instance().Publish(new MegaloopUpdatedEvent
+                    {
+                        Megaloop = megaloop
+                    }).ConfigureAwait(false);
+                    await Channel.Instance().Publish(new MegaloopUpdatedSignal
+                    {
+                        LastPlayer = megaloop.LastPlayer,
+                        LastWinner = megaloop.LastWinner,
+                        PlayerCount = megaloop.PlayerCount,
+                        JackpotSize = megaloop.JackpotSize,
+                        JackpotSizeUsd = megaloop.JackpotSizeUsd
+                    }).ConfigureAwait(false);
                 }
                 catch (Exception exception)
                 {

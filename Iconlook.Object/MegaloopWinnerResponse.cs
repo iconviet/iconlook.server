@@ -1,11 +1,7 @@
-﻿using Iconviet.Object;
-
-namespace Iconlook.Object
+﻿namespace Iconlook.Object
 {
-    public class MegaloopWinnerResponse : ResponseBase<MegaloopWinnerResponse>
+    public class MegaloopWinnerResponse : MegaloopPlayerResponse
     {
-        public string Address { get; set; }
-        public decimal Deposit { get; set; }
         public decimal Jackpot { get; set; }
         public decimal Subsidy { get; set; }
         public decimal JackpotUsd { get; set; }

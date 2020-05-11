@@ -30,7 +30,7 @@
          AllowSelection="false"
          GridLines="GridLine.Horizontal"
          TValue="MegaloopPlayerResponse"
-         DataSource="MegaloopResponse.Players.Take(12)">
+         DataSource="MegaloopResponse.Players.Take(14)">
     <GridColumns>
         <GridColumn HeaderText="Address" Field="@nameof(MegaloopPlayerResponse.Address)">
             <Template>
@@ -44,7 +44,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="100" HeaderText="Amount" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Deposit)">
+        <GridColumn Width="100" HeaderText="Deposit" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(MegaloopPlayerResponse.Deposit)">
             <Template>
                 @{
                     if (context is MegaloopPlayerResponse player)

@@ -32,6 +32,15 @@ namespace Iconlook.Client.Megaloop
             return response.ToArray();
         }
 
+        public async Task<RpcArray> GetWinners()
+        {
+            var response = await _client.CallAsync(new Call.Builder()
+                .Method("ls_winners")
+                .To(new Address("cxa6ba8f0730ad952b5898ac3e5e90a17e20574eff"))
+                .Build());
+            return response.ToArray();
+        }
+
         public async Task<string> GetLastPlayer()
         {
             var response = await _client.CallAsync(new Call.Builder()
