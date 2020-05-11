@@ -1,13 +1,14 @@
 ﻿@page "/megaloop"
+@page "/dapp/megaloop"
 @layout DAppLayout
 <style type="text/css">
     .header a {
         color: white;
     }
 
-    .header a:hover {
-        color: white;
-    }
+        .header a:hover {
+            color: white;
+        }
 
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
@@ -15,17 +16,17 @@
         padding-right: 5px !important;
     }
 
-    .e-grid .e-rowcell:last-child,
-    .e-grid .e-headercell:last-child {
-        padding-left: 5px !important;
-        padding-right: 20px !important;
-    }
+        .e-grid .e-rowcell:last-child,
+        .e-grid .e-headercell:last-child {
+            padding-left: 5px !important;
+            padding-right: 20px !important;
+        }
 
-    .e-grid .e-rowcell:first-child,
-    .e-grid .e-headercell:first-child {
-        padding-left: 20px !important;
-        padding-right: 5px !important;
-    }
+        .e-grid .e-rowcell:first-child,
+        .e-grid .e-headercell:first-child {
+            padding-left: 20px !important;
+            padding-right: 5px !important;
+        }
 
     .e-tab .e-tab-header .e-indicator {
         background: none !important;
@@ -40,7 +41,7 @@
         text-shadow: 1px 1px 1px rgb(9, 49, 42);
     }
 
-    
+
     .hero-pill {
         border-radius: 12px;
         padding: 3px 12px 3px 12px;
@@ -56,7 +57,7 @@
         background-attachment: fixed;
         background-image: radial-gradient(circle farthest-corner at 10% 20%,rgba(0,141,149,1.0) 0, rgba(0,181,149,1.0) 90%);
     }
-    
+
     .tab-current {
         -ms-background-repeat: repeat-x;
         background-repeat: repeat-x;
@@ -167,9 +168,11 @@
                     <div class="d-flex">
                         <a class="primary font-weight-bold" href="/">WHAT IF I WON?</a>
                     </div>
-                    <div class="pt-1"><span class="mono special font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
-                        @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
-                    </span> ICX will be sent back to your wallet</div>
+                    <div class="pt-1">
+                        <span class="mono special font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
+                            @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
+                        </span> ICX will be sent back to your wallet
+                    </div>
                 </div>
             </div>
         </div>
