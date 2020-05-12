@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,6 +51,8 @@ namespace Iconlook.Service.Web
         {
             base.ConfigureServices(services);
             services
+                .AddServerSideBlazor();
+            services
                 .AddSyncfusionBlazor()
                 .AddResponseCompression()
                 .AddHttpContextAccessor()
@@ -62,13 +63,11 @@ namespace Iconlook.Service.Web
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 })
-                .Configure<HubOptions>(x => x.EnableDetailedErrors = true)
-                .AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors = true);
-            services.AddWebMarkupMin(x =>
-            {
-                x.DisablePoweredByHttpHeaders = true;
-                x.AllowMinificationInDevelopmentEnvironment = true;
-            }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
+                .AddWebMarkupMin(x =>
+                {
+                    x.DisablePoweredByHttpHeaders = true;
+                    x.AllowMinificationInDevelopmentEnvironment = true;
+                }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
             var connection = $"{Configuration.GetConnectionString("redis")},password={ServicePassword}";
             if (connection.HasValue())
             {
