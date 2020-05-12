@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
-using Syncfusion.Blazor;
 using Syncfusion.Licensing;
 using WebMarkupMin.AspNetCore3;
 
@@ -53,9 +52,9 @@ namespace Iconlook.Service.Web
         {
             base.ConfigureServices(services);
             services
+                .AddSyncfusionBlazor()
                 .AddResponseCompression()
                 .AddHttpContextAccessor()
-                .AddSyncfusionBlazor(true)
                 .AddScoped<HttpContextAccessor>()
                 .Configure<ForwardedHeadersOptions>(x =>
                 {
