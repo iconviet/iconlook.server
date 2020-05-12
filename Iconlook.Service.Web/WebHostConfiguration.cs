@@ -27,7 +27,6 @@ namespace Iconlook.Service.Web
         {
             base.Configure(application, environment);
             application
-                .UseStaticFiles()
                 .UseForwardedHeaders()
                 .UseHeaderProcessor(this)
                 .UseWhen(
@@ -37,6 +36,7 @@ namespace Iconlook.Service.Web
                     context => context.Request.Path.StartsWithSegments("/api") ||
                                context.Request.Path.StartsWithSegments("/sse"),
                     builder => builder.UseWebServiceStack(this))
+                .UseStaticFiles()
                 .UseCookieProcessor()
                 .UseRouting()
                 .UseWebMarkupMin()
