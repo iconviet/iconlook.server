@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Iconlook.Client;
-using Iconlook.Client.Megaloop;
+using Iconlook.Client.Service;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;
@@ -22,12 +22,12 @@ namespace Iconlook.Service.Job.Workers
                 Log.Debug("{Work} started", nameof(UpdateMegaloopWorker));
                 try
                 {
-                    var service = new MegaloopClient(Endpoints.TESTNET, 2);
-                    var players = await service.GetPlayers();
-                    var winners = await service.GetWinners();
-                    var last_player = await service.GetLastPlayer();
-                    var last_winner = await service.GetLastWinner();
-                    var jackpot_size = await service.GetJackpotSize();
+                    var client = new MegaloopScoreClient(2);
+                    var players = await client.GetPlayers();
+                    var winners = await client.GetWinners();
+                    var last_player = await client.GetLastPlayer();
+                    var last_winner = await client.GetLastWinner();
+                    var jackpot_size = await client.GetJackpotSize();
                     var last_icx_price = UpdateChainWorker.LastIcxPrice;
                     var megaloop = new MegaloopResponse
                     {

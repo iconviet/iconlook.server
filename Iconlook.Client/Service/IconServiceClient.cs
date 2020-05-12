@@ -14,7 +14,7 @@ namespace Iconlook.Client.Service
 {
     public class IconServiceClient : IIconService
     {
-        private readonly IconService _client;
+        protected IconService Client;
 
         public IconServiceClient(double timeout) : this(Endpoints.MAINNET, timeout)
         {
@@ -30,7 +30,7 @@ namespace Iconlook.Client.Service
                     endpoint = Endpoints.CITIZEN;
                 }
             }
-            _client = new IconService(new HttpProvider(
+            Client = new IconService(new HttpProvider(
                 new HttpClient { Timeout = TimeSpan.FromSeconds(timeout) }, $"{endpoint}/api/v3"));
         }
 
@@ -90,52 +90,52 @@ namespace Iconlook.Client.Service
 
         public Task<Block> GetLastBlock()
         {
-            return _client.GetLastBlock();
+            return Client.GetLastBlock();
         }
 
         public Task<Block> GetBlock(Bytes hash)
         {
-            return _client.GetBlock(hash);
+            return Client.GetBlock(hash);
         }
 
         public Task<BigInteger> GetTotalSupply()
         {
-            return _client.GetTotalSupply();
+            return Client.GetTotalSupply();
         }
 
         public Task<T> CallAsync<T>(Call<T> call)
         {
-            return _client.CallAsync(call);
+            return Client.CallAsync(call);
         }
 
         public Task<Block> GetBlock(BigInteger height)
         {
-            return _client.GetBlock(height);
+            return Client.GetBlock(height);
         }
 
         public Task<BigInteger> GetBalance(Address address)
         {
-            return _client.GetBalance(address);
+            return Client.GetBalance(address);
         }
 
         public Task<List<ScoreApi>> GetScoreApi(Address address)
         {
-            return _client.GetScoreApi(address);
+            return Client.GetScoreApi(address);
         }
 
         public Task<ConfirmedTransaction> GetTransaction(Bytes hash)
         {
-            return _client.GetTransaction(hash);
+            return Client.GetTransaction(hash);
         }
 
         public Task<TransactionResult> GetTransactionResult(Bytes hash)
         {
-            return _client.GetTransactionResult(hash);
+            return Client.GetTransactionResult(hash);
         }
 
         public Task<Bytes> SendTransaction(SignedTransaction transaction)
         {
-            return _client.SendTransaction(transaction);
+            return Client.SendTransaction(transaction);
         }
     }
 }
