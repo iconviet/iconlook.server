@@ -59,8 +59,8 @@ namespace Iconlook.Service.Web
                 .AddScoped<HttpContextAccessor>()
                 .Configure<ForwardedHeadersOptions>(x =>
                 {
-                    // x.KnownProxies.Clear();
-                    // x.KnownNetworks.Clear();
+                    x.KnownProxies.Clear();
+                    x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 })
                 .AddWebMarkupMin(x =>
