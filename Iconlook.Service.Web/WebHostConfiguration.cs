@@ -27,12 +27,12 @@ namespace Iconlook.Service.Web
         {
             base.Configure(application, environment);
             application
+                .UseStaticFiles()
                 .UseForwardedHeaders()
                 .UseHeaderProcessor(this)
                 .UseWhen(
                     context => !context.Request.Headers["CF-Request-ID"].Any(),
                     builder => builder.UseResponseCompression())
-                .UseStaticFiles()
                 .MapWhen(
                     context => context.Request.Path.StartsWithSegments("/api") ||
                                context.Request.Path.StartsWithSegments("/sse"),
