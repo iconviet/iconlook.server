@@ -7,3 +7,4 @@ https://cdn.syncfusion.com/ej2/18.1.48/ej2-lists/styles/material.css
 https://cdn.syncfusion.com/ej2/18.1.48/ej2-navigations/styles/material.css
 https://cdn.syncfusion.com/ej2/18.1.48/ej2-popups/styles/material.css
 https://cdn.syncfusion.com/ej2/18.1.48/ej2-splitbuttons/styles/material.css
+https://cdn.syncfusion.com/ej2/18.1.48/ej2-barcode-generator/styles/material.css

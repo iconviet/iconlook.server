@@ -1,17 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject HttpContextAccessor HttpAccessor
-<style>
-    body {
-        background: #ece9e6;
-        background: linear-gradient(to top, #ece9e6, #ffffff);
-        background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
-    }
-</style>
-<main>
-    <div class="pt-5 container">
-        @Body
-    </div>
-</main>
+@Body
 @code
 {
     protected bool IsMobile;

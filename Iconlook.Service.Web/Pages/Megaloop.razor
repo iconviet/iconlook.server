@@ -1,14 +1,13 @@
 ﻿@page "/megaloop"
-@page "/dapp/megaloop"
 @layout DAppLayout
 <style type="text/css">
     .header a {
         color: white;
     }
 
-        .header a:hover {
-            color: white;
-        }
+    .header a:hover {
+        color: white;
+    }
 
     .e-grid .e-rowcell,
     .e-grid .e-headercell {
@@ -16,17 +15,17 @@
         padding-right: 5px !important;
     }
 
-        .e-grid .e-rowcell:last-child,
-        .e-grid .e-headercell:last-child {
-            padding-left: 5px !important;
-            padding-right: 20px !important;
-        }
+    .e-grid .e-rowcell:last-child,
+    .e-grid .e-headercell:last-child {
+        padding-left: 5px !important;
+        padding-right: 20px !important;
+    }
 
-        .e-grid .e-rowcell:first-child,
-        .e-grid .e-headercell:first-child {
-            padding-left: 20px !important;
-            padding-right: 5px !important;
-        }
+    .e-grid .e-rowcell:first-child,
+    .e-grid .e-headercell:first-child {
+        padding-left: 20px !important;
+        padding-right: 5px !important;
+    }
 
     .e-tab .e-tab-header .e-indicator {
         background: none !important;
@@ -48,6 +47,19 @@
         background-color: rgba(0, 141, 149, 1.0);
     }
 
+    header {
+        font-family: 'Lato';
+        background-color: white;
+        box-shadow: 0 8px 11px -6px #000000;
+        box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
+    }
+        
+    body {
+        background: #ece9e6;
+        background: linear-gradient(to bottom, #ece9e6, #ffffff);
+        background: -webkit-linear-gradient(to bottom, #ece9e6, #ffffff);
+    }
+    
     .header {
         color: white;
         border: none;
@@ -67,152 +79,175 @@
         background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(253,239,132,1) 0%, rgba(247,198,169,1) 54.2%, rgba(21,186,196,1) 100.3%);
     }
 </style>
-<div class="row mb-3">
-    <div class="col">
-        <div class="px-5 py-4 card header rounded shadow-sm">
-            <div class="row">
-                <div class="col-5">
-                    <div class="mb-1 d-inline-flex">
-                        <h1 class="logo-text font-weight-bold">MEGALO<span style="margin-left: -5px;">OP</span></h1>
-                    </div>
-                    <div>
-                        @{
-                            var jackpot = MegaloopResponse?.LastWinner?.Jackpot.ToString("N4") ?? "0.0000";
-                            var jackpot_usd = MegaloopResponse?.LastWinner?.JackpotUsd.ToString("N2") ?? "0.00";
-                            var address = MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000";
-                            <span class="fs-n1 font-weight-bold">@jackpot ICX</span>
-                            <span class="fs-n1 opacity-50 font-weight-light">$@jackpot_usd USD</span>
-                            <span class="fs-n2 opacity-50">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
-                            <a class="mono fs-n1" href="https://bicon.tracker.solidwallet.io/address/@address">@address</a>
-                        }
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="mb-2 fs-n2 font-weight-semibold">READY TO WIN</div>
-                    <h2 class="mono pt-1 hero-text font-weight-bold MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
-                        @(MegaloopResponse?.PlayerCount ?? 0)
-                    </h2>
-                    <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
-                        players
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-stopwatch"></i> TIME TO DRAW</div>
-                    <h2 class="pt-1 ls-n2 hero-text font-weight-bold ChainResponse_NextTermCountdown">
-                        @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
-                    </h2>
-                    <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">remaining</div>
-                </div>
-                <div class="col-3 text-right">
-                    <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-award"></i> TODAY JACKPOT</div>
-                    <div class="mt-1 d-inline-flex">
-                        <h2 class="mono hero-text font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
-                            @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
-                        </h2>&nbsp;&nbsp;
-                        <h4 class="font-weight-light" style="margin-top: 6px;">
-                            ICX
-                        </h4>
-                    </div>
-                    <div>
-                        <div class="mono fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
-                            <span class="fs-n1">$</span>
-                            <span class="MegaloopResponse_JackpotSizeUsd" number="@(MegaloopResponse?.JackpotSizeUsd ?? 0)">
-                                @(MegaloopResponse?.JackpotSizeUsd.ToString("N2") ?? "0.00")
-                            </span>
-                            <span class="fs-n1">USD</span>
+<header class="d-none d-lg-block">
+    <div class="container">
+        <div class="row" style="min-height: 52px;">
+            <div class="col d-flex col-auto align-items-center">
+                <span class="font-weight-light" style="font-size: 24px;">MEGAL</span>
+                <img src="static/images/oo.svg" style="max-width: 40px;" />
+                <span class="font-weight-light" style="font-size: 24px;">P</span>
+            </div>
+            <div class="col d-flex col-auto align-items-center">
+                <h2 class="text-light opacity-50 font-weight-light">|</h2>
+            </div>
+            <div class="col d-flex col-auto align-items-center">
+                <span class="fs-1 font-weight-bold">A simple global lottery system based on ICON blockchain.</span>&nbsp;&nbsp;
+                <a class="fs-1 special font-weight-bold" href="/">Try it now !</a>
+            </div>
+            <div class="col d-flex justify-content-end align-items-center">
+                <i class="fal pr-2 primary fa-sign-in"></i>
+                <a class="primary font-weight-bold" href="/">LOGIN</a>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="pt-4 container">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="px-5 py-4 card header rounded shadow-sm">
+                    <div class="row">
+                        <div class="col-5 d-inline-flex">
+                            <img width="88" height="88" src="/static/images/qrcode_black.png" />
+                            <div class="pl-3">
+                                @{
+                                    var jackpot = MegaloopResponse?.LastWinner?.Jackpot.ToString("N4") ?? "0.0000";
+                                    var jackpot_usd = MegaloopResponse?.LastWinner?.JackpotUsd.ToString("N2") ?? "0.00";
+                                    var address = MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000";
+                                    <span class="fs-n1 font-weight-bold">@jackpot ICX</span>
+                                    <span class="fs-n1 opacity-50 font-weight-light">$@jackpot_usd USD</span>
+                                    <span class="fs-n2 opacity-50">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
+                                    <a class="mono fs-n1" href="https://bicon.tracker.solidwallet.io/address/@address">@address</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="mb-2 fs-n2 font-weight-semibold">READY TO WIN</div>
+                            <h2 class="mono pt-1 hero-text font-weight-bold MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
+                                @(MegaloopResponse?.PlayerCount ?? 0)
+                            </h2>
+                            <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
+                                players
+                            </div>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-stopwatch"></i> TIME TO DRAW</div>
+                            <h2 class="pt-1 ls-n2 hero-text font-weight-bold ChainResponse_NextTermCountdown">
+                                @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
+                            </h2>
+                            <div class="fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">remaining</div>
+                        </div>
+                        <div class="col-3 text-right">
+                            <div class="mb-2 fs-n2 font-weight-semibold"><i class="fad pr-1 fs-2 fa-award"></i> TODAY JACKPOT</div>
+                            <div class="mt-1 d-inline-flex">
+                                <h2 class="mono hero-text font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
+                                    @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
+                                </h2>&nbsp;&nbsp;
+                                <h4 class="font-weight-light" style="margin-top: 6px;">
+                                    ICX
+                                </h4>
+                            </div>
+                            <div>
+                                <div class="mono fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
+                                    <span class="fs-n1">$</span>
+                                    <span class="MegaloopResponse_JackpotSizeUsd" number="@(MegaloopResponse?.JackpotSizeUsd ?? 0)">
+                                        @(MegaloopResponse?.JackpotSizeUsd.ToString("N2") ?? "0.00")
+                                    </span>
+                                    <span class="fs-n1">USD</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row mb-3">
-    <div class="col-lg d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded shadow-sm">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-4">
-                    <i class="fad text-light opacity-75 fa-question" style="font-size: 40px;"></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="primary font-weight-bold" href="/">HOW DOES IT WORK?</a>
-                    </div>
-                    <div class="pt-1"><span class="font-weight-bold">1</span> player will take the jackpot every <span class="special font-weight-bold">24 hours</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded shadow-sm">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-3">
-                    <i class="fad fa-qrcode text-light opacity-75" style="font-size: 40px; "></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
-                    </div>
-                    <div class="pt-1">Send ICX to <span class="special font-weight-bold" style="text-decoration: underline;">this address</span> from your wallet</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg d-none d-md-block">
-        <div class="px-1 p-3 card rounded shadow-sm">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-3">
-                    <i class="fad text-light opacity-75 fa-badge-dollar" style="font-size: 40px;"></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="primary font-weight-bold" href="/">WHAT IF I WON?</a>
-                    </div>
-                    <div class="pt-1">
-                        <span class="mono font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
-                            @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
-                        </span> ICX will be <span class="special font-weight-bold">sent back</span> to your wallet
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row mb-5">
-    <div class="col mr-sm-n3">
-        <div class="card shadow" style="min-height: 617px;">
-            <SfTab Animation="Animation">
-                <TabEvents Selecting="Select" />
-                <TabItems>
-                    <TabItem Header="Winning">
-                        <ContentTemplate>
-                            <div class="p-0 card-body">
-                                <MegaloopWinnersGrid></MegaloopWinnersGrid>
+        <div class="row mb-3">
+            <div class="col-lg d-none mr-lg-n4 d-md-block">
+                <div class="px-1 p-3 card rounded shadow-sm">
+                    <div class="d-inline-flex">
+                        <div class="ml-2 mr-4">
+                            <i class="fad text-light opacity-75 fa-question" style="font-size: 40px;"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex">
+                                <a class="primary font-weight-bold" href="/">HOW DOES IT WORK?</a>
                             </div>
-                        </ContentTemplate>
-                    </TabItem>
-                </TabItems>
-            </SfTab>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card shadow" style="min-height: 617px;">
-            <SfTab Animation="Animation">
-                <TabEvents Selecting="Select" />
-                <TabItems>
-                    <TabItem Header="Current">
-                        <ContentTemplate>
-                            <div class="p-0 card-body">
-                                <MegaloopPlayersGrid></MegaloopPlayersGrid>
+                            <div class="pt-1"><span class="font-weight-bold">1</span> player will take the jackpot every <span class="special font-weight-bold">24 hours</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg d-none mr-lg-n4 d-md-block">
+                <div class="px-1 p-3 card rounded shadow-sm">
+                    <div class="d-inline-flex">
+                        <div class="ml-2 mr-3">
+                            <i class="fad fa-qrcode text-light opacity-75" style="font-size: 40px; "></i>
+                        </div>
+                        <div>
+                            <div class="d-flex">
+                                <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
                             </div>
-                        </ContentTemplate>
-                    </TabItem>
-                </TabItems>
-            </SfTab>
+                            <div class="pt-1">Send ICX to <span class="special font-weight-bold" style="text-decoration: underline;">this address</span> from your wallet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg d-none d-md-block">
+                <div class="px-1 p-3 card rounded shadow-sm">
+                    <div class="d-inline-flex">
+                        <div class="ml-2 mr-3">
+                            <i class="fad text-light opacity-75 fa-badge-dollar" style="font-size: 40px;"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex">
+                                <a class="primary font-weight-bold" href="/">WHAT IF I WON?</a>
+                            </div>
+                            <div class="pt-1">
+                                <span class="mono font-weight-bold MegaloopResponse_JackpotSize" number="@(MegaloopResponse?.JackpotSize ?? 0)">
+                                    @(MegaloopResponse?.JackpotSize.ToString("N4") ?? "0.0000")
+                                </span> ICX will be <span class="special font-weight-bold">sent back</span> to your wallet
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col mr-sm-n3">
+                <div class="card shadow" style="min-height: 617px;">
+                    <SfTab Animation="Animation">
+                        <TabEvents Selecting="Select" />
+                        <TabItems>
+                            <TabItem Header="Winning">
+                                <ContentTemplate>
+                                    <div class="p-0 card-body">
+                                        <MegaloopWinnersGrid></MegaloopWinnersGrid>
+                                    </div>
+                                </ContentTemplate>
+                            </TabItem>
+                        </TabItems>
+                    </SfTab>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow" style="min-height: 617px;">
+                    <SfTab Animation="Animation">
+                        <TabEvents Selecting="Select" />
+                        <TabItems>
+                            <TabItem Header="Current">
+                                <ContentTemplate>
+                                    <div class="p-0 card-body">
+                                        <MegaloopPlayersGrid></MegaloopPlayersGrid>
+                                    </div>
+                                </ContentTemplate>
+                            </TabItem>
+                        </TabItems>
+                    </SfTab>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
+</main>
 @code {
     [Parameter]
     public bool Paging { get; set; }
