@@ -23,82 +23,27 @@
         padding-right: 5px !important;
     }
 </style>
-<div class="row mb-3 d-none d-md-block">
-    <div class="col">
-        <div class="card shadow-sm border-bottom-0">
-            <div class="container">
-                <div class="row text-nowrap">
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <VotingTile ChainResponse="ChainResponse"></VotingTile>
-                    </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <StakingTile ChainResponse="ChainResponse"></StakingTile>
-                    </div>
-                    <div class="col d-inline-flex border-right border-bottom">
-                        <TreasuryTile ChainResponse="ChainResponse"></TreasuryTile>
-                    </div>
-                    <div class="col d-inline-flex border-bottom">
-                        <BlockTile ChainResponse="ChainResponse"></BlockTile>
-                    </div>
-                </div>
-            </div>
+<div class="mb-3 card d-none shadow-sm d-md-block border-bottom-0">
+    <div class="row no-gutters text-nowrap">
+        <div class="px-3 col-md d-inline-flex border-right border-bottom">
+            <VotingTile ChainResponse="ChainResponse"></VotingTile>
+        </div>
+        <div class="px-3 col-lg d-inline-flex border-right border-bottom">
+            <StakingTile ChainResponse="ChainResponse"></StakingTile>
+        </div>
+        <div class="px-3 col-lg d-inline-flex border-right border-bottom">
+            <TreasuryTile ChainResponse="ChainResponse"></TreasuryTile>
+        </div>
+        <div class="px-3 col-lg d-inline-flex border-right border-bottom">
+            <BlockTile ChainResponse="ChainResponse"></BlockTile>
         </div>
     </div>
 </div>
-<!--
-<div class="row">
-    <div class="col-lg mb-3 d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-4">
-                    <i class="fad fa-info text-white" style="font-size: 41px;"></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">VOTE FOR US</a>
-                    </div>
-                    <div class="pt-1 text-white">we have contributed shit load, vote for us <span class="mono font-weight-bold">now</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg mb-3 d-none mr-lg-n4 d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-3">
-                    <i class="fad fa-circle text-white" style="font-size: 41px;"></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">CONTRIBUTION DAO</a>
-                    </div>
-                    <div class="pt-1 text-white">alternative on-chain radical voting <span class="mono font-weight-bold">proposal</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg mb-3 d-none d-md-block">
-        <div class="px-1 p-3 card rounded gradient shadow-sm border-0">
-            <div class="d-inline-flex">
-                <div class="ml-2 mr-3">
-                    <i class="fad fa-mobile-alt text-white" style="font-size: 41px;"></i>
-                </div>
-                <div>
-                    <div class="d-flex">
-                        <a class="text-white font-weight-bold" href="/">ICONLOOK MOBILE</a>
-                    </div>
-                    <div class="pt-1 text-white">Android and iOS apps is coming soon <span class="mono font-weight-bold">boys!</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-<div class="row mb-5">
-    <div class="col">
-        <div class="card shadow-sm" style="min-height: 943px;">
+<div class="mb-5 card shadow-sm" style="min-height: 943px;">
+    <div class="row">
+        <div class="col">
             <SfTab Animation="Animation">
-                <TabEvents Selecting="Select"/>
+                <TabEvents Selecting="Select" />
                 <TabItems>
                     <TabItem Header="Unstaking">
                         <ContentTemplate>
@@ -119,7 +64,6 @@
         </div>
     </div>
 </div>
-
 @code {
     [Parameter]
     public bool Paging { get; set; }
