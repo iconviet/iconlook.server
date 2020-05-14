@@ -40,7 +40,8 @@
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
     <!-- Head Stylesheet -->
-    <link async rel="stylesheet" href="static/css/bundle.min.css?v=@HostBase.Configuration.VersionInformation" />
+    <link async rel="stylesheet" href="static/css/bundle.min.css?v=@CoreAssembly.StudioCoreVersion" />
+    <link async rel="stylesheet" href="static/css/site.min.css?v=@HostBase.Configuration.VersionInformation" />
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -52,7 +53,8 @@
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
 
     <!-- Body Javascript -->
-    <script async type="text/javascript" src="static/js/bundle.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script type="text/javascript" src="static/js/bundle.min.js?v=@CoreAssembly.StudioCoreVersion"></script>
+    <script async type="text/javascript" src="static/js/site.js?v=@HostBase.Configuration.VersionInformation"></script>
     <script async type="text/javascript" src="_framework/blazor.server.js?v=@typeof(WebHost).Assembly.InformationVersion()"></script>
     <environment exclude="Localhost">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>

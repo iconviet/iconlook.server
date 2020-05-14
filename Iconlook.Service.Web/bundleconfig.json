@@ -1,5 +1,24 @@
 ﻿[
   {
+    "minify": { "enabled": true },
+    "inputFiles": [
+      "wwwroot/static/css/site*.css"
+    ],
+    "outputFileName": "wwwroot/static/css/site.min.css"
+  },
+  {
+    "minify": { "enabled": true },
+    // *** do not change the order of these lines !!! ***/
+    "inputFiles": [
+      "wwwroot/static/css/gf-*.min.css",
+      "wwwroot/static/css/sf-*.min.css",
+      "wwwroot/static/css/fa-*.min.css",
+      "wwwroot/static/css/bootstrap.min.css",
+      "wwwroot/static/css/site*.css"
+    ],
+    "outputFileName": "wwwroot/static/css/bundle.min.css"
+  },
+  {
     "minify": { "enabled": false },
     // *** do not change the order of these lines !!! ***/
     "inputFiles": [
@@ -22,21 +41,8 @@
       "wwwroot/static/js/sf-dropdowns.min.js",
       "wwwroot/static/js/sf-splitbuttons.min.js",
       "wwwroot/static/js/sf-grids.min.js",
-      "wwwroot/static/js/sf-calendars.min.js",
-      "wwwroot/static/js/site.js"
+      "wwwroot/static/js/sf-calendars.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
-  },
-  {
-    "minify": { "enabled": true },
-    // *** do not change the order of these lines !!! ***/
-    "inputFiles": [
-      "wwwroot/static/css/gf-*.min.css",
-      "wwwroot/static/css/sf-*.min.css",
-      "wwwroot/static/css/fa-*.min.css",
-      "wwwroot/static/css/bootstrap.min.css",
-      "wwwroot/static/css/site*.css"
-    ],
-    "outputFileName": "wwwroot/static/css/bundle.min.css"
   }
 ]
