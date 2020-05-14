@@ -29,8 +29,8 @@
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.0-preview.3.20215.14" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="5.0.0-preview.3.20215.14" />
-    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.48" />
-    <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.48" />
+    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.52" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.52" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.2" />
   </ItemGroup>
 </Project>

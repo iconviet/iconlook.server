@@ -109,16 +109,18 @@
                     <div class="row">
                         <div class="col-5 d-inline-flex">
                             <img width="88" height="88" src="/static/images/qrcode_black.png" />
-                            <div class="pl-3">
-                                @{
-                                    var jackpot = MegaloopResponse?.LastWinner?.Jackpot.ToString("N4") ?? "0.0000";
-                                    var jackpot_usd = MegaloopResponse?.LastWinner?.JackpotUsd.ToString("N2") ?? "0.00";
-                                    var address = MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000";
-                                    <span class="fs-n1 font-weight-bold">@jackpot ICX</span>
-                                    <span class="fs-n1 opacity-50 font-weight-light">$@jackpot_usd USD</span>
-                                    <span class="fs-n2 opacity-50">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
-                                    <a class="mono fs-n1" href="https://bicon.tracker.solidwallet.io/address/@address">@address</a>
-                                }
+                            <div class="pl-3  d-flex align-items-end">
+                                <div>
+                                    @{
+                                        var jackpot = MegaloopResponse?.LastWinner?.Jackpot.ToString("N4") ?? "0.0000";
+                                        var jackpot_usd = MegaloopResponse?.LastWinner?.JackpotUsd.ToString("N2") ?? "0.00";
+                                        var address = MegaloopResponse?.LastWinner?.Address ?? "hx0000000000000000000000000000000000000000";
+                                        <span class="fs-n1 font-weight-bold">@jackpot ICX</span>
+                                        <span class="fs-n1 opacity-50 font-weight-light">$@jackpot_usd USD</span>
+                                        <span class="fs-n2 opacity-50">&nbsp;•&nbsp;&nbsp;LAST WINNER</span>
+                                        <a class="mono fs-n1" href="https://bicon.tracker.solidwallet.io/address/@address">@address</a>
+                                    }
+                                </div>
                             </div>
                         </div>
                         <div class="col-2 text-center">
