@@ -38,12 +38,11 @@
     <meta property="og:image" content="https://iconlook.io/static/images/logo-256.png?44629809080" />
     <meta property="og:description" content="Real-time & Data-rich Blockchain Intelligence, Telemetry and Analytics for ICON Ecosystem 🔰 100% optimized for mobile browser © 2020 ICONVIET" />
 
-    <!-- Stylesheet & Javascript -->
+    <!-- Head Stylesheet -->
     <link async rel="stylesheet" href="static/css/bundle-1.min.css?v=@HostBase.Configuration.VersionInformation" />
     <link async rel="stylesheet" href="static/css/bundle-2.min.css?v=@HostBase.Configuration.VersionInformation" />
     <link async rel="stylesheet" href="static/css/bundle-3.min.css?v=@HostBase.Configuration.VersionInformation" />
-    <link async rel="stylesheet" href="static/css/bundle-4.min.css?v=@HostBase.Configuration.VersionInformation" />
-    <script async type="text/javascript" src="_framework/blazor.server.js?v=@typeof(WebHost).Assembly.InformationVersion()"></script>
+    <link async rel="stylesheet" href="static/css/bundle-4.min.css?v=@HostBase.Configuration.VersionInformation" />    
 </head>
 <body>
     <div id="components-reconnect-modal">
@@ -53,8 +52,13 @@
         </div>
     </div>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-    <script async type="text/javascript" src="static/js/bundle-1.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+
+    <!-- Body Javascript -->
+    <script type="text/javascript" src="static/js/bundle-1.min.js?v=@HostBase.Configuration.VersionInformation"></script>
     <script async type="text/javascript" src="static/js/bundle-2.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script async type="text/javascript" src="static/js/bundle-3.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script async type="text/javascript" src="static/js/bundle-4.min.js?v=@HostBase.Configuration.VersionInformation"></script>
+    <script async type="text/javascript" src="_framework/blazor.server.js?v=@typeof(WebHost).Assembly.InformationVersion()"></script>
     <environment exclude="Localhost">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160442792-1"></script>
         <script type="text/javascript">

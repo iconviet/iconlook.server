@@ -4,11 +4,7 @@
     // *** do NOT change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/js/jquery.min.js",
-      "wwwroot/static/js/popper.min.js",
-      "wwwroot/static/js/ss-utils.min.js",
-      "wwwroot/static/js/jquery-ui.min.js",
-      "wwwroot/static/js/animate-number.min.js",
-      "wwwroot/static/js/animate-number.extend.min.js"
+      "wwwroot/static/js/popper.min.js"      
     ],
     "outputFileName": "wwwroot/static/js/bundle-1.min.js"
   },
@@ -16,11 +12,22 @@
     "minify": { "enabled": true },
     // *** do NOT change the order of these lines !!! ***/
     "inputFiles": [
-      "wwwroot/static/js/rxjs.min.js",
+      "wwwroot/static/js/jquery-ui.min.js",
       "wwwroot/static/js/bootstrap.min.js",
-      "wwwroot/static/js/site.js"
+      "wwwroot/static/js/animate-number.min.js",
+      "wwwroot/static/js/animate-number.extend.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle-2.min.js"
+  },
+  {
+    "minify": { "enabled": true },
+    // *** do NOT change the order of these lines !!! ***/
+    "inputFiles": [
+      "wwwroot/static/js/rxjs.min.js",
+      "wwwroot/static/js/ss-utils.min.js",      
+      "wwwroot/static/js/site.js"
+    ],
+    "outputFileName": "wwwroot/static/js/bundle-3.min.js"
   },
   {
     "minify": { "enabled": false },
@@ -39,7 +46,7 @@
       "wwwroot/static/js/sf-grids.min.js",
       "wwwroot/static/js/sf-calendars.min.js"
     ],
-    "outputFileName": "wwwroot/static/js/bundle-3.min.js"
+    "outputFileName": "wwwroot/static/js/bundle-4.min.js"
   },
   {
     "minify": { "enabled": true },
