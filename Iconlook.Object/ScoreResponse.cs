@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Iconviet.Object;
+﻿using Iconviet.Object;
 
 namespace Iconlook.Object
 {

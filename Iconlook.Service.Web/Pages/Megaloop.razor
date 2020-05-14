@@ -51,15 +51,15 @@
         font-family: 'Lato';
         background-color: white;
         box-shadow: 0 8px 11px -6px #000000;
-        box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 11px -6px rgba(0, 0, 0, 0.12);
     }
-        
+
     body {
         background: #ece9e6;
         background: linear-gradient(to bottom, #ece9e6, #ffffff);
         background: -webkit-linear-gradient(to bottom, #ece9e6, #ffffff);
     }
-    
+
     .header {
         color: white;
         border: none;
@@ -67,7 +67,7 @@
         background-repeat: repeat-x;
         -ms-background-attachment: fixed;
         background-attachment: fixed;
-        background-image: radial-gradient(circle farthest-corner at 10% 20%,rgba(0,141,149,1.0) 0, rgba(0,181,149,1.0) 90%);
+        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(0, 141, 149, 1.0) 0, rgba(0, 181, 149, 1.0) 90%);
     }
 
     .tab-current {
@@ -76,7 +76,7 @@
         -ms-background-attachment: fixed;
         background-attachment: fixed;
         background-color: #FF9A8B;
-        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(253,239,132,1) 0%, rgba(247,198,169,1) 54.2%, rgba(21,186,196,1) 100.3%);
+        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(253, 239, 132, 1) 0%, rgba(247, 198, 169, 1) 54.2%, rgba(21, 186, 196, 1) 100.3%);
     }
 </style>
 <header class="d-none d-lg-block">
@@ -84,7 +84,7 @@
         <div class="row" style="min-height: 52px;">
             <div class="col d-flex col-auto align-items-center">
                 <span class="font-weight-light" style="font-size: 24px;">MEGAL</span>
-                <img src="static/images/oo.svg" style="max-width: 40px;" />
+                <img src="static/images/oo.svg" style="max-width: 40px;"/>
                 <span class="font-weight-light" style="font-size: 24px;">P</span>
             </div>
             <div class="col d-flex col-auto align-items-center">
@@ -108,7 +108,7 @@
                 <div class="px-5 py-4 card header rounded shadow-sm">
                     <div class="row">
                         <div class="col-5 d-inline-flex">
-                            <img width="88" height="88" src="/static/images/qrcode_black.png" />
+                            <img width="88" height="88" src="/static/images/qrcode_black.png"/>
                             <div class="pl-3  d-flex align-items-end">
                                 <div>
                                     @{
@@ -183,7 +183,7 @@
                 <div class="px-1 p-3 card rounded shadow-sm">
                     <div class="d-inline-flex">
                         <div class="ml-2 mr-3">
-                            <i class="fad fa-qrcode text-light opacity-75" style="font-size: 40px; "></i>
+                            <i class="fad fa-qrcode text-light opacity-75" style="font-size: 40px;"></i>
                         </div>
                         <div>
                             <div class="d-flex">
@@ -218,7 +218,7 @@
             <div class="col mr-sm-n3">
                 <div class="card shadow" style="min-height: 617px;">
                     <SfTab Animation="Animation">
-                        <TabEvents Selecting="Select" />
+                        <TabEvents Selecting="Select"/>
                         <TabItems>
                             <TabItem Header="Winning">
                                 <ContentTemplate>
@@ -234,7 +234,7 @@
             <div class="col">
                 <div class="card shadow" style="min-height: 617px;">
                     <SfTab Animation="Animation">
-                        <TabEvents Selecting="Select" />
+                        <TabEvents Selecting="Select"/>
                         <TabItems>
                             <TabItem Header="Current">
                                 <ContentTemplate>
@@ -250,6 +250,7 @@
         </div>
     </div>
 </main>
+
 @code {
     [Parameter]
     public bool Paging { get; set; }

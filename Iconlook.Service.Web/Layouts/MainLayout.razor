@@ -24,7 +24,7 @@
     header {
         background-color: white;
         box-shadow: 0 8px 11px -6px #000000;
-        box-shadow: 0 8px 11px -6px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 11px -6px rgba(0, 0, 0, 0.12);
     }
 
     footer .list-group-header {
@@ -49,7 +49,7 @@
                 </a>
             </div>
             <div class="col d-inline-flex justify-content-end align-items-center">
-                <img src="static/images/iconviet.png" style="opacity: 0.85; max-width: 112px; margin-top: -4px; margin-right: -40px;" />
+                <img src="static/images/iconviet.png" style="opacity: 0.85; max-width: 112px; margin-top: -4px; margin-right: -40px;"/>
                 <SfMenu Items="MenuItems" CssClass="sf-menu"></SfMenu>
             </div>
             <div class="col col-auto fs-2 pl-3 pb-1">
@@ -63,7 +63,7 @@
         <nav class="navbar navbar-light">
             <div>
                 <a href="/">
-                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;" />
+                    <img class="text-right" src="static/images/iconviet.png" style="opacity: 0.8; max-width: 110px; margin-left: -13px;"/>
                 </a>
             </div>
             <button type="button" class="navbar-toggler" style="border: none;" aria-expanded="false" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content">
@@ -193,11 +193,11 @@
     {
         IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");
         MenuItems = new List<MenuItem>
-    {
+        {
             new MenuItem
             {
                 Items = new List<MenuItem>
-            {
+                {
                     new MenuItem { Text = "Who Are We *" },
                     new MenuItem { Text = "Why Vote For Us *" },
                     new MenuItem { Text = "Active Governance *" },
@@ -207,7 +207,7 @@
             new MenuItem
             {
                 Text = "P-REPS", IconCss = "fal fa-users-class", Items = new List<MenuItem>
-            {
+                {
                     new MenuItem { Text = "P-Rep Directory", Url = "/prep/list" },
                     new MenuItem { Text = "Disqualified P-Reps *", Url = "/prep/list?filter=disqualified" },
                     new MenuItem { Text = "Controversal P-Reps *", Url = "/prep/list?filter=controversal" }
@@ -216,7 +216,7 @@
             new MenuItem
             {
                 Text = "ICONCHAIN", IconCss = "fal fa-globe", Items = new List<MenuItem>
-            {
+                {
                     new MenuItem { Text = "Unstaking Address", Url = "/address/list/unstaking" },
                     new MenuItem { Text = "Undelegated Address", Url = "/address/list/undelegated" },
                     new MenuItem { Text = "Suspicious Addresses *", Url = "/address/list/suspicious" },
@@ -226,7 +226,7 @@
             new MenuItem
             {
                 Text = "LOOPCHAIN", IconCss = "fal fa-network-wired", Items = new List<MenuItem>
-            {
+                {
                     new MenuItem { Text = "Loopchain Browser *" },
                     new MenuItem { Text = "Connector Directory *" },
                     new MenuItem { Text = "Transaction Monitoring *" },
@@ -236,7 +236,7 @@
             new MenuItem
             {
                 Text = "INTERCHAIN", IconCss = "fal fa-chart-network", Items = new List<MenuItem>
-            {
+                {
                     new MenuItem { Text = "Interchain Explorer *" },
                     new MenuItem { Text = "IRC20 Swap History *" },
                     new MenuItem { Text = "Crosschain Traffic Monior *" },

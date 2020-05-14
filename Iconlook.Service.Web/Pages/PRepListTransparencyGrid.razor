@@ -12,12 +12,12 @@
     }
 </style>
 <SfGrid EnableHover="true"
-         EnableAltRow="true"
-         TValue="PRepResponse"
-         AllowPaging="CanPage"
-         AllowSelection="CanEdit"
-         GridLines="GridLine.Horizontal"
-         Query="@(new Query().AddParams("edit", EditKey))">
+        EnableAltRow="true"
+        TValue="PRepResponse"
+        AllowPaging="CanPage"
+        AllowSelection="CanEdit"
+        GridLines="GridLine.Horizontal"
+        Query="@(new Query().AddParams("edit", EditKey))">
     <GridPageSettings PageSize="PageSize" PageSizes="PageSizes"></GridPageSettings>
     <GridEditSettings AllowEditing="CanEdit" Mode="EditMode.Dialog"></GridEditSettings>
     <GridSearchSettings Operator="Operator.Contains" IgnoreCase="true"></GridSearchSettings>
