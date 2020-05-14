@@ -7,7 +7,7 @@ namespace Iconlook.Service.Web
     {
         public static IServiceCollection AddSyncfusionBlazor(this IServiceCollection instance)
         {
-            return instance.AddSyncfusionBlazor(false);
+            return instance.AddSyncfusionBlazor(true);
         }
     }
 }
