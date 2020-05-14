@@ -72,9 +72,15 @@
   {
     "minify": { "enabled": true },
     "inputFiles": [
-      "wwwroot/static/css/fa-*.min.css",
-      "wwwroot/static/css/site*.css"
+      "wwwroot/static/css/fa-*.min.css"
     ],
     "outputFileName": "wwwroot/static/css/bundle-4.min.css"
+  },
+  {
+    "minify": { "enabled": true },
+    "inputFiles": [
+      "wwwroot/static/css/site*.css"
+    ],
+    "outputFileName": "wwwroot/static/css/bundle-5.min.css"
   }
 ]
