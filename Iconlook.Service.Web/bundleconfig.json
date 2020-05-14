@@ -4,7 +4,7 @@
     // *** do NOT change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/js/jquery.min.js",
-      "wwwroot/static/js/popper.min.js"      
+      "wwwroot/static/js/popper.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle-1.min.js"
   },
@@ -24,7 +24,7 @@
     // *** do NOT change the order of these lines !!! ***/
     "inputFiles": [
       "wwwroot/static/js/rxjs.min.js",
-      "wwwroot/static/js/ss-utils.min.js",      
+      "wwwroot/static/js/ss-utils.min.js",
       "wwwroot/static/js/site.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle-3.min.js"
