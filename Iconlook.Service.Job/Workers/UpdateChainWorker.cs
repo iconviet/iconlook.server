@@ -45,18 +45,18 @@ namespace Iconlook.Service.Job.Workers
                             var staking_info = await chainalytic.GetStakingInfo();
                             var chain = new ChainResponse
                             {
-                                MarketCap = (long) main_info?.GetMarketCap(),
                                 IcxSupply = (long) total_supply.ToIcx(),
                                 IRep = iiss_info?.GetIRep().ToIcx() ?? 0,
+                                MarketCap = (long) main_info?.GetMarketCap(),
                                 IcxCirculation = (long) main_info?.GetIcxCirculation(),
                                 PublicTreasury = (long) main_info?.GetPublicTreasury(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
+                                TotalStaked = (long) prep_info?.GetTotalStaked().ToIcx(),
                                 NextTermBlockHeight = (long) iiss_info?.GetNextPRepTerm(),
                                 TransactionCount = (long) main_info?.GetTransactionCount(),
                                 IcxPrice = LastIcxPrice = ticker?.LastPrice ?? LastIcxPrice,
                                 RRepPercentage = (double) (iiss_info?.GetRRep() * 3) / 10000,
                                 IcxPriceChangePercentage = ticker?.PriceChangePercent / 100 ?? 0,
-                                TotalStaked = (long) prep_info?.GetTotalStaked().ToIcx(),
                                 BlockHeight = LastBlockHeight = (long) iiss_info?.GetBlockHeight(),
                                 StakingAddressCount = (long) staking_info?.GetStakingAddressCount(),
                                 TotalDelegated = (long) prep_info?.GetTotalDelegated().ToIcx(),
