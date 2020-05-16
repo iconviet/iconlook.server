@@ -52,7 +52,7 @@ namespace Iconlook.Service.Job.Workers
                             Block = long.Parse(player.ToString().Split(":")[2]),
                             Deposit = player.ToString().Split(":")[1].ToLoop().ToIcx(),
                             Chance = player.ToString().Split(":")[1].ToLoop().ToIcx() / jackpot_size.ToIcx()
-                        }).ToList();
+                        }).OrderByDescending(x => x.Block).Take(20).ToList();
                     }
                     if (last_winner.HasValue())
                     {
@@ -77,7 +77,7 @@ namespace Iconlook.Service.Job.Workers
                             Subsidy = winner.ToString().Split(':')[4].ToLoop().ToIcx(),
                             JackpotUsd = winner.ToString().Split(':')[3].ToLoop().ToIcx() * last_icx_price,
                             Chance = winner.ToString().Split(':')[3].ToLoop().ToIcx() / last_winner.Split(':')[2].ToLoop().ToIcx()
-                        }).ToList();
+                        }).OrderByDescending(x => x.Block).Take(20).ToList();
                     }
                     await Endpoint.Instance().Publish(new MegaloopUpdatedEvent
                     {

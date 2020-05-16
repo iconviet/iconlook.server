@@ -30,7 +30,7 @@ namespace Iconlook.Service.Api
                         break;
                 }
                 return new UnstakingAddressListResponse(items
-                    .OrderByDescending(x => x.UnstakedBlockHeight)
+                    .OrderByDescending(x => x.RequestedBlockHeight)
                     .Skip(items.Count > request.Take ? request.Skip : 0).Take(request.Take))
                 {
                     Count = items.Count,

@@ -39,8 +39,8 @@ namespace Iconlook.Service.Job.Workers
                                 Id = key,
                                 Hash = key,
                                 Name = name,
-                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Type = name == null ? AddressType.Iconist : AddressType.PRep,
+                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Delegated = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString()),
                                 Undelegated = decimal.Parse(BigDecimal.Parse(tuple[2]).ToString())
                             };
@@ -60,8 +60,8 @@ namespace Iconlook.Service.Job.Workers
                                 Name = name,
                                 RequestedBlockHeight = long.Parse(tuple[2]),
                                 UnstakedBlockHeight = long.Parse(tuple[3]) - 17, // TODO: offset for deviation
-                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Type = name == null ? AddressType.Iconist : AddressType.PRep,
+                                Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
                             var calculator = new UnstakeBlockCalculator(
