@@ -42,7 +42,7 @@ namespace Iconlook.Service.Job.Workers
                                 Timestamp = x.GetTimestamp().Value.ToDateTimeOffset(),
                                 Fee = x.GetFee().HasValue ? x.GetFee().Value.ToIcx() : 0,
                                 Amount = x.GetValue().HasValue ? x.GetValue().Value.ToIcx() : 0
-                            }).ToList();
+                            }).Where(x => x.Amount > 0).ToList();
                             var block = new BlockResponse
                             {
                                 PeerId = last_block.GetPeerId(),
@@ -52,8 +52,9 @@ namespace Iconlook.Service.Job.Workers
                                 Hash = last_block.GetBlockHash().ToString(),
                                 TotalAmount = transactions.Sum(x => x.Amount),
                                 PrevHash = last_block.GetPrevBlockHash().ToString(),
-                                Height = LastBlockHeight = (long) last_block.GetHeight(),
-                                Timestamp = last_block.GetTimestamp().ToDateTimeOffset()
+                                Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
+                                Height = LastBlockHeight = (long) last_block.GetHeight()
+                                
                             };
                             await Channel.Instance().Publish(new BlockUpdatedSignal
                             {

@@ -59,7 +59,7 @@ namespace Iconlook.Service.Job.Workers
                                 Hash = key,
                                 Name = name,
                                 RequestedBlockHeight = long.Parse(tuple[2]),
-                                UnstakedBlockHeight = long.Parse(tuple[3]) - 17, // TODO: offset for deviation
+                                UnstakedBlockHeight = long.Parse(tuple[3]) - 39, // TODO: offset for deviation
                                 Type = name == null ? AddressType.Iconist : AddressType.PRep,
                                 Staked = decimal.Parse(BigDecimal.Parse(tuple[0]).ToString()),
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
