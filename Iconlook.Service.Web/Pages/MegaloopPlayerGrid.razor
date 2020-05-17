@@ -15,16 +15,16 @@
         font-weight: 400;
     }
 
-    .unstaking_amount .number-part {
+    .deposit_amount .number-part {
         font-weight: 700;
     }
 
-    .unstaking_amount .fraction-part {
+    .deposit_amount .fraction-part {
         font-weight: 500;
     }
 </style>
 <SfGrid @ref="SfGrid"
-         ID="players_grid"
+         ID="player_grid"
          EnableHover="false"
          EnableAltRow="false"
          AllowSelection="false"
@@ -38,7 +38,7 @@
                     if (context is MegaloopPlayerResponse player)
                     {
                         <a class="primary no-underline" href="https://bicon.tracker.solidwallet.io/address/@player.Address">
-                            <span class="fs-n1 mono">@player.Address</span>
+                            <span class="mono fs-n1 MegaloopResponse_Address">@player.Address</span>
                         </a>
                     }
                 }
@@ -49,7 +49,7 @@
                 @{
                     if (context is MegaloopPlayerResponse player)
                     {
-                        <span class="mono ls-n2 unstaking_amount">@player.Deposit.ToIcxString()</span>
+                        <span class="mono ls-n2 deposit_amount MegaloopResponse_Deposit">@player.Deposit.ToIcxString()</span>
                         <span class="pl-1 text-light font-weight-light">ICX</span>
                     }
                 }

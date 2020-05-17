@@ -57,7 +57,7 @@ namespace Iconlook.Client.Service
             return response.ToString();
         }
 
-        public async Task<string> GetCurrentSubsidy()
+        public async Task<string> GetJackpotSubsidy()
         {
             var response = await Client.CallAsync(new Call.Builder()
                 .Method("get_current_subsidy")
