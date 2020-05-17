@@ -81,7 +81,7 @@
         <div class="row" style="min-height: 52px;">
             <div class="col d-flex col-auto align-items-center">
                 <span class="font-weight-light" style="font-size: 24px;">MEGAL</span>
-                <img src="static/images/oo.svg" style="width: 40px; height: 20px;" />
+                <img width="40" height="20" src="static/images/oo.svg" />
                 <span class="font-weight-light" style="font-size: 24px;">P</span>
             </div>
             <div class="col d-none col-auto d-md-flex align-items-center">
@@ -89,7 +89,13 @@
             </div>
             <div class="col d-none col-auto d-md-flex align-items-center">
                 <span class="fs-1 font-weight-bold">A simple global lottery system based on ICON blockchain.</span>&nbsp;&nbsp;
-                <a class="fs-1 special font-weight-bold" href="/">Try it now !</a>
+                <a class="fs-1 special font-weight-bold" href="/">Try it now!</a>
+            </div>
+            <div class="col d-none col-auto d-md-flex align-items-center">
+                <h2 class="text-light opacity-50 font-weight-light">|</h2>
+            </div>
+            <div class="col d-none col-auto d-md-flex align-items-center">
+                <span class="fs-1 font-weight-light">iOS and Android mobile app coming soon</span>
             </div>
             <div class="col d-flex align-items-center justify-content-end">
                 <SfButton CssClass="e-primary" IconCss="fal fa-sign-in-alt">Login</SfButton>
@@ -102,7 +108,7 @@
         <div class="p-0 mb-3 card header rounded shadow-sm">
             <div class="row no-gutters">
                 <div class="col d-none mr-lg-auto d-lg-inline-flex">
-                    <img width="128" height="128" src="/static/images/qrcode_black.png" />
+                    <img width="126" height="128" src="/static/images/qrcode_black.png" />
                     <div class="pl-3 pb-4 d-flex align-items-end">
                         <div>
                             @{
@@ -212,53 +218,9 @@
                 </div>
             </div>
         </div>
-        @if (IsMobile)
-        {
-            <div class="row mb-5">
-                <div class="col mr-sm-n3">
-                    <div class="card shadow" style="min-height: 617px;">
-                        <SfTab Animation="Animation">
-                            <TabEvents Selecting="Select" />
-                            <TabItems>
-                                <TabItem Header="Current">
-                                    <ContentTemplate>
-                                        <div class="p-0 card-body">
-                                            <MegaloopPlayersGrid></MegaloopPlayersGrid>
-                                        </div>
-                                    </ContentTemplate>
-                                </TabItem>
-                                <TabItem Header="Winning">
-                                    <ContentTemplate>
-                                        <div class="p-0 card-body">
-                                            <MegaloopWinnersGrid></MegaloopWinnersGrid>
-                                        </div>
-                                    </ContentTemplate>
-                                </TabItem>
-                            </TabItems>
-                        </SfTab>
-                    </div>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="row mb-5">
-                <div class="col mr-sm-n3">
-                    <div class="card shadow" style="min-height: 617px;">
-                        <SfTab Animation="Animation">
-                            <TabEvents Selecting="Select" />
-                            <TabItems>
-                                <TabItem Header="Winning">
-                                    <ContentTemplate>
-                                        <div class="p-0 card-body">
-                                            <MegaloopWinnersGrid></MegaloopWinnersGrid>
-                                        </div>
-                                    </ContentTemplate>
-                                </TabItem>
-                            </TabItems>
-                        </SfTab>
-                    </div>
-                </div>
+        <div class="row mb-5">
+            @if (IsMobile)
+            {
                 <div class="col">
                     <div class="card shadow" style="min-height: 617px;">
                         <SfTab Animation="Animation">
@@ -271,31 +233,58 @@
                                         </div>
                                     </ContentTemplate>
                                 </TabItem>
+                                <TabItem Header="Winning">
+                                    <ContentTemplate>
+                                        <div class="p-0 card-body">
+                                            <MegaloopWinnersGrid></MegaloopWinnersGrid>
+                                        </div>
+                                    </ContentTemplate>
+                                </TabItem>
                             </TabItems>
                         </SfTab>
                     </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="col-sm mb-3 mr-sm-n3">
+                    <div class="card shadow" style="min-height: 617px;">
+                        <SfTab Animation="Animation">
+                            <TabEvents Selecting="Select" />
+                            <TabItems>
+                                <TabItem Header="Winning">
+                                    <ContentTemplate>
+                                        <div class="p-0 card-body">
+                                            <MegaloopWinnersGrid></MegaloopWinnersGrid>
+                                        </div>
+                                    </ContentTemplate>
+                                </TabItem>
+                            </TabItems>
+                        </SfTab>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card shadow" style="min-height: 617px;">
+                        <SfTab Animation="Animation">
+                            <TabEvents Selecting="Select" />
+                            <TabItems>
+                                <TabItem Header="Current">
+                                    <ContentTemplate>
+                                        <div class="p-0 card-body">
+                                            <MegaloopPlayersGrid></MegaloopPlayersGrid>
+                                        </div>
+                                    </ContentTemplate>
+                                </TabItem>
+                            </TabItems>
+                        </SfTab>
+                    </div>
+                </div>
         }
+        </div>
     </div>
 </main>
 
 @code {
-    [Parameter]
-    public bool Paging { get; set; }
-
-    [Parameter]
-    public int PageSize { get; set; }
-
-    [Parameter]
-    public bool Sorting { get; set; }
-
-    [Parameter]
-    public string Category { get; set; }
-
-    [Parameter]
-    public object PageSizes { get; set; }
-
     bool IsMobile;
     protected TabHeader Winning;
     protected TabHeader Current;
@@ -313,9 +302,6 @@
 
     protected override void OnInitialized()
     {
-        Paging = true;
-        PageSize = 20;
-        PageSizes = new[] { 20, 50, 100, 500, 1000 };
         ChainResponse = LocalCache.LastChainResponse;
         MegaloopResponse = LocalCache.LastMegaloopResponse;
         Winning = new TabHeader { Text = "WINNING HISTORY" };
