@@ -29,11 +29,13 @@ namespace Iconlook.Service.Job.Workers
                     var last_winner = await client.GetLastWinner();
                     var jackpot_size = await client.GetJackpotSize();
                     var last_icx_price = UpdateChainWorker.LastIcxPrice;
+                    var current_subsidy = await client.GetCurrentSubsidy();
                     var megaloop = new MegaloopResponse
                     {
                         PlayerCount = players.Count(),
-                        JackpotSize = jackpot_size.ToIcx(),
-                        JackpotSizeUsd = jackpot_size.ToIcx() * last_icx_price
+                        CurrentSubsidy = current_subsidy.ToLoop().ToIcx(),
+                        JackpotSizeUsd = jackpot_size.ToIcx() * last_icx_price,
+                        JackpotSize = jackpot_size.ToIcx() + current_subsidy.ToLoop().ToIcx()
                     };
                     if (last_player.HasValue())
                     {

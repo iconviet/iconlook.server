@@ -8,6 +8,7 @@ namespace Iconlook.Object
         public int PlayerCount { get; set; }
         public decimal JackpotSize { get; set; }
         public decimal JackpotSizeUsd { get; set; }
+        public decimal CurrentSubsidy { get; set; }
         public MegaloopPlayerResponse LastPlayer { get; set; }
         public MegaloopWinnerResponse LastWinner { get; set; }
         public List<MegaloopPlayerResponse> Players { get; set; }
