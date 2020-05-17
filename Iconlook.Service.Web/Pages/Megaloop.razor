@@ -108,7 +108,7 @@
         <div class="p-0 mb-3 card header rounded shadow-sm">
             <div class="row">
                 <div class="col-5 d-none d-lg-inline-flex">
-                    <img width="126" height="128" src="/static/images/qrcode_black.png" />
+                    <img width="130" height="130" src="/static/images/qrcode_black.png" />
                     <div class="pl-4 pb-4 d-flex align-items-end">
                         <div>
                             @{
@@ -127,12 +127,12 @@
                     <div class="row px-5 py-4 no-gutters">
                         <div class="col-md-4 d-none d-md-block text-nowrap text-center">
                             <div class="mb-2 fs-n2 font-weight-semibold">
-                                READY TO WIN
+                                <i class="fad pr-1 fs-2 fa-users"></i> READY TO WIN
                             </div>
-                            <h2 class="mono pt-1 hero-text font-weight-bold MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
+                            <h2 class="mono pt-1 hero-text font-weight-normal MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
                                 @(MegaloopResponse?.PlayerCount ?? 0)
                             </h2>
-                            <div class="hero-pill shadow-sm d-inline-block justify-content-center">
+                            <div class="mt-1 fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
                                 players
                             </div>
                         </div>
@@ -140,17 +140,19 @@
                             <div class="mb-2 fs-n2 font-weight-semibold">
                                 <i class="fad pr-1 fs-2 fa-stopwatch"></i> TIME TO DRAW
                             </div>
-                            <h2 class="pt-1 ls-n2 hero-text font-weight-bold ChainResponse_NextTermCountdown">
+                            <h2 class="pt-1 ls-n2 hero-text font-weight-normal ChainResponse_NextTermCountdown">
                                 @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
                             </h2>
-                            <div class="hero-pill shadow-sm d-inline-block justify-content-center">remaining</div>
+                            <div class="mt-1 fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
+                                remaining
+                            </div>
                         </div>
                         <div class="col-6 col-md-4 text-nowrap text-right">
                             <div class="mb-2 fs-n2 font-weight-semibold">
                                 <i class="fad pr-1 fs-2 fa-award"></i> TODAY PRIZE
                             </div>
                             <div>
-                                <div class="mt-1 d-inline-flex">
+                                <div class="d-inline-flex">
                                     <h2 class="mono hero-text font-weight-bold MegaloopResponse_TotalJackpotSize" number="@(MegaloopResponse?.TotalJackpotSize.ToString("N0") ?? "0")">
                                         @(MegaloopResponse?.TotalJackpotSize.ToString("N0") ?? "0")
                                     </h2>&nbsp;&nbsp;
@@ -159,7 +161,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div>
+                            <div class="mt-2">
                                 <div class="mono fs-n1 hero-pill shadow-sm d-inline-flex justify-content-center">
                                     <span class="MegaloopResponse_TotalJackpotSizeUsd" number="@(MegaloopResponse?.TotalJackpotSizeUsd.ToString("N2") ?? "0.00")">
                                         @(MegaloopResponse?.TotalJackpotSizeUsd.ToString("N2") ?? "0.00")
@@ -197,7 +199,7 @@
                             <div class="d-flex">
                                 <a class="primary font-weight-bold" href="/">HOW DO I PLAY?</a>
                             </div>
-                            <div class="pt-1">Send ICX to <span class="special font-weight-bold" style="text-decoration: underline;">this address</span> from your wallet</div>
+                            <div class="pt-1">Send any ICX to this <span class="special font-weight-bold" style="text-decoration: underline;">contract</span> from your wallet</div>
                         </div>
                     </div>
                 </div>
@@ -223,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mb-5">
+        <div class="row mb-3">
             @if (IsMobile)
             {
                 <div class="col">
@@ -252,7 +254,7 @@
             }
             else
             {
-                <div class="col-sm mr-sm-n3">
+                <div class="col-md mr-md-n3">
                     <div class="card shadow" style="min-height: 617px;">
                         <SfTab Animation="Animation">
                             <TabEvents Selecting="Select" />
@@ -268,7 +270,7 @@
                         </SfTab>
                     </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-md">
                     <div class="card shadow" style="min-height: 617px;">
                         <SfTab Animation="Animation">
                             <TabEvents Selecting="Select" />
