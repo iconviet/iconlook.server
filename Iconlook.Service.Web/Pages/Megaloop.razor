@@ -84,21 +84,21 @@
                 <img width="40" height="20" src="static/images/oo.svg" />
                 <span class="font-weight-light" style="font-size: 24px;">P</span>
             </div>
-            <div class="col d-none col-auto d-md-flex align-items-center">
+            <div class="col col-auto ml-n3 d-flex d-lg-none align-items-center">
+                <SfButton IsToggle="false" CssClass="e-outline text-light" IconCss="far fa-qrcode"></SfButton>
+            </div>
+            <div class="col d-none col-auto d-lg-flex align-items-center">
                 <h2 class="text-light opacity-50 font-weight-light">|</h2>
             </div>
-            <div class="col d-none col-auto d-md-flex align-items-center">
+            <div class="col d-none col-auto d-lg-flex align-items-center">
                 <span class="fs-1 font-weight-bold">A simple global lottery system based on ICON blockchain.</span>&nbsp;&nbsp;
                 <a class="fs-1 special font-weight-bold" href="/">Try it now!</a>
             </div>
-            <div class="col d-none col-auto d-md-flex align-items-center">
-                <h2 class="text-light opacity-50 font-weight-light">|</h2>
-            </div>
-            <div class="col d-none col-auto d-md-flex align-items-center">
-                <span class="fs-1 font-weight-light">iOS and Android mobile app coming soon</span>
+            <div class="col d-none col-auto d-xl-flex align-items-center">
+                <span class="fs-1 badge badge-pill badge-light font-weight-light">iOS & Android mobile app coming soon</span>
             </div>
             <div class="col d-flex align-items-center justify-content-end">
-                <SfButton CssClass="e-primary" IconCss="fal fa-sign-in-alt">Login</SfButton>
+                <SfButton CssClass="mr-n2 e-link border-0 primary" IconCss="fal fs-1 fa-sign-in-alt">Login</SfButton>
             </div>
         </div>
     </div>
@@ -129,7 +129,7 @@
                             <div class="mb-2 fs-n2 font-weight-semibold">
                                 <i class="fad pr-1 fs-2 fa-users"></i> READY TO WIN
                             </div>
-                            <h2 class="mono pt-1 hero-text font-weight-normal MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
+                            <h2 class="mono pt-1 hero-text font-weight-semibold MegaloopResponse_PlayerCount" number="@(MegaloopResponse?.PlayerCount ?? 0)">
                                 @(MegaloopResponse?.PlayerCount ?? 0)
                             </h2>
                             <div class="mt-1 fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
@@ -140,7 +140,7 @@
                             <div class="mb-2 fs-n2 font-weight-semibold">
                                 <i class="fad pr-1 fs-2 fa-stopwatch"></i> TIME TO DRAW
                             </div>
-                            <h2 class="pt-1 ls-n2 hero-text font-weight-normal ChainResponse_NextTermCountdown">
+                            <h2 class="pt-1 ls-n2 hero-text font-weight-semibold ChainResponse_NextTermCountdown">
                                 @(ChainResponse?.NextTermCountdown ?? "0h 0m 0s")
                             </h2>
                             <div class="mt-1 fs-n1 hero-pill shadow-sm d-inline-block justify-content-center">
@@ -173,8 +173,8 @@
                 </div>
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col-lg d-none mr-lg-n4 d-md-block">
+        <div class="row">
+            <div class="col-lg  mb-3 d-none mr-lg-n4 d-md-block">
                 <div class="px-1 p-3 card rounded shadow-sm">
                     <div class="d-inline-flex">
                         <div class="ml-2 mr-4">
@@ -189,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg d-none mr-lg-n4 d-md-block">
+            <div class="col-lg mb-3 d-none mr-lg-n4 d-md-block">
                 <div class="px-1 p-3 card rounded shadow-sm">
                     <div class="d-inline-flex">
                         <div class="ml-2 mr-3">
@@ -204,7 +204,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg d-none d-md-block">
+            <div class="col-lg mb-3 d-none d-md-block">
                 <div class="px-1 p-3 card rounded shadow-sm">
                     <div class="d-inline-flex">
                         <div class="ml-2 mr-3">
@@ -254,7 +254,7 @@
             }
             else
             {
-                <div class="col-md mr-md-n3">
+                <div class="col-md mb-3 mr-md-n3">
                     <div class="card shadow" style="min-height: 617px;">
                         <SfTab Animation="Animation">
                             <TabEvents Selecting="Select" />
