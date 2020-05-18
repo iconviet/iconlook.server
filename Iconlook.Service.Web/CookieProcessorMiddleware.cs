@@ -58,6 +58,7 @@ namespace Iconlook.Service.Web
                         endpoint.Publish(web_requested_event.ThenDo(e =>
                         {
                             e.IconString = "💠";
+                            e.UserHashId = user_hash_id;
                             e.BodyString = "NEW USER DETECTED";
                         })).ConfigureAwait(false);
                         state.Response.Cookies.Append(

@@ -52,7 +52,7 @@ namespace Iconlook.Service.Job.Workers
                             Block = long.Parse(last_player.Split(':')[2])
                         };
                     }
-                    if (players.Any())
+                    if (players.Any() && jackpot_size > 0)
                     {
                         response.Players = players.Select(player => new MegaloopPlayerResponse
                         {
