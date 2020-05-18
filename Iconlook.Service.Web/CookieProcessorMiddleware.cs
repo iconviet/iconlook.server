@@ -34,33 +34,34 @@ namespace Iconlook.Service.Web
                 var state = (HttpContext) x;
                 if (!state.Request.Path.StartsWithSegments("/_blazor"))
                 {
+                    var web_requested_event = new WebRequestedEvent
+                    {
+                        Url = url,
+                        Referer = referer,
+                        Address = address,
+                        Country = country,
+                        IconString = "🔸",
+                        UserAgent = user_agent,
+                        UserHashId = user_hash_id,
+                        BodyString = "OLD USER REVISITED"
+                    };
                     var endpoint = _application.ApplicationServices.TryResolve<IMessageSession>();
                     if (user_hash_id.HasValue())
                     {
-                        endpoint.Publish(new WebRequestedEvent
+                        endpoint.Publish(web_requested_event.ThenDo(e =>
                         {
-                            Url = url,
-                            Referer = referer,
-                            Address = address,
-                            Country = country,
-                            IconString = "🔸",
-                            UserAgent = user_agent,
-                            UserHashId = user_hash_id,
-                            BodyString = "OLD USER REVISITED"
-                        }).ConfigureAwait(false);
+                            e.IconString = "🔸";
+                            e.BodyString = "OLD USER REVISITED";
+                        })).ConfigureAwait(false);
                     }
                     else
                     {
                         user_hash_id = Generate.HashId(16).ToUpper();
-                        endpoint.Publish(new WebRequestedEvent
+                        endpoint.Publish(web_requested_event.ThenDo(e =>
                         {
-                            Url = url,
-                            Referer = referer,
-                            IconString = "💠",
-                            UserAgent = user_agent,
-                            UserHashId = user_hash_id,
-                            BodyString = "NEW USER DETECTED"
-                        }).ConfigureAwait(false);
+                            e.IconString = "💠";
+                            e.BodyString = "NEW USER DETECTED";
+                        })).ConfigureAwait(false);
                         state.Response.Cookies.Append(
                             Cookies.USER_HASH_ID, user_hash_id, new CookieOptions
                             {
