@@ -40,10 +40,8 @@ namespace Iconlook.Service.Web
                         Referer = referer,
                         Address = address,
                         Country = country,
-                        IconString = "🔸",
                         UserAgent = user_agent,
-                        UserHashId = user_hash_id,
-                        BodyString = "OLD USER REVISITED"
+                        UserHashId = user_hash_id
                     };
                     var endpoint = _application.ApplicationServices.TryResolve<IMessageSession>();
                     if (user_hash_id.HasValue())
