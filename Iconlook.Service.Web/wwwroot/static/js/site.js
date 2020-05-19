@@ -38,42 +38,6 @@
                         }
                     }));
                 // ******************************************
-                // *         MegaloopUpdatedSignal          *
-                // ******************************************
-                subscriptions.push(subject
-                    .pipe(rxjs.operators.filter(x => x.name === "MegaloopUpdatedSignal"))
-                    .pipe(rxjs.operators.auditTime(1000)).subscribe(signal => {
-                        if (signal.body.diffPlayer != null) {
-                            if ($("#player_grid").length) {
-                            if ($("#player_grid .e-content tr").length > 1) {
-                                if ($("#player_grid .e-content tr").length >= 14) {
-                                    $("#player_grid .e-content tr:last").remove();
-                                }
-                                const player_row = $("#player_grid .e-content tr:first").clone();
-                                player_row.find(".MegaloopResponse_Address")
-                                    .text(signal.body.diffPlayer.address);
-                                player_row.find(".MegaloopResponse_Chance")
-                                    .percent(signal.body.diffPlayer.chance);
-                                player_row.find(".MegaloopResponse_Deposit")
-                                    .decimal(signal.body.diffPlayer.deposit, 4, true);
-                                player_row.hide().css("opacity", 0).css("background-color", "#ffffe1");
-                                player_row.prependTo($("#player_grid .e-content tbody:first"));
-                                player_row.slideDown(150).animate({ opacity: 1 }, 450)
-                                    .animate({ queue: true, 'background-color': "#ffffff" }, 300);
-                            }
-                            $("#player_grid .e-content tr").toArray().forEach(function(item, index) {
-                                $(item).attr("aria-rowindex", index);
-                                $(item).attr("data-uid", `grid-row${index}`);
-                            });
-                        }
-                        
-                    }
-                    $(".MegaloopResponse_PlayerCount").integer(signal.body.playerCount);
-                    $(".MegaloopResponse_TotalJackpotSize").integer(signal.body.totalJackpotSize);
-                    $(".MegaloopResponse_TotalJackpotSizeUsd").decimal(signal.body.totalJackpotSizeUsd, 2);
-                }));
-
-                // ******************************************
                 // *          ChainUpdatedSignal            *
                 // ******************************************
                 subscriptions.push(subject

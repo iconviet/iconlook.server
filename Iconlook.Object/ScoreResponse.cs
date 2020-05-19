@@ -1,4 +1,5 @@
-﻿using Iconviet.Object;
+﻿using FluentValidation;
+using Iconviet.Object;
 
 namespace Iconlook.Object
 {
@@ -12,8 +13,8 @@ namespace Iconlook.Object
         protected override void AddRules(Validator<T> validator)
         {
             base.AddRules(validator);
-            // validator.RuleFor(x => x.Id).NotEmpty();
-            // validator.RuleFor(x => x.Hash).NotEmpty();
+            validator.RuleFor(x => x.Id).NotEmpty();
+            validator.RuleFor(x => x.Hash).NotEmpty();
         }
     }
 }
