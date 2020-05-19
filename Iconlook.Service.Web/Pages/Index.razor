@@ -1,9 +1,5 @@
 ﻿@page "/"
 <style type="text/css">
-    .card .e-grid {
-        min-height: 880px;
-    }
-
     .e-grid .e-gridheader {
         display: none;
     }
@@ -242,60 +238,73 @@
     </div>
 </div>
 <div class="row mb-3">
-    <div class="col-sm mr-sm-n3">
-        <div class="mb-3 main card shadow-sm" style="min-height: 932px;">
-            <SfTab Animation="Animation">
-                <TabEvents Selecting="Select"/>
-                <TabItems>
-                    <TabItem Header="Governance">
-                        <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
-                                <IndexGovernanceGrid></IndexGovernanceGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                    <TabItem Header="Production">
-                        <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
-                                <IndexProductionGrid></IndexProductionGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                    <TabItem Header="Reward">
-                        <ContentTemplate>
-                            <div class="card-body pt-1 pb-0">
-                                <IndexRewardGrid></IndexRewardGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                </TabItems>
-            </SfTab>
+    <div class="col-lg mr-lg-n3">
+        <div class="mb-3 card shadow-sm">
+            <div style="min-height: 924px;">
+                <SfTab Animation="Animation">
+                    <TabEvents Selecting="Select" />
+                    <TabItems>
+                        <TabItem Header="Governance">
+                            <ContentTemplate>
+                                <div class="card-body pt-1 pb-0">
+                                    <IndexGovernanceGrid></IndexGovernanceGrid>
+                                </div>
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem Header="Production">
+                            <ContentTemplate>
+                                <div class="card-body pt-1 pb-0">
+                                    <IndexProductionGrid></IndexProductionGrid>
+                                </div>
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem Header="Reward">
+                            <ContentTemplate>
+                                <div class="card-body pt-1 pb-0">
+                                    <IndexRewardGrid></IndexRewardGrid>
+                                </div>
+                            </ContentTemplate>
+                        </TabItem>
+                    </TabItems>
+                </SfTab>
+            </div>
+            <div class="d-lg-none card-header text-center border-bottom-0 font-weight-bold">
+                <NavLink class="primary" href="/prep/list">MORE</NavLink>
+            </div>
         </div>
-        <div class="d-none d-lg-block font-weight-bold position-absolute" style="top: 11px; right: 34px;">
+        <div class="d-none d-lg-block font-weight-bold position-absolute" style="top: 12px; right: 34px;">
             <NavLink class="primary" href="/prep/list">MORE</NavLink>
         </div>
     </div>
     <div class="col-sm">
-        <div class="card shadow-sm" style="min-height: 932px;">
-            <SfTab Animation="Animation">
-                <TabEvents Selecting="Select"/>
-                <TabItems>
-                    <TabItem Header="Blocks">
-                        <ContentTemplate>
-                            <div class="card-body py-1 overflow-hidden">
-                                <IndexBlocksGrid></IndexBlocksGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                    <TabItem Header="Transactions">
-                        <ContentTemplate>
-                            <div class="card-body py-1 overflow-hidden">
-                                <IndexTransactionsGrid></IndexTransactionsGrid>
-                            </div>
-                        </ContentTemplate>
-                    </TabItem>
-                </TabItems>
-            </SfTab>
+        <div class="card shadow-sm">
+            <div style="min-height: 924px;">
+                <SfTab Animation="Animation">
+                    <TabEvents Selecting="Select" />
+                    <TabItems>
+                        <TabItem Header="Blocks">
+                            <ContentTemplate>
+                                <div class="card-body py-1 overflow-hidden">
+                                    <IndexBlocksGrid></IndexBlocksGrid>
+                                </div>
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem Header="Transactions">
+                            <ContentTemplate>
+                                <div class="card-body py-1 overflow-hidden">
+                                    <IndexTransactionsGrid></IndexTransactionsGrid>
+                                </div>
+                            </ContentTemplate>
+                        </TabItem>
+                    </TabItems>
+                </SfTab>
+            </div>
+            <div class="d-sm-none card-header text-center border-bottom-0 font-weight-bold">
+                <NavLink class="primary" href="#">MORE</NavLink>
+            </div>
+            <div class="d-none d-lg-block font-weight-bold position-absolute" style="top: 12px; right: 20px;">
+                <NavLink class="primary" href="#">MORE</NavLink>
+            </div>
         </div>
     </div>
 </div>
