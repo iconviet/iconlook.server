@@ -18,7 +18,7 @@ namespace Iconlook.Service.Mon
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdatePeersWorker>().StartAsync());
+                    Observable.FromAsync(() => Container.TryResolve<UpdatePeersWorker>().StartAsync()).Repeat().Subscribe();
                 });
         }
     }

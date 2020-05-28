@@ -18,10 +18,10 @@ namespace Iconlook.Service.Job
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateBlockWorker>().StartAsync());
-                    Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(async x => await Container.TryResolve<UpdateChainWorker>().StartAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdatePRepsWorker>().StartAsync());
-                    Observable.Interval(TimeSpan.FromMinutes(1)).Subscribe(async x => await Container.TryResolve<UpdateChainalyticWorker>().StartAsync());
+                    Observable.FromAsync(() => Container.TryResolve<UpdateBlockWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdateChainWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdatePRepsWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdateChainalyticWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
                 });
         }
     }

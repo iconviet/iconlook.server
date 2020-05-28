@@ -74,12 +74,12 @@ namespace Iconlook.Service.Job.Workers
                             return address;
                         }));
                 }
+                catch (TaskCanceledException)
+                {
+                }
                 catch (Exception exception)
                 {
-                    if (!(exception is TaskCanceledException))
-                    {
-                        Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWorker), exception.Message);
-                    }
+                    Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWorker), exception.Message);
                 }
                 Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWorker), time.Elapsed.TotalMilliseconds);
             }

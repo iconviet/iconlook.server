@@ -131,12 +131,12 @@ namespace Iconlook.Service.Job.Workers
                     Log.Debug("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
                     Log.Debug("**************************************************");
                 }
+                catch (TaskCanceledException)
+                {
+                }
                 catch (Exception exception)
                 {
-                    if (!(exception is TaskCanceledException))
-                    {
-                        Log.Error(exception, "{Work} failed to run. {Message}.", nameof(UpdatePRepsWorker), exception.Message);
-                    }
+                    Log.Error(exception, "{Work} failed to run. {Message}.", nameof(UpdatePRepsWorker), exception.Message);
                 }
                 Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsWorker), time.Elapsed.TotalMilliseconds);
             }

@@ -26,7 +26,7 @@ namespace Iconlook.Service.Job.Workers
                 Log.Debug("{Work} started", nameof(UpdateBlockWorker));
                 try
                 {
-                    var service = new IconServiceClient(2);
+                    var service = new IconServiceClient();
                     var last_block = await service.GetLastBlock();
                     if (last_block != null)
                     {
@@ -54,7 +54,6 @@ namespace Iconlook.Service.Job.Workers
                                 PrevHash = last_block.GetPrevBlockHash().ToString(),
                                 Timestamp = last_block.GetTimestamp().ToDateTimeOffset(),
                                 Height = LastBlockHeight = (long) last_block.GetHeight()
-                                
                             };
                             await Channel.Instance().Publish(new BlockUpdatedSignal
                             {
@@ -77,12 +76,12 @@ namespace Iconlook.Service.Job.Workers
                         }
                     }
                 }
+                catch (TaskCanceledException)
+                {
+                }
                 catch (Exception exception)
                 {
-                    if (!(exception is TaskCanceledException))
-                    {
-                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWorker), exception.Message);
-                    }
+                    Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateBlockWorker), exception.Message);
                 }
                 Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateBlockWorker), rolex.Elapsed.TotalMilliseconds);
             }

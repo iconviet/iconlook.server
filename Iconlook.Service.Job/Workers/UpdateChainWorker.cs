@@ -28,15 +28,15 @@ namespace Iconlook.Service.Job.Workers
                 Log.Debug("{Work} started", nameof(UpdateChainWorker));
                 try
                 {
-                    var service = new IconServiceClient(2);
+                    var service = new IconServiceClient();
                     var last_block = await service.GetLastBlock();
                     if (last_block != null)
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var binance = new BinanceClient(2);
-                            var tracker = new IconTrackerClient(2);
-                            var chainalytic = new ChainalyticClient(2);
+                            var binance = new BinanceClient();
+                            var tracker = new IconTrackerClient();
+                            var chainalytic = new ChainalyticClient();
                             var main_info = await tracker.GetMainInfo();
                             var iiss_info = await service.GetIissInfo();
                             var prep_info = await service.GetPRepInfo();
@@ -80,12 +80,12 @@ namespace Iconlook.Service.Job.Workers
                         }
                     }
                 }
+                catch (TaskCanceledException)
+                {
+                }
                 catch (Exception exception)
                 {
-                    if (!(exception is TaskCanceledException))
-                    {
-                        Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateChainWorker), exception.Message);
-                    }
+                    Log.Error(exception, "{Work} failed to run. {Message}", nameof(UpdateChainWorker), exception.Message);
                 }
                 Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainWorker), rolex.Elapsed.TotalMilliseconds);
             }

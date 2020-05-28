@@ -31,7 +31,7 @@
       "wwwroot/static/js/animate-number.extend.min.js",
       "wwwroot/static/js/sf-base.min.js",
       "wwwroot/static/js/sf-data.min.js",
-//    "wwwroot/static/js/sf-barcodegenerator.min.js",
+      "wwwroot/static/js/sf-barcodegenerator.min.js",
       "wwwroot/static/js/sf-buttons.min.js",
       "wwwroot/static/js/sf-popups.min.js",
       "wwwroot/static/js/sf-lists.min.js",
@@ -39,8 +39,8 @@
       "wwwroot/static/js/sf-navigations.min.js",
       "wwwroot/static/js/sf-dropdowns.min.js",
       "wwwroot/static/js/sf-splitbuttons.min.js",
-      "wwwroot/static/js/sf-grids.min.js"
-//    "wwwroot/static/js/sf-calendars.min.js"
+      "wwwroot/static/js/sf-grids.min.js",
+      "wwwroot/static/js/sf-calendars.min.js"
     ],
     "outputFileName": "wwwroot/static/js/bundle.min.js"
   }
