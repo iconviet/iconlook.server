@@ -1,9 +1,4 @@
-﻿@code {
-    [Parameter]
-    public ChainResponse ChainResponse { get; set; }
-}
-
-<div class="px-1 py-3 flex-fill">
+﻿<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">USD PRICE&nbsp;&nbsp;•&nbsp;&nbsp;% 24H</div>
     <div>
         <span class="fs-2 ls-n1 mono-lg ChainResponse_IcxPrice" number="@(ChainResponse?.IcxPrice ?? 0)">
@@ -21,3 +16,13 @@
         @(ChainResponse?.MarketCap.ToString("C0") ?? "$0")
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+}

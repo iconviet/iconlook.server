@@ -6,4 +6,9 @@
 @code{
     [Parameter]
     public string Hash { get; set; }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
 }

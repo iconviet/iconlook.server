@@ -1,9 +1,4 @@
-﻿@code {
-    [Parameter]
-    public PeerResponse PeerResponse { get; set; }
-}
-
-<div class="px-1 py-3 flex-fill">
+﻿<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">
         <span>LEADER</span>&nbsp;
         <span class="leader-ranking font-weight-bold">#@(PeerResponse?.Ranking.ToString() ?? "0")</span>
@@ -22,3 +17,13 @@
         <span class="positive-light leader-block-elapse"></span><span class="text-light leader-block-remain">❚❚❚❚❚❚❚❚❚❚</span>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public PeerResponse PeerResponse { get; set; }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+}

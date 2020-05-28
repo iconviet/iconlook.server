@@ -87,6 +87,11 @@
 @code{
     protected bool IsMobile;
 
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
     protected override void OnInitialized()
     {
         IsMobile = HttpAccessor.Context.Request.Headers["User-Agent"].ToString().Contains("Mobile");

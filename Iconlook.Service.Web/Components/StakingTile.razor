@@ -1,9 +1,4 @@
-﻿@code {
-    [Parameter]
-    public ChainResponse ChainResponse { get; set; }
-}
-
-<div class="px-1 py-3 flex-fill">
+﻿<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">STAKED&nbsp;&nbsp;•&nbsp;&nbsp;% CIRCULATION</div>
     <div>
         <span class="fs-2 ls-n1 mono-lg ChainResponse_TotalStaked" number="@(ChainResponse?.TotalStaked ?? 0)">@(ChainResponse?.TotalStaked.ToString("N0") ?? "0")</span>
@@ -21,3 +16,13 @@
         </div>
     </a>
 </div>
+
+@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+}

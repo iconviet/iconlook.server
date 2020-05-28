@@ -53,7 +53,7 @@
 <div class="mb-4 card shadow-sm" style="min-height: 1107px;">
     <div class="row">
         <div class="col">
-            <SfTab Animation="Animation">
+            <SfTab Animation="Animation" EnablePersistence="true">
                 <TabEvents Selecting="Select"/>
                 <TabItems>
                     <TabItem Header="Summary">
@@ -92,6 +92,11 @@
     protected PeerResponse PeerResponse;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
 
     public void Select(SelectingEventArgs args)
     {

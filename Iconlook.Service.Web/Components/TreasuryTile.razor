@@ -1,9 +1,4 @@
-﻿@code {
-    [Parameter]
-    public ChainResponse ChainResponse { get; set; }
-}
-
-<div class="px-1 py-3 flex-fill">
+﻿<div class="px-1 py-3 flex-fill">
     <div class="py-1 fs-n3 text-light">ANNUAL REWARD</div>
     <div>
         <span class="fs-1 mono-lg primary ChainResponse_RRepPercentage">
@@ -20,3 +15,13 @@
         @(ChainResponse?.PublicTreasury.ToString("N0") ?? "0")
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public ChainResponse ChainResponse { get; set; }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+}

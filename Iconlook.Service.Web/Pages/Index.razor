@@ -245,7 +245,7 @@
     <div class="col-lg mr-lg-n3">
         <div class="mb-3 card shadow-sm">
             <div style="min-height: 924px;">
-                <SfTab Animation="Animation">
+                <SfTab Animation="Animation" EnablePersistence="true">
                     <TabEvents Selecting="Select" />
                     <TabItems>
                         <TabItem Header="Governance">
@@ -325,6 +325,11 @@
     protected TabAnimationSettings Animation;
     protected List<DropDownButtonItem> ToolItems;
     protected List<DropDownButtonItem> SearchItems;
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
 
     protected void Select(SelectingEventArgs args)
     {
