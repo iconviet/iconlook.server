@@ -27,16 +27,16 @@ namespace Iconlook.Service.Web
         {
             base.Configure(application, environment);
             application
+                .UseStaticFiles()
                 .UseForwardedHeaders()
                 .UseHeaderProcessor(this)
-                .UseWhen(
-                    context => !context.Request.Headers["CF-Request-ID"].Any(),
-                    builder => builder.UseResponseCompression())
+//              .UseWhen(
+//                  context => !context.Request.Headers["CF-Request-ID"].Any(),
+//                  builder => builder.UseResponseCompression())
                 .MapWhen(
                     context => context.Request.Path.StartsWithSegments("/api") ||
                                context.Request.Path.StartsWithSegments("/sse"),
                     builder => builder.UseWebServiceStack(this))
-                .UseStaticFiles()
                 .UseCookieProcessor()
                 .UseRouting()
                 .UseWebMarkupMin()
@@ -54,7 +54,7 @@ namespace Iconlook.Service.Web
                 .AddServerSideBlazor();
             services
                 .AddSyncfusionBlazor()
-                .AddResponseCompression()
+//              .AddResponseCompression()
                 .AddHttpContextAccessor()
                 .AddScoped<HttpContextAccessor>()
                 .Configure<ForwardedHeadersOptions>(x =>
