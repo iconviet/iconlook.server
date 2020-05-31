@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using NServiceBus;
 using ServiceStack;
+using Environment = System.Environment;
 
 namespace Iconlook.Service.Web
 {
@@ -24,15 +25,23 @@ namespace Iconlook.Service.Web
             _configuration = configuration;
         }
 
+        private string ExtractXPoweredByHeaderString()
+        {
+            var hostname = Environment.GetEnvironmentVariable("HOSTNAME");
+            return (hostname.HasValue()
+                ? $"{hostname}.{_configuration.EndpointName}"
+                : _configuration.EndpointInstanceId).ToLower();
+        }
+
         public async Task InvokeAsync(HttpContext http)
         {
             var url = http.Request.GetDisplayUrl();
+            var x_powered_by = ExtractXPoweredByHeaderString();
             var referer = http.Request.Headers["Referer"].ToString();
             var country = http.Request.Headers["CF-IPCountry"].ToString();
             var user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
             var user_agent = http.Request.Headers["User-Agent"].ToString();
             var address = http.Request.Headers["CF-Connecting-IP"].ToString();
-            var x_powered_by = http.Request.Headers["X-Powered-By"].ToString();
             http.Response.OnStarting(x =>
             {
                 var state = (HttpContext) x;
