@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace Iconlook.Client.Binance
 {
-    public class BinanceClient
+    public class BinanceApiClient
     {
         private readonly JsonHttpClient _client;
 
-        public BinanceClient(double timeout = 30)
+        public BinanceApiClient(double timeout = 30)
         {
             _client = new JsonHttpClient("http://api.binance.com");
             _client.GetHttpClient().Timeout = TimeSpan.FromSeconds(timeout);

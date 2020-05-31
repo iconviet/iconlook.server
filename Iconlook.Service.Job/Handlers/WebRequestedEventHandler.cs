@@ -15,7 +15,7 @@ namespace Iconlook.Service.Job.Handlers
 {
     public class WebRequestedEventHandler : HandlerBase, IHandleMessages<WebRequestedEvent>
     {
-        public TelegramClient Telegram { get; set; }
+        public TelegramApiClient Telegram { get; set; }
         public HostConfiguration Configuration { get; set; }
 
         public Task Handle(WebRequestedEvent message, IMessageHandlerContext context)

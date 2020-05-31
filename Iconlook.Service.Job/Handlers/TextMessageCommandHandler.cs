@@ -11,7 +11,7 @@ namespace Iconlook.Service.Job.Handlers
 {
     public class TextMessageCommandHandler : HandlerBase, IHandleMessages<TextMessageCommand>
     {
-        public TelegramClient Telegram { get; set; }
+        public TelegramApiClient Telegram { get; set; }
         public HostConfiguration Configuration { get; set; }
 
         public Task Handle(TextMessageCommand message, IMessageHandlerContext context)

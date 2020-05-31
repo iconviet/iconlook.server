@@ -34,7 +34,7 @@ namespace Iconlook.Service.Job.Workers
                     {
                         if (last_block.GetHeight() > LastBlockHeight)
                         {
-                            var binance = new BinanceClient();
+                            var binance = new BinanceApiClient();
                             var tracker = new IconTrackerClient();
                             var chainalytic = new ChainalyticClient();
                             var main_info = await tracker.GetMainInfo();
