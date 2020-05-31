@@ -31,8 +31,8 @@ namespace Iconlook.Service.Job.Handlers
                            (message.Address.HasValue() ? $"<pre>Address: {message.Address}</pre>\n" : string.Empty) +
                            $"<pre>Request: {message.Url}</pre>\n" +
                            (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
-                           $"<pre>Browser: {ua.Device}, {ua.OS}, {ua.UA}</pre>" +
-                           $"<pre>Machine: {message.XPoweredBy}</pre>\n";
+                           $"<pre>Machine: {message.XPoweredBy}</pre>\n" +
+                           $"<pre>Browser: {ua.Device}, {ua.OS}, {ua.UA}</pre>";
                 if (!message.Url.Contains("apple-touch-icon") &&
                     (message.Url.StartsWith("https://iconlook.io") ||
                      message.Url.StartsWith("https://www.iconlook.io")) &&
