@@ -34,9 +34,9 @@ namespace Iconlook.Service.Web
 
     public static class WebServiceStackMiddlewareExtensions
     {
-        public static IApplicationBuilder UseWebServiceStack(this IApplicationBuilder builder, HostConfiguration configuration)
+        public static IApplicationBuilder UseWebServiceStack(this IApplicationBuilder application, HostConfiguration configuration)
         {
-            return builder.UseMiddleware<WebServiceStackMiddleware>().UseServiceStack(new WebServiceStack(configuration));
+            return application.UseMiddleware<WebServiceStackMiddleware>().UseServiceStack(new WebServiceStack(configuration));
         }
     }
 }

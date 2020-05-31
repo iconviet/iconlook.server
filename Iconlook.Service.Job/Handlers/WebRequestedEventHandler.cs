@@ -20,7 +20,7 @@ namespace Iconlook.Service.Job.Handlers
 
         public Task Handle(WebRequestedEvent message, IMessageHandlerContext context)
         {
-            var myself = new[] { "M878", "7E54", "J8R8", "DDWW", "WDLZ" };
+            var myself = new[] { "ODNB" };
             if (message.Country.HasValue() && !myself.Any(message.UserHashId.StartsWith))
             {
                 var blacklist = new[] { "bot", "other", "spider" };
@@ -31,7 +31,8 @@ namespace Iconlook.Service.Job.Handlers
                            (message.Address.HasValue() ? $"<pre>Address: {message.Address}</pre>\n" : string.Empty) +
                            $"<pre>Request: {message.Url}</pre>\n" +
                            (message.Referer.HasValue() ? $"<pre>Referer: {message.Referer}</pre>\n" : string.Empty) +
-                           $"<pre>Browser: {ua.Device}, {ua.OS}, {ua.UA}</pre>";
+                           $"<pre>Browser: {ua.Device}, {ua.OS}, {ua.UA}</pre>" +
+                           $"<pre>Machine: {message.XPoweredBy}</pre>\n";
                 if (!message.Url.Contains("apple-touch-icon") &&
                     (message.Url.StartsWith("https://iconlook.io") ||
                      message.Url.StartsWith("https://www.iconlook.io")) &&

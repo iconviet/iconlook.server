@@ -12,5 +12,6 @@ namespace Iconlook.Message
         public string UserHashId { get; set; }
         public string IconString { get; set; }
         public string BodyString { get; set; }
+        public string XPoweredBy { get; set; }
     }
 }

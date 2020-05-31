@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Iconlook.Message;
 using Iconviet;
+using Iconviet.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -13,17 +14,20 @@ namespace Iconlook.Service.Web
     public class CookieProcessorMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly HostConfiguration _configuration;
         private readonly IApplicationBuilder _application;
 
-        public CookieProcessorMiddleware(RequestDelegate next, IApplicationBuilder application)
+        public CookieProcessorMiddleware(RequestDelegate next, IApplicationBuilder application, HostConfiguration configuration)
         {
             _next = next;
             _application = application;
+            _configuration = configuration;
         }
 
         public async Task InvokeAsync(HttpContext http)
         {
             var url = http.Request.GetDisplayUrl();
+            var x_powered_by = _configuration.EndpointName;
             var referer = http.Request.Headers["Referer"].ToString();
             var country = http.Request.Headers["CF-IPCountry"].ToString();
             var user_hash_id = http.Request.Cookies[Cookies.USER_HASH_ID];
@@ -41,7 +45,8 @@ namespace Iconlook.Service.Web
                         Address = address,
                         Country = country,
                         UserAgent = user_agent,
-                        UserHashId = user_hash_id
+                        UserHashId = user_hash_id,
+                        XPoweredBy = x_powered_by
                     };
                     var endpoint = _application.ApplicationServices.TryResolve<IMessageSession>();
                     if (user_hash_id.HasValue())
@@ -76,9 +81,9 @@ namespace Iconlook.Service.Web
 
     public static class CookieProcessorMiddlewareExtensions
     {
-        public static IApplicationBuilder UseCookieProcessor(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCookieProcessor(this IApplicationBuilder application, HostConfiguration configuration)
         {
-            return builder.UseMiddleware<CookieProcessorMiddleware>(builder);
+            return application.UseMiddleware<CookieProcessorMiddleware>(application, configuration);
         }
     }
 }

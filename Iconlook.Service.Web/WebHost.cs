@@ -11,9 +11,9 @@ namespace Iconlook.Service.Web
     {
         public static Task Main()
         {
-            var cu = TzdbDateTimeZoneSource.Default.ZoneLocations.Single(x => x.CountryCode == "VN");
+            TzdbDateTimeZoneSource.Default.ZoneLocations.Single(x => x.CountryCode == "VN");
             var configuration = new WebHostConfiguration();
-            return StartAsync(configuration, b => b.ConfigureWebHostDefaults(x => x.UseStaticWebAssets().UseStartup(configuration.GetType())));
+            return StartAsync(configuration, b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())));
         }
     }
 }
