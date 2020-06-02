@@ -27,6 +27,7 @@
       "wwwroot/static/js/ss-utils.min.js",
       "wwwroot/static/js/jquery-ui.min.js",
       "wwwroot/static/js/bootstrap.min.js",
+      "wwwroot/static/js/clipboard.min.js",
       "wwwroot/static/js/animate-number.min.js",
       "wwwroot/static/js/animate-number.extend.min.js",
       "wwwroot/static/js/sf-base.min.js",

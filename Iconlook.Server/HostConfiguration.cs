@@ -26,8 +26,8 @@ namespace Iconlook.Server
         protected override void ConfigureContainer(ContainerBuilder builder)
         {
             base.ConfigureContainer(builder);
-            builder.RegisterType<BinanceApiClient>().PropertiesAutowired();
             builder.RegisterType<JsonHttpClient>().PropertiesAutowired();
+            builder.RegisterType<BinanceApiClient>().PropertiesAutowired();
             builder.RegisterType<TelegramApiClient>().PropertiesAutowired();
             builder.RegisterType<ChainalyticClient>().PropertiesAutowired();
             builder.RegisterType<IconTrackerClient>().PropertiesAutowired();
