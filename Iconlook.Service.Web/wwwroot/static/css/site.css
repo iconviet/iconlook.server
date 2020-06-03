@@ -310,6 +310,11 @@ button.secondary, button .secondary {
     border: none;
 }
 
+.row.card {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .card {
     border: solid 1px#e7eaee;
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,11 @@ namespace Iconlook.Service.Web
         {
             base.Configure(application, environment);
             application
+                .Use((http, next) =>
+                {
+                    http.Request.Scheme = "https";
+                    return next();
+                })
                 .UseStaticFiles()
                 .UseForwardedHeaders()
                 .UseWhen(
@@ -51,7 +57,8 @@ namespace Iconlook.Service.Web
         {
             base.ConfigureServices(services);
             services
-                .AddServerSideBlazor();
+                .AddServerSideBlazor()
+                .AddCircuitOptions(x => x.DetailedErrors = true);
             services
                 .AddSyncfusionBlazor()
                 .AddResponseCompression()
@@ -63,6 +70,7 @@ namespace Iconlook.Service.Web
                     x.KnownNetworks.Clear();
                     x.ForwardedHeaders = ForwardedHeaders.All;
                 })
+                .Configure<HubOptions>(x => x.EnableDetailedErrors = true)
                 .AddWebMarkupMin(x =>
                 {
                     x.DisablePoweredByHttpHeaders = true;
