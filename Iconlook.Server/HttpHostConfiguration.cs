@@ -23,6 +23,10 @@ namespace Iconlook.Server
             NServiceBusPersistence = NServiceBusPersistence.RavenDB;
         }
 
+        protected override void ConfigureElastic(ContainerBuilder builder)
+        {
+        }
+
         protected override void ConfigureContainer(ContainerBuilder builder)
         {
             base.ConfigureContainer(builder);
