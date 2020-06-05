@@ -7,7 +7,7 @@
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Iconviet.Server" Version="1.0.0-master-1572007" />
+    <PackageReference Include="Iconviet.Server" Version="1.0.0-master-1572053" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />

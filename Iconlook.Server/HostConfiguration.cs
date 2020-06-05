@@ -19,6 +19,7 @@ namespace Iconlook.Server
         {
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
+            NServiceBusPersistence = NServiceBusPersistence.RavenDB;
         }
 
         protected override void ConfigureRavenDb(ContainerBuilder builder)
