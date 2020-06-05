@@ -2,8 +2,8 @@
     let subscriptions = [];
     const subject = new rxjs.Subject();
     $("[data-toggle=tooltip]").tooltip({ delay: { show: 0 } });
-    const source = new EventSource("/sse/stream?channel=iconlook");
     let leader_block_mcount = parseInt($(".leader-block-mcount").text());
+    const source = new EventSource("/sse/stream?channel=iconlook_localhost");
     source.addEventListener("error", function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
         success: function(selector, json, message) {
