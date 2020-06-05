@@ -19,8 +19,10 @@ namespace Iconlook.Server
         {
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
-            HangfireJobPersistence = HangfireJobPersistence.Memory;
-            NServiceBusPersistence = NServiceBusPersistence.RavenDB;
+        }
+
+        protected override void ConfigureRavenDb(ContainerBuilder builder)
+        {
         }
 
         protected override void ConfigureElastic(ContainerBuilder builder)
@@ -48,7 +50,7 @@ namespace Iconlook.Server
         protected override void ConfigureNServiceBusTransportRouting(RoutingSettings routing)
         {
             base.ConfigureNServiceBusTransportRouting(routing);
-            routing.RouteToEndpoint(typeof(TextMessageCommand), "Iconlook.Job");
+            routing.RouteToEndpoint(typeof(TextMessageCommand), $"{ProjectName}.Job");
         }
     }
 }

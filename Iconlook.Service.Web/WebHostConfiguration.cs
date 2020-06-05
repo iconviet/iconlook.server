@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Reflection;
 using Iconlook.Server;
 using Iconviet;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +29,8 @@ namespace Iconlook.Service.Web
             application
                 .Use((http, next) =>
                 {
-                    http.Request.Scheme = "https";
+                    http.Request.Scheme =
+                        Environment == Environment.Localhost ? "http" : "https";
                     return next();
                 })
                 .UseStaticFiles()
@@ -76,26 +76,24 @@ namespace Iconlook.Service.Web
                     x.DisablePoweredByHttpHeaders = true;
                     x.AllowMinificationInDevelopmentEnvironment = true;
                 }).AddHtmlMinification(x => x.MinificationSettings.RemoveHtmlComments = false);
-            var connection = $"{Configuration.GetConnectionString("redis")},password={ServicePassword}";
-            if (connection.HasValue())
+            var redis = $"{Configuration.GetConnectionString("redis")},password={ServicePassword}";
+            if (redis.HasValue())
             {
                 if (Environment == Environment.Localhost)
                 {
-                    connection = connection.Replace("redis", "localhost");
+                    redis = redis.Replace("redis", "localhost");
                 }
-                services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(connection);
+                services.AddSignalR().AddMessagePackProtocol().AddStackExchangeRedis(redis);
             }
-            if (!OperatingSystem.IsWindows)
+            if (OperatingSystem.IsWindows)
             {
                 services.AddDataProtection()
-                    .PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"))
-                    .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name);
+                    .SetApplicationName(ProjectName)
+                    .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redis), ProjectName.ToLower());
             }
             else
             {
-                services.AddDataProtection()
-                    .SetApplicationName(Assembly.GetEntryAssembly().GetName().Name)
-                    .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(connection), ProjectName);
+                services.AddDataProtection().SetApplicationName(ProjectName).PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"));
             }
             services.AddRazorPages(x => x.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
             SyncfusionLicenseProvider.RegisterLicense("MjI0ODk5QDMxMzgyZTMxMmUzMGYrRTdlbUhkc0xDMXFMdlhiaDk3ZUtPVlN3c3lzQm9XeUNUdVVCQXhxNWc9");
