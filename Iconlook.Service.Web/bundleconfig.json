@@ -2,6 +2,13 @@
   {
     "minify": { "enabled": true },
     "inputFiles": [
+      "wwwroot/static/js/site.js"
+    ],
+    "outputFileName": "wwwroot/static/js/site.min.js"
+  },
+  {
+    "minify": { "enabled": true },
+    "inputFiles": [
       "wwwroot/static/css/site*.css"
     ],
     "outputFileName": "wwwroot/static/css/site.min.css"
