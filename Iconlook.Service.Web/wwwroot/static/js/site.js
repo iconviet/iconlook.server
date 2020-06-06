@@ -2,7 +2,7 @@
     let subscriptions = [];
     const subject = new rxjs.Subject();
     $("[data-toggle=tooltip]").tooltip({ delay: { show: 0 } });
-    const source = new EventSource("/sse/stream?channel=iconlook");
+    const source = new EventSource("/sse/stream?channel=megaloop");
     let leader_block_mcount = parseInt($(".leader-block-mcount").text());
     source.addEventListener("error", function(e) { console.log("ERROR", e); }, false);
     $(source).handleServerEvents({
