@@ -15,7 +15,7 @@ namespace Iconlook.Server
             signal.Timestamp = DateTimeOffset.UtcNow;
             if (signal.IsValid())
             {
-                instance.NotifyChannel(HostBase.Configuration.ChannelName, signal);
+                instance.NotifyChannel(HostBase.Configuration.ChannelId, signal);
             }
             return Task.CompletedTask;
         }
