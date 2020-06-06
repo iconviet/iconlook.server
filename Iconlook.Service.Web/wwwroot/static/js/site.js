@@ -1,10 +1,11 @@
 ﻿$(document).ready(function() {
     let subscriptions = [];
     const subject = new rxjs.Subject();
+    const channel = "iconlook_localhost";
     $("[data-toggle=tooltip]").tooltip({ delay: { show: 0 } });
-    const source = new EventSource("/sse/iconlook/stream?channel=iconlook_localhost");
     let leader_block_mcount = parseInt($(".leader-block-mcount").text());
-    source.addEventListener("error", function(e) { console.log("ERROR", e); }, false);
+    const source = new EventSource("/sse/" + channel + "/stream?channel=" + channel);
+    source.addEventListener("error", function(e) { console.log("ERROR", e); },false);
     $(source).handleServerEvents({
         success: function(selector, json, message) {
             if (!selector.startsWith("cmd.on")) {
