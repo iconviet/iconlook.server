@@ -9,16 +9,16 @@ using Iconviet;
 using Iconviet.Server;
 using Serilog;
 
-namespace Iconlook.Service.Job.Workers
+namespace Iconlook.Service.Job
 {
-    public class UpdateChainalyticWorker : WorkerBase
+    public class UpdateChainalyticJob : JobBase
     {
         public override async Task StartAsync()
         {
             using (var time = new Rolex())
             using (var redis = Redis.Instance())
             {
-                Log.Debug("{Work} started", nameof(UpdateChainalyticWorker));
+                Log.Debug("{Job} started", nameof(UpdateChainalyticJob));
                 try
                 {
                     var chainalytic = new ChainalyticClient();
@@ -65,7 +65,7 @@ namespace Iconlook.Service.Job.Workers
                                 Unstaking = decimal.Parse(BigDecimal.Parse(tuple[1]).ToString())
                             };
                             var calculator = new UnstakeBlockCalculator(
-                                UpdateBlockWorker.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
+                                UpdateBlockJob.LastBlockHeight, address.RequestedBlockHeight, address.UnstakedBlockHeight);
                             address.RequestedDateTime = calculator.GetRequestDateTime();
                             address.UnstakingCountdown = calculator.GetUnstakingCountdown();
                             address.RequestedDateTimeAge = calculator.GetRequestDateTimeAge();
@@ -79,9 +79,9 @@ namespace Iconlook.Service.Job.Workers
                 }
                 catch (Exception exception)
                 {
-                    Log.Error(exception, "{Work} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticWorker), exception.Message);
+                    Log.Error(exception, "{Job} failed to run. {Message}. {StackTrace}", nameof(UpdateChainalyticJob), exception.Message);
                 }
-                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticWorker), time.Elapsed.TotalMilliseconds);
+                Log.Debug("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdateChainalyticJob), time.Elapsed.TotalMilliseconds);
             }
         }
     }

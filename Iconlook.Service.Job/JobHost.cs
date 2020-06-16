@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Iconlook.Service.Job.Workers;
 using Iconviet.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -18,10 +17,10 @@ namespace Iconlook.Service.Job
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.FromAsync(() => Container.TryResolve<UpdateBlockWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
-                    Observable.FromAsync(() => Container.TryResolve<UpdateChainWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
-                    Observable.FromAsync(() => Container.TryResolve<UpdatePRepsWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
-                    Observable.FromAsync(() => Container.TryResolve<UpdateChainalyticWorker>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdateBlockJob>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdateChainJob>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdatePRepsJob>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdateChainalyticJob>().StartAsync()).Delay(TimeSpan.FromSeconds(1)).Repeat().Subscribe();
                 });
         }
     }

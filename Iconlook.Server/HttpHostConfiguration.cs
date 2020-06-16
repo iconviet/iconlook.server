@@ -15,7 +15,7 @@ namespace Iconlook.Server
     {
         public override string ProjectName => "Iconlook";
 
-        public HttpHostConfiguration(string hostname, int port) : base(hostname, port)
+        public HttpHostConfiguration(string hostname, int port = 0) : base(hostname, port)
         {
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;

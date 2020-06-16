@@ -20,12 +20,12 @@ namespace Iconlook.Service.Api
 
         public string Any(SetupRequest _)
         {
-            BackgroundJob.Enqueue<SetupWork>(x => x.StartAsync());
+            BackgroundJob.Enqueue<SetupJob>(x => x.StartAsync());
             Log.Information("Setup Job Ran.");
             return "SETUP JOB IS RUNNING";
         }
 
-        public class SetupWork : WorkerBase
+        public class SetupJob : JobBase
         {
             private IDbConnection _db;
 

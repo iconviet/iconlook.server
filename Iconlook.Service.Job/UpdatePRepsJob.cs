@@ -16,9 +16,9 @@ using ServiceStack;
 using ServiceStack.OrmLite;
 using JsonHttpClient = Iconlook.Client.JsonHttpClient;
 
-namespace Iconlook.Service.Job.Workers
+namespace Iconlook.Service.Job
 {
-    public class UpdatePRepsWorker : WorkerBase
+    public class UpdatePRepsJob : JobBase
     {
         public override async Task StartAsync()
         {
@@ -26,7 +26,7 @@ namespace Iconlook.Service.Job.Workers
             using (var db = Db.Instance())
             using (var redis = Redis.Instance())
             {
-                Log.Debug("{Work} started", nameof(UpdatePRepsWorker));
+                Log.Debug("{Job} started", nameof(UpdatePRepsJob));
                 try
                 {
                     var prep_list = new List<PRep>();
@@ -125,7 +125,7 @@ namespace Iconlook.Service.Job.Workers
                         r.DailyReward = (long) calculator.GetDailyReward();
                         r.YearlyReward = (long) calculator.GetYearlyReward();
                         r.MonthlyReward = (long) calculator.GetMonthlyReward();
-                        r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainWorker.LastIcxPrice;
+                        r.MonthlyRewardUsd = r.MonthlyReward * UpdateChainJob.LastIcxPrice;
                     })));
                     Log.Debug("**************************************************");
                     Log.Debug("{PReps} P-Reps latest information stored in {Elapsed:N0}ms", prep_list.Count, time.Elapsed.TotalMilliseconds);
@@ -136,9 +136,9 @@ namespace Iconlook.Service.Job.Workers
                 }
                 catch (Exception exception)
                 {
-                    Log.Error(exception, "{Work} failed to run. {Message}.", nameof(UpdatePRepsWorker), exception.Message);
+                    Log.Error(exception, "{Job} failed to run. {Message}.", nameof(UpdatePRepsJob), exception.Message);
                 }
-                Log.Debug("{Work} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsWorker), time.Elapsed.TotalMilliseconds);
+                Log.Debug("{Job} stopped ({Elapsed:N0}ms)", nameof(UpdatePRepsJob), time.Elapsed.TotalMilliseconds);
             }
         }
     }

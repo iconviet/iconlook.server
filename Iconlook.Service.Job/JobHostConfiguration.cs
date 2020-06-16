@@ -7,7 +7,7 @@ namespace Iconlook.Service.Job
 {
     public class JobHostConfiguration : HttpHostConfiguration
     {
-        public JobHostConfiguration() : base("Job", 82)
+        public JobHostConfiguration() : base("Job")
         {
         }
 

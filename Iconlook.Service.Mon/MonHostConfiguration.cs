@@ -7,7 +7,7 @@ namespace Iconlook.Service.Mon
 {
     public class MonHostConfiguration : HttpHostConfiguration
     {
-        public MonHostConfiguration() : base("Mon", 83)
+        public MonHostConfiguration() : base("Mon")
         {
         }
 

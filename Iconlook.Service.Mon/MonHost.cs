@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Iconlook.Service.Mon.Workers;
 using Iconviet.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -18,7 +17,7 @@ namespace Iconlook.Service.Mon
                 b => b.ConfigureWebHostDefaults(x => x.UseStartup(configuration.GetType())),
                 c =>
                 {
-                    Observable.FromAsync(() => Container.TryResolve<UpdatePeersWorker>().StartAsync()).Repeat().Subscribe();
+                    Observable.FromAsync(() => Container.TryResolve<UpdatePeersJob>().StartAsync()).Repeat().Subscribe();
                 });
         }
     }
