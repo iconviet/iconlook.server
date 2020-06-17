@@ -53,6 +53,7 @@
                 @{
                     if (context is UnstakingAddressResponse address)
                     {
+                        <img width="16" height="16" class="mr-2 mt-n1 rounded-circle" src="@address.Hash.ToBase64ImgSrc()" />
                         if (address.Name != null)
                         {
                             <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
@@ -71,7 +72,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="145" HeaderText="Unstaking" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
+        <GridColumn Width="@((IsMobile ? 120 : 140).ToString())" HeaderText="Unstaking" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UnstakingAddressResponse.Unstaking)">
             <Template>
                 @{
                     if (context is UnstakingAddressResponse address)

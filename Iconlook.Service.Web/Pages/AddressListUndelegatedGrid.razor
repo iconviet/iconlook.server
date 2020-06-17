@@ -59,6 +59,7 @@
                 @{
                     if (context is AddressResponse address)
                     {
+                        <img width="16" height="16" class="mr-2 mt-n1 rounded-circle" src="@address.Hash.ToBase64ImgSrc()" />
                         if (address.Name != null)
                         {
                             <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
