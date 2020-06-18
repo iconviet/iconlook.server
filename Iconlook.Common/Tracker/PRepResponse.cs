@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Common.Tracker
+﻿namespace Iconlook.Shared.Tracker
 {
     public class PRepResponse
     {

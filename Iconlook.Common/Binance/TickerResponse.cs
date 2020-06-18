@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Common.Binance
+﻿namespace Iconlook.Shared.Binance
 {
     public class TickerResponse
     {

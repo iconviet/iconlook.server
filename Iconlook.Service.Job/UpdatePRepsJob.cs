@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Iconlook.Common;
-using Iconlook.Common.Calculator;
-using Iconlook.Common.Service;
-using Iconlook.Common.Tracker;
+using Iconlook.Shared;
+using Iconlook.Shared.Calculator;
+using Iconlook.Shared.Service;
+using Iconlook.Shared.Tracker;
 using Iconlook.Entity;
 using Iconlook.Message;
 using Iconlook.Object;
@@ -14,7 +14,7 @@ using Iconviet.Server;
 using Serilog;
 using ServiceStack;
 using ServiceStack.OrmLite;
-using JsonHttpClient = Iconlook.Common.JsonHttpClient;
+using JsonHttpClient = Iconlook.Shared.JsonHttpClient;
 
 namespace Iconlook.Service.Job
 {

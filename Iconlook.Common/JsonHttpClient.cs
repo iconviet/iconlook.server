@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Polly;
 using ServiceStack;
 
-namespace Iconlook.Common
+namespace Iconlook.Shared
 {
     public class JsonHttpClient : ServiceStack.JsonHttpClient
     {

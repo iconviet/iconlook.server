@@ -2,7 +2,7 @@
 using System.Numerics;
 using ServiceStack.Text;
 
-namespace Iconlook.Common.Chainalytic
+namespace Iconlook.Shared.Chainalytic
 {
     public class UndelegatedInfoRpc : RpcResponse
     {

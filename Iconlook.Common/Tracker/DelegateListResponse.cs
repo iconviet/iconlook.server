@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Iconlook.Common.Tracker
+namespace Iconlook.Shared.Tracker
 {
     public class DelegateListResponse
     {

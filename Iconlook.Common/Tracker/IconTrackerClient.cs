@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Iconlook.Common.Tracker
+namespace Iconlook.Shared.Tracker
 {
     public class IconTrackerClient
     {

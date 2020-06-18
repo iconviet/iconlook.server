@@ -2,7 +2,7 @@
 using System.Numerics;
 using Lykke.Icon.Sdk.Data;
 
-namespace Iconlook.Common
+namespace Iconlook.Shared
 {
     public static class BigIntegerExtensions
     {

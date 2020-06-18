@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Iconlook.Common;
-using Iconlook.Common.Service;
+using Iconlook.Shared;
+using Iconlook.Shared.Service;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;

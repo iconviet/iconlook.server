@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot;
 
-namespace Iconlook.Common
+namespace Iconlook.Shared
 {
     public class TelegramApiClient : TelegramBotClient
     {

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using Iconlook.Common.Calculator;
-using Iconlook.Common.Chainalytic;
+using Iconlook.Shared.Calculator;
+using Iconlook.Shared.Chainalytic;
 using Iconlook.Object;
 using Iconviet;
 using Iconviet.Server;

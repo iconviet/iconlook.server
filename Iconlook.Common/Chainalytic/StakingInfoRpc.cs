@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Iconlook.Common.Chainalytic
+namespace Iconlook.Shared.Chainalytic
 {
     public class StakingInfoRpc : RpcResponse
     {

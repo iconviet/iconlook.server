@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using ServiceStack.Text;
 
-namespace Iconlook.Common.Tracker
+namespace Iconlook.Shared.Tracker
 {
     public class MainResponse
     {

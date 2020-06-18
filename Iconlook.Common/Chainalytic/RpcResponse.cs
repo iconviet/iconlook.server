@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Common.Chainalytic
+﻿namespace Iconlook.Shared.Chainalytic
 {
     public class RpcResponse
     {

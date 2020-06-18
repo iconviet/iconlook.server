@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Common
+﻿namespace Iconlook.Shared
 {
     public static class Endpoints
     {

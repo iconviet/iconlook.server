@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Common.Calculator
+﻿namespace Iconlook.Shared.Calculator
 {
     public class PRepRewardCalculator
     {

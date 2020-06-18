@@ -10,7 +10,7 @@ using Lykke.Icon.Sdk.Data;
 using Lykke.Icon.Sdk.Transport.Http;
 using Environment = System.Environment;
 
-namespace Iconlook.Common.Service
+namespace Iconlook.Shared.Service
 {
     public class IconServiceClient : IIconService
     {

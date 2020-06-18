@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ServiceStack;
 using ServiceStack.Text;
 
-namespace Iconlook.Common.Chainalytic
+namespace Iconlook.Shared.Chainalytic
 {
     public class ChainalyticClient
     {
