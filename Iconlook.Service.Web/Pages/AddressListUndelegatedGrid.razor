@@ -59,7 +59,7 @@
                 @{
                     if (context is AddressResponse address)
                     {
-                        <img width="16" height="16" class="mr-2 mt-n1 rounded-circle" src="@address.Hash.ToBase64ImgSrc()" />
+                        <img width="14" height="14" class="mr-2 mt-n1 rounded-circle" src="@address.Hash.ToBase64ImgSrc()" />
                         if (address.Name != null)
                         {
                             <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
@@ -78,7 +78,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Width="@((IsMobile ? 125 : 180).ToString())" HeaderText="Undelegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Undelegated)">
+        <GridColumn Width="@((IsMobile ? 115 : 180).ToString())" HeaderText="Undelegated" TextAlign="TextAlign.Right" HeaderTextAlign="TextAlign.Right" Field="@nameof(UndelegatedAddressResponse.Undelegated)">
             <Template>
                 @{
                     if (context is UndelegatedAddressResponse address)
