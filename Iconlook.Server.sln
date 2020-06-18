@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Entity", "Iconlook
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Api", "Iconlook.Service.Api\Iconlook.Service.Api.csproj", "{54701964-9D8F-441E-AB67-E199CB1D8545}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Object", "Iconlook.Object\Iconlook.Object.csproj", "{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Job", "Iconlook.Service.Job\Iconlook.Service.Job.csproj", "{851696F7-D1BB-44CE-9387-2F073F7845C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Message", "Iconlook.Message\Iconlook.Message.csproj", "{39C8DF5C-9246-42B7-B19D-3FBDDBC65DA9}"
@@ -45,10 +43,6 @@ Global
 		{54701964-9D8F-441E-AB67-E199CB1D8545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54701964-9D8F-441E-AB67-E199CB1D8545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54701964-9D8F-441E-AB67-E199CB1D8545}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F373F2A-BABA-421B-A9D0-BD951B1E4A3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{851696F7-D1BB-44CE-9387-2F073F7845C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{851696F7-D1BB-44CE-9387-2F073F7845C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851696F7-D1BB-44CE-9387-2F073F7845C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
