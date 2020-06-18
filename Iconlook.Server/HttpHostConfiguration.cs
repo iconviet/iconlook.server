@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using Autofac;
-using Iconlook.Client;
-using Iconlook.Client.Binance;
-using Iconlook.Client.Chainalytic;
-using Iconlook.Client.Service;
-using Iconlook.Client.Tracker;
+using Iconlook.Common;
+using Iconlook.Common.Binance;
+using Iconlook.Common.Chainalytic;
+using Iconlook.Common.Service;
+using Iconlook.Common.Tracker;
 using Iconlook.Message;
 using Iconviet.Server;
 using NServiceBus;

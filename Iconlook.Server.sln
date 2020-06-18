@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Job", "Ico
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Message", "Iconlook.Message\Iconlook.Message.csproj", "{39C8DF5C-9246-42B7-B19D-3FBDDBC65DA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Client", "Iconlook.Client\Iconlook.Client.csproj", "{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Common", "Iconlook.Common\Iconlook.Common.csproj", "{D1F64E32-F9AB-4B28-8674-EFA9F8BB04EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iconlook.Service.Mon", "Iconlook.Service.Mon\Iconlook.Service.Mon.csproj", "{6086F5B7-7782-41EA-86C2-EE0389E3D5FB}"
 EndProject

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Iconlook.Client;
-using Iconlook.Client.Binance;
-using Iconlook.Client.Calculator;
-using Iconlook.Client.Chainalytic;
-using Iconlook.Client.Service;
-using Iconlook.Client.Tracker;
+using Iconlook.Common;
+using Iconlook.Common.Binance;
+using Iconlook.Common.Calculator;
+using Iconlook.Common.Chainalytic;
+using Iconlook.Common.Service;
+using Iconlook.Common.Tracker;
 using Iconlook.Message;
 using Iconlook.Object;
 using Iconlook.Server;

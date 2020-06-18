@@ -10,7 +10,7 @@ using Iconviet.Server;
 using NServiceBus;
 using Serilog;
 using ServiceStack;
-using JsonHttpClient = Iconlook.Client.JsonHttpClient;
+using JsonHttpClient = Iconlook.Common.JsonHttpClient;
 
 namespace Iconlook.Service.Mon
 {

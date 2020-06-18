@@ -1,5 +1,5 @@
 ﻿using Iconviet.Server;
-using ServiceStack.Api.Swagger;
+using ServiceStack.Api.OpenApi;
 
 namespace Iconlook.Service.Api
 {
@@ -8,7 +8,7 @@ namespace Iconlook.Service.Api
         protected override void ConfigureFeature()
         {
             base.ConfigureFeature();
-            Plugins.Add(new SwaggerFeature());
+            Plugins.Add(new OpenApiFeature());
         }
 
         public ApiServiceStack(HostConfiguration config) : base(config.HostName, typeof(ApiServiceStack).Assembly, config)
