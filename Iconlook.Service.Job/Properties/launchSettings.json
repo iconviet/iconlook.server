@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Iconlook.Service.Job": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "CITIZEN_URL": "https://ctz.solidwallet.io",
+        "TRACKER_URL": "https://tracker.icon.foundation"
+      }
+    }
+  }
+}

@@ -1,11 +1,8 @@
 ﻿using System.Reflection;
 using Autofac;
-using Iconlook.Shared;
-using Iconlook.Shared.Binance;
-using Iconlook.Shared.Chainalytic;
-using Iconlook.Shared.Service;
-using Iconlook.Shared.Tracker;
 using Iconlook.Message;
+using Iconlook.Shared;
+using Iconviet;
 using Iconviet.Server;
 using NServiceBus;
 
@@ -20,6 +17,8 @@ namespace Iconlook.Server
             NServiceBusPurgeOnStartup = true;
             NServiceBusTransport = NServiceBusTransport.RabbitMQ;
             NServiceBusPersistence = NServiceBusPersistence.RavenDB;
+            IconNetwork.CitizenUrl = "CITIZEN_URL".EnvironmentVariable();
+            IconNetwork.TrackerUrl = "TRACKER_URL".EnvironmentVariable();
         }
 
         protected override void ConfigureRavenDb(ContainerBuilder builder)
@@ -28,17 +27,6 @@ namespace Iconlook.Server
 
         protected override void ConfigureElastic(ContainerBuilder builder)
         {
-        }
-
-        protected override void ConfigureContainer(ContainerBuilder builder)
-        {
-            base.ConfigureContainer(builder);
-            builder.RegisterType<JsonHttpClient>().PropertiesAutowired();
-            builder.RegisterType<BinanceApiClient>().PropertiesAutowired();
-            builder.RegisterType<TelegramApiClient>().PropertiesAutowired();
-            builder.RegisterType<ChainalyticClient>().PropertiesAutowired();
-            builder.RegisterType<IconTrackerClient>().PropertiesAutowired();
-            builder.RegisterType<IconServiceClient>().PropertiesAutowired();
         }
 
         public override void ConfigureNServiceBus(EndpointConfiguration configuration)
@@ -52,6 +40,12 @@ namespace Iconlook.Server
         {
             base.ConfigureNServiceBusTransportRouting(routing);
             routing.RouteToEndpoint(typeof(TextMessageCommand), $"{ProjectName}.Job");
+        }
+
+        protected override void ConfigureContainer(ContainerBuilder builder)
+        {
+            base.ConfigureContainer(builder);
+            builder.RegisterInstance(new TelegramApiClient("892011336:AAHI0I6b3dDYuCej6RvijUYrZSJXgX4w5hw"));
         }
     }
 }

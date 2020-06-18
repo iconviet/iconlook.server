@@ -1,20 +1,28 @@
 {
-  "profiles": {
-    "IIS Express": {
-      "launchBrowser": true,
-      "commandName": "IISExpress"
-    },
-    "Megaloop.Service.Web": {
-      "launchBrowser": true,
-      "commandName": "Standalone",
-      "applicationUrl": "http://localhost:80"
-    }
-  },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:80"
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "launchBrowser": true,
+      "commandName": "IISExpress",
+      "environmentVariables": {
+        "CITIZEN_URL": "https://ctz.solidwallet.io",
+        "TRACKER_URL": "https://tracker.icon.foundation"
+      }
+    },
+    "Iconlook.Service.Web": {
+      "launchBrowser": true,
+      "commandName": "Standalone",      
+      "applicationUrl": "http://localhost:80",
+      "environmentVariables": {
+        "CITIZEN_URL": "https://ctz.solidwallet.io",
+        "TRACKER_URL": "https://tracker.icon.foundation"
+      }
     }
   }
 }

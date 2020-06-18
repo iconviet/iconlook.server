@@ -56,7 +56,7 @@
                         <img width="14" height="14" class="mr-2 mt-n1 rounded-circle" src="@address.Hash.ToBase64ImgSrc()" />
                         if (address.Name != null)
                         {
-                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                            <a class="primary no-underline" href="@IconNetwork.TrackerUrl/address/@address.Hash">
                                 <span class="fs-n1 address-name font-weight-semibold">
                                     @address.Name
                                 </span>
@@ -64,7 +64,7 @@
                         }
                         else
                         {
-                            <a class="primary no-underline" href="https://tracker.icon.foundation/address/@address.Hash">
+                            <a class="primary no-underline" href="@IconNetwork.TrackerUrl/address/@address.Hash">
                                 <span class="fs-n1 mono">@address.Hash</span>
                             </a>
                         }
