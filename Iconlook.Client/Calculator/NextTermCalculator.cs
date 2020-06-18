@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Iconlook.Calculator
+namespace Iconlook.Client.Calculator
 {
     public class NextTermCalculator
     {

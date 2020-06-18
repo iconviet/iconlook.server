@@ -1,4 +1,4 @@
-﻿namespace Iconlook.Calculator
+﻿namespace Iconlook.Client.Calculator
 {
     public class PRepRewardCalculator
     {

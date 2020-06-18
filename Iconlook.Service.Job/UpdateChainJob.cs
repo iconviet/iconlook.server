@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Iconlook.Calculator;
 using Iconlook.Client;
 using Iconlook.Client.Binance;
+using Iconlook.Client.Calculator;
 using Iconlook.Client.Chainalytic;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;

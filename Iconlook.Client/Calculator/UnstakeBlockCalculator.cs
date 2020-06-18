@@ -2,7 +2,7 @@
 using Humanizer;
 using Humanizer.Localisation;
 
-namespace Iconlook.Calculator
+namespace Iconlook.Client.Calculator
 {
     public class UnstakeBlockCalculator
     {

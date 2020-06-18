@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Iconlook.Calculator;
 using Iconlook.Client;
+using Iconlook.Client.Calculator;
 using Iconlook.Client.Service;
 using Iconlook.Client.Tracker;
 using Iconlook.Entity;
