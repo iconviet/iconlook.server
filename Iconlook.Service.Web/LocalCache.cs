@@ -2,6 +2,7 @@
 
 namespace Iconlook.Service.Web
 {
+    // TODO: replace this with Redis Cache
     public static class LocalCache
     {
         public static PeerResponse LastPeerResponse { get; set; }
