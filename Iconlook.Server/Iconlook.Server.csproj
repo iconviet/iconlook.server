@@ -7,8 +7,8 @@
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Iconlook.Shared" Version="1.0.0-master-1711819" />
-    <PackageReference Include="NServiceBus.Persistence.Sql" Version="5.0.0" />
+    <PackageReference Include="Iconlook.Shared" Version="1.0.0-master-1761159" />
+    <PackageReference Include="NServiceBus.Persistence.Sql" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
