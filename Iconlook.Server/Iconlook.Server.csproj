@@ -7,7 +7,7 @@
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Iconlook.Shared" Version="1.0.0-master-1761159" />
+    <PackageReference Include="Iconlook.Shared" Version="1.0.0-master-1821857" />
     <PackageReference Include="NServiceBus.Persistence.Sql" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
