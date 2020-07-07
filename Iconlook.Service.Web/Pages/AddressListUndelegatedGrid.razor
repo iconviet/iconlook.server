@@ -43,6 +43,7 @@
     </SfChipList>
 </div>
 <SfGrid @ref="SfGrid"
+         Query="@Query"
          EnableHover="false"
          AllowPaging="Paging"
          EnableAltRow="false"
@@ -181,6 +182,8 @@
     [Parameter]
     public int PageSize { get; set; }
 
+    protected Query Query = new Query();
+
     [Parameter]
     public object PageSizes { get; set; }
 
@@ -188,7 +191,7 @@
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
     protected override void OnInitialized()

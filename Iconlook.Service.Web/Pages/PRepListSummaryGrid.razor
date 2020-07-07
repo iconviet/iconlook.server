@@ -46,6 +46,7 @@
     </SfChipList>
 </div>
 <SfGrid @ref="SfGrid"
+         Query="@Query"
          ID="summary_grid"
          EnableHover="true"
          EnableAltRow="true"
@@ -242,8 +243,6 @@
 </SfGrid>
 
 @code {
-    protected SfGrid<PRepResponse> SfGrid;
-
     [Parameter]
     public int PageSize { get; set; }
 
@@ -253,14 +252,18 @@
     [Parameter]
     public string EditKey { get; set; }
 
+    protected Query Query = new Query();
+
     [Parameter]
     public object PageSizes { get; set; }
+
+    protected SfGrid<PRepResponse> SfGrid;
 
     public bool CanEdit => !string.IsNullOrWhiteSpace(EditKey);
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
 }

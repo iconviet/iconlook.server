@@ -37,6 +37,7 @@
     </SfChipList>
 </div>
 <SfGrid @ref="SfGrid"
+         Query="@Query"
          ID="unstaking_grid"
          EnableHover="false"
          AllowPaging="Paging"
@@ -175,6 +176,8 @@
     [Parameter]
     public int PageSize { get; set; }
 
+    protected Query Query = new Query();
+
     [Parameter]
     public object PageSizes { get; set; }
 
@@ -182,7 +185,7 @@
 
     private void ChipListOnClick(ClickEventArgs args)
     {
-        SfGrid.Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
+        Query = new Query().AddParams("filter", ((dynamic) args.Data).value);
     }
 
     protected override void OnInitialized()
