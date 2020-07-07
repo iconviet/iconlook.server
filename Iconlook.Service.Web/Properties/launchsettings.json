@@ -17,7 +17,7 @@
     },
     "Iconlook.Service.Web": {
       "launchBrowser": true,
-      "commandName": "Standalone",      
+      "commandName": "Project",      
       "applicationUrl": "http://localhost:80",
       "environmentVariables": {
         "CITIZEN_URL": "https://ctz.solidwallet.io",
