@@ -323,8 +323,8 @@
     protected PeerResponse PeerResponse;
     protected ChainResponse ChainResponse;
     protected TabAnimationSettings Animation;
-    protected List<DropDownButtonItem> ToolItems;
-    protected List<DropDownButtonItem> SearchItems;
+    protected List<DropDownMenuItem> ToolItems;
+    protected List<DropDownMenuItem> SearchItems;
 
     protected override bool ShouldRender()
     {
@@ -348,17 +348,17 @@
             Next = new TabAnimationNext { Duration = 0 },
             Previous = new TabAnimationPrevious { Duration = 0 }
         };
-        ToolItems = new List<DropDownButtonItem>
+        ToolItems = new List<DropDownMenuItem>
         {
-            new DropDownButtonItem { Text = "ROUND", IconCss = "fal fa-users-class" },
-            new DropDownButtonItem { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
-            new DropDownButtonItem { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
+            new DropDownMenuItem { Text = "ROUND", IconCss = "fal fa-users-class" },
+            new DropDownMenuItem { Text = "ANALYZE", IconCss = "fal fa-hashtag" },
+            new DropDownMenuItem { Text = "INVESTIGATE", IconCss = "fal fa-dice" }
         };
-        SearchItems = new List<DropDownButtonItem>
+        SearchItems = new List<DropDownMenuItem>
         {
-            new DropDownButtonItem { Text = "P-REP", IconCss = "fal fa-users-class" },
-            new DropDownButtonItem { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
-            new DropDownButtonItem { Text = "TRANSACTION", IconCss = "fal fa-dice" }
+            new DropDownMenuItem { Text = "P-REP", IconCss = "fal fa-users-class" },
+            new DropDownMenuItem { Text = "ADDRESS", IconCss = "fal fa-hashtag" },
+            new DropDownMenuItem { Text = "TRANSACTION", IconCss = "fal fa-dice" }
         };
         Votes = new TabHeader { Text = "VOTES", IconCss = "fal fa-ballot" };
         Blocks = new TabHeader { Text = "BLOCKS", IconCss = "fal fa-cube" };

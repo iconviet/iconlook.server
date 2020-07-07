@@ -96,7 +96,7 @@ namespace Iconlook.Service.Web
                 services.AddDataProtection().SetApplicationName(ProjectName).PersistKeysToFileSystem(new DirectoryInfo("/var/lib/dotnet"));
             }
             services.AddRazorPages(x => x.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
-            SyncfusionLicenseProvider.RegisterLicense("MjI0ODk5QDMxMzgyZTMxMmUzMGYrRTdlbUhkc0xDMXFMdlhiaDk3ZUtPVlN3c3lzQm9XeUNUdVVCQXhxNWc9");
+            SyncfusionLicenseProvider.RegisterLicense("MjgwOTEzQDMxMzgyZTMyMmUzMElJVFNKdEpLTk5IV2dGS3VUME9RUXpYVXdOeXJBZHpGc0kxaEU3UE1XczA9");
         }
     }
 }
