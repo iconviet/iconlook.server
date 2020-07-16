@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Iconviet;
 using Iconviet.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Environment = System.Environment;
 
 namespace Iconlook.Service.Web
 {
@@ -23,9 +21,7 @@ namespace Iconlook.Service.Web
             http.Response.OnStarting(x =>
             {
                 var state = (HttpContext) x;
-                var hostname = Environment.GetEnvironmentVariable("HOSTNAME");
-                state.Response.Headers["X-Powered-By"] =
-                    (hostname.HasValue() ? $"{hostname}.{_configuration.EndpointName}" : _configuration.EndpointInstanceId).ToLower();
+                state.Response.Headers["X-Powered-By"] = _configuration.EndpointUniquelyAddressableName.ToLower();
                 return Task.CompletedTask;
             }, http);
             await _next(http);

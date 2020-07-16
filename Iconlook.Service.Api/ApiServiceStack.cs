@@ -11,7 +11,7 @@ namespace Iconlook.Service.Api
             Plugins.Add(new OpenApiFeature());
         }
 
-        public ApiServiceStack(HostConfiguration config) : base(config.HostName, typeof(ApiServiceStack).Assembly, config)
+        public ApiServiceStack(HostConfiguration config) : base(config.ServiceName, typeof(ApiServiceStack).Assembly, config)
         {
         }
     }

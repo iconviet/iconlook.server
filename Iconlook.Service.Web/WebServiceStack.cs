@@ -9,7 +9,7 @@ namespace Iconlook.Service.Web
 {
     public class WebServiceStack : ServiceStackBase
     {
-        public WebServiceStack(HostConfiguration configuration) : base(configuration.HostName, typeof(WebServiceStack).Assembly, configuration)
+        public WebServiceStack(HostConfiguration configuration) : base(configuration.ServiceName, typeof(WebServiceStack).Assembly, configuration)
         {
         }
 

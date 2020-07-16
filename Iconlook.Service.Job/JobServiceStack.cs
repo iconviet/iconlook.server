@@ -4,7 +4,7 @@ namespace Iconlook.Service.Job
 {
     public class JobServiceStack : ServiceStackBase
     {
-        public JobServiceStack(HostConfiguration config) : base(config.HostName, typeof(JobServiceStack).Assembly, config)
+        public JobServiceStack(HostConfiguration config) : base(config.ServiceName, typeof(JobServiceStack).Assembly, config)
         {
         }
     }
