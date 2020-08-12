@@ -8,6 +8,6 @@
   </PropertyGroup>
     <ItemGroup>
   <PackageReference Include="Iconlook.Object" Version="1.0.0-master-1701917" />
-  <PackageReference Include="ServiceStack" Version="5.9.0" />
+  <PackageReference Include="ServiceStack" Version="5.9.2" />
 </ItemGroup>
 </Project>
