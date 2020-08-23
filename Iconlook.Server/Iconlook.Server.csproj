@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Iconlook.Shared" Version="1.0.0-master-2252011" />
-    <PackageReference Include="NServiceBus.Persistence.Sql" Version="6.0.2" />
+    <PackageReference Include="NServiceBus.Persistence.Sql" Version="6.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Iconlook.Entity\Iconlook.Entity.csproj" />
