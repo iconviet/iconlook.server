@@ -7,7 +7,7 @@
     <Copyright>Copyright © ICONVIET 2019-2020</Copyright>
   </PropertyGroup>
     <ItemGroup>
-  <PackageReference Include="Iconlook.Object" Version="1.0.0-master-1701917" />
+  <PackageReference Include="Iconlook.Object" Version="1.0.0-master-2532312" />
   <PackageReference Include="ServiceStack" Version="5.9.2" />
 </ItemGroup>
 </Project>
